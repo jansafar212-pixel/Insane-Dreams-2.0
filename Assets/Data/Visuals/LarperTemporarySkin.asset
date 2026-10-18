@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb528433d18e7c24b94402c75f563040, type: 3}
+  m_Name: LarperTemporarySkin
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Visuals.CharacterSkin
+  head: {fileID: 21300000, guid: 26d1deec9b387474bafd6f4eeb1d94a9, type: 3}
+  torso: {fileID: 21300000, guid: 6d09322a82f083b479139d3b8f64f95c, type: 3}
+  arm: {fileID: 21300000, guid: e6081f4b13fa18d40847022e72ca3b0f, type: 3}
+  leg: {fileID: 21300000, guid: 1fb7be1a67078e940bf772f5c30b6934, type: 3}
+  weapon: {fileID: 21300000, guid: 66614f6e06e48a24cab78320b880d848, type: 3}
+  parachute: {fileID: 21300000, guid: defe1352ad874eb4487c8a711dd8c119, type: 3}
+  faces:
+  - {fileID: 21300000, guid: 493c467f8cd801c4aac7b8bbc6c7352d, type: 3}
+  - {fileID: 21300000, guid: 46fbbc4f48838964e9f847fa81beadc2, type: 3}
+  - {fileID: 21300000, guid: b8938d7fbc5656646a07216e3bebb77b, type: 3}
+  - {fileID: 21300000, guid: f0d8624e6ac6bc440bb9360e6da62ee5, type: 3}
+  - {fileID: 21300000, guid: 7d28400b3fb90914db68604ca6b1a6f7, type: 3}
+  - {fileID: 21300000, guid: 944b2cb2be9317a4eac792fc69c9f66f, type: 3}
+  clothing: {r: 1, g: 1, b: 1, a: 1}
+  provenance: Original Drive parts adapted with nearest-neighbour crop/resampling. Expressions except neutral remain TEMP. Parachute recolored cream for contrast. Original downloads unchanged; see ART_MANIFEST.md for source IDs and crop rectangles.

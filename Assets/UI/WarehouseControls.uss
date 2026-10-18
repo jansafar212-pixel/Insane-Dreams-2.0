@@ -1,0 +1,43 @@
+.safe-area { position: absolute; left: 0; right: 0; top: 0; bottom: 0; }
+.instructions {
+    max-width: 67%;
+    align-self: flex-start;
+    margin: 12px 18px;
+    padding: 8px 14px;
+    background-color: rgba(9, 15, 26, 0.84);
+    color: rgb(230, 243, 250);
+    font-size: 18px;
+    white-space: normal;
+}
+.title { color: rgb(65, 215, 245); -unity-font-style: bold; font-size: 23px; }
+.stick {
+    position: absolute; width: 150px; height: 150px; bottom: 30px;
+    border-radius: 75px; border-width: 3px; border-color: rgba(150, 220, 245, 0.85);
+    background-color: rgba(12, 36, 50, 0.68);
+    align-items: center; justify-content: center;
+}
+.move-stick { left: 28px; }
+.aim-stick { right: 28px; }
+.knob {
+    width: 62px; height: 62px; border-radius: 31px;
+    background-color: rgba(94, 214, 239, 0.8);
+}
+.stick-label {
+    position: absolute; top: -26px; color: rgb(215, 242, 255);
+    font-size: 16px; -unity-font-style: bold;
+}
+.action {
+    position: absolute; width: 88px; height: 88px; border-radius: 44px;
+    border-width: 3px; border-color: rgb(255, 205, 90);
+    background-color: rgba(75, 48, 12, 0.85);
+    color: rgb(255, 240, 200); font-size: 19px;
+    -unity-font-style: bold; align-items: center; justify-content: center;
+}
+.parachute-button { right: 205px; bottom: 44px; }
+.parachute-button.deployed { background-color: rgb(25, 110, 103); border-color: rgb(113, 255, 221); }
+.reload-button { right: 205px; bottom: 146px; margin: 0; font-size: 16px; }
+.action:active { background-color: rgb(151, 106, 32); }
+.equipment { position: absolute; right: 18px; top: 14px; width: 205px; background-color: rgba(9, 15, 26, 0.86); padding: 8px; }
+.loadout { color: rgb(245, 225, 180); white-space: normal; font-size: 16px; }
+.equipment-buttons { flex-direction: row; }
+.equipment-buttons > Button { flex-grow: 1; height: 42px; font-size: 20px; background-color: rgb(35, 66, 75); color: white; }

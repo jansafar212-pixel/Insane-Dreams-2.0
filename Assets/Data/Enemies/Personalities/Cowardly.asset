@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fd27866107baae45a9f618eec30b6e6, type: 3}
+  m_Name: Cowardly
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Enemies.LarperPersonalityProfile
+  disposition: 2
+  panicChance: 0.2
+  witnessRange: 9
+  panicSeconds: 2.5
+  moraleCooldown: 45
+  speechCooldown: 30
+  panicSpeechGap: 5
+  panicSpeechCooldown: 60
+  detected:
+  - CAN WE MAKE THIS A PRIVATE LOBBY?
+  lost:
+  - TACTICAL BUFFERING.
+  misses:
+  - YOUR HITBOX IS CHEATING.
+  witnessed:
+  - HE WAS LAGGING.
+  panic:
+  - MOM COME PICK ME UP IM SCARED!
+  reload:
+  - WAIT! I'M RELOADING!
+  - STOP SHOOTING!
+  - THIS MAG HATES ME!
+  withdraw:
+  - I'M GETTING OUT OF HERE!
+  - I NEED COVER!
+  - I DIDN'T SIGN UP FOR THIS!
+  blocked:
+  - NO ROOM! RELOADING HERE!
+  - BAD PLAN! HOLD ON!

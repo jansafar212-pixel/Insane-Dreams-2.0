@@ -1,0 +1,8 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <ui:Style src="Controls.uss" />
+    <ui:VisualElement name="controls" class="controls" picking-mode="Ignore">
+        <ui:Label text="INSANE DREAMS / PROTOTYPE 01" class="title" picking-mode="Ignore" />
+        <ui:Label text="A / D or arrows: move     SPACE: jump" picking-mode="Ignore" />
+        <ui:Label text="Climb the three amber platforms" picking-mode="Ignore" />
+    </ui:VisualElement>
+</ui:UXML>

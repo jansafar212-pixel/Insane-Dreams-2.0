@@ -1,0 +1,33 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <ui:Style src="WarehouseControls.uss" />
+    <ui:VisualElement name="safeArea" class="safe-area" picking-mode="Ignore">
+        <ui:VisualElement class="instructions" picking-mode="Ignore">
+            <ui:Label text="WAREHOUSE / TRAVERSAL TESTBED" class="title" picking-mode="Ignore" />
+            <ui:Label text="A/D: move   S: crouch / descend   SPACE: jump   SHIFT: toggle chute" picking-mode="Ignore" />
+            <ui:Label text="Stick up: jump / grab ladder; down: crouch / descend at ladder top" picking-mode="Ignore" />
+            <ui:Label text="Aim stick: inner zone aims / outer zone fires. R: reload. RMB aim + LMB/F fire." picking-mode="Ignore" />
+            <ui:Label text="A: ground   B: amber mezzanine / roof   C: blue basement" picking-mode="Ignore" />
+            <ui:Label text="Low passage: down + sideways. CHUTE button: tap to toggle." picking-mode="Ignore" />
+        </ui:VisualElement>
+        <ui:VisualElement class="equipment">
+            <ui:Label name="loadout" text="Loadout: awaiting binding" class="loadout" picking-mode="Ignore" />
+            <ui:VisualElement class="equipment-buttons">
+                <ui:Button name="slot1" text="1" />
+                <ui:Button name="slot2" text="2" />
+                <ui:Button name="melee" text="M" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="moveStick" class="stick move-stick">
+            <ui:Label text="MOVE / CLIMB" class="stick-label" picking-mode="Ignore" />
+            <ui:VisualElement class="knob" picking-mode="Ignore" />
+        </ui:VisualElement>
+        <ui:VisualElement name="aimStick" class="stick aim-stick">
+            <ui:Label text="AIM / PUSH TO FIRE" class="stick-label" picking-mode="Ignore" />
+            <ui:VisualElement class="knob" picking-mode="Ignore" />
+        </ui:VisualElement>
+        <ui:VisualElement name="parachuteButton" class="action parachute-button">
+            <ui:Label text="DEPLOY&#10;CHUTE" picking-mode="Ignore" />
+        </ui:VisualElement>
+        <ui:Button name="reload" text="RELOAD" class="action reload-button" />
+    </ui:VisualElement>
+</ui:UXML>

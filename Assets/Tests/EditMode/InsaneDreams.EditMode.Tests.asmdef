@@ -1,0 +1,6 @@
+{
+  "name": "InsaneDreams.EditMode.Tests",
+  "references": ["InsaneDreams.Runtime"],
+  "includePlatforms": ["Editor"],
+  "optionalUnityReferences": ["TestAssemblies"]
+}

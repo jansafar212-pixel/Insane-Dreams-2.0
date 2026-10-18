@@ -1,0 +1,13 @@
+.controls {
+    margin: 20px 24px;
+    padding: 12px 16px;
+    background-color: rgba(10, 17, 30, 0.85);
+    color: rgb(235, 246, 255);
+    font-size: 22px;
+    white-space: normal;
+}
+.title {
+    color: rgb(69, 217, 255);
+    -unity-font-style: bold;
+    margin-bottom: 5px;
+}

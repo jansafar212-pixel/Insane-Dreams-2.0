@@ -1,0 +1,6 @@
+{
+  "name": "InsaneDreams.Runtime",
+  "rootNamespace": "InsaneDreams",
+  "references": ["Unity.InputSystem"],
+  "autoReferenced": true
+}

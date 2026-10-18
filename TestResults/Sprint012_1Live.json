@@ -1,0 +1,11 @@
+{
+  "naturalTrials": "P0 Reacting x=17,01 mag=18 reserve=54\nP0 Engaging x=17,03 mag=17 reserve=54\nP0 BlindFiring x=17,03 mag=16 reserve=54\nP0 Withdrawing x=17,03 mag=0 reserve=54\nP0 Reloading x=14,20 mag=0 reserve=54\nP0 Patrol x=14,20 mag=18 reserve=36\nP0 Reacting x=13,99 mag=18 reserve=36\nP0 Approaching x=14,73 mag=18 reserve=36\nP0 Engaging x=15,24 mag=18 reserve=36\nP0 BlindFiring x=16,28 mag=15 reserve=36\nP0 Reacting x=16,29 mag=15 reserve=36\nP0 Searching x=16,33 mag=15 reserve=36\nP0 Patrol x=19,06 mag=15 reserve=36\nP0 Reacting x=19,79 mag=15 reserve=36\nP0 Engaging x=20,12 mag=14 reserve=36\nRESULT profile=Overconfident attempt=1 demonstrated=True frozen=False known=(20.00, 0.71) hidden=(26.00, 0.71, 0.00) blindShots=16 wallHits=10 final=Engaging\nP1 Reacting x=17,00 mag=18 reserve=54\nP1 Engaging x=17,00 mag=17 reserve=54\nP1 Searching x=17,00 mag=16 reserve=54\nP1 Patrol x=17,00 mag=16 reserve=54\nP1 Reacting x=19,79 mag=16 reserve=54\nP1 Engaging x=19,91 mag=15 reserve=54\nP1 BlindFiring x=19,91 mag=12 reserve=54\nP1 Reacting x=19,91 mag=12 reserve=54\nP1 Searching x=19,92 mag=12 reserve=54\nP1 Reacting x=19,96 mag=12 reserve=54\nP1 Engaging x=19,96 mag=11 reserve=54\nP1 BlindFiring x=20,06 mag=8 reserve=54\nP1 Withdrawing x=20,06 mag=0 reserve=54\nP1 Reloading x=17,12 mag=0 reserve=54\nRESULT profile=Ordinary attempt=1 demonstrated=True frozen=False known=(20.00, 0.71) hidden=(26.00, 0.71, 0.00) blindShots=8 wallHits=6 final=Reloading",
+  "note": "Natural-trial aggregate frozen=False includes later legitimate reacquisitions. The separate uninterrupted-hidden measurement below verifies frozen memory. Existing crate at x21; temporary actor positioning/player protection discarded; controlled repeat temporarily forced ordinary chance to 1, without asset changes.",
+  "uninterruptedHiddenInterval": "Ordinary controlled repeat, chance temporarily 1: blind=True memoryGap=0 known=(20.00, 0.71) hidden=(26.00, 0.71, 0.00) extraShots=5 ammoSpent=5 lastHit=Geometry",
+  "finalState": {
+    "scene": "Assets/Scenes/Warehouse_Testbed.unity",
+    "isDirty": false,
+    "playing": false,
+    "missingScripts": 0
+  }
+}

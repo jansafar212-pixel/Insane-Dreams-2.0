@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb528433d18e7c24b94402c75f563040, type: 3}
+  m_Name: Sprint008BucketLarperSkin
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Visuals.CharacterSkin
+  head: {fileID: 21300000, guid: e2313a704f976f14ab063e9e4d7f27c6, type: 3}
+  torso: {fileID: 21300000, guid: 1e8bb048e9b672546a4a44e9af741bba, type: 3}
+  arm: {fileID: 21300000, guid: d2750752e625f35459cd84a6ac72b35e, type: 3}
+  leg: {fileID: 21300000, guid: 65f62800d34d156448f336dd636e881b, type: 3}
+  weapon: {fileID: 21300000, guid: ad04809653025234986d9107d6aa2334, type: 3}
+  parachute: {fileID: 21300000, guid: f89cc3f609931e34791fea7c21333f51, type: 3}
+  secondaryWeapon: {fileID: 21300000, guid: 0d9544d255dbe2e43a08107018622f45, type: 3}
+  meleeWeapon: {fileID: 21300000, guid: 2f5b2ca3950189843963dc27d4609498, type: 3}
+  faces:
+  - {fileID: 21300000, guid: 94f26a0d1519f464f8d77e315a3c6218, type: 3}
+  - {fileID: 21300000, guid: 567a729094e6cfd4a8dd6e3a3127144b, type: 3}
+  - {fileID: 21300000, guid: 4dc98e943fe371d47964274509555955, type: 3}
+  - {fileID: 21300000, guid: 844370bbb39280943b7bdab09631ff8e, type: 3}
+  - {fileID: 21300000, guid: 595d1ed3b5a258148abc4533fe9bb4f1, type: 3}
+  - {fileID: 21300000, guid: fde137f076b3a27439e863e677eb488d, type: 3}
+  clothing: {r: 1, g: 1, b: 1, a: 1}
+  provenance: Sprint 009 proportional revision of the independently code-authored Sprint 008 style. New head/face/body pixel patterns; no historical image input. Publication/provenance review still applies.

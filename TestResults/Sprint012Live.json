@@ -1,0 +1,30 @@
+{
+  "method": "Unity MCP-controlled live Warehouse_Testbed. Group used authored spawn positions with temporary player protection. Cover checks removed protection. Ragdoll check used an isolated runtime hitscan emitter. Runtime changes discarded on stopping Play Mode; inline captures inspected, no screenshot files claimed.",
+  "entry": {
+    "actors": 7,
+    "health": 100,
+    "x": -24,
+    "allWeapons": "LarperBuzzbox"
+  },
+  "group": {
+    "group": "STATE 3 Reacting x=-1,08 moved=1,08 shots=0 ammo=18 reserve=54\nSTATE 4 Reacting x=-10,25 moved=10,25 shots=0 ammo=18 reserve=54\nSTATE 5 Reacting x=0,75 moved=0,75 shots=0 ammo=18 reserve=54\nSTATE 4 Searching x=-10,00 moved=10,00 shots=0 ammo=18 reserve=54\nSHOT 5 gap=0 dot=1\nSHOT 3 gap=0 dot=1\nSTATE 3 Engaging x=-0,98 moved=0,98 shots=1 ammo=17 reserve=54\nSTATE 5 Engaging x=0,85 moved=0,85 shots=1 ammo=17 reserve=54\nSTATE 4 Patrol x=-7,28 moved=7,28 shots=0 ammo=18 reserve=54\nSTATE 4 Reacting x=-4,19 moved=4,19 shots=0 ammo=18 reserve=54\nSTATE 5 Withdrawing x=0,85 moved=0,00 shots=15 ammo=3 reserve=54\nLINE 5 Withdraw FALL BACK!\nSHOT 4 gap=0 dot=1\nSTATE 4 Engaging x=-4,07 moved=4,07 shots=1 ammo=17 reserve=54\nSTATE 3 Reloading x=-0,98 moved=0,98 shots=18 ammo=0 reserve=54\nSTATE 4 Searching x=-4,07 moved=4,07 shots=4 ammo=14 reserve=54\nLINE 5 Reload RELOADING!\nSTATE 5 Reloading x=4,53 moved=3,68 shots=15 ammo=3 reserve=54\nSTATE 4 Patrol x=-4,07 moved=4,07 shots=4 ammo=14 reserve=54\nSTATE 4 Reacting x=-3,97 moved=3,97 shots=4 ammo=14 reserve=54\nSTATE 4 Engaging x=-3,91 moved=3,91 shots=5 ammo=13 reserve=54\nSTATE 4 Searching x=-3,91 moved=3,91 shots=8 ammo=10 reserve=54\nSTATE 4 Patrol x=-3,92 moved=3,92 shots=8 ammo=10 reserve=54\nSTATE 4 Reacting x=-3,92 moved=3,92 shots=8 ammo=10 reserve=54\nSTATE 3 Reacting x=-0,98 moved=0,98 shots=18 ammo=18 reserve=36\nSTATE 4 Engaging x=-3,92 moved=3,92 shots=9 ammo=9 reserve=54\nLINE 4 Blocked NO ROOM! RELOADING HERE!\nSTATE 4 Reloading x=-3,91 moved=3,91 shots=11 ammo=7 reserve=54\nSTATE 3 Engaging x=-0,98 moved=0,98 shots=19 ammo=17 reserve=36\nSTATE 2 Reacting x=8,06 moved=8,06 shots=0 ammo=18 reserve=54\nSTATE 5 Reacting x=4,60 moved=3,75 shots=15 ammo=18 reserve=39\nSTATE 2 Engaging x=7,96 moved=7,96 shots=0 ammo=18 reserve=54\nSHOT 2 gap=0 dot=1\nSTATE 5 Engaging x=4,60 moved=3,75 shots=16 ammo=17 reserve=39\nLINE 3 Blocked BAD PLAN! HOLD ON!\nSTATE 3 Reloading x=-0,98 moved=0,98 shots=36 ammo=0 reserve=36\nSTATE 2 Reloading x=7,96 moved=7,96 shots=15 ammo=3 reserve=54\nSTATE 5 Withdrawing x=4,60 moved=0,00 shots=30 ammo=3 reserve=39\nSTATE 4 Patrol x=-3,92 moved=3,92 shots=11 ammo=18 reserve=43\nSTATE 4 Reacting x=-3,92 moved=3,92 shots=11 ammo=18 reserve=43\nSTATE 4 Engaging x=-3,92 moved=3,92 shots=12 ammo=17 reserve=43\nLINE 5 Reload COVER ME, I'M RELOADING!\nSTATE 5 Reloading x=8,30 moved=3,71 shots=30 ammo=3 reserve=39\nSTATE 4 Searching x=-3,92 moved=3,92 shots=15 ammo=14 reserve=43\nSTATE 4 Patrol x=-3,92 moved=3,92 shots=15 ammo=14 reserve=43\nSTATE 4 Reacting x=-3,92 moved=3,92 shots=15 ammo=14 reserve=43\nSTATE 4 Engaging x=-3,92 moved=3,92 shots=16 ammo=13 reserve=43\nSTATE 3 Reacting x=-0,98 moved=0,98 shots=36 ammo=18 reserve=18\nSTATE 2 Reacting x=7,96 moved=7,96 shots=15 ammo=18 reserve=39\nSTATE 4 Searching x=-3,92 moved=3,92 shots=19 ammo=10 reserve=43\nSTATE 3 Engaging x=-0,98 moved=0,98 shots=37 ammo=17 reserve=18\nSTATE 2 Engaging x=7,96 moved=7,96 shots=15 ammo=18 reserve=39\nSTATE 4 Patrol x=-3,92 moved=3,92 shots=19 ammo=10 reserve=43\nSTATE 4 Reacting x=-3,92 moved=3,92 shots=19 ammo=10 reserve=43\nSTATE 5 Reacting x=8,43 moved=3,83 shots=30 ammo=18 reserve=24\nSTATE 4 Engaging x=-3,92 moved=3,92 shots=20 ammo=9 reserve=43\nLINE 4 Blocked BAD PLAN! HOLD ON!\nSTATE 4 Reloading x=-3,92 moved=3,92 shots=22 ammo=7 reserve=43\nSTATE 5 Engaging x=7,09 moved=2,50 shots=31 ammo=17 reserve=24\nSTATE 2 Reloading x=7,96 moved=7,96 shots=30 ammo=3 reserve=39\nLINE 3 Blocked NO ROOM! RELOADING HERE!\nSTATE 3 Reloading x=-0,98 moved=0,98 shots=54 ammo=0 reserve=18\nSTATE 5 Withdrawing x=5,86 moved=0,00 shots=45 ammo=3 reserve=24\nPEAK_BUBBLES=2\nSHOT_COUNTS=0,0,30,54,22,45,0",
+    "reloadPose": "actor=3 pose=True magazineVisible=True magazineY=-0,4024333",
+    "actors": "EnemySpawn_-7_0,8 shots=54 x=-0,9819927;EnemySpawn_WitnessPatrol shots=22 x=-3,915;Sprint012_Encounter_0 shots=45 x=6,344815;Sprint012_Encounter_1 shots=0 x=21,27599;Sprint012_Encounter_2 shots=0 x=-0,9751645;Sprint012_Encounter_3 shots=0 x=20,8414;EnemySpawn_LadderPatrol shots=30 x=7,964041"
+  },
+  "cover": {
+    "cover": "CROUCH origin=(-14.85, 0.55) end=(-14.80, 0.55) surface=Geometry targetHealth=50\nSTAND origin=(-14.71, 1.05) end=(-11.40, 1.05) surface=Character targetHealth=30",
+    "incoming": "INCOMING_COVER surface=Geometry playerHealth=100\nINCOMING_UNCOVERED surface=Character playerHealth=95\nRAGDOLL spawns=0 parts=0 active=0",
+    "finalDefeat": "spawns=0 bodies=0 active=0",
+    "physics": "finite=True"
+  },
+  "verifiedRagdoll": "shot=True hit=Character targetHealth=30\nshot=True hit=Character targetHealth=10\nshot=True hit=Character targetHealth=0\nspawns=1 bodies=6 active=1\nfinite=True joints=5",
+  "finalState": {
+    "scene": "Assets/Scenes/Warehouse_Testbed.unity",
+    "isDirty": false,
+    "playing": false,
+    "missingScripts": 0,
+    "missingRefs": [],
+    "colliders": 31,
+    "androidSupport": false
+  }
+}
