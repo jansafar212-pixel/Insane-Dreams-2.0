@@ -1,0 +1,34 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <ui:Style src="WarehouseControls.uss" />
+    <ui:Style src="MissionControls.uss" />
+    <ui:VisualElement name="safeArea" class="safe-area" picking-mode="Ignore">
+        <ui:VisualElement class="mission-card" picking-mode="Ignore">
+            <ui:Label text="MISSION 01 / WAREHOUSE INCIDENT" class="mission-heading" picking-mode="Ignore" />
+            <ui:Label name="objective" class="mission-objective" picking-mode="Ignore" />
+            <ui:Label name="missionNotice" class="mission-notice" picking-mode="Ignore" />
+            <ui:Label name="missionTime" class="mission-time" picking-mode="Ignore" />
+        </ui:VisualElement>
+        <ui:VisualElement class="equipment">
+            <ui:Label name="loadout" class="loadout" picking-mode="Ignore" />
+            <ui:VisualElement class="equipment-buttons">
+                <ui:Button name="slot1" text="1" /><ui:Button name="slot2" text="2" /><ui:Button name="melee" text="M" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="moveStick" class="stick move-stick"><ui:Label text="MOVE / CLIMB" class="stick-label" picking-mode="Ignore" /><ui:VisualElement class="knob" picking-mode="Ignore" /></ui:VisualElement>
+        <ui:VisualElement name="aimStick" class="stick aim-stick"><ui:Label text="AIM / FIRE" class="stick-label" picking-mode="Ignore" /><ui:VisualElement class="knob" picking-mode="Ignore" /></ui:VisualElement>
+        <ui:VisualElement name="parachuteButton" class="action parachute-button"><ui:Label text="DEPLOY&#10;CHUTE" picking-mode="Ignore" /></ui:VisualElement>
+        <ui:Button name="reload" text="RELOAD" class="action reload-button" />
+        <ui:Label name="interactionPrompt" class="interaction-prompt" picking-mode="Ignore" />
+        <ui:Button name="interact" text="INTERACT" class="interact-button hidden" />
+        <ui:VisualElement name="missionResults" class="results hidden">
+            <ui:VisualElement class="results-card">
+                <ui:Label text="MISSION COMPLETE" class="results-heading" />
+                <ui:Label text="WAREHOUSE INCIDENT" class="results-title" />
+                <ui:Label name="resultStats" class="results-stats" />
+                <ui:VisualElement name="resultsExtras" />
+                <ui:Button name="replayMission" text="REPLAY MISSION" class="results-replay" />
+                <ui:Label text="Evidence secured. Probably.&#10;Replay starts at the warehouse entrance." class="results-note" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

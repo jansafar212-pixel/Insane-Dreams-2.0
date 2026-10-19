@@ -12,15 +12,23 @@ namespace InsaneDreams.Tests
         [Test] public void BasicPistolHasOriginalModularMagazineAndFiniteAutomaticBurst()
         {
             var def=AssetDatabase.LoadAssetAtPath<WeaponDefinition>("Assets/Data/Items/LarperBuzzbox.asset");
-            Assert.IsNotNull(def);Assert.AreEqual(18,def.MagazineCapacity);Assert.AreEqual(5,def.Damage);
+            Assert.IsNotNull(def);Assert.AreEqual(27,def.MagazineCapacity);Assert.AreEqual(5,def.Damage);
             Assert.IsTrue(AssetDatabase.GetAssetPath(def.EquippedSprite).StartsWith("Assets/Art/Sprint012/"));Assert.Greater(def.MagazineSprite.rect.height,def.EquippedSprite.rect.height*2);
             var prefab=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemies/Larper.prefab");
             Assert.AreSame(def,new SerializedObject(prefab.GetComponent<EnemyCombat>()).FindProperty("firearm").objectReferenceValue);
             var runtime=new RuntimeWeapon(def,54);
-            for(int i=0;i<18;i++){Assert.IsTrue(runtime.Cycle.TryAttack(i*.11f));Assert.IsFalse(runtime.Cycle.TryAttack(i*.11f+.01f));}
-            Assert.IsFalse(runtime.Cycle.TryAttack(2));Assert.IsTrue(runtime.Cycle.TryReload(2));Assert.IsFalse(runtime.Cycle.TryAttack(3));
-            runtime.Cycle.Tick(4.61f);Assert.AreEqual(18,runtime.MagazineAmmo);Assert.AreEqual(36,runtime.ReserveAmmo);
+            for(int i=0;i<27;i++){Assert.IsTrue(runtime.Cycle.TryAttack(i*.11f));Assert.IsFalse(runtime.Cycle.TryAttack(i*.11f+.01f));}
+            Assert.IsFalse(runtime.Cycle.TryAttack(3));Assert.IsTrue(runtime.Cycle.TryReload(3));Assert.IsFalse(runtime.Cycle.TryAttack(4));
+            runtime.Cycle.Tick(3+def.ReloadDuration+.01f);Assert.AreEqual(27,runtime.MagazineAmmo);Assert.AreEqual(27,runtime.ReserveAmmo);
             Assert.IsNotNull(AssetDatabase.LoadAssetAtPath<WeaponDefinition>("Assets/Data/Items/WarehouseCarbine.asset"));
+        }
+        [Test] public void Sprint0122ReloadVariationPreservesDeadlineAmmoAndSharedDefinition()
+        {
+            var def=AssetDatabase.LoadAssetAtPath<WeaponDefinition>("Assets/Data/Items/LarperBuzzbox.asset");var weapon=new RuntimeWeapon(def,36);weapon.SetAmmunition(0,36);
+            Assert.AreEqual(4,def.ReloadDuration);Assert.IsFalse(weapon.Cycle.TryReload(0,float.NaN));Assert.IsFalse(weapon.Cycle.TryReload(0,0));
+            Assert.IsTrue(weapon.Cycle.TryReload(0,1.05f));Assert.IsFalse(weapon.Cycle.TryReload(1));Assert.IsFalse(weapon.Cycle.TryAttack(3.8f));
+            weapon.Cycle.Tick(4.19f);Assert.AreEqual(0,weapon.MagazineAmmo);Assert.AreEqual(36,weapon.ReserveAmmo);
+            weapon.Cycle.Tick(4.21f);Assert.AreEqual(27,weapon.MagazineAmmo);Assert.AreEqual(9,weapon.ReserveAmmo);Assert.AreEqual(4,def.ReloadDuration);
         }
         [Test] public void CombatSpeechDensityAndDuplicateSuppressionDoNotReplaceOrdinaryGate()
         {

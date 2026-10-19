@@ -165,7 +165,7 @@ namespace InsaneDreams.Tests
         [UnityTest] public IEnumerator TypedSpawnResolvesArchetypeAndMissingOptionalReferencesAreSafe()
         {
             var archetype = AssetDatabase.LoadAssetAtPath<InsaneDreams.Enemies.EnemyArchetype>("Assets/Data/Enemies/Larper.asset");
-            var marker = Keep(new GameObject("TypedSpawn")); marker.transform.position = new Vector3(1000, .85f);
+            var marker = Keep(new GameObject("TypedSpawn")); marker.transform.position = new Vector3(1004, .85f);
             var point = marker.AddComponent<InsaneDreams.Enemies.EnemySpawnPoint>();
             var serialized = new SerializedObject(point); serialized.FindProperty("archetype").objectReferenceValue = archetype;
             serialized.ApplyModifiedPropertiesWithoutUndo(); Assert.IsNull(point.ValidationError);

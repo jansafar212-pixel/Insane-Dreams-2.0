@@ -796,7 +796,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6262284589613112447, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 367478917}
   m_SourcePrefab: {fileID: 100100000, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
 --- !u!4 &63279466 stripped
 Transform:
@@ -1165,7 +1168,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6262284589613112447, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1675799792}
   m_SourcePrefab: {fileID: 100100000, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
 --- !u!4 &104253244 stripped
 Transform:
@@ -2271,6 +2277,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!1 &279295302 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6262284589613112447, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
+  m_PrefabInstance: {fileID: 1956021511}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &311102606 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6262284589613112447, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
+  m_PrefabInstance: {fileID: 1373855795}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &336972112
 GameObject:
   m_ObjectHideFlags: 0
@@ -2442,7 +2458,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6262284589613112447, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1809152101}
   m_SourcePrefab: {fileID: 100100000, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
 --- !u!4 &346150105 stripped
 Transform:
@@ -2460,6 +2479,7 @@ GameObject:
   - component: {fileID: 350207568}
   - component: {fileID: 350207570}
   - component: {fileID: 350207569}
+  - component: {fileID: 350207571}
   m_Layer: 0
   m_Name: CrouchPassage
   m_TagString: Untagged
@@ -2588,6 +2608,37 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &350207571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350207567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad5727709307a14a8541c9eb3a2ca4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Combat.ImpactSurface2D
+  material: 2
+--- !u!1 &367478914 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6262284589613112447, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
+  m_PrefabInstance: {fileID: 63279465}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &367478917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367478914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad5727709307a14a8541c9eb3a2ca4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Combat.ImpactSurface2D
+  material: 1
 --- !u!1001 &383414577
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2857,12 +2908,20 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6262284589613112447, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 885867636}
   m_SourcePrefab: {fileID: 100100000, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
 --- !u!4 &430741764 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4028084947343565556, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
   m_PrefabInstance: {fileID: 430741763}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &456526055 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6262284589613112447, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
+  m_PrefabInstance: {fileID: 2108946029}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &497942763
 GameObject:
@@ -3151,6 +3210,7 @@ GameObject:
   - component: {fileID: 527038835}
   - component: {fileID: 527038837}
   - component: {fileID: 527038836}
+  - component: {fileID: 527038838}
   m_Layer: 0
   m_Name: LowCover_Sprint012
   m_TagString: Untagged
@@ -3279,6 +3339,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.6, y: 0.9}
   m_EdgeRadius: 0
+--- !u!114 &527038838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 527038834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad5727709307a14a8541c9eb3a2ca4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Combat.ImpactSurface2D
+  material: 3
 --- !u!1 &527993115
 GameObject:
   m_ObjectHideFlags: 0
@@ -3757,12 +3830,20 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6262284589613112447, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1272412294}
   m_SourcePrefab: {fileID: 100100000, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
 --- !u!4 &571043398 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4028084947343565556, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
   m_PrefabInstance: {fileID: 571043397}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &588571029 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6262284589613112447, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
+  m_PrefabInstance: {fileID: 1223565506}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &608872483
 GameObject:
@@ -4391,7 +4472,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6262284589613112447, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1715142506}
   m_SourcePrefab: {fileID: 100100000, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
 --- !u!4 &686414854 stripped
 Transform:
@@ -4671,7 +4755,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6262284589613112447, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1399858257}
   m_SourcePrefab: {fileID: 100100000, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
 --- !u!4 &777683821 stripped
 Transform:
@@ -5639,7 +5726,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6262284589613112447, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 961632886}
   m_SourcePrefab: {fileID: 100100000, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
 --- !u!4 &864151729 stripped
 Transform:
@@ -5738,6 +5828,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!1 &876275130 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6262284589613112447, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
+  m_PrefabInstance: {fileID: 1381133207}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &878376778
 GameObject:
   m_ObjectHideFlags: 0
@@ -5830,6 +5925,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!1 &885867633 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6262284589613112447, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
+  m_PrefabInstance: {fileID: 430741763}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &885867636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 885867633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad5727709307a14a8541c9eb3a2ca4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Combat.ImpactSurface2D
+  material: 2
 --- !u!114 &893260372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6236,6 +6349,24 @@ Transform:
   - {fileID: 1675833099}
   m_Father: {fileID: 430132073}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &961632883 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6262284589613112447, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
+  m_PrefabInstance: {fileID: 864151728}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &961632886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 961632883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad5727709307a14a8541c9eb3a2ca4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Combat.ImpactSurface2D
+  material: 2
 --- !u!1 &964464344
 GameObject:
   m_ObjectHideFlags: 0
@@ -6512,6 +6643,7 @@ GameObject:
   - component: {fileID: 984014703}
   - component: {fileID: 984014705}
   - component: {fileID: 984014704}
+  - component: {fileID: 984014706}
   m_Layer: 0
   m_Name: Crate_-3
   m_TagString: Untagged
@@ -6640,6 +6772,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!114 &984014706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 984014702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad5727709307a14a8541c9eb3a2ca4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Combat.ImpactSurface2D
+  material: 3
 --- !u!1 &987679506
 GameObject:
   m_ObjectHideFlags: 0
@@ -6769,7 +6914,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6262284589613112447, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1509962915}
   m_SourcePrefab: {fileID: 100100000, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
 --- !u!4 &1052672351 stripped
 Transform:
@@ -6826,6 +6974,11 @@ MonoBehaviour:
   ladderRoute: {fileID: 0}
   routeTargetHeight: 6.6
   personality: {fileID: 0}
+--- !u!1 &1060261456 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6262284589613112447, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
+  m_PrefabInstance: {fileID: 1808544989}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1069492308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6919,7 +7072,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6262284589613112447, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1744761168}
   m_SourcePrefab: {fileID: 100100000, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
 --- !u!4 &1072107280 stripped
 Transform:
@@ -7277,13 +7433,29 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6262284589613112447, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1223565510}
   m_SourcePrefab: {fileID: 100100000, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
 --- !u!4 &1223565507 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4028084947343565556, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
   m_PrefabInstance: {fileID: 1223565506}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1223565510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 588571029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad5727709307a14a8541c9eb3a2ca4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Combat.ImpactSurface2D
+  material: 2
 --- !u!1 &1226538544
 GameObject:
   m_ObjectHideFlags: 0
@@ -7635,13 +7807,34 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6262284589613112447, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1390244056}
   m_SourcePrefab: {fileID: 100100000, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
 --- !u!4 &1266575812 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4028084947343565556, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
   m_PrefabInstance: {fileID: 1266575811}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1272412291 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6262284589613112447, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
+  m_PrefabInstance: {fileID: 571043397}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1272412294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1272412291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad5727709307a14a8541c9eb3a2ca4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Combat.ImpactSurface2D
+  material: 2
 --- !u!1 &1282117243
 GameObject:
   m_ObjectHideFlags: 0
@@ -8411,13 +8604,29 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6262284589613112447, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1373855799}
   m_SourcePrefab: {fileID: 100100000, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
 --- !u!4 &1373855796 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4028084947343565556, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
   m_PrefabInstance: {fileID: 1373855795}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1373855799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 311102606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad5727709307a14a8541c9eb3a2ca4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Combat.ImpactSurface2D
+  material: 2
 --- !u!1001 &1381133207
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8493,13 +8702,47 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6262284589613112447, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1381133211}
   m_SourcePrefab: {fileID: 100100000, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
 --- !u!4 &1381133208 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4028084947343565556, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
   m_PrefabInstance: {fileID: 1381133207}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1381133211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 876275130}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad5727709307a14a8541c9eb3a2ca4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Combat.ImpactSurface2D
+  material: 2
+--- !u!1 &1390244053 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6262284589613112447, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
+  m_PrefabInstance: {fileID: 1266575811}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1390244056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1390244053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad5727709307a14a8541c9eb3a2ca4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Combat.ImpactSurface2D
+  material: 2
 --- !u!1 &1393488486
 GameObject:
   m_ObjectHideFlags: 0
@@ -8592,6 +8835,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!1 &1399858254 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6262284589613112447, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
+  m_PrefabInstance: {fileID: 777683820}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1399858257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1399858254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad5727709307a14a8541c9eb3a2ca4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Combat.ImpactSurface2D
+  material: 1
 --- !u!1 &1404555316
 GameObject:
   m_ObjectHideFlags: 0
@@ -9329,6 +9590,34 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!1 &1509962912 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6262284589613112447, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
+  m_PrefabInstance: {fileID: 1052672350}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1509962915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1509962912}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad5727709307a14a8541c9eb3a2ca4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Combat.ImpactSurface2D
+  material: 1
+--- !u!1 &1512399800 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6262284589613112447, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
+  m_PrefabInstance: {fileID: 1917729725}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1514960753 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6262284589613112447, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
+  m_PrefabInstance: {fileID: 2132351817}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1540328696
 GameObject:
   m_ObjectHideFlags: 0
@@ -10160,6 +10449,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!1 &1675799789 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6262284589613112447, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
+  m_PrefabInstance: {fileID: 104253243}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1675799792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675799789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad5727709307a14a8541c9eb3a2ca4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Combat.ImpactSurface2D
+  material: 1
 --- !u!1 &1675833098
 GameObject:
   m_ObjectHideFlags: 0
@@ -10355,6 +10662,7 @@ GameObject:
   - component: {fileID: 1697247878}
   - component: {fileID: 1697247880}
   - component: {fileID: 1697247879}
+  - component: {fileID: 1697247881}
   m_Layer: 0
   m_Name: Crate_21
   m_TagString: Untagged
@@ -10483,6 +10791,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!114 &1697247881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697247877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad5727709307a14a8541c9eb3a2ca4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Combat.ImpactSurface2D
+  material: 3
 --- !u!1 &1713709382
 GameObject:
   m_ObjectHideFlags: 0
@@ -10575,6 +10896,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!1 &1715142503 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6262284589613112447, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
+  m_PrefabInstance: {fileID: 686414853}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1715142506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1715142503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad5727709307a14a8541c9eb3a2ca4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Combat.ImpactSurface2D
+  material: 2
 --- !u!1 &1716653356
 GameObject:
   m_ObjectHideFlags: 0
@@ -10770,6 +11109,7 @@ GameObject:
   - component: {fileID: 1719464106}
   - component: {fileID: 1719464108}
   - component: {fileID: 1719464107}
+  - component: {fileID: 1719464109}
   m_Layer: 0
   m_Name: Crate_-18
   m_TagString: Untagged
@@ -10898,6 +11238,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!114 &1719464109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1719464105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad5727709307a14a8541c9eb3a2ca4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Combat.ImpactSurface2D
+  material: 3
 --- !u!1 &1722694958
 GameObject:
   m_ObjectHideFlags: 0
@@ -10990,6 +11343,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!1 &1744761165 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6262284589613112447, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
+  m_PrefabInstance: {fileID: 1072107279}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1744761168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1744761165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad5727709307a14a8541c9eb3a2ca4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Combat.ImpactSurface2D
+  material: 1
 --- !u!114 &1781954610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11171,13 +11542,47 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6262284589613112447, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1808544993}
   m_SourcePrefab: {fileID: 100100000, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
 --- !u!4 &1808544990 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4028084947343565556, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
   m_PrefabInstance: {fileID: 1808544989}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1808544993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1060261456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad5727709307a14a8541c9eb3a2ca4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Combat.ImpactSurface2D
+  material: 1
+--- !u!1 &1809152098 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6262284589613112447, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
+  m_PrefabInstance: {fileID: 346150104}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1809152101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809152098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad5727709307a14a8541c9eb3a2ca4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Combat.ImpactSurface2D
+  material: 2
 --- !u!114 &1821376540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11757,13 +12162,29 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6262284589613112447, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1917729729}
   m_SourcePrefab: {fileID: 100100000, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
 --- !u!4 &1917729726 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4028084947343565556, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
   m_PrefabInstance: {fileID: 1917729725}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1917729729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512399800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad5727709307a14a8541c9eb3a2ca4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Combat.ImpactSurface2D
+  material: 2
 --- !u!1 &1944060574
 GameObject:
   m_ObjectHideFlags: 0
@@ -12115,13 +12536,29 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6262284589613112447, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1956021515}
   m_SourcePrefab: {fileID: 100100000, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
 --- !u!4 &1956021512 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4028084947343565556, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
   m_PrefabInstance: {fileID: 1956021511}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1956021515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 279295302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad5727709307a14a8541c9eb3a2ca4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Combat.ImpactSurface2D
+  material: 2
 --- !u!1 &1968211027
 GameObject:
   m_ObjectHideFlags: 0
@@ -13045,13 +13482,29 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6262284589613112447, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2108946033}
   m_SourcePrefab: {fileID: 100100000, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
 --- !u!4 &2108946030 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4028084947343565556, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
   m_PrefabInstance: {fileID: 2108946029}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2108946033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 456526055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad5727709307a14a8541c9eb3a2ca4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Combat.ImpactSurface2D
+  material: 2
 --- !u!1 &2113364798
 GameObject:
   m_ObjectHideFlags: 0
@@ -13227,13 +13680,29 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6262284589613112447, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2132351821}
   m_SourcePrefab: {fileID: 100100000, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
 --- !u!4 &2132351818 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4028084947343565556, guid: e9f4072382672bc44bfd945e1a1997fd, type: 3}
   m_PrefabInstance: {fileID: 2132351817}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2132351821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1514960753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad5727709307a14a8541c9eb3a2ca4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Combat.ImpactSurface2D
+  material: 1
 --- !u!1001 &5323663346490712002
 PrefabInstance:
   m_ObjectHideFlags: 0

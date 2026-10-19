@@ -95,12 +95,14 @@ namespace InsaneDreams.Tests
             var enemy = Keep(Object.Instantiate(Asset<GameObject>("Assets/Prefabs/Enemies/Larper.prefab"), new Vector3(2004, 1), Quaternion.identity)); Pin(enemy);
             enemy.GetComponent<LarperBrain>().Configure(Asset<EnemyArchetype>("Assets/Data/Enemies/Larper.asset"));
             var combat = enemy.GetComponent<EnemyCombat>(); combat.BindTarget(player.GetComponent<Health>());
+            CombatTestView.Frame(combat);
             var policy=new SerializedObject(combat);foreach(string key in new[]{"ordinaryBlindChance","cowardBlindChance","overconfidentBlindChance"})policy.FindProperty(key).floatValue=0;policy.ApplyModifiedPropertiesWithoutUndo(); // Explicitly exercise the non-spray branch.
-            yield return new WaitForSeconds(.4f);
+            // Allow several imperfect shots after the configurable reaction jitter.
+            for(int i=0;i<60&&player.GetComponent<Health>().Current==player.GetComponent<Health>().Maximum;i++)yield return new WaitForFixedUpdate();
             Assert.AreEqual(EngagementState.Engaging, combat.State); Assert.Greater(enemy.GetComponent<AttackExecutor>().ShotsFired, 0);
             Assert.Less(player.GetComponent<Health>().Current, player.GetComponent<Health>().Maximum);
             Assert.Less(combat.AimDirection.x, 0);
-            player.transform.position = new Vector3(2050, 1); Physics2D.SyncTransforms(); yield return null;
+            player.transform.position = new Vector3(2050, 1); Physics2D.SyncTransforms(); yield return new WaitForSeconds(3.2f);
             Assert.AreEqual(EngagementState.Patrol, combat.State); Assert.IsFalse(enemy.GetComponent<LarperBrain>().DecisionsSuspended);
         }
         [UnityTest] public IEnumerator AuthoredLadderAscentUsesExistingTraversalAndRestoresPatrol()

@@ -13,6 +13,9 @@ namespace InsaneDreams.Checkpoints
         public void SetLit(bool lit) { if (markerVisual != null) markerVisual.color = lit ? activeColor : inactiveColor; }
         private void OnTriggerEnter2D(Collider2D other)
         {
+            // Physics2D also delivers triggers to disabled MonoBehaviours. Mission
+            // markers are disabled because objective-gated commits own activation.
+            if(!isActiveAndEnabled)return;
             if (other.attachedRigidbody != null && other.attachedRigidbody.TryGetComponent(out PlayerRecovery player))
                 player.Activate(this, spawnPoint != null ? (Vector2)spawnPoint.position : (Vector2)transform.position);
         }

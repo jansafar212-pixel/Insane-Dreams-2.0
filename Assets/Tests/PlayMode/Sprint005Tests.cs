@@ -163,19 +163,23 @@ namespace InsaneDreams.Tests
             var enemy = Keep(Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemies/Larper.prefab"), new Vector3(3008, .85f), Quaternion.identity));
             var brain = enemy.GetComponent<LarperBrain>(); brain.Configure(AssetDatabase.LoadAssetAtPath<EnemyArchetype>("Assets/Data/Enemies/Larper.asset"));
             var combat = enemy.GetComponent<EnemyCombat>(); combat.BindTarget(player.GetComponent<Health>());
+            CombatTestView.Frame(combat);
+            var policy=new UnityEditor.SerializedObject(combat);foreach(string key in new[]{"ordinaryBlindChance","overconfidentBlindChance","cowardBlindChance"})policy.FindProperty(key).floatValue=0;policy.ApplyModifiedPropertiesWithoutUndo(); // Exercise the optional non-spray path explicitly.
             var attack = enemy.GetComponent<AttackExecutor>();
             yield return new WaitForSeconds(.1f); Assert.AreEqual(0, attack.ShotsFired); Assert.AreEqual(EngagementState.Reacting, combat.State);
             yield return new WaitForSeconds(.6f); Assert.Greater(attack.ShotsFired, 0); Assert.Less(enemy.transform.position.x, 3007.5f);
             Box("SightWall", new Vector2(3002.5f, 2), new Vector2(.3f, 4)); Physics2D.SyncTransforms(); int shots = attack.ShotsFired;
             yield return new WaitForSeconds(.3f); Assert.IsFalse(combat.TargetVisible); Assert.AreEqual(shots, attack.ShotsFired);
             Assert.AreEqual(EngagementState.Searching, combat.State);
-            yield return new WaitForSeconds(.5f); Assert.AreEqual(EngagementState.Patrol, combat.State);
+            yield return new WaitForSeconds(3.1f); Assert.AreEqual(EngagementState.Patrol, combat.State);
         }
         [UnityTest] public IEnumerator LarperEffectiveRangeAndAccuracyAreConfigurableAndDefeatFeedbackIsSingle()
         {
             var enemy = Keep(Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemies/Larper.prefab"), new Vector3(3012, body.position.y), Quaternion.identity));
             enemy.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
             var combat = enemy.GetComponent<EnemyCombat>(); combat.BindTarget(player.GetComponent<Health>());
+            CombatTestView.Frame(combat);
+            var configuredRange=new UnityEditor.SerializedObject(combat);configuredRange.FindProperty("engagementRange").floatValue=11;configuredRange.ApplyModifiedPropertiesWithoutUndo(); // The firing limit is now independent of accuracy falloff.
             yield return new WaitForSeconds(.5f);
             Assert.AreEqual(EngagementState.Approaching, combat.State); Assert.AreEqual(0, enemy.GetComponent<AttackExecutor>().ShotsFired);
             Assert.Greater(combat.SpreadAtDistance(10), combat.SpreadAtDistance(3));

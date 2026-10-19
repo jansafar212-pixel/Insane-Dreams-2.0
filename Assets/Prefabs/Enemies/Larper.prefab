@@ -150,6 +150,7 @@ GameObject:
   - component: {fileID: 3751230418356003257}
   - component: {fileID: 5852922802227495080}
   - component: {fileID: 3715701836297340262}
+  - component: {fileID: 2227119419476407966}
   m_Layer: 2
   m_Name: Larper
   m_TagString: Untagged
@@ -347,6 +348,8 @@ MonoBehaviour:
   ledgeProbe: 0.45
   jumpLandingDistance: 4
   state: 0
+  retreatHopHeight: 1.6
+  retreatHopWidth: 1.8
 --- !u!114 &661502014450628496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -382,11 +385,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2
   tracer: {fileID: 1124243493089130025}
-  tracerSeconds: 0.35
-  tracerWidth: 0.035
+  tracerSeconds: 0.17
+  tracerWidth: 0.04
   maximumTracers: 6
-  friendlyTracer: {r: 1, g: 0.9, b: 0.45, a: 0.85}
-  enemyTracer: {r: 1, g: 0.35, b: 0.25, a: 0.85}
+  friendlyTracer: {r: 0.3, g: 0.95, b: 1, a: 0.95}
+  enemyTracer: {r: 1, g: 0.4, b: 0.2, a: 0.95}
   muzzleBlockingLayers:
     serializedVersion: 2
     m_Bits: 1
@@ -465,10 +468,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Enemies.EnemyCombat
   firearm: {fileID: 11400000, guid: 67c88bc28be6401419eaffaf19d822a0, type: 2}
-  detectionRange: 14
+  detectionRange: 22
+  engagementRange: 18
+  gameplayCamera: {fileID: 0}
+  allowOffscreenFire: 0
+  perceptionSeconds: 0.1
   closeRange: 3
-  closeSpread: 6
-  distantSpread: 32
+  closeSpread: 3
+  distantSpread: 40
   geometry:
     serializedVersion: 2
     m_Bits: 1
@@ -477,17 +484,26 @@ MonoBehaviour:
   aimDegreesPerSecond: 240
   effectiveRange: 11
   preferredDistance: 6
-  visibilityMemory: 0.65
+  visibilityMemory: 3
   rangeHysteresis: 2
   ordinaryReloadFraction: 0.2
   cowardReloadFraction: 0.4
   overconfidentReloadFraction: 0
-  withdrawalDistance: 3.5
-  withdrawalSeconds: 1.8
+  withdrawalDistance: 6
+  withdrawalSeconds: 4.5
   tacticalSampleSeconds: 0.18
   reengagementDelay: 0.35
-  initialReserveAmmo: 54
+  initialReserveAmmo: 135
   minimumWithdrawalDistance: 2.5
+  reloadDurationVariation: 0.05
+  reactionJitterSeconds: 0.05
+  blindAimUncertainty: 3
+  coverSearchDistance: 7
+  ordinaryBlindChance: 0.7
+  overconfidentBlindChance: 0.95
+  cowardBlindChance: 0.4
+  blindFireSeconds: 2
+  cowardBlindDuration: 0.45
 --- !u!82 &6066884275829778829
 AudioSource:
   m_ObjectHideFlags: 0
@@ -601,10 +617,17 @@ MonoBehaviour:
   surfaceImpactSprite: {fileID: 21300000, guid: c5aa54491ab589f4dbeba1957f7e05aa, type: 3}
   geometryImpactSound: {fileID: 0}
   ragdollImpactSound: {fileID: 0}
+  concreteImpactSound: {fileID: 0}
+  metalImpactSound: {fileID: 0}
+  woodImpactSound: {fileID: 0}
+  maximumImpactParticles: 12
+  particleSeconds: 0.24
+  pitchVariation: 0.07
+  muzzleGlowEnabled: 1
   muzzleSeconds: 0.06
   hitSeconds: 0.12
-  hurtSeconds: 0.15
-  hurtColor: {r: 1, g: 0.25, b: 0.2, a: 1}
+  hurtSeconds: 0.1
+  hurtColor: {r: 1, g: 0.75, b: 0.6, a: 1}
   firingSound: {fileID: 0}
   hitSound: {fileID: 0}
   hurtSound: {fileID: 0}
@@ -658,6 +681,8 @@ MonoBehaviour:
   rig: {fileID: 4052374020717442031}
   pixelsPerUnit: 32
   expressionSeconds: 1.4
+  flinchSeconds: 0.1
+  flinchDegrees: 3
 --- !u!114 &5852922802227495080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -687,6 +712,25 @@ MonoBehaviour:
   landing: {fileID: 0}
   ladderStep: {fileID: 0}
   stepInterval: 0.35
+--- !u!114 &2227119419476407966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6616293515568177051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 872e2052f9989424690ccd74e363654f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Traversal.PlayerPosture2D
+  heightMultiplier: 0.7
+  speedMultiplier: 0.45
+  downwardThreshold: 0.35
+  releaseThreshold: 0.2
+  solids:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!1 &6739411559143382628
 GameObject:
   m_ObjectHideFlags: 0
@@ -845,6 +889,10 @@ PrefabInstance:
       propertyPath: magazine
       value: 
       objectReference: {fileID: 2342510590501504401}
+    - target: {fileID: 4569419814807869278, guid: e7941d2289102344989ca6d0e53aa893, type: 3}
+      propertyPath: crouchedMuzzleCeiling
+      value: -0.06
+      objectReference: {fileID: 0}
     - target: {fileID: 5928026802790503677, guid: e7941d2289102344989ca6d0e53aa893, type: 3}
       propertyPath: m_Sprite
       value: 

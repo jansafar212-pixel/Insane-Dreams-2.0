@@ -34,7 +34,7 @@ namespace InsaneDreams.Tests
             player.GetComponent<Health>().ProtectFor(60);
             var go=Keep(Object.Instantiate(Asset<GameObject>("Assets/Prefabs/Enemies/Larper.prefab"),new Vector3(184,.85f),Quaternion.identity));go.GetComponent<LarperBrain>().Configure(Asset<EnemyArchetype>("Assets/Data/Enemies/Larper.asset"));
             go.GetComponent<LarperAwareness>().Configure(Asset<LarperPersonalityProfile>("Assets/Data/Enemies/Personalities/Ordinary.asset"));go.GetComponent<LarperSpeechBubble>().Bind(camera,document);
-            var e=go.GetComponent<EnemyCombat>();e.BindTarget(player.GetComponent<Health>());return e;
+            var e=go.GetComponent<EnemyCombat>();e.BindTarget(player.GetComponent<Health>());e.BindGameplayCamera(camera);return e;
         }
         private void BlindPolicy(EnemyCombat e,float chance=1,float seconds=2)
         {var s=new SerializedObject(e);foreach(string key in new[]{"ordinaryBlindChance","cowardBlindChance","overconfidentBlindChance"})s.FindProperty(key).floatValue=chance;s.FindProperty("blindFireSeconds").floatValue=seconds;s.ApplyModifiedPropertiesWithoutUndo();}
@@ -53,10 +53,10 @@ namespace InsaneDreams.Tests
         }
         [UnityTest] public IEnumerator EmptyBlindMagazineTransitionsToExistingRetreatAndReload()
         {
-            var e=Enemy();BlindPolicy(e);yield return Engage(e);e.Weapon.SetAmmunition(3,36);Solid("EmptyCover",new Vector2(182,1),new Vector2(.3f,8));
+            var e=Enemy();BlindPolicy(e);yield return Engage(e);var settings=new SerializedObject(e);foreach(var key in new[]{"ordinaryReloadFraction","cowardReloadFraction","overconfidentReloadFraction"})settings.FindProperty(key).floatValue=0;settings.ApplyModifiedPropertiesWithoutUndo();e.Weapon.SetAmmunition(3,36);Solid("EmptyCover",new Vector2(182,1),new Vector2(.3f,8));
             for(int i=0;i<110&&e.State!=EngagementState.Reloading;i++)yield return new WaitForFixedUpdate();
             Assert.AreEqual(EngagementState.Reloading,e.State);Assert.AreEqual(0,e.Weapon.MagazineAmmo);Assert.IsFalse(e.IsBlindFiring);Assert.Greater(e.transform.position.x,186.4f);
-            yield return new WaitForSeconds(2.8f);Assert.AreEqual(18,e.Weapon.MagazineAmmo);Assert.AreEqual(18,e.Weapon.ReserveAmmo);Assert.IsFalse(e.IsBlindFiring);
+            yield return new WaitForSeconds(e.Weapon.Definition.ReloadDuration*1.05f+.2f);Assert.AreEqual(27,e.Weapon.MagazineAmmo);Assert.AreEqual(9,e.Weapon.ReserveAmmo);Assert.IsFalse(e.IsBlindFiring);
         }
         [UnityTest] public IEnumerator NeverSeenAndDeclinedBlindDecisionCannotStartSpraying()
         {
@@ -99,11 +99,59 @@ namespace InsaneDreams.Tests
         [UnityTest] public IEnumerator OversizedMagazineFumblesVisiblyAndDeathCannotFinishReload()
         {
             var e=Enemy();e.BindTarget(null);e.Weapon.SetAmmunition(0,36);Assert.IsTrue(e.Weapon.Cycle.TryReload(Time.time));
-            yield return new WaitForSeconds(.65f);var v=e.GetComponent<CharacterVisualDriver>();var rig=v.Rig;
+            yield return new WaitForSeconds(e.Weapon.Definition.ReloadDuration*.25f);var v=e.GetComponent<CharacterVisualDriver>();var rig=v.Rig;
             Assert.IsTrue(v.ReloadPoseActive);Assert.IsTrue(rig.weapon.enabled);Assert.IsTrue(rig.magazine.enabled);Assert.Greater(Mathf.Abs(rig.magazine.transform.localPosition.y),.3f);
             Assert.Less(Vector2.Dot(rig.BarrelDirection,Vector2.right),.8f);Assert.AreEqual(0,e.Weapon.MagazineAmmo);
             float deadline=e.Weapon.Cycle.ReloadEndsAt;e.GetComponent<Health>().ApplyDamage(new DamageInfo(1000,CombatTeam.Player));e.Weapon.Cycle.Tick(deadline+1);
             Assert.AreEqual(0,e.Weapon.MagazineAmmo);Assert.AreEqual(36,e.Weapon.ReserveAmmo);
+        }
+        [UnityTest] public IEnumerator Sprint0122DistantVisibleTargetDrawsInaccuratePrematureFire()
+        {
+            var e=Enemy();player.GetComponent<Rigidbody2D>().position=new Vector2(163,.85f);Physics2D.SyncTransforms();
+            var s=new SerializedObject(e);s.FindProperty("preferredDistance").floatValue=30;s.ApplyModifiedPropertiesWithoutUndo();
+            s.FindProperty("engagementRange").floatValue=24;s.FindProperty("detectionRange").floatValue=28;s.ApplyModifiedPropertiesWithoutUndo(); // Preserve coverage of configurable premature range beyond the new default.
+            yield return Engage(e);Assert.IsTrue(e.TargetVisible);Assert.Greater(Vector2.Distance(e.transform.position,player.transform.position),20);
+            Assert.AreEqual(40,e.SpreadAtDistance(21));Assert.AreEqual(3,e.SpreadAtDistance(2));Assert.AreEqual(28,e.Weapon.Definition.AttackRange);
+            Assert.Less(e.Weapon.MagazineAmmo,27);
+        }
+        [UnityTest] public IEnumerator Sprint0122PointBlankBurstStillDealsRapidRealDamage()
+        {
+            var e=Enemy();player.GetComponent<Rigidbody2D>().position=new Vector2(182,.85f);player.GetComponent<Health>().ProtectFor(0);Physics2D.SyncTransforms();
+            yield return new WaitForSeconds(1.1f);Assert.GreaterOrEqual(e.GetComponent<AttackExecutor>().ShotsFired,5);
+            Assert.LessOrEqual(player.GetComponent<Health>().Current,75);
+        }
+        [UnityTest] public IEnumerator Sprint0122FallbackRetreatTravelsSixUnitsAndReloadCannotFinishEarly()
+        {
+            var e=Enemy();e.Weapon.SetAmmunition(0,36);float start=e.transform.position.x;
+            for(int i=0;i<200&&e.State!=EngagementState.Reloading;i++)yield return new WaitForFixedUpdate();
+            Assert.AreEqual(EngagementState.Reloading,e.State);Assert.IsNull(e.SelectedCover);Assert.That(e.transform.position.x-start,Is.InRange(5f,7f));
+            float duration=e.Weapon.Cycle.ReloadEndsAt-e.Weapon.Cycle.ReloadStartedAt;Assert.That(duration,Is.InRange(3.8f,4.2f));
+            e.BindTarget(null); // A committed reload survives target loss; do not sample after a fresh shot.
+            int shots=e.GetComponent<AttackExecutor>().ShotsFired;yield return new WaitForSeconds(3.5f);
+            Assert.IsTrue(e.Weapon.Cycle.IsReloading);Assert.AreEqual(0,e.Weapon.MagazineAmmo);Assert.AreEqual(shots,e.GetComponent<AttackExecutor>().ShotsFired);
+            yield return new WaitForSeconds(.8f);Assert.AreEqual(27,e.Weapon.MagazineAmmo);Assert.AreEqual(9,e.Weapon.ReserveAmmo);
+        }
+        [UnityTest] public IEnumerator Sprint0122ReachableLowCoverIsPreferredReachedAndCrouchedDuringReload()
+        {
+            var cover=Solid("RetreatLowCover",new Vector2(188.5f,.45f),new Vector2(1.2f,.9f));var e=Enemy();e.Weapon.SetAmmunition(0,36);
+            Solid("CheckpointTriggerBeyondCover",new Vector2(190.5f,1.5f),new Vector2(2,3)).GetComponent<Collider2D>().isTrigger=true;
+            float start=e.transform.position.x;bool selected=false,jumped=false;
+            for(int i=0;i<300&&!e.IsReloadingCrouched;i++)
+            {selected|=e.SelectedCover==cover.GetComponent<Collider2D>();jumped|=e.GetComponent<Rigidbody2D>().linearVelocity.y>1;yield return new WaitForFixedUpdate();}
+            Assert.IsTrue(selected,"A reachable crate must win over plain retreat.");Assert.IsTrue(jumped,"Existing motor must physically jump the low crate.");
+            Assert.That(e.transform.position.x-start,Is.InRange(5f,7f));Assert.IsTrue(e.IsReloadingCrouched,"Must arrive and crouch behind real cover.");
+            Assert.Less(Mathf.Abs(e.transform.position.y-.71f),.25f,"Perching on the crate is not protected cover.");
+            var hits=new RaycastHit2D[8];Assert.IsTrue(CombatVisibility2D.IsBlocked(new Vector2(180,.65f),e.GetComponent<BoxCollider2D>().bounds.center,1,hits));
+            Assert.IsFalse(CombatVisibility2D.IsBlocked(new Vector2(180,1.25f),new Vector2(e.transform.position.x,1.25f),1,hits));
+            yield return new WaitForSeconds(4.5f);Assert.IsFalse(e.GetComponent<InsaneDreams.Traversal.PlayerPosture2D>().IsCrouched);Assert.Greater(e.Weapon.MagazineAmmo,0);
+        }
+        [UnityTest] public IEnumerator Sprint0122UnreachableCoverRejectsCeilingAndFallsBackWithoutLooping()
+        {
+            Solid("UnsafeCover",new Vector2(188.5f,.45f),new Vector2(1.2f,.9f));Solid("HopCeiling",new Vector2(188.5f,2.1f),new Vector2(2,.3f));
+            var e=Enemy();e.Weapon.SetAmmunition(0,36);
+            for(int i=0;i<220&&e.State!=EngagementState.Reloading;i++)yield return new WaitForFixedUpdate();
+            Assert.IsNull(e.SelectedCover);Assert.AreEqual(EngagementState.Reloading,e.State);Assert.IsTrue(e.Weapon.Cycle.IsReloading);
+            Assert.Less(e.transform.position.x,188);
         }
         [UnityTest] public IEnumerator BlockedRetreatReloadsInPlaceWithoutFalseMovementCalloutOrRepeatedEvents()
         {

@@ -25,7 +25,7 @@ namespace InsaneDreams.Tests
         private GameObject Actor(bool enemy=false,float x=7000)
         {
             var root=Keep(Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(enemy?"Assets/Prefabs/Enemies/Larper.prefab":"Assets/Prefabs/Player/WarehousePlayer.prefab"),new Vector3(x,.85f),Quaternion.identity));
-            if(enemy){root.GetComponent<LarperBrain>().enabled=false;root.GetComponent<LarperSpeechBubble>().Bind(camera,document);}
+            if(enemy){root.GetComponent<LarperBrain>().enabled=false;root.GetComponent<LarperSpeechBubble>().Bind(camera,document);root.GetComponent<EnemyCombat>().BindGameplayCamera(camera);}
             return root;
         }
         private void Freeze(GameObject actor){actor.GetComponent<Rigidbody2D>().bodyType=RigidbodyType2D.Kinematic;actor.GetComponent<Rigidbody2D>().constraints=RigidbodyConstraints2D.FreezeAll;}

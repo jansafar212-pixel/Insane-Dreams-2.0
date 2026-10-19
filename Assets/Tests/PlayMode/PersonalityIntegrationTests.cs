@@ -23,7 +23,7 @@ namespace InsaneDreams.Tests
         {
             var go=Keep(Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemies/Larper.prefab"),new Vector3(x,1),Quaternion.identity));
             go.GetComponent<Rigidbody2D>().bodyType=RigidbodyType2D.Kinematic;go.GetComponent<Rigidbody2D>().constraints=RigidbodyConstraints2D.FreezeAll;
-            go.GetComponent<LarperAwareness>().Configure(profile);go.GetComponent<LarperSpeechBubble>().Bind(camera,document);return go;
+            go.GetComponent<LarperAwareness>().Configure(profile);go.GetComponent<LarperSpeechBubble>().Bind(camera,document);go.GetComponent<EnemyCombat>().BindGameplayCamera(camera);return go;
         }
         [UnitySetUp] public IEnumerator Setup()
         {

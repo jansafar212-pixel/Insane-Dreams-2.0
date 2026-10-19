@@ -9,7 +9,7 @@ namespace InsaneDreams.Visuals
         public SpriteRenderer face, weapon, parachute;
         public Transform muzzle;
         public SpriteRenderer magazine;
-        [SerializeField] private float crouchedMuzzleCeiling = .02f;
+        [SerializeField] private float crouchedMuzzleCeiling = -.06f;
         public void SetMagazine(Sprite sprite)
         {
             if (sprite != null && magazine == null)
@@ -25,6 +25,9 @@ namespace InsaneDreams.Visuals
         [SerializeField] private float torsoCenterY = .09375f;
         [SerializeField] private float shoulderHalfWidth = .1875f;
         private float climbBlend;
+        [SerializeField, Min(.02f)] private float crouchTransitionSeconds=.14f;
+        [SerializeField, Range(0,65)] private float crouchLegDegrees=55;
+        private float crouchBlend;
         public Transform[] BodyParts => new[] { torso, head, leftArm, rightArm, leftLeg, rightLeg };
         public bool IsBound => skin != null && skin.IsComplete && head && torso && leftArm && rightArm && leftLeg && rightLeg && weaponMount && accessoryMounts && speechAnchor && face && weapon && parachute;
         public void ApplySkin(CharacterSkin value)
@@ -52,24 +55,28 @@ namespace InsaneDreams.Visuals
             // All values are local visual offsets. The gameplay root and collider are never moved here.
             transform.localScale = new Vector3(facing, 1, 1);
             bool crouch = pose == CharacterPose.Crouch || pose == CharacterPose.CrouchWalk;
+            crouchBlend=Application.isPlaying?Mathf.MoveTowards(crouchBlend,crouch?1:0,Time.deltaTime/crouchTransitionSeconds):crouch?1:0;
             float step = Mathf.Sin(phase), bob = pose == CharacterPose.Walk || pose == CharacterPose.CrouchWalk ? Mathf.Abs(step) / 32 : 0;
             float torsoHalf = skin.torso.bounds.extents.y;
-            float hipY = crouch ? -.48f : standingFeetY + skin.leg.bounds.size.y;
-            float shoulderY = crouch ? -.2f : torsoCenterY + torsoHalf - .0625f;
-            float headY = crouch ? -.1f : torsoCenterY + torsoHalf + skin.head.bounds.extents.y;
-            torso.localPosition = new Vector3(0, crouch ? -.28f : torsoCenterY + bob, 0);
-            torso.localScale = new Vector3(1, crouch ? .65f : 1, 1);
-            torso.localRotation = Quaternion.Euler(0, 0, pose == CharacterPose.Panic ? -12 : 0);
-            head.localPosition = new Vector3(crouch ? .06f : 0, headY + bob, 0);
-            head.localScale = Vector3.one * (crouch ? .8f : 1);
+            float shoulderY = Mathf.Lerp(torsoCenterY + torsoHalf - .0625f,-.03f,crouchBlend);
+            float headY = Mathf.Lerp(torsoCenterY + torsoHalf + skin.head.bounds.extents.y,.12f,crouchBlend);
+            torso.localPosition = new Vector3(0,Mathf.Lerp(torsoCenterY,-.18f,crouchBlend)+bob*(1-crouchBlend),0);
+            torso.localScale = Vector3.one;
+            torso.localRotation = Quaternion.Euler(0, 0, pose == CharacterPose.Panic ? -12 : -8*crouchBlend);
+            head.localPosition = new Vector3(.08f*crouchBlend, headY + bob*(1-crouchBlend), 0);
+            head.localScale = Vector3.one;
             head.localRotation = Quaternion.Euler(0, 0, expression == FaceExpression.Smug ? -7 : pose == CharacterPose.Panic ? 12 : 0);
-            leftLeg.localPosition = new Vector3(-.12f, hipY, 0); rightLeg.localPosition = new Vector3(.12f, hipY, 0);
-            leftLeg.localScale = rightLeg.localScale = new Vector3(1, crouch ? .4f : 1, 1);
+            leftLeg.localScale = rightLeg.localScale = Vector3.one;
             float legAngle = pose == CharacterPose.Walk || pose == CharacterPose.CrouchWalk ? step * 27 : pose == CharacterPose.Jump ? 25 : pose == CharacterPose.Fall ? -12 : 0;
             if (pose == CharacterPose.Climb) legAngle = step * 32;
+            legAngle=Mathf.Lerp(legAngle,crouchLegDegrees+(pose==CharacterPose.CrouchWalk?step*5:0),crouchBlend);
+            // Rigid limbs fold at their hips; solve the pivot height from their actual
+            // sprite bounds so the feet stay on the same floor throughout the blend.
+            float hipY=standingFeetY+skin.leg.bounds.size.y*Mathf.Cos(legAngle*Mathf.Deg2Rad)+skin.leg.bounds.extents.x*Mathf.Abs(Mathf.Sin(legAngle*Mathf.Deg2Rad));
+            leftLeg.localPosition=new Vector3(-.09f,hipY,0);rightLeg.localPosition=new Vector3(.09f,hipY,0);
             leftLeg.localRotation = Quaternion.Euler(0, 0, legAngle); rightLeg.localRotation = Quaternion.Euler(0, 0, -legAngle);
             leftArm.localPosition = new Vector3(-shoulderHalfWidth, shoulderY + bob, 0); rightArm.localPosition = new Vector3(shoulderHalfWidth, shoulderY + bob, 0);
-            leftArm.localScale = rightArm.localScale = Vector3.one * (crouch ? .75f : 1);
+            leftArm.localScale = rightArm.localScale = Vector3.one;
             rightArm.localScale = new Vector3(rightArm.localScale.x, rightArm.localScale.y * (1 - recoil * .1f), rightArm.localScale.z);
             // Mirror the direction into rig space; world-space aim stays independent of walking direction.
             Vector2 localAim = new Vector2(aim.x * facing, aim.y).normalized;

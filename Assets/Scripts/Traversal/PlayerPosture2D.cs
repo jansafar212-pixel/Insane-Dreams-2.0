@@ -7,7 +7,7 @@ namespace InsaneDreams.Traversal
     [RequireComponent(typeof(BoxCollider2D), typeof(PlayerMotor2D))]
     public sealed class PlayerPosture2D : MonoBehaviour
     {
-        [SerializeField, Range(.3f, .85f)] private float heightMultiplier = .55f;
+        [SerializeField, Range(.3f, .85f)] private float heightMultiplier = .7f;
         [SerializeField, Range(.1f, 1)] private float speedMultiplier = .45f;
         [SerializeField, Range(.1f, 1)] private float downwardThreshold = .35f;
         [SerializeField, Range(0, .3f)] private float releaseThreshold = .2f;
@@ -23,6 +23,7 @@ namespace InsaneDreams.Traversal
         public Vector2 WorldCenter => box.bounds.center;
         public Vector2 LocalCenter => box.offset;
         public float HeightRatio => IsCrouched ? heightMultiplier : 1;
+        public float CrouchedHeightRatio => heightMultiplier;
         public float StandingWorldHeight => standingSize.y * Mathf.Abs(transform.lossyScale.y);
         private void Awake()
         {

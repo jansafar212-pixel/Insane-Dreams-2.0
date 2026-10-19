@@ -33,12 +33,12 @@ namespace InsaneDreams.Combat
             NextAttackAt = now + Mathf.Max(.01f, weapon.Definition.FiringInterval);
             return true;
         }
-        public bool TryReload(float now)
+        public bool TryReload(float now, float durationScale = 1)
         {
-            if (float.IsNaN(now) || float.IsInfinity(now)) return false;
+            if (float.IsNaN(now) || float.IsInfinity(now) || float.IsNaN(durationScale) || float.IsInfinity(durationScale) || durationScale <= 0) return false;
             Tick(now);
             if (!weapon.UsesAmmunition || IsReloading || weapon.ReserveAmmo <= 0 || weapon.MagazineAmmo >= weapon.Definition.MagazineCapacity) return false;
-            IsReloading = true; ReloadStartedAt = now; ReloadEndsAt = now + weapon.Definition.ReloadDuration; return true;
+            IsReloading = true; ReloadStartedAt = now; ReloadEndsAt = now + weapon.Definition.ReloadDuration * durationScale; return true;
         }
         public void CancelReload() => IsReloading = false;
     }

@@ -22,6 +22,8 @@ namespace InsaneDreams.Input
         private Camera aimCamera;
         public event System.Action InputReset;
         public event System.Action ReloadRequested;
+        public event System.Action InteractionRequested;
+        public event System.Action HealRequested;
         public event System.Action<InsaneDreams.Inventory.EquipmentSlot> WeaponSelectionRequested;
         public Vector2 Move { get; private set; }
         public Vector2 AimDirection { get; private set; } = Vector2.right;
@@ -46,6 +48,8 @@ namespace InsaneDreams.Input
         }
         public void SetFireIntent(bool held) => touchFire = held;
         public void RequestReload() => ReloadRequested?.Invoke();
+        public void RequestInteraction() => InteractionRequested?.Invoke();
+        public void RequestHeal() => HealRequested?.Invoke();
         public void BindAimCamera(Camera camera) => aimCamera = camera;
         public void SelectWeapon(InsaneDreams.Inventory.EquipmentSlot slot) => WeaponSelectionRequested?.Invoke(slot);
         public void Jump() { if (posture == null || posture.PrepareJump()) traversal.Jump(); }
@@ -65,6 +69,8 @@ namespace InsaneDreams.Input
                 keyboardParachute = key.leftShiftKey.wasPressedThisFrame;
                 if (key.spaceKey.wasPressedThisFrame) Jump();
                 if (key.rKey.wasPressedThisFrame) RequestReload();
+                if (key.eKey.wasPressedThisFrame) RequestInteraction();
+                if (key.hKey.wasPressedThisFrame) RequestHeal();
                 desktopFire = key.fKey.isPressed;
                 if (key.digit1Key.wasPressedThisFrame) SelectWeapon(InsaneDreams.Inventory.EquipmentSlot.Firearm1);
                 if (key.digit2Key.wasPressedThisFrame) SelectWeapon(InsaneDreams.Inventory.EquipmentSlot.Firearm2);

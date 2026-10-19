@@ -20,11 +20,11 @@ MonoBehaviour:
   weaponCategory: 0
   damage: 5
   firingInterval: 0.105
-  magazineCapacity: 18
-  reloadDuration: 2.6
+  magazineCapacity: 27
+  reloadDuration: 4
   presentationPrefab: {fileID: 0}
   equippedSprite: {fileID: 21300000, guid: d37018cc6ebca9b47beb358f771e1ce8, type: 3}
   magazineSprite: {fileID: 21300000, guid: c82b78debb3c2d44da1a4279d006c01c, type: 3}
-  firearmRange: 18
+  firearmRange: 28
   meleeRange: 1.6
   impactImpulse: 0.9

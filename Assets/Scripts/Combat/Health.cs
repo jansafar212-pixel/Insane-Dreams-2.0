@@ -29,6 +29,11 @@ namespace InsaneDreams.Combat
         private void Awake() => Restore();
         public void Restore() { current = maximum; IsDefeated = false; }
         public void ProtectFor(float seconds) => protectedUntil = Time.time + Mathf.Max(0, seconds);
+        public float Heal(float amount)
+        {
+            if(IsDefeated||amount<=0||float.IsNaN(amount)||float.IsInfinity(amount))return 0;
+            float restored=Mathf.Min(amount,maximum-current);current+=restored;return restored;
+        }
         public bool ApplyDamage(DamageInfo damage)
         {
             if (IsDefeated || Time.time < protectedUntil || damage.Amount <= 0 || float.IsNaN(damage.Amount) ||

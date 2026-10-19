@@ -14,6 +14,9 @@ namespace InsaneDreams.Visuals
         [SerializeField] private CutoutRig rig;
         [SerializeField, Min(1)] private float pixelsPerUnit = 32;
         [SerializeField, Min(.01f)] private float expressionSeconds = 1.4f;
+        [SerializeField, Range(.04f,.2f)] private float flinchSeconds=.1f;
+        [SerializeField, Range(0,6)] private float flinchDegrees=3;
+        private float flinchUntil,flinchSign;
         private Rigidbody2D body;
         private PlayerMotor2D motor;
         private PlayerTraversal2D traversal;
@@ -60,7 +63,11 @@ namespace InsaneDreams.Visuals
         }
         private void ResetVisuals() { phase = recoilUntil = expressionUntil = shotPoseUntil = 0; ReloadPoseActive = false; reaction = Expression = FaceExpression.Neutral; }
         private void Fired(Vector2 direction, Vector2 end, bool hit) => recoilUntil = Time.time + .12f;
-        private void Hurt(DamageInfo _) => SetReaction(FaceExpression.Stunned);
+        private void Hurt(DamageInfo damage)
+        {
+            SetReaction(FaceExpression.Stunned);flinchUntil=Time.time+flinchSeconds;
+            flinchSign=damage.Impact.HasValue?Mathf.Sign(damage.Impact.Value.Direction.x):1;
+        }
         private void SetReaction(FaceExpression value) { reaction = value; expressionUntil = Time.time + expressionSeconds; }
         private void React(LarperSpeechEvent context)
         {
@@ -109,6 +116,8 @@ namespace InsaneDreams.Visuals
                 shotPose || (player != null ? player.HasAimIntent || player.FireHeld : enemy != null && (enemy.TargetVisible || enemy.IsBlindFiring)), loadout == null || loadout.SelectedWeapon != null,
                 ReloadPoseActive, cycle != null ? cycle.ReloadProgress(Time.time) : 0);
             // Deployment remains authoritative even while grounded or climbing. Only the
+            float flinch=Mathf.Clamp01((flinchUntil-Time.time)/flinchSeconds)*flinchDegrees*flinchSign*facing;
+            rig.torso.localRotation*=Quaternion.Euler(0,0,-flinch);rig.head.localRotation*=Quaternion.Euler(0,0,flinch);
             // airborne pose raises the arms; normal grounded locomotion remains available.
             if (traversal != null) rig.parachute.enabled = traversal.IsParachuting && !health.IsDefeated;
             // Snap only the visual child; physics and independent aiming retain full precision.

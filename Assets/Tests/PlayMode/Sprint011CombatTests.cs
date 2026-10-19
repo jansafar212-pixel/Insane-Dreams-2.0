@@ -52,7 +52,7 @@ namespace InsaneDreams.Tests
         {
             var go = Keep(Object.Instantiate(Asset<GameObject>("Assets/Prefabs/Enemies/Larper.prefab"), new Vector3(124, .85f), Quaternion.identity));
             go.GetComponent<LarperBrain>().Configure(Asset<EnemyArchetype>("Assets/Data/Enemies/Larper.asset"));
-            var combat = go.GetComponent<EnemyCombat>(); combat.BindTarget(player.GetComponent<Health>()); return combat;
+            var combat = go.GetComponent<EnemyCombat>(); combat.BindTarget(player.GetComponent<Health>());CombatTestView.Frame(combat); return combat;
         }
         [UnityTest] public IEnumerator EveryAimAndFacingUsesTransformedMuzzleAndExactShotLineWithBoundedTrails()
         {
@@ -137,7 +137,7 @@ namespace InsaneDreams.Tests
             yield return null; Assert.IsTrue(enemy.GetComponent<CharacterVisualDriver>().ReloadPoseActive);
             Assert.IsTrue(enemy.GetComponent<CharacterVisualDriver>().Rig.weapon.enabled);
             var wall = Solid("LostSightDuringReload", new Vector2(122, 1), new Vector2(.3f, 4));
-            yield return new WaitForSeconds(enemy.Weapon.Definition.ReloadDuration + .15f);
+            yield return new WaitForSeconds(enemy.Weapon.Definition.ReloadDuration * 1.05f + .2f);
             Assert.IsFalse(enemy.Weapon.Cycle.IsReloading); Assert.Greater(enemy.Weapon.MagazineAmmo, 0); Assert.Less(enemy.Weapon.ReserveAmmo, 24);
             Assert.AreEqual(shots, enemy.GetComponent<AttackExecutor>().ShotsFired); Assert.IsFalse(enemy.TargetVisible);
             Object.Destroy(wall); yield return new WaitForSeconds(1);

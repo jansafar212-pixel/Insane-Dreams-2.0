@@ -22,6 +22,7 @@ namespace InsaneDreams.Input
         private Label loadoutLabel;
         private float nextReadout;
         private InsaneDreams.Combat.Health health;
+        private InsaneDreams.Combat.PlayerHealing healing;
         private InsaneDreams.Traversal.PlayerTraversal2D traversal;
         private Label chuteLabel;
         public bool IsBound { get; private set; }
@@ -35,6 +36,7 @@ namespace InsaneDreams.Input
             subscribedActions = target;
             loadout = target != null ? target.GetComponent<InsaneDreams.Inventory.PlayerLoadout>() : null;
             health = target != null ? target.GetComponent<InsaneDreams.Combat.Health>() : null;
+            healing = target != null ? target.GetComponent<InsaneDreams.Combat.PlayerHealing>() : null;
             traversal = target != null ? target.GetComponent<InsaneDreams.Traversal.PlayerTraversal2D>() : null;
             nextReadout = 0;
             if (subscribedActions != null) subscribedActions.InputReset += ClearPointers;
@@ -106,7 +108,9 @@ namespace InsaneDreams.Input
                 loadoutLabel.text = loadout == null ? "Loadout: unbound" : weapon == null ? $"{loadout.SelectedSlot}: empty" :
                     $"{loadout.SelectedSlot}: {weapon.Definition.DisplayName}\n" +
                     (weapon.UsesAmmunition ? $"Ammo {weapon.MagazineAmmo} / reserve {weapon.ReserveAmmo}" : "Melee / unlimited uses") +
-                    (weapon.Cycle.IsReloading ? "\nRELOADING" : "") + (health != null ? $"\nHealth {health.Current:0}/{health.Maximum:0}" : "");
+                    (weapon.Cycle.IsReloading ? "\nRELOADING" : "") + (health != null ? $"\nHealth {health.Current:0}/{health.Maximum:0}" : "") +
+                    (healing==null?"":Time.time<healing.FeedbackUntil?$"\nHEALED +{healing.LastRestored:0}":healing.CooldownRemaining>0?$"\nHeal {healing.CooldownRemaining:0.0}s":"\nH — HEAL");
+                loadoutLabel.style.color=healing!=null&&Time.time<healing.FeedbackUntil?new Color(.35f,1,.55f):Color.white;
             }
             var screen = new Vector2Int(Screen.width, Screen.height);
             if (lastSafeArea == Screen.safeArea && lastScreen == screen) return;

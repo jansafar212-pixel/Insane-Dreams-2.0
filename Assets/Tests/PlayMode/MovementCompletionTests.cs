@@ -46,7 +46,7 @@ namespace InsaneDreams.Tests
         {
             float feet=box.bounds.min.y,standing=box.size.y;
             actions.SetTouchMove(Vector2.down);yield return new WaitForSeconds(.12f);
-            Assert.IsTrue(posture.IsCrouched);Assert.That(box.size.y,Is.EqualTo(standing*.55f).Within(.001f));Assert.That(box.bounds.min.y,Is.EqualTo(feet).Within(.025f));
+            Assert.IsTrue(posture.IsCrouched);Assert.That(box.size.y,Is.EqualTo(standing*.7f).Within(.001f));Assert.That(box.bounds.min.y,Is.EqualTo(feet).Within(.025f));
             Assert.That(player.transform.Find("PostureVisual").GetComponent<SpriteRenderer>().bounds.size.y,Is.EqualTo(box.bounds.size.y).Within(.02f));
             actions.SetTouchMove(new Vector2(.7f,-.7f));actions.SetTouchAim(Vector2.left);actions.SetFireIntent(true);yield return new WaitForSeconds(.3f);
             Assert.Greater(body.linearVelocity.x,1);Assert.Less(body.linearVelocity.x,2.3f);Assert.Less(actions.AimDirection.x,0);

@@ -1667,3 +1667,505 @@ chance-based declines and timeout exits are intentional. Phone-scale balance
 still needs developer playtesting. Final scene saved/open/clean, Play Mode stopped,
 compilation successful, zero current Console errors/warnings and missing scripts.
 No commit or push; recovery reserve preserved by stopping after verification.
+
+## AKUMU 2 — Sprint 012.2: Larper distance, panic and cover (2026-10-19)
+
+Extended the current EnemyCombat/LarperBrain, retaining hitscan, real muzzle
+collision, pooled tracers, health, existing traversal and all prior tests.
+No game/folder rename, new artwork, enemies, combat effects or physics systems.
+
+Tuning on the Larper prefab and LarperBuzzbox asset (Inspector-configurable):
+
+| Parameter | Before | After |
+| --- | --- | --- |
+| Visual detection | 14 | 28 units |
+| Engagement cutoff | effectiveRange 11 | separate engagementRange 24 |
+| Accuracy distance | 3–11 | unchanged 3–11 units |
+| Close / distant maximum angular spread | 6 / 32 | 3 / 40 degrees |
+| Hitscan reach | 18 | 28 units |
+| Reload | 2.6s | 4s, enemy variation ±5% (3.8–4.2s) |
+| Intended retreat / timeout | 3.5 units / 1.8s | 6 units / 4.5s |
+| Cover search | none | local 7 units, at most 32 candidates |
+| Reaction jitter / extra blind spread | none | 0–0.05s / 3 degrees |
+
+Magazine 18, cadence 0.105s, damage 5, effective accuracy distance 11 and
+personality reload fractions (ordinary .2 / coward .4 / overconfident 0) retained.
+Blind-fire chance .70/.40/.95, finite 2s window (coward .9s), frozen hidden memory,
+real ammunition and legitimate reacquisition are preserved. Longer range is
+separate from accuracy; distance continues to worsen spread.
+
+EnemyCombat performs one bounded cover query when committing to withdrawal.
+Candidates must block a line from the last seen threat to a crouched destination,
+have a supported corridor and safe endpoint, and fit existing motor jump/headroom
+limits. LarperBrain reuses normal walking/jumping for small obstacles (default
+maximum 1.6 high / 1.8 wide). No teleporting or per-frame path search. Buffered
+physics queries avoid new combat allocations. Plain six-unit walking fallback,
+shorter safe displacement or in-place reload remain available when cover fails.
+
+The prefab now includes existing PlayerPosture2D. Combat requests crouch only at
+a real grounded cover endpoint during reload, then requests safe standing at
+completion; existing visual rig/reload animation and callouts remain active.
+WeaponCycle accepts a per-reload duration scale without editing shared weapon
+definitions. Its existing Tick remains the only ammunition transfer authority.
+Target loss cannot cancel or instantly complete committed reloads.
+
+Live verification exposed and fixed two integration problems: Checkpoint_Exit's
+trigger was treated as a solid wall by retreat probes, and a projected cover
+position could permit crouching on top of a crate. Retreat probes now explicitly
+ignore triggers, while crouching requires actual grounded arrival near the
+original height. Endpoint stopping runs between tactical samples to prevent
+overshoot; waiting for a hop to settle is bounded by the retreat timeout.
+
+Code: EnemyCombat.cs, LarperBrain.cs, WeaponCycle.cs; authoring helper
+Assets/Editor/Sprint0122AiSetup.cs. Authored asset changes are Larper.prefab
+(tuning/posture) and LarperBuzzbox.asset (reload/reach). Player/ragdoll prefabs,
+warehouse layout, geometry, artwork and UI were not changed. Existing unrelated
+renderer/project-settings changes were left intact.
+
+Validation: fresh baseline was 35/35 Edit and 88/89 Play. One old Sprint005
+immediate-occlusion assertion conflicted with probabilistic Sprint012.1 blind
+fire; explicitly selecting the chance-zero branch preserves that test's original
+assertions and newer blind-fire coverage. The first implementation run was
+36/36 Edit and 92/94 Play: an old .4s random-hit assertion and a new post-reload
+ammo sample raced reaction jitter/legitimate resumed shooting. These now use a
+bounded time-to-hit check and isolate committed reload completion after target
+loss. Other reload-pose/deadline waits follow the configured duration.
+
+Final full suite after all integration fixes: **36/36 Edit + 94/94 Play =
+130/130 passed**, no failures/skips. All **124 previous test names retained**;
+six new tests cover distant fire/poor accuracy, real point-blank damage, six-unit
+fallback/four-second vulnerability, reachable cover/physical hop/crouch/trigger
+handling/standing, blocked headroom fallback, and authoritative varied reload
+deadlines/ammo/shared-definition safety. Existing frozen-memory, cover collision,
+navigation, inventory, ragdoll and scene tests pass. Records:
+TestResults/Sprint012_2.json and Sprint012_2Live.json (including baseline failures).
+
+Actual Warehouse_Testbed Play Mode checks used temporary actor placement,
+protection and camera framing. A visible player 22 units away drew six shots
+(18→12 ammo); inline Game View showed the broad spread. Final cover trial moved
+x16→22.298 (6.298 units), physically hopped Crate_21, settled at y.71 and crouched
+behind it. Reload duration was 4.091s, with zero additional shots during reload;
+completion restored 18 rounds, reserve54→36 and standing/exposure. Captures were
+viewed inline; no saved screenshot or human-input playtest claim. All temporary
+runtime changes were discarded. Final audit checked 80 scene/prefab behaviours:
+zero missing scripts/references, all 31 warehouse colliders retained. Warehouse
+saved/open/clean, Play Mode stopped; compilation successful and current Console
+has zero errors/warnings (historical buffer entries are not current errors).
+
+Limitations: cover planning is conservative and local, not general navigation;
+full walls, gaps, broad crates, blocked headroom and saturated queries fall back.
+It may reload exposed when no safe route exists. Existing pursuit can expose or
+jump toward the target again after standing. Optional desperation melee was
+deferred: player melee exists, but enemies lack a compatible equipment-switching
+path, so adding it would exceed this refinement sprint. Android/device profiling
+and phone-scale balance are unverified. No new dependencies or artwork.
+
+Manual playtest checklist: approach a distant Larper and compare its spread at
+close range; break sight, move behind cover and confirm frozen panic aim/timeout;
+watch an empty enemy retreat behind a crate, crouch for about four seconds, then
+stand/expose; repeat beside a wall, ledge and checkpoint trigger; exchange shots
+over low cover standing/crouched and verify real muzzle obstruction. Minor
+follow-ups: tune the 40-degree spread, reload vulnerability and short post-reload
+exposure behavior from hands-on warehouse testing, then profile on Android.
+
+No commit or push. Usage reserve retained; no Sprint 013 work begun.
+
+## AKUMU 2 — Sprint 013: Camera-aware combat and colorful feedback (2026-10-19)
+
+Incrementally extended existing combat, preserving hitscan, damage/collision,
+weapon cadence, magazine/reload rules, panic memory, cover navigation and ragdolls.
+Larper prefab detection 28→22 units; engagement 24→18 units. Accuracy remains
+3→40 degrees over the existing distance curve. Magazine18, cadence .105s,
+damage5, reload4s ±5% and retreat6 units are unchanged.
+
+EnemyCombat now gates the first successful firearm attack using the actual
+gameplay Camera.main (cached, with bounded retry if missing) or explicitly bound
+gameplay camera. GameplayViewport projects collider body bounds, allowing partial
+body entry even when the pivot is outside. It checks depth, active camera and the
+visible torso's culling layer, which differs from the collision root's layer.
+No Renderer.isVisible/Scene-view visibility dependency. Existing geometry LOS,
+range, reaction, ammo, reload and traversal gates still apply: viewport overlap
+alone never authorizes shooting through a wall. Missing/disabled cameras fail
+closed for fresh enemies.
+
+Only a successful legitimate shot establishes engagement authorization. It
+persists through camera movement during the same awareness episode, so moving
+the viewport cannot flicker/reset combat or suppress valid panic fire. Binding a
+new target, losing tracking beyond existing memory/range rules, and re-enabling
+reset authorization. There is no visibility grace for enemies that never fired.
+Actual sight still updates awareness off-screen; viewport permission controls
+initial attack, not enemy knowledge. Existing finite frozen last-known-position
+bursts and genuine reacquisition are retained.
+
+AttackExecutor keeps exact hitscan endpoints and its six-slot LineRenderer pool.
+Tracers now last .17s instead of .35s, use cyan player/orange-red enemy colors,
+subtle brightness/width variation and a fading tail. Live inspection discovered
+the old URP/Unlit material ignored vertex colors/alpha, leaving every line yellow.
+CombatTracer.mat now uses the existing compatible Sprites/Default shader with a
+white tint and transparent queue; visual captures verified real color/fade.
+No physical bullet objects or damaging ricochet mechanic were added.
+
+CombatFeedback extends existing muzzle/surface cues with varied warm flashes,
+a brief optional translucent sprite glow (no dynamic lights), and a reusable
+12-sprite particle ring per actor. Explicit ImpactSurface2D metadata classifies
+the warehouse's 24 solid colliders: gray concrete dust/debris, yellow metal sparks
+with occasional longer cosmetic streaks, brown wood splinters/puffs; unclassified
+surfaces reliably use a blue-white generic fallback. Classification comes from
+the actual nearest hit collider and normal. All 31 colliders remain unchanged;
+no destructible environment, new geometry or new art was introduced. Existing
+point-filtered placeholder effect sprites are reused, with replaceable assets.
+CharacterVisualDriver adds a directional 3-degree/.1s head/torso flinch and shorter
+warm hit tint; physics bodies, colliders and ordinary hit knockback are unchanged.
+
+Audio integration only: suitable project clips are absent. The asset inventory
+contained package voice/demo clips, not usable combat sounds; none were repurposed
+or downloaded. CombatFeedback has separate concrete/metal/wood/fallback impact
+slots plus existing firearm, hit, hurt, reload, empty and defeat slots. Frequent
+combat playback uses two reusable voices per actor, a global 12-voice cap,
+controlled ±7% pitch variation and existing volume .5. Reload sound is triggered
+by the real reload-start event at pitch1. Unassigned clips are silent, not errors.
+The pre-existing rare detached defeat cue path remains unchanged. Required assets:
+short distinct Buzzbox/carbine shots, metal spark/ricochet, wood thud/splinter,
+concrete dust/debris and generic impact clips, awkward four-second reload/handling,
+empty click and optional hit/hurt/defeat cues. Audio quality/mixing was not validated.
+The automated voice test uses a temporary silent in-memory clip, not shipped SFX.
+
+Created production sources: Assets/Scripts/Camera/GameplayViewport.cs,
+Assets/Scripts/Combat/ImpactSurface2D.cs and Assets/Editor/Sprint013Setup.cs.
+Modified production sources: EnemyCombat.cs, AttackExecutor.cs, CombatFeedback.cs
+and CharacterVisualDriver.cs. Authored assets: Larper.prefab,
+WarehousePlayer.prefab, CombatTracer.mat and Warehouse_Testbed.unity (surface
+metadata only). Tests: new Sprint013RulesTests.cs, Sprint013Tests.cs and
+CombatTestView.cs; existing CombatIntegrationTests, Sprint005Tests,
+Sprint011CombatTests, Sprint012CombatTests, PersonalityIntegrationTests and
+VisualIntegrationTests now frame/bind actual fixture cameras. The earlier
+configurable long-range case explicitly requests its former 28/24 settings,
+preserving that coverage while new tests assert the 22/18 defaults. Prior sprint
+and unrelated renderer/project-settings modifications were preserved.
+
+Live Warehouse_Testbed checks used temporary diagnostic actor placement,
+protection and camera framing, including pinned actors for the camera experiment.
+At 17 units, a fresh off-screen enemy had clear LOS and 18 rounds but fired zero
+shots. Panning it into the gameplay view produced six shots (18→12 ammo). Panning
+away after engagement produced three further shots (12→9), preserving combat.
+After the shader correction, a three-enemy burst produced 7/7/8 shots, with only
+1/1/2 active tracers at capture, each bounded by six tracers and 12 particles.
+Metal sparks were visible; the busiest actor had eight active particles. Cyan
+player rays visibly terminated at Crate_21 (wood x20.5/y.55), BasementPipeBridge
+(metal x-1.84/y-5.43) and BasementFloor (concrete x4.16/y-7). Inline Game captures
+were inspected for flash anchors, color, endpoint and effect readability. These
+were scripted live Editor checks, not hands-on input or hardware profiling. No
+saved screenshot is claimed. Runtime overrides were discarded on Play Mode exit.
+
+Performance remains bounded: no per-frame cover search, physical bullets or new
+render pipeline/dependencies. Viewport projection needs no scene-wide physics
+search and is skipped once the encounter is authorized. Particle and tracer
+buffers are allocated on actor initialization and reused. A cheaper Inspector
+configuration is maximumImpactParticles4, maximumTracers3 and muzzleGlowEnabled
+false; profile before choosing a device preset. Android/device FPS, allocation
+rates, audio mix and touch readability remain unverified. Concrete contrast on
+gray floors, muzzle size and group density still need hands-on tuning.
+
+Recommended Sprint 014: supply licensed/original combat clips and tune their mix,
+profile the bounded effects on supported Android hardware, and perform hands-on
+camera-edge, close/distant fire, low-cover and multi-enemy readability checks.
+No new weapons, enemy classes, levels, explosives, armor or physics overhaul.
+
+Final validation after shader and visual-layer integration fixes: **38/38 Edit +
+100/100 Play = 138/138 passed**, no failures/skips. All **130 previous test names
+retained**; eight new tests cover Sprint013's camera, effects, audio integration,
+flinch, tuning and scene contracts. Existing reload/cover/navigation/ammo/ragdoll
+regressions pass. Records: TestResults/Sprint013.json and Sprint013Live.json.
+Scoped git diff whitespace check passed. Compilation succeeded; zero current
+Console errors. One current unrelated Unity AI Toolkit warning reports
+"Account API did not become accessible within 30 seconds" (network/editor-focus
+service timeout); it was recorded rather than hidden or treated as a combat bug.
+Historical obsolete-API test warnings also remain in the MCP log buffer.
+
+Final saved/open scene is Warehouse_Testbed, clean and outside Play Mode. Audit
+of 104 scene/prefab behaviours found zero missing scripts/object references;
+all 31 colliders and 24 explicit surface markers are intact, with no Live013
+diagnostic actors persisted. Player, Larper and ragdoll prefab references intact.
+No commit or push. Resource reserve preserved; no Sprint014 implementation begun.
+
+## Sprint 014 — Warehouse Incident (2026-10-19)
+
+Implemented a separate, playable mission in `Assets/Scenes/Warehouse_Mission01.unity`.
+It is the first enabled build scene; previous build entries remain available.
+Warehouse_Testbed was copied through Editor APIs and was not changed by this
+sprint. Its before/after SHA256 is
+`DBD270D874D8BDE8F12B0EA43746C00F0906104F888B392718C3F053146F3915`.
+Earlier uncommitted Sprint012.2/013 and unrelated project changes were preserved.
+
+The mission starts safely at the west entrance with 100 health and the existing
+loadout (carbine 24/72). Objectives progress through entering the warehouse,
+clearing storage, reaching processing, clearing processing, recovering records,
+and escaping. The arrival guard (1), storage group (4), and processing group (5)
+use existing basic Larper prefabs and personality profiles. Ten actors are
+prewarmed once; future groups remain inactive until their authorized region is
+entered. Encounter activation and completion are idempotent. Clearing the guard
+gates storage; the storage checkpoint gates processing; records and the final
+objective gate the exit. Objectives cannot be skipped by visiting regions early.
+
+The route uses the existing warehouse floors, pipe/duck passage, west ladder,
+storage mezzanine, three stepped gantry platforms, processing roof, east ladder,
+records office, and east ground exit. Four wooden cover crates and seven small
+signs supply navigation and corporate satire using existing visuals. No new art,
+enemy classes, weapons, economy, or physics systems were added. Enemy tuning is
+unchanged: 22/18 awareness ranges, 40-degree spread, 18-round magazine, .105-second
+shot interval, 5 damage, four-second reload with existing variation, and six-unit
+retreat behavior. Mission reset hooks clear transient AI/combat state without
+retuning combat, cover, camera authorization, or navigation.
+
+Storage and records-office checkpoints integrate with existing PlayerRecovery
+and health recovery. Snapshots retain cleared encounters, objective/records
+progress, ammunition/reserves, and selected weapon. Death restores 100 health and
+existing recovery protection; incomplete encounters reset at authored positions,
+while checkpoint-cleared groups stay cleared. The same ten actors are reused.
+Progress kills roll back with a snapshot; the separate results defeat counter
+retains every actual enemy defeat event across retries. Deaths count player
+health defeat events. Existing fall recovery remains available.
+
+Records require E or the mission touch interaction button, proximity inside the
+records region, and an unobstructed interaction path. Interaction advances once.
+The mission HUD extends the existing UI Toolkit controls and PanelSettings with
+briefing, objective notifications, contextual interaction, and results. Completion
+freezes elapsed game time and player actions. Results show time, actual enemies
+defeated, and deaths. Replay resets objectives, checkpoints, counters, health,
+loadout, ammunition, position, and enemies in place, and clears existing ragdolls.
+No main menu currently exists, so Replay is the working post-mission action. An
+empty results extension container supports later work without simulated rewards.
+
+New files: `Assets/Scripts/Missions/{WarehouseMission,MissionEncounter,MissionTrigger,
+MissionHud}.cs`, `Assets/UI/MissionControls.uxml`, `Assets/UI/MissionControls.uss`,
+`Assets/Editor/Sprint014MissionSetup.cs`, the new mission scene,
+`Assets/Tests/EditMode/Sprint014RulesTests.cs`, and
+`Assets/Tests/PlayMode/Sprint014MissionTests.cs`, with Unity metadata. Modified
+integration files: `Assets/Scripts/Input/PlayerActions.cs` (interaction request),
+`Assets/Scripts/Enemies/EnemyCombat.cs` and `EnemySpawnPoint.cs` (encounter reset),
+`ProjectSettings/EditorBuildSettings.asset`, and this log. Verification records are
+`TestResults/Sprint014.json`, `Sprint014Live.json`, and `Sprint014Pilot.cs`; the
+diagnostic pilot is outside Assets and is not shipped as gameplay code.
+
+Integration checks caught and fixed mission UI prefab overrides not persisting,
+inherited testbed spawns, collider-edge entry being rejected before the player's
+pivot reached a trigger, mission triggers interfering with traversal floor probes,
+and beacon rendering accidentally scaling trigger roots. The final six zones use
+unit scale and IgnoreRaycast, retaining trigger contacts while excluding traversal
+geometry probes. Beacon renderers are separate children. Trigger stay retries
+handle edge entry and progression while already overlapping. Two early test
+fixture errors (remote-interaction placement and the existing recovery ladder
+lockout) were corrected; the lockout itself was preserved. Earlier failures and
+their resolutions are retained in the test report.
+
+Baseline: **38 Edit + 100 Play = 138/138 passed**. Final validation:
+**40 Edit + 108 Play = 148/148 passed**, zero failures/skips; all 138 baseline
+test names retained. Ten new tests cover scene/UI/prefab contracts, supported
+route clearance, safe initialization, physical trigger edge entry, real ladder
+landing, gated progression, blocked/remote interaction, checkpoint ammunition and
+actor reuse, records/results/replay, and existing enemy camera/hitscan/reload rules.
+
+Two scripted live Editor playthroughs reached completion using actual PlayerActions
+movement, jump, aiming, shooting, reload, climbing, and interaction. The earlier
+78.69-second diagnostic included one explicitly logged injected lethal player hit
+to exercise checkpoint recovery and runtime corrections; it is not final-scene
+acceptance evidence. The final saved-scene run used normal damage with no immunity,
+teleports, injected damage, or direct enemy defeat calls. It completed in **51.06
+game seconds**, including a roughly 25-second pilot stall and excluding Editor
+inspection pauses: 54 shots, 11 actual enemy defeats, one natural player death,
+10 unique cleared enemies, 20 health remaining, and three checkpoint commits.
+The natural death restored the storage checkpoint and processing was completed
+on retry. A storage enemy changed floors; adapting the pilot route found and
+defeated it normally. Results displayed 00:51 / 11 defeats / 1 death. Submitting
+the actual Replay button reset the run to its safe initial state with the same
+ten inactive actors. Inline Game View captures were inspected; no saved screenshot
+or hands-on human playtest is claimed. Runtime diagnostics were discarded.
+
+The automated pilot's precise input and pauses do not establish normal human
+pacing: the requested 5–10 minute first-play target remains unverified. Hands-on
+navigation, difficulty, floor-changing enemy pursuit, portrait/touch readability,
+and Android performance still need review. No Android build/device test was run.
+Previously missing combat audio remains missing; no new audio or mix is claimed.
+Recommended Sprint015: hands-on mission pacing and route clarity, tune encounters
+from player evidence, validate touch controls on target hardware, profile effects,
+and supply appropriately licensed combat audio. Avoid expanding systems before
+these checks establish a reliable first mission.
+
+Final Editor audit: compilation complete, zero current Console errors/warnings,
+118 scene/prefab behaviours checked with zero missing scripts/object references,
+38 colliders, ten spawn points, and six correctly sized mission zones. Warehouse
+Mission01 is saved, clean, open, and outside Play Mode. Warehouse_Testbed and
+existing character/ragdoll prefab references remain intact. No commit or push.
+
+## Sprint 015 — Combat awareness, persistence, healing and crouch repair (2026-10-19)
+
+Reused EnemySpawnPoint, EnemyCombat, LarperBrain, RuntimeWeapon/WeaponCycle,
+Health, PlayerActions, the existing HUD, posture controller and CutoutRig. No new
+enemy classes, weapons, art, dependencies, inventory or movement controllers.
+The established URP renderer, colorful combat effects and gray warehouse remain.
+
+Runtime spawn points now separate preparation from activation. They retain their
+authored position, prepare at most one actor, and retry activation only when the
+position is outside the gameplay camera plus a configurable 1.25-world-unit safety
+margin. Clearance rejects geometry, props, the player and other actors; two foot
+probes require solid support. Saturated queries and unavailable/disabled cameras
+fail closed. Invalid or visible placements wait rather than relocating or forcing
+a spawn. Checks run every .2 unscaled seconds, after the camera's LateUpdate, with
+no yield between final validation and activation. Aspect ratio and camera size are
+handled by actual viewport projection. Fixed-size query buffers avoid hot-path
+allocations. Selected spawn gizmos show the body/safety margin; pending points are
+magenta. Once activated, actors are not despawned or suspended when offscreen.
+
+Warehouse_Mission01 now contains ten authored Larper prefab occupants already
+present at scene load, using references on the existing ten spawn points. Encounter
+triggers authorize engagement without visibly materializing enemies. Untriggered
+occupants hold their authored posts; this staging condition is independent of
+camera visibility. Active enemies retain perception, movement, investigation,
+retreat and reload while offscreen. The first live attempt exposed untriggered
+patrols wandering away from their authored floors; explicit encounter staging fixed
+that integration problem and a mission regression now checks that posts are held.
+An actual player hit alerts a staged encounter, preventing visible occupants from
+remaining passive targets; detection, sight, camera permission and objective gates
+still apply independently after that alert.
+Existing actors are restored behind a .18-second opaque mission reset cover for
+checkpoint recovery and Replay. This prevents visible reappearance and avoids
+indefinitely postponing a reused actor whose authored position remains on-camera.
+New runtime spawns always use the offscreen safety rule. The same ten mission
+actors are reused. Early legitimate defeats of visible future occupants are
+counted; objective gates still require the authored mission sequence.
+
+The final alert-enabled live run exposed a latent checkpoint integration bug:
+Physics2D sends trigger callbacks to disabled MonoBehaviours. The office marker,
+disabled so WarehouseMission could own objective-gated checkpoint commits, could
+silently steal PlayerRecovery's spawn while the saved objective still referred to
+storage. CheckpointMarker.OnTriggerEnter2D now explicitly rejects disabled/inactive
+markers. A physical-contact regression visits the unauthorized office, waits for
+physics callbacks, applies lethal damage, and verifies storage spawn, health and
+objective restoration. All nine mission tests pass after this correction.
+
+Firing permission is separate from detection, confirmed line of sight and memory.
+Every real shot, including blind fire, requires current gameplay-camera visibility
+unless the Inspector capability allowOffscreenFire is enabled (default false).
+Leaving the camera cancels the blind burst immediately; a historical first shot
+no longer grants permanent firing permission. The capability only relaxes the
+camera gate and does not grant detection or sight. No sniper was implemented.
+Confirmed perception samples run every .1 seconds; last-known position changes
+only on confirmed sight. Memory lasts three seconds and then returns to patrol.
+Existing inaccurate panic fire is bounded by both its duration and memory expiry,
+never perfectly follows a player through cover, and remains camera-gated. A fresh
+solid obstruction blocks direct shots even between perception samples. Expensive
+shot obstruction checks only run when weapon cadence permits another shot.
+Selected combat gizmos show camera permission and the remembered position.
+
+Cover commitment and the existing locomotion probes remain authoritative. Cover
+selection now prefers the nearest verified reachable cover in the retreat corridor.
+The committed destination is retained, avoiding repeated selection/oscillation.
+Retreat progress is measured along the chosen direction instead of absolute
+displacement. Existing blocked-path checks, fallback withdrawal, minimum travel,
+4.5-second timeout, low-hop clearance, crouched reload and delayed reengagement
+remain. A blocked retreat still reaches a finite reload decision rather than
+deadlocking. Reload ticking continues without sight or camera visibility.
+
+LarperBuzzbox magazine capacity increased from 18 to **27** (50%); initial enemy
+reserve increased from 54 to **135**, enough for five complete empty-magazine
+reloads. Both remain Inspector-configurable through the existing weapon definition
+and EnemyCombat. Reload consumes real finite reserve, supports partial final
+loads, and cannot fire during reload or with an empty magazine. Four-second reload
+duration/variation, .105-second cadence, 5 damage, 40-degree distant spread,
+22/18 detection/engagement ranges, cowardly thresholds and six-unit fallback
+withdrawal remain unchanged. Existing archetype movement capabilities and the new
+offscreen-fire flag supply lightweight future configuration without new AI types.
+
+PlayerHealing uses Health.Heal without restoring defeated actors or changing damage
+protection/death handling. H routes through PlayerActions.RequestHeal. Defaults:
+35 HP, capped at maximum; three-second game-time cooldown; unlimitedUses=true.
+The optional finite-use setting defaults to three uses when unlimited mode is
+disabled. Full health, defeat, disabled actions, cooldown and exhausted uses reject
+healing without consuming a use/cooldown. A successful heal displays a green
+HEALED +amount readout in the existing HUD alongside current/maximum health; the
+HUD then shows cooldown or H — HEAL. No consumable item system was added.
+
+Crouch distortion came from independent pose scaling: torso .65, head .8, arms .75
+and legs .4, with discontinuous offsets. CutoutRig now keeps full head/torso/limb
+proportions, folds the existing rigid legs at their hips, uses a small torso lean,
+and solves leg-pivot height from sprite bounds so feet stay grounded. Crouch blends
+over .14 seconds with a configurable 55-degree leg pose. The root only mirrors
+facing; no whole-body compression was added. Collider height is .7 of standing
+(0.98 world units for the existing 1.4-unit character), fitting the 1.05-unit passage
+while matching the taller uncompressed pose. Existing bottom-anchored collider
+changes and blocked-standing overlap checks remain. Weapon/muzzle alignment and
+recoil stay in the same rig; crouched muzzle ceiling is -.06 local Y, preserving a
+low firing origin. The first broad regression caught the muzzle slightly above
+the pivot; this was corrected rather than weakening the lower-origin assertion.
+The rig still uses the established simple cutout limbs, not a new animation system.
+
+New source files: Assets/Scripts/Combat/PlayerHealing.cs,
+Assets/Editor/Sprint015Setup.cs, Assets/Tests/EditMode/Sprint015RulesTests.cs and
+Assets/Tests/PlayMode/Sprint015Tests.cs, with Unity metadata. Modified runtime files:
+Combat/Health.cs; Enemies/EnemyCombat.cs and EnemySpawnPoint.cs;
+Camera/GameplayViewport.cs; Input/PlayerActions.cs and WarehouseTouchControls.cs;
+Traversal/PlayerPosture2D.cs; Visuals/CutoutRig.cs; Missions/MissionEncounter.cs,
+WarehouseMission.cs and MissionHud.cs; Checkpoints/CheckpointMarker.cs. Modified assets: LarperBuzzbox.asset,
+Larper.prefab, WarehousePlayer.prefab and Warehouse_Mission01.unity. Existing
+Sprint005, MovementCompletion, TraversalRegression, CombatIntegration, Sprint012,
+Sprint013 and Sprint014 tests retain their cases, with explicit expectations
+updated for intentional ammo, memory, collider and scene-occupant changes.
+
+Inspector defaults added/changed: spawn cameraSafetyMargin=1.25, retrySeconds=.2,
+supportDistance=.6, geometry=1, optional gameplayCamera and placedActor;
+EnemyCombat allowOffscreenFire=false, perceptionSeconds=.1, visibilityMemory=3,
+initialReserveAmmo=135; weapon magazineCapacity=27; healing amount=35,
+cooldownSeconds=3, unlimitedUses=true, remainingUses=3; posture heightMultiplier=.7;
+rig crouchTransitionSeconds=.14, crouchLegDegrees=55, crouchedMuzzleCeiling=-.06.
+
+Live validation: inspected enlarged standing/crouch renders and the actual HUD in
+Play Mode. Visual feet Y=.01875 versus collider feet Y=.015; head/torso/leg scales
+were (1,1,1). A separate controlled healing check applied 50 test damage and routed
+healing through PlayerActions, producing 85/100 and visible HEALED +35. That check
+is distinct from the subsequent full mission run. An earlier completed mission input pilot
+used normal movement/jumps/climbing, aim/fire, reload, interaction and healing;
+no teleports, immunity, injected damage or direct enemy defeat calls. It completed
+in 21.47 game seconds with ten defeats, zero deaths, 37 shots, one successful
+35-HP heal, 50 HP remaining, records recovered and three checkpoint commits.
+Results showed 00:21 / 10 defeats / 0 deaths. Submitting the real Replay button
+restored 100 HP, initial objectives/counters and the same ten active staged actors
+behind the reset cover. Runtime inspection overrides were discarded on exit.
+This completed run preceded the hit-alert/checkpoint correction; the later final
+run is recorded below. Scripted precise-aim runs do not establish human difficulty
+or pacing.
+
+Verification records and four diagnostic captures are retained under TestResults/
+outside Assets: Sprint015.json, Sprint015Live.json, Sprint015Pilot.cs,
+Sprint015Standing.png, Sprint015Crouch.png, Sprint015Healing.png and
+Sprint015Results.png. Older Sprint008 capture assets were preserved. No original
+artwork was sought or replacement artwork generated. Android/touch hardware,
+device profiling, hands-on subjective pose review and human mission pacing remain
+unverified. Existing missing combat audio is unchanged. No Sprint016 work begun.
+
+Final saved-scene live run after hit alerts and checkpoint-contact repair:
+**19.91 game seconds, ten actual defeats, zero deaths, 40 shots, two successful
+35-HP heals, 85 HP remaining, three checkpoint commits, records recovered and one
+completion**. Results displayed 00:19 / 10 / 0; Sprint015Results.png records this
+final run. Normal gameplay input and damage rules were used throughout. Earlier
+diagnostics (including the invalid-office-checkpoint death loop) were superseded
+by the explicit enabled-state guard and its passing physical-contact regression.
+Automated precision and diagnostic pauses are not human pacing evidence.
+
+Final automated validation after all integration fixes: **41/41 Edit Mode +
+121/121 Play Mode = 162/162 passed**, zero failures/skips. All **148 Sprint014
+baseline test names retained**, with 14 additional cases (one Edit, 12 Sprint015
+Play, one mission checkpoint-contact Play). Existing cover/retreat/reload, ammo,
+traversal, ragdoll, camera, effects, mission objectives, checkpoint rollback,
+results and Replay coverage passes. Intermediate failures and resolutions remain
+in Sprint015.json. Scoped git whitespace validation passed.
+
+Final serialized audit covered **280 scene/prefab behaviours**, including the
+player, Larper and LarperCartoonRagdoll prefabs: zero missing scripts or non-null
+missing object references, ten authored occupants and ten spawn points. Current
+Console: **zero errors, zero warnings**, compilation complete. Historical log
+buffer entries retain resolved diagnostic/compile errors, obsolete-API warnings
+and the unrelated AI Toolkit account-access timeout; current ground truth is
+recorded separately in Sprint015Live.json. Warehouse_Testbed's file SHA256 is
+unchanged from Sprint014. Warehouse_Mission01 is saved, clean, open and outside
+Play Mode; runtime camera/input overrides and diagnostic callbacks were discarded.
+Earlier uncommitted work was preserved. Nothing staged, committed or pushed.

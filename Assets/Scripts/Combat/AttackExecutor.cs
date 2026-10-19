@@ -9,7 +9,7 @@ namespace InsaneDreams.Combat
         [SerializeField] private LayerMask hitLayers = 5;
         [SerializeField] private LayerMask physicalImpactLayers = 2;
         [SerializeField] private LineRenderer tracer;
-        [SerializeField, Range(.02f, 1)] private float tracerSeconds = .35f;
+        [SerializeField, Range(.02f, 1)] private float tracerSeconds = .17f;
         [SerializeField, Min(.001f)] private float tracerWidth = .035f;
         [SerializeField, Range(1, 16)] private int maximumTracers = 6;
         [SerializeField] private Color friendlyTracer = new Color(1, .9f, .45f, .85f);
@@ -25,8 +25,11 @@ namespace InsaneDreams.Combat
         public Vector2 LastShotOrigin { get; private set; }
         public Vector2 LastShotDirection { get; private set; }
         public Vector2 LastShotEnd { get; private set; }
+        public Vector2 LastHitNormal { get; private set; }
+        public ImpactMaterial LastImpactMaterial { get; private set; }
         private LineRenderer[] trails;
         private float[] expires;
+        private Color[] trailColors;
         private int nextTrail;
         private Material ownedMaterial;
         public int ShotsFired { get; private set; }
@@ -41,6 +44,7 @@ namespace InsaneDreams.Combat
             visual = GetComponent<InsaneDreams.Visuals.CharacterVisualDriver>(); rig = GetComponentInChildren<InsaneDreams.Visuals.CutoutRig>(true);
             rig?.EnsureMuzzle();
             trails = new LineRenderer[Mathf.Clamp(maximumTracers, 1, 16)]; expires = new float[trails.Length];
+            trailColors=new Color[trails.Length];
             Material material = tracer != null ? tracer.sharedMaterial : null;
             if (material == null) material = ownedMaterial = new Material(Shader.Find("Sprites/Default"));
             for (int i = 0; i < trails.Length; i++)
@@ -98,9 +102,11 @@ namespace InsaneDreams.Combat
             Vector2 end = origin + direction * weapon.Definition.AttackRange;
             bool damaged = false;
             LastSurface = ShotSurface.None;
+            LastImpactMaterial=ImpactMaterial.Generic;LastHitNormal=-direction;
             if (closest.collider != null)
             {
                 end = closest.point;
+                LastHitNormal=closest.normal;LastImpactMaterial=ImpactSurface2D.Classify(closest.collider);
                 var impact = new PhysicalImpact(end, direction, weapon.Definition.ImpactImpulse, closest.rigidbody);
                 var health = closest.collider.GetComponentInParent<Health>();
                 if (health != null)
@@ -122,6 +128,9 @@ namespace InsaneDreams.Combat
             if (weapon.UsesAmmunition && trails != null)
             {
                 var line = trails[nextTrail]; line.enabled = true;
+                Color color=owner.Team==CombatTeam.Enemy?enemyTracer:friendlyTracer;
+                trailColors[nextTrail]=Color.Lerp(color,Color.white,Random.Range(.05f,.25f));
+                line.startWidth=tracerWidth*Random.Range(.85f,1.15f);line.endWidth=line.startWidth*.65f;
                 line.SetPosition(0, new Vector3(origin.x, origin.y, -.1f)); line.SetPosition(1, new Vector3(end.x, end.y, -.1f));
                 expires[nextTrail] = Time.time + tracerSeconds;
                 nextTrail = (nextTrail + 1) % trails.Length;
@@ -133,14 +142,13 @@ namespace InsaneDreams.Combat
         private void FadeTrails()
         {
             if (trails == null) return;
-            Color color = owner.Team == CombatTeam.Enemy ? enemyTracer : friendlyTracer;
             for (int i = 0; i < trails.Length; i++)
             {
                 if (!trails[i].enabled) continue;
                 float remaining = expires[i] - Time.time;
                 if (remaining <= 0) { trails[i].enabled = false; continue; }
-                Color faded = color; faded.a *= Mathf.Clamp01(remaining / Mathf.Max(.02f, tracerSeconds));
-                trails[i].startColor = trails[i].endColor = faded;
+                Color faded = trailColors[i]; faded.a *= Mathf.Clamp01(remaining / Mathf.Max(.02f, tracerSeconds));
+                trails[i].startColor=faded;faded.a*=.4f;trails[i].endColor=faded;
             }
         }
         private void OnDisable() { if (trails != null) foreach (var line in trails) if (line != null) line.enabled = false; }
