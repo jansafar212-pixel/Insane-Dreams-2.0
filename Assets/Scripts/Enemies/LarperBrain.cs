@@ -27,6 +27,7 @@ namespace InsaneDreams.Enemies
         private float pursuitInput;
         private bool pursuitAllowsJump = true;
         private bool pursuitIsRetreat;
+        private EnemyCombat combat;
         [SerializeField, Min(.1f)] private float retreatHopHeight = 1.6f;
         [SerializeField, Min(.1f)] private float retreatHopWidth = 1.8f;
         private readonly RaycastHit2D[] retreatHits = new RaycastHit2D[16];
@@ -100,7 +101,7 @@ namespace InsaneDreams.Enemies
         public void AnchorPatrolHere() { originX = body.position.x; pauseUntil = 0; ClearPursuit(); }
         private void Awake()
         {
-            motor = GetComponent<PlayerMotor2D>(); body = GetComponent<Rigidbody2D>(); box = GetComponent<BoxCollider2D>();
+            motor = GetComponent<PlayerMotor2D>(); body = GetComponent<Rigidbody2D>(); box = GetComponent<BoxCollider2D>();combat=GetComponent<EnemyCombat>();
             originX = body.position.x;
         }
         public void Configure(EnemyArchetype value) { archetype = value; originX = body.position.x; direction = 1; pauseUntil = 0; }
@@ -112,6 +113,7 @@ namespace InsaneDreams.Enemies
             if (archetype.Allows(MovementCapabilities.Stationary) || !archetype.Allows(MovementCapabilities.Walk))
             { Stop(LocomotionState.Stationary); return; }
             if (Time.time < pauseUntil) { Stop(LocomotionState.Blocked); return; }
+            if(combat!=null&&motor.IsGrounded&&!combat.CanAdvance(direction)){Stop(LocomotionState.Blocked);return;}
             if (!motor.IsGrounded)
             {
                 state = body.linearVelocity.y > 0 ? LocomotionState.Jumping : LocomotionState.Falling;
@@ -145,6 +147,7 @@ namespace InsaneDreams.Enemies
             if (Mathf.Abs(pursuitInput) < .01f) { Stop(LocomotionState.Stationary); return; }
             if (Time.time < pauseUntil) { Stop(LocomotionState.Blocked); return; }
             direction = Mathf.Sign(pursuitInput);
+            if(combat!=null&&motor.IsGrounded&&!combat.CanAdvance(direction)){Stop(LocomotionState.Blocked);return;}
             Vector2 forward = Vector2.right * direction;
             Vector2 nose = (Vector2)box.bounds.center + forward * (box.bounds.extents.x + .05f);
             var wallHit = pursuitIsRetreat ? RetreatRaycast(nose, forward, wallProbe) : Physics2D.Raycast(nose, forward, wallProbe, surfaces); bool wall = wallHit;

@@ -25,6 +25,7 @@ namespace InsaneDreams.Input
         private InsaneDreams.Combat.PlayerHealing healing;
         private InsaneDreams.Traversal.PlayerTraversal2D traversal;
         private Label chuteLabel;
+        private Button healButton;
         public bool IsBound { get; private set; }
 
         public void Bind(PlayerActions target)
@@ -51,6 +52,7 @@ namespace InsaneDreams.Input
             root.Q<Button>("slot2")?.RegisterCallback<ClickEvent>(SelectSecond);
             root.Q<Button>("melee")?.RegisterCallback<ClickEvent>(SelectMelee);
             root.Q<Button>("reload")?.RegisterCallback<ClickEvent>(Reload);
+            healButton=root.Q<Button>("heal");healButton?.RegisterCallback<ClickEvent>(Heal);
             moveStick = new Stick(root.Q<VisualElement>("moveStick"), value => { if (actions != null) actions.SetTouchMove(value); });
             aimStick = new Stick(root.Q<VisualElement>("aimStick"), value =>
             {
@@ -75,6 +77,7 @@ namespace InsaneDreams.Input
         private void SelectSecond(ClickEvent evt) => actions?.SelectWeapon(InsaneDreams.Inventory.EquipmentSlot.Firearm2);
         private void SelectMelee(ClickEvent evt) => actions?.SelectWeapon(InsaneDreams.Inventory.EquipmentSlot.Melee);
         private void Reload(ClickEvent evt) => actions?.RequestReload();
+        private void Heal(ClickEvent evt) => actions?.RequestHeal();
 
         private void ChuteDown(PointerDownEvent evt)
         {
@@ -111,6 +114,7 @@ namespace InsaneDreams.Input
                     (weapon.Cycle.IsReloading ? "\nRELOADING" : "") + (health != null ? $"\nHealth {health.Current:0}/{health.Maximum:0}" : "") +
                     (healing==null?"":Time.time<healing.FeedbackUntil?$"\nHEALED +{healing.LastRestored:0}":healing.CooldownRemaining>0?$"\nHeal {healing.CooldownRemaining:0.0}s":"\nH — HEAL");
                 loadoutLabel.style.color=healing!=null&&Time.time<healing.FeedbackUntil?new Color(.35f,1,.55f):Color.white;
+                if(healButton!=null)healButton.text=healing!=null&&healing.CooldownRemaining>0?$"HEAL\n{healing.CooldownRemaining:0.0}s":"HEAL";
             }
             var screen = new Vector2Int(Screen.width, Screen.height);
             if (lastSafeArea == Screen.safeArea && lastScreen == screen) return;
@@ -155,6 +159,7 @@ namespace InsaneDreams.Input
             root.Q<Button>("slot2")?.UnregisterCallback<ClickEvent>(SelectSecond);
             root.Q<Button>("melee")?.UnregisterCallback<ClickEvent>(SelectMelee);
             root.Q<Button>("reload")?.UnregisterCallback<ClickEvent>(Reload);
+            healButton?.UnregisterCallback<ClickEvent>(Heal);
             parachute?.UnregisterCallback<PointerDownEvent>(ChuteDown);
             parachute?.UnregisterCallback<PointerUpEvent>(ChuteUp);
             parachute?.UnregisterCallback<PointerCancelEvent>(ChuteCancel);

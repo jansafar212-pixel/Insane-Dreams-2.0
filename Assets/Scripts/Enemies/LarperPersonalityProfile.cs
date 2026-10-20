@@ -2,7 +2,7 @@ using UnityEngine;
 namespace InsaneDreams.Enemies
 {
     public enum LarperDisposition { Ordinary, Overconfident, Cowardly }
-    public enum LarperSpeechEvent { Detected, Lost, MissStreak, WitnessDefeat, Panic, Reload, Withdraw, Blocked }
+    public enum LarperSpeechEvent { Detected, Lost, MissStreak, WitnessDefeat, Panic, Reload, Withdraw, Blocked, Malfunction }
     [CreateAssetMenu(menuName="Insane Dreams/Larper Personality")]
     public sealed class LarperPersonalityProfile : ScriptableObject
     {
@@ -10,7 +10,7 @@ namespace InsaneDreams.Enemies
         [SerializeField, Range(0,1)] private float panicChance=.08f;
         [SerializeField, Min(1)] private float witnessRange=9;
         [SerializeField, Min(.1f)] private float panicSeconds=2.5f;
-        [SerializeField, Min(1)] private float moraleCooldown=45;
+        [SerializeField, Min(1)] private float moraleCooldown=18;
         [SerializeField, Min(20)] private float speechCooldown=30;
         [SerializeField, Min(1)] private float panicSpeechGap=5;
         [SerializeField, Min(20)] private float panicSpeechCooldown=60;
@@ -22,6 +22,7 @@ namespace InsaneDreams.Enemies
         [SerializeField] private string[] reload={"RELOADING!", "MY MAG'S EMPTY!", "WHY IS THIS THING SO LONG?!", "NOBODY SHOOT ME, I'M BUSY!"};
         [SerializeField] private string[] withdraw={"FALL BACK!", "COVER ME!", "THIS POSITION SUCKS!"};
         [SerializeField] private string[] blocked={"NO ROOM! RELOADING HERE!", "BAD PLAN! HOLD ON!"};
+        [SerializeField] private string[] malfunction={"WHY ISN'T IT WORKING?!", "IT'S A FEATURE!", "I PAID GOOD MONEY FOR THIS!", "TACTICAL MALFUNCTION!", "BRO, NOT NOW!"};
         public LarperDisposition Disposition=>disposition;
         public float PanicChance=>panicChance;
         public float WitnessRange=>witnessRange;
@@ -31,7 +32,7 @@ namespace InsaneDreams.Enemies
         public float PanicSpeechGap=>panicSpeechGap;
         public float PanicSpeechCooldown=>panicSpeechCooldown;
         public string[] Lines(LarperSpeechEvent context) => context switch
-        { LarperSpeechEvent.Detected=>detected, LarperSpeechEvent.Lost=>lost, LarperSpeechEvent.MissStreak=>misses, LarperSpeechEvent.WitnessDefeat=>witnessed, LarperSpeechEvent.Reload=>reload, LarperSpeechEvent.Withdraw=>withdraw, LarperSpeechEvent.Blocked=>blocked, _=>panic };
+        { LarperSpeechEvent.Detected=>detected, LarperSpeechEvent.Lost=>lost, LarperSpeechEvent.MissStreak=>misses, LarperSpeechEvent.WitnessDefeat=>witnessed, LarperSpeechEvent.Reload=>reload, LarperSpeechEvent.Withdraw=>withdraw, LarperSpeechEvent.Blocked=>blocked, LarperSpeechEvent.Malfunction=>malfunction, _=>panic };
     }
     // Explicit time and random sample make rate limiting/morale independently testable.
     public sealed class EncounterSpeechGate

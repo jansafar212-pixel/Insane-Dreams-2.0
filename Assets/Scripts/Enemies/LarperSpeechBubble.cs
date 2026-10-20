@@ -5,7 +5,7 @@ namespace InsaneDreams.Enemies
 {
     public sealed class LarperSpeechBubble : MonoBehaviour
     {
-        [SerializeField, Min(.5f)] private float visibleSeconds=2.8f;
+        [SerializeField, Min(.5f)] private float visibleSeconds=3.2f;
         [SerializeField] private Vector3 worldOffset=new Vector3(0,1.3f,0);
         private Camera view;
         private UIDocument document;
@@ -29,9 +29,11 @@ namespace InsaneDreams.Enemies
             if(view==null||document==null||document.rootVisualElement?.panel==null)return false;
             Vector3 point=view.WorldToViewportPoint(position);return point.z>0&&point.x>0&&point.x<1&&point.y>0&&point.y<1;
         }
-        public void Show(string text,bool panic=false)
+        public void Show(string text,bool panic=false)=>TryShow(text,panic);
+        public bool TryShow(string text,bool panic=false)
         {
-            if(!IsRelevant(transform.position)||string.IsNullOrWhiteSpace(text))return;
+            for(int i=visible.Count-1;i>=0;i--)if(visible[i]==null||!visible[i].IsVisible){var old=visible[i];if(old!=null)old.Hide();else visible.RemoveAt(i);}
+            if(IsVisible||visible.Count>=2||!IsRelevant(transform.position)||string.IsNullOrWhiteSpace(text))return false;
             if(label==null)
             {
                 label=new Label { name="larperSpeech",pickingMode=PickingMode.Ignore };
@@ -44,7 +46,7 @@ namespace InsaneDreams.Enemies
             }
             if(!visible.Contains(this))visible.Add(this);
             label.style.backgroundColor=panic?new Color(.35f,.08f,.05f,.97f):new Color(.04f,.07f,.12f,.95f);
-            LastLine=text;LinesShown++;label.text=text;until=Time.time+visibleSeconds;label.style.display=DisplayStyle.Flex;
+            LastLine=text;LinesShown++;label.text=text;until=Time.time+Mathf.Clamp(visibleSeconds+Mathf.Max(0,text.Length-20)*.025f,3,4);label.style.display=DisplayStyle.Flex;return true;
         }
         public static Rect AvoidOverlap(Rect desired,Rect screen,IReadOnlyList<Rect> occupied)
         {

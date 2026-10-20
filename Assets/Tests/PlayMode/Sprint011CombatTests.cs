@@ -120,10 +120,10 @@ namespace InsaneDreams.Tests
             doll.Activate(actor.GetComponent<CharacterVisualDriver>().Rig, Vector2.zero);
             var part = doll.parts[0]; foreach (var p in doll.parts) { p.linearVelocity = Vector2.zero; p.angularVelocity = 0; }
             doll.ReceiveImpact(new PhysicalImpact(part.worldCenterOfMass, Vector2.right, .9f, part));
-            Assert.That(part.linearVelocity.x, Is.EqualTo(.9f * 1.56f / part.mass).Within(.001f));
+            Assert.That(part.linearVelocity.x, Is.EqualTo(.9f * 1.794f / part.mass).Within(.001f));
             part.linearVelocity = Vector2.zero;
             doll.ReceiveDefeatImpact(new PhysicalImpact(part.worldCenterOfMass, Vector2.right, .9f, part));
-            Assert.That(part.linearVelocity.x, Is.EqualTo(.9f * 2.6f / part.mass).Within(.001f));
+            Assert.That(part.linearVelocity.x, Is.EqualTo(.9f * 2.99f / part.mass).Within(.001f));
             doll.ReceiveImpact(new PhysicalImpact(part.worldCenterOfMass, Vector2.right, 10000, part));
             Assert.LessOrEqual(part.linearVelocity.magnitude, 12.001f); Assert.AreEqual(45, doll.Lifetime);
             yield return null;

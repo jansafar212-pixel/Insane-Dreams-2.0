@@ -2169,3 +2169,781 @@ recorded separately in Sprint015Live.json. Warehouse_Testbed's file SHA256 is
 unchanged from Sprint014. Warehouse_Mission01 is saved, clean, open and outside
 Play Mode; runtime camera/input overrides and diagnostic callbacks were discarded.
 Earlier uncommitted work was preserved. Nothing staged, committed or pushed.
+
+## Sprint 015.1 — Perception, combat positions and camera stability (2026-10-19)
+
+Investigated the existing runtime components, serialized player/camera settings,
+mission gating, visibility masks, shot paths, movement hooks and regression suite.
+The player already uses Rigidbody2D Interpolate at the existing .02-second physics
+step. WarehouseCameraFollow is the only camera writer; no Cinemachine or competing
+camera scripts were found. Ladder traversal drives Rigidbody velocity in
+FixedUpdate and does not switch camera targets/offsets. No movement physics or
+ladder controller rewrite was necessary.
+
+The short-sight root cause was Sprint015 encounter staging: EnemySpawnPoint bound
+a null target while staged, and EnemyCombat returned before its perception checks.
+Authored mission enemies therefore needed a region trigger or direct damage to
+become aware, despite the unchanged 22-unit detection/18-unit engagement ranges.
+Targets now remain bound, and staged actors run the existing .1-second perception
+samples. Confirmed sight wakes the observer before taking damage, independently
+of camera visibility. Each observer senses for itself; noticing a threat marks its
+encounter engaged without magically sharing a confirmed player position with all
+members. Existing region activation and damage alerts remain available. Mission
+storage-region visitation is tracked separately from engagement so natural early
+awareness cannot block or bypass objective/checkpoint progression. Existing tests
+were updated for that intentional distinction, retaining all their test cases.
+
+There is no restrictive field-of-view cone in the existing basic Larper policy.
+Geometry mask remains layer 0; normal actor collision roots use layer 2. Sight
+raycasts now explicitly ignore the observer and target hierarchies, protecting
+against accidental self-blocking if layers change. Saturated visibility queries
+fail closed. Geometry still blocks sight, including legitimate occlusion by the
+warehouse pipe/platforms. Medium-range and elevated clear sight are tested without
+damage. The camera gate still applies to every actual shot, including blind fire,
+and never to perception. Distance-dependent spread, reaction timing, last-confirmed
+position memory, 27/135 ammunition and the cowardly retreat/reload loop remain.
+
+Added logical CombatNoise events using a readonly value descriptor and static
+subscription, rather than a new scene manager or AI controller. MovementAudioHooks
+publishes player movement independent of optional AudioClips. Noise intensity
+tracks actual speed; running is louder than walking, with a .25 multiplier for
+crouching. Existing footstep cadence remains .35 seconds. AttackExecutor publishes
+successful firearm shots using the real muzzle-to-nearest-hit segment, before
+visual tracer fading. LarperAwareness subscribes/unsubscribes alongside its existing
+events and routes hostile player stimuli into EnemyCombat. There are no projectile
+or sound-source searches every frame.
+
+Hearing uses distance, movement intensity and a single obstruction attenuation
+check. Player gunfire is deduplicated at .25 seconds per receiver. Heard positions
+are quantized to a two-unit grid and retained for four seconds; they never replace
+the last confirmed visual player position. Unconfirmed sounds produce temporary
+suspicion, facing/investigation via the existing motor, then expire. Gunfire near
+an actor's real shot segment produces an UnderFire state and a brief hesitation
+when no target is confirmed; existing retreat/reload ownership is preserved.
+Near-miss checks use shot data, not tracer renderers or physical projectile objects.
+The exposed Unaware/Suspicious/Alerted/UnderFire classification complements the
+existing engagement state rather than replacing its state machine. No sight or
+offscreen firing permission is granted by hearing alone.
+
+Identical combat destinations came from independently pursuing the same preferred
+distance and selecting cover without checking other actors' intentions. Added a
+small static reservation/occupancy registry owned by EnemyCombat lifecycle events.
+Candidates respect the largest spacing requested by either actor, consider both
+current occupancy and claimed positions, and use the existing supported-corridor,
+obstacle and low-hop checks. Nearby alternatives are bounded and deterministic.
+Long approaches use short supported steps; a clear current position is the fallback
+when no travel candidate is valid. Goals remain committed between tactical samples
+and are reconsidered after meaningful target movement, arrival or obstruction.
+Retreat releases a firing claim and claims a reachable retreat/cover endpoint;
+reload can retain that protected endpoint until completion. Defeat, panic, route
+ownership, reset, disable and destruction release claims. There is no crowd manager,
+global path planner or teleport separation. Selected-editor gizmos show detection,
+movement-hearing range and claimed combat positions.
+
+The camera's actual defect was quantization feedback: SmoothDamp used the previous
+pixel-rounded transform as its next continuous input. That causes residual error
+and inconsistent settling while interpolated physics/render frames advance, most
+noticeably at ladder stops and reversals. Follow now keeps an unrounded internal
+position and velocity; only the final render position is snapped. Boundary clamps
+also constrain the internal state and zero the affected velocity axis. Snap/bind
+initializes both states consistently. Camera LateUpdate runs after visual posing
+and before camera-safe spawn activation. The existing interpolated root target,
+framing, integer zoom, 32-PPU art grid, offset and .16-second smoothTime are retained.
+No additional lag, camera target switching or ladder-state offsets were introduced.
+
+New Inspector defaults: minimumCombatSpacing=1.25, positionSampleSeconds=.25;
+movementHearingRange=11, gunfireHearingRange=24, obstructedHearingMultiplier=.45,
+hearingMemorySeconds=4, soundPositionUncertainty=2, nearMissDistance=1.25 and
+gunfireHearingInterval=.25 on EnemyCombat; runningSpeed=5 and
+crouchNoiseMultiplier=.25 on MovementAudioHooks. Existing detection=22,
+engagement=18, visual memory=3, perception interval=.1, stepInterval=.35 and camera
+smoothTime=.16/visualPixelsPerUnit=32 remain configurable and unchanged.
+
+New source: Assets/Scripts/Combat/CombatNoise.cs,
+Assets/Scripts/Enemies/CombatPositionReservations.cs and
+Assets/Tests/PlayMode/Sprint0151Tests.cs, with Unity metadata. Modified source:
+Camera/WarehouseCameraFollow.cs; Combat/AttackExecutor.cs and CombatVisibility2D.cs;
+Enemies/EnemyCombat.cs, EnemySpawnPoint.cs and LarperAwareness.cs;
+Visuals/MovementAudioHooks.cs; Missions/MissionEncounter.cs and WarehouseMission.cs;
+plus Sprint014MissionTests.cs and this log. No new enemy, weapon, level, visual
+asset, package or replacement controller. Existing uncommitted work was preserved.
+
+Final automated validation: **41/41 Edit + 131/131 Play = 172/172 passed**, zero
+failures/skips. All **162 Sprint015 baseline names retained**, ten new Play cases.
+They cover staged medium/elevated sight without damage, self filtering/occlusion,
+quiet crouch versus obstructed running, gunfire attenuation/deduplication, real
+hitscan near misses, clip-independent footsteps, stable distinct leases and cleanup,
+physical multi-actor positioning, rapid camera reversals/settling and real ladder
+climb/stop/dismount. Existing offscreen spawning/persistence/fire restrictions,
+memory, cover/reload/ammo, healing, crouch, effects, ragdoll, objectives/checkpoints,
+results and Replay coverage passes. The initial reservation fixture exposed a
+missing current-position fallback; the first mission run exposed the conflation
+of engagement and region visitation. Both were fixed before the final full suite.
+
+Scripted live Warehouse_Mission01 playthrough completed with normal PlayerActions,
+damage, ammunition and healing: **20.89 game seconds, ten defeats, zero deaths,
+36 shots, two heals, 85 HP remaining, records recovered and three checkpoint
+commits**. No immunity, teleports, injected damage or direct defeat calls were used.
+The input pilot deliberately stopped on the ladder for 1.1 seconds. In the final
+.3-second settled window (108 samples), target and camera Y span were both zero;
+maximum follow error was .00389 world units. Across 97 actor snapshots, 55 claimed
+position pairs stayed at least 1.596 units apart (configured minimum 1.25); minimum
+observed actor distance was 1.158. All four awareness classifications were observed.
+These are sampled live measurements, not a device performance profile or a human
+feel/pacing claim. Results were visually inspected in Game View.
+
+Records: TestResults/Sprint0151.json, Sprint0151Live.json, Sprint0151Pilot.cs,
+Sprint0151Camera.csv and Sprint0151Actors.csv. Two screen-capture attempts failed
+because no Game View render target was open; exact errors/stacks are preserved in
+Sprint0151Live.json and MCP history. Opening Game View and stepping one completed
+frame resolved capture. After recording those tool errors, the Console view was
+cleared and a fresh .8-second startup check produced **zero errors/warnings**.
+Final serialized audit: **280 behaviours, zero missing scripts/references**, ten
+occupants, and one camera writer. Compilation complete; Warehouse_Mission01 saved,
+clean, open and outside Play Mode. Warehouse_Testbed's file SHA256 remains
+DBD270D874D8BDE8F12B0EA43746C00F0906104F888B392718C3F053146F3915.
+
+Remaining manual checks: subjective camera feel and rapid reversals at target
+device frame rates, portrait/touch/device profiling, narrow-corridor crowd behavior,
+and human mission difficulty/pacing. Intentional art-grid steps remain; hearing is
+a simple range/obstruction model, not multi-floor acoustic navigation, and position
+claims are not a global crowd solver. Missing audio clips remain optional and do
+not suppress logical awareness. No Sprint016 work, staging, commit or push.
+
+## Sprint 016 — Enemy spacing and encounter distribution (2026-10-19)
+
+Focused balancing only. Runtime spawn activation now has Inspector-configurable
+`EnemySpawnPoint.minimumSpawnSpacing = 1.2` world units between Larper centers.
+Previously there was no independent spawn-distance parameter: clearance relied
+on collider overlap (nominal body width 0.8, with the existing 0.06 query inset).
+The new distance is 50% above that nominal width; the separate 1.25 camera safety
+margin is unchanged. A bounded, nonallocating neighborhood query checks active
+Larpers. Original body/obstacle, two-foot support and final-camera checks remain.
+Saturated queries fail closed. Crowded points remain pending at their original
+validated locations, retrying every existing 0.2 seconds. Lower Inspector spacing
+permits deliberate dense encounters; physical body clearance still applies.
+
+Combat reservation spacing increased from 1.25 to **1.75 units (+40%)**, in the
+existing component default and Larper prefab. Reachable candidate selection,
+current-position fallback, cover claims, stable leases and cleanup are unchanged.
+No proximity-triggered retreat or formation rules. All ten authored mission
+occupants retain their irregular locations and encounter membership. Population,
+offscreen restrictions, persistence and covered checkpoint/replay restoration
+remain unchanged. No crouch, player, camera, awareness, weapon, healing, animation
+or ragdoll changes in this sprint.
+
+Sprint016 files: Assets/Scripts/Enemies/EnemySpawnPoint.cs and EnemyCombat.cs;
+Assets/Prefabs/Enemies/Larper.prefab; Assets/Scenes/Warehouse_Mission01.unity
+(saved spawn-spacing fields); Assets/Tests/PlayMode/Sprint016Tests.cs and meta;
+this log; TestResults/Sprint016.json, Sprint016Live.json, Sprint016Actors.csv and
+Sprint016Pilot.cs. Saving the prefab also serializes existing Sprint015.1 hearing
+and footstep defaults at unchanged values. Earlier uncommitted work is preserved.
+
+Validation: **41/41 Edit + 136/136 Play = 177/177 passed**, zero failures/skips;
+all 172 Sprint015.1 test names retained. Five new Play cases cover nonoverlapping
+but too-close spawns postponing then restoring three actors at their original
+points, separate platforms, explicit dense configuration, and stable distinct
+reservations with two, three and five simultaneous Larpers. Existing camera-safe
+spawning, obstacles/unsupported points, real movement/blocked destinations,
+reservation cleanup, awareness, offscreen fire, memory, retreat/reload, healing,
+crouch, camera/ladder, mission and ragdoll regressions pass. An initial exact-vector
+stability assertion rejected tiny physics settling; it now allows less than 0.01
+units, and the final full suite passes.
+
+The existing normal-input pilot was reused with separate Sprint016 diagnostic
+keys. Actual live Warehouse_Mission01 completion: **22.07 game seconds, ten
+defeats, zero deaths, two real healing requests**. No teleports, immunity or
+injected damage. Across 103 snapshots/592 actor rows, 52 reserved-position pairs
+had minimum separation **2.408 units**, above 1.75; all four awareness states were
+observed. Actual bodies briefly approached 1.158 units: reservation spacing governs
+destinations, not continuous separation while traversing. No pilot stall occurred.
+This is automated Editor validation, not human pacing review or a controlled
+target-device performance profile. Extra spawn work is bounded to 32 hits per
+pending point at the existing retry interval, without per-query array allocation.
+
+Final audit: 280 scene/player/Larper/ragdoll behaviours, zero missing scripts or
+non-null missing references, ten occupants using 1.75 combat spacing. Compilation
+succeeded; final Console has zero errors/warnings. Initial MCP timeout and
+reload-status HTTP400 recovered; a Unity account token-exchange exception was also
+observed in retained history, absent from the final Console. Details are recorded
+in Sprint016Live.json. Older obsolete-API compilation warnings remain outside this
+focused sprint. Warehouse_Mission01 saved, clean, open, outside Play Mode.
+Warehouse_Testbed SHA256 remains
+DBD270D874D8BDE8F12B0EA43746C00F0906104F888B392718C3F053146F3915.
+
+Remaining manual checks: subjective crowd readability, narrow corridors, touch
+devices and target-hardware profiling. No global crowd solver was introduced;
+invalid runtime positions wait rather than force spawning. No Sprint017 work,
+staging, commit or push.
+
+## Sprint 017 — Defensive crouching and suppression stability (2026-10-19)
+
+Larpers now sometimes briefly hold ground in the protagonist's existing goalkeeper
+crouch when the existing hostile-player hitscan noise segment passes within the
+existing 1.25-unit near-miss radius (including surviving direct hits). Ordinary
+distant gunfire alone does not trigger it. EnemyCombat requests downward input on
+the already-present PlayerPosture2D; CharacterVisualDriver and CutoutRig therefore
+reuse the same 55-degree leg pose, rigid modular scales, 0.14-second blend, attached
+weapon and constrained muzzle. No player/posture/rig/animation source was changed.
+The same controller reduces body height to 70%, keeps feet grounded, and prevents
+standing through ceilings. Once clear, normal standing resumes without more input.
+
+Inspector tuning on EnemyCombat and Larper.prefab:
+- defensiveCrouchProbability: 0.30 per eligible suppression episode.
+- defensiveCrouchSeconds: randomized 0.8–2.0 seconds (Vector2 min/max).
+- defensiveCrouchCooldown: randomized 5–8 seconds (Vector2 min/max).
+- suppressionQuietSeconds: 0.65 seconds without a nearby shot ends an episode.
+
+Successful AND failed rolls consume the cooldown. Every nearby round extends the
+episode boundary, not the crouch timer; a continuing burst cannot reroll or keep
+the actor crouched forever. Only grounded, alive actors outside panic, withdrawal,
+reload, ladder-route/climb and parachute states qualify. These incompatible states
+cancel an ongoing reaction. Existing low-ammo survival decisions take priority.
+During the short hold, movement stops without discarding an existing reservation;
+ordinary inaccurate aiming/firing, sight checks, memory and camera gates continue.
+No accuracy bonus, new panic/run-away system, controller or formation logic.
+An expired defensive timer clears its input; a genuinely obstructed ceiling may
+keep the physical posture crouched until standing is safe, as for the player.
+
+Production changes: Assets/Scripts/Enemies/EnemyCombat.cs and
+Assets/Prefabs/Enemies/Larper.prefab (four tuning fields). Added
+Assets/Tests/PlayMode/Sprint017Tests.cs plus Unity meta. Updated this log. Validation
+artifacts: TestResults/Sprint017.json, Sprint017Live.json, Sprint017Actors.csv and
+Sprint017Pilot.cs. All previous uncommitted work remains intact. No new visual assets,
+archetypes, weapons, levels, UI, player/camera changes or art generation.
+
+Automated validation: **41/41 Edit + 144/144 Play = 185/185 passed**, zero
+failures/skips. All **177 Sprint016 test names retained**, eight focused additions.
+They verify a real no-damage hitscan near miss, recognizable rigid pose and feet,
+70% collider, safe crouched firing/muzzle/spread and offscreen gate, burst/failed
+roll cooldowns, timeout and low-ceiling recovery, retreat/reload/panic/airborne/
+disable priority, live ladder cancellation, blocked sight/frozen last-known point,
+one ragdoll on death, and varied finite reactions among eight simultaneous actors.
+Existing spawning, spacing, reservations, awareness, reload/cover, ammo, healing,
+camera, ladders, player crouch and ragdoll regressions all pass. Initial fixtures
+froze enemies above the grounded probe and incorrectly expected defeat to disable
+the collider component rather than its root; those test assumptions were fixed.
+One MCP test invocation during reload returned HTTP400; retry succeeded.
+
+Actual normal-input live mission run, at unchanged default 30% chance, completed
+in **33.71 game seconds with one death/checkpoint recovery, ten final mission
+defeats and five healing requests**. No immunity, teleports or injected damage.
+Game View was paused and visually inspected during a natural defensive crouch:
+Processing_Spawn_0 had Crouch pose, 0.98 collider height, head scale 1 and six shots
+fired. The same ridiculous bent-leg pose and attached firing weapon were visible.
+Across 156 snapshots/803 actor rows, 22 defensive-intent rows included 16 physically
+crouched rows (six captured onset before FixedUpdate applied the collider). Up to
+**three simultaneous defensive actors**, and 15 snapshots mixing defensive and
+other behavior, were observed. Among 99 reserved-position pairs minimum distance
+was **2.204 units**, above Sprint016's unchanged 1.75 setting. No pilot stall.
+
+Performance scope: the production reaction is driven by existing noise events,
+with scalar timers/eligibility checks only; no new per-update collection, global
+search, component creation/destruction or physics query. Existing posture owns
+the bounded safe-standing query. Eight-actor tests and the live run passed without
+an integration stall; this is not a controlled FPS comparison or target-device
+CPU/GPU profile. Human combat feel/difficulty and device profiling remain manual.
+
+Final serialized audit: 280 behaviours across scene and player/Larper/ragdoll
+prefabs, zero missing scripts/non-null missing references; ten mission occupants,
+all inheriting 0.30 probability. Compilation complete, final Console zero errors
+and warnings. Warehouse_Mission01 saved, clean, open, Play Mode stopped. Player
+crouch/pose source and Warehouse_Testbed remain unchanged by this sprint.
+No staging, commit, push, Sprint018 work or unrelated feature work.
+
+## Sprint 018 — Lightweight reactive tuning (2026-10-19)
+
+Three bounded adjustments in existing EnemyCombat, saved on Larper.prefab:
+- Defensive crouch chance 0.30 -> 0.36 (+20% per eligible episode).
+- Under fire only, moving-target retarget displacement multiplier 1 -> 0.8:
+  3.5 -> 2.8 units (-20%, +25% displacement sensitivity at default spacing).
+  Stable leases remain valid; the existing 0.25-second sample cadence, support
+  checks and reservations are unchanged. No forced movement after every shot.
+- Under fire only, personality low-ammo retreat fraction multiplier 1 -> 1.2:
+  ordinary 0.20 -> 0.24 (27-round magazine: five -> six rounds), cowardly
+  0.40 -> 0.48 (ten -> twelve rounds), overconfident zero stays zero.
+  Existing target availability, memory, distance and reserve-ammo gates still apply.
+
+The two suppression modifiers use the existing 0.6-second under-fire timer, return
+to baseline when it expires, and are Inspector-configurable/clamped to 0.8–1 and
+1–1.25 respectively; retreat fractions remain capped at 0.8. Cooldowns, duration,
+episode deduplication, blind-fire probabilities, imperfect aim and aggressive
+overconfident behavior remain unchanged. No fixed action sequence. Nearby allies
+and cover modifiers were skipped: no suitable additional decision-time cache was
+available, and this sprint adds no searches or physics queries. Only scalar math
+was added to existing decisions; no new managers, collections or animation edits.
+
+Files: Assets/Scripts/Enemies/EnemyCombat.cs, Assets/Prefabs/Enemies/Larper.prefab,
+Assets/Tests/PlayMode/Sprint017Tests.cs (two Sprint018 cases), this log, and
+TestResults/Sprint018.json. No new production files or unrelated changes.
+
+Validation: **41 Edit + 146 Play = 187/187 passed**, zero failures/skips, all 185
+Sprint017 names retained. New tests compare 2,000 matched seeded episodes before
+and after, verifying increased yet nonmandatory crouching; actual Play Mode checks
+verify earlier low-ammo retreat, moving-target retargeting, modifier expiry, stable
+unsuppressed leases and preservation of zero aggressive thresholds. Existing
+varied multi-enemy crouching, cooldown, fire/reload/memory, spawning/spacing,
+camera/ladder, healing, pose and ragdoll regressions pass. No separate manual/live
+mission pilot or FPS benchmark was run this sprint; long-run frequency, subjective
+feel and device performance remain manual checks. The shorter retarget threshold
+increases opportunities only when the target moves enough, not every suppression.
+
+Compilation succeeded; final Console zero errors/warnings, ten mission occupants.
+Warehouse_Mission01 saved, clean, open and outside Play Mode. Existing uncommitted
+work preserved. No staging, commit, push, Sprint019 or unrelated feature work.
+
+## Sprint 019 — Larper social reactions (2026-10-19)
+
+Reused Health.Defeated -> LarperAwareness's existing static ally notification.
+All defeats/ragdolls are treated consistently. Separate dramatic-knockdown and
+panicked-retreat propagation were skipped: reliable classification/deduplicated
+propagation would require more infrastructure. Only actual defeats publish events;
+social fear, confidence, panic and withdrawal do not relay them.
+
+Witnessing keeps the existing nine-unit personality range and on-camera gate,
+adds a configurable 100-degree half-angle (200-degree cone), and uses the existing
+nonallocating sight ray with self/source filtering. Range, cooldown, compatibility
+and field-of-view reject before the ray. No per-frame social scan, collection,
+physics query or new manager. Speech remains the existing system, independent of
+AI witnessing; a UI document is not required to apply the influence.
+
+Ordinary default bands: **45% fear, 15% confidence, 40% minimal interruption**.
+Cowardly: 55%/10%; overconfident: 35%/25%. Existing profile panic probabilities
+(ordinary 8%, cowardly 20%, overconfident 2%) are INCLUDED in the fear band,
+preserving the original panic path and forced-panic regression fixtures. A single
+roll chooses the band. No guaranteed retreat or fixed reaction sequence.
+Settings are Inspector-configurable on LarperAwareness/Larper.prefab: base fear
+0.45, base confidence 0.15, influence 4 seconds, view half-angle 100 degrees.
+The existing profile morale cooldown is reused (45 seconds). All eligible rolls,
+including unaffected ones, consume it; cooldown is at least the influence duration.
+
+EnemyCombat uses two scalar fields for one non-stacking timed influence, reset on
+disable/death/encounter reset and expired by time comparison. Fear adds randomized
+0.15–0.45-second hesitation, multiplies future suppression-crouch chance and
+low-ammo retreat fraction by 1.25. Confidence multiplies those by 0.9 and 0.85 and
+preferred firing distance by 0.9 (5 -> 4.5 units). Existing cooldowns, safe movement,
+reservations, aim/spread, sight/memory, ammo and offscreen-fire gates remain in
+charge. Zero aggressive retreat thresholds remain zero; probabilities/fractions
+stay bounded. No player location is learned from an ally's defeat. New effects
+cannot interrupt an active reload, withdrawal, panic, ladder route/climb or chute.
+
+Each defeated source emits once per activation. A monotonic event ID plus one
+watermark per observer deduplicates repeats and out-of-order older events without
+an expanding collection. Cooldowns prevent multiple nearby defeats from refreshing
+or stacking effects. A new defeat after a legitimate new lifetime receives a new
+ID. Cosmetic ragdoll motion cannot recursively publish morale notifications.
+
+Files: Assets/Scripts/Enemies/LarperAwareness.cs and EnemyCombat.cs;
+Assets/Prefabs/Enemies/Larper.prefab; new Assets/Tests/PlayMode/Sprint019Tests.cs
+and Unity meta; this log; TestResults/Sprint019.json. No new production source,
+personality assets, animations, visual assets, dialogue system or unrelated edits.
+
+Validation: **41 Edit + 152 Play = 193/193 passed**, zero failures/skips;
+all 187 Sprint018 names retained. Six added Play tests exercise real fatal damage
+and ragdoll notification, finite hesitation/fear/confidence, unchanged unknown
+player position, walls/range/rear-field rejection, duplicate IDs after cooldown,
+fresh events after cooldown, non-stacking and reset, protected reload/traversal,
+and seeded eight-witness variation without chains. Legacy forced-panic/visual-face
+tests and all previous crouch, suppression, spawning/spacing, fire/reload, memory,
+healing, camera/ladder and ragdoll regressions pass. Actual Unity runtime tests were
+run; no separate human playthrough or device FPS profile was performed.
+
+Final: compilation complete, ten occupants, zero missing Larper prefab scripts,
+Warehouse_Mission01 saved/clean/open, Play Mode stopped. Console zero errors and
+one unrelated warning: "Account API did not become accessible within 30 seconds.
+This may be due to network issues or editor focus." Warehouse_Testbed SHA256 stays
+DBD270D874D8BDE8F12B0EA43746C00F0906104F888B392718C3F053146F3915.
+Remaining limits: existing on-camera social gate; no separate knockdown/retreat
+events; subjective combat feel and target-device profiling remain manual.
+Existing uncommitted work preserved; no staging, commit, push or Sprint020 work.
+
+## Sprint 020 — Morale, crowd control and Android polish (2026-10-20)
+
+Morale diagnosis: defeat notifications already arrived, but a gameplay-camera gate
+discarded offscreen witnesses, an unaffected roll blocked further decisions for
+45 seconds (often the whole encounter), and ordinary fear only paused for a
+fraction of a second. Social witnessing now works outside the gameplay camera
+while retaining distance/cone/solid LOS checks and unknown player position.
+Ordinary offscreen shooting remains forbidden; explicit sniper capability is
+unchanged. Legacy direct panic keeps its camera gate. Personality probabilities
+are unchanged. Profile morale cooldown **45 -> 18 seconds**, influence **4 -> 5**.
+Non-panic fear can request the existing cooldown-limited goalkeeper crouch or,
+with visible threat, available reserves and <=55% magazine, sometimes commit to
+the existing safe withdrawal. Otherwise it hesitates 0.4–0.8 seconds, bounded by
+the influence lifetime. No scripted action sequence or accuracy improvement.
+
+Rare collapse: an actual witnessed panic has an Inspector-configurable **8%**
+chance to start a wave; nearby recipients have **35%** spread chance. Hard limits:
+**two hops, root plus three recipients, six-unit LOS range, 20-second global
+cooldown**, existing local cooldown, 0.7–1.4-second propagated panic and <=5-second
+influence. A per-wave event watermark rejects duplicates. Only this bounded panic
+notification propagates; normal fear, confidence and defeats do not recurse
+indefinitely. No scans, propagation collections or per-frame social physics.
+
+Crowding diagnosis: reservations separated destinations, but did not exclude paths
+through allies or control approach spacing; runtime spawn distance was only 1.2.
+Spawn spacing is now **1.5 units (+25%)**, postponing unsafe activation as before.
+Combat spacing stays 1.75. Existing registry now rejects same-floor paths through
+active allies and checks motion at 0.1-second intervals with a wider resume gap
+(hysteresis). A stable registry priority resolves almost coincident starts. No
+teleports, new overlap queries or pathfinder. Grounded patrol/pursuit yield; actual
+airborne and authored ladder traversal retain ownership. Cover selection checks
+the same clear path and reservations; blocked retreats retain finite reload fallback.
+
+Speech hard cap moved into LarperSpeechBubble.TryShow: **maximum two globally**,
+including direct callers. Lines last **3–4 seconds** (3.2 base plus length), with
+no rapid replacement. A single expiring pending combat line per actor prevents
+withdrawal/reload dialogue from being lost behind a readable existing bubble;
+pending checks run every 0.2 seconds only while queued, expire after six seconds,
+and perform no physics. Added short retreat lines such as STAND YOUR GROUND! and
+I FEAR NOTHING!, selected on real retreat events. Opening lines differ by
+personality; ordinary chatter and existing speech gates remain rate limited.
+
+Android: configurable **1.125 character magnification** (12.5% larger) in the
+existing camera writer, with Editor preview. It applies AFTER integer zoom
+rounding, which would otherwise silently erase the adjustment. PC framing and
+tracking/smoothing are unchanged; tighter actual camera bounds still govern fire
+and runtime spawn visibility. Preview was disabled again after validation.
+Both pad diameters **150 -> 187.5**, knobs **62 -> 77.5** (+25%); input thresholds
+and normalized sensitivity unchanged. Touch areas grow with the pads. Controls
+are **50% opacity**; action buttons shifted clear of larger sticks, interaction
+moved above controls. Added 88-unit Heal buttons to both existing control UXMLs,
+wired to PlayerActions.RequestHeal/PlayerHealing with cooldown caption. Existing
+safe-area and PanelSettings scaling retained. No Android startup investigation,
+startup code/build-scene edits, package additions or unrelated settings changes.
+
+Ragdolls: existing initial multiplier **2.6 -> 2.99**, subsequent **1.56 -> 1.794**,
+impulse cap **2.5 -> 2.875** (+15%). Velocity 12, angular velocity 720, damping,
+joints, four-active cap, lifetime/sleep and activation/recovery remain unchanged.
+Pistol impulses remain low; larger inputs gain expression without an unbounded launch.
+
+Sprint020 files (all under Assets unless stated):
+- Scripts/Enemies/EnemyCombat.cs, CombatPositionReservations.cs, LarperBrain.cs,
+  EnemySpawnPoint.cs, LarperAwareness.cs, LarperSpeechBubble.cs,
+  LarperPersonalityProfile.cs; Scripts/Camera/WarehouseCameraFollow.cs;
+  Scripts/Input/WarehouseTouchControls.cs; Scripts/Visuals/CartoonRagdoll.cs.
+- UI/WarehouseControls.uss/.uxml, UI/MissionControls.uss/.uxml;
+  Data/Enemies/Personalities/Ordinary.asset, Cowardly.asset, Overconfident.asset;
+  Prefabs/Enemies/Larper.prefab; Prefabs/Visuals/LarperCartoonRagdoll.prefab;
+  Scenes/Warehouse_Mission01.unity (camera fields and spawn spacing only).
+- New Tests/PlayMode/Sprint020Tests.cs and meta. Existing Sprint011CombatTests,
+  Sprint012CombatTests, TraversalRegressionTests and Sprint016Tests retain cases
+  with intentional impulse, readable dialogue timing, normalized drag distance
+  and spawn-spacing expectations updated. This log and TestResults/Sprint020.json,
+  Sprint020Live.json, Sprint020Actors.csv, Sprint020InitialActors.csv, Sprint020Pilot.cs.
+
+Validation: **41 Edit + 160 Play = 201/201 passed**, zero failures/skips; all 193
+Sprint019 names retained, eight new cases. They exercise offscreen observed fear
+and actual crouch without shots, bounded/cooldown collapse and wall/distance
+rejection, speech hard cap/readability/replacement prevention, four touch layouts
+(1280x720, 960x720, 1560x720, 720x1280), real Heal click, exact Android/PC framing
+ratio, moving-neighbor separation/platform independence, and measured 1.15 impulse
+ratio with stability clamps. Initial full run was 157/160 Play: two old numeric/
+gesture assumptions and discarded retreat dialogue were corrected; all three
+targeted cases then passed, followed by the final full suite. The first focused
+Heal fixture was protected from damage; removing its test-only protection fixed it.
+
+Actual normal-input mission run with Android framing preview completed in **25.20
+game seconds, ten defeats, zero deaths, three real heals**. Frames advanced from
+1488 before pilot to 11341 during and 32569 at completion; Game View visually
+inspected with enlarged translucent sticks and Heal. No immunity, teleport or
+injected defeat was used by the pilot. Its old ladder wait was incompatible with
+the closer viewport; two navigation diagnostics stalled, then the diagnostic
+script was updated to side-jump, approach and return using real movement input.
+Gameplay was not changed to accommodate the pilot. Initial-run samples include
+25 active fear rows; the completed run includes 29 confidence rows. Natural waves
+did not occur in this small sample; forced-wave tests prove their caps and expiry.
+Completed run: 120 snapshots/699 actor rows, 41 reserved pairs, minimum reserved
+distance **2.352**, minimum sampled body-center distance **2.330**, at most one
+visible speech bubble observed (the two-bubble case is covered by tests).
+
+Performance: crowd checks reuse the existing registry at 10 Hz, avoiding extra
+physics. Path checks are bounded by the small existing actor count. Social
+propagation is bounded/event-driven; speech polling exists only for one expiring
+pending line. Existing ragdoll caps/sleep remain. No target-device FPS benchmark
+was performed. Manual Android checks: real multitouch/comfort, notches/safe areas,
+orientation/aspect layouts including interaction HUD, magnified pixel appearance,
+narrow-corridor/ladder approach traffic, stronger-impact stability and CPU/GPU FPS.
+
+Final audit: 280 scene/player/Larper/ragdoll behaviours, zero missing scripts or
+non-null missing references, ten occupants. Compilation complete; final Console
+zero errors/warnings. One asset-save MCP timeout recovered; readback confirmed all
+values and saves, recorded in Sprint020Live.json. Warehouse_Mission01 saved, clean,
+open and stopped; Android preview false. Warehouse_Testbed SHA256 remains
+DBD270D874D8BDE8F12B0EA43746C00F0906104F888B392718C3F053146F3915.
+Earlier uncommitted changes preserved. No staging, commit, push or Sprint021 work.
+
+## Sprint 020.1 — Cowardice Calibration (2026-10-20)
+
+Two existing Inspector parameters tuned in code defaults and Larper.prefab:
+defensiveCrouchProbability **0.36 -> 0.48 (+33.3%)**;
+socialFearChance **0.45 -> 0.60 (+33.3%)**. Existing personality offsets yield
+cowardly/ordinary/overconfident witnessed-fear bands of **70% / 60% / 50%**
+(previously 55% / 45% / 35%). More fear opportunities feed the existing brief
+hesitation, defensive crouch and situational low-ammunition withdrawal decisions.
+No new actions, state transitions, scans, queries or allocations were added.
+
+Preserved: duck duration 0.8–2 seconds, duck decision cooldown 5–8 seconds,
+morale cooldown 18 seconds, influence duration 5 seconds, confidence probability
+and personality offsets, weapon/reload/panic-fire handling, navigation and poses.
+The separate personality panic thresholds (20% / 8% / 2%) remain unchanged;
+these also gate collapse-wave initiation. Root collapse probability 8%, spread
+35%, 20-second global lockout, two-hop and four-actor caps are unchanged.
+Increasing the wider fear band does not increase the wave-trigger probability.
+
+Files touched for this sprint: EnemyCombat.cs, LarperAwareness.cs, Larper.prefab;
+existing Sprint017Tests.cs and Sprint019Tests.cs calibration assertions; this log
+and TestResults/Sprint0201.json. Seeded duck testing retains the old 30%/36%
+comparison and adds 48%; social variation checks the current 60% band and mixed
+fear/confidence responses. The suppression fixture now waits 0.5 rather than
+0.3 seconds for its existing 0.1-second perception/0.25-second position samples,
+still inside the 0.6-second suppression window. Gameplay sampling is unchanged.
+
+Validation: compilation succeeded; **41 Edit + 160 Play = 201/201 passed**, no
+failures/skips, all 201 Sprint020 case names retained. The initial Play run was
+158/160: the old eight-witness sample expected a nonreacting actor at 45% fear;
+at 60% it instead contained both fear and confidence, so the assertion now checks
+that meaningful variation. The retarget fixture also failed its short wait,
+reproduced once, then passed without gameplay changes before the sampling-aware
+wait adjustment. The subsequent full Play run passed. Existing cooldown, expiry,
+shooting/reloading, varied reactions, blocked/offscreen perception, bounded-wave,
+spawning/spacing, camera, input, traversal and ragdoll cases remain covered.
+
+Final readback: prefab probabilities 0.48/0.60, duck cooldown 5–8, collapse 0.08,
+spread 0.35. Warehouse_Mission01 saved, clean, open and stopped; no compilation
+in progress, Console zero errors. One unrelated Unity AI Toolkit account-API
+timeout warning remains; captured compile history also includes pre-existing
+obsolete FindObjectsSortMode warnings in VisualIntegrationTests. No gameplay
+errors found in the regression suite. No manual firefight playtest or PC/Android
+performance benchmark was performed; subjective feel remains for developer
+playtesting. Warehouse_Testbed hash unchanged from Sprint020. All earlier dirty
+work preserved. No staging, commit or push.
+
+## Sprint 020.2 — Near-Miss Suppression (2026-10-20)
+
+AttackExecutor now includes its actual hit Health in the existing CombatNoise
+event alongside the collision-clipped shot origin/end. Damage, accuracy, timing
+and tracer endpoints are unchanged. EnemyCombat tests center-to-shot-segment
+distance within the existing configurable 1.25-unit radius, excludes self,
+friendly, zero-length and direct-hit trajectories (including protected hits),
+then checks the short closest-point-to-actor path with the existing nonallocating
+geometry ray buffer. This rejects enemies behind the impact wall or beneath
+cover parallel to a passing trajectory. Hearing remains a separate, attenuated
+awareness path; hearing a blocked shot does not imply suppression or sight.
+
+New reusable Combat.SuppressionMeter is a small value type: event-driven additions,
+lazy linear decay, no component/manager/Update or allocated collection. Default
+per-miss gain is 28 scaled from 40–100% by proximity; cap 100, quiet gap 0.65s,
+decay 18 units/second. Cowardly susceptibility 1.25, ordinary 1, confident 0.75;
+existing fearful morale multiplies by 1.15, confidence by 0.9. Values other than
+personality multipliers use Inspector settings on EnemyCombat/Larper.prefab.
+
+Low suppression retains existing episode-based 48% ducking and 5–8s cooldown.
+Crossing 25 adds a brief 0.25s hesitation using the existing timer, at most once
+per second. At 60, eligible grounded Larpers roll an existing finite withdrawal:
+base probability 55%, scaled by susceptibility/morale and clamped; failed rolls
+also consume a 6s decision cooldown. Actual withdrawal/cover/collision/spacing
+logic and 4.5s timeout are reused. Direction and cover occlusion use the incoming
+shot origin, without inventing visual player knowledge. Repeated bullets do not
+restart withdrawal. On completion, adequately armed suppression retreats resume
+combat after the existing reengagement delay; low-ammo retreats still reload.
+Incompatible reload, panic, ladder and parachute states reject new reactions.
+Reset/re-enable clears the meter. Existing retreat speech is used after real
+travel; no extra dialogue, UI, animation or visual assets were added.
+
+Ally fear remains 60%; collapse probabilities, caps and cooldowns are unchanged.
+Suppression emits no ally-defeat or collapse notifications. Existing camera fire
+gates and uncertain last-known-position fire remain untouched. Event callbacks
+reuse the current awareness subscribers; candidate misses add one short geometry
+raycast, not per-frame bullet/enemy searches. No new per-frame meter work.
+
+Files: CombatNoise.cs, AttackExecutor.cs, new SuppressionMeter.cs (+ Unity meta),
+EnemyCombat.cs, Larper.prefab; new SuppressionRulesTests.cs and Sprint0202Tests.cs
+(+ Unity metas), this log and TestResults/Sprint0202.json.
+
+Validation: compilation succeeded. **42 Edit + 166 Play = 208/208 passed**,
+zero failures/skips; all 201 Sprint020.1 case names retained. Six new Play cases
+first passed independently, then in the full suite: actual shot trajectory and
+protected direct-hit exclusion; real wall impact and parallel-cover shielding;
+proximity/personality/cap/decay/reset; sustained misses causing finite retreat
+with no damage or ally death, no repeated restart or forced full-mag reload;
+failed-roll cooldown with continued shooting; self/friendly/zero-length/distant
+rejection. New Edit case verifies exact lazy decay, quiet gap, cap and resumption.
+Existing shooting/reload, crouch, perception, morale/collapse, spacing/spawning,
+camera, traversal, touch and ragdoll regressions passed unchanged.
+
+Final Editor audit: Warehouse_Mission01 saved, clean, open and outside Play Mode;
+compilation stopped successfully, zero scene missing scripts, Console zero errors
+and warnings. Prefab readback confirms all suppression defaults above, ducking
+0.48, ally fear 0.60, collapse 0.08 and spread 0.35. Warehouse_Testbed hash remains
+DBD270D874D8BDE8F12B0EA43746C00F0906104F888B392718C3F053146F3915.
+No manual firefight playtest or Android hardware performance measurement was
+performed. Remaining verification: subjective reaction pacing under sustained
+crossfire, moving retreat/cover encounters on real mission terrain, and Android
+CPU/frame-time profiling with dense gunfire. No new panic-fire mode was added;
+existing uncertain fire, weapon handling and contextual retreat dialogue remain.
+Earlier uncommitted changes preserved; no staging, commit or push.
+
+## Sprint 020.3 — Suppression Fear & Playtest Ammo (2026-10-20)
+
+Small tuning pass: existing linear proximity weight now ranges **0.4 -> 1.45**,
+previously **0.4 -> 1.0**. Base nearMissSuppression remains 28: closest-pass peak
+gain rises **28 -> 40.6 (+45%)** before personality/morale modifiers. The valid
+outer-radius minimum remains **11.2 -> 11.2**; intermediate gains taper linearly.
+Detection radius, collision-clipped trajectories and direct-hit/cover rejection
+are unchanged. Cap 100, thresholds 25/60, decay 18/s, quiet gap 0.65s, reaction
+cooldown 6s, personality/morale multipliers and finite retreat behavior unchanged.
+Ducking probability 48%, ally fear 60% and collapse settings unchanged.
+
+WarehousePlayer.prefab uses the existing Inspector initialReserveAmmo setting:
+**36 -> 108 per firearm (3x)**. This isolates playtest reserves to the player
+prefab; PlayerLoadout's generic default and enemy ammunition are unchanged. Both
+starting firearms still have full, unchanged magazines. Weapon definitions,
+damage, firing interval, reload duration and ammo-transfer logic are untouched.
+The reserve setting can be returned to 36 for later balancing; ammo stays finite.
+
+Files changed for this sprint: EnemyCombat.cs (one weight), WarehousePlayer.prefab
+(one reserve setting), existing Sprint0202Tests.cs proximity assertions and
+TraversalRegressionTests.cs ammo/HUD/reload assertions, this log and
+TestResults/Sprint0203.json. No new test cases, systems, states or assets.
+
+Validation: compilation succeeded, **42/42 Edit tests passed**. The full Play
+run passed 164/166. Stronger buildup triggered an accumulated-suppression retreat
+inside the old duck-only cooldown fixture; Sprint017Tests.cs now sets retreat
+chance to zero in that fixture, preserving dedicated retreat coverage in
+Sprint0202Tests. A pre-existing UI size assertion measured 187.0636 rather than
+187.5 at the current panel scale, reproduced in isolation. Sprint020Tests.cs now
+allows one logical pixel of layout rounding instead of 0.1; no UI assets changed.
+All 10 Sprint017 and all 8 Sprint020 cases then passed. **All 208 existing cases
+have passing latest results** (42 Edit + 166 Play); this combines the full run
+and targeted reruns, not a second complete Play run. All Sprint020.2 case names
+retained. Additional fixture files modified: Sprint017Tests.cs, Sprint020Tests.cs.
+
+The updated proximity case verifies a 40–50% close-pass gain increase and exactly
+unchanged outer-radius strength, with existing accumulation, cap, personality,
+decay and finite-retreat checks. The ammo test verifies both full magazines and
+108 reserves, correct HUD reserve text, and a one-round reload producing 107
+reserve with unchanged capacity. Earlier weapon/mission/checkpoint tests passed.
+No manual firefight or Android hardware verification was performed.
+
+Final readback: player reserve 108, enemy reserve 135, duck 0.48, ally fear 0.60,
+collapse 0.08/spread 0.35. Warehouse_Mission01 saved, clean, open and stopped;
+no compilation in progress, Console zero errors/warnings. Earlier uncommitted
+work preserved; no staging, commit or push.
+
+## Sprint 021 — Living Battlefield (2026-10-20)
+
+Cover/repositioning: useful protection is now evaluated at crouched-head height
+rather than body center. Existing threat-side endpoint, reachable corridor/hop,
+occupancy and combat reservation checks remain authoritative. Commit-time scoring
+slightly disfavors required hops and includes bounded +/-0.25 variation. Armed
+suppression retreats that actually reach cover hold a protected crouch for a
+finite randomized 1.2–2.4s, without refreshing on every bullet. Protection is
+rechecked using the existing 0.25s sampler. Expiry/invalid cover releases the
+hold and normal sight-checked combat resumes. Low-ammo cover reloads retain
+their existing behavior. Panic, traversal and encounter reset retain priority.
+
+The existing combat-position sampler now considers occasional repositioning,
+with Inspector interval 8–13s and base chance 20% (40% when pressured or unable
+to fire effectively). Decisions wait for the current movement to finish and
+reuse the existing safe candidate/reservation machinery. Tactical stand-off
+changes by -1.25 (advance) or +1.75 (withdraw); advance preference is 65% for
+overconfident, 30% ordinary and 10% cowardly actors. Grounded/same-level gates
+preserve authored vertical navigation. Failed opportunities wait another
+interval; equivalent locations are not continuously reselected.
+
+Suppression: one base-value adjustment **28 -> 31.5 (+12.5%)**, in both code and
+Larper.prefab. Existing distance weights 0.4–1.45 remain unchanged: peak gain
+**40.6 -> 45.675**, outer-radius gain **11.2 -> 12.6**, before personality/morale.
+No second multiplier. Cap, thresholds, decay, personality factors and reaction
+cooldowns are unchanged; ducking stays 48%, ally fear 60%, collapse chance 8%,
+spread 35% with existing caps/global lockout. No new morale events or cascades.
+
+Malfunctions: WeaponCycle supports a finite obstruction to firing/reload with no
+ammo consumption or ownership change. Existing cadence, committed reload and
+empty/melee guards remain. Only the basic Larper prefab enables the AI trigger:
+**0.75% per eligible firing attempt**, **1.4s recovery**, **18s cooldown**, with
+a 2s initial/reset grace. Rolls occur after cadence, camera and trajectory-LOS
+checks. Recovery uses existing Reacting behavior; 35% attempt existing ducking
+(still subject to its own chance/cooldown). Malfunction dialogue is attempted
+on 40% of events, through the existing expiring queue, speech gates and two-bubble
+cap. Five contextual lines are available on all existing personalities. No new
+AI state machine, animation or enemy archetype. Player weapons are unaffected.
+
+Spawning/persistence: inspected and preserved. Runtime activation requires the
+actor bounds plus camera safety margin to be offscreen after camera LateUpdate;
+collision/support and neighbor spacing are checked before reveal. Active actors
+are reused and not culled on camera exit. Authored starting occupants and covered
+checkpoint resets retain their explicit existing semantics. No spawn rewrite.
+Ordinary offscreen fire restrictions and explicit sniper-capability hook remain.
+
+Feedback: actual hitscan-aligned pooled tracers already fade and were retained.
+Material surface-impact sprites now fade over their existing lifetime instead
+of abruptly vanishing. Existing concrete/metal/wood colors, pooled particles,
+pool caps, audio limits and ragdoll impulses are unchanged. No new art/shaders.
+
+Files for this sprint: EnemyCombat.cs, WeaponCycle.cs, LarperAwareness.cs,
+LarperPersonalityProfile.cs, CombatFeedback.cs, Larper.prefab; new
+Sprint021RulesTests.cs / Sprint021Tests.cs and Unity metas; existing
+Sprint0202Tests.cs expectations scaled for the intentional +12.5% gain; this log
+and TestResults/Sprint021.json. Player reserve remains 108 per firearm; no camera,
+UI layout, startup, weapon definition, ragdoll or scene-geometry changes.
+
+Validation: **44 Edit cases passed; 174 Play cases have passing latest results,
+218 total**, all 208 Sprint020.3 names retained and ten new cases. Initial full
+Play run was 172/174: the uninterrupted-burst deadline and an unchanged visual
+jump/fall timing check failed, then both passed in isolation. The burst fixture
+now explicitly disables the optional malfunction trigger to preserve its original
+uninterrupted-fire premise; every shot/retreat/reload assertion and deadline is
+retained, with forced malfunction/recovery tested separately. Final full Play run
+was 173/174, including all 208 previous cases passing. The remaining new test had
+assumed preferred distance 5 while the prefab uses 6, allowing a valid 0.25-unit
+advance; setting its controlled preferred distance to 5 preserved the >1 movement
+assertion. All eight new Play cases then passed together. Thus 218 is the latest
+per-case result across the full suite plus targeted reruns, not a claim that the
+last full Play invocation alone passed all cases. Existing Sprint012CombatTests.cs
+fixture is also modified. No existing assertions were loosened or removed.
+
+New coverage exercises head-height/occupied cover rejection independently,
+physical movement/hopping to cover, crouched finite hold and real reengagement,
+lease-based tactical movement with no sample-by-sample restart, exact one-time
+suppression scaling, invalid/empty/reloading/melee malfunction rejection, ammo
+and cadence preservation, real AI jam/recovery/cooldown, offscreen jam/fire
+rejection, zoom-aware activation with retained HP/ammo/suppression, and actual
+tracer endpoint/material fade/pool invariants. Compilation checks passed after
+each major stage. Existing reachable low-cover/reload test also passed early.
+
+Live Editor integration: reused the normal-input mission pilot, with real
+movement, aiming, reloads and healing and no immunity/teleports/injected damage.
+Mission completed in **26.6245 game seconds, ten defeats, zero deaths, two heals,
+one naturally occurring malfunction**. Frame count advanced 996 -> 10263; Game
+View/HUD inspected during traversal/combat. 674 actor samples: maximum suppression
+45.0659, 27 suppressed rows, seven defensive-crouch rows, at most one visible speech
+bubble. No tactical reposition or cover-hold samples occurred in this short lethal
+run; prolonged-fire behaviors are demonstrated by focused physical integration
+tests and still require subjective firefight playtesting. Natural collapse was
+not observed; unchanged wave regression tests passed. Diagnostics:
+TestResults/Sprint021Pilot.cs, Sprint021Live.json, Sprint021Actors.csv and
+Sprint021GameView.png (screenshot stored outside Assets, not a game art asset).
+
+Performance: new tactical decisions reuse the 0.25s position sampler; hold-cover
+occlusion rechecks are bounded at that cadence, not every frame. Cover searches
+occur only at movement commitment, reuse fixed buffers and existing path/spacing
+queries. Weapon malfunction/recovery is scalar timing logic. Surface fading adds
+no new effect objects or pools. No target-device FPS/CPU/GPU benchmark performed.
+Manual PC/Android checks remain: long firefight pacing, crowded/vertical cover
+traffic, visible onset/recovery/readability of rare malfunctions, low-end Android
+frame times and touch gameplay. Dedicated peeking/leaning/advanced cover-shooting
+animations are deferred to avoid a new animation system; existing crouch/stand,
+LOS-gated fire and safe reengagement satisfy the current cover flow.
+
+Final audit: Warehouse_Mission01 saved, clean, open and outside Play Mode;
+compilation idle, Console zero errors/warnings. 280 scene/player/Larper/ragdoll
+behaviours inspected with zero missing scripts or non-null missing references.
+Audit uses Unity 6.6's EntityId property after the obsolete InstanceID audit API
+was rejected; this was an eval-only diagnostic, not a project compilation error.
+Readback: gain 31.5, basic unreliable weapon enabled at 0.0075, duck 0.48,
+ally fear 0.60, collapse 0.08/spread 0.35. Warehouse_Testbed hash unchanged:
+DBD270D874D8BDE8F12B0EA43746C00F0906104F888B392718C3F053146F3915.
+Earlier work and historical diagnostic screenshots preserved. No staging, commit,
+push or Sprint022 work.

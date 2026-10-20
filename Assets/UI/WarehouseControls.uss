@@ -11,15 +11,15 @@
 }
 .title { color: rgb(65, 215, 245); -unity-font-style: bold; font-size: 23px; }
 .stick {
-    position: absolute; width: 150px; height: 150px; bottom: 30px;
-    border-radius: 75px; border-width: 3px; border-color: rgba(150, 220, 245, 0.85);
+    position: absolute; width: 187.5px; height: 187.5px; bottom: 30px;
+    border-radius: 94px; border-width: 3px; border-color: rgba(150, 220, 245, 0.85);
     background-color: rgba(12, 36, 50, 0.68);
     align-items: center; justify-content: center;
 }
 .move-stick { left: 28px; }
 .aim-stick { right: 28px; }
 .knob {
-    width: 62px; height: 62px; border-radius: 31px;
+    width: 77.5px; height: 77.5px; border-radius: 39px;
     background-color: rgba(94, 214, 239, 0.8);
 }
 .stick-label {
@@ -33,9 +33,11 @@
     color: rgb(255, 240, 200); font-size: 19px;
     -unity-font-style: bold; align-items: center; justify-content: center;
 }
-.parachute-button { right: 205px; bottom: 44px; }
+.stick, .action, .equipment-buttons { opacity: 0.5; }
+.parachute-button { right: 244px; bottom: 44px; }
 .parachute-button.deployed { background-color: rgb(25, 110, 103); border-color: rgb(113, 255, 221); }
-.reload-button { right: 205px; bottom: 146px; margin: 0; font-size: 16px; }
+.reload-button { right: 244px; bottom: 146px; margin: 0; font-size: 16px; }
+.heal-button { left: 244px; bottom: 44px; margin: 0; font-size: 16px; }
 .action:active { background-color: rgb(151, 106, 32); }
 .equipment { position: absolute; right: 18px; top: 14px; width: 205px; background-color: rgba(9, 15, 26, 0.86); padding: 8px; }
 .loadout { color: rgb(245, 225, 180); white-space: normal; font-size: 16px; }

@@ -888,6 +888,8 @@ MonoBehaviour:
   smoothTime: 0.16
   orthographicSize: 7.2
   visualPixelsPerUnit: 32
+  androidCharacterScale: 1.125
+  previewAndroidFraming: 0
 --- !u!81 &89708304
 AudioListener:
   m_ObjectHideFlags: 0
@@ -2430,6 +2432,7 @@ MonoBehaviour:
   placedActor: {fileID: 207203800}
   gameplayCamera: {fileID: 0}
   cameraSafetyMargin: 1.25
+  minimumSpawnSpacing: 1.5
   retrySeconds: 0.2
   geometry:
     serializedVersion: 2
@@ -2833,6 +2836,7 @@ MonoBehaviour:
   placedActor: {fileID: 2040398371}
   gameplayCamera: {fileID: 0}
   cameraSafetyMargin: 1.25
+  minimumSpawnSpacing: 1.5
   retrySeconds: 0.2
   geometry:
     serializedVersion: 2
@@ -5328,6 +5332,7 @@ MonoBehaviour:
   placedActor: {fileID: 1879761912}
   gameplayCamera: {fileID: 0}
   cameraSafetyMargin: 1.25
+  minimumSpawnSpacing: 1.5
   retrySeconds: 0.2
   geometry:
     serializedVersion: 2
@@ -5568,6 +5573,7 @@ MonoBehaviour:
   placedActor: {fileID: 1565854962}
   gameplayCamera: {fileID: 0}
   cameraSafetyMargin: 1.25
+  minimumSpawnSpacing: 1.5
   retrySeconds: 0.2
   geometry:
     serializedVersion: 2
@@ -5806,6 +5812,7 @@ MonoBehaviour:
   placedActor: {fileID: 157619927}
   gameplayCamera: {fileID: 0}
   cameraSafetyMargin: 1.25
+  minimumSpawnSpacing: 1.5
   retrySeconds: 0.2
   geometry:
     serializedVersion: 2
@@ -7236,6 +7243,7 @@ MonoBehaviour:
   placedActor: {fileID: 1483497595}
   gameplayCamera: {fileID: 0}
   cameraSafetyMargin: 1.25
+  minimumSpawnSpacing: 1.5
   retrySeconds: 0.2
   geometry:
     serializedVersion: 2
@@ -7837,6 +7845,7 @@ MonoBehaviour:
   placedActor: {fileID: 736880137}
   gameplayCamera: {fileID: 0}
   cameraSafetyMargin: 1.25
+  minimumSpawnSpacing: 1.5
   retrySeconds: 0.2
   geometry:
     serializedVersion: 2
@@ -8888,6 +8897,7 @@ MonoBehaviour:
   placedActor: {fileID: 1689504101}
   gameplayCamera: {fileID: 0}
   cameraSafetyMargin: 1.25
+  minimumSpawnSpacing: 1.5
   retrySeconds: 0.2
   geometry:
     serializedVersion: 2
@@ -9117,6 +9127,7 @@ MonoBehaviour:
   placedActor: {fileID: 1840595456}
   gameplayCamera: {fileID: 0}
   cameraSafetyMargin: 1.25
+  minimumSpawnSpacing: 1.5
   retrySeconds: 0.2
   geometry:
     serializedVersion: 2
@@ -10643,6 +10654,7 @@ MonoBehaviour:
   placedActor: {fileID: 751005359}
   gameplayCamera: {fileID: 0}
   cameraSafetyMargin: 1.25
+  minimumSpawnSpacing: 1.5
   retrySeconds: 0.2
   geometry:
     serializedVersion: 2

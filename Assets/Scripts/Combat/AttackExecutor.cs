@@ -101,6 +101,7 @@ namespace InsaneDreams.Combat
             }
             Vector2 end = origin + direction * weapon.Definition.AttackRange;
             bool damaged = false;
+            Health hitTarget = null;
             LastSurface = ShotSurface.None;
             LastImpactMaterial=ImpactMaterial.Generic;LastHitNormal=-direction;
             if (closest.collider != null)
@@ -109,6 +110,7 @@ namespace InsaneDreams.Combat
                 LastHitNormal=closest.normal;LastImpactMaterial=ImpactSurface2D.Classify(closest.collider);
                 var impact = new PhysicalImpact(end, direction, weapon.Definition.ImpactImpulse, closest.rigidbody);
                 var health = closest.collider.GetComponentInParent<Health>();
+                hitTarget = health;
                 if (health != null)
                 {
                     LastSurface = ShotSurface.Character;
@@ -125,6 +127,7 @@ namespace InsaneDreams.Combat
             ShotsFired++;
             LastShotOrigin = origin; LastShotDirection = direction; LastShotEnd = end;
             Fired?.Invoke(direction, end, damaged);
+            if(weapon.UsesAmmunition)CombatNoise.Report(new CombatNoiseEvent(gameObject,owner.Team,CombatNoiseKind.Gunfire,origin,end,1,hitTarget));
             if (weapon.UsesAmmunition && trails != null)
             {
                 var line = trails[nextTrail]; line.enabled = true;

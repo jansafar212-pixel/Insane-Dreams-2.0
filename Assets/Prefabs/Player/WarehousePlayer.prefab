@@ -791,7 +791,7 @@ MonoBehaviour:
   initialFirearm1: {fileID: 11400000, guid: a19415bc42a5c1749983394fafeb429d, type: 2}
   initialFirearm2: {fileID: 11400000, guid: 2d59804bf74db5842a92644e840bc441, type: 2}
   initialMelee: {fileID: 11400000, guid: 82b20f5de82ce3e4dbfcd07239f36ec9, type: 2}
-  initialReserveAmmo: 36
+  initialReserveAmmo: 108
   firearm1:
     definition: {fileID: 0}
     instanceId: 
@@ -1071,6 +1071,8 @@ MonoBehaviour:
   landing: {fileID: 0}
   ladderStep: {fileID: 0}
   stepInterval: 0.35
+  runningSpeed: 5
+  crouchNoiseMultiplier: 0.25
 --- !u!114 &444807282281913829
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -16,7 +16,7 @@ MonoBehaviour:
   panicChance: 0.08
   witnessRange: 9
   panicSeconds: 2.5
-  moraleCooldown: 45
+  moraleCooldown: 18
   speechCooldown: 30
   panicSpeechGap: 5
   panicSpeechCooldown: 60
@@ -36,9 +36,11 @@ MonoBehaviour:
   - MY MAG'S EMPTY!
   - NOBODY SHOOT ME, I'M BUSY!
   withdraw:
-  - FALL BACK!
-  - COVER ME!
-  - THIS POSITION SUCKS!
+  - TACTICAL WITHDRAWAL!
+  - STAND YOUR GROUND!
+  - I FEAR NOTHING!
+  - WE HAVE THEM SURROUNDED!
+  - I'M NOT PAID ENOUGH!
   blocked:
   - NO ROOM! RELOADING HERE!
   - BAD PLAN! HOLD ON!

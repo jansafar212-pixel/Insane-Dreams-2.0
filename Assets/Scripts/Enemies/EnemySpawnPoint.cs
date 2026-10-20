@@ -16,6 +16,8 @@ namespace InsaneDreams.Enemies
         [SerializeField] private LarperBrain placedActor;
         [SerializeField] private Camera gameplayCamera;
         [SerializeField, Min(0)] private float cameraSafetyMargin=1.25f;
+        [Tooltip("Minimum center distance from active Larpers for runtime activation. Set lower for intentional dense encounters; authored occupants are preserved.")]
+        [SerializeField, Min(0)] private float minimumSpawnSpacing=1.5f;
         [SerializeField, Min(.05f)] private float retrySeconds=.2f;
         [SerializeField] private LayerMask geometry=1;
         [SerializeField, Min(.05f)] private float supportDistance=.6f;
@@ -27,7 +29,7 @@ namespace InsaneDreams.Enemies
         public LarperBrain Spawned{get;private set;}
         public bool IsPending=>pending;
         public string ValidationError=>archetype==null?"Assign an enemy archetype.":archetype.ValidationError;
-        public void BindTarget(Health value){target=value;if(Spawned!=null)Spawned.GetComponent<EnemyCombat>()?.BindTarget(encounterEnabled?target:null);}
+        public void BindTarget(Health value){target=value;if(Spawned!=null)Spawned.GetComponent<EnemyCombat>()?.BindTarget(target);}
         public void BindGameplayCamera(Camera value)=>gameplayCamera=value;
         private void Start(){if(spawnOnStart)Spawn();}
         // Synchronous prewarming cannot render a frame. Activation is separate.
@@ -41,13 +43,13 @@ namespace InsaneDreams.Enemies
                 var actor=Instantiate(archetype.Prefab,transform.position,transform.rotation,spawnedParent);
                 actor.SetActive(false);Spawned=actor.GetComponent<LarperBrain>();
             }
-            Spawned.Configure(archetype);Spawned.GetComponent<EnemyCombat>()?.SetEncounterEnabled(encounterEnabled);Spawned.GetComponent<EnemyCombat>()?.BindTarget(encounterEnabled?target:null);
+            Spawned.Configure(archetype);Spawned.GetComponent<EnemyCombat>()?.SetEncounterEnabled(encounterEnabled);Spawned.GetComponent<EnemyCombat>()?.BindTarget(target);
             if(personality!=null)Spawned.GetComponent<LarperAwareness>()?.Configure(personality);
             if(ladderRoute!=null)Spawned.GetComponent<AuthoredLadderRoute>()?.Configure(ladderRoute,routeTargetHeight);
             return Spawned;
         }
         public LarperBrain Spawn(){if(Prepare()!=null)ActivateEncounter();return Spawned;}
-        public void SetEncounterEnabled(bool value){encounterEnabled=value;if(Spawned!=null){Spawned.GetComponent<EnemyCombat>()?.SetEncounterEnabled(value);Spawned.GetComponent<EnemyCombat>()?.BindTarget(value?target:null);}}
+        public void SetEncounterEnabled(bool value){encounterEnabled=value;if(Spawned!=null)Spawned.GetComponent<EnemyCombat>()?.SetEncounterEnabled(value);}
         public void ActivateEncounter(){SetEncounterEnabled(true);pending=Spawned!=null&&!Spawned.gameObject.activeSelf;}
         private Bounds CaptureBounds()
         {
@@ -65,6 +67,15 @@ namespace InsaneDreams.Enemies
             int count=Physics2D.OverlapBox(bounds.center,(Vector2)bounds.size-Vector2.one*.06f,0,filter,overlaps);
             if(count==overlaps.Length)return false;
             for(int i=0;i<count;i++)if(!overlaps[i].transform.IsChildOf(Spawned.transform))return false;
+            // Body clearance alone allowed almost touching actors. Check a wider,
+            // allocation-free neighborhood without treating nearby scenery as an obstacle.
+            count=Physics2D.OverlapCircle(Spawned.transform.position,minimumSpawnSpacing,filter,overlaps);
+            if(count==overlaps.Length)return false;
+            for(int i=0;i<count;i++)
+            {
+                var other=overlaps[i].GetComponentInParent<LarperBrain>();
+                if(other!=null&&other!=Spawned&&Vector2.SqrMagnitude(other.transform.position-Spawned.transform.position)<minimumSpawnSpacing*minimumSpawnSpacing)return false;
+            }
             filter.SetLayerMask(geometry);
             for(int i=-1;i<=1;i+=2)
             {
@@ -90,7 +101,7 @@ namespace InsaneDreams.Enemies
             firstReset=false;pending=false;var go=actor.gameObject;go.SetActive(false);
             var body=go.GetComponent<Rigidbody2D>();body.position=transform.position;body.linearVelocity=Vector2.zero;body.angularVelocity=0;body.rotation=0;go.transform.position=transform.position;
             go.GetComponent<InsaneDreams.Traversal.PlayerTraversal2D>()?.ResetTraversal();
-            go.GetComponent<Health>().Restore();go.GetComponent<EnemyCombat>().ResetEncounter(active?target:null);
+            go.GetComponent<Health>().Restore();go.GetComponent<EnemyCombat>().ResetEncounter(target);
             actor.Configure(archetype);actor.AnchorPatrolHere();
             if(coveredReset&&placedActor!=null){go.SetActive(!completed);return;}
             pending=!completed;nextAttempt=Time.unscaledTime+retrySeconds;
@@ -99,6 +110,7 @@ namespace InsaneDreams.Enemies
         {
             Gizmos.color=ValidationError!=null?Color.red:pending?Color.magenta:Color.yellow;
             Gizmos.DrawWireCube(transform.position,new Vector3(.8f,1.4f,.1f));
+            Gizmos.DrawWireSphere(transform.position,minimumSpawnSpacing);
             Gizmos.color=new Color(1,.7f,0,.4f);Gizmos.DrawWireCube(transform.position,new Vector3(.8f+cameraSafetyMargin*2,1.4f+cameraSafetyMargin*2,.1f));
         }
     }

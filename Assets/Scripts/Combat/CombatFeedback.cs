@@ -48,6 +48,7 @@ namespace InsaneDreams.Combat
         private SpriteRenderer surface;
         private InsaneDreams.Visuals.CutoutRig rig;
         private float surfaceUntil;
+        private Color surfaceColor;
         private Vector2 surfacePoint;
         private float muzzleUntil, hitUntil, tintUntil;
         private bool tinted;
@@ -131,7 +132,7 @@ namespace InsaneDreams.Combat
             surfacePoint = point; surface.enabled = true; surfaceUntil = Time.time + hitSeconds;
             LastImpactMaterial=executor.LastImpactMaterial;
             Color color=LastImpactMaterial switch {ImpactMaterial.Concrete=>new Color(.65f,.68f,.7f),ImpactMaterial.Metal=>new Color(1,.9f,.35f),ImpactMaterial.Wood=>new Color(.8f,.48f,.2f),_=>new Color(.65f,.85f,1)};
-            surface.color=kind==ShotSurface.Ragdoll?new Color(.5f,.95f,1):color;
+            surface.color=surfaceColor=kind==ShotSurface.Ragdoll?new Color(.5f,.95f,1):color;
             surface.transform.localScale = Vector3.one * (surfaceImpactSprite != null ? 1 : .18f);
             for(int i=0;i<3;i++)
             {
@@ -191,7 +192,11 @@ namespace InsaneDreams.Combat
             else hit.transform.position = new Vector3(hitPoint.x, hitPoint.y, -.2f);
             if (Time.time >= tintUntil) RestoreTint();
             if (Time.time >= surfaceUntil) surface.enabled = false;
-            else surface.transform.position = new Vector3(surfacePoint.x, surfacePoint.y, -.2f);
+            else
+            {
+                surface.transform.position = new Vector3(surfacePoint.x, surfacePoint.y, -.2f);
+                var color=surfaceColor;color.a*=Mathf.Clamp01((surfaceUntil-Time.time)/Mathf.Max(.02f,hitSeconds));surface.color=color;
+            }
         }
         private void LateUpdate()
         {

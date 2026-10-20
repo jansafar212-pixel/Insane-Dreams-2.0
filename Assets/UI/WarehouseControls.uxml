@@ -29,5 +29,6 @@
             <ui:Label text="DEPLOY&#10;CHUTE" picking-mode="Ignore" />
         </ui:VisualElement>
         <ui:Button name="reload" text="RELOAD" class="action reload-button" />
+        <ui:Button name="heal" text="HEAL" class="action heal-button" />
     </ui:VisualElement>
 </ui:UXML>

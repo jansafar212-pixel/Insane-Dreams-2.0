@@ -16,7 +16,7 @@ MonoBehaviour:
   panicChance: 0.02
   witnessRange: 9
   panicSeconds: 2.5
-  moraleCooldown: 45
+  moraleCooldown: 18
   speechCooldown: 30
   panicSpeechGap: 5
   panicSpeechCooldown: 60
@@ -35,9 +35,11 @@ MonoBehaviour:
   - I'M CONSERVING RESOURCES!
   - WHY IS THIS THING SO LONG?!
   withdraw:
-  - TACTICAL REPOSITIONING!
-  - I'M NOT RUNNING!
-  - STRATEGIC WITHDRAWAL!
+  - I FEAR NOTHING!
+  - STAND YOUR GROUND!
+  - TACTICAL WITHDRAWAL!
+  - WE HAVE THEM SURROUNDED!
+  - I'M NOT PAID ENOUGH!
   blocked:
   - NO ROOM! RELOADING HERE!
   - BAD PLAN! HOLD ON!

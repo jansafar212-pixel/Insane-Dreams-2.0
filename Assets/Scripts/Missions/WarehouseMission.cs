@@ -22,6 +22,7 @@ namespace InsaneDreams.Missions
         private PlayerLoadout loadout;
         private BoxCollider2D playerBox;
         private bool restoring,ready,officeSaved;
+        private bool storageEntered;
         private float startedAt,completedTime,noticeUntil;
         private string notice;
         private MissionStage savedStage;
@@ -61,7 +62,7 @@ namespace InsaneDreams.Missions
         }
         public void Replay()
         {
-            if(!ready)return;restoring=true;Stage=MissionStage.EnterWarehouse;HasRecords=false;Deaths=Kills=TotalDefeats=CheckpointCommits=Completions=0;officeSaved=false;startedAt=Time.time;completedTime=0;
+            if(!ready)return;restoring=true;storageEntered=false;Stage=MissionStage.EnterWarehouse;HasRecords=false;Deaths=Kills=TotalDefeats=CheckpointCommits=Completions=0;officeSaved=false;startedAt=Time.time;completedTime=0;
             bool covered=hud!=null&&hud.CoverReset();for(int i=0;i<encounters.Length;i++)encounters[i].ResetEncounter(false,false,covered);
             foreach(EquipmentSlot slot in System.Enum.GetValues(typeof(EquipmentSlot))){var weapon=loadout.Get(slot);if(weapon!=null){weapon.Cycle.CancelReload();weapon.SetAmmunition(weapon.Definition.MagazineCapacity,weapon.UsesAmmunition?72:0);}}
             loadout.Select(EquipmentSlot.Firearm1);player.enabled=true;player.GetComponent<PlayerCombat>().enabled=true;recovery.Bind(initialSpawn,cameraFollow);
@@ -77,7 +78,7 @@ namespace InsaneDreams.Missions
         {recovery.Activate(marker,spawn.position);CaptureSnapshot();CheckpointCommits++;Notify("CHECKPOINT REACHED",2.5f);}
         private void Recovered()
         {
-            if(!ready||restoring||Stage==MissionStage.Complete)return;restoring=true;Stage=savedStage;HasRecords=savedRecords;officeSaved=savedStage>=MissionStage.RecoverRecords;
+            if(!ready||restoring||Stage==MissionStage.Complete)return;restoring=true;Stage=savedStage;HasRecords=savedRecords;storageEntered=savedStage>=MissionStage.ReachProcessing;officeSaved=savedStage>=MissionStage.RecoverRecords;
             bool covered=hud!=null&&hud.CoverReset();Kills=0;for(int i=0;i<encounters.Length;i++){encounters[i].ResetEncounter(savedEncounters[i],false,covered);Kills+=encounters[i].DefeatedCount;}
             for(int i=0;i<3;i++){var weapon=loadout.Get((EquipmentSlot)i);if(weapon!=null){weapon.Cycle.CancelReload();weapon.SetAmmunition(savedMagazine[i],savedReserve[i]);}}
             loadout.Select(savedSelection);ClearRagdolls();restoring=false;Notify("BACK AT THE CHECKPOINT",3);
@@ -101,7 +102,7 @@ namespace InsaneDreams.Missions
                 case MissionZone.Entrance:
                     if(Stage!=MissionStage.EnterWarehouse)return false;Stage=MissionStage.ClearStorage;encounters[0].Activate();Notify("The entrance guard seems unconvinced.",3);return true;
                 case MissionZone.Storage:
-                    if(Stage!=MissionStage.ClearStorage||!encounters[0].Cleared||encounters[1].IsActive)return false;encounters[1].Activate();if(encounters[1].Cleared)Stage=MissionStage.ReachProcessing;Notify("STORAGE — ground floor and mezzanine. Ladder to the west.",4);return true;
+                    if(Stage!=MissionStage.ClearStorage||!encounters[0].Cleared||storageEntered)return false;storageEntered=true;encounters[1].Activate();if(encounters[1].Cleared)Stage=MissionStage.ReachProcessing;Notify("STORAGE — ground floor and mezzanine. Ladder to the west.",4);return true;
                 case MissionZone.Checkpoint:
                     if(Stage!=MissionStage.ReachProcessing||savedStage==MissionStage.ReachProcessing)return false;Commit(storageCheckpoint,storageSpawn);return true;
                 case MissionZone.Processing:

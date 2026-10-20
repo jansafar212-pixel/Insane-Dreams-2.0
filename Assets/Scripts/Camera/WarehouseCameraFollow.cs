@@ -3,6 +3,7 @@ using UnityEngine;
 namespace InsaneDreams.CameraSystem
 {
     [RequireComponent(typeof(Camera))]
+    [DefaultExecutionOrder(150)]
     public sealed class WarehouseCameraFollow : MonoBehaviour
     {
         [SerializeField] private Transform target;
@@ -12,8 +13,11 @@ namespace InsaneDreams.CameraSystem
         [SerializeField, Min(0.01f)] private float smoothTime = 0.16f;
         [SerializeField, Min(1)] private float orthographicSize = 7.2f;
         [SerializeField, Min(0)] private int visualPixelsPerUnit = 32;
+        [SerializeField, Range(1,1.25f)] private float androidCharacterScale=1.125f;
+        [SerializeField] private bool previewAndroidFraming;
         private Camera view;
         private Vector3 velocity;
+        private Vector3 followPosition;
         private void Awake() => view = GetComponent<Camera>();
         private void Start() => SnapToTarget();
         public void Bind(Transform value) { target = value; velocity = Vector3.zero; if (value != null) SnapToTarget(); }
@@ -33,6 +37,10 @@ namespace InsaneDreams.CameraSystem
                 zoom = Mathf.Max(zoom, Mathf.CeilToInt(view.pixelHeight / (2 * maximum * visualPixelsPerUnit)));
                 view.orthographicSize = view.pixelHeight / (2f * visualPixelsPerUnit * zoom);
             }
+            // Apply after the integer zoom calculation: otherwise rounding can
+            // silently erase a modest Android framing adjustment.
+            if(Application.platform==RuntimePlatform.Android||Application.isEditor&&previewAndroidFraming)
+                view.orthographicSize/=Mathf.Clamp(androidCharacterScale,1,1.25f);
             float halfY = view.orthographicSize;
             float halfX = halfY * view.aspect;
             Vector2 desired = (Vector2)target.position + offset;
@@ -45,17 +53,19 @@ namespace InsaneDreams.CameraSystem
             if (target == null) return;
             if (view == null) view = GetComponent<Camera>();
             velocity = Vector3.zero;
-            transform.position = PixelPosition(FramedPosition());
+            followPosition=FramedPosition();transform.position = PixelPosition(followPosition);
         }
 
         private void LateUpdate()
         {
             if (target == null) return;
             Vector3 desired = FramedPosition();
-            Vector3 position = Vector3.SmoothDamp(transform.position, desired, ref velocity, smoothTime);
+            // The target transform is Rigidbody2D's interpolated presentation position.
+            // Never feed the pixel-rounded render output back into the smoothing state.
+            Vector3 position = Vector3.SmoothDamp(followPosition, desired, ref velocity, smoothTime);
             float halfY = view.orthographicSize, halfX = halfY * view.aspect;
-            position.x = Mathf.Clamp(position.x, levelMin.x + halfX, levelMax.x - halfX);
-            position.y = Mathf.Clamp(position.y, levelMin.y + halfY, levelMax.y - halfY);
+            float x=Mathf.Clamp(position.x,levelMin.x+halfX,levelMax.x-halfX),y=Mathf.Clamp(position.y,levelMin.y+halfY,levelMax.y-halfY);
+            if(x!=position.x)velocity.x=0;if(y!=position.y)velocity.y=0;position.x=x;position.y=y;followPosition=position;
             transform.position = PixelPosition(position);
         }
         private Vector3 PixelPosition(Vector3 value)

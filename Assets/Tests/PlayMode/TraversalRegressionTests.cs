@@ -128,7 +128,7 @@ namespace InsaneDreams.Tests
             var chute = root.Q<VisualElement>("parachuteButton");
             Down(move, 0, move.worldBound.center + Vector2.right * 40);
             Down(move, 1, move.worldBound.center + Vector2.left * 40); // Must not hijack finger zero.
-            Down(aim, 2, aim.worldBound.center + new Vector2(35, -35));
+            Down(aim, 2, aim.worldBound.center + new Vector2(43.75f, -43.75f));
             Down(chute, 3, chute.worldBound.center);
             yield return null;
             Assert.Greater(actions.Move.x, .4f); Assert.Greater(actions.AimDirection.y, .4f); Assert.IsTrue(actions.FireHeld);
@@ -216,6 +216,13 @@ namespace InsaneDreams.Tests
             ui.GetComponent<WarehouseTouchControls>().Bind(actions); yield return null; yield return null;
             var root = ui.GetComponent<UIDocument>().rootVisualElement;
             var loadout = player.GetComponent<InsaneDreams.Inventory.PlayerLoadout>();
+            foreach(var slot in new[]{InsaneDreams.Inventory.EquipmentSlot.Firearm1,InsaneDreams.Inventory.EquipmentSlot.Firearm2})
+            {var weapon=loadout.Get(slot);Assert.AreEqual(108,weapon.ReserveAmmo);Assert.AreEqual(weapon.Definition.MagazineCapacity,weapon.MagazineAmmo);}
+            yield return new WaitForSeconds(.25f);StringAssert.Contains("reserve 108",root.Q<Label>("loadout").text);
+            var startingWeapon=loadout.SelectedWeapon;startingWeapon.SetAmmunition(startingWeapon.Definition.MagazineCapacity-1,108);
+            Assert.IsTrue(startingWeapon.Cycle.TryReload(Time.time));startingWeapon.Cycle.Tick(Time.time+startingWeapon.Definition.ReloadDuration+.01f);
+            Assert.AreEqual(startingWeapon.Definition.MagazineCapacity,startingWeapon.MagazineAmmo);Assert.AreEqual(107,startingWeapon.ReserveAmmo);
+            yield return new WaitForSeconds(.25f);StringAssert.Contains("reserve 107",root.Q<Label>("loadout").text);
             var first = loadout.Get(InsaneDreams.Inventory.EquipmentSlot.Firearm1); first.SetAmmunition(3, 17);
             var second = root.Q<Button>("slot2"); Down(second, 5, second.worldBound.center); Up(second, 5);
             yield return null; Assert.AreEqual(InsaneDreams.Inventory.EquipmentSlot.Firearm2, loadout.SelectedSlot);

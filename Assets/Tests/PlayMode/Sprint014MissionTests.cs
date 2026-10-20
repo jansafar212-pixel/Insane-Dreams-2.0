@@ -50,7 +50,7 @@ namespace InsaneDreams.Tests
             Assert.AreEqual(24,mission.Player.GetComponent<PlayerLoadout>().SelectedWeapon.MagazineAmmo);Assert.IsFalse(mission.Player.GetComponent<PlayerLoadout>().SelectedWeapon.Cycle.IsReloading);
             var root=mission.GetComponentInChildren<UIDocument>();var doc=SceneManager.GetActiveScene().GetRootGameObjects().SelectMany(g=>g.GetComponentsInChildren<UIDocument>()).Single();Assert.AreEqual(mission.Objective,doc.rootVisualElement.Q<Label>("objective").text);
             Assert.IsTrue(SceneManager.GetActiveScene().GetRootGameObjects().SelectMany(g=>g.GetComponentsInChildren<LevelEntry>()).Single().IsBound);yield return new WaitForSeconds(1);
-            foreach(var point in mission.Encounters.SelectMany(g=>g.Points))Assert.AreEqual(point.transform.position.x,point.Spawned.transform.position.x,.03f,"Staged scene occupants must hold their authored posts before encounter activation.");
+            Assert.AreEqual(10,Actors().Length,"Natural perception must not spawn duplicate scene occupants.");
             mission.Encounters[1].Points[0].Spawned.GetComponent<Health>().ApplyDamage(new DamageInfo(1,CombatTeam.Player,mission.Player.gameObject));Assert.IsTrue(mission.Encounters[1].IsActive,"A real player hit must alert visible occupants before their region trigger.");Assert.AreEqual(MissionStage.EnterWarehouse,mission.Stage,"A legitimate alert must not bypass objective gates.");
         }
         [UnityTest] public IEnumerator PhysicalColliderEdgeEntryActivatesBeforePivotReachesTriggerInterior()
@@ -73,7 +73,7 @@ namespace InsaneDreams.Tests
         {
             var entrance=zones.Single(z=>z.Zone==MissionZone.Entrance);Assert.IsFalse(mission.EnterZone(MissionZone.Entrance,entrance.Region),"Remote calls must not activate encounters.");
             Assert.IsFalse(Enter(MissionZone.Storage));Assert.AreEqual(MissionStage.EnterWarehouse,mission.Stage);Assert.IsTrue(Enter(MissionZone.Entrance));Assert.IsFalse(Enter(MissionZone.Entrance));
-            Assert.IsTrue(mission.Encounters[0].IsActive);Assert.IsFalse(mission.Encounters[1].IsActive);Assert.IsFalse(Enter(MissionZone.Storage));Defeat(0);Assert.IsTrue(Enter(MissionZone.Storage));Assert.IsFalse(Enter(MissionZone.Storage));
+            Assert.IsTrue(mission.Encounters[0].IsActive);Assert.IsFalse(Enter(MissionZone.Storage),"Natural awareness must not bypass the guard objective.");Defeat(0);Assert.IsTrue(Enter(MissionZone.Storage));Assert.IsFalse(Enter(MissionZone.Storage));
             Assert.AreEqual(9,Actors().Count(a=>a.gameObject.activeInHierarchy));Defeat(1);Assert.AreEqual(MissionStage.ReachProcessing,mission.Stage);Assert.IsFalse(Enter(MissionZone.Processing));Assert.IsTrue(Enter(MissionZone.Checkpoint));Assert.AreEqual(1,mission.CheckpointCommits);Assert.IsFalse(Enter(MissionZone.Checkpoint));yield return null;
         }
         [UnityTest] public IEnumerator ExitAndRemoteRecordsStayLockedUntilBothEncountersAndInteractionComplete()

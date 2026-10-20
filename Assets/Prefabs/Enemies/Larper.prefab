@@ -473,6 +473,33 @@ MonoBehaviour:
   gameplayCamera: {fileID: 0}
   allowOffscreenFire: 0
   perceptionSeconds: 0.1
+  minimumCombatSpacing: 1.75
+  positionSampleSeconds: 0.25
+  suppressedRepositionDistanceMultiplier: 0.8
+  combatRepositionSeconds: {x: 8, y: 13}
+  combatRepositionChance: 0.2
+  movementHearingRange: 11
+  gunfireHearingRange: 24
+  obstructedHearingMultiplier: 0.45
+  hearingMemorySeconds: 4
+  soundPositionUncertainty: 2
+  nearMissDistance: 1.25
+  gunfireHearingInterval: 0.25
+  defensiveCrouchProbability: 0.48
+  defensiveCrouchSeconds: {x: 0.8, y: 2}
+  defensiveCrouchCooldown: {x: 5, y: 8}
+  suppressionQuietSeconds: 0.65
+  maximumSuppression: 100
+  nearMissSuppression: 31.5
+  suppressionDecayPerSecond: 18
+  moderateSuppression: 25
+  highSuppression: 60
+  suppressionRetreatChance: 0.55
+  suppressionReactionCooldown: 6
+  unreliableWeapon: 1
+  malfunctionChance: 0.0075
+  malfunctionRecoverySeconds: 1.4
+  malfunctionCooldown: 18
   closeRange: 3
   closeSpread: 3
   distantSpread: 40
@@ -489,6 +516,7 @@ MonoBehaviour:
   ordinaryReloadFraction: 0.2
   cowardReloadFraction: 0.4
   overconfidentReloadFraction: 0
+  suppressedReloadFractionMultiplier: 1.2
   withdrawalDistance: 6
   withdrawalSeconds: 4.5
   tacticalSampleSeconds: 0.18
@@ -647,7 +675,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1c38f8bbfac90d4eae46c8ad45d84f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Enemies.LarperSpeechBubble
-  visibleSeconds: 2.8
+  visibleSeconds: 3.2
   worldOffset: {x: 0, y: 1.3, z: 0}
 --- !u!114 &3466965646119948066
 MonoBehaviour:
@@ -666,6 +694,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   missedAttacksForLine: 4
+  collapseChance: 0.08
+  collapseSpreadChance: 0.35
+  socialFearChance: 0.6
+  socialConfidenceChance: 0.15
+  socialInfluenceSeconds: 5
+  socialViewHalfAngle: 100
 --- !u!114 &3751230418356003257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -712,6 +746,8 @@ MonoBehaviour:
   landing: {fileID: 0}
   ladderStep: {fileID: 0}
   stepInterval: 0.35
+  runningSpeed: 5
+  crouchNoiseMultiplier: 0.25
 --- !u!114 &2227119419476407966
 MonoBehaviour:
   m_ObjectHideFlags: 0

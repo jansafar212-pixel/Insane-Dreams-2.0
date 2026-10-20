@@ -9,9 +9,9 @@ namespace InsaneDreams.Visuals
         [SerializeField, Min(1)] private int maximumActive = 4;
         [SerializeField, Min(.1f)] private float lifetime = 45;
         [SerializeField, Min(.1f)] private float restSeconds = 1.5f;
-        [SerializeField, Min(0)] private float initialDefeatMultiplier = 2.6f;
-        [SerializeField, Min(0)] private float postDefeatMultiplier = 1.56f;
-        [SerializeField, Min(0)] private float maximumImpulse = 2.5f;
+        [SerializeField, Min(0)] private float initialDefeatMultiplier = 2.99f;
+        [SerializeField, Min(0)] private float postDefeatMultiplier = 1.794f;
+        [SerializeField, Min(0)] private float maximumImpulse = 2.875f;
         [SerializeField, Min(0)] private float maximumVelocity = 12;
         [SerializeField, Min(0)] private float maximumAngularVelocity = 720;
         [SerializeField, Min(0)] private float linearDamping = .5f, angularDamping = 1.2f;

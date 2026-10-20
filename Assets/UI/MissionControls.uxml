@@ -18,6 +18,7 @@
         <ui:VisualElement name="aimStick" class="stick aim-stick"><ui:Label text="AIM / FIRE" class="stick-label" picking-mode="Ignore" /><ui:VisualElement class="knob" picking-mode="Ignore" /></ui:VisualElement>
         <ui:VisualElement name="parachuteButton" class="action parachute-button"><ui:Label text="DEPLOY&#10;CHUTE" picking-mode="Ignore" /></ui:VisualElement>
         <ui:Button name="reload" text="RELOAD" class="action reload-button" />
+        <ui:Button name="heal" text="HEAL" class="action heal-button" />
         <ui:Label name="interactionPrompt" class="interaction-prompt" picking-mode="Ignore" />
         <ui:Button name="interact" text="INTERACT" class="interact-button hidden" />
         <ui:VisualElement name="missionResults" class="results hidden">

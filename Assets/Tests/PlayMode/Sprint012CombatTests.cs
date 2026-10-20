@@ -87,13 +87,15 @@ namespace InsaneDreams.Tests
         }
         [UnityTest] public IEnumerator FullPistolBurstCommitsToRealRetreatThroughLostSightAndReloadsOnce()
         {
-            var e=Enemy();int movedEvents=0,reloads=0,retreatLines=0;e.WithdrawalStarted+=()=>movedEvents++;e.ReloadStarted+=()=>reloads++;
+            var e=Enemy();var reliability=new SerializedObject(e);reliability.FindProperty("unreliableWeapon").boolValue=false;reliability.ApplyModifiedPropertiesWithoutUndo(); // Uninterrupted-burst baseline; Sprint021 covers actual malfunction/recovery.
+            int movedEvents=0,reloads=0,retreatLines=0;e.WithdrawalStarted+=()=>movedEvents++;e.ReloadStarted+=()=>reloads++;
             e.GetComponent<LarperAwareness>().LineDelivered+=c=>{if(c==LarperSpeechEvent.Withdraw)retreatLines++;};float start=e.transform.position.x;
             for(int i=0;i<180&&e.State!=EngagementState.Withdrawing;i++)yield return new WaitForFixedUpdate();
             Assert.AreEqual(EngagementState.Withdrawing,e.State);Assert.Greater(e.GetComponent<AttackExecutor>().ShotsFired,10);
             Solid("SightLostMidRetreat",new Vector2(182,1),new Vector2(.2f,4));
             for(int i=0;i<100&&e.State!=EngagementState.Reloading;i++)yield return new WaitForFixedUpdate();
-            Assert.AreEqual(EngagementState.Reloading,e.State);Assert.GreaterOrEqual(e.transform.position.x-start,2.5f);Assert.AreEqual(1,movedEvents);Assert.AreEqual(1,reloads);Assert.AreEqual(1,retreatLines);
+            Assert.AreEqual(EngagementState.Reloading,e.State);Assert.GreaterOrEqual(e.transform.position.x-start,2.5f);Assert.AreEqual(1,movedEvents);Assert.AreEqual(1,reloads);
+            for(int i=0;i<80&&retreatLines==0;i++)yield return new WaitForFixedUpdate();Assert.AreEqual(1,retreatLines,"Meaningful dialogue waits for the previous readable bubble.");
             int shots=e.GetComponent<AttackExecutor>().ShotsFired;yield return new WaitForSeconds(.4f);Assert.AreEqual(shots,e.GetComponent<AttackExecutor>().ShotsFired);Assert.AreEqual(1,reloads);
         }
         [UnityTest] public IEnumerator OversizedMagazineFumblesVisiblyAndDeathCannotFinishReload()
