@@ -1,0 +1,28 @@
+{
+  "Total": 3,
+  "Passed": 3,
+  "Failed": 0,
+  "Tests": [
+    {
+      "FullName": "InsaneDreams.Tests.LevelArt0026Tests.NewEnvironmentSpritesHaveNativePointPixelsAndSmallFlatPalettes",
+      "Status": "Passed",
+      "Duration": 0.0796381,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.LevelArt0026Tests.SavedWarehouseScenesKeepOriginalNonvisualDataAndUseTheNewArt",
+      "Status": "Passed",
+      "Duration": 0.5815216,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.LevelArt0026PlayTests.ActualWarehouseShowsNewCratesWithoutChangingTheirCollisionOrLadderEndpoints",
+      "Status": "Passed",
+      "Duration": 1.3295029,
+      "Message": null,
+      "StackTrace": null
+    }
+  ]
+}

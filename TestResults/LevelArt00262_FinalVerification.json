@@ -1,0 +1,19 @@
+{
+  "scene": "Assets/Scenes/Warehouse_Demo.unity",
+  "isDirty": false,
+  "playing": false,
+  "changedSceneEntries": [],
+  "textures": 32,
+  "point": true,
+  "formats": [
+    "RGBA32"
+  ],
+  "mips": [
+    1
+  ],
+  "msaa": 1,
+  "renderScale": 1.0,
+  "nativePpu": 32,
+  "environmentDrawingGrid": 4,
+  "effectivePpu": 8
+}

@@ -185,3 +185,75 @@ sorting18/19 keeps it visible over the torso, restoring normal layering afterwar
 Both-facing controlled captures: PostPlaytest_Syringe0/1.png; artistic/gameplay and
 Android readability acceptance remain pending. Player corpses reuse the existing
 CartoonRagdoll source and limits; no enemy physics or new animation framework.
+
+## Sprint 0026 - level environment language (2026-10-24)
+
+Assets/Art/LevelArt0026/ contains32 independently code-authored native sprites;
+LevelArt0026Setup is the explicit Editor-only recipe/authoring source. Four crate
+constructions (wood brace, wood planks, tin corners, rust panel) share chunky two-
+pixel construction marks, dark edges and tiny rivets. Floors/platforms use clear
+flat top edges and sparse slab/bolt marks. Large dark wall blocks, muted windows,
+beams, pipe/vent and simple rolling doors stay behind actors. Ladder art keeps the
+existing endpoint/capture layout and readable ochre rungs. No new decorative clutter.
+
+Shared16 opaque swatches: #221F23 #895734 #B18046 #583728 #66706D #895C3E #B99C4F
+#22292E #283136 #353F42 #2D4048 #495452 #3D4242 #4E5959 #737164 #A6A284.
+No gradients, wood grain, glossy reflections or noise.32PPU, point filtering,
+RGBA32, no mipmaps, FullRect sprites. Full-object platform/crate pixel canvases use
+existing exact renderer sizes; fractional edge pixels are clipped rather than
+rounding collision bounds or stretching the whole pattern. Scaled/collider-bearing
+cover roots retain all original configuration and get counter-scaled visual-only
+children. No runtime art generator or new animation framework.
+
+All old shared art and MainMenu assets remain byte-identical. Character sprites,
+HUD/shop and gameplay systems are unchanged. Native Before/After overview captures
+and LevelArt0026_Runtime.png were visually inspected; deliberate-crude artistic
+acceptance and Android readability/performance still require human playtesting.
+
+## Sprint 0026.1 - controlling art-direction clarification
+
+Earnest, handmade amateur pixel art is the target: an enthusiastic teenager trying
+to make a good-looking game in LibreSprite, not an artist deliberately drawing badly.
+Avoid both professional/AI-looking polish and careless ugliness. Simplicity must
+retain readability, visual humor, intention and charm. The approved crates are the
+current environment benchmark and must not be repainted without explicit direction.
+
+This pass removes repeated seams/bolts, the dense wall grid and fine mechanical
+marks. Simple unequal two-pane windows, stout ladder rungs, broad door/vent divisions
+and clear flat platform tops keep recognizable construction. Sparse wall space is
+intentional. Non-crate assets use1-3 colors at existing32PPU/point-filtered dimensions;
+apparent detail blocks are larger, without moving objects or changing colliders.
+No random distortion/noise, new props/materials/textures or sophisticated effects.
+Approved crate assets/pixels remain byte-identical. LevelArt00261_Runtime.png was
+actually inspected at the gameplay camera zoom; artistic acceptance is still human.
+
+## Sprint 0026.2 - logical pixel size, not new art direction
+
+Non-crate environment recipes are baked on a4x4 native-pixel grid: an effective
+8PPU drawing canvas within the unchanged32PPU sprites. Use nearest-neighbor blocks,
+not blur or interpolation. Thin ladder/beam forms need explicit coarse cells so
+their structure survives. Retain exact existing bounds and the sparse handmade
+composition. No added colors, shadows, props or shaders; no deliberately ugly art.
+Approved crates retain their accepted pixels and are excluded from this bake.
+Point/RGBA32/no mipmaps were already correct; camera/render settings remain intact.
+LevelArt00262_Runtime.png and LadderRuntime.png were inspected at gameplay zoom;
+artistic acceptance remains human, and Android device verification is outstanding.
+
+## Sprint 0026.2 revised brief - chunky environmental character (2026-10-25)
+
+The revised brief permits curated details and simple hard shadows, superseding
+the preceding pass's no-new-props/shadows restriction. Keep the effective 8PPU
+drawing grid inside 32PPU sprites. Details should look thoughtfully drawn by an
+enthusiastic amateur: recognizable chunky forms, a few flat colors, no gradients,
+microtexture, noise or professional rendering. Approved crates remain unchanged.
+
+HandmadeEnvironmentDetailsSetup explicitly draws 15 reusable sprite modules into
+one Point/RGBA32/no-mipmap 256x256 sheet. Sparse signs, patch/crack, stain, section
+number, pipe/valve, fan, electrical cabinets, shelf and warning lamp vary the walls.
+Four small platform/floor marks and four opaque flat shadow bands per warehouse
+add construction cues without new lighting. All detail cells are four native
+pixels wide/high, alpha is binary, and each module has at most five opaque colors.
+Decorative objects contain only Transform and SpriteRenderer; background sorting
+keeps actors in front. No character, UI, camera, collision or gameplay redesign.
+Controlled opening, ladder and office captures support visual review; final
+artistic approval and actual Android readability/performance remain manual.

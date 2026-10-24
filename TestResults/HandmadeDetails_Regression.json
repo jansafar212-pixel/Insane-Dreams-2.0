@@ -1,0 +1,46 @@
+[
+  {
+    "Suite": "Edit",
+    "Status": "completed",
+    "Summary": {
+      "total": 2,
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    }
+  },
+  {
+    "Suite": "Play",
+    "Status": "completed",
+    "Summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    }
+  },
+  {
+    "Suite": "Cover",
+    "Status": "completed",
+    "Summary": {
+      "total": 12,
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    }
+  },
+  {
+    "Suite": "Ladder",
+    "Status": "completed",
+    "Summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    }
+  }
+]

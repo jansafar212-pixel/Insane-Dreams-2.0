@@ -1,0 +1,147 @@
+{
+  "Total": 20,
+  "Passed": 20,
+  "Failed": 0,
+  "Tests": [
+    {
+      "FullName": "InsaneDreams.Tests.LevelArt0026Tests.NewEnvironmentSpritesHaveNativePointPixelsAndSmallFlatPalettes",
+      "Status": "Passed",
+      "Duration": 0.0683949,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.LevelArt0026Tests.SavedWarehouseScenesKeepOriginalNonvisualDataAndUseTheNewArt",
+      "Status": "Passed",
+      "Duration": 0.4682928,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.LevelArt0026PlayTests.ActualWarehouseShowsNewCratesWithoutChangingTheirCollisionOrLadderEndpoints",
+      "Status": "Passed",
+      "Duration": 1.5591612,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint022CoverTests.AndroidFireButtonWorksWithoutAimAndIndependentPointersResetSafely",
+      "Status": "Passed",
+      "Duration": 1.3933802,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint022CoverTests.BlindFireHasWideRealBarrelSpreadAndAimedFireRetainsAccuracy",
+      "Status": "Passed",
+      "Duration": 2.2891363,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint022CoverTests.CeilingPreventsHiddenAccuratePeekAndShotsCannotStartInsideObstacle",
+      "Status": "Passed",
+      "Duration": 1.1663073,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint022CoverTests.ConcealmentBlocksRealShotsButUnobstructedRearStillTakesDamage",
+      "Status": "Passed",
+      "Duration": 0.5315691,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint022CoverTests.CoverPoseKeepsRigidArmsAttachedFeetGroundedAndHeadWithinDamageableBody",
+      "Status": "Passed",
+      "Duration": 1.2695264,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint022CoverTests.CoverRemovalMovementAndIncapacitationRestoreOrdinaryPosture",
+      "Status": "Passed",
+      "Duration": 1.6362054,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint022CoverTests.FireButtonLayoutFitsBothControlTemplatesInLandscapeUltrawideAndPortrait",
+      "Status": "Passed",
+      "Duration": 0.5922098,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint022CoverTests.InvalidGeometryAndDistanceNeverBecomeCover",
+      "Status": "Passed",
+      "Duration": 1.120391,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint022CoverTests.LeavingCoverUnderCeilingEventuallyRestoresCrouchHeightWhileStillHoldingDown",
+      "Status": "Passed",
+      "Duration": 0.8184632,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint022CoverTests.LeftSideCoverMirrorsArmsAndMuzzleWithoutChangingRootScale",
+      "Status": "Passed",
+      "Duration": 1.0709322,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint022CoverTests.PeekExposesDamageableBodyAndReleaseConcealsWithoutMovingFeet",
+      "Status": "Passed",
+      "Duration": 0.9568009,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint022CoverTests.ReloadHealingJumpAndRecoveryReleaseCoverWithoutColliderOrGravityLeaks",
+      "Status": "Passed",
+      "Duration": 3.642604,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0225Tests.TouchJumpDetachesWhileHoldingDownAndLeavesOneAirJump",
+      "Status": "Passed",
+      "Duration": 0.939058,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0225Tests.TouchJumpDetachesWhileHoldingLeftAndLeavesOneAirJump",
+      "Status": "Passed",
+      "Duration": 0.8938464,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0225Tests.TouchJumpDetachesWhileHoldingRightAndLeavesOneAirJump",
+      "Status": "Passed",
+      "Duration": 0.9005377,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0225Tests.TouchJumpDetachesWhileHoldingUpAndLeavesOneAirJump",
+      "Status": "Passed",
+      "Duration": 0.8976526,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.TraversalRegressionTests.LadderTakesPriorityAndDisabledOrDestroyedLadderRestoresGravity",
+      "Status": "Passed",
+      "Duration": 1.2299385,
+      "Message": null,
+      "StackTrace": null
+    }
+  ]
+}

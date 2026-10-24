@@ -1,0 +1,1865 @@
+[
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_BasementFloor[0]",
+    "sprite": "Assets/Art/LevelArt0026/Concrete_1728x32.asset",
+    "size": [
+      54.0,
+      1.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_Ground_Entry[1]",
+    "sprite": "Assets/Art/LevelArt0026/Concrete_436x26.asset",
+    "size": [
+      13.5999994,
+      0.8
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_Ground_Central[2]",
+    "sprite": "Assets/Art/LevelArt0026/Concrete_679x26.asset",
+    "size": [
+      21.2,
+      0.8
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_Ground_Exit[3]",
+    "sprite": "Assets/Art/LevelArt0026/Concrete_436x26.asset",
+    "size": [
+      13.5999994,
+      0.8
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_Mezzanine_Left[4]",
+    "sprite": "Assets/Art/LevelArt0026/Walkway_276x16.asset",
+    "size": [
+      8.599999,
+      0.5
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_Mezzanine_Central[5]",
+    "sprite": "Assets/Art/LevelArt0026/Walkway_468x16.asset",
+    "size": [
+      14.6,
+      0.5
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_Mezzanine_GapLanding[6]",
+    "sprite": "Assets/Art/LevelArt0026/Walkway_116x16.asset",
+    "size": [
+      3.60000038,
+      0.5
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_Mezzanine_Right[7]",
+    "sprite": "Assets/Art/LevelArt0026/Walkway_276x16.asset",
+    "size": [
+      8.599999,
+      0.5
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_Roof_Left[8]",
+    "sprite": "Assets/Art/LevelArt0026/Walkway_340x16.asset",
+    "size": [
+      10.5999994,
+      0.5
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_Roof_Central[9]",
+    "sprite": "Assets/Art/LevelArt0026/Walkway_404x16.asset",
+    "size": [
+      12.6,
+      0.5
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_Roof_Right[10]",
+    "sprite": "Assets/Art/LevelArt0026/Walkway_308x16.asset",
+    "size": [
+      9.599999,
+      0.5
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_UpperStep_01[11]",
+    "sprite": "Assets/Art/LevelArt0026/Walkway_84x13.asset",
+    "size": [
+      2.60000014,
+      0.399999619
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_UpperStep_02[12]",
+    "sprite": "Assets/Art/LevelArt0026/Walkway_84x13.asset",
+    "size": [
+      2.60000038,
+      0.399999619
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_UpperStep_03[13]",
+    "sprite": "Assets/Art/LevelArt0026/Walkway_71x13.asset",
+    "size": [
+      2.20000076,
+      0.399999619
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_BasementPipeBridge[14]",
+    "sprite": "Assets/Art/LevelArt0026/Walkway_160x12.asset",
+    "size": [
+      5.0,
+      0.350000381
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_Boundary_Left[15]",
+    "sprite": "Assets/Art/LevelArt0026/Boundary_32x928.asset",
+    "size": [
+      1.0,
+      29.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_Boundary_Right[16]",
+    "sprite": "Assets/Art/LevelArt0026/Boundary_32x928.asset",
+    "size": [
+      1.0,
+      29.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_Boundary_Top[17]",
+    "sprite": "Assets/Art/LevelArt0026/Boundary_1792x32.asset",
+    "size": [
+      56.0,
+      1.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_Roof_ExitLanding[18]",
+    "sprite": "Assets/Art/LevelArt0026/Walkway_77x16.asset",
+    "size": [
+      2.40000153,
+      0.5
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_CrouchPassage[19]",
+    "sprite": "Assets/Art/LevelArt0026/Hazard_64x13.asset",
+    "size": [
+      2.0,
+      0.4000001
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_Crate_-18[20]",
+    "sprite": "Assets/Art/LevelArt0026/CrateWoodBrace_32x32.asset",
+    "size": [
+      1.0,
+      1.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_Crate_-3[21]",
+    "sprite": "Assets/Art/LevelArt0026/CrateWoodPlanks_32x32.asset",
+    "size": [
+      1.0,
+      1.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_Crate_21[22]",
+    "sprite": "Assets/Art/LevelArt0026/CrateTinCorners_32x32.asset",
+    "size": [
+      1.0,
+      1.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/DistantMasonry[23]",
+    "sprite": "Assets/Art/LevelArt0026/Masonry_128x144.asset",
+    "size": [
+      54.0,
+      28.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Window_-24[24]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/WindowUpper_-24[25]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Beam_-24[26]",
+    "sprite": "Assets/Art/LevelArt0026/Support_8x832.asset",
+    "size": [
+      0.25,
+      26.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Window_-18[27]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/WindowUpper_-18[28]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Beam_-18[29]",
+    "sprite": "Assets/Art/LevelArt0026/Support_8x832.asset",
+    "size": [
+      0.25,
+      26.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Window_-12[30]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/WindowUpper_-12[31]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Beam_-12[32]",
+    "sprite": "Assets/Art/LevelArt0026/Support_8x832.asset",
+    "size": [
+      0.25,
+      26.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Window_-6[33]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/WindowUpper_-6[34]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Beam_-6[35]",
+    "sprite": "Assets/Art/LevelArt0026/Support_8x832.asset",
+    "size": [
+      0.25,
+      26.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Window_0[36]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/WindowUpper_0[37]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Beam_0[38]",
+    "sprite": "Assets/Art/LevelArt0026/Support_8x832.asset",
+    "size": [
+      0.25,
+      26.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Window_6[39]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/WindowUpper_6[40]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Beam_6[41]",
+    "sprite": "Assets/Art/LevelArt0026/Support_8x832.asset",
+    "size": [
+      0.25,
+      26.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Window_12[42]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/WindowUpper_12[43]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Beam_12[44]",
+    "sprite": "Assets/Art/LevelArt0026/Support_8x832.asset",
+    "size": [
+      0.25,
+      26.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Window_18[45]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/WindowUpper_18[46]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Beam_18[47]",
+    "sprite": "Assets/Art/LevelArt0026/Support_8x832.asset",
+    "size": [
+      0.25,
+      26.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Window_24[48]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/WindowUpper_24[49]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Beam_24[50]",
+    "sprite": "Assets/Art/LevelArt0026/Support_8x832.asset",
+    "size": [
+      0.25,
+      26.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/LoadingDoor[51]",
+    "sprite": "Assets/Art/LevelArt0026/Door_48x80.asset",
+    "size": [
+      1.5,
+      2.5
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/VentBay[52]",
+    "sprite": "Assets/Art/LevelArt0026/Vent_64x48.asset",
+    "size": [
+      2.0,
+      1.5
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/PipeBay[53]",
+    "sprite": "Assets/Art/LevelArt0026/Pipe_8x128.asset",
+    "size": [
+      0.25,
+      4.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Graphic_Ladder_Basement_Mezzanine[54]/Body[0]",
+    "sprite": "Assets/Art/LevelArt0026/Ladder.asset",
+    "size": [
+      1.0,
+      13.34375
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Graphic_Ladder_Basement_Mezzanine[54]/BottomTermination[1]",
+    "sprite": "Assets/Art/LevelArt0026/LadderFoot.asset",
+    "size": [
+      1.0,
+      0.125
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Graphic_Ladder_Basement_Mezzanine[54]/TopTermination[2]",
+    "sprite": "Assets/Art/LevelArt0026/LadderTop.asset",
+    "size": [
+      1.0,
+      0.125
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Graphic_Ladder_RoofAccess[55]/Body[0]",
+    "sprite": "Assets/Art/LevelArt0026/Ladder.asset",
+    "size": [
+      1.0,
+      7.75
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Graphic_Ladder_RoofAccess[55]/BottomTermination[1]",
+    "sprite": "Assets/Art/LevelArt0026/LadderFoot.asset",
+    "size": [
+      1.0,
+      0.125
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Graphic_Ladder_RoofAccess[55]/TopTermination[2]",
+    "sprite": "Assets/Art/LevelArt0026/LadderTop.asset",
+    "size": [
+      1.0,
+      0.125
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Graphic_Ladder_MultiLevel[56]/Body[0]",
+    "sprite": "Assets/Art/LevelArt0026/Ladder.asset",
+    "size": [
+      1.0,
+      21.15625
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Graphic_Ladder_MultiLevel[56]/BottomTermination[1]",
+    "sprite": "Assets/Art/LevelArt0026/LadderFoot.asset",
+    "size": [
+      1.0,
+      0.125
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Graphic_Ladder_MultiLevel[56]/TopTermination[2]",
+    "sprite": "Assets/Art/LevelArt0026/LadderTop.asset",
+    "size": [
+      1.0,
+      0.125
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/LowCover_Sprint012[9]",
+    "sprite": "Assets/Art/LevelArt0026/CrateRustPanel_52x29.asset",
+    "size": [
+      1.6,
+      0.9
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/MissionExitDoor[22]",
+    "sprite": "Assets/Art/LevelArt0026/ExitDoor_42x64.asset",
+    "size": [
+      1.3,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/MissionCrate_-3_5,9[23]",
+    "sprite": "Assets/Art/LevelArt0026/CrateWoodPlanks_32x32.asset",
+    "size": [
+      1.0,
+      1.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/MissionCrate_16,4_12,5[24]",
+    "sprite": "Assets/Art/LevelArt0026/CrateWoodBrace_32x32.asset",
+    "size": [
+      1.0,
+      1.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/MissionCrate_20_12,5[25]",
+    "sprite": "Assets/Art/LevelArt0026/CrateRustPanel_32x32.asset",
+    "size": [
+      1.0,
+      1.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/MissionCrate_17,5_5,9[26]",
+    "sprite": "Assets/Art/LevelArt0026/CrateTinCorners_32x32.asset",
+    "size": [
+      1.0,
+      1.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/Sprint024_EncounterRoutes[36]/DemoCover_7,8[1]",
+    "sprite": "Assets/Art/LevelArt0026/CrateWoodBrace_32x29.asset",
+    "size": [
+      1.0,
+      0.9
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/Sprint024_EncounterRoutes[36]/DemoCover_18,2[2]",
+    "sprite": "Assets/Art/LevelArt0026/CrateWoodBrace_32x29.asset",
+    "size": [
+      1.0,
+      0.9
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/Sprint0026_Cover[40]/TacticalCrate_0[0]",
+    "sprite": "Assets/Art/LevelArt0026/CrateWoodPlanks_32x32.asset",
+    "size": [
+      1.0,
+      1.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/Sprint0026_Cover[40]/TacticalCrate_1[1]",
+    "sprite": "Assets/Art/LevelArt0026/CrateTinCorners_32x32.asset",
+    "size": [
+      1.0,
+      1.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/Sprint0026_Cover[40]/TacticalCrate_2[2]",
+    "sprite": "Assets/Art/LevelArt0026/CrateRustPanel_32x32.asset",
+    "size": [
+      1.0,
+      1.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Surface_BasementFloor[0]",
+    "sprite": "Assets/Art/LevelArt0026/Concrete_1728x32.asset",
+    "size": [
+      54.0,
+      1.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Surface_Ground_Entry[1]",
+    "sprite": "Assets/Art/LevelArt0026/Concrete_436x26.asset",
+    "size": [
+      13.5999994,
+      0.8
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Surface_Ground_Central[2]",
+    "sprite": "Assets/Art/LevelArt0026/Concrete_679x26.asset",
+    "size": [
+      21.2,
+      0.8
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Surface_Ground_Exit[3]",
+    "sprite": "Assets/Art/LevelArt0026/Concrete_436x26.asset",
+    "size": [
+      13.5999994,
+      0.8
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Surface_Mezzanine_Left[4]",
+    "sprite": "Assets/Art/LevelArt0026/Walkway_276x16.asset",
+    "size": [
+      8.599999,
+      0.5
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Surface_Mezzanine_Central[5]",
+    "sprite": "Assets/Art/LevelArt0026/Walkway_468x16.asset",
+    "size": [
+      14.6,
+      0.5
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Surface_Mezzanine_GapLanding[6]",
+    "sprite": "Assets/Art/LevelArt0026/Walkway_116x16.asset",
+    "size": [
+      3.60000038,
+      0.5
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Surface_Mezzanine_Right[7]",
+    "sprite": "Assets/Art/LevelArt0026/Walkway_276x16.asset",
+    "size": [
+      8.599999,
+      0.5
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Surface_Roof_Left[8]",
+    "sprite": "Assets/Art/LevelArt0026/Walkway_340x16.asset",
+    "size": [
+      10.5999994,
+      0.5
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Surface_Roof_Central[9]",
+    "sprite": "Assets/Art/LevelArt0026/Walkway_404x16.asset",
+    "size": [
+      12.6,
+      0.5
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Surface_Roof_Right[10]",
+    "sprite": "Assets/Art/LevelArt0026/Walkway_308x16.asset",
+    "size": [
+      9.599999,
+      0.5
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Surface_UpperStep_01[11]",
+    "sprite": "Assets/Art/LevelArt0026/Walkway_84x13.asset",
+    "size": [
+      2.60000014,
+      0.399999619
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Surface_UpperStep_02[12]",
+    "sprite": "Assets/Art/LevelArt0026/Walkway_84x13.asset",
+    "size": [
+      2.60000038,
+      0.399999619
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Surface_UpperStep_03[13]",
+    "sprite": "Assets/Art/LevelArt0026/Walkway_71x13.asset",
+    "size": [
+      2.20000076,
+      0.399999619
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Surface_BasementPipeBridge[14]",
+    "sprite": "Assets/Art/LevelArt0026/Walkway_160x12.asset",
+    "size": [
+      5.0,
+      0.350000381
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Surface_Boundary_Left[15]",
+    "sprite": "Assets/Art/LevelArt0026/Boundary_32x928.asset",
+    "size": [
+      1.0,
+      29.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Surface_Boundary_Right[16]",
+    "sprite": "Assets/Art/LevelArt0026/Boundary_32x928.asset",
+    "size": [
+      1.0,
+      29.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Surface_Boundary_Top[17]",
+    "sprite": "Assets/Art/LevelArt0026/Boundary_1792x32.asset",
+    "size": [
+      56.0,
+      1.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Surface_Roof_ExitLanding[18]",
+    "sprite": "Assets/Art/LevelArt0026/Walkway_77x16.asset",
+    "size": [
+      2.40000153,
+      0.5
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Surface_CrouchPassage[19]",
+    "sprite": "Assets/Art/LevelArt0026/Hazard_64x13.asset",
+    "size": [
+      2.0,
+      0.4000001
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Surface_Crate_-18[20]",
+    "sprite": "Assets/Art/LevelArt0026/CrateWoodBrace_32x32.asset",
+    "size": [
+      1.0,
+      1.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Surface_Crate_-3[21]",
+    "sprite": "Assets/Art/LevelArt0026/CrateWoodPlanks_32x32.asset",
+    "size": [
+      1.0,
+      1.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Surface_Crate_21[22]",
+    "sprite": "Assets/Art/LevelArt0026/CrateTinCorners_32x32.asset",
+    "size": [
+      1.0,
+      1.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/DistantMasonry[23]",
+    "sprite": "Assets/Art/LevelArt0026/Masonry_128x144.asset",
+    "size": [
+      54.0,
+      28.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Window_-24[24]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/WindowUpper_-24[25]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Beam_-24[26]",
+    "sprite": "Assets/Art/LevelArt0026/Support_8x832.asset",
+    "size": [
+      0.25,
+      26.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Window_-18[27]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/WindowUpper_-18[28]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Beam_-18[29]",
+    "sprite": "Assets/Art/LevelArt0026/Support_8x832.asset",
+    "size": [
+      0.25,
+      26.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Window_-12[30]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/WindowUpper_-12[31]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Beam_-12[32]",
+    "sprite": "Assets/Art/LevelArt0026/Support_8x832.asset",
+    "size": [
+      0.25,
+      26.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Window_-6[33]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/WindowUpper_-6[34]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Beam_-6[35]",
+    "sprite": "Assets/Art/LevelArt0026/Support_8x832.asset",
+    "size": [
+      0.25,
+      26.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Window_0[36]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/WindowUpper_0[37]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Beam_0[38]",
+    "sprite": "Assets/Art/LevelArt0026/Support_8x832.asset",
+    "size": [
+      0.25,
+      26.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Window_6[39]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/WindowUpper_6[40]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Beam_6[41]",
+    "sprite": "Assets/Art/LevelArt0026/Support_8x832.asset",
+    "size": [
+      0.25,
+      26.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Window_12[42]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/WindowUpper_12[43]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Beam_12[44]",
+    "sprite": "Assets/Art/LevelArt0026/Support_8x832.asset",
+    "size": [
+      0.25,
+      26.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Window_18[45]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/WindowUpper_18[46]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Beam_18[47]",
+    "sprite": "Assets/Art/LevelArt0026/Support_8x832.asset",
+    "size": [
+      0.25,
+      26.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Window_24[48]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/WindowUpper_24[49]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Beam_24[50]",
+    "sprite": "Assets/Art/LevelArt0026/Support_8x832.asset",
+    "size": [
+      0.25,
+      26.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/LoadingDoor[51]",
+    "sprite": "Assets/Art/LevelArt0026/Door_48x80.asset",
+    "size": [
+      1.5,
+      2.5
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/VentBay[52]",
+    "sprite": "Assets/Art/LevelArt0026/Vent_64x48.asset",
+    "size": [
+      2.0,
+      1.5
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/PipeBay[53]",
+    "sprite": "Assets/Art/LevelArt0026/Pipe_8x128.asset",
+    "size": [
+      0.25,
+      4.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Graphic_Ladder_Basement_Mezzanine[54]/Body[0]",
+    "sprite": "Assets/Art/LevelArt0026/Ladder.asset",
+    "size": [
+      1.0,
+      13.34375
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Graphic_Ladder_Basement_Mezzanine[54]/BottomTermination[1]",
+    "sprite": "Assets/Art/LevelArt0026/LadderFoot.asset",
+    "size": [
+      1.0,
+      0.125
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Graphic_Ladder_Basement_Mezzanine[54]/TopTermination[2]",
+    "sprite": "Assets/Art/LevelArt0026/LadderTop.asset",
+    "size": [
+      1.0,
+      0.125
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Graphic_Ladder_RoofAccess[55]/Body[0]",
+    "sprite": "Assets/Art/LevelArt0026/Ladder.asset",
+    "size": [
+      1.0,
+      7.75
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Graphic_Ladder_RoofAccess[55]/BottomTermination[1]",
+    "sprite": "Assets/Art/LevelArt0026/LadderFoot.asset",
+    "size": [
+      1.0,
+      0.125
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Graphic_Ladder_RoofAccess[55]/TopTermination[2]",
+    "sprite": "Assets/Art/LevelArt0026/LadderTop.asset",
+    "size": [
+      1.0,
+      0.125
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Graphic_Ladder_MultiLevel[56]/Body[0]",
+    "sprite": "Assets/Art/LevelArt0026/Ladder.asset",
+    "size": [
+      1.0,
+      21.15625
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Graphic_Ladder_MultiLevel[56]/BottomTermination[1]",
+    "sprite": "Assets/Art/LevelArt0026/LadderFoot.asset",
+    "size": [
+      1.0,
+      0.125
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[9]/Graphic_Ladder_MultiLevel[56]/TopTermination[2]",
+    "sprite": "Assets/Art/LevelArt0026/LadderTop.asset",
+    "size": [
+      1.0,
+      0.125
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/LowCover_Sprint012[11]",
+    "sprite": "Assets/Art/LevelArt0026/CrateRustPanel_52x29.asset",
+    "size": [
+      1.6,
+      0.9
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_BasementFloor[0]",
+    "sprite": "Assets/Art/LevelArt0026/Concrete_1728x32.asset",
+    "size": [
+      54.0,
+      1.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_Ground_Entry[1]",
+    "sprite": "Assets/Art/LevelArt0026/Concrete_436x26.asset",
+    "size": [
+      13.5999994,
+      0.8
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_Ground_Central[2]",
+    "sprite": "Assets/Art/LevelArt0026/Concrete_679x26.asset",
+    "size": [
+      21.2,
+      0.8
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_Ground_Exit[3]",
+    "sprite": "Assets/Art/LevelArt0026/Concrete_436x26.asset",
+    "size": [
+      13.5999994,
+      0.8
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_Mezzanine_Left[4]",
+    "sprite": "Assets/Art/LevelArt0026/Walkway_276x16.asset",
+    "size": [
+      8.599999,
+      0.5
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_Mezzanine_Central[5]",
+    "sprite": "Assets/Art/LevelArt0026/Walkway_468x16.asset",
+    "size": [
+      14.6,
+      0.5
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_Mezzanine_GapLanding[6]",
+    "sprite": "Assets/Art/LevelArt0026/Walkway_116x16.asset",
+    "size": [
+      3.60000038,
+      0.5
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_Mezzanine_Right[7]",
+    "sprite": "Assets/Art/LevelArt0026/Walkway_276x16.asset",
+    "size": [
+      8.599999,
+      0.5
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_Roof_Left[8]",
+    "sprite": "Assets/Art/LevelArt0026/Walkway_340x16.asset",
+    "size": [
+      10.5999994,
+      0.5
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_Roof_Central[9]",
+    "sprite": "Assets/Art/LevelArt0026/Walkway_404x16.asset",
+    "size": [
+      12.6,
+      0.5
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_Roof_Right[10]",
+    "sprite": "Assets/Art/LevelArt0026/Walkway_308x16.asset",
+    "size": [
+      9.599999,
+      0.5
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_UpperStep_01[11]",
+    "sprite": "Assets/Art/LevelArt0026/Walkway_84x13.asset",
+    "size": [
+      2.60000014,
+      0.399999619
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_UpperStep_02[12]",
+    "sprite": "Assets/Art/LevelArt0026/Walkway_84x13.asset",
+    "size": [
+      2.60000038,
+      0.399999619
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_UpperStep_03[13]",
+    "sprite": "Assets/Art/LevelArt0026/Walkway_71x13.asset",
+    "size": [
+      2.20000076,
+      0.399999619
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_BasementPipeBridge[14]",
+    "sprite": "Assets/Art/LevelArt0026/Walkway_160x12.asset",
+    "size": [
+      5.0,
+      0.350000381
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_Boundary_Left[15]",
+    "sprite": "Assets/Art/LevelArt0026/Boundary_32x928.asset",
+    "size": [
+      1.0,
+      29.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_Boundary_Right[16]",
+    "sprite": "Assets/Art/LevelArt0026/Boundary_32x928.asset",
+    "size": [
+      1.0,
+      29.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_Boundary_Top[17]",
+    "sprite": "Assets/Art/LevelArt0026/Boundary_1792x32.asset",
+    "size": [
+      56.0,
+      1.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_Roof_ExitLanding[18]",
+    "sprite": "Assets/Art/LevelArt0026/Walkway_77x16.asset",
+    "size": [
+      2.40000153,
+      0.5
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_CrouchPassage[19]",
+    "sprite": "Assets/Art/LevelArt0026/Hazard_64x13.asset",
+    "size": [
+      2.0,
+      0.4000001
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_Crate_-18[20]",
+    "sprite": "Assets/Art/LevelArt0026/CrateWoodBrace_32x32.asset",
+    "size": [
+      1.0,
+      1.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_Crate_-3[21]",
+    "sprite": "Assets/Art/LevelArt0026/CrateWoodPlanks_32x32.asset",
+    "size": [
+      1.0,
+      1.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Surface_Crate_21[22]",
+    "sprite": "Assets/Art/LevelArt0026/CrateTinCorners_32x32.asset",
+    "size": [
+      1.0,
+      1.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/DistantMasonry[23]",
+    "sprite": "Assets/Art/LevelArt0026/Masonry_128x144.asset",
+    "size": [
+      54.0,
+      28.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Window_-24[24]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/WindowUpper_-24[25]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Beam_-24[26]",
+    "sprite": "Assets/Art/LevelArt0026/Support_8x832.asset",
+    "size": [
+      0.25,
+      26.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Window_-18[27]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/WindowUpper_-18[28]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Beam_-18[29]",
+    "sprite": "Assets/Art/LevelArt0026/Support_8x832.asset",
+    "size": [
+      0.25,
+      26.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Window_-12[30]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/WindowUpper_-12[31]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Beam_-12[32]",
+    "sprite": "Assets/Art/LevelArt0026/Support_8x832.asset",
+    "size": [
+      0.25,
+      26.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Window_-6[33]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/WindowUpper_-6[34]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Beam_-6[35]",
+    "sprite": "Assets/Art/LevelArt0026/Support_8x832.asset",
+    "size": [
+      0.25,
+      26.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Window_0[36]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/WindowUpper_0[37]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Beam_0[38]",
+    "sprite": "Assets/Art/LevelArt0026/Support_8x832.asset",
+    "size": [
+      0.25,
+      26.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Window_6[39]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/WindowUpper_6[40]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Beam_6[41]",
+    "sprite": "Assets/Art/LevelArt0026/Support_8x832.asset",
+    "size": [
+      0.25,
+      26.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Window_12[42]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/WindowUpper_12[43]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Beam_12[44]",
+    "sprite": "Assets/Art/LevelArt0026/Support_8x832.asset",
+    "size": [
+      0.25,
+      26.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Window_18[45]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/WindowUpper_18[46]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Beam_18[47]",
+    "sprite": "Assets/Art/LevelArt0026/Support_8x832.asset",
+    "size": [
+      0.25,
+      26.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Window_24[48]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/WindowUpper_24[49]",
+    "sprite": "Assets/Art/LevelArt0026/Window_96x64.asset",
+    "size": [
+      3.0,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Beam_24[50]",
+    "sprite": "Assets/Art/LevelArt0026/Support_8x832.asset",
+    "size": [
+      0.25,
+      26.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/LoadingDoor[51]",
+    "sprite": "Assets/Art/LevelArt0026/Door_48x80.asset",
+    "size": [
+      1.5,
+      2.5
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/VentBay[52]",
+    "sprite": "Assets/Art/LevelArt0026/Vent_64x48.asset",
+    "size": [
+      2.0,
+      1.5
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/PipeBay[53]",
+    "sprite": "Assets/Art/LevelArt0026/Pipe_8x128.asset",
+    "size": [
+      0.25,
+      4.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Graphic_Ladder_Basement_Mezzanine[54]/Body[0]",
+    "sprite": "Assets/Art/LevelArt0026/Ladder.asset",
+    "size": [
+      1.0,
+      13.34375
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Graphic_Ladder_Basement_Mezzanine[54]/BottomTermination[1]",
+    "sprite": "Assets/Art/LevelArt0026/LadderFoot.asset",
+    "size": [
+      1.0,
+      0.125
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Graphic_Ladder_Basement_Mezzanine[54]/TopTermination[2]",
+    "sprite": "Assets/Art/LevelArt0026/LadderTop.asset",
+    "size": [
+      1.0,
+      0.125
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Graphic_Ladder_RoofAccess[55]/Body[0]",
+    "sprite": "Assets/Art/LevelArt0026/Ladder.asset",
+    "size": [
+      1.0,
+      7.75
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Graphic_Ladder_RoofAccess[55]/BottomTermination[1]",
+    "sprite": "Assets/Art/LevelArt0026/LadderFoot.asset",
+    "size": [
+      1.0,
+      0.125
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Graphic_Ladder_RoofAccess[55]/TopTermination[2]",
+    "sprite": "Assets/Art/LevelArt0026/LadderTop.asset",
+    "size": [
+      1.0,
+      0.125
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Graphic_Ladder_MultiLevel[56]/Body[0]",
+    "sprite": "Assets/Art/LevelArt0026/Ladder.asset",
+    "size": [
+      1.0,
+      21.15625
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Graphic_Ladder_MultiLevel[56]/BottomTermination[1]",
+    "sprite": "Assets/Art/LevelArt0026/LadderFoot.asset",
+    "size": [
+      1.0,
+      0.125
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/WarehouseArt_Sprint008[8]/Graphic_Ladder_MultiLevel[56]/TopTermination[2]",
+    "sprite": "Assets/Art/LevelArt0026/LadderTop.asset",
+    "size": [
+      1.0,
+      0.125
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/LowCover_Sprint012[9]",
+    "sprite": "Assets/Art/LevelArt0026/CrateRustPanel_52x29.asset",
+    "size": [
+      1.6,
+      0.9
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/MissionExitDoor[22]",
+    "sprite": "Assets/Art/LevelArt0026/ExitDoor_42x64.asset",
+    "size": [
+      1.3,
+      2.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/MissionCrate_-3_5,9[23]",
+    "sprite": "Assets/Art/LevelArt0026/CrateWoodPlanks_32x32.asset",
+    "size": [
+      1.0,
+      1.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/MissionCrate_16,4_12,5[24]",
+    "sprite": "Assets/Art/LevelArt0026/CrateWoodBrace_32x32.asset",
+    "size": [
+      1.0,
+      1.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/MissionCrate_20_12,5[25]",
+    "sprite": "Assets/Art/LevelArt0026/CrateRustPanel_32x32.asset",
+    "size": [
+      1.0,
+      1.0
+    ],
+    "ppu": 32.0
+  },
+  {
+    "name": "/MissionCrate_17,5_5,9[26]",
+    "sprite": "Assets/Art/LevelArt0026/CrateTinCorners_32x32.asset",
+    "size": [
+      1.0,
+      1.0
+    ],
+    "ppu": 32.0
+  }
+]

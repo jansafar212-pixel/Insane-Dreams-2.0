@@ -5380,3 +5380,145 @@ capacity/reserve, switching and ammo preservation; multiple simulated aspect rat
 Native HUD capture inspected; compile successful, zero current Console errors.
 Raw results: TestResults/SmallMedicalAmmo.json. No broader regressions or Android
 hardware tests rerun for this small UI pass. No stage/commit/push.
+
+## Sprint 0026 - Old-school 8-bit environment redesign (2026-10-24)
+
+Environment-only pass for the new brief; existing gameplay/AI Sprint0026 helper
+was not rerun. Warehouse_Demo, Testbed and Mission01 receive207 renderer updates:
+four crude wood/industrial crate variants, chunky concrete/metal platforms, quiet
+wall panels/windows/supports, simple doors/vent/pipe and matching ladder rails/rungs.
+32 new native Sprite/Texture assets, shared16-color opaque palette,32PPU,
+point/RGBA32/no mipmaps, at most6 colors per texture. Existing asset recipes extend
+via Editor-only LevelArt0026Setup; no generated illustration or historical recovery.
+Original shared crate art stays intact for MainMenu. Supply/checkpoint/mission
+signals, characters, sound, UI, layout and gameplay remain unchanged.
+
+Live Editor APIs authored scene refs. A guard caught cached collider tiling changes
+before saving; collider-bearing/scaled objects now use pure visual children, so
+original sprite/collider settings and transforms stay intact.16 visual children,
+no added colliders/gameplay components. Exact existing bounds retained; textures
+clip fractional end pixels instead of altering geometry. All3065 original protected
+scene entries unchanged; all750 protected file hashes unchanged (runtime scripts,
+UI/data/prefabs/original art/MainMenu/physics/build settings). Four crate variants
+retained in every warehouse, including wood/metal contrast near the opening.
+
+Final20/20 targeted checks pass:2 Edit asset/scene invariant cases,1 actual-scene
+Play Mode art/solid-ray/ladder-endpoint check,12 cover regressions,4 directional
+ladder detaches and1 ladder-priority/gravity-restoration case. Final native captures
+Before/After0/1/2 and gameplay-camera Runtime were generated and inspected. Controlled
+captures/tests are not a human playthrough or Android validation. Previous unrelated
+historical test failures are not claimed fixed. Initial helper API compile errors,
+authoring response timeouts and a three-variant Testbed draft were corrected or
+verified before completion; final compilation/current Console0errors/0warnings.
+
+Raw pixel payload1,028,292 bytes across32 assets; actual Android frame time/memory,
+combat readability, style approval and phone-resolution sharpness require manual
+playtest. No runtime generator/manager/scanning/physics changes. Warehouse_Demo
+saved/open/clean, Play Mode stopped. Recovery files and prior work retained; no
+stage/commit/push. Full file list, validation and manual checklist:
+TestResults/LevelArt0026_Report.md. Evidence: LevelArt0026_Regression.json,
+ProtectedBefore/After.json, per-scene GameplayBefore/After, Assignments,
+FinalVerification and native Before/After/Runtime PNG captures.
+
+## Sprint 0026.1 - earnest handmade environment simplification (2026-10-24)
+
+Art-direction clarification overrides any interpretation of crude as deliberately
+ugly: an enthusiastic teenager trying to draw a good game with limited experience,
+not careless rectangles or generated polish. Approved crates are the benchmark.
+All six crate assets and metadata are byte-identical; no crate repaint/regeneration.
+
+Simplified26 existing non-crate textures in place; total32 unchanged. Removed
+platform bolts/panel seams/chips, wall grid, fine door ribbing and pipe/beam marks.
+Thicker platform edges and ladder rungs, simple two-pane slightly unequal windows,
+three-slit vents and broad door divisions remain recognizable. Reduced repeated
+visible windows18 ->6 per warehouse, leaving purposeful wall space. No new props,
+textures, materials, shaders or runtime components. Non-crate sprites now1-3 colors;
+point/RGBA32/no mipmaps/32PPU and exact dimensions retained. No intentional random
+misalignment, noise or ugly distortion. Same Demo/Testbed/Mission01 layouts.
+
+789 protected file hashes unchanged, including approved crates, original art,
+main menu/HUD/shop/runtime scripts/prefabs/data/project settings. All3081 original
+transform/nonvisual scene entries unchanged; collider/cover/traversal/AI/camera/
+combat/progression untouched. Only background-window Renderer visibility changed
+in scenes.3/3 focused tests pass:2 Edit palette/settings/saved-invariant checks,
+1 actual-scene Play crate raycasts/bounds/ladder endpoints plus gameplay capture.
+No broad suites repeated or unrelated old failures declared fixed. Native authoring
+response timeout was checked against durable success and saved-state evidence.
+Final compile/current Console0errors/0warnings, Demo saved/open/clean/stopped.
+
+New actual gameplay-camera capture LevelArt00261_Runtime.png and earlier Before
+image were inspected. These are controlled Editor captures, not human firefights,
+Android profiling or artistic acceptance. Phone-size charm/readability and busy
+combat/cover/ladder device review remain manual. Previous work/recovery files
+preserved; no stage/commit/push. Details: TestResults/LevelArt00261_Report.md,
+EditTests/PlayTests, ProtectedBefore/After, GameplayBefore/After, AuthoringResult
+and FinalVerification evidence.
+
+## Sprint 0026.2 - visibly coarser environment pixels (2026-10-24)
+
+Resolution-only pass, not a redesign. Existing non-crate art baked into4x4 native-
+pixel blocks: effective8PPU drawing grid while Sprite storage stays32PPU and exact
+object/renderer/collider dimensions remain unchanged. Platforms, window/door/hazard
+forms now use larger blocks. Narrow beams/pipes and ladder rails/rungs/caps use
+explicit coarse cells to remain readable. No new colors/shadows/materials/textures/
+props, no runtime systems; earnest handmade charm remains the goal. Crates skipped.
+26 non-crate assets processed (24 actual content changes;2 already coarse/flat).
+
+Inspection found Point/RGBA32/no mipmaps already correct; URP MSAA1, render scale1,
+global quality AA0. No camera/quality change was needed or made.789 protected hashes
+unchanged, including crates/metas, gameplay code, prefabs, UI/shop/menu/original art.
+3/3 focused checks pass:2 Edit exact4pixel-grid/colors/settings/scene invariants,
+1 actual-scene Play bounds/raycasts/ladder endpoints plus two gameplay-zoom captures.
+Initial Unity runner mode-transition/restoration failure canceled; isolated stopped-
+mode runs pass. Native authoring response timeout verified against durable success
+and saved data. Final compile0errors;1 unrelated Unity AI Toolkit account/network
+warning remains. No historical full suite/device performance claim.
+
+Opening and ladder/mezzanine captures actually inspected: LevelArt00262_Runtime.png
+and LadderRuntime.png; Before.png retained. Controlled player relocation uses the
+existing camera snap only in the test, not authored scene/camera changes. Human
+artistic approval and Android readability/motion/performance checks remain manual.
+Demo saved/open/clean/stopped; previous work and recovery files retained; no stage/
+commit/push. Details: TestResults/LevelArt00262_Report.md and EditTests/PlayTests,
+Regression, ProtectedBefore/After, AuthoringResult, FinalVerification evidence.
+
+## Sprint 0026.2 revised brief - chunky handmade details (2026-10-25)
+
+Continued the coarse-pixel environment rather than restarting it. The revised
+brief explicitly permits environmental detail and simple hard shadows. Added
+one shared 256x256 Point/RGBA32/no-mipmap sheet with15 independently code-drawn
+modules. All use4x4 native-pixel cells within32PPU sprites, binary alpha and at
+most five opaque colors. No gradients, soft lights, microtexture or random noise.
+
+Each of Demo/Testbed/Mission01 receives11 curated wall/background details (NOPE/
+FINE signs, electrical cabinets, pipe/valve, fan, shelf, concrete patch/crack,
+stain, section number, warning lamp), four small platform/floor marks and four
+flat hard shadow bands.57 new SpriteRenderers total; only Transform/Renderer
+components, one shared sheet/material, no runtime generation or update workload.
+Sparse areas retained. Background sorting keeps actors ahead; surface marks
+stay within original surface bounds. Office sign moved left after capture review
+showed the ladder obscuring it. Native Unity APIs authored all scene/asset changes.
+
+All815 protected original files remain byte-identical, including all six approved
+crate assets/metas and existing coarse environment textures. All3081 original
+scene transform/nonvisual snapshot entries match. No gameplay, collision, AI,
+spawning, camera, character, weapon, HUD, menu or shop changes. Prior uncommitted
+work/recovery files retained; nothing staged, committed or pushed.
+
+Final focused automated results16/16:2 Edit sheet/grid/palette/component/scene
+invariant checks,1 actual-Demo Play crate bounds/raycasts/ladder endpoints plus
+decoration/capture check,12 existing cover tests,1 existing disabled/destroyed-
+ladder gravity-restoration test. Tests repeated after final placement adjustment
+where relevant. Compilation successful; final current Unity Console0errors and
+0warnings (historical console buffer is separate). Demo saved/open/clean, Play
+Mode stopped. No broad historical suite or Android performance claim.
+
+Opening, ladder/mezzanine and office gameplay-camera captures visually inspected.
+These are controlled Editor test captures, with combat disabled and test-only
+player relocation for later views. Human artistic acceptance, busy-combat contrast,
+phone-size readability and Android scrolling/performance remain manual checks.
+Full file list, evidence and manual checklist: TestResults/HandmadeDetails_Report.md;
+results: HandmadeDetails_Regression.json and Edit/Play/Cover/LadderTests.json;
+saved-state proof: HandmadeDetails_FinalVerification.json, Console.json,
+ProtectedBefore/After and per-scene Before/After snapshots. Implemented by Codex;
+awaiting human artistic and device playtest verification.
