@@ -1,5 +1,10 @@
 # AKUMU 2 character art
 
+> Current visual direction and approval/reference index: [GRAPHICS_BIBLE.md](GRAPHICS_BIBLE.md).
+> Read it first for graphics work. This document preserves technical rig,
+> attachment, provenance and sprint history; older experiments and superseded
+> restrictions do not override the permanent bible or later explicit user direction.
+
 ## Hotfix 0025.3 presentation note
 
 Larper Glock reloads reuse the accepted player magazine component without changing
