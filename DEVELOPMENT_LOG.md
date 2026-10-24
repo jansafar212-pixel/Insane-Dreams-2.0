@@ -5178,3 +5178,205 @@ feel near boxes/cover/ladders/platform edges, Android input/safe areas/readabili
 Exact files, parameters, secondary status and manual checklist:
 TestResults/Sprint0026_Report.md. Raw history/latest results Sprint0026.json;
 protected before/after manifests Sprint0026_ProtectedBefore/After.json.
+
+## 2026-10-24 — Hotfix0025.3: latest playtest follow-up after Sprint0026
+
+Implemented by Codex — awaiting human/Android playtest verification. New brief
+reuses0025.3; distinct follow-up setup/tests/report preserve the earlier hotfix.
+Read current AGENTS/art bible/log and scripts/prefabs before focused edits.
+
+Blind-fire HUD used cover instead of physical crouch; MissionControls also omitted
+the button. Both HUDs now show it whenever physically crouched, hide on standing,
+disable/dim without usable cover, and reject invalid pointer firing. Ordinary FIRE
+and aiming joystick remain usable away from cover; disabled blind fire sits100UI
+units above FIRE to avoid overlap, usable cover keeps the old position. Existing
+raise/spread/LOS/ammo, pointer release and other touch input remain.
+
+Samurai-only jumpSpeed13.28→15 (+12.95%speed/~27.6%theoreticalheight), gravity3
+unchanged. Actual free-jump comparison verifies25–30%rise and proper landings;
+3.2unit platform reached by one jump. Motor/player/Larper/fireworks values untouched.
+Existing planner already derives arcs from motor speed. Warehouse test caught a
+low-crate stall: old descending gate required>.9 vertical centre difference. Gate
+.9→.3 reuses existing safe swept walk-off and drop/landing limits; whole autonomous
+warehouse suite now reaches melee/pursues/replans correctly. No new nav framework,
+teleportation, physics body, damage, anticipation or horizontal movement changes.
+
+Glock tracer origin was correct, but LateUpdate moved only the flash to the later
+recoiling muzzle. Explicit BackupPistol/LarperBuzzbox references now pin flash world
+position/orientation to the recorded shot throughout its short life. Tracer/hitscan
+remain unchanged; other weapons keep existing flash following/custom art. No sprite,
+palette, pivots, ammo/rate/damage/reload edits. Native APIs authored3prefabs only;
+all3warehouse scenes byte-identical, all3Demo Samurai inherit15 without overrides.
+
+Verification:63unique targeted checks passed (54selectedPlay+9selectedEdit),
+including6new focused cases. Both HUDs, disabled/functional blind fire/pointer exit,
+12player Glock aim/facing/recoil/translation cases, enemy Glock and unchanged carbine;
+measured higher jump/landing; actual warehouse Samurai viewport/aggro/cover/melee;
+ceiling/gap/step navigation; cover, movement/ladders/weapon presentation, revival,
+Larper panic escapes, combat rules and Samurai rig/tuning regressions. No existing
+test assertions changed and no unnecessary full-project run. Initial warehouse
+failure and passing whole-suite rerun retained in raw history.
+
+Compile completed without errors. Post-test Console0errors/0warnings; a later broad
+MCP eval timed out after10000ms and logged one Pipeline tooling error. Smaller
+native retries succeeded; final Console retains1tooling error/0warnings. No logs
+erased. Four native prefab scans0missing scripts. Protected files16/17identical,
+only expected SamuraiCombat descent edit;0unexpected changes. MainMenu clean/open,
+Play Mode stopped. No stage/commit/push. Human gameplay feel and Android touch,
+safe-area/joystick-scale ergonomics and performance still need manual verification.
+
+Exact files/values/tests/manual checklist: TestResults/Hotfix00253Followup_Report.md.
+Raw results Hotfix00253Followup.json; protected before/after manifests alongside it.
+
+## 2026-10-24 — Menu/HUD graphics rework and corrected0025.3 controls
+
+Implemented by Codex — awaiting artistic/human/Android playtest acceptance. Read
+AGENTS/art bible/current log and inspected existing UI/gameplay. Preserved the
+already implemented Samurai13.28→15 (~28%height)/low-crate descent and Glock
+shot-origin alignment; no repeated tuning or unrelated gameplay refactoring.
+
+Menu: independently code-authored5×7 block wordmark, flat warehouse silhouettes,
+existing ShippingCrate art and ink/paper/cardboard/yellow/orange/teal palette.
+Main navigation, settings/levels/shop, scrollbar, pause, Results and revival share
+flat rectangular warning-label styling. Existing callbacks/save/progression remain.
+No new font dependency, generated illustration, character sprite or rig edits.
+
+HUD: live health numbers/bar, armor/tape/revive readouts, selected weapon sprite,
+large magazine/reserve fields and1/2/M tabs replace the dense equipment paragraph.
+Objectives sit below vitals; pause centred in safe area, min-height56 to survive
+pixel rounding. Touch sizes/radius/thresholds/sensitivity preserved; aim inset44px.
+Data readout remains5Hz with cached UI references, no gameplay scans/physics added.
+
+Removed redundant ordinary FIRE from both layouts and its field/query/layout/
+pointer bindings. Secondary slot/weapon mechanics and joystick firing preserved,
+verified with real touch selection plus sidearm ammo consumption. Latest corrected
+blind-fire rule supersedes the previous follow-up: visible ONLY while physically
+crouched AND in usable cover. Hidden in the other3states; pointer guard also checks
+both. Standing/cover destruction hides/releases it while underlying blind spread,
+raise/peek/LOS and input ownership remain. No merely-near-cover acquisition UI.
+
+Verification:81unique targeted checks pass (72Play+9Edit), deduplicated reruns.
+Menu settings/save/back/play/level/preparation/all shop tabs/buy/launch/pause/resume;
+real HUD values/bar/icon, sidearm joystick, layout/insets; updated four-state and
+cover-destruction pointer checks; existing flow/save/results/revival, cover,
+movement/ladders/camera/touch layouts, Samurai pursuit/jump/landing/melee, Glock
+all-direction/recoil alignment and Larper suppression/escape regressions. Existing
+tests adapt to the requested removed control and new ammo fields; behavioral
+assertions retained. Fresh-save sidearm fixture corrected to buy/equip in Shop;
+settings slider query excludes scrollbar internals. Pause hit height enlarged
+after layout regression caught subpixel rounding under its former52unit minimum.
+
+Actual Unity MainMenu/shop/HUD captures generated and visually inspected; controlled
+temporary saves and runtime poses, not human playthrough or Android verification.
+All21 protected gameplay/data/prefab/warehouse-scene hashes identical. Compile
+completed, final Console0errors/0warnings. MainMenu clean/open/stopped, background
+off. No scenes/prefabs altered, no stage/commit/push. Body text reuses existing
+Unity font; historical art unchanged. Actual app exit not invoked in Editor.
+
+Manual remaining: artistic/readability review, Android safe areas/tap comfort/
+scrolling/joystick scales/performance, normal warehouse play and desktop-build quit.
+Full modifications/tests/checklist: TestResults/GraphicsUiRework_Report.md.
+Evidence: GraphicsUiRework.json; protected before/after manifests; native captures
+GraphicsUiRework_MainMenu.png, GraphicsUiRework_Shop.png, GraphicsUiRework_Hud.png.
+
+## Mobile HUD & explosives expert focused hotfix (2026-10-24)
+
+Implemented by Codex - awaiting Android/gameplay playtest verification.
+Health resolved size 260x173 -> 220x141 (~31% less area); pause painted face
+124x56 -> 88x40 with unchanged 124x56 touch target at safe top-center.
+Startup objective 280x224 -> 224x137 (~51% less area), opacity .88 -> .65;
+long text bounded with touch scrolling, mission/progress/results retained.
+Only repeated startup flavor sentence omitted from compact readout.
+Explosive native damage 24 -> 31.2 (+30%), radius 2.7 -> 3.2 (+18.5%).
+Recovery 3s -> 1.05s +/-15%; .85s wind-up, initial 1-2s delay, fuse variation,
+8% held malfunction and two-projectile/35-renderer pools preserved.
+Fixed unconditional close-range retreat veto: valid ready targets can prompt a
+throw while repositioning; readable wind-up still plants feet. Controlled real
+pool launched 13 vs 7 times in 28s; no Larper/Samurai tuning changed.
+
+Final unique tests: 33 Play Mode pass / 1 fail; 7 Edit Mode pass. Targeted HUD,
+blast/friendly-fire/fuse/held-failure, menu/shop, cover, weapon and progression
+checks pass. Older Sprint0242 suppression crouch assertion (line77) fails twice,
+including isolated rerun; cause unestablished, pipeline unchanged. All21 protected
+hashes match previous graphics-rework manifest. Do not claim full regression pass.
+Compile successful; stopped; final current Console 0 errors/0 warnings. Initial
+layout overlap corrected; fixture now resumes pause before unloading. No new
+per-frame scans/managers/effect counts. No stage/commit/push.
+
+Android tap comfort, text scrolling/readability and actual device performance,
+combat balance and full-level human playtest remain required. Editor captures
+and controlled tests are not Android/human verification. Full changes, exact
+measurements, test limitations and manual checklist: TestResults/MobileHudPyro_Report.md.
+Evidence: MobileHudPyro_Regression.json, _Before/_After.json/png,
+_ThrowCounts.json, _Protected.json.
+
+## Post-playtest hotfix / recovery completion (2026-10-24)
+
+Resumed existing implementation; did not restart or overwrite earlier work.
+Implemented by Codex - awaiting human gameplay/Android verification.
+Weapon panel 219.85x219.85 -> 196x161.78 UI units (~34.4% less area), readable
+weapon/ammo/icon fields and nominal44-unit selection hit heights retained.
+Pause now uses two pixel bars in the existing88x40 face /124x56 hit target.
+Health and objective dimensions unchanged; all12 protected hashes unchanged,
+including previous explosives tuning, shared movement/ragdoll/AI and warehouse scenes.
+
+Separate Procure Faintanyl shop button, exact description:
+relax its not addictive, just habit forming
+Native catalog: $75 per injection, capacity2; existing wallet/debounce/save rollback
+and finite stock reused. Existing death-button revival still consumes one, restores
+in place and protects for2s. New .6s one-handed flat-pixel syringe gesture follows
+the free hand/facing; fire/reload briefly gated, movement retained, replay cancels.
+New independently code-authored16x7 Sprite, point/32PPU, existing palette. Actual
+historical Postava1 inspected; original artwork/character modules unchanged.
+
+Player death copies the live pose before defeat observers reset it, using the
+existing six-body CartoonRagdoll fallback, terrain collisions, impact/momentum,
+bounded impulses, lifetime/cap and sleep. Live rig hides and controls suspend.
+Revive/checkpoint retires corpse and restores presentation/simulation/controls.
+Empty stock now shows1.2s collapse before automatic checkpoint recovery; existing
+regression retains recovery assertions with the new intentional wait. Death screen
+keeps its buttons, background .94 -> .45 so the collapse is visible.
+
+Final unique regressions:69 Play pass /1 fail,7 Edit pass (76/77); extra explicit
+legacy diagnostic excluded from totals. Five new focused cases pass again on
+recovery, including actual explosion death, both-facing syringe, exactly-once
+purchase/use, combat return, chosen/empty-stock checkpoint recovery and layouts.
+Existing shop/progression/save/weapon/reload/cover/touch/enemy corpse/prior HUD and
+explosives checks pass. Old enemy fixture used only six root bodies despite14-body
+articulation; test loops now inspect/stop actual Bodies, retaining thresholds.
+Final ReactiveRagdollTests5/5. Speech timing initially failed, isolated rerun passed.
+Remaining ladder-top diagonal test expects velocity>3 but gets0; reproduced with
+both new presentation components disabled. Movement code unchanged; cause not
+resolved in this focused hotfix. Previous suppression-crouch issue remains in
+prior report, not retested here. Do not claim a fully passing project suite.
+
+Controlled native HUD/shop/syringe/death captures inspected. No human full-level
+playthrough, APK/device verification or Android profiling. Final compile successful,
+MainMenu clean/open/stopped; current Console0errors/0warnings. Dirty working tree
+and all prior changes retained; no stage/commit/push.
+Full file list, measurements, test history and manual checklist:
+TestResults/PostPlaytest_Report.md; raw PostPlaytest_Regression.json;
+PostPlaytest_ProtectedBefore/After.json; PostPlaytest_LegacyDiagnostics.txt;
+PostPlaytest_Before/After.json and native runtime PNG captures.
+Final follow-up: Unity AI Toolkit later logged one Editor account/network warning
+(Account API did not become accessible within30seconds). Current Console0errors,
+1warning; scripts remain compiled and MainMenu clean/open/stopped. This supersedes
+the zero-warning snapshot above. No account/tooling changes were made.
+
+## Small UI hotfix - Medical-only Faintanyl / magazine capacity (2026-10-24)
+
+Medical tab now maps the existing serialized Faintanyl category; its purchase card
+is rendered only in that section, absent from Weapons, Ammunition, Body armor and
+Duct tape. Existing offer, exact description, price, cap, debounce and transactions
+unchanged; no asset/category-value migration or balance edits.
+Ammo HUD now shows current/magazine-capacity (for example16/27), using the selected
+weapon definition; reserve remains separate. Existing cached readout refresh updates
+firing/reload/slot changes. Melee keeps --. No unrelated layout/gameplay edits.
+Production files: GameFlowController.cs, WarehouseTouchControls.cs. Updated existing
+PostPlaytestHotfixTests, GraphicsUiReworkTests and TraversalRegressionTests assertions.
+Focused verification only:3/3 Play Mode cases pass: all store categories/Medical
+purchase/debounce/cap/save, actual touch firing and reload with dynamic numerator/
+capacity/reserve, switching and ammo preservation; multiple simulated aspect ratios.
+Native HUD capture inspected; compile successful, zero current Console errors.
+Raw results: TestResults/SmallMedicalAmmo.json. No broader regressions or Android
+hardware tests rerun for this small UI pass. No stage/commit/push.

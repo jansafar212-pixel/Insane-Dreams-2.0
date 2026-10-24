@@ -28,6 +28,9 @@ namespace InsaneDreams.Missions
             resetCover=new VisualElement{name="missionResetCover"};resetCover.style.position=Position.Absolute;
             resetCover.style.left=resetCover.style.right=resetCover.style.top=resetCover.style.bottom=0;
             resetCover.style.backgroundColor=Color.black;resetCover.style.display=DisplayStyle.None;root.Add(resetCover);
+            // Keep long notices readable via touch scrolling, without an expanding overlay.
+            var card=root.Q(className:"mission-card");
+            if(card!=null&&card.Q("missionDetails")==null){var details=new ScrollView(ScrollViewMode.Vertical){name="missionDetails"};details.AddToClassList("mission-details");details.horizontalScrollerVisibility=ScrollerVisibility.Hidden;details.verticalScrollerVisibility=ScrollerVisibility.Hidden;while(card.childCount>0)details.Add(card[0]);card.Add(details);}
             objective=root.Q<Label>("objective");notification=root.Q<Label>("missionNotice");prompt=root.Q<Label>("interactionPrompt");time=root.Q<Label>("missionTime");resultStats=root.Q<Label>("resultStats");
             interact=root.Q<Button>("interact");replay=root.Q<Button>("replayMission");if(interact==null||replay==null)return;interact.clicked+=Interact;replay.clicked+=Replay;
             if(mission!=null)mission.Changed+=Refresh;Refresh();
@@ -46,9 +49,10 @@ namespace InsaneDreams.Missions
         private void Update(){if(resetCover!=null&&Time.frameCount>=coveredFrame&&Time.unscaledTime>=coveredUntil)resetCover.style.display=DisplayStyle.None;if(mission!=null&&Time.unscaledTime>=nextReadout){nextReadout=Time.unscaledTime+.15f;Readout();}}
         private void Readout()
         {
-            if(mission==null||safe==null||notification==null||time==null||prompt==null||interact==null)return;notification.text=mission.Notification;notification.EnableInClassList("hidden",notification.text.Length==0);time.text=Clock(mission.Elapsed);
+            if(mission==null||safe==null||notification==null||time==null||prompt==null||interact==null)return;notification.text=mission.Notification.StartsWith("MISSION 01")?"MISSION 01 / WAREHOUSE INCIDENT":mission.Notification;notification.EnableInClassList("hidden",notification.text.Length==0);time.text=Clock(mission.Elapsed);
             bool available=mission.CanInteract;prompt.text=available?"CORPORATE RECORDS — E / INTERACT":"";interact.EnableInClassList("hidden",!available);
             prompt.EnableInClassList("hidden",!available);
         }
     }
 }
+

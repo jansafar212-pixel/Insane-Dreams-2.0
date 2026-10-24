@@ -222,18 +222,18 @@ namespace InsaneDreams.Tests
             var loadout = player.GetComponent<InsaneDreams.Inventory.PlayerLoadout>();
             foreach(var slot in new[]{InsaneDreams.Inventory.EquipmentSlot.Firearm1,InsaneDreams.Inventory.EquipmentSlot.Firearm2})
             {var weapon=loadout.Get(slot);Assert.AreEqual(108,weapon.ReserveAmmo);Assert.AreEqual(weapon.Definition.MagazineCapacity,weapon.MagazineAmmo);}
-            yield return new WaitForSeconds(.25f);StringAssert.Contains("reserve 108",root.Q<Label>("loadout").text);
+            yield return new WaitForSeconds(.25f);Assert.AreEqual("RESERVE 108",root.Q<Label>("reserveValue").text);
             var startingWeapon=loadout.SelectedWeapon;startingWeapon.SetAmmunition(startingWeapon.Definition.MagazineCapacity-1,108);
             Assert.IsTrue(startingWeapon.Cycle.TryReload(Time.time));startingWeapon.Cycle.Tick(Time.time+startingWeapon.Definition.ReloadDuration+.01f);
             Assert.AreEqual(startingWeapon.Definition.MagazineCapacity,startingWeapon.MagazineAmmo);Assert.AreEqual(107,startingWeapon.ReserveAmmo);
-            yield return new WaitForSeconds(.25f);StringAssert.Contains("reserve 107",root.Q<Label>("loadout").text);
+            yield return new WaitForSeconds(.25f);Assert.AreEqual("RESERVE 107",root.Q<Label>("reserveValue").text);
             var first = loadout.Get(InsaneDreams.Inventory.EquipmentSlot.Firearm1); first.SetAmmunition(3, 17);
             var second = root.Q<Button>("slot2"); Down(second, 5, second.worldBound.center); Up(second, 5);
             yield return null; Assert.AreEqual(InsaneDreams.Inventory.EquipmentSlot.Firearm2, loadout.SelectedSlot);
             actions.SelectWeapon(InsaneDreams.Inventory.EquipmentSlot.Melee); yield return new WaitForSeconds(.25f);
-            StringAssert.Contains("unlimited", root.Q<Label>("loadout").text);
+            StringAssert.Contains("unlimited", root.Q<Label>("reserveValue").text);
             actions.SelectWeapon(InsaneDreams.Inventory.EquipmentSlot.Firearm1); yield return new WaitForSeconds(.25f);
-            Assert.AreEqual(3, loadout.SelectedWeapon.MagazineAmmo); StringAssert.Contains("Ammo 3", root.Q<Label>("loadout").text);
+            Assert.AreEqual(3, loadout.SelectedWeapon.MagazineAmmo); Assert.AreEqual($"3/{loadout.SelectedWeapon.Definition.MagazineCapacity}", root.Q<Label>("ammoValue").text);
         }
         [UnityTest] public IEnumerator MobileControlsFitLandscapeAndWideLandscapeTargets()
         {

@@ -1,22 +1,64 @@
-.flow-background { position: absolute; left: 0; right: 0; top: 0; bottom: 0; background-color: rgb(17,27,37); align-items: center; justify-content: center; padding: 20px 36px; }
-.flow-scroll { width: 100%; max-width: 1050px; max-height: 100%; }
-.flow-content { padding: 16px 20px; }
-.flow-brand { color: rgb(62,222,243); font-size: 44px; -unity-font-style: bold; }
-.flow-kicker { color: rgb(163,183,193); font-size: 16px; margin-bottom: 18px; }
-.flow-title { color: rgb(255,219,117); font-size: 23px; white-space: normal; margin: 8px 0; }
-.flow-copy { color: rgb(232,239,241); font-size: 19px; white-space: normal; margin: 6px 0; }
-.flow-warning { color: rgb(255,177,130); font-size: 18px; white-space: normal; margin: 8px 0; }
-.flow-button { min-height: 52px; margin: 5px 4px; padding: 8px 14px; background-color: rgb(34,77,88); border-width: 2px; border-color: rgb(86,151,166); color: white; font-size: 18px; white-space: normal; }
-.flow-button:hover, .flow-button:focus { background-color: rgb(51,108,119); border-color: rgb(255,219,117); }
-.flow-button:disabled { opacity: .45; }
+.flow-background { position: absolute; left: 0; right: 0; top: 0; bottom: 0; background-color: #191d2b; align-items: center; justify-content: center; padding: 24px 36px; }
+.warehouse-scene { position: absolute; left: 0; right: 0; top: 0; bottom: 0; overflow: hidden; }
+.warehouse-moon { position: absolute; right: 12%; top: 7%; width: 74px; height: 74px; background-color: #b58441; }
+.warehouse-wall { position: absolute; left: -4%; right: -2%; bottom: 58px; height: 43%; background-color: #242b36; border-top-width: 12px; border-top-color: #0c6374; rotate: -2deg; }
+.warehouse-door { position: absolute; right: 9%; bottom: 0; width: 230px; height: 73%; background-color: #111723; border-width: 10px; border-color: #37404a; }
+.warehouse-window { position: absolute; left: 8%; top: 34px; width: 150px; height: 64px; background-color: #b58441; border-width: 8px; border-color: #191d2b; }
+.warehouse-sign { position: absolute; right: 8%; top: -56px; color: #f7c92c; font-size: 13px; -unity-font-style: bold; letter-spacing: 2px; }
+.warehouse-crate { position: absolute; right: 5%; bottom: 58px; width: 124px; height: 124px; background-image: url("../Art/Sprint008/ShippingCrate.png"); -unity-background-scale-mode: scale-to-fit; }
+.warehouse-crate.small { right: 15%; width: 86px; height: 86px; }
+.warehouse-floor { position: absolute; left: 0; right: 0; bottom: 0; height: 58px; background-color: #111723; border-top-width: 6px; border-top-color: #e2671e; }
+.flow-scroll { width: 100%; max-width: 1180px; max-height: 100%; }
+.flow-scroll .unity-scroller--vertical { width: 14px; min-width: 14px; background-color: #e9dfc1; }
+.flow-scroll .unity-scroller--vertical .unity-base-slider__tracker { background-color: #e9dfc1; }
+.flow-scroll .unity-scroller--vertical .unity-base-slider__dragger { background-color: #b58441; border-radius: 0; border-width: 1px; border-color: #191d2b; }
+.flow-scroll .unity-scroller__low-button, .flow-scroll .unity-scroller__high-button { background-color: #f7c92c; border-radius: 0; border-width: 1px; border-color: #191d2b; -unity-background-image-tint-color: #191d2b; }
+.flow-scroll .unity-scroller--vertical .flow-scroll-arrow { background-image: none; background-color: #f7c92c; color: #191d2b; font-size: 12px; height: 18px; -unity-font-style: bold; }
+.flow-scroll .unity-scroller--vertical #unity-dragger { background-color: #b58441; border-width: 1px; border-color: #191d2b; border-radius: 0; }
+.flow-scroll .unity-scroller--vertical #unity-tracker { background-color: #e9dfc1; }
+.flow-content { padding: 24px 28px; background-color: #ffffeb; border-left-width: 8px; border-left-color: #e2671e; color: #191d2b; }
+.front-page { background-color: rgba(25,29,43,.94); border-left-color: #f7c92c; border-top-width: 3px; border-top-color: #ffffeb; padding: 30px; }
+.flow-kicker { color: #0c6374; font-size: 13px; -unity-font-style: bold; letter-spacing: 2px; margin-bottom: 18px; white-space: normal; }
+.front-page .flow-kicker { color: #f7c92c; }
+.flow-brand { color: #191d2b; font-size: 32px; -unity-font-style: bold; letter-spacing: 2px; }
+.flow-front { flex-direction: row; flex-wrap: wrap; }
+.flow-hero { flex-grow: 1; flex-basis: 480px; padding-right: 24px; padding-bottom: 16px; }
+.flow-logo { width: 100%; max-width: 390px; height: 70px; margin-top: 24px; margin-bottom: 18px; }
+.flow-tagline { color: #f7c92c; font-size: 29px; -unity-font-style: bold; white-space: normal; margin-top: 2px; }
+.flow-stamp { align-self: flex-start; margin-top: 24px; margin-bottom: 14px; padding: 6px 10px; border-width: 2px; border-color: #e2671e; color: #e2671e; font-size: 13px; -unity-font-style: bold; letter-spacing: 2px; rotate: -3deg; }
+.flow-intro { color: #d6d2bc; font-size: 19px; white-space: normal; }
+.flow-nav { flex-grow: 1; flex-basis: 300px; min-width: 240px; justify-content: center; }
+.flow-nav-title { color: #b58441; font-size: 12px; -unity-font-style: bold; letter-spacing: 2px; margin: 8px 4px; }
+.flow-nav-note { color: #d6d2bc; font-size: 16px; margin: 16px 8px; white-space: normal; }
+.flow-footer { color: #b58441; font-size: 11px; letter-spacing: 1px; white-space: normal; margin-top: 24px; padding-top: 12px; border-top-width: 2px; border-top-color: #414451; }
+.flow-title { color: #191d2b; font-size: 24px; -unity-font-style: bold; white-space: normal; margin: 12px 0 8px; }
+.flow-copy { color: #34343b; font-size: 18px; white-space: normal; margin: 6px 0; }
+.flow-warning { color: #a72d20; font-size: 17px; -unity-font-style: bold; white-space: normal; margin: 8px 0; }
+.flow-button { min-height: 56px; margin: 5px 4px; padding: 10px 18px; background-color: #e9dfc1; border-width: 2px; border-color: #191d2b; border-bottom-width: 5px; color: #191d2b; font-size: 18px; -unity-font-style: bold; white-space: normal; border-radius: 0; }
+.flow-button:hover, .flow-button:focus { background-color: #f7c92c; border-color: #0c6374; }
+.flow-button:active { background-color: #e2671e; }
+.flow-button:disabled { opacity: .4; }
+.flow-primary, .flow-button.is-selected { background-color: #f7c92c; }
+.flow-nav .flow-button { min-height: 66px; font-size: 22px; }
+.flow-nav .flow-quiet { color: #d6d2bc; background-color: #242b36; border-color: #555561; font-size: 16px; min-height: 50px; }
+.flow-nav .flow-quiet:hover, .flow-nav .flow-quiet:focus { border-color: #f7c92c; color: #ffffeb; }
 .flow-row { flex-direction: row; flex-wrap: wrap; }
-.flow-list { flex-grow: 1; flex-basis: 240px; }
-.flow-detail { flex-grow: 2; flex-basis: 300px; padding: 12px 18px; background-color: rgb(26,42,54); }
+.flow-list { flex-grow: 1; flex-basis: 230px; }
+.flow-detail { flex-grow: 2; flex-basis: 300px; padding: 12px 18px; margin: 5px; border-width: 2px; border-color: #b58441; background-color: #f1e8cb; }
 .flow-row > .flow-button { flex-grow: 1; }
 .flow-slider { min-height: 48px; margin: 8px 12px; }
-.level-entry { padding: 12px; background-color: rgb(26,42,54); margin-bottom: 12px; }
-.level-icon { width: 72px; height: 72px; -unity-background-scale-mode: scale-to-fit; }
-.campaign-pause { position: absolute; left: 50%; translate: -50% 0; top: 12px; bottom: auto; min-width: 124px; min-height: 52px; margin: 0; }
-.top-pause .mission-card { right: 50%; margin-right: 80px; max-width: none; }
-.campaign-overlay { position: absolute; left: 0; right: 0; top: 0; bottom: 0; background-color: rgba(10,20,28,.97); align-items: center; justify-content: center; }
-.campaign-panel { width: 80%; max-width: 560px; padding: 20px; }
+.flow-slider .unity-base-slider__tracker { height: 6px; background-color: #b58441; }
+.flow-slider .unity-base-slider__dragger { width: 20px; height: 24px; background-color: #f7c92c; border-width: 2px; border-color: #191d2b; border-radius: 0; }
+.level-entry { padding: 14px 18px; background-color: #f1e8cb; border-width: 2px; border-color: #b58441; border-left-width: 8px; border-left-color: #0c6374; margin-bottom: 12px; }
+.level-icon { width: 84px; height: 64px; -unity-background-scale-mode: scale-to-fit; }
+.campaign-pause { position: absolute; left: 50%; translate: -50% 0; top: 12px; bottom: auto; min-width: 124px; min-height: 56px; margin: 0; padding: 8px; font-size: 16px; background-color: #f7c92c; }
+.campaign-overlay { position: absolute; left: 0; right: 0; top: 0; bottom: 0; background-color: rgba(25,29,43,.96); align-items: center; justify-content: center; }
+.campaign-panel { width: 80%; max-width: 560px; padding: 24px; background-color: #ffffeb; border-left-width: 8px; border-left-color: #e2671e; }
+
+/* Keep the touch target generous; paint only its smaller inset face. */
+.campaign-pause, .campaign-pause:hover, .campaign-pause:focus, .campaign-pause:active { background-color: rgba(0,0,0,0); border-width: 0; padding: 0; font-size: 0; color: rgba(0,0,0,0); align-items: center; justify-content: center; }
+.pause-face { width: 88px; height: 40px; background-color: #f7c92c; color: #191d2b; border-width: 2px; border-color: #191d2b; font-size: 12px; -unity-font-style: bold; -unity-text-align: middle-center; }
+.campaign-pause:active .pause-face { background-color: #e2671e; }
+.pause-face { align-items: center; justify-content: center; }
+.pause-icon { flex-direction: row; width: 18px; height: 18px; justify-content: space-between; }
+.pause-bar { width: 6px; height: 18px; background-color: #191d2b; }

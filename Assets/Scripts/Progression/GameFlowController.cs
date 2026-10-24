@@ -13,39 +13,74 @@ namespace InsaneDreams.Progression
         private ShopCategory category;
         private string selected;
         private bool loading;
+        private static readonly string[] LogoGlyphs={
+            "01110"+"11011"+"11011"+"11111"+"11011"+"11011"+"11011",
+            "11011"+"11011"+"11110"+"11100"+"11110"+"11011"+"11011",
+            "11011"+"11011"+"11011"+"11011"+"11011"+"11011"+"01110",
+            "10001"+"11011"+"10101"+"10101"+"10001"+"10001"+"10001",
+            "01110"+"11011"+"00011"+"00110"+"01100"+"11000"+"11111"};
         private Rect lastSafeArea;
         private Vector2Int lastScreen;
         private void Start()
         {
             session=GameSession.Instance;
             if(session==null){session=new GameObject("CampaignSession").AddComponent<GameSession>();session.Initialize(catalog,System.IO.Path.Combine(Application.persistentDataPath,"akumu2_progress_v1.json"));}
-            content=GetComponent<UIDocument>().rootVisualElement.Q("flowContent");Draw();
+            var root=GetComponent<UIDocument>().rootVisualElement;
+            var scroll=root.Q<ScrollView>();scroll.verticalScroller.lowButton.text="^";scroll.verticalScroller.highButton.text="v";
+            scroll.verticalScroller.lowButton.AddToClassList("flow-scroll-arrow");scroll.verticalScroller.highButton.AddToClassList("flow-scroll-arrow");
+            content=root.Q("flowContent");Draw();
         }
         private void Text(VisualElement parent,string value,string style="flow-copy"){var label=new Label(value);label.AddToClassList(style);parent.Add(label);}
         private Button Action(VisualElement parent,string text,System.Action callback,bool enabled=true)
         {var button=new Button(callback){text=text};button.AddToClassList("flow-button");button.SetEnabled(enabled&&!loading);parent.Add(button);return button;}
         private void Go(FlowScreen screen){session.Navigate(screen);Draw();}
+        private void PixelLogo(VisualElement parent)
+        {
+            var logo=new VisualElement{name="akumuWordmark",tooltip="AKUMU 2",pickingMode=PickingMode.Ignore};logo.AddToClassList("flow-logo");parent.Add(logo);int x=0;
+            foreach(int index in new[]{0,1,2,3,2,-1,4})
+            {
+                if(index<0){x+=30;continue;}string glyph=LogoGlyphs[index];
+                for(int y=0;y<7;y++)for(int col=0;col<5;)
+                {
+                    if(glyph[y*5+col]!='1'){col++;continue;}int start=col;while(col<5&&glyph[y*5+col]=='1')col++;
+                    var strip=new VisualElement{pickingMode=PickingMode.Ignore};strip.style.position=Position.Absolute;strip.style.left=Length.Percent((x+start*10)/390f*100);strip.style.top=y*10;strip.style.width=Length.Percent((col-start)*10/390f*100);strip.style.height=10;strip.style.backgroundColor=new Color(1,1,235f/255);logo.Add(strip);
+                }
+                x+=60;
+            }
+        }
         private void Draw()
         {
             content.Clear();var data=session.Data;
-            Text(content,"AKUMU 2","flow-brand");Text(content,"KUROHASHI GAMES / WAREHOUSE INCIDENT","flow-kicker");
+            content.EnableInClassList("front-page",session.Screen==FlowScreen.MainMenu);
+            if(session.Screen!=FlowScreen.MainMenu)Text(content,"AKUMU 2","flow-brand");
+            Text(content,"KUROHASHI GAMES  /  FIELD OPERATIONS","flow-kicker");
             if(session.Store.ReadOnly)Text(content,session.Store.Problem,"flow-warning");
             if(!string.IsNullOrEmpty(session.Notice))Text(content,session.Notice,"flow-warning");
             switch(session.Screen)
             {
                 case FlowScreen.MainMenu:
-                    Text(content,"Unemployed. Unqualified. Unreasonably confident.");
-                    Action(content,"PLAY",()=>Go(FlowScreen.Levels));Action(content,"SETTINGS",()=>Go(FlowScreen.Settings));
-                    if(Application.platform!=RuntimePlatform.Android)Action(content,"QUIT",()=>Application.Quit());break;
+                    var front=new VisualElement();front.AddToClassList("flow-front");content.Add(front);
+                    var hero=new VisualElement();hero.AddToClassList("flow-hero");front.Add(hero);
+                    PixelLogo(hero);
+                    Text(hero,"BAD DREAMS.\nWORSE EMPLOYEES.","flow-tagline");
+                    Text(hero,"NO TRAINING PROVIDED","flow-stamp");
+                    Text(hero,"Unemployed. Unqualified.\nUnreasonably confident.","flow-intro");
+                    var nav=new VisualElement();nav.AddToClassList("flow-nav");front.Add(nav);
+                    Text(nav,"YOUR NEXT BAD DECISION","flow-nav-title");
+                    Action(nav,"PLAY",()=>Go(FlowScreen.Levels)).AddToClassList("flow-primary");
+                    Action(nav,"SETTINGS",()=>Go(FlowScreen.Settings));
+                    if(Application.platform!=RuntimePlatform.Android)Action(nav,"QUIT",()=>Application.Quit()).AddToClassList("flow-quiet");
+                    Text(nav,"Clock in. Cause problems.\nTry to clock out.","flow-nav-note");
+                    Text(content,"INJURIES WILL NOT BE REIMBURSED.   //   EST. BAD IDEAS","flow-footer");break;
                 case FlowScreen.Settings:
                     Text(content,"SETTINGS","flow-title");
                     Text(content,"Master audio");
                     var volume=new Slider(0,1){value=data.volume};volume.AddToClassList("flow-slider");
                     volume.RegisterValueChangedCallback(e=>{data.volume=e.newValue;AudioListener.volume=e.newValue;session.Save();});content.Add(volume);
-                    Text(content,"Touch joystick scale — existing control response is unchanged");
+                    Text(content,"Touch control size");
                     var scale=new Slider(.75f,1.5f){value=data.joystickScale};scale.AddToClassList("flow-slider");
                     scale.RegisterValueChangedCallback(e=>{data.joystickScale=e.newValue;session.Save();});content.Add(scale);
-                    Text(content,"PC: A/D move · S crouch · SPACE jump · RMB aim · LMB/F fire · H hold heal\nTouch: MOVE / AIM sticks · JUMP · FIRE · HOLD HEAL");
+                    Text(content,"PC: A/D move · S crouch · SPACE jump · RMB aim · LMB/F fire · H hold heal\nTouch: MOVE / AIM sticks · push AIM to fire · JUMP · HOLD HEAL");
                     Action(content,"BACK",()=>Go(FlowScreen.MainMenu));break;
                 case FlowScreen.Levels:
                     Text(content,"LEVEL SELECTION","flow-title");Text(content,"Wallet $"+data.balance);
@@ -63,7 +98,9 @@ namespace InsaneDreams.Progression
                     Text(content,"Wallet $"+data.balance+" · Tape "+data.tape.ToString("0")+"/"+catalog.tapeCapacity+" · Armor "+data.armor.ToString("0")+"/"+catalog.armorCapacity);
                     var tabs=new VisualElement();tabs.AddToClassList("flow-row");content.Add(tabs);
                     foreach(ShopCategory tab in Enum.GetValues(typeof(ShopCategory)))
-                        Action(tabs,tab==ShopCategory.BodyArmor?"Body armor":tab==ShopCategory.DuctTape?"Duct tape":tab.ToString(),()=>{category=tab;selected=null;Draw();});
+                    {var button=Action(tabs,tab==ShopCategory.Faintanyl?"Medical":tab==ShopCategory.BodyArmor?"Body armor":tab==ShopCategory.DuctTape?"Duct tape":tab.ToString(),()=>{category=tab;selected=null;Draw();});button.EnableInClassList("is-selected",tab==category);}
+                    if(category!=ShopCategory.Faintanyl)
+                    {
                     var items=new VisualElement();items.AddToClassList("flow-row");content.Add(items);
                     var list=new VisualElement();list.AddToClassList("flow-list");items.Add(list);
                     var detail=new VisualElement();detail.AddToClassList("flow-detail");items.Add(detail);
@@ -86,6 +123,9 @@ namespace InsaneDreams.Progression
                         {var gun=Array.Find(catalog.offers,x=>x.category==ShopCategory.Weapons&&x.weapon==item.weapon);Text(detail,"Reserve "+(gun==null?0:data.Ammo(gun.id).reserve)+"/"+catalog.ammoCapacity);}
                         Action(detail,"BUY",()=>{session.Buy(item.id,Time.unscaledTime);Draw();},session.CanBuy(item.id));
                     }
+                    }
+                    var faintanyl=Array.Find(catalog.offers,x=>x.category==ShopCategory.Faintanyl);
+                    if(category==ShopCategory.Faintanyl&&faintanyl!=null){var consumable=new VisualElement{name="faintanylShop"};consumable.AddToClassList("flow-detail");content.Add(consumable);Text(consumable,$"FAINTANYL {data.faintanyl}/{Combat.PlayerRevive.Capacity} / ${faintanyl.price}","flow-nav-title");Text(consumable,faintanyl.description);Text(consumable,"Fictional revival injection. Use after defeat; 2 seconds of protection.");Action(consumable,"Procure Faintanyl",()=>{session.Buy(faintanyl.id,Time.unscaledTime);Draw();},session.CanBuy(faintanyl.id)).name="procureFaintanyl";}
                     Text(content,"Equipped: "+Name(data.primary)+" / "+Name(data.secondary)+" / "+Name(data.melee));
                     Action(content,"START MISSION — PURCHASE OPTIONAL",StartMission);
                     Action(content,"BACK TO LEVELS",()=>Go(FlowScreen.Levels));break;

@@ -403,11 +403,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Enemies.FireworksCombat
   projectilePrefab: {fileID: 7504959464638873672, guid: dd665e649b517ff42aab744d088ca477, type: 3}
   preparationSeconds: 0.85
-  recoverySeconds: 3
+  recoverySeconds: 1.05
   preferredRange: 7
   badMissChance: 0.2
   heldMalfunctionChance: 0.08
   heldFuseFraction: {x: 0.35, y: 0.8}
+  recoveryVariation: 0.15
 --- !u!114 &1705753465351473174
 MonoBehaviour:
   m_ObjectHideFlags: 0

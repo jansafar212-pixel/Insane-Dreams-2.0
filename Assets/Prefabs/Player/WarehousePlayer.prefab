@@ -719,6 +719,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3238488678541685392, guid: cd4f5843982b0a148872e6244b91d26b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3774186861527489551}
+    - targetCorrespondingSourceObject: {fileID: 3238488678541685392, guid: cd4f5843982b0a148872e6244b91d26b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7175288878199714597}
+    - targetCorrespondingSourceObject: {fileID: 3238488678541685392, guid: cd4f5843982b0a148872e6244b91d26b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 129068368536365875}
   m_SourcePrefab: {fileID: 100100000, guid: cd4f5843982b0a148872e6244b91d26b, type: 3}
 --- !u!4 &3084045251787293455 stripped
 Transform:
@@ -783,6 +789,8 @@ MonoBehaviour:
     rearmThreshold: 0.25
     diagonalThreshold: 0.45
     climbDominance: 1.15
+  allowLandingSlide: 1
+  landingSlideSeconds: 0.35
 --- !u!114 &6516927546607258203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1021,6 +1029,9 @@ MonoBehaviour:
   muzzleGlowEnabled: 1
   muzzleFlashSprite: {fileID: 21300000, guid: 542d1bb265b91ea44912c43f29fcd3f8, type: 2}
   muzzleFlashWeapon: {fileID: 11400000, guid: a19415bc42a5c1749983394fafeb429d, type: 2}
+  shotAnchoredFlashWeapons:
+  - {fileID: 11400000, guid: 2d59804bf74db5842a92644e840bc441, type: 2}
+  - {fileID: 11400000, guid: 67c88bc28be6401419eaffaf19d822a0, type: 2}
   muzzleSeconds: 0.06
   hitSeconds: 0.12
   hurtSeconds: 0.1
@@ -1202,6 +1213,34 @@ MonoBehaviour:
   geometry:
     serializedVersion: 2
     m_Bits: 1
+--- !u!114 &7175288878199714597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7868476103539599707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e7617b7f482c59469c33fdcffd413b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Visuals.PlayerDeathRagdoll
+  prefab: {fileID: 3226303803156021105, guid: 9c697fa8bf042f5429e9f9fd0a9326ac, type: 3}
+  automaticRecoverySeconds: 1.2
+--- !u!114 &129068368536365875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7868476103539599707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 101d4caeeaf1d3449a356284ba535e72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Visuals.PlayerSyringeVisual
+  syringeSprite: {fileID: 5776157255477178343, guid: 08e29fd834aa6c74f894598bf00b19bf, type: 2}
+  seconds: 0.6
 --- !u!1001 &5706764124496338293
 PrefabInstance:
   m_ObjectHideFlags: 0

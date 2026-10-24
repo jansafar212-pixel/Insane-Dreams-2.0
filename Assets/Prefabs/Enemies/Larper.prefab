@@ -1233,6 +1233,9 @@ MonoBehaviour:
   muzzleGlowEnabled: 1
   muzzleFlashSprite: {fileID: 0}
   muzzleFlashWeapon: {fileID: 0}
+  shotAnchoredFlashWeapons:
+  - {fileID: 11400000, guid: 2d59804bf74db5842a92644e840bc441, type: 2}
+  - {fileID: 11400000, guid: 67c88bc28be6401419eaffaf19d822a0, type: 2}
   muzzleSeconds: 0.06
   hitSeconds: 0.12
   hurtSeconds: 0.1

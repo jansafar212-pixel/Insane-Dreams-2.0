@@ -1,16 +1,20 @@
-.mission-card { position: absolute; left: 18px; top: 14px; max-width: 61%; padding: 12px 16px; background-color: rgba(9,15,26,0.92); color: rgb(235,240,240); white-space: normal; }
-.mission-heading { color: rgb(185,204,210); font-size: 17px; -unity-font-style: bold; }
-.mission-objective { color: rgb(255,221,137); font-size: 21px; -unity-font-style: bold; white-space: normal; margin-top: 5px; }
-.mission-notice { font-size: 18px; white-space: normal; margin-top: 8px; }
-.mission-time { color: rgb(175,187,193); font-size: 15px; margin-top: 5px; }
-.interaction-prompt { align-self: center; margin-top: 26%; color: rgb(255,231,169); background-color: rgba(9,15,26,0.88); font-size: 21px; }
-.interact-button { position: absolute; left: 42%; bottom: 260px; padding: 14px 25px; font-size: 21px; background-color: rgb(43,71,78); color: white; border-width: 2px; border-color: rgb(255,221,137); }
-.results { position: absolute; left: 0; right: 0; top: 0; bottom: 0; align-items: center; justify-content: center; background-color: rgba(6,11,18,0.95); }
-.results-card { width: 76%; max-width: 640px; padding: 28px; background-color: rgb(20,30,39); border-width: 2px; border-color: rgb(103,132,145); color: rgb(240,244,244); }
-.results-heading { color: rgb(255,221,137); font-size: 34px; -unity-font-style: bold; }
-.results-title { font-size: 25px; margin-top: 6px; }
-.results-stats { font-size: 23px; margin-top: 24px; margin-bottom: 24px; white-space: normal; }
-.results-replay { padding: 14px; background-color: rgb(43,83,91); color: white; font-size: 24px; }
-.results-note { margin-top: 14px; font-size: 17px; white-space: normal; color: rgb(176,189,195); }
-.mission-complete .equipment, .mission-complete .stick, .mission-complete .action, .mission-complete .mission-card, .mission-complete .interact-button, .mission-complete .interaction-prompt { display: none; }
+.mission-card { position: absolute; left: 18px; top: 174px; width: 224px; max-width: 34%; padding: 6px 8px; background-color: rgba(25,29,43,.65); border-left-width: 3px; border-left-color: #b58441; color: #ffffeb; white-space: normal; }
+.mission-heading { color: #b58441; font-size: 10px; -unity-font-style: bold; letter-spacing: 1px; }
+.mission-objective { color: #ffffeb; font-size: 15px; -unity-font-style: bold; white-space: normal; margin-top: 2px; }
+.mission-notice { color: #f7c92c; font-size: 12px; white-space: normal; margin-top: 4px; }
+.mission-time { color: #bdbda8; font-size: 10px; margin-top: 3px; }
+.interaction-prompt { align-self: center; margin-top: 26%; color: #191d2b; background-color: #f7c92c; padding: 6px 12px; font-size: 18px; -unity-font-style: bold; }
+.interact-button { position: absolute; left: 42%; bottom: 260px; padding: 12px 20px; font-size: 18px; -unity-font-style: bold; background-color: #f7c92c; color: #191d2b; border-width: 2px; border-color: #191d2b; border-radius: 0; }
+.results { position: absolute; left: 0; right: 0; top: 0; bottom: 0; align-items: center; justify-content: center; background-color: rgba(25,29,43,.96); }
+.results-card { width: 76%; max-width: 640px; padding: 28px; background-color: #ffffeb; border-left-width: 8px; border-left-color: #e2671e; color: #191d2b; }
+.results-heading { color: #0c6374; font-size: 30px; -unity-font-style: bold; }
+.results-title { font-size: 19px; margin-top: 6px; color: #775122; }
+.results-stats { font-size: 22px; margin: 22px 0; white-space: normal; }
+.results-replay { min-height: 56px; padding: 12px; background-color: #f7c92c; border-width: 2px; border-color: #191d2b; color: #191d2b; font-size: 21px; -unity-font-style: bold; border-radius: 0; }
+.results-note { margin-top: 14px; font-size: 15px; white-space: normal; color: #775122; }
+.mission-complete .equipment, .mission-complete .vitals-panel, .mission-complete .stick, .mission-complete .action, .mission-complete .mission-card, .mission-complete .interact-button, .mission-complete .interaction-prompt { display: none; }
 .hidden { display: none; }
+
+.mission-details { max-height: 140px; flex-shrink: 1; }
+.mission-card .unity-label { margin-left: 0; margin-right: 0; padding: 0; }
+

@@ -101,17 +101,17 @@ namespace InsaneDreams.Tests
         {
             var g=Keep(Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemies/CartoonFirework.prefab")));var b=g.GetComponent<FireworkProjectile>();
             var victim=Keep(new GameObject("H253Victim"));victim.transform.position=new Vector2(6100,20);victim.layer=2;victim.AddComponent<BoxCollider2D>();var hp=victim.AddComponent<Health>();Physics2D.SyncTransforms();
-            b.Prepare(null,victim.transform.position,Color.magenta,true);b.ExplodeHeld(victim.transform.position);Assert.AreEqual(76,hp.Current,.1f);Assert.AreEqual(35,b.PooledVisualCount);
+            b.Prepare(null,victim.transform.position,Color.magenta,true);b.ExplodeHeld(victim.transform.position);Assert.AreEqual(68.8f,hp.Current,.1f);Assert.AreEqual(35,b.PooledVisualCount);
             int renderers=g.GetComponentsInChildren<SpriteRenderer>(true).Length;Assert.IsTrue(g.transform.Find("FireworkFlash").GetComponent<SpriteRenderer>().enabled);
             yield return new WaitForSeconds(.28f);Assert.IsFalse(g.transform.Find("FireworkFlash").GetComponent<SpriteRenderer>().enabled);Assert.IsTrue(g.transform.Find("SecondarySpark0").GetComponent<SpriteRenderer>().enabled);
-            b.Detonate();Assert.AreEqual(76,hp.Current,.1f);yield return new WaitForSeconds(.65f);Assert.IsFalse(b.Busy);
+            b.Detonate();Assert.AreEqual(68.8f,hp.Current,.1f);yield return new WaitForSeconds(.65f);Assert.IsFalse(b.Busy);
             b.Prepare(null,victim.transform.position,Color.cyan,true);Assert.AreEqual(renderers,g.GetComponentsInChildren<SpriteRenderer>(true).Length);
             Assert.IsFalse(g.transform.Find("SecondarySpark0").GetComponent<SpriteRenderer>().enabled);b.Cancel();
         }
         [Test]public void NativeTuningIsSmallAndPreservesOtherRolesAndRecovery()
         {
             var larper=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemies/Larper.prefab");var s=new SerializedObject(larper.GetComponent<EnemyCombat>());Assert.AreEqual(63.8f,s.FindProperty("nearMissSuppression").floatValue,.001f);Assert.AreEqual(12,s.FindProperty("suppressionDecayPerSecond").floatValue);
-            var expert=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemies/FireworksExpert.prefab");s=new SerializedObject(expert.GetComponent<FireworksCombat>());Assert.AreEqual(3,s.FindProperty("recoverySeconds").floatValue);Assert.AreEqual(.85f,s.FindProperty("preparationSeconds").floatValue);
+            var expert=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemies/FireworksExpert.prefab");s=new SerializedObject(expert.GetComponent<FireworksCombat>());Assert.AreEqual(1.05f,s.FindProperty("recoverySeconds").floatValue);Assert.AreEqual(.85f,s.FindProperty("preparationSeconds").floatValue);
             var samurai=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemies/Samurai.prefab");Assert.IsNull(samurai.GetComponent<PistolMagazineReload>());
         }
     }

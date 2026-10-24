@@ -92,6 +92,14 @@ MonoBehaviour:
     quantity: 50
     weapon: {fileID: 0}
     starter: 0
+  - id: faintanyl
+    title: Faintanyl
+    description: relax its not addictive, just habit forming
+    category: 4
+    price: 75
+    quantity: 1
+    weapon: {fileID: 0}
+    starter: 0
   primaryId: carbine
   meleeId: baton
   startingMoney: 1000

@@ -28,7 +28,7 @@ namespace InsaneDreams.Progression
             if(Session==null)return;
             var root=document.rootVisualElement;root.styleSheets.Add(style);
             var back=new Button(ReturnToLevels){text="LEVEL SELECTION"};back.AddToClassList("flow-button");root.Q("resultsExtras").Add(back);
-            var pause=new Button(()=>SetPaused(true)){name="campaignPause",text="PAUSE"};pause.AddToClassList("flow-button");pause.AddToClassList("campaign-pause");var safe=root.Q("safeArea");safe.AddToClassList("top-pause");safe.Add(pause);
+            var pause=new Button(()=>SetPaused(true)){name="campaignPause",tooltip="Pause"};var pauseFace=new VisualElement{name="pauseVisual",pickingMode=PickingMode.Ignore};pauseFace.AddToClassList("pause-face");var icon=new VisualElement{name="pauseIcon",tooltip="\u23F8",pickingMode=PickingMode.Ignore};icon.AddToClassList("pause-icon");for(int i=0;i<2;i++){var bar=new VisualElement{pickingMode=PickingMode.Ignore};bar.AddToClassList("pause-bar");icon.Add(bar);}pauseFace.Add(icon);pause.Add(pauseFace);pause.AddToClassList("flow-button");pause.AddToClassList("campaign-pause");var safe=root.Q("safeArea");safe.AddToClassList("top-pause");safe.Add(pause);
             overlay=new VisualElement();overlay.AddToClassList("campaign-overlay");var panel=new VisualElement();panel.AddToClassList("campaign-panel");overlay.Add(panel);
             var title=new Label("TAKE A BREATH. THE HERO IS SELF-EMPLOYED.");title.AddToClassList("flow-title");panel.Add(title);
             Add(panel,"RESUME",()=>SetPaused(false));Add(panel,"RETRY MISSION",()=>{SetPaused(false);mission.Replay();});Add(panel,"RETURN TO LEVELS",ReturnToLevels);

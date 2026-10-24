@@ -55,8 +55,8 @@ namespace InsaneDreams.Tests
         [UnityTest]public IEnumerator DedicatedBlindFireControlIsConditionalAndReleasesOnCoverExit()
         {
             var doc=Keep(Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/UI/WarehouseControls.prefab"))).GetComponent<UIDocument>();doc.GetComponent<WarehouseTouchControls>().Bind(actions);yield return new WaitForSeconds(.2f);
-            var blind=doc.rootVisualElement.Q<VisualElement>("blindFireButton");var fire=doc.rootVisualElement.Q<VisualElement>("fireButton");Assert.AreEqual(DisplayStyle.None,blind.resolvedStyle.display);Assert.AreEqual(DisplayStyle.Flex,fire.resolvedStyle.display);
-            Solid(new Vector2(X+1.1f,.45f),new Vector2(1,.9f));actions.SetTouchAim(Vector2.right);actions.SetTouchMove(Vector2.down);yield return new WaitForSeconds(.4f);Assert.IsTrue(player.GetComponent<PlayerCover2D>().IsCovered);Assert.AreEqual(DisplayStyle.Flex,blind.resolvedStyle.display);Assert.AreEqual(DisplayStyle.None,fire.resolvedStyle.display);
+            var blind=doc.rootVisualElement.Q<VisualElement>("blindFireButton");Assert.IsNull(doc.rootVisualElement.Q("fireButton"));Assert.AreEqual(DisplayStyle.None,blind.resolvedStyle.display);
+            Solid(new Vector2(X+1.1f,.45f),new Vector2(1,.9f));actions.SetTouchAim(Vector2.right);actions.SetTouchMove(Vector2.down);yield return new WaitForSeconds(.4f);Assert.IsTrue(player.GetComponent<PlayerCover2D>().IsCovered);Assert.AreEqual(DisplayStyle.Flex,blind.resolvedStyle.display);
             using(var evt=PointerDownEvent.GetPooled(new Event{type=EventType.MouseDown,button=0,mousePosition=blind.worldBound.center})){evt.target=blind;blind.SendEvent(evt);}yield return new WaitForSeconds(.1f);Assert.IsTrue(player.GetComponent<PlayerCover2D>().IsBlindFiring);
             actions.SetTouchMove(Vector2.zero);yield return new WaitForSeconds(.3f);Assert.IsFalse(player.GetComponent<PlayerCover2D>().IsCovered);Assert.AreEqual(DisplayStyle.None,blind.resolvedStyle.display);Assert.IsFalse(actions.FireHeld);
         }
@@ -99,7 +99,7 @@ namespace InsaneDreams.Tests
                 Assert.IsFalse(health.ApplyDamage(new DamageInfo(10,CombatTeam.Enemy)));yield return new WaitForSeconds(1.7f);Assert.IsFalse(health.ApplyDamage(new DamageInfo(10,CombatTeam.Enemy)));yield return new WaitForSeconds(.35f);Assert.IsTrue(health.ApplyDamage(new DamageInfo(10,CombatTeam.Enemy)));
             }
             Assert.AreEqual(200,player.GetComponent<PlayerHealing>().DuctTape);
-            health.ProtectFor(0);Assert.IsTrue(health.ApplyDamage(new DamageInfo(1000,CombatTeam.Enemy)));Assert.IsFalse(health.IsDefeated);Assert.AreEqual(1,checkpoints,"Empty inventory preserves checkpoint recovery");
+            health.ProtectFor(0);Assert.IsTrue(health.ApplyDamage(new DamageInfo(1000,CombatTeam.Enemy)));Assert.IsTrue(health.IsDefeated);yield return new WaitForSeconds(1.4f);Assert.IsFalse(health.IsDefeated);Assert.AreEqual(1,checkpoints,"Empty inventory preserves checkpoint recovery after the ragdoll collapse");
         }
         [UnityTest]public IEnumerator FaintanylCanBeDeclinedWithoutConsumingAndCheckpointResumesControls()
         {

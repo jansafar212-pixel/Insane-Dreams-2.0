@@ -207,7 +207,9 @@ namespace InsaneDreams.Enemies
                 usedBackoff=true;backoffFrom=body.position;backoffDirection=-direction;backoffUntil=Time.time+(overhang?.38f:.25f);
                 brain.ClearPursuit();motor.SetMoveInput(backoffDirection*.7f);return true;
             }
-            if(focus.y<start.y-.9f&&FindDescendingEdge(start,half,focus,out var dropLanding))
+            // Low crates can leave the player's body centre less than .9 below us.
+            // Reuse the swept walk-off rather than retrying a tall arc into the ceiling.
+            if(focus.y<start.y-.3f&&FindDescendingEdge(start,half,focus,out var dropLanding))
             {
                 // The old inside-edge waypoint stopped before leaving the platform;
                 // generic pursuit then refused the ledge. Commit a validated physical

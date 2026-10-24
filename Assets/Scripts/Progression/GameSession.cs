@@ -78,6 +78,10 @@ namespace InsaneDreams.Progression
                     if(Data.armor>=catalog.armorCapacity)return false;Data.armor=Mathf.Min(catalog.armorCapacity,Data.armor+quantity);break;
                 case ShopCategory.DuctTape:
                     if(Data.tape>=catalog.tapeCapacity)return false;Data.tape=Mathf.Min(catalog.tapeCapacity,Data.tape+quantity);break;
+                case ShopCategory.Faintanyl:
+                    if(Data.faintanyl>=Combat.PlayerRevive.Capacity)return false;
+                    Data.faintanyl+=Math.Min(quantity,Combat.PlayerRevive.Capacity-Data.faintanyl);break;
+                default:return false;
             }
             Data.balance-=item.price;
             if(!Store.Save(Data)){Data=JsonUtility.FromJson<GameProgress>(snapshot);Notice=Store.Problem;return false;}
@@ -92,6 +96,7 @@ namespace InsaneDreams.Progression
                 case ShopCategory.Weapons:return item.weapon!=null&&!Data.owned.Contains(id);
                 case ShopCategory.BodyArmor:return Data.armor<catalog.armorCapacity;
                 case ShopCategory.DuctTape:return Data.tape<catalog.tapeCapacity;
+                case ShopCategory.Faintanyl:return Data.faintanyl<Combat.PlayerRevive.Capacity;
                 case ShopCategory.Ammunition:
                     var gun=Array.Find(catalog.offers,x=>x.category==ShopCategory.Weapons&&x.weapon==item.weapon);
                     return gun!=null&&item.weapon!=null&&item.weapon.WeaponCategory==Inventory.WeaponCategory.Firearm&&Data.owned.Contains(gun.id)&&(Data.ammunition.Find(x=>x.id==gun.id)?.reserve??0)<catalog.ammoCapacity;

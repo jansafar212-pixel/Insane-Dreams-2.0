@@ -131,7 +131,7 @@ namespace InsaneDreams.Tests
                 foreach (var size in new[] { new Vector2(1280,720), new Vector2(960,720), new Vector2(1560,720), new Vector2(720,1280), new Vector2(648,1280) })
                 {
                     var root = ui.rootVisualElement; root.style.width = size.x; root.style.height = size.y;
-                    var names = new[] { "moveStick","aimStick","heal","reload","parachuteButton","fireButton","jumpButton","supplyInteract" };
+                    Assert.IsNull(root.Q("fireButton"));var names = new[] { "moveStick","aimStick","heal","reload","parachuteButton","jumpButton","supplyInteract" };
                     root.Q<VisualElement>("supplyInteract").RemoveFromClassList("hidden");
                     yield return null; yield return null; yield return null;
                     var controls = names.Select(n => root.Q<VisualElement>(n)).ToArray();

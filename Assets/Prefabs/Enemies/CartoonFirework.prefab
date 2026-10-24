@@ -50,10 +50,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Enemies.FireworkProjectile
   rocket: {fileID: 7349695670563665240}
   warning: {fileID: 409123808978536890}
-  radius: 2.7
+  radius: 3.2
   flightSeconds: 0.95
   arcHeight: 2.6
-  damage: 24
+  damage: 31.2
   impulse: 4
   normalFuse: {x: 0.8, y: 1.5}
   shortFuse: {x: 0.25, y: 0.45}

@@ -1,0 +1,7 @@
+Ladder with both new player components disabled:   Expected: greater than 3.0f
+  But was:  0.0f
+
+Enemy-only fixture in this controlled random sequence:   Expected: True
+  But was:  False
+
+Legacy root bodies=6, max vx=0; actual simulation bodies=14, max vx=11,99825

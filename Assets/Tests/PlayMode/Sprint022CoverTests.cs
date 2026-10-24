@@ -201,9 +201,9 @@ namespace InsaneDreams.Tests
             TouchEvent(fire, 9, Vector2.zero, false); yield return null; Assert.IsTrue(actions.FireHeld, "Other fingers cannot release fire");
             actions.SuspendInput(); yield return new WaitForSeconds(.1f); Assert.IsFalse(actions.FireHeld); Assert.IsFalse(cover.IsCovered);
             TouchEvent(fire,2,Vector2.zero,false);yield return null;
-            fire=root.Q<VisualElement>("fireButton"); // Normal fire returns when cover ends.
+            Assert.IsNull(root.Q("fireButton"));fire=root.Q<VisualElement>("aimStick"); // Joystick owns ordinary fire after cover ends.
             Assert.AreEqual(DisplayStyle.Flex,fire.resolvedStyle.display);Assert.Greater(fire.worldBound.width,0);
-            TouchEvent(fire, 2, Vector2.zero, true);yield return new WaitForSeconds(.1f);Assert.IsTrue(actions.FireHeld,$"Normal fire must remain held; cover={cover.IsCovered}, display={fire.resolvedStyle.display}");
+            TouchEvent(fire, 2, new Vector2(90,0), true);yield return new WaitForSeconds(.1f);Assert.IsTrue(actions.FireHeld,$"Normal fire must remain held; cover={cover.IsCovered}, display={fire.resolvedStyle.display}");
             TouchEvent(fire, 2, Vector2.zero, false);yield return new WaitForSeconds(.1f);Assert.IsFalse(actions.FireHeld);
         }
         [UnityTest] public IEnumerator FireButtonLayoutFitsBothControlTemplatesInLandscapeUltrawideAndPortrait()
@@ -214,10 +214,10 @@ namespace InsaneDreams.Tests
             foreach (var size in new[] { new Vector2(1280, 720), new Vector2(2560, 1080), new Vector2(720, 1280), new Vector2(1080, 1920) })
             {
                 var frame = new VisualElement(); frame.style.position = Position.Absolute; frame.style.width = size.x; frame.style.height = size.y;
-                root.Add(frame); AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/UI/" + template + ".uxml").CloneTree(frame);
+                root.Add(frame); AssetDatabase.LoadAssetAtPath<VisualTreeAsset>("Assets/UI/" + template + ".uxml").CloneTree(frame);frame.Q("blindFireButton").RemoveFromClassList("hidden");
                 var interact = frame.Q<VisualElement>("interact"); if (interact != null) interact.style.display = DisplayStyle.Flex;
                 yield return null; yield return null;
-                var fire = frame.Q<VisualElement>("fireButton"); Rect bounds = frame.worldBound;
+                Assert.IsNull(frame.Q("fireButton"));var fire = frame.Q<VisualElement>("blindFireButton"); Rect bounds = frame.worldBound;
                 Assert.IsTrue(bounds.Contains(fire.worldBound.min)); Assert.IsTrue(bounds.Contains(fire.worldBound.max));
                 foreach (var name in new[] { "moveStick", "aimStick", "parachuteButton", "reload", "heal", "interact" })
                 {

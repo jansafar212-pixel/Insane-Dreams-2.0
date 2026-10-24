@@ -150,3 +150,38 @@ new skeletons or limb scaling. The two-facing eight-phase review is
 `TestResults/Hotfix00251_Reload.png`; normal-zoom runtime pause/reload evidence is
 `Hotfix00251_Gameplay.png`. These are controlled reviews awaiting gameplay/art
 approval, not claims of human acceptance. Actual Postava 1.png was inspected.
+
+## 2026-10-24 — Menu and HUD visual language
+
+Menus use flat ink#191D2B, paper#FFFFEB, cardboard#B58441, warning yellow#F7C92C,
+orange#E2671E and teal#0C6374 from the existing palette. The main wordmark is an
+independently code-authored5×7 block-letter pattern rendered as static UI strips;
+it does not add a font package or trace historical artwork. Existing Unity text
+remains for readable body copy and controls. The background uses flat warehouse
+silhouettes and the unchanged Sprint008 ShippingCrate sprite. No glossy gradients,
+3D props, character sprite/rig changes or historical-source modifications.
+
+Paper shop/settings/results panels, rectangular warning-label buttons, selected
+weapon tabs and matching pause/revive controls share these colors. Gameplay keeps
+its original touch hit sizes/radius/thresholds and aim-pad44px right inset. A clear
+health bar/numeric vitals, current weapon sprite and large magazine/reserve readouts
+replace the old multiline debug-style equipment label. Do not bring back a second
+ordinary FIRE control; the aim stick owns ordinary touch firing. Blind fire appears
+only with physical crouching AND usable cover, per the latest corrected requirement.
+
+Controlled native Unity captures were inspected: TestResults/GraphicsUiRework_MainMenu.png,
+GraphicsUiRework_Shop.png and GraphicsUiRework_Hud.png. These demonstrate implementation
+and layout, not human artistic approval or Android-device acceptance.
+
+## Post-playtest Faintanyl equipment gesture (2026-10-24)
+
+PostPlaytestHotfixSetup authors FaintanylSyringe.asset as an independent16x7
+flat-color equipment Sprite, point filtering and32PPU, pivot(.8,.5). Existing ink,
+paper, teal and yellow pixels create an exaggerated fictional syringe silhouette.
+It is not historical recovery or a character redesign. Actual Postava1 reference
+was inspected; historical originals and character modules/pivots remain unchanged.
+The existing free arm performs a .6s non-graphic gesture; temporary arm/syringe
+sorting18/19 keeps it visible over the torso, restoring normal layering afterward.
+Both-facing controlled captures: PostPlaytest_Syringe0/1.png; artistic/gameplay and
+Android readability acceptance remain pending. Player corpses reuse the existing
+CartoonRagdoll source and limits; no enemy physics or new animation framework.

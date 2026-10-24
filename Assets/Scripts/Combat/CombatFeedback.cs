@@ -18,6 +18,11 @@ namespace InsaneDreams.Combat
         [SerializeField] private bool muzzleGlowEnabled=true;
         [SerializeField] private Sprite muzzleFlashSprite;
         [SerializeField] private InsaneDreams.Inventory.WeaponDefinition muzzleFlashWeapon;
+        [Tooltip("These weapons keep the flash at the recorded shot origin, matching their world-space tracer throughout recoil.")]
+        [SerializeField] private InsaneDreams.Inventory.WeaponDefinition[] shotAnchoredFlashWeapons;
+        private bool shotAnchoredFlash;
+        private Vector3 flashShotPosition;
+        private Quaternion flashShotRotation;
         private InsaneDreams.Inventory.PlayerLoadout loadout;
         private SpriteRenderer glow;
         private SpriteRenderer[] particles;
@@ -123,6 +128,7 @@ namespace InsaneDreams.Combat
             {
             ShotCues++; Sound(firingSound); muzzle.enabled = true; muzzleUntil = Time.time + muzzleSeconds;
             var definition=loadout!=null?loadout.SelectedWeapon?.Definition:enemy!=null?enemy.Weapon?.Definition:null;
+            shotAnchoredFlash=definition!=null&&shotAnchoredFlashWeapons!=null&&System.Array.IndexOf(shotAnchoredFlashWeapons,definition)>=0;
             bool custom=muzzleFlashSprite!=null&&definition==muzzleFlashWeapon;
             muzzle.sprite=custom?muzzleFlashSprite:effectSprite;
             muzzle.transform.position = (Vector3)executor.LastShotOrigin + Vector3.back * .15f;
@@ -130,6 +136,7 @@ namespace InsaneDreams.Combat
             muzzle.color=Color.Lerp(new Color(1,.65f,.1f),Color.white,Random.Range(.15f,.5f));
             glow.enabled=muzzleGlowEnabled;glow.transform.position=muzzle.transform.position;glow.transform.localScale=new Vector3(.45f,.3f,1);
             muzzle.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
+            flashShotPosition=muzzle.transform.position;flashShotRotation=muzzle.transform.rotation;
             }
             else{muzzle.enabled=false;glow.enabled=false;}
             if (!damaged) return;
@@ -212,7 +219,9 @@ namespace InsaneDreams.Combat
         private void LateUpdate()
         {
             // The cutout driver (order 100) has now applied this frame's aim, crouch and recoil.
-            if (muzzle.enabled && rig != null && rig.weapon.enabled && rig.weapon.sprite != null)
+            if(muzzle.enabled&&shotAnchoredFlash)
+            {muzzle.transform.SetPositionAndRotation(flashShotPosition,flashShotRotation);}
+            else if (muzzle.enabled && rig != null && rig.weapon.enabled && rig.weapon.sprite != null)
                 muzzle.transform.position = (Vector3)rig.MuzzlePosition + Vector3.back * .15f;
             if(glow.enabled)glow.transform.position=muzzle.transform.position;
         }

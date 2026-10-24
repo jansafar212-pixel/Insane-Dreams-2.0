@@ -44,12 +44,12 @@ namespace InsaneDreams.Tests
             return enemy.GetComponent<RagdollOnDefeat>().LastRagdoll;
         }
         private static void StopBodies(CartoonRagdoll doll)
-        {foreach(var body in doll.parts){body.linearVelocity=Vector2.zero;body.angularVelocity=0;body.Sleep();}}
+        {foreach(var body in doll.Bodies){body.linearVelocity=Vector2.zero;body.angularVelocity=0;body.Sleep();}}
         [UnityTest] public IEnumerator FatalRayTransfersHitDirectionAndRepeatedShotsReuseOneInactiveEnemyBody()
         {
             int defeats=0;enemy.GetComponent<Health>().Defeated+=_=>defeats++;
             var doll=Defeat();Assert.IsNotNull(doll);Assert.IsFalse(enemy.activeSelf);Assert.AreEqual(1,defeats);Assert.AreEqual(1,doll.ImpactCount);
-            bool rightward=false;foreach(var b in doll.parts)rightward|=b.linearVelocity.x>2;Assert.IsTrue(rightward);
+            bool rightward=false;foreach(var b in doll.Bodies)rightward|=b.linearVelocity.x>2;Assert.IsTrue(rightward);
             for(int i=0;i<3;i++)Assert.IsTrue(Shoot(doll.parts[0].position));
             Assert.AreEqual(ShotSurface.Ragdoll,attack.LastSurface);Assert.AreEqual(4,doll.ImpactCount);
             Assert.AreEqual(1,defeats);Assert.AreEqual(1,enemy.GetComponent<RagdollOnDefeat>().SpawnCount);
@@ -71,9 +71,9 @@ namespace InsaneDreams.Tests
             yield return new WaitForSeconds(3); // Let contacts settle before testing the rest/wake policy.
             StopBodies(doll);yield return new WaitForSeconds(.15f);Assert.IsTrue(doll.IsResting);
             var head=doll.parts[1];shooter.transform.position=(Vector3)head.position+new Vector3(-3,0);Assert.IsTrue(Shoot(head.position));
-            Assert.IsFalse(doll.IsResting);bool awake=false;foreach(var p in doll.parts)awake|=p.IsAwake();Assert.IsTrue(awake);
+            Assert.IsFalse(doll.IsResting);bool awake=false;foreach(var p in doll.Bodies)awake|=p.IsAwake();Assert.IsTrue(awake);
             StopBodies(doll);shooter.transform.position=(Vector3)head.position+new Vector3(3,0);Assert.IsTrue(Shoot(head.position));
-            bool leftward=false;foreach(var p in doll.parts)leftward|=p.linearVelocity.x<-.1f;Assert.IsTrue(leftward);
+            bool leftward=false;foreach(var p in doll.Bodies)leftward|=p.linearVelocity.x<-.1f;Assert.IsTrue(leftward);
         }
         [UnityTest] public IEnumerator OffCentreSegmentImpactProducesTorqueAndAbsurdImpulsesRemainBounded()
         {
@@ -83,7 +83,7 @@ namespace InsaneDreams.Tests
             Assert.Greater(Mathf.Abs(part.angularVelocity),1);Assert.LessOrEqual(part.linearVelocity.magnitude,12.001f);Assert.LessOrEqual(Mathf.Abs(part.angularVelocity),720.01f);
             int count=doll.ImpactCount;doll.ReceiveImpact(new PhysicalImpact(point,Vector2.right,float.NaN));Assert.AreEqual(count,doll.ImpactCount);
             yield return new WaitForSeconds(2);
-            foreach(var body in doll.parts){Assert.IsFalse(float.IsNaN(body.position.x));Assert.Greater(body.position.y,-.6f);Assert.LessOrEqual(body.linearVelocity.magnitude,12.2f);}
+            foreach(var body in doll.Bodies){Assert.IsFalse(float.IsNaN(body.position.x));Assert.Greater(body.position.y,-.6f);Assert.LessOrEqual(body.linearVelocity.magnitude,12.2f);}
         }
         [UnityTest] public IEnumerator InteractionDoesNotExtendAbsoluteLifetimeOrDuplicateRegistryEntry()
         {

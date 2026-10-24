@@ -15,6 +15,7 @@ namespace InsaneDreams.Combat
         public bool CanOfferRevive=>isActiveAndEnabled&&health!=null&&health.IsDefeated&&Injections>0;
         public float ProtectionRemaining=>Mathf.Max(0,protectionUntil-Time.time);
         public event System.Action<int> InventoryChanged;
+        public event System.Action Revived;
         private void Awake(){health=GetComponent<Health>();actions=GetComponent<PlayerActions>();combat=GetComponent<PlayerCombat>();body=GetComponent<Rigidbody2D>();recovery=GetComponent<PlayerRecovery>();Injections=Mathf.Clamp(initialInjections,0,Capacity);}
         private void OnEnable(){health.Defeated+=Defeated;recovery.Recovered+=CheckpointRecovered;}
         private void OnDisable(){health.Defeated-=Defeated;recovery.Recovered-=CheckpointRecovered;if(waiting){body.simulated=wasSimulated;waiting=false;}}
@@ -36,7 +37,7 @@ namespace InsaneDreams.Combat
         {
             if(!waiting||!CanOfferRevive)return false;
             Injections--;health.Restore();health.ProtectFor(2);protectionUntil=Time.time+2;
-            ResumeControls();InventoryChanged?.Invoke(Injections);return true;
+            ResumeControls();GetComponent<Visuals.PlayerDeathRagdoll>()?.ReturnToLife();InventoryChanged?.Invoke(Injections);Revived?.Invoke();return true;
         }
         public bool ReturnToCheckpoint()
         {if(!waiting||!health.IsDefeated)return false;ResumeControls();recovery.Respawn();return true;}

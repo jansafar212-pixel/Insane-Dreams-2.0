@@ -3,7 +3,7 @@ using InsaneDreams.Inventory;
 using UnityEngine;
 namespace InsaneDreams.Progression
 {
-    public enum ShopCategory { Weapons, Ammunition, BodyArmor, DuctTape }
+    public enum ShopCategory { Weapons, Ammunition, BodyArmor, DuctTape, Faintanyl }
     [Serializable] public sealed class LevelEntryData
     {
         public string id, title, scene, description;

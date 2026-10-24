@@ -7,10 +7,12 @@ namespace InsaneDreams.Enemies
     public sealed class FireworksCombat : MonoBehaviour
     {
         [SerializeField] private FireworkProjectile projectilePrefab;
-        [SerializeField,Min(.1f)] private float preparationSeconds=.85f,recoverySeconds=3.8f,preferredRange=7;
+        [SerializeField,Min(.1f)] private float preparationSeconds=.85f,recoverySeconds=1.05f,preferredRange=7;
         [SerializeField,Range(0,1)] private float badMissChance=.2f;
         [SerializeField,Range(0,.2f)] private float heldMalfunctionChance=.08f;
         [SerializeField] private Vector2 heldFuseFraction=new Vector2(.35f,.8f);
+        [SerializeField,Range(0,.3f)] private float recoveryVariation=.15f;
+        private float RecoveryDelay=>recoverySeconds*Random.Range(1-recoveryVariation,1+recoveryVariation);
         private readonly FireworkProjectile[] pool=new FireworkProjectile[2];
         private FireworkProjectile pending;
         private LarperBrain brain;private EnemyCombat combat;private Health health;
@@ -46,10 +48,10 @@ namespace InsaneDreams.Enemies
                 if(!cameraAllowed||!visible){Cancel();nextAttack=Time.time+1;return EngagementState.Reacting;}
                 if(failAt>0&&Time.time>=failAt)
                 {
-                    var failed=pending;pending=null;HeldMalfunctions++;surprisedUntil=Time.time+1;throwPoseUntil=Time.time+.3f;nextAttack=Time.time+recoverySeconds;
+                    var failed=pending;pending=null;HeldMalfunctions++;surprisedUntil=Time.time+1;throwPoseUntil=Time.time+.3f;nextAttack=Time.time+RecoveryDelay;
                     awareness?.FireworkCue(true);failed.ExplodeHeld(Hand);return EngagementState.Reacting;
                 }
-                if(Time.time>=launchAt){pending.Launch(Hand);pending=null;Launches++;throwPoseUntil=Time.time+.3f;nextAttack=Time.time+recoverySeconds;}
+                if(Time.time>=launchAt){pending.Launch(Hand);pending=null;Launches++;throwPoseUntil=Time.time+.3f;nextAttack=Time.time+RecoveryDelay;}
                 return EngagementState.Reacting;
             }
             Vector2 delta=remembered-(Vector2)transform.position;
@@ -57,8 +59,9 @@ namespace InsaneDreams.Enemies
             if(delta.magnitude>preferredRange+3)
             {float sign=Mathf.Sign(delta.x);brain.SetPursuit(combat.CanAdvance(sign)?sign*.65f:0);return EngagementState.Approaching;}
             if(delta.magnitude<3.2f)
-            {float sign=-Mathf.Sign(delta.x);brain.SetPursuit(combat.CanAdvance(sign)?sign*.6f:0);return EngagementState.Withdrawing;}
-            brain.SetPursuit(0);if(Time.time<nextAttack||!cameraAllowed||!ready)return EngagementState.Reacting;
+            {float sign=-Mathf.Sign(delta.x);brain.SetPursuit(combat.CanAdvance(sign)?sign*.6f:0);if(Time.time<nextAttack||!cameraAllowed||!ready)return EngagementState.Withdrawing;}
+            else brain.SetPursuit(0);
+            if(Time.time<nextAttack||!cameraAllowed||!ready)return EngagementState.Reacting;
             foreach(var p in pool)if(p!=null&&!p.Busy){pending=p;break;}if(pending==null)return EngagementState.Reacting;
             float spread=Random.value<badMissChance?3.2f:.65f;
             Vector2 destination=remembered+new Vector2(Random.Range(-spread,spread),-.5f);
