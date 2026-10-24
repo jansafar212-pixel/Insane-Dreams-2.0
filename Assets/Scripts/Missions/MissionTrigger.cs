@@ -2,7 +2,7 @@ using InsaneDreams.Input;
 using UnityEngine;
 namespace InsaneDreams.Missions
 {
-    public enum MissionZone { Entrance, Storage, Checkpoint, Processing, Records, Exit }
+    public enum MissionZone { Entrance, Storage, Checkpoint, Processing, Records, Exit, OfficeCheckpoint }
     [RequireComponent(typeof(BoxCollider2D))]
     public sealed class MissionTrigger : MonoBehaviour
     {
@@ -20,7 +20,6 @@ namespace InsaneDreams.Missions
         {
             // Contact callbacks can precede a measurable overlap by one physics step.
             // Also allow an eligible stage change while already inside a zone.
-            if(zone==MissionZone.Exit&&mission.Stage!=MissionStage.Escape)return;
             OnTriggerEnter2D(other);
         }
     }

@@ -19,12 +19,13 @@ MonoBehaviour:
   category: 0
   weaponCategory: 0
   damage: 5
-  firingInterval: 0.105
+  firingInterval: 0.07
   magazineCapacity: 27
   reloadDuration: 4
   presentationPrefab: {fileID: 0}
-  equippedSprite: {fileID: 21300000, guid: d37018cc6ebca9b47beb358f771e1ce8, type: 3}
-  magazineSprite: {fileID: 21300000, guid: c82b78debb3c2d44da1a4279d006c01c, type: 3}
+  equippedSprite: {fileID: 21300000, guid: 9ece9c252eb2fa7428e54081f295ac8a, type: 2}
+  magazineSprite: {fileID: 21300000, guid: c86887c677b489c4ea609cbb28004fd0, type: 2}
+  magazineMountOffset: {x: 0.03125, y: -0.0625}
   firearmRange: 28
   meleeRange: 1.6
   impactImpulse: 0.9

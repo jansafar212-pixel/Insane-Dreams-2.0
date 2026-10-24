@@ -15,7 +15,7 @@ namespace InsaneDreams.Tests
         [Test] public void MissionOccupantsAndInspectorDefaultsPreserveModularReferences()
         {
             var player=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Player/WarehousePlayer.prefab");
-            var healing=new SerializedObject(player.GetComponent<PlayerHealing>());Assert.AreEqual(35,healing.FindProperty("amount").floatValue);Assert.AreEqual(3,healing.FindProperty("cooldownSeconds").floatValue);Assert.IsTrue(healing.FindProperty("unlimitedUses").boolValue);
+            var healing=new SerializedObject(player.GetComponent<PlayerHealing>());Assert.AreEqual(25,healing.FindProperty("healingPerSecond").floatValue);Assert.AreEqual(200,healing.FindProperty("initialDuctTape").floatValue);Assert.AreEqual(200,healing.FindProperty("maximumDuctTape").floatValue);Assert.IsTrue(healing.FindProperty("requireReleaseAfterDamage").boolValue);
             Assert.AreEqual(.7f,new SerializedObject(player.GetComponent<PlayerPosture2D>()).FindProperty("heightMultiplier").floatValue);
             var enemy=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemies/Larper.prefab");var combat=new SerializedObject(enemy.GetComponent<EnemyCombat>());
             Assert.IsFalse(combat.FindProperty("allowOffscreenFire").boolValue);Assert.AreEqual(3,combat.FindProperty("visibilityMemory").floatValue);Assert.AreEqual(.1f,combat.FindProperty("perceptionSeconds").floatValue);

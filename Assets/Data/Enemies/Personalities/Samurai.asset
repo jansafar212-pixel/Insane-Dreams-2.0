@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fd27866107baae45a9f618eec30b6e6, type: 3}
+  m_Name: Samurai
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Enemies.LarperPersonalityProfile
+  disposition: 1
+  panicChance: 0.02
+  witnessRange: 9
+  panicSeconds: 2.5
+  moraleCooldown: 45
+  speechCooldown: 30
+  panicSpeechGap: 5
+  panicSpeechCooldown: 60
+  detected:
+  - "\u62D9\u8005\u306F\u5BFF\u53F8\u306E\u70BA\u306B\u6226\u3046\u3002"
+  - "\u6211\u3053\u305D\u6BB5\u30DC\u30FC\u30EB\u5C06\u8ECD\uFF01"
+  lost:
+  - "\u5FCD\u6CD5\u3001\u898B\u5931\u3044\u306E\u8853\uFF01"
+  misses:
+  - "\u5200\u3088\u3001\u305D\u306A\u305F\u306F\u9577\u3059\u304E\u308B\uFF01"
+  witnessed:
+  - "\u53CB\u3088\u3001\u663C\u5BDD\u306B\u306F\u65E9\u3044\u305E\u3002"
+  panic:
+  - "\u5F85\u3066\uFF01\u9244\u7832\u306F\u5351\u602F\u3067\u3054\u3056\u308B\uFF01"
+  reload:
+  - RELOADING! ALL PART OF THE PLAN!
+  - I'M CONSERVING RESOURCES!
+  - WHY IS THIS THING SO LONG?!
+  withdraw:
+  - "\u3053\u308C\u306F\u52C7\u307E\u3057\u304D\u5F8C\u9000\u3067\u3054\u3056\u308B\uFF01"
+  blocked:
+  - "\u9000\u8DEF\u304C\u5C0F\u3055\u3059\u304E\u308B\u305E\uFF01"
+  malfunction:
+  - WHY ISN'T IT WORKING?!
+  - IT'S A FEATURE!
+  - I PAID GOOD MONEY FOR THIS!
+  - TACTICAL MALFUNCTION!
+  - BRO, NOT NOW!
+  suppressed:
+  - "\u62D9\u8005\u306E\u515C\u306F\u7D19\u3067\u3054\u3056\u308B\uFF01"
+  - "\u52C7\u8005\u306F\u5E8A\u3068\u8A9E\u308B\u3082\u306E\u306A\u308A\u3002"

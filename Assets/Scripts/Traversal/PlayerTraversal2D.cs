@@ -8,7 +8,6 @@ namespace InsaneDreams.Traversal
     public sealed class PlayerTraversal2D : MonoBehaviour
     {
         [SerializeField, Min(0.1f)] private float climbSpeed = 4.5f;
-        [SerializeField, Min(0.1f)] private float ladderJumpSpeed = 10f;
         [SerializeField, Min(0)] private float ladderJumpHorizontalSpeed = 7f;
         [SerializeField, Min(0)] private float reattachDelay = 0.3f;
         [SerializeField, Min(0)] private float captureWidthMultiplier = 1.25f;
@@ -32,6 +31,7 @@ namespace InsaneDreams.Traversal
         private Rigidbody2D body;
         private BoxCollider2D playerCollider;
         private PlayerPosture2D posture;
+        private InsaneDreams.Combat.PlayerCover2D cover;
         private float normalGravity;
         private float nextAttachTime;
         private float climbInput;
@@ -52,6 +52,7 @@ namespace InsaneDreams.Traversal
         public bool HasUpwardClimbIntent(Vector2 move) => move.y >= entryThreshold && move.y >= Mathf.Abs(move.x) * entryDominance;
         public bool CanEnterFromTop(Vector2 move)
         {
+            if (cover != null && cover.OwnsDownwardInput(move)) return false;
             if (move.y > -entryThreshold || -move.y < Mathf.Abs(move.x) * entryDominance) return false;
             var candidate = FindUsableLadder();
             float reachHeight = posture != null ? posture.StandingWorldHeight : playerCollider.bounds.size.y;
@@ -61,9 +62,11 @@ namespace InsaneDreams.Traversal
         private void Awake()
         {
             motor = GetComponent<PlayerMotor2D>();
+            motor.AirJumped+=ClearParachute;
             body = GetComponent<Rigidbody2D>();
             playerCollider = GetComponent<BoxCollider2D>();
             posture = GetComponent<PlayerPosture2D>();
+            cover = GetComponent<InsaneDreams.Combat.PlayerCover2D>();
             normalGravity = body.gravityScale;
             SetParachute(false);
         }
@@ -81,7 +84,8 @@ namespace InsaneDreams.Traversal
         {
             if (!IsClimbing) { motor.RequestJump(); return; }
             LeaveLadder(true);
-            body.linearVelocity = new Vector2(horizontalInput * ladderJumpHorizontalSpeed, ladderJumpSpeed);
+            motor.ConsumeTraversalJump();
+            body.linearVelocity = new Vector2(horizontalInput * ladderJumpHorizontalSpeed, motor.JumpSpeed);
         }
 
         public bool ToggleParachute()
@@ -97,7 +101,9 @@ namespace InsaneDreams.Traversal
         {
             if (ownsMotion && (ladder == null || !ladder.isActiveAndEnabled)) LeaveLadder(true);
             if (Mathf.Abs(climbInput) < entryReleaseThreshold) requireClimbRelease = false;
-            bool entryIntent = HasUpwardClimbIntent(new Vector2(horizontalInput, Mathf.Abs(climbInput)));
+            var move = new Vector2(horizontalInput, climbInput);
+            bool coverOwns = cover != null && (cover.IsCovered || cover.OwnsDownwardInput(move));
+            bool entryIntent = !coverOwns && (HasUpwardClimbIntent(move) || CanEnterFromTop(move));
             if (!IsClimbing && entryIntent && Time.time < nextAttachTime) requireClimbRelease = true;
             if (!IsClimbing && !requireClimbRelease && entryIntent && Time.time >= nextAttachTime)
             {
@@ -278,5 +284,6 @@ namespace InsaneDreams.Traversal
         }
 
         private void OnDisable() => ResetTraversal();
+        private void OnDestroy(){if(motor!=null)motor.AirJumped-=ClearParachute;}
     }
 }

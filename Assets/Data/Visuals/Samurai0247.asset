@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb528433d18e7c24b94402c75f563040, type: 3}
+  m_Name: Samurai0247
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Visuals.CharacterSkin
+  head: {fileID: 21300000, guid: 3655bc26664361c4bb3dfd9a02d4f14e, type: 2}
+  torso: {fileID: 21300000, guid: 420d21adc60f8da4e99282f034fdc8fb, type: 2}
+  arm: {fileID: 21300000, guid: 9251ac3b987aceb49b7e3d6ff377af80, type: 2}
+  leg: {fileID: 21300000, guid: 6d8cf9e99f3bb374ea750be302f782e5, type: 2}
+  weapon: {fileID: 21300000, guid: f21b4eda66ae5654e813a9b082b0e4a3, type: 2}
+  parachute: {fileID: 21300000, guid: f89cc3f609931e34791fea7c21333f51, type: 3}
+  secondaryWeapon: {fileID: 21300000, guid: 0d9544d255dbe2e43a08107018622f45, type: 3}
+  meleeWeapon: {fileID: 21300000, guid: f21b4eda66ae5654e813a9b082b0e4a3, type: 2}
+  panicFace: {fileID: 21300000, guid: 50cd4134a67d4644bb229c88c6e44899, type: 2}
+  faces:
+  - {fileID: 21300000, guid: eaa1405e8bc212144a8d6289a5f86ba4, type: 2}
+  - {fileID: 21300000, guid: a9e89e6d477acc5418e7073727d8f506, type: 2}
+  - {fileID: 21300000, guid: 435511b2f28d5c842971683eb9f28222, type: 2}
+  - {fileID: 21300000, guid: 5385edcc82e93ba49bd1ea75c5058ca2, type: 2}
+  - {fileID: 21300000, guid: 50cd4134a67d4644bb229c88c6e44899, type: 2}
+  - {fileID: 21300000, guid: 7e74a901257094942a3b066af9a1165e, type: 2}
+  clothing: {r: 1, g: 1, b: 1, a: 1}
+  provenance: Sprint 024.7 native pixel recipes; current Larper production baseline + inspected Enemak Postava references. Historical originals preserved; new redesign awaiting artistic playtest review.

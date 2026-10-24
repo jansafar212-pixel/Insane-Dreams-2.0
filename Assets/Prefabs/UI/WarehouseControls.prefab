@@ -69,3 +69,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InsaneDreams.Input.WarehouseTouchControls
   actions: {fileID: 0}
+  fireThreshold: 0.85
+  fireReleaseThreshold: 0.7
+  joystickScale: 1.15

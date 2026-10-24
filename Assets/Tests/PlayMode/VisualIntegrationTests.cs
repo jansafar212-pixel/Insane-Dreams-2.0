@@ -53,6 +53,10 @@ namespace InsaneDreams.Tests
             actions.SetTouchMove(Vector2.left);actions.SetTouchAim(Vector2.up);yield return new WaitForSeconds(.3f);
             Assert.AreEqual(-1,visual.Facing);Assert.Greater(visual.Rig.weaponMount.TransformVector(Vector3.right).normalized.y,.95f);
             actions.SetTouchMove(Vector2.down);actions.SetTouchAim(Vector2.right);yield return new WaitForSeconds(.15f);
+            // Unfocused Editor frames can span the old wait. Observe the actual
+            // posture/visual transition before asserting its final geometry.
+            float settledBy=Time.realtimeSinceStartup+1;
+            while((visual.CurrentPose!=CharacterPose.Crouch||visual.Rig.head.GetComponent<SpriteRenderer>().bounds.max.y>actor.GetComponent<BoxCollider2D>().bounds.max.y+.05f)&&Time.realtimeSinceStartup<settledBy)yield return null;
             Assert.AreEqual(CharacterPose.Crouch,visual.CurrentPose);
             var bounds=actor.GetComponent<BoxCollider2D>().bounds;
             Assert.LessOrEqual(visual.Rig.head.GetComponent<SpriteRenderer>().bounds.max.y,bounds.max.y+.05f);

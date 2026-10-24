@@ -63,8 +63,12 @@ namespace InsaneDreams.Tests
             try
             {
                 var camera=root.AddComponent<Camera>();camera.targetTexture=output;target.transform.position=new Vector3(2.123f,3.456f,0);
-                var position=target.transform.position;root.AddComponent<InsaneDreams.CameraSystem.WarehouseCameraFollow>().Bind(target.transform);
+                var position=target.transform.position;var follow=root.AddComponent<InsaneDreams.CameraSystem.WarehouseCameraFollow>();
+                var settings=new UnityEditor.SerializedObject(follow);settings.FindProperty("gameplayZoomMultiplier").floatValue=1;settings.ApplyModifiedPropertiesWithoutUndo();follow.Bind(target.transform);
                 float ratio=height/(camera.orthographicSize*2*32);Assert.That(ratio,Is.EqualTo(Mathf.Round(ratio)).Within(.0001f));
+                float baseline=camera.orthographicSize;
+                settings.Update();settings.FindProperty("gameplayZoomMultiplier").floatValue=1.1f;settings.ApplyModifiedPropertiesWithoutUndo();follow.SnapToTarget();
+                Assert.AreEqual(baseline/1.1f,camera.orthographicSize,.0001f);
                 Assert.That(root.transform.position.x*32,Is.EqualTo(Mathf.Round(root.transform.position.x*32)).Within(.0001f));
                 Assert.That(root.transform.position.y*32,Is.EqualTo(Mathf.Round(root.transform.position.y*32)).Within(.0001f));
                 Assert.AreEqual(position,target.transform.position);

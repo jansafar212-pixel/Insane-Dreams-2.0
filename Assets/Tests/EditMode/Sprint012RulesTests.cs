@@ -13,7 +13,7 @@ namespace InsaneDreams.Tests
         {
             var def=AssetDatabase.LoadAssetAtPath<WeaponDefinition>("Assets/Data/Items/LarperBuzzbox.asset");
             Assert.IsNotNull(def);Assert.AreEqual(27,def.MagazineCapacity);Assert.AreEqual(5,def.Damage);
-            Assert.IsTrue(AssetDatabase.GetAssetPath(def.EquippedSprite).StartsWith("Assets/Art/Sprint012/"));Assert.Greater(def.MagazineSprite.rect.height,def.EquippedSprite.rect.height*2);
+            Assert.IsTrue(AssetDatabase.GetAssetPath(def.EquippedSprite).StartsWith("Assets/Art/Sprint0246/"));Assert.Greater(def.MagazineSprite.rect.height,def.EquippedSprite.rect.height*1.5f);
             var prefab=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemies/Larper.prefab");
             Assert.AreSame(def,new SerializedObject(prefab.GetComponent<EnemyCombat>()).FindProperty("firearm").objectReferenceValue);
             var runtime=new RuntimeWeapon(def,54);

@@ -58,12 +58,11 @@ namespace InsaneDreams.Tests
             var coward=Enemy(13000,"Cowardly");var confident=Enemy(13004,"Overconfident");yield return new WaitForSeconds(.2f);
             Near(coward);Near(confident);Assert.Greater(coward.Suppression,confident.Suppression);float far=confident.Suppression;
             confident.ResetEncounter(null);Near(confident,.1f);Assert.Greater(confident.Suppression,far);
-            // Compare the same proximity and personality against Sprint020.2 tuning.
-            float previousClose=28*Mathf.Lerp(.4f,1,1-.1f/1.25f)*.75f;
-            Assert.Greater(confident.Suppression,previousClose*1.4f*1.125f);Assert.Less(confident.Suppression,previousClose*1.5f*1.125f);
-            confident.ResetEncounter(null);Near(confident,1.25f);Assert.AreEqual(28*.4f*.75f*1.125f,confident.Suppression,.01f,"Sprint021 scales all distances once by 12.5%.");
+            float gain=new SerializedObject(confident).FindProperty("nearMissSuppression").floatValue;
+            Assert.AreEqual(gain*Mathf.Lerp(.4f,1.45f,1-.1f/1.5f)*.75f,confident.Suppression,.01f,"Close misses retain distance and personality weighting exactly once.");
+            confident.ResetEncounter(null);Near(confident,1.25f);Assert.AreEqual(gain*Mathf.Lerp(.4f,1.45f,1-.8f/1.5f)*.75f,confident.Suppression,.02f,"Overhead shots use the standing head envelope, even after crouching.");
             for(int i=0;i<20;i++)Near(coward);Assert.AreEqual(100,coward.Suppression,.001f);
-            yield return new WaitForSeconds(1);Assert.Less(coward.Suppression,100);yield return new WaitForSeconds(6);Assert.AreEqual(0,coward.Suppression);
+            yield return new WaitForSeconds(1);Assert.Less(coward.Suppression,100);yield return new WaitForSeconds(8.5f);Assert.AreEqual(0,coward.Suppression);
             Near(coward);coward.gameObject.SetActive(false);coward.gameObject.SetActive(true);Assert.AreEqual(0,coward.Suppression);
         }
         [UnityTest] public IEnumerator SustainedMissesAloneCanRetreatThenResumeWithoutReloadOrMoraleWave()
@@ -72,7 +71,7 @@ namespace InsaneDreams.Tests
             for(int i=0;i<5;i++)Near(e);Assert.AreEqual(EngagementState.Withdrawing,e.State);Assert.Greater(e.RetreatDestination.x,e.transform.position.x);Assert.AreEqual(hp,e.GetComponent<Health>().Current);Assert.AreEqual(27,e.Weapon.MagazineAmmo);Assert.AreEqual(0,e.GetComponent<LarperAwareness>().SocialReactions);Assert.AreEqual(0,e.GetComponent<LarperAwareness>().CollapseReactions);
             var destination=e.RetreatDestination;for(int i=0;i<30;i++)Near(e);Assert.AreEqual(destination,e.RetreatDestination);
             yield return new WaitForSeconds(4.8f);Assert.AreNotEqual(EngagementState.Withdrawing,e.State);Assert.IsFalse(e.Weapon.Cycle.IsReloading);Assert.AreEqual(27,e.Weapon.MagazineAmmo);
-            Near(e);Assert.AreNotEqual(EngagementState.Withdrawing,e.State,"The same burst cannot restart retreat during its six-second decision cooldown.");
+            Near(e);Assert.AreEqual(EngagementState.Withdrawing,e.State,"After 4.8 seconds, a fresh burst may use the new four-second reaction window.");
         }
         [UnityTest] public IEnumerator FailedHighRollConsumesCooldownAndGroundHoldersKeepShooting()
         {

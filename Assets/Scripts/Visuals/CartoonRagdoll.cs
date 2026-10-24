@@ -23,6 +23,8 @@ namespace InsaneDreams.Visuals
         public int ImpactCount { get; private set; }
         public Vector2 LastImpactPoint { get; private set; }
         public Rigidbody2D[] parts;
+        private Rigidbody2D[] simulationParts;
+        public Rigidbody2D[] Bodies=>simulationParts??parts;
         public SpriteRenderer face;
         private static readonly List<CartoonRagdoll> active = new List<CartoonRagdoll>();
         private float age, resting;
@@ -46,11 +48,19 @@ namespace InsaneDreams.Visuals
                 to.transform.SetPositionAndRotation(from.position, Quaternion.Euler(0, 0, angle));
                 Vector3 scale = from.lossyScale;
                 to.transform.localScale = new Vector3(Mathf.Abs(scale.x), Mathf.Abs(scale.y), Mathf.Abs(scale.z));
-                var sprite = to.GetComponent<SpriteRenderer>(); sprite.sprite = from.GetComponent<SpriteRenderer>().sprite;
+                var originalSprite=from.GetComponent<SpriteRenderer>();
+                var sprite = to.GetComponent<SpriteRenderer>(); sprite.sprite = originalSprite.sprite;
+                // Replacement skins can have different native dimensions (tiny Samurai).
+                // Fit corpse geometry to the copied pixels; living hitboxes stay unchanged.
+                var box = to.GetComponent<BoxCollider2D>();box.size=sprite.sprite.bounds.size;box.offset=sprite.sprite.bounds.center;
+                sprite.sortingLayerID=originalSprite.sortingLayerID;sprite.sortingOrder=originalSprite.sortingOrder;
                 sprite.flipX = source.transform.lossyScale.x < 0;
-                sprite.color = i == 0 ? source.skin.clothing : Color.white;
+                sprite.color = i == 0 ? source.skin.clothing : i==2?source.RearArmTint:Color.white;
             }
             face.sprite = source.skin.Face(FaceExpression.Stunned); face.flipX = source.transform.lossyScale.x < 0;
+            face.enabled = source.face != null && source.face.enabled;
+            simulationParts=source.Segmented!=null?source.Segmented.BuildRagdoll(this):parts;
+            source.GetComponentInParent<ArmorVisual>(true)?.CopyTo(parts[0].transform);
             for (int i = 1; i < parts.Length; i++)
             {
                 var joint = parts[i].GetComponent<HingeJoint2D>();
@@ -59,13 +69,13 @@ namespace InsaneDreams.Visuals
                 float limit = i == 1 ? 35 : limbAngularLimit;
                 joint.limits = new JointAngleLimits2D { min = -limit, max = limit };
             }
-            for (int i = 0; i < parts.Length; i++)
+            for (int i = 0; i < Bodies.Length; i++)
             {
-                parts[i].simulated = true;
-                parts[i].centerOfMass = parts[i].GetComponent<Collider2D>().offset;
-                parts[i].linearDamping = linearDamping; parts[i].angularDamping = angularDamping;
-                parts[i].linearVelocity = Vector2.ClampMagnitude(momentum, 8) + Vector2.up * .6f;
-                parts[i].angularVelocity = i % 2 == 0 ? 35 : -35;
+                Bodies[i].simulated = true;
+                Bodies[i].centerOfMass = Bodies[i].GetComponent<Collider2D>().offset;
+                Bodies[i].linearDamping = linearDamping; Bodies[i].angularDamping = angularDamping;
+                Bodies[i].linearVelocity = Vector2.ClampMagnitude(momentum, 8) + Vector2.up * .6f;
+                Bodies[i].angularVelocity = i % 2 == 0 ? 35 : -35;
             }
         }
         public void ReceiveImpact(PhysicalImpact impact) => ApplyImpact(impact, postDefeatMultiplier);
@@ -74,14 +84,14 @@ namespace InsaneDreams.Visuals
         {
             if (!impact.IsValid || !isActiveAndEnabled || parts == null || parts.Length == 0) return;
             Rigidbody2D target = null; float nearest = float.PositiveInfinity;
-            foreach (var part in parts)
+            foreach (var part in Bodies)
             {
                 if (part == impact.Body) { target = part; break; }
                 float distance = (part.GetComponent<Collider2D>().ClosestPoint(impact.Point) - impact.Point).sqrMagnitude;
                 if (distance < nearest) { nearest = distance; target = part; }
             }
             if (target == null) return;
-            foreach (var part in parts) part.WakeUp();
+            foreach (var part in Bodies) part.WakeUp();
             IsResting = false; resting = 0;
             Vector2 point = target.GetComponent<Collider2D>().ClosestPoint(impact.Point);
             target.AddForceAtPosition(impact.Direction * Mathf.Min(maximumImpulse, impact.Impulse * multiplier), point, ForceMode2D.Impulse);
@@ -89,7 +99,7 @@ namespace InsaneDreams.Visuals
         }
         private void ClampVelocities()
         {
-            foreach (var part in parts)
+            foreach (var part in Bodies)
             {
                 if (maximumVelocity > 0) part.linearVelocity = Vector2.ClampMagnitude(part.linearVelocity, maximumVelocity);
                 if (maximumAngularVelocity > 0) part.angularVelocity = Mathf.Clamp(part.angularVelocity, -maximumAngularVelocity, maximumAngularVelocity);
@@ -110,17 +120,17 @@ namespace InsaneDreams.Visuals
             if (parts == null) return;
             if (IsResting)
             {
-                bool awake = false; foreach (var part in parts) if (part.IsAwake()) { awake = true; break; }
+                bool awake = false; foreach (var part in Bodies) if (part.IsAwake()) { awake = true; break; }
                 if (!awake) return;
                 IsResting = false; resting = 0;
             }
             bool still = true;
-            foreach (var part in parts) if (part != null && (part.linearVelocity.sqrMagnitude > .025f || Mathf.Abs(part.angularVelocity) > 8)) { still = false; break; }
+            foreach (var part in Bodies) if (part != null && (part.linearVelocity.sqrMagnitude > .025f || Mathf.Abs(part.angularVelocity) > 8)) { still = false; break; }
             resting = still ? resting + Time.deltaTime : 0;
             if (resting >= restSeconds)
             {
                 IsResting = true;
-                foreach (var part in parts) if (part != null) { part.linearVelocity = Vector2.zero; part.angularVelocity = 0; part.Sleep(); }
+                foreach (var part in Bodies) if (part != null) { part.linearVelocity = Vector2.zero; part.angularVelocity = 0; part.Sleep(); }
             }
         }
         public void Retire() { active.Remove(this); gameObject.SetActive(false); Destroy(gameObject); }

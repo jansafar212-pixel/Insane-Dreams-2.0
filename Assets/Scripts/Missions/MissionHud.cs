@@ -40,7 +40,7 @@ namespace InsaneDreams.Missions
         {
             if(mission==null||safe==null||results==null||objective==null||resultStats==null)return;bool complete=mission.Stage==MissionStage.Complete;
             safe.EnableInClassList("mission-complete",complete);results.EnableInClassList("hidden",!complete);objective.text=mission.Objective;
-            resultStats.text=$"TIME   {Clock(mission.Elapsed)}\nENEMIES DEFEATED   {mission.TotalDefeats}\nDEATHS   {mission.Deaths}";
+            resultStats.text=$"TIME   {Clock(mission.Elapsed)}\nENEMIES DEFEATED   {mission.TotalDefeats}\nDEATHS   {mission.Deaths}"+(complete?$"\nMISSION EARNINGS   ${mission.Earnings}":"");
             Readout();
         }
         private void Update(){if(resetCover!=null&&Time.frameCount>=coveredFrame&&Time.unscaledTime>=coveredUntil)resetCover.style.display=DisplayStyle.None;if(mission!=null&&Time.unscaledTime>=nextReadout){nextReadout=Time.unscaledTime+.15f;Readout();}}

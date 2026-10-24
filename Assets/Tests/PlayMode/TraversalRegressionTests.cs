@@ -46,14 +46,14 @@ namespace InsaneDreams.Tests
             var box = go.AddComponent<BoxCollider2D>(); box.isTrigger = true; box.size = new Vector2(2, 5);
             Physics2D.SyncTransforms(); return go.AddComponent<LadderVolume>();
         }
-        [UnityTest] public IEnumerator DiagonalJumpIsSingleUntilNeutralAndAirborneRequestsAreRejected()
+        [UnityTest] public IEnumerator DiagonalJumpRequiresFreshGestureAndAllowsOnlyOneAirborneBoost()
         {
             Assert.IsTrue(motor.IsGrounded); float initial = body.position.y;
             actions.SetTouchMove(new Vector2(.7f, .7f)); yield return new WaitForSeconds(.15f);
-            Assert.Greater(body.position.y, initial + .5f); Assert.Greater(body.linearVelocity.x, 0);
+            Assert.Greater(body.position.y, initial + .5f); Assert.Greater(body.linearVelocity.x, 0);Assert.AreEqual(1,motor.JumpsUsed);
             actions.SetTouchMove(Vector2.zero); yield return null;
             actions.SetTouchMove(Vector2.up); float rising = body.linearVelocity.y;
-            yield return new WaitForSeconds(.08f); Assert.Less(body.linearVelocity.y, rising);
+            yield return new WaitForSeconds(.08f);Assert.AreEqual(2,motor.JumpsUsed);Assert.Greater(body.linearVelocity.y,0);
             yield return new WaitForSeconds(1f); Assert.IsTrue(motor.IsGrounded);
             yield return new WaitForSeconds(.2f); Assert.Less(body.position.y, 1f);
             actions.SetTouchMove(Vector2.zero); yield return null;
@@ -123,12 +123,12 @@ namespace InsaneDreams.Tests
             var controls = ui.GetComponent<WarehouseTouchControls>(); controls.Bind(actions);
             yield return null; yield return null;
             var root = ui.GetComponent<UIDocument>().rootVisualElement;
-            Assert.IsNull(root.Q<VisualElement>("jumpButton"));
+            Assert.IsNotNull(root.Q<VisualElement>("jumpButton"));
             var move = root.Q<VisualElement>("moveStick"); var aim = root.Q<VisualElement>("aimStick");
             var chute = root.Q<VisualElement>("parachuteButton");
             Down(move, 0, move.worldBound.center + Vector2.right * 40);
             Down(move, 1, move.worldBound.center + Vector2.left * 40); // Must not hijack finger zero.
-            Down(aim, 2, aim.worldBound.center + new Vector2(43.75f, -43.75f));
+            Down(aim, 2, aim.worldBound.center + new Vector2(1,-1).normalized * aim.worldBound.width * .35f * .95f);
             Down(chute, 3, chute.worldBound.center);
             yield return null;
             Assert.Greater(actions.Move.x, .4f); Assert.Greater(actions.AimDirection.y, .4f); Assert.IsTrue(actions.FireHeld);
@@ -167,6 +167,10 @@ namespace InsaneDreams.Tests
             var archetype = AssetDatabase.LoadAssetAtPath<InsaneDreams.Enemies.EnemyArchetype>("Assets/Data/Enemies/Larper.asset");
             var marker = Keep(new GameObject("TypedSpawn")); marker.transform.position = new Vector3(1004, .85f);
             var point = marker.AddComponent<InsaneDreams.Enemies.EnemySpawnPoint>();
+            // Runtime activation must not depend on another test's ambient Camera.main.
+            var spawnCamera = Keep(new GameObject("TypedSpawnCamera")).AddComponent<Camera>();
+            spawnCamera.orthographic = true; spawnCamera.orthographicSize = 1;
+            spawnCamera.transform.position = new Vector3(995,1,-10); point.BindGameplayCamera(spawnCamera);
             var serialized = new SerializedObject(point); serialized.FindProperty("archetype").objectReferenceValue = archetype;
             serialized.ApplyModifiedPropertiesWithoutUndo(); Assert.IsNull(point.ValidationError);
             var enemy = point.Spawn(); Keep(enemy.gameObject); Assert.AreSame(enemy, point.Spawn());

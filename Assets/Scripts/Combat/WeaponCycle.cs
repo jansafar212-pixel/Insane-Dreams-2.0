@@ -8,6 +8,7 @@ namespace InsaneDreams.Combat
     {
         private readonly RuntimeWeapon weapon;
         public bool IsReloading { get; private set; }
+        public event System.Action MagazineInserted;
         public float ReloadEndsAt { get; private set; }
         public float ReloadStartedAt { get; private set; }
         public float ReloadProgress(float now) => IsReloading ? Mathf.InverseLerp(ReloadStartedAt, ReloadEndsAt, now) : 0;
@@ -28,6 +29,7 @@ namespace InsaneDreams.Combat
             IsReloading = false;
             int transfer = Mathf.Min(weapon.Definition.MagazineCapacity - weapon.MagazineAmmo, weapon.ReserveAmmo);
             weapon.SetAmmunition(weapon.MagazineAmmo + transfer, weapon.ReserveAmmo - transfer);
+            if(weapon.Definition.PhysicalMagazineReload)MagazineInserted?.Invoke();
         }
         public bool TryAttack(float now)
         {

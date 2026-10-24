@@ -84,6 +84,7 @@ namespace InsaneDreams.Tests
             loadout.Select(EquipmentSlot.Firearm2); loadout.Select(EquipmentSlot.Firearm1);
             Assert.IsFalse(weapon.Cycle.IsReloading); Assert.AreEqual(3, weapon.MagazineAmmo);
             actions.RequestReload(); var health = player.GetComponent<Health>(); health.ProtectFor(0);
+            player.GetComponent<PlayerRevive>()?.RestoreInventory(0); // Exercise finite-stock checkpoint fallback.
             Assert.IsTrue(health.ApplyDamage(new DamageInfo(1000, CombatTeam.Enemy)));
             Assert.AreEqual(health.Maximum, health.Current); Assert.IsFalse(health.IsDefeated);
             Assert.AreSame(weapon, loadout.SelectedWeapon); Assert.AreEqual(3, weapon.MagazineAmmo); Assert.AreEqual(17, weapon.ReserveAmmo);
@@ -130,7 +131,7 @@ namespace InsaneDreams.Tests
             using(var evt=PointerDownEvent.GetPooled(new Touch{fingerId=1,position=aim.worldBound.center+Vector2.right*20,phase=TouchPhase.Began},EventModifiers.None))aim.SendEvent(evt);
             yield return null; Assert.Less(actions.Move.x,0); Assert.Greater(actions.AimDirection.x,0); Assert.IsFalse(actions.FireHeld);
             int before=executor.ShotsFired;
-            using(var evt=PointerMoveEvent.GetPooled(new Touch{fingerId=1,position=aim.worldBound.center+Vector2.right*60,phase=TouchPhase.Moved},EventModifiers.None))aim.SendEvent(evt);
+            using(var evt=PointerMoveEvent.GetPooled(new Touch{fingerId=1,position=aim.worldBound.center+Vector2.right*aim.worldBound.width*.35f*.95f,phase=TouchPhase.Moved},EventModifiers.None))aim.SendEvent(evt);
             yield return null; yield return null; Assert.IsTrue(actions.FireHeld); Assert.Greater(executor.ShotsFired,before); Assert.Less(actions.Move.x,0);
             using(var evt=PointerCancelEvent.GetPooled(new Touch{fingerId=1,position=aim.worldBound.center,phase=TouchPhase.Canceled},EventModifiers.None))aim.SendEvent(evt);
             yield return null; Assert.IsFalse(actions.FireHeld); Assert.Less(actions.Move.x,0);

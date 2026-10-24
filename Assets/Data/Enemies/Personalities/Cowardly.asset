@@ -16,7 +16,7 @@ MonoBehaviour:
   panicChance: 0.2
   witnessRange: 9
   panicSeconds: 2.5
-  moraleCooldown: 18
+  moraleCooldown: 45
   speechCooldown: 30
   panicSpeechGap: 5
   panicSpeechCooldown: 60
@@ -40,6 +40,28 @@ MonoBehaviour:
   - I FEAR NOTHING!
   - WE HAVE THEM SURROUNDED!
   - I'M NOT PAID ENOUGH!
+  - TACTICAL RETREAT!
+  - I'M TOO RICH TO DIE!
+  - COVER ME, IDIOTS!
+  - THIS IS NOT LIKE WARZONE!
   blocked:
   - NO ROOM! RELOADING HERE!
   - BAD PLAN! HOLD ON!
+  malfunction:
+  - WHY ISN'T IT WORKING?!
+  - IT'S A FEATURE!
+  - I PAID GOOD MONEY FOR THIS!
+  - TACTICAL MALFUNCTION!
+  - BRO, NOT NOW!
+  suppressed:
+  - THAT WAS MY HAIR!
+  - PLEASE MISS SOMEWHERE ELSE!
+  - COVER IS MY BEST FRIEND!
+  - THEY'RE SHOOTING AT ME!
+  - I'M NOT PAID ENOUGH!
+  openingFire:
+  - PIN HIM DOWN!
+  - I MEANT TO AIM THERE!
+  changingCover:
+  - THIS BOX WILL SAVE ME!
+  - BRAVELY HIDING OVER HERE!

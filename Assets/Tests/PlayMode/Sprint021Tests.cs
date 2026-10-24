@@ -38,9 +38,9 @@ namespace InsaneDreams.Tests
         [UnityTest] public IEnumerator SuppressionScalesExactlyOnceAtEveryDistanceAndKeepsCooldowns()
         {
             var e=Enemy();yield return new WaitForSeconds(.2f);Float(e,"suppressionRetreatChance",0);Near(e);
-            Assert.AreEqual(31.5f*Mathf.Lerp(.4f,1.45f,1-.9f/1.25f),e.Suppression,.01f);
-            var s=new SerializedObject(e);Assert.AreEqual(18,s.FindProperty("suppressionDecayPerSecond").floatValue);Assert.AreEqual(6,s.FindProperty("suppressionReactionCooldown").floatValue);
-            e.ResetEncounter(null);var p=(Vector2)e.GetComponent<BoxCollider2D>().bounds.center+Vector2.up*1.25f;e.Hear(new CombatNoiseEvent(player,CombatTeam.Player,CombatNoiseKind.Gunfire,p-Vector2.right*8,p+Vector2.right*8,1));Assert.AreEqual(12.6f,e.Suppression,.01f);
+            Assert.AreEqual(44.296f,e.Suppression,.02f,".9 above centre is .3 above the standing head reference, plus .35 bias.");
+            var s=new SerializedObject(e);Assert.AreEqual(12,s.FindProperty("suppressionDecayPerSecond").floatValue);Assert.AreEqual(4,s.FindProperty("suppressionReactionCooldown").floatValue);
+            e.ResetEncounter(null);var p=(Vector2)e.GetComponent<BoxCollider2D>().bounds.center+Vector2.up*1.25f;e.Hear(new CombatNoiseEvent(player,CombatTeam.Player,CombatNoiseKind.Gunfire,p-Vector2.right*8,p+Vector2.right*8,1));Assert.AreEqual(29.89f,e.Suppression,.02f);
         }
         [UnityTest] public IEnumerator RealRetreatReachesCoverHoldsBrieflyThenReengages()
         {

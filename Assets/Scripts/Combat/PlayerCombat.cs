@@ -11,8 +11,9 @@ namespace InsaneDreams.Combat
         private PlayerLoadout loadout;
         private AttackExecutor executor;
         private RuntimeWeapon previous;
+        private PlayerCover2D cover;
         public event System.Action ReloadStarted;
-        private void Awake() { actions = GetComponent<PlayerActions>(); loadout = GetComponent<PlayerLoadout>(); executor = GetComponent<AttackExecutor>(); }
+        private void Awake() { actions = GetComponent<PlayerActions>(); loadout = GetComponent<PlayerLoadout>(); executor = GetComponent<AttackExecutor>(); cover = GetComponent<PlayerCover2D>(); }
         private void OnEnable() { actions.ReloadRequested += Reload; actions.InputReset += Cancel; loadout.SelectionChanging += Cancel; }
         private void OnDisable() { actions.ReloadRequested -= Reload; actions.InputReset -= Cancel; loadout.SelectionChanging -= Cancel; Cancel(); }
         public void Reload() { if (loadout.SelectedWeapon != null && loadout.SelectedWeapon.Cycle.TryReload(Time.time)) ReloadStarted?.Invoke(); }
@@ -23,7 +24,12 @@ namespace InsaneDreams.Combat
             if (current != previous) { previous?.Cycle.CancelReload(); previous = current; }
             if (current == null) return;
             current.Cycle.Tick(Time.time);
-            if (actions.FireHeld) executor.Attack(current, actions.AimDirection, Time.time);
+            if (!actions.FireHeld || cover != null && cover.IsCovered && actions.HasAimIntent && !cover.PeekReady) return;
+            Vector2 aim = actions.AimDirection;
+            // Roll only on an eligible shot, preserving ordinary aiming and all cycle rules.
+            if (cover != null && cover.IsBlindFiring && !current.Cycle.IsReloading && !current.Cycle.IsMalfunctioning(Time.time) && current.MagazineAmmo > 0 && Time.time >= current.Cycle.NextAttackAt)
+                aim = Quaternion.Euler(0, 0, Random.Range(-cover.BlindSpread(0), cover.BlindSpread(0))) * aim;
+            executor.Attack(current, aim, Time.time);
         }
     }
 }

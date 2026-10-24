@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e8921d1dbf32564abe2c60b68cd8e62, type: 3}
+  m_Name: Samurai
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Enemies.EnemyArchetype
+  stableId: 40f60bbfd8d548c781a62e33ce3fad87
+  prefab: {fileID: 7909795113297446030, guid: 1d6e456d54fdb6846b3dc4d40ddd4693, type: 3}
+  capabilities: 7
+  moveInput: 1
+  patrolHalfWidth: 7
+  blockedPause: 0.5

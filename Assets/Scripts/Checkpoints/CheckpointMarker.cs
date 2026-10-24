@@ -10,7 +10,8 @@ namespace InsaneDreams.Checkpoints
         [SerializeField] private Color inactiveColor = new Color(0.3f, 0.65f, 0.85f);
         [SerializeField] private Color activeColor = new Color(0.3f, 1f, 0.5f);
         private void Reset() => GetComponent<BoxCollider2D>().isTrigger = true;
-        public void SetLit(bool lit) { if (markerVisual != null) markerVisual.color = lit ? activeColor : inactiveColor; }
+        public bool IsLit{get;private set;}
+        public void SetLit(bool lit) { IsLit=lit;if (markerVisual != null) markerVisual.color = lit ? activeColor : inactiveColor; }
         private void OnTriggerEnter2D(Collider2D other)
         {
             // Physics2D also delivers triggers to disabled MonoBehaviours. Mission

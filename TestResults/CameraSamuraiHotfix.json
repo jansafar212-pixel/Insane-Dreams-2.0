@@ -1,0 +1,1606 @@
+{
+  "baseline": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"status\": \"completed\",\n  \"duration\": 9.85,\n  \"summary\": {\n    \"total\": 3,\n    \"passed\": 1,\n    \"failed\": 2,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.CameraSamuraiHotfixTests.AutonomousSmallSamuraiCrossesActualCoverAndKeepsMeleeTelegraph\",\n      \"Status\": \"Failed\",\n      \"Duration\": 7.1952711,\n      \"Message\": \"  Expected: True\\r\\n  But was:  False\\r\\n\",\n      \"StackTrace\": \"at InsaneDreams.Tests.CameraSamuraiHotfixTests+<AutonomousSmallSamuraiCrossesActualCoverAndKeepsMeleeTelegraph>d__12.MoveNext () [0x001b4] in C:\\\\Users\\\\jansa\\\\Documents\\\\GitHub\\\\Insane-Dreams-2.0\\\\Assets\\\\Tests\\\\PlayMode\\\\CameraSamuraiHotfixTests.cs:52\\r\\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in .\\\\Library\\\\PackageCache\\\\com.unity.test-framework@80f691d4262b\\\\UnityEngine.TestRunner\\\\NUnitExtensions\\\\Attributes\\\\TestEnumerator.cs:52\\r\\n\"\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CameraSamuraiHotfixTests.SmallBodyDetectionWorksAtDifferentElevationsAndSolidWallsOcclude\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.4978937,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CameraSamuraiHotfixTests.VisibleEntryStartsPursuitAndCameraExitDoesNotClearAggro\",\n      \"Status\": \"Failed\",\n      \"Duration\": 1.0796322,\n      \"Message\": \"  Unseen Samurai must not begin an aggressive approach\\r\\n  Expected: less than 0.100000001f\\r\\n  But was:  0.15599823f\\r\\n\",\n      \"StackTrace\": \"at InsaneDreams.Tests.CameraSamuraiHotfixTests+<VisibleEntryStartsPursuitAndCameraExitDoesNotClearAggro>d__11.MoveNext () [0x00091] in C:\\\\Users\\\\jansa\\\\Documents\\\\GitHub\\\\Insane-Dreams-2.0\\\\Assets\\\\Tests\\\\PlayMode\\\\CameraSamuraiHotfixTests.cs:40\\r\\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in .\\\\Library\\\\PackageCache\\\\com.unity.test-framework@80f691d4262b\\\\UnityEngine.TestRunner\\\\NUnitExtensions\\\\Attributes\\\\TestEnumerator.cs:52\\r\\n\"\n    }\n  ]\n}"
+      }
+    ]
+  },
+  "baselineStationaryFailure": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"status\": \"completed\",\n  \"duration\": 12.93,\n  \"summary\": {\n    \"total\": 1,\n    \"passed\": 0,\n    \"failed\": 1,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.CameraSamuraiHotfixTests.RemovedObstructionAllowsReplanningInsteadOfPermanentStationaryFailure\",\n      \"Status\": \"Failed\",\n      \"Duration\": 12.8729754,\n      \"Message\": \"  Landing interrupted or timed out\\r\\n  Expected: greater than 1\\r\\n  But was:  1\\r\\n\",\n      \"StackTrace\": \"at InsaneDreams.Tests.CameraSamuraiHotfixTests+<RemovedObstructionAllowsReplanningInsteadOfPermanentStationaryFailure>d__13.MoveNext () [0x0026e] in C:\\\\Users\\\\jansa\\\\Documents\\\\GitHub\\\\Insane-Dreams-2.0\\\\Assets\\\\Tests\\\\PlayMode\\\\CameraSamuraiHotfixTests.cs:63\\r\\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in .\\\\Library\\\\PackageCache\\\\com.unity.test-framework@80f691d4262b\\\\UnityEngine.TestRunner\\\\NUnitExtensions\\\\Attributes\\\\TestEnumerator.cs:52\\r\\n\"\n    }\n  ]\n}"
+      }
+    ]
+  },
+  "baselineLadderCamera": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"status\": \"completed\",\n  \"duration\": 3.16,\n  \"summary\": {\n    \"total\": 1,\n    \"passed\": 0,\n    \"failed\": 1,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.LadderCameraHotfixTests.ClimbingCentersSmoothlyRejectsAimChangesAndRestoresDirectionalComposition\",\n      \"Status\": \"Failed\",\n      \"Duration\": 3.1272041,\n      \"Message\": \"  Expected: 0.5d +/- 0.0080000003799796104d\\r\\n  But was:  0.333251953125d\\r\\n\",\n      \"StackTrace\": \"at InsaneDreams.Tests.LadderCameraHotfixTests+<ClimbingCentersSmoothlyRejectsAimChangesAndRestoresDirectionalComposition>d__5.MoveNext () [0x00336] in C:\\\\Users\\\\jansa\\\\Documents\\\\GitHub\\\\Insane-Dreams-2.0\\\\Assets\\\\Tests\\\\PlayMode\\\\LadderCameraHotfixTests.cs:31\\r\\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in .\\\\Library\\\\PackageCache\\\\com.unity.test-framework@80f691d4262b\\\\UnityEngine.TestRunner\\\\NUnitExtensions\\\\Attributes\\\\TestEnumerator.cs:52\\r\\n\"\n    }\n  ]\n}"
+      }
+    ]
+  },
+  "firstTargeted": [
+    {
+      "filter": "CameraSamuraiHotfixTests",
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"status\": \"completed\",\n  \"duration\": 24.86,\n  \"summary\": {\n    \"total\": 5,\n    \"passed\": 5,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.CameraSamuraiHotfixTests.AutonomousPursuitReachesElevatedWarehouseStepAfterVisibleAcquisition\",\n      \"Status\": \"Passed\",\n      \"Duration\": 2.1403125,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CameraSamuraiHotfixTests.AutonomousSmallSamuraiCrossesActualCoverAndKeepsMeleeTelegraph\",\n      \"Status\": \"Passed\",\n      \"Duration\": 6.5197229,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CameraSamuraiHotfixTests.RemovedObstructionAllowsReplanningInsteadOfPermanentStationaryFailure\",\n      \"Status\": \"Passed\",\n      \"Duration\": 8.3562094,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CameraSamuraiHotfixTests.SmallBodyDetectionWorksAtDifferentElevationsAndSolidWallsOcclude\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.9819409,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CameraSamuraiHotfixTests.VisibleEntryStartsPursuitAndCameraExitDoesNotClearAggro\",\n      \"Status\": \"Passed\",\n      \"Duration\": 5.7858957,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+          }
+        ]
+      }
+    },
+    {
+      "filter": "LadderCameraHotfixTests",
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"status\": \"completed\",\n  \"duration\": 7.15,\n  \"summary\": {\n    \"total\": 1,\n    \"passed\": 1,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.LadderCameraHotfixTests.ClimbingCentersSmoothlyRejectsAimChangesAndRestoresDirectionalComposition\",\n      \"Status\": \"Passed\",\n      \"Duration\": 7.1171614,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "attempts": [
+    {
+      "mode": "editor",
+      "filter": "",
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"status\": \"completed\",\n  \"duration\": 5.29,\n  \"summary\": {\n    \"total\": 78,\n    \"passed\": 78,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.CombatRulesTests.AttacksAndReloadNeverMutateSharedDefinitions\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0264918,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CombatRulesTests.CancelledReloadTransfersNothingAndCanRestart\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0011466,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CombatRulesTests.CooldownCannotBeBypassedAndEmptyAttemptsDoNotSpendAmmo\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0015866,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CombatRulesTests.DamageFiltersInvalidFriendlyAndSelfHitsAndDefeatsOnce\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0055215,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CombatRulesTests.MagazineDepletesExactlyOncePerSuccessfulAttack\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0005269,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CombatRulesTests.MeleeUsesCooldownButNeverAmmunitionOrReload\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0007007,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CombatRulesTests.ReloadTransfersOnlyAtDeadlineAndConservesAmmunition\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0004676,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.DataAndGestureTests.AuthoredDefinitionsHaveValidUniqueIdentities\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0844163,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.DataAndGestureTests.EmptySlotsAndMeleeAreExplicit\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0027252,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.DataAndGestureTests.EnemyIdentityAndExplicitCapabilitiesAreIndependent\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0039261,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.DataAndGestureTests.LadderArbitrationConsumesHeldGestureAcrossTransitions\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0006287,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.DataAndGestureTests.SafeAreaInsetsRespectCutoutsInBothLandscapeOrientations\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0022491,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.DataAndGestureTests.StableSnapshotsResolveByDefinitionIdentity\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0077866,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.DataAndGestureTests.SwitchingPreservesIndependentRuntimeAmmoAndDefinitions\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0007881,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.DataAndGestureTests.UpwardDiagonalClimbsButLateralDiagonalRetainsJumpAndNeutralHysteresis\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0005002,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.DataAndGestureTests.UpwardGestureRequiresNeutralAndNeverRepeatsOnLanding\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0002735,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.PersonalityRulesTests.ConfiguredProfilesHaveDialogueAndDifferentMoraleProbabilities\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0038651,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.PersonalityRulesTests.EncounterGateLimitsOrdinaryLinesAndRareOverridesAcrossSpeakers\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0003872,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.PersonalityRulesTests.WarehousePassageHasCorrectClearanceAndDoesNotOverlapCheckpointSpawn\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0649477,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.SecondArmRigTests.FreeArmNeverChangesCarryingHandMuzzleOrMirroredAim(1)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0067899,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.SecondArmRigTests.FreeArmNeverChangesCarryingHandMuzzleOrMirroredAim(-1)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0036276,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.SecondArmRigTests.HumanoidPrefabsKeepRearArmBehindTorsoAndFrontArmWithOriginalSprites\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.004049,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.SecondArmRigTests.RearArmActuallyContributesVisiblePixelsAcrossPoses(\\\"Player\\\",1)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.4127689,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.SecondArmRigTests.RearArmActuallyContributesVisiblePixelsAcrossPoses(\\\"Player\\\",-1)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.0291956,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.SecondArmRigTests.RearArmActuallyContributesVisiblePixelsAcrossPoses(\\\"Larper\\\",1)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.4883944,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.SecondArmRigTests.RearArmActuallyContributesVisiblePixelsAcrossPoses(\\\"Larper\\\",-1)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.1407132,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint008PresentationTests.ActiveSkinsAndRagdollUseIndependentSpritesWithSafePixelImports\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0139072,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint008PresentationTests.WarehouseArtAddsNoCollisionAndPreservesPreSprintGeometryAndPracticeBindings\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0598506,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint009RigTests.EveryLadderGraphicHasPixelAlignedCapsAboveItsLandingFloor\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.046224,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint009RigTests.ProportionsExpressionsAndPivotsMatchTheStandingSkeleton\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0032972,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint009RigTests.RagdollColliderMassAndNeckFollowTheResizedLivingParts\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0013207,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint012RulesTests.BasicPistolHasOriginalModularMagazineAndFiniteAutomaticBurst\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0011533,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint012RulesTests.CombatSpeechDensityAndDuplicateSuppressionDoNotReplaceOrdinaryGate\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0003646,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint012RulesTests.Sprint0122ReloadVariationPreservesDeadlineAmmoAndSharedDefinition\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0004169,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint012RulesTests.WarehouseHasSevenConfiguredActiveEncountersAndOneRepresentativeLowCover\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0418518,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint013RulesTests.BodyBoundsRespectGameplayProjectionDepthEdgesAndCulling\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0019985,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint013RulesTests.CameraTuningAndExplicitWarehouseSurfacesPreservePistolAndSceneContracts\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0462809,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint014RulesTests.MissionIsSeparateWithStagedPrefabsValidReferencesAndMissionUiOverride\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.1151294,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint014RulesTests.MissionSpawnsCheckpointsAndSteppedRouteHaveSupportedClearanceWithinExistingJumpLimits\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.1100364,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint015RulesTests.MissionOccupantsAndInspectorDefaultsPreserveModularReferences\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0558366,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint021RulesTests.InvalidEmptyReloadingAndMeleeOperationsCannotMalfunction\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0009473,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint021RulesTests.MalfunctionBlocksOperationsThenRecoversWithoutChangingAmmoOrCadence\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0006174,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0242RulesTests.BundlesSuppliesAndProgressMarkersHaveSeparateSavedVisualsWithoutLauncher\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0872298,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0242RulesTests.DemoAddedFiveSupportedSpacedResidentsWhileTestbedOpeningAndSpecialistsRemainIntact\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.1315547,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0244RigTests.OnlySamuraiOptsIntoEnemyAirJumpWhileCombatTuningIsPreserved\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.00118,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0244RigTests.SamuraiHasCompleteSegmentChainsAndPreservesModularArtDimensions\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.000643,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0245RigTests.CandidateHasOneCompleteSegmentedRigWithConsistentDensity(\\\"Larper\\\")\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0018726,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0245RigTests.CandidateHasOneCompleteSegmentedRigWithConsistentDensity(\\\"Samurai\\\")\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.000107,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0245RigTests.CandidateUsesEightFlatColorsWithUniformSkinAndSixDistinctFaces\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0052288,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0245RigTests.FullPanicUsesDistinctFaceWithoutChangingFallbackExpressionContract\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0040182,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0246RulesTests.ConfiguredEditorEntryIsMainMenuAndBothBuildPlatformsInheritMenuFirst\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0234755,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0246RulesTests.PistolVisualsAndSocketChangeWithoutWeaponBalanceChanges\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0008372,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0247RulesTests.CameraCompositionUsesProjectionAndEffectiveViewport(1280,720,0,1)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0047371,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0247RulesTests.CameraCompositionUsesProjectionAndEffectiveViewport(2560,1080,0.1f,0.75f)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0004417,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0247RulesTests.RedesignsRetainNativeDensityFallbacksAndNoLiveVisualPhysics(\\\"WarehousePlayer\\\")\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0010864,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0247RulesTests.RedesignsRetainNativeDensityFallbacksAndNoLiveVisualPhysics(\\\"Samurai\\\")\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.000289,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0247RulesTests.RedesignsRetainNativeDensityFallbacksAndNoLiveVisualPhysics(\\\"FireworksExpert\\\")\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0001761,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0247RulesTests.SpeedsAreAbsoluteAndMotorAccelerationUnchanged(\\\"WarehousePlayer\\\",8.4f)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0011828,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0247RulesTests.SpeedsAreAbsoluteAndMotorAccelerationUnchanged(\\\"Larper\\\",7.7f)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0002034,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0247RulesTests.SpeedsAreAbsoluteAndMotorAccelerationUnchanged(\\\"Samurai\\\",7)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0001541,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0247RulesTests.SpeedsAreAbsoluteAndMotorAccelerationUnchanged(\\\"FireworksExpert\\\",7)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0001489,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0247RulesTests.TinySamuraiHasGiantSwordButRetainsFairLivingHitboxAndCombatTuning\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0027351,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0248RulesTests.ExactlyThreeAuthoredSamuraiHaveClearGroundAlignedResetPointsAndUnchangedCombat\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.1088899,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0248RulesTests.SamuraiStandingBodyHitboxMatchesVisibleBodyBoundsInBothDirections\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0105689,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0248RulesTests.VisualAndFireRateChangesKeepWeaponBalanceAndPooledEffectBudget\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0014281,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint024ProgressTests.ActiveAndSavedBuildProfilesCannotBypassCampaignWithTestbedOnlyScenes\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0215026,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint024ProgressTests.AtomicSaveReloadKeepsMoneyAndCompletionWithoutOverwritingUnknownFutureVersion\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0250528,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint024ProgressTests.DemoHasBoundActorsStagedSpecialistsAndOriginalMissionRemainsSeparate\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0962134,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint024ProgressTests.InvalidResourceValuesNormalizeWithoutNegativeBalances\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0004003,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.SuppressionRulesTests.AccumulationCapsThenDecaysAfterQuietGapWithoutTicking\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0007203,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.VisualAssetTests.CameraUsesIntegerArtPixelsAtLandscapeSizesWithoutMovingTarget(1280,720)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0018447,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.VisualAssetTests.CameraUsesIntegerArtPixelsAtLandscapeSizesWithoutMovingTarget(2560,1080)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0003572,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.VisualAssetTests.GameplayPrefabsHaveCompleteReplaceableVisualsWithoutVisualPhysics(\\\"Assets/Prefabs/Player/WarehousePlayer.prefab\\\")\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0009457,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.VisualAssetTests.GameplayPrefabsHaveCompleteReplaceableVisualsWithoutVisualPhysics(\\\"Assets/Prefabs/Enemies/Larper.prefab\\\")\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0002612,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.VisualAssetTests.ImportedVisualPixelsAreUncompressedPointFilteredAndConsistent\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0228479,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.VisualAssetTests.RagdollPrefabHasSixBodiesFiveLimitedJointsAndDoesNotBlockGameplayMasks\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0031354,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.VisualAssetTests.SpeechPlacementSeparatesNearbyBubblesAndClampsToLandscape(1280,720)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0024135,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.VisualAssetTests.SpeechPlacementSeparatesNearbyBubblesAndClampsToLandscape(2560,1080)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0000768,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+          }
+        ]
+      }
+    },
+    {
+      "mode": "playmode",
+      "filter": "CameraSamuraiHotfixTests",
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"status\": \"completed\",\n  \"duration\": 37.47,\n  \"summary\": {\n    \"total\": 6,\n    \"passed\": 5,\n    \"failed\": 1,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.CameraSamuraiHotfixTests.AutonomousPursuitReachesElevatedWarehouseStepAfterVisibleAcquisition\",\n      \"Status\": \"Failed\",\n      \"Duration\": 13.011236,\n      \"Message\": \"  (1.53, 6.18) see=False Patrol None; (1.53, 8.65) see=True Approaching None; (2.61, 5.93) see=False Approaching None; (2.61, 5.93) see=False Approaching None; (2.61, 5.93) see=False Approaching None; (2.61, 5.93) see=False Approaching None; (2.61, 5.93) see=False Approaching None; (2.61, 5.93) see=False Approaching None; (2.61, 5.93) see=False Approaching None; (2.61, 5.93) see=False Approaching None; (2.61, 5.93) see=False Approaching None; (2.61, 5.93) see=False Approaching None; (2.61, 5.93) see=False Approaching None; (2.61, 5.93) see=False Approaching None; (2.61, 5.93) see=False Approaching None; (2.61, 5.93) see=False Approaching None; (2.61, 5.93) see=False Approaching None; (2.61, 5.93) see=False Approaching None; (2.61, 5.93) see=False Approaching None; (2.61, 5.93) see=False Approaching None; (2.61, 5.93) see=False Approaching None; (2.61, 5.93) see=False Approaching None; (2.61, 5.93) see=False Approaching None; (2.61, 5.93) see=False Approaching None; \\r\\n  Expected: greater than 0\\r\\n  But was:  0\\r\\n\",\n      \"StackTrace\": \"at InsaneDreams.Tests.CameraSamuraiHotfixTests+<AutonomousPursuitReachesElevatedWarehouseStepAfterVisibleAcquisition>d__14.MoveNext () [0x001df] in C:\\\\Users\\\\jansa\\\\Documents\\\\GitHub\\\\Insane-Dreams-2.0\\\\Assets\\\\Tests\\\\PlayMode\\\\CameraSamuraiHotfixTests.cs:72\\r\\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in .\\\\Library\\\\PackageCache\\\\com.unity.test-framework@80f691d4262b\\\\UnityEngine.TestRunner\\\\NUnitExtensions\\\\Attributes\\\\TestEnumerator.cs:52\\r\\n\"\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CameraSamuraiHotfixTests.AutonomousSmallSamuraiCrossesActualCoverAndKeepsMeleeTelegraph\",\n      \"Status\": \"Passed\",\n      \"Duration\": 6.5674481,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CameraSamuraiHotfixTests.BriefDecisionGapPreservesCommittedPhysicalFlight\",\n      \"Status\": \"Passed\",\n      \"Duration\": 2.2863322,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CameraSamuraiHotfixTests.RemovedObstructionAllowsReplanningInsteadOfPermanentStationaryFailure\",\n      \"Status\": \"Passed\",\n      \"Duration\": 8.2318671,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CameraSamuraiHotfixTests.SmallBodyDetectionWorksAtDifferentElevationsAndSolidWallsOcclude\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.5494221,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CameraSamuraiHotfixTests.VisibleEntryStartsPursuitAndCameraExitDoesNotClearAggro\",\n      \"Status\": \"Passed\",\n      \"Duration\": 5.798006,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+          }
+        ]
+      }
+    },
+    {
+      "mode": "playmode",
+      "filter": "LadderCameraHotfixTests",
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"status\": \"completed\",\n  \"duration\": 7.14,\n  \"summary\": {\n    \"total\": 1,\n    \"passed\": 1,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.LadderCameraHotfixTests.ClimbingCentersSmoothlyRejectsAimChangesAndRestoresDirectionalComposition\",\n      \"Status\": \"Passed\",\n      \"Duration\": 7.1182946,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+          }
+        ]
+      }
+    },
+    {
+      "mode": "playmode",
+      "filter": "Sprint0247Tests",
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"status\": \"completed\",\n  \"duration\": 16.47,\n  \"summary\": {\n    \"total\": 3,\n    \"passed\": 3,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0247Tests.CameraReversesSmoothlyRejectsRapidChatterAndKeepsJumpVisible\",\n      \"Status\": \"Passed\",\n      \"Duration\": 5.4342898,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0247Tests.StrongFirstMissShowsHesitationEvenWhenRetreatAndDuckRollsFail\",\n      \"Status\": \"Passed\",\n      \"Duration\": 10.2183351,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0247Tests.TinySamuraiCorpseFitsCopiedSpritesAndPreservesContactMasks\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.7957162,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+          }
+        ]
+      }
+    },
+    {
+      "mode": "playmode",
+      "filter": "Sprint0243Tests",
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"status\": \"completed\",\n  \"duration\": 42.84,\n  \"summary\": {\n    \"total\": 15,\n    \"passed\": 15,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0243Tests.ContactWithStepAllowsOneLaunchAdjustmentInsteadOfStalling\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.5143402,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0243Tests.CrossesGapWithOneGroundedJump\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.8195193,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0243Tests.ExistingDefensiveDuckStillInterruptsSamuraiPressure\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.9233172,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0243Tests.ImpossibleRiseAndBlockedArcDoNotCreateJumpLoops\",\n      \"Status\": \"Passed\",\n      \"Duration\": 2.9240926,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0243Tests.ModularArtKeepsHandAttachedInJumpWindupAndSwing\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.9235459,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0243Tests.MovingTargetCannotRetargetCommittedFlightAndLandingRestoresBudget\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.6915831,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0243Tests.NewObstructionDuringFlightDoesNotCauseRepeatedFailedJumps\",\n      \"Status\": \"Passed\",\n      \"Duration\": 5.9714691,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0243Tests.OccupiedLandingDefersJumpUntilAllyLeaves\",\n      \"Status\": \"Passed\",\n      \"Duration\": 2.1535803,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0243Tests.PlayerDirectlyBelowCausesLedgeApproachAndPhysicalDescent\",\n      \"Status\": \"Passed\",\n      \"Duration\": 13.3816172,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0243Tests.PursuesHigherPlatformWithRealPhysics\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.6800219,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0243Tests.PursuesLowerPlatformWithRealPhysics\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.9394712,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0243Tests.RagdollCopiesNewPartsWithoutOldFaceOverlay\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0347819,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0243Tests.StrikeDealsFortyAndHitInterruptsNextWindup\",\n      \"Status\": \"Passed\",\n      \"Duration\": 2.1743187,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0243Tests.WarehouseAuthoredStepRouteSupportsMultipleFiniteJumps\",\n      \"Status\": \"Passed\",\n      \"Duration\": 3.5277902,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0243Tests.WarehouseFloorHeightDropRemainsPhysical\",\n      \"Status\": \"Passed\",\n      \"Duration\": 2.1398067,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+          }
+        ]
+      }
+    },
+    {
+      "mode": "playmode",
+      "filter": "Sprint0244Tests",
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"status\": \"completed\",\n  \"duration\": 35.78,\n  \"summary\": {\n    \"total\": 11,\n    \"passed\": 11,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0244Tests.CeilingRejectsBothArcsWithoutRepeatedLaunches\",\n      \"Status\": \"Passed\",\n      \"Duration\": 2.9249377,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0244Tests.DestroyedDestinationEndsPlanWithoutExtraAirJumps\",\n      \"Status\": \"Passed\",\n      \"Duration\": 3.9150312,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0244Tests.DoubleJumpCrossesWideGapWithoutAirChaining\",\n      \"Status\": \"Passed\",\n      \"Duration\": 2.1980809,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0244Tests.ExistingLadderCanExitAtSelectedIntermediatePlatform\",\n      \"Status\": \"Passed\",\n      \"Duration\": 4.9801796,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0244Tests.MotorRejectsThirdImpulseUntilConfirmedLanding\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.3143362,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0244Tests.OrdinaryReachablePlatformDoesNotSpendSecondJump\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.6846367,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0244Tests.PlannedDoubleJumpPhysicallyReachesHigherPlatformAndResets\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.9947974,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0244Tests.RouteCanInitiallyMoveAwayFromTargetAndBlacklistFailedEdge\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.215604,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0244Tests.SegmentChainsAndSwordRemainConnectedAcrossPosesAndFacing\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0251578,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0244Tests.SegmentedRagdollKeepsFourteenBodiesAndLimitedConnections\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.5777021,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0244Tests.WarehouseStepsOfferPhysicalJumpRoutesWithoutLoops\",\n      \"Status\": \"Passed\",\n      \"Duration\": 16.9194238,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+          }
+        ]
+      }
+    },
+    {
+      "mode": "playmode",
+      "filter": "FocusedHotfixTests",
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"status\": \"completed\",\n  \"duration\": 17.03,\n  \"summary\": {\n    \"total\": 2,\n    \"passed\": 2,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.FocusedHotfixTests.SamuraiCrossesActualWarehouseCrateCoverAndUpperSteps\",\n      \"Status\": \"Passed\",\n      \"Duration\": 14.677279,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.FocusedHotfixTests.SamuraiPhysicalJumpApexIncreasesModeratelyAndResetsOnLanding\",\n      \"Status\": \"Passed\",\n      \"Duration\": 2.3244039,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+          }
+        ]
+      }
+    },
+    {
+      "mode": "playmode",
+      "filter": "Sprint0248Tests",
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"status\": \"completed\",\n  \"duration\": 4.02,\n  \"summary\": {\n    \"total\": 6,\n    \"passed\": 6,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0248Tests.AnimatedSamuraiHurtboxMatchesBodyAcrossFacingAndPosesWithoutInvisibleMovementHits\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0464669,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0248Tests.CarbineFlashUsesNewDirectionalSpriteAtMuzzleAndExpiresPerShot\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.1311185,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0248Tests.EveryFireworkCanHurtAllTeamsAndSelfExactlyOnceWhileWallAndBulletRulesRemain\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.9171752,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0248Tests.FasterPistolEmpties27RoundsWithOneCuePerShotAndFiniteReload\",\n      \"Status\": \"Passed\",\n      \"Duration\": 2.0822993,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0248Tests.FuseBucketsVaryAndShortFuseDetonatesAtActualAirbornePosition\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.4935004,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0248Tests.ScaledSamuraiKeepsFeetGripAndEveryCorpseSegmentAtFivePercentIncrease\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.3275572,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+          }
+        ]
+      }
+    },
+    {
+      "mode": "playmode",
+      "filter": "Sprint0224Tests",
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"status\": \"completed\",\n  \"duration\": 18.69,\n  \"summary\": {\n    \"total\": 9,\n    \"passed\": 9,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0224Tests.AndroidHeldGestureDoesNotAutoDoubleJumpButFreshGestureDoes\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.7649094,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0224Tests.DoubleJumpFromCoverKeepsSmoothRootWeaponAndReadableExistingRig\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.7553098,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0224Tests.FailedDuckCanRetryDuringSameBurstOnlyAfterCooldown\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.8143574,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0224Tests.FewCloseMissesCanInterruptAdvancingAndCommitRetreatWithoutFullPanic\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.769261,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0224Tests.OverheadRegistrationRemainsConsistentAfterDuckingAndFarOrShieldedShotsAreRejected\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.4839116,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0224Tests.RealHitscanShortBurstDucksAndBuildsPressureWithoutDamageThenRecovers\",\n      \"Status\": \"Passed\",\n      \"Duration\": 11.1302048,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0224Tests.RespawnRestoresBudgetWhileEnemyMotorRetainsSingleJump\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.923251,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0224Tests.SingleThenSecondJumpCapsVelocityPreservesMomentumRejectsThirdAndResetsOnLanding\",\n      \"Status\": \"Passed\",\n      \"Duration\": 2.3191675,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0224Tests.WallContactAndMotorReenableCannotRefillAirJump\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.699969,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+          }
+        ]
+      }
+    },
+    {
+      "mode": "playmode",
+      "filter": "Sprint0223MotionTests",
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"status\": \"completed\",\n  \"duration\": 1.76,\n  \"summary\": {\n    \"total\": 1,\n    \"passed\": 1,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0223MotionTests.RenderedMotionDoesNotRewindOrMoveAfterLateUpdate\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.7364201,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+          }
+        ]
+      }
+    },
+    {
+      "mode": "playmode",
+      "filter": "Sprint0225Tests",
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"status\": \"completed\",\n  \"duration\": 6.25,\n  \"summary\": {\n    \"total\": 8,\n    \"passed\": 8,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0225Tests.BothHudAssetsHaveLargerHitAreasAndSeparatedActionsAcrossAspectRatios\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.3601006,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0225Tests.ExplicitTouchAndFreshUpGestureSpendOnlyOneJumpAndResetOnLanding\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.6701997,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0225Tests.ThreeCapturedTouchPointersKeepMovingAndFiringWhileJumpIsTapped\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.3506221,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0225Tests.TouchJumpDetachesWhileHoldingDownAndLeavesOneAirJump\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.8806304,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0225Tests.TouchJumpDetachesWhileHoldingLeftAndLeavesOneAirJump\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.8827407,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0225Tests.TouchJumpDetachesWhileHoldingRightAndLeavesOneAirJump\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.8948874,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0225Tests.TouchJumpDetachesWhileHoldingUpAndLeavesOneAirJump\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.877808,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0225Tests.ZoomDividesExistingFramingByOnePointOneAtEveryAspectAndPreservesBounds\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.3009425,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+          }
+        ]
+      }
+    },
+    {
+      "mode": "playmode",
+      "filter": "Sprint0245Tests",
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"status\": \"completed\",\n  \"duration\": 3.87,\n  \"summary\": {\n    \"total\": 6,\n    \"passed\": 6,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0245Tests.ArmorTracksEquipmentDamageDepletionAndCopiesToCorpse\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0626464,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0245Tests.DownwardCoverBeatsLadderTopEntryOnRight\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.3987235,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0245Tests.DownwardCoverBeatsMidLadderCaptureOnLeft\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.4000716,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0245Tests.SegmentedPistolRetractionKeepsMuzzleOnNearSideOfSolidCover\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.026668,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0245Tests.SegmentedPistolStaysInHandAcrossMirroredPosesAndReload\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.4313862,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0245Tests.UnobstructedLadderTopStillAllowsIntentionalDescent\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.519865,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+          }
+        ]
+      }
+    },
+    {
+      "mode": "playmode",
+      "filter": "CombatIntegrationTests",
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"status\": \"completed\",\n  \"duration\": 5.18,\n  \"summary\": {\n    \"total\": 8,\n    \"passed\": 8,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.CombatIntegrationTests.AuthoredLadderAscentUsesExistingTraversalAndRestoresPatrol\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.0596035,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CombatIntegrationTests.InvalidAimDoesNotConsumeAmmunitionOrStartCooldown\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0206861,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CombatIntegrationTests.LarperEngagesShootsAndReturnsToPatrolWhenTargetLeaves\",\n      \"Status\": \"Passed\",\n      \"Duration\": 3.8438708,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CombatIntegrationTests.MeleeRequiresShortUnobstructedRangeAndNoAmmo\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0228122,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CombatIntegrationTests.PlayerFireSwitchInterruptAndDeathRecoveryPreserveInventory\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0263006,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CombatIntegrationTests.RaycastStopsAtGeometryAndDefeatsTargetOnce\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0248966,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CombatIntegrationTests.TwoThumbAimOnlyAndOuterFireZoneRemainIndependent\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0454314,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CombatIntegrationTests.UnavailableLadderRouteReleasesMotionAndReloadButtonIsReachable\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.1133724,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+          }
+        ]
+      }
+    },
+    {
+      "mode": "playmode",
+      "filter": "FirstSightReactionIsSlower",
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"status\": \"completed\",\n  \"duration\": 1.02,\n  \"summary\": {\n    \"total\": 1,\n    \"passed\": 1,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint012CombatTests.FirstSightReactionIsSlowerButEstablishedAutomaticFireKeepsItsCadence\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.992917,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+          }
+        ]
+      }
+    },
+    {
+      "mode": "playmode",
+      "filter": "CameraSamuraiHotfixTests",
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"status\": \"completed\",\n  \"duration\": 26.71,\n  \"summary\": {\n    \"total\": 6,\n    \"passed\": 5,\n    \"failed\": 1,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.CameraSamuraiHotfixTests.AutonomousPursuitReachesElevatedWarehouseStepAfterVisibleAcquisition\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.9978208,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CameraSamuraiHotfixTests.AutonomousSmallSamuraiCrossesActualCoverAndKeepsMeleeTelegraph\",\n      \"Status\": \"Passed\",\n      \"Duration\": 6.6098576,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CameraSamuraiHotfixTests.BriefDecisionGapPreservesCommittedPhysicalFlight\",\n      \"Status\": \"Passed\",\n      \"Duration\": 2.2932119,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CameraSamuraiHotfixTests.RemovedObstructionAllowsReplanningInsteadOfPermanentStationaryFailure\",\n      \"Status\": \"Passed\",\n      \"Duration\": 8.3310756,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CameraSamuraiHotfixTests.SmallBodyDetectionWorksAtDifferentElevationsAndSolidWallsOcclude\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.5443084,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CameraSamuraiHotfixTests.VisibleEntryStartsPursuitAndCameraExitDoesNotClearAggro\",\n      \"Status\": \"Failed\",\n      \"Duration\": 5.8540654,\n      \"Message\": \"  Expected: False\\r\\n  But was:  True\\r\\n\",\n      \"StackTrace\": \"at InsaneDreams.Tests.CameraSamuraiHotfixTests+<VisibleEntryStartsPursuitAndCameraExitDoesNotClearAggro>d__11.MoveNext () [0x002a0] in C:\\\\Users\\\\jansa\\\\Documents\\\\GitHub\\\\Insane-Dreams-2.0\\\\Assets\\\\Tests\\\\PlayMode\\\\CameraSamuraiHotfixTests.cs:45\\r\\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in .\\\\Library\\\\PackageCache\\\\com.unity.test-framework@80f691d4262b\\\\UnityEngine.TestRunner\\\\NUnitExtensions\\\\Attributes\\\\TestEnumerator.cs:52\\r\\n\"\n    }\n  ]\n}"
+          }
+        ]
+      }
+    },
+    {
+      "mode": "playmode",
+      "filter": "CameraSamuraiHotfixTests",
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"status\": \"completed\",\n  \"duration\": 26.44,\n  \"summary\": {\n    \"total\": 6,\n    \"passed\": 6,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.CameraSamuraiHotfixTests.AutonomousPursuitReachesElevatedWarehouseStepAfterVisibleAcquisition\",\n      \"Status\": \"Passed\",\n      \"Duration\": 2.1082826,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CameraSamuraiHotfixTests.AutonomousSmallSamuraiCrossesActualCoverAndKeepsMeleeTelegraph\",\n      \"Status\": \"Passed\",\n      \"Duration\": 6.4981257,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CameraSamuraiHotfixTests.BriefDecisionGapPreservesCommittedPhysicalFlight\",\n      \"Status\": \"Passed\",\n      \"Duration\": 2.179637,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CameraSamuraiHotfixTests.RemovedObstructionAllowsReplanningInsteadOfPermanentStationaryFailure\",\n      \"Status\": \"Passed\",\n      \"Duration\": 8.1978811,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CameraSamuraiHotfixTests.SmallBodyDetectionWorksAtDifferentElevationsAndSolidWallsOcclude\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.4592936,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CameraSamuraiHotfixTests.VisibleEntryStartsPursuitAndCameraExitDoesNotClearAggro\",\n      \"Status\": \"Passed\",\n      \"Duration\": 5.9182076,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+          }
+        ]
+      }
+    },
+    {
+      "mode": "editor",
+      "filter": "",
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"status\": \"completed\",\n  \"duration\": 7.28,\n  \"summary\": {\n    \"total\": 78,\n    \"passed\": 78,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.CombatRulesTests.AttacksAndReloadNeverMutateSharedDefinitions\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0084947,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CombatRulesTests.CancelledReloadTransfersNothingAndCanRestart\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.00088,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CombatRulesTests.CooldownCannotBeBypassedAndEmptyAttemptsDoNotSpendAmmo\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0017014,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CombatRulesTests.DamageFiltersInvalidFriendlyAndSelfHitsAndDefeatsOnce\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0148542,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CombatRulesTests.MagazineDepletesExactlyOncePerSuccessfulAttack\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0010227,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CombatRulesTests.MeleeUsesCooldownButNeverAmmunitionOrReload\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0005439,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CombatRulesTests.ReloadTransfersOnlyAtDeadlineAndConservesAmmunition\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0007158,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.DataAndGestureTests.AuthoredDefinitionsHaveValidUniqueIdentities\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.6496021,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.DataAndGestureTests.EmptySlotsAndMeleeAreExplicit\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0019187,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.DataAndGestureTests.EnemyIdentityAndExplicitCapabilitiesAreIndependent\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0057298,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.DataAndGestureTests.LadderArbitrationConsumesHeldGestureAcrossTransitions\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0005968,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.DataAndGestureTests.SafeAreaInsetsRespectCutoutsInBothLandscapeOrientations\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0017856,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.DataAndGestureTests.StableSnapshotsResolveByDefinitionIdentity\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0094079,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.DataAndGestureTests.SwitchingPreservesIndependentRuntimeAmmoAndDefinitions\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0015295,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.DataAndGestureTests.UpwardDiagonalClimbsButLateralDiagonalRetainsJumpAndNeutralHysteresis\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0009592,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.DataAndGestureTests.UpwardGestureRequiresNeutralAndNeverRepeatsOnLanding\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0003419,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.PersonalityRulesTests.ConfiguredProfilesHaveDialogueAndDifferentMoraleProbabilities\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0042671,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.PersonalityRulesTests.EncounterGateLimitsOrdinaryLinesAndRareOverridesAcrossSpeakers\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0005704,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.PersonalityRulesTests.WarehousePassageHasCorrectClearanceAndDoesNotOverlapCheckpointSpawn\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.1086859,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.SecondArmRigTests.FreeArmNeverChangesCarryingHandMuzzleOrMirroredAim(1)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0099837,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.SecondArmRigTests.FreeArmNeverChangesCarryingHandMuzzleOrMirroredAim(-1)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0025092,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.SecondArmRigTests.HumanoidPrefabsKeepRearArmBehindTorsoAndFrontArmWithOriginalSprites\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0024375,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.SecondArmRigTests.RearArmActuallyContributesVisiblePixelsAcrossPoses(\\\"Player\\\",1)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 2.005545,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.SecondArmRigTests.RearArmActuallyContributesVisiblePixelsAcrossPoses(\\\"Player\\\",-1)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.4121011,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.SecondArmRigTests.RearArmActuallyContributesVisiblePixelsAcrossPoses(\\\"Larper\\\",1)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.7700503,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.SecondArmRigTests.RearArmActuallyContributesVisiblePixelsAcrossPoses(\\\"Larper\\\",-1)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.1224525,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint008PresentationTests.ActiveSkinsAndRagdollUseIndependentSpritesWithSafePixelImports\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.016736,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint008PresentationTests.WarehouseArtAddsNoCollisionAndPreservesPreSprintGeometryAndPracticeBindings\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0583675,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint009RigTests.EveryLadderGraphicHasPixelAlignedCapsAboveItsLandingFloor\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0467012,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint009RigTests.ProportionsExpressionsAndPivotsMatchTheStandingSkeleton\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0053332,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint009RigTests.RagdollColliderMassAndNeckFollowTheResizedLivingParts\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0020866,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint012RulesTests.BasicPistolHasOriginalModularMagazineAndFiniteAutomaticBurst\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.003515,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint012RulesTests.CombatSpeechDensityAndDuplicateSuppressionDoNotReplaceOrdinaryGate\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0007592,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint012RulesTests.Sprint0122ReloadVariationPreservesDeadlineAmmoAndSharedDefinition\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0009043,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint012RulesTests.WarehouseHasSevenConfiguredActiveEncountersAndOneRepresentativeLowCover\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0664253,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint013RulesTests.BodyBoundsRespectGameplayProjectionDepthEdgesAndCulling\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0018498,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint013RulesTests.CameraTuningAndExplicitWarehouseSurfacesPreservePistolAndSceneContracts\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0540554,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint014RulesTests.MissionIsSeparateWithStagedPrefabsValidReferencesAndMissionUiOverride\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.1462322,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint014RulesTests.MissionSpawnsCheckpointsAndSteppedRouteHaveSupportedClearanceWithinExistingJumpLimits\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0903749,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint015RulesTests.MissionOccupantsAndInspectorDefaultsPreserveModularReferences\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0550611,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint021RulesTests.InvalidEmptyReloadingAndMeleeOperationsCannotMalfunction\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0006254,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint021RulesTests.MalfunctionBlocksOperationsThenRecoversWithoutChangingAmmoOrCadence\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0005668,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0242RulesTests.BundlesSuppliesAndProgressMarkersHaveSeparateSavedVisualsWithoutLauncher\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0861408,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0242RulesTests.DemoAddedFiveSupportedSpacedResidentsWhileTestbedOpeningAndSpecialistsRemainIntact\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.1165247,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0244RigTests.OnlySamuraiOptsIntoEnemyAirJumpWhileCombatTuningIsPreserved\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0030853,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0244RigTests.SamuraiHasCompleteSegmentChainsAndPreservesModularArtDimensions\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0012191,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0245RigTests.CandidateHasOneCompleteSegmentedRigWithConsistentDensity(\\\"Larper\\\")\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0022339,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0245RigTests.CandidateHasOneCompleteSegmentedRigWithConsistentDensity(\\\"Samurai\\\")\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0001653,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0245RigTests.CandidateUsesEightFlatColorsWithUniformSkinAndSixDistinctFaces\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0078934,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0245RigTests.FullPanicUsesDistinctFaceWithoutChangingFallbackExpressionContract\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.004043,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0246RulesTests.ConfiguredEditorEntryIsMainMenuAndBothBuildPlatformsInheritMenuFirst\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0286469,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0246RulesTests.PistolVisualsAndSocketChangeWithoutWeaponBalanceChanges\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0018274,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0247RulesTests.CameraCompositionUsesProjectionAndEffectiveViewport(1280,720,0,1)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0046333,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0247RulesTests.CameraCompositionUsesProjectionAndEffectiveViewport(2560,1080,0.1f,0.75f)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0004806,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0247RulesTests.RedesignsRetainNativeDensityFallbacksAndNoLiveVisualPhysics(\\\"WarehousePlayer\\\")\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0009486,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0247RulesTests.RedesignsRetainNativeDensityFallbacksAndNoLiveVisualPhysics(\\\"Samurai\\\")\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0001382,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0247RulesTests.RedesignsRetainNativeDensityFallbacksAndNoLiveVisualPhysics(\\\"FireworksExpert\\\")\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0001142,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0247RulesTests.SpeedsAreAbsoluteAndMotorAccelerationUnchanged(\\\"WarehousePlayer\\\",8.4f)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0007123,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0247RulesTests.SpeedsAreAbsoluteAndMotorAccelerationUnchanged(\\\"Larper\\\",7.7f)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0001385,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0247RulesTests.SpeedsAreAbsoluteAndMotorAccelerationUnchanged(\\\"Samurai\\\",7)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.00009,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0247RulesTests.SpeedsAreAbsoluteAndMotorAccelerationUnchanged(\\\"FireworksExpert\\\",7)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0001036,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0247RulesTests.TinySamuraiHasGiantSwordButRetainsFairLivingHitboxAndCombatTuning\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0015502,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0248RulesTests.ExactlyThreeAuthoredSamuraiHaveClearGroundAlignedResetPointsAndUnchangedCombat\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0979965,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0248RulesTests.SamuraiStandingBodyHitboxMatchesVisibleBodyBoundsInBothDirections\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0081808,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0248RulesTests.VisualAndFireRateChangesKeepWeaponBalanceAndPooledEffectBudget\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0019358,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint024ProgressTests.ActiveAndSavedBuildProfilesCannotBypassCampaignWithTestbedOnlyScenes\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0344964,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint024ProgressTests.AtomicSaveReloadKeepsMoneyAndCompletionWithoutOverwritingUnknownFutureVersion\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0256384,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint024ProgressTests.DemoHasBoundActorsStagedSpecialistsAndOriginalMissionRemainsSeparate\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.1163065,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint024ProgressTests.InvalidResourceValuesNormalizeWithoutNegativeBalances\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0006485,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.SuppressionRulesTests.AccumulationCapsThenDecaysAfterQuietGapWithoutTicking\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0010977,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.VisualAssetTests.CameraUsesIntegerArtPixelsAtLandscapeSizesWithoutMovingTarget(1280,720)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0029748,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.VisualAssetTests.CameraUsesIntegerArtPixelsAtLandscapeSizesWithoutMovingTarget(2560,1080)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0008131,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.VisualAssetTests.GameplayPrefabsHaveCompleteReplaceableVisualsWithoutVisualPhysics(\\\"Assets/Prefabs/Player/WarehousePlayer.prefab\\\")\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.000907,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.VisualAssetTests.GameplayPrefabsHaveCompleteReplaceableVisualsWithoutVisualPhysics(\\\"Assets/Prefabs/Enemies/Larper.prefab\\\")\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.01257,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.VisualAssetTests.ImportedVisualPixelsAreUncompressedPointFilteredAndConsistent\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0235414,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.VisualAssetTests.RagdollPrefabHasSixBodiesFiveLimitedJointsAndDoesNotBlockGameplayMasks\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0034884,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.VisualAssetTests.SpeechPlacementSeparatesNearbyBubblesAndClampsToLandscape(1280,720)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0017649,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.VisualAssetTests.SpeechPlacementSeparatesNearbyBubblesAndClampsToLandscape(2560,1080)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0000605,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+          }
+        ]
+      }
+    },
+    {
+      "mode": "playmode",
+      "filter": "VisualIntegrationTests",
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"status\": \"completed\",\n  \"duration\": 8.49,\n  \"summary\": {\n    \"total\": 8,\n    \"passed\": 8,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.VisualIntegrationTests.ActualShotRecoilAndSkinReplacementDoNotMoveActorOrChangeHealth\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.4057757,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.VisualIntegrationTests.DeliveredBoastAndCombatMissesDriveExpressionsWithoutRandomTimers\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.6891279,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.VisualIntegrationTests.FatalDamageCreatesOneStableRagdollStopsEnemyAndTransfersMomentum\",\n      \"Status\": \"Passed\",\n      \"Duration\": 2.387626,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.VisualIntegrationTests.JumpFallChuteLadderAndRecoveryUseActualTraversalState\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.1939099,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.VisualIntegrationTests.MirroredDefeatPreservesLimbDirectionAndSceneUnloadCleansBodies\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0464531,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.VisualIntegrationTests.RagdollCapAndSceneOwnedCleanupPreventAccumulation\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0700703,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.VisualIntegrationTests.WalkingFacingAimRecoilAndCrouchRemainIndependentOfGameplay\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.0042775,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.VisualIntegrationTests.WitnessPanicFaceSpeechAnchorOverlapAndDefeatLifecycleAreConnected\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.6672424,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+          }
+        ]
+      }
+    },
+    {
+      "mode": "playmode",
+      "filter": "Sprint0248SceneTests",
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"status\": \"completed\",\n  \"duration\": 2.74,\n  \"summary\": {\n    \"total\": 1,\n    \"passed\": 1,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0248SceneTests.ThreeSamuraiSurviveResetOnGroundThenIndividuallyDetectPursueAndStrike\",\n      \"Status\": \"Passed\",\n      \"Duration\": 2.7208177,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+          }
+        ]
+      }
+    },
+    {
+      "mode": "playmode",
+      "filter": "Sprint0243Tests",
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"status\": \"completed\",\n  \"duration\": 32.12,\n  \"summary\": {\n    \"total\": 15,\n    \"passed\": 15,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0243Tests.ContactWithStepAllowsOneLaunchAdjustmentInsteadOfStalling\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.5146509,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0243Tests.CrossesGapWithOneGroundedJump\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.8192956,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0243Tests.ExistingDefensiveDuckStillInterruptsSamuraiPressure\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.9142653,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0243Tests.ImpossibleRiseAndBlockedArcDoNotCreateJumpLoops\",\n      \"Status\": \"Passed\",\n      \"Duration\": 2.9151436,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0243Tests.ModularArtKeepsHandAttachedInJumpWindupAndSwing\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.9147664,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0243Tests.MovingTargetCannotRetargetCommittedFlightAndLandingRestoresBudget\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.6739852,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0243Tests.NewObstructionDuringFlightDoesNotCauseRepeatedFailedJumps\",\n      \"Status\": \"Passed\",\n      \"Duration\": 5.9168821,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0243Tests.OccupiedLandingDefersJumpUntilAllyLeaves\",\n      \"Status\": \"Passed\",\n      \"Duration\": 2.119587,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0243Tests.PlayerDirectlyBelowCausesLedgeApproachAndPhysicalDescent\",\n      \"Status\": \"Passed\",\n      \"Duration\": 2.8208939,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0243Tests.PursuesHigherPlatformWithRealPhysics\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.6804585,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0243Tests.PursuesLowerPlatformWithRealPhysics\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.9385562,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0243Tests.RagdollCopiesNewPartsWithoutOldFaceOverlay\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0329442,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0243Tests.StrikeDealsFortyAndHitInterruptsNextWindup\",\n      \"Status\": \"Passed\",\n      \"Duration\": 2.1712119,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0243Tests.WarehouseAuthoredStepRouteSupportsMultipleFiniteJumps\",\n      \"Status\": \"Passed\",\n      \"Duration\": 3.5135588,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0243Tests.WarehouseFloorHeightDropRemainsPhysical\",\n      \"Status\": \"Passed\",\n      \"Duration\": 2.1404243,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+          }
+        ]
+      }
+    }
+  ],
+  "latestTests": [
+    {
+      "FullName": "InsaneDreams.Tests.CombatRulesTests.AttacksAndReloadNeverMutateSharedDefinitions",
+      "Status": "Passed",
+      "Duration": 0.0084947,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CombatRulesTests.CancelledReloadTransfersNothingAndCanRestart",
+      "Status": "Passed",
+      "Duration": 0.00088,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CombatRulesTests.CooldownCannotBeBypassedAndEmptyAttemptsDoNotSpendAmmo",
+      "Status": "Passed",
+      "Duration": 0.0017014,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CombatRulesTests.DamageFiltersInvalidFriendlyAndSelfHitsAndDefeatsOnce",
+      "Status": "Passed",
+      "Duration": 0.0148542,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CombatRulesTests.MagazineDepletesExactlyOncePerSuccessfulAttack",
+      "Status": "Passed",
+      "Duration": 0.0010227,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CombatRulesTests.MeleeUsesCooldownButNeverAmmunitionOrReload",
+      "Status": "Passed",
+      "Duration": 0.0005439,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CombatRulesTests.ReloadTransfersOnlyAtDeadlineAndConservesAmmunition",
+      "Status": "Passed",
+      "Duration": 0.0007158,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.DataAndGestureTests.AuthoredDefinitionsHaveValidUniqueIdentities",
+      "Status": "Passed",
+      "Duration": 0.6496021,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.DataAndGestureTests.EmptySlotsAndMeleeAreExplicit",
+      "Status": "Passed",
+      "Duration": 0.0019187,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.DataAndGestureTests.EnemyIdentityAndExplicitCapabilitiesAreIndependent",
+      "Status": "Passed",
+      "Duration": 0.0057298,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.DataAndGestureTests.LadderArbitrationConsumesHeldGestureAcrossTransitions",
+      "Status": "Passed",
+      "Duration": 0.0005968,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.DataAndGestureTests.SafeAreaInsetsRespectCutoutsInBothLandscapeOrientations",
+      "Status": "Passed",
+      "Duration": 0.0017856,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.DataAndGestureTests.StableSnapshotsResolveByDefinitionIdentity",
+      "Status": "Passed",
+      "Duration": 0.0094079,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.DataAndGestureTests.SwitchingPreservesIndependentRuntimeAmmoAndDefinitions",
+      "Status": "Passed",
+      "Duration": 0.0015295,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.DataAndGestureTests.UpwardDiagonalClimbsButLateralDiagonalRetainsJumpAndNeutralHysteresis",
+      "Status": "Passed",
+      "Duration": 0.0009592,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.DataAndGestureTests.UpwardGestureRequiresNeutralAndNeverRepeatsOnLanding",
+      "Status": "Passed",
+      "Duration": 0.0003419,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.PersonalityRulesTests.ConfiguredProfilesHaveDialogueAndDifferentMoraleProbabilities",
+      "Status": "Passed",
+      "Duration": 0.0042671,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.PersonalityRulesTests.EncounterGateLimitsOrdinaryLinesAndRareOverridesAcrossSpeakers",
+      "Status": "Passed",
+      "Duration": 0.0005704,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.PersonalityRulesTests.WarehousePassageHasCorrectClearanceAndDoesNotOverlapCheckpointSpawn",
+      "Status": "Passed",
+      "Duration": 0.1086859,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.SecondArmRigTests.FreeArmNeverChangesCarryingHandMuzzleOrMirroredAim(1)",
+      "Status": "Passed",
+      "Duration": 0.0099837,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.SecondArmRigTests.FreeArmNeverChangesCarryingHandMuzzleOrMirroredAim(-1)",
+      "Status": "Passed",
+      "Duration": 0.0025092,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.SecondArmRigTests.HumanoidPrefabsKeepRearArmBehindTorsoAndFrontArmWithOriginalSprites",
+      "Status": "Passed",
+      "Duration": 0.0024375,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.SecondArmRigTests.RearArmActuallyContributesVisiblePixelsAcrossPoses(\"Player\",1)",
+      "Status": "Passed",
+      "Duration": 2.005545,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.SecondArmRigTests.RearArmActuallyContributesVisiblePixelsAcrossPoses(\"Player\",-1)",
+      "Status": "Passed",
+      "Duration": 1.4121011,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.SecondArmRigTests.RearArmActuallyContributesVisiblePixelsAcrossPoses(\"Larper\",1)",
+      "Status": "Passed",
+      "Duration": 0.7700503,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.SecondArmRigTests.RearArmActuallyContributesVisiblePixelsAcrossPoses(\"Larper\",-1)",
+      "Status": "Passed",
+      "Duration": 0.1224525,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint008PresentationTests.ActiveSkinsAndRagdollUseIndependentSpritesWithSafePixelImports",
+      "Status": "Passed",
+      "Duration": 0.016736,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint008PresentationTests.WarehouseArtAddsNoCollisionAndPreservesPreSprintGeometryAndPracticeBindings",
+      "Status": "Passed",
+      "Duration": 0.0583675,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint009RigTests.EveryLadderGraphicHasPixelAlignedCapsAboveItsLandingFloor",
+      "Status": "Passed",
+      "Duration": 0.0467012,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint009RigTests.ProportionsExpressionsAndPivotsMatchTheStandingSkeleton",
+      "Status": "Passed",
+      "Duration": 0.0053332,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint009RigTests.RagdollColliderMassAndNeckFollowTheResizedLivingParts",
+      "Status": "Passed",
+      "Duration": 0.0020866,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint012RulesTests.BasicPistolHasOriginalModularMagazineAndFiniteAutomaticBurst",
+      "Status": "Passed",
+      "Duration": 0.003515,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint012RulesTests.CombatSpeechDensityAndDuplicateSuppressionDoNotReplaceOrdinaryGate",
+      "Status": "Passed",
+      "Duration": 0.0007592,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint012RulesTests.Sprint0122ReloadVariationPreservesDeadlineAmmoAndSharedDefinition",
+      "Status": "Passed",
+      "Duration": 0.0009043,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint012RulesTests.WarehouseHasSevenConfiguredActiveEncountersAndOneRepresentativeLowCover",
+      "Status": "Passed",
+      "Duration": 0.0664253,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint013RulesTests.BodyBoundsRespectGameplayProjectionDepthEdgesAndCulling",
+      "Status": "Passed",
+      "Duration": 0.0018498,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint013RulesTests.CameraTuningAndExplicitWarehouseSurfacesPreservePistolAndSceneContracts",
+      "Status": "Passed",
+      "Duration": 0.0540554,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint014RulesTests.MissionIsSeparateWithStagedPrefabsValidReferencesAndMissionUiOverride",
+      "Status": "Passed",
+      "Duration": 0.1462322,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint014RulesTests.MissionSpawnsCheckpointsAndSteppedRouteHaveSupportedClearanceWithinExistingJumpLimits",
+      "Status": "Passed",
+      "Duration": 0.0903749,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint015RulesTests.MissionOccupantsAndInspectorDefaultsPreserveModularReferences",
+      "Status": "Passed",
+      "Duration": 0.0550611,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint021RulesTests.InvalidEmptyReloadingAndMeleeOperationsCannotMalfunction",
+      "Status": "Passed",
+      "Duration": 0.0006254,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint021RulesTests.MalfunctionBlocksOperationsThenRecoversWithoutChangingAmmoOrCadence",
+      "Status": "Passed",
+      "Duration": 0.0005668,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0242RulesTests.BundlesSuppliesAndProgressMarkersHaveSeparateSavedVisualsWithoutLauncher",
+      "Status": "Passed",
+      "Duration": 0.0861408,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0242RulesTests.DemoAddedFiveSupportedSpacedResidentsWhileTestbedOpeningAndSpecialistsRemainIntact",
+      "Status": "Passed",
+      "Duration": 0.1165247,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0244RigTests.OnlySamuraiOptsIntoEnemyAirJumpWhileCombatTuningIsPreserved",
+      "Status": "Passed",
+      "Duration": 0.0030853,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0244RigTests.SamuraiHasCompleteSegmentChainsAndPreservesModularArtDimensions",
+      "Status": "Passed",
+      "Duration": 0.0012191,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0245RigTests.CandidateHasOneCompleteSegmentedRigWithConsistentDensity(\"Larper\")",
+      "Status": "Passed",
+      "Duration": 0.0022339,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0245RigTests.CandidateHasOneCompleteSegmentedRigWithConsistentDensity(\"Samurai\")",
+      "Status": "Passed",
+      "Duration": 0.0001653,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0245RigTests.CandidateUsesEightFlatColorsWithUniformSkinAndSixDistinctFaces",
+      "Status": "Passed",
+      "Duration": 0.0078934,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0245RigTests.FullPanicUsesDistinctFaceWithoutChangingFallbackExpressionContract",
+      "Status": "Passed",
+      "Duration": 0.004043,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0246RulesTests.ConfiguredEditorEntryIsMainMenuAndBothBuildPlatformsInheritMenuFirst",
+      "Status": "Passed",
+      "Duration": 0.0286469,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0246RulesTests.PistolVisualsAndSocketChangeWithoutWeaponBalanceChanges",
+      "Status": "Passed",
+      "Duration": 0.0018274,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0247RulesTests.CameraCompositionUsesProjectionAndEffectiveViewport(1280,720,0,1)",
+      "Status": "Passed",
+      "Duration": 0.0046333,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0247RulesTests.CameraCompositionUsesProjectionAndEffectiveViewport(2560,1080,0.1f,0.75f)",
+      "Status": "Passed",
+      "Duration": 0.0004806,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0247RulesTests.RedesignsRetainNativeDensityFallbacksAndNoLiveVisualPhysics(\"WarehousePlayer\")",
+      "Status": "Passed",
+      "Duration": 0.0009486,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0247RulesTests.RedesignsRetainNativeDensityFallbacksAndNoLiveVisualPhysics(\"Samurai\")",
+      "Status": "Passed",
+      "Duration": 0.0001382,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0247RulesTests.RedesignsRetainNativeDensityFallbacksAndNoLiveVisualPhysics(\"FireworksExpert\")",
+      "Status": "Passed",
+      "Duration": 0.0001142,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0247RulesTests.SpeedsAreAbsoluteAndMotorAccelerationUnchanged(\"WarehousePlayer\",8.4f)",
+      "Status": "Passed",
+      "Duration": 0.0007123,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0247RulesTests.SpeedsAreAbsoluteAndMotorAccelerationUnchanged(\"Larper\",7.7f)",
+      "Status": "Passed",
+      "Duration": 0.0001385,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0247RulesTests.SpeedsAreAbsoluteAndMotorAccelerationUnchanged(\"Samurai\",7)",
+      "Status": "Passed",
+      "Duration": 0.00009,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0247RulesTests.SpeedsAreAbsoluteAndMotorAccelerationUnchanged(\"FireworksExpert\",7)",
+      "Status": "Passed",
+      "Duration": 0.0001036,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0247RulesTests.TinySamuraiHasGiantSwordButRetainsFairLivingHitboxAndCombatTuning",
+      "Status": "Passed",
+      "Duration": 0.0015502,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0248RulesTests.ExactlyThreeAuthoredSamuraiHaveClearGroundAlignedResetPointsAndUnchangedCombat",
+      "Status": "Passed",
+      "Duration": 0.0979965,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0248RulesTests.SamuraiStandingBodyHitboxMatchesVisibleBodyBoundsInBothDirections",
+      "Status": "Passed",
+      "Duration": 0.0081808,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0248RulesTests.VisualAndFireRateChangesKeepWeaponBalanceAndPooledEffectBudget",
+      "Status": "Passed",
+      "Duration": 0.0019358,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint024ProgressTests.ActiveAndSavedBuildProfilesCannotBypassCampaignWithTestbedOnlyScenes",
+      "Status": "Passed",
+      "Duration": 0.0344964,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint024ProgressTests.AtomicSaveReloadKeepsMoneyAndCompletionWithoutOverwritingUnknownFutureVersion",
+      "Status": "Passed",
+      "Duration": 0.0256384,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint024ProgressTests.DemoHasBoundActorsStagedSpecialistsAndOriginalMissionRemainsSeparate",
+      "Status": "Passed",
+      "Duration": 0.1163065,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint024ProgressTests.InvalidResourceValuesNormalizeWithoutNegativeBalances",
+      "Status": "Passed",
+      "Duration": 0.0006485,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.SuppressionRulesTests.AccumulationCapsThenDecaysAfterQuietGapWithoutTicking",
+      "Status": "Passed",
+      "Duration": 0.0010977,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.VisualAssetTests.CameraUsesIntegerArtPixelsAtLandscapeSizesWithoutMovingTarget(1280,720)",
+      "Status": "Passed",
+      "Duration": 0.0029748,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.VisualAssetTests.CameraUsesIntegerArtPixelsAtLandscapeSizesWithoutMovingTarget(2560,1080)",
+      "Status": "Passed",
+      "Duration": 0.0008131,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.VisualAssetTests.GameplayPrefabsHaveCompleteReplaceableVisualsWithoutVisualPhysics(\"Assets/Prefabs/Player/WarehousePlayer.prefab\")",
+      "Status": "Passed",
+      "Duration": 0.000907,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.VisualAssetTests.GameplayPrefabsHaveCompleteReplaceableVisualsWithoutVisualPhysics(\"Assets/Prefabs/Enemies/Larper.prefab\")",
+      "Status": "Passed",
+      "Duration": 0.01257,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.VisualAssetTests.ImportedVisualPixelsAreUncompressedPointFilteredAndConsistent",
+      "Status": "Passed",
+      "Duration": 0.0235414,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.VisualAssetTests.RagdollPrefabHasSixBodiesFiveLimitedJointsAndDoesNotBlockGameplayMasks",
+      "Status": "Passed",
+      "Duration": 0.0034884,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.VisualAssetTests.SpeechPlacementSeparatesNearbyBubblesAndClampsToLandscape(1280,720)",
+      "Status": "Passed",
+      "Duration": 0.0017649,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.VisualAssetTests.SpeechPlacementSeparatesNearbyBubblesAndClampsToLandscape(2560,1080)",
+      "Status": "Passed",
+      "Duration": 0.0000605,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "editor"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CameraSamuraiHotfixTests.AutonomousPursuitReachesElevatedWarehouseStepAfterVisibleAcquisition",
+      "Status": "Passed",
+      "Duration": 2.1082826,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CameraSamuraiHotfixTests.AutonomousSmallSamuraiCrossesActualCoverAndKeepsMeleeTelegraph",
+      "Status": "Passed",
+      "Duration": 6.4981257,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CameraSamuraiHotfixTests.BriefDecisionGapPreservesCommittedPhysicalFlight",
+      "Status": "Passed",
+      "Duration": 2.179637,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CameraSamuraiHotfixTests.RemovedObstructionAllowsReplanningInsteadOfPermanentStationaryFailure",
+      "Status": "Passed",
+      "Duration": 8.1978811,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CameraSamuraiHotfixTests.SmallBodyDetectionWorksAtDifferentElevationsAndSolidWallsOcclude",
+      "Status": "Passed",
+      "Duration": 1.4592936,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CameraSamuraiHotfixTests.VisibleEntryStartsPursuitAndCameraExitDoesNotClearAggro",
+      "Status": "Passed",
+      "Duration": 5.9182076,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.LadderCameraHotfixTests.ClimbingCentersSmoothlyRejectsAimChangesAndRestoresDirectionalComposition",
+      "Status": "Passed",
+      "Duration": 7.1182946,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0247Tests.CameraReversesSmoothlyRejectsRapidChatterAndKeepsJumpVisible",
+      "Status": "Passed",
+      "Duration": 5.4342898,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0247Tests.StrongFirstMissShowsHesitationEvenWhenRetreatAndDuckRollsFail",
+      "Status": "Passed",
+      "Duration": 10.2183351,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0247Tests.TinySamuraiCorpseFitsCopiedSpritesAndPreservesContactMasks",
+      "Status": "Passed",
+      "Duration": 0.7957162,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0243Tests.ContactWithStepAllowsOneLaunchAdjustmentInsteadOfStalling",
+      "Status": "Passed",
+      "Duration": 1.5146509,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0243Tests.CrossesGapWithOneGroundedJump",
+      "Status": "Passed",
+      "Duration": 1.8192956,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0243Tests.ExistingDefensiveDuckStillInterruptsSamuraiPressure",
+      "Status": "Passed",
+      "Duration": 0.9142653,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0243Tests.ImpossibleRiseAndBlockedArcDoNotCreateJumpLoops",
+      "Status": "Passed",
+      "Duration": 2.9151436,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0243Tests.ModularArtKeepsHandAttachedInJumpWindupAndSwing",
+      "Status": "Passed",
+      "Duration": 0.9147664,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0243Tests.MovingTargetCannotRetargetCommittedFlightAndLandingRestoresBudget",
+      "Status": "Passed",
+      "Duration": 1.6739852,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0243Tests.NewObstructionDuringFlightDoesNotCauseRepeatedFailedJumps",
+      "Status": "Passed",
+      "Duration": 5.9168821,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0243Tests.OccupiedLandingDefersJumpUntilAllyLeaves",
+      "Status": "Passed",
+      "Duration": 2.119587,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0243Tests.PlayerDirectlyBelowCausesLedgeApproachAndPhysicalDescent",
+      "Status": "Passed",
+      "Duration": 2.8208939,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0243Tests.PursuesHigherPlatformWithRealPhysics",
+      "Status": "Passed",
+      "Duration": 1.6804585,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0243Tests.PursuesLowerPlatformWithRealPhysics",
+      "Status": "Passed",
+      "Duration": 1.9385562,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0243Tests.RagdollCopiesNewPartsWithoutOldFaceOverlay",
+      "Status": "Passed",
+      "Duration": 0.0329442,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0243Tests.StrikeDealsFortyAndHitInterruptsNextWindup",
+      "Status": "Passed",
+      "Duration": 2.1712119,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0243Tests.WarehouseAuthoredStepRouteSupportsMultipleFiniteJumps",
+      "Status": "Passed",
+      "Duration": 3.5135588,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0243Tests.WarehouseFloorHeightDropRemainsPhysical",
+      "Status": "Passed",
+      "Duration": 2.1404243,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0244Tests.CeilingRejectsBothArcsWithoutRepeatedLaunches",
+      "Status": "Passed",
+      "Duration": 2.9249377,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0244Tests.DestroyedDestinationEndsPlanWithoutExtraAirJumps",
+      "Status": "Passed",
+      "Duration": 3.9150312,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0244Tests.DoubleJumpCrossesWideGapWithoutAirChaining",
+      "Status": "Passed",
+      "Duration": 2.1980809,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0244Tests.ExistingLadderCanExitAtSelectedIntermediatePlatform",
+      "Status": "Passed",
+      "Duration": 4.9801796,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0244Tests.MotorRejectsThirdImpulseUntilConfirmedLanding",
+      "Status": "Passed",
+      "Duration": 0.3143362,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0244Tests.OrdinaryReachablePlatformDoesNotSpendSecondJump",
+      "Status": "Passed",
+      "Duration": 1.6846367,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0244Tests.PlannedDoubleJumpPhysicallyReachesHigherPlatformAndResets",
+      "Status": "Passed",
+      "Duration": 1.9947974,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0244Tests.RouteCanInitiallyMoveAwayFromTargetAndBlacklistFailedEdge",
+      "Status": "Passed",
+      "Duration": 0.215604,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0244Tests.SegmentChainsAndSwordRemainConnectedAcrossPosesAndFacing",
+      "Status": "Passed",
+      "Duration": 0.0251578,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0244Tests.SegmentedRagdollKeepsFourteenBodiesAndLimitedConnections",
+      "Status": "Passed",
+      "Duration": 0.5777021,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0244Tests.WarehouseStepsOfferPhysicalJumpRoutesWithoutLoops",
+      "Status": "Passed",
+      "Duration": 16.9194238,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.FocusedHotfixTests.SamuraiCrossesActualWarehouseCrateCoverAndUpperSteps",
+      "Status": "Passed",
+      "Duration": 14.677279,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.FocusedHotfixTests.SamuraiPhysicalJumpApexIncreasesModeratelyAndResetsOnLanding",
+      "Status": "Passed",
+      "Duration": 2.3244039,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0248Tests.AnimatedSamuraiHurtboxMatchesBodyAcrossFacingAndPosesWithoutInvisibleMovementHits",
+      "Status": "Passed",
+      "Duration": 0.0464669,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0248Tests.CarbineFlashUsesNewDirectionalSpriteAtMuzzleAndExpiresPerShot",
+      "Status": "Passed",
+      "Duration": 0.1311185,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0248Tests.EveryFireworkCanHurtAllTeamsAndSelfExactlyOnceWhileWallAndBulletRulesRemain",
+      "Status": "Passed",
+      "Duration": 0.9171752,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0248Tests.FasterPistolEmpties27RoundsWithOneCuePerShotAndFiniteReload",
+      "Status": "Passed",
+      "Duration": 2.0822993,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0248Tests.FuseBucketsVaryAndShortFuseDetonatesAtActualAirbornePosition",
+      "Status": "Passed",
+      "Duration": 0.4935004,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0248Tests.ScaledSamuraiKeepsFeetGripAndEveryCorpseSegmentAtFivePercentIncrease",
+      "Status": "Passed",
+      "Duration": 0.3275572,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0224Tests.AndroidHeldGestureDoesNotAutoDoubleJumpButFreshGestureDoes",
+      "Status": "Passed",
+      "Duration": 0.7649094,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0224Tests.DoubleJumpFromCoverKeepsSmoothRootWeaponAndReadableExistingRig",
+      "Status": "Passed",
+      "Duration": 0.7553098,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0224Tests.FailedDuckCanRetryDuringSameBurstOnlyAfterCooldown",
+      "Status": "Passed",
+      "Duration": 0.8143574,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0224Tests.FewCloseMissesCanInterruptAdvancingAndCommitRetreatWithoutFullPanic",
+      "Status": "Passed",
+      "Duration": 0.769261,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0224Tests.OverheadRegistrationRemainsConsistentAfterDuckingAndFarOrShieldedShotsAreRejected",
+      "Status": "Passed",
+      "Duration": 0.4839116,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0224Tests.RealHitscanShortBurstDucksAndBuildsPressureWithoutDamageThenRecovers",
+      "Status": "Passed",
+      "Duration": 11.1302048,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0224Tests.RespawnRestoresBudgetWhileEnemyMotorRetainsSingleJump",
+      "Status": "Passed",
+      "Duration": 0.923251,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0224Tests.SingleThenSecondJumpCapsVelocityPreservesMomentumRejectsThirdAndResetsOnLanding",
+      "Status": "Passed",
+      "Duration": 2.3191675,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0224Tests.WallContactAndMotorReenableCannotRefillAirJump",
+      "Status": "Passed",
+      "Duration": 0.699969,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0223MotionTests.RenderedMotionDoesNotRewindOrMoveAfterLateUpdate",
+      "Status": "Passed",
+      "Duration": 1.7364201,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0225Tests.BothHudAssetsHaveLargerHitAreasAndSeparatedActionsAcrossAspectRatios",
+      "Status": "Passed",
+      "Duration": 0.3601006,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0225Tests.ExplicitTouchAndFreshUpGestureSpendOnlyOneJumpAndResetOnLanding",
+      "Status": "Passed",
+      "Duration": 1.6701997,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0225Tests.ThreeCapturedTouchPointersKeepMovingAndFiringWhileJumpIsTapped",
+      "Status": "Passed",
+      "Duration": 0.3506221,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0225Tests.TouchJumpDetachesWhileHoldingDownAndLeavesOneAirJump",
+      "Status": "Passed",
+      "Duration": 0.8806304,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0225Tests.TouchJumpDetachesWhileHoldingLeftAndLeavesOneAirJump",
+      "Status": "Passed",
+      "Duration": 0.8827407,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0225Tests.TouchJumpDetachesWhileHoldingRightAndLeavesOneAirJump",
+      "Status": "Passed",
+      "Duration": 0.8948874,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0225Tests.TouchJumpDetachesWhileHoldingUpAndLeavesOneAirJump",
+      "Status": "Passed",
+      "Duration": 0.877808,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0225Tests.ZoomDividesExistingFramingByOnePointOneAtEveryAspectAndPreservesBounds",
+      "Status": "Passed",
+      "Duration": 0.3009425,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0245Tests.ArmorTracksEquipmentDamageDepletionAndCopiesToCorpse",
+      "Status": "Passed",
+      "Duration": 0.0626464,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0245Tests.DownwardCoverBeatsLadderTopEntryOnRight",
+      "Status": "Passed",
+      "Duration": 1.3987235,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0245Tests.DownwardCoverBeatsMidLadderCaptureOnLeft",
+      "Status": "Passed",
+      "Duration": 1.4000716,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0245Tests.SegmentedPistolRetractionKeepsMuzzleOnNearSideOfSolidCover",
+      "Status": "Passed",
+      "Duration": 0.026668,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0245Tests.SegmentedPistolStaysInHandAcrossMirroredPosesAndReload",
+      "Status": "Passed",
+      "Duration": 0.4313862,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0245Tests.UnobstructedLadderTopStillAllowsIntentionalDescent",
+      "Status": "Passed",
+      "Duration": 0.519865,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CombatIntegrationTests.AuthoredLadderAscentUsesExistingTraversalAndRestoresPatrol",
+      "Status": "Passed",
+      "Duration": 1.0596035,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CombatIntegrationTests.InvalidAimDoesNotConsumeAmmunitionOrStartCooldown",
+      "Status": "Passed",
+      "Duration": 0.0206861,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CombatIntegrationTests.LarperEngagesShootsAndReturnsToPatrolWhenTargetLeaves",
+      "Status": "Passed",
+      "Duration": 3.8438708,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CombatIntegrationTests.MeleeRequiresShortUnobstructedRangeAndNoAmmo",
+      "Status": "Passed",
+      "Duration": 0.0228122,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CombatIntegrationTests.PlayerFireSwitchInterruptAndDeathRecoveryPreserveInventory",
+      "Status": "Passed",
+      "Duration": 0.0263006,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CombatIntegrationTests.RaycastStopsAtGeometryAndDefeatsTargetOnce",
+      "Status": "Passed",
+      "Duration": 0.0248966,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CombatIntegrationTests.TwoThumbAimOnlyAndOuterFireZoneRemainIndependent",
+      "Status": "Passed",
+      "Duration": 0.0454314,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CombatIntegrationTests.UnavailableLadderRouteReleasesMotionAndReloadButtonIsReachable",
+      "Status": "Passed",
+      "Duration": 0.1133724,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint012CombatTests.FirstSightReactionIsSlowerButEstablishedAutomaticFireKeepsItsCadence",
+      "Status": "Passed",
+      "Duration": 0.992917,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.VisualIntegrationTests.ActualShotRecoilAndSkinReplacementDoNotMoveActorOrChangeHealth",
+      "Status": "Passed",
+      "Duration": 0.4057757,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.VisualIntegrationTests.DeliveredBoastAndCombatMissesDriveExpressionsWithoutRandomTimers",
+      "Status": "Passed",
+      "Duration": 1.6891279,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.VisualIntegrationTests.FatalDamageCreatesOneStableRagdollStopsEnemyAndTransfersMomentum",
+      "Status": "Passed",
+      "Duration": 2.387626,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.VisualIntegrationTests.JumpFallChuteLadderAndRecoveryUseActualTraversalState",
+      "Status": "Passed",
+      "Duration": 1.1939099,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.VisualIntegrationTests.MirroredDefeatPreservesLimbDirectionAndSceneUnloadCleansBodies",
+      "Status": "Passed",
+      "Duration": 0.0464531,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.VisualIntegrationTests.RagdollCapAndSceneOwnedCleanupPreventAccumulation",
+      "Status": "Passed",
+      "Duration": 0.0700703,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.VisualIntegrationTests.WalkingFacingAimRecoilAndCrouchRemainIndependentOfGameplay",
+      "Status": "Passed",
+      "Duration": 1.0042775,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.VisualIntegrationTests.WitnessPanicFaceSpeechAnchorOverlapAndDefeatLifecycleAreConnected",
+      "Status": "Passed",
+      "Duration": 1.6672424,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0248SceneTests.ThreeSamuraiSurviveResetOnGroundThenIndividuallyDetectPursueAndStrike",
+      "Status": "Passed",
+      "Duration": 2.7208177,
+      "Message": null,
+      "StackTrace": null,
+      "mode": "playmode"
+    }
+  ]
+}

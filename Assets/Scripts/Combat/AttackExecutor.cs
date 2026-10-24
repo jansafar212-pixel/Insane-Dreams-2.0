@@ -20,6 +20,7 @@ namespace InsaneDreams.Combat
         private InsaneDreams.Traversal.PlayerPosture2D posture;
         private InsaneDreams.Visuals.CharacterVisualDriver visual;
         private InsaneDreams.Visuals.CutoutRig rig;
+        private PlayerCover2D playerCover;
         private Vector2 BodyOrigin => posture != null ? posture.WorldCenter : (Vector2)transform.position;
         public Vector2 Origin => rig != null && rig.muzzle != null ? rig.MuzzlePosition : BodyOrigin;
         public Vector2 LastShotOrigin { get; private set; }
@@ -33,6 +34,7 @@ namespace InsaneDreams.Combat
         private int nextTrail;
         private Material ownedMaterial;
         public int ShotsFired { get; private set; }
+        public bool LastAttackUsesAmmunition { get; private set; }
         public event System.Action<Vector2, Vector2, bool> Fired;
         public event System.Action<Vector2, ShotSurface> SurfaceHit;
         public ShotSurface LastSurface { get; private set; }
@@ -43,6 +45,7 @@ namespace InsaneDreams.Combat
             owner = GetComponent<Health>(); posture = GetComponent<InsaneDreams.Traversal.PlayerPosture2D>();
             visual = GetComponent<InsaneDreams.Visuals.CharacterVisualDriver>(); rig = GetComponentInChildren<InsaneDreams.Visuals.CutoutRig>(true);
             rig?.EnsureMuzzle();
+            playerCover = GetComponent<PlayerCover2D>();
             trails = new LineRenderer[Mathf.Clamp(maximumTracers, 1, 16)]; expires = new float[trails.Length];
             trailColors=new Color[trails.Length];
             Material material = tracer != null ? tracer.sharedMaterial : null;
@@ -62,7 +65,10 @@ namespace InsaneDreams.Combat
             // Check the held path through the shoulder. A torso-to-tip diagonal
             // incorrectly blocks a standing gun above otherwise valid low cover.
             Vector2 shoulder = rig.rightArm.position;
-            if (ClipHeldSegment(BodyOrigin, shoulder, out var safe) || ClipHeldSegment(shoulder, rig.MuzzlePosition, out safe)) rig.RetractMuzzle(safe);
+            bool raised = playerCover != null && playerCover.RaiseWeapon;
+            if (ClipHeldSegment(BodyOrigin, shoulder, out var safe) ||
+                (raised ? ClipHeldSegment(shoulder, rig.weaponMount.position, out safe) || ClipHeldSegment(rig.weaponMount.position, rig.MuzzlePosition, out safe) :
+                ClipHeldSegment(shoulder, rig.MuzzlePosition, out safe))) rig.RetractMuzzle(safe);
         }
         private bool ClipHeldSegment(Vector2 start, Vector2 end, out Vector2 safePosition)
         {
@@ -86,17 +92,25 @@ namespace InsaneDreams.Combat
                 return false;
             }
             Vector2 direction = aim.normalized;
+            LastAttackUsesAmmunition=weapon.UsesAmmunition;
             // Enemy spread and current input are posed synchronously, before reading the
             // anchor. Update/LateUpdate ordering cannot leave a previous-frame muzzle.
             if (weapon.UsesAmmunition) visual?.PrepareShot(direction);
             ConstrainMuzzle();
             Vector2 origin = weapon.UsesAmmunition ? Origin : BodyOrigin;
             var filter = new ContactFilter2D { useTriggers = false }; filter.SetLayerMask(hitLayers.value | physicalImpactLayers.value);
-            int count = Physics2D.Raycast(origin, direction, filter, hits, weapon.Definition.AttackRange);
+            // A short player contact sweep is forgiving across the visible wrench
+            // swing, while its farthest extent remains the configured melee range.
+            float contactRadius=Mathf.Min(.16f,weapon.Definition.AttackRange*.25f);
+            int count = !weapon.UsesAmmunition&&playerCover!=null?
+                Physics2D.CircleCast(origin,contactRadius,direction,filter,hits,Mathf.Max(0,weapon.Definition.AttackRange-contactRadius)):
+                Physics2D.Raycast(origin, direction, filter, hits, weapon.Definition.AttackRange);
             RaycastHit2D closest = default; float distance = float.PositiveInfinity;
             for (int i = 0; i < count; i++)
             {
                 if (hits[i].collider.transform.IsChildOf(transform)) continue;
+                if(!weapon.UsesAmmunition&&Vector2.Dot(hits[i].point-origin,direction)<-.01f)continue;
+                if(InsaneDreams.Enemies.SamuraiBodyHitbox.IsMovementShape(hits[i].collider))continue;
                 if (hits[i].distance < distance) { closest = hits[i]; distance = hits[i].distance; }
             }
             Vector2 end = origin + direction * weapon.Definition.AttackRange;

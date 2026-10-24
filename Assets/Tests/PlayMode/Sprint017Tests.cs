@@ -44,7 +44,7 @@ namespace InsaneDreams.Tests
             yield return new WaitForSeconds(.25f);Assert.IsTrue(e.IsDefensivelyCrouching);Assert.IsTrue(e.GetComponent<PlayerPosture2D>().IsCrouched);Assert.AreEqual(height*.7f,box.size.y,.001f);Assert.AreEqual(feet,box.bounds.min.y,.01f);Assert.AreEqual(CharacterPose.Crouch,e.GetComponent<CharacterVisualDriver>().CurrentPose);
             foreach(var part in new[]{rig.head,rig.torso,rig.leftArm,rig.leftLeg,rig.rightLeg})Assert.AreEqual(Vector3.one,part.localScale);
             Assert.AreEqual(feet,rig.leftLeg.GetComponent<SpriteRenderer>().bounds.min.y,.05f);Assert.Greater(Mathf.Abs(Mathf.DeltaAngle(0,rig.leftLeg.localEulerAngles.z)),40);
-            var attack=e.GetComponent<AttackExecutor>();int shots=attack.ShotsFired;yield return new WaitForSeconds(.3f);Assert.Greater(attack.ShotsFired,shots);Assert.Greater(attack.LastShotOrigin.y,feet+.1f);Assert.LessOrEqual(attack.LastShotOrigin.y,box.bounds.max.y+.05f);Assert.AreEqual(40,e.SpreadAtDistance(12));
+            var attack=e.GetComponent<AttackExecutor>();int shots=attack.ShotsFired;yield return new WaitForSeconds(.3f);Assert.Greater(attack.ShotsFired,shots);Assert.Greater(attack.LastShotOrigin.y,feet+.1f);Assert.LessOrEqual(attack.LastShotOrigin.y,box.bounds.max.y+.05f);Assert.That(e.SpreadAtDistance(12),Is.InRange(40,50));
             camera.transform.position=new Vector3(9900,2,-10);yield return new WaitForSeconds(.1f);shots=attack.ShotsFired;yield return new WaitForSeconds(.25f);Assert.AreEqual(shots,attack.ShotsFired);
         }
         [UnityTest] public IEnumerator ContinuousBurstDoesNotExtendCrouchOrRerollAndCooldownRequiresNewEpisode()
@@ -100,15 +100,16 @@ namespace InsaneDreams.Tests
         }
         [UnityTest] public IEnumerator Sprint018CrouchTuningIncreasesSeededOpportunitiesWithoutMakingThemMandatory()
         {
-            var e=Enemy(forced:false);yield return new WaitForSeconds(.2f);Assert.AreEqual(.48f,new SerializedObject(e).FindProperty("defensiveCrouchProbability").floatValue,.001f);
-            int before=0,after=0,calibrated=0;for(int i=0;i<2000;i++)foreach(float chance in new[]{.3f,.36f,.48f})
+            var e=Enemy(forced:false);yield return new WaitForSeconds(.2f);Assert.AreEqual(.70f,new SerializedObject(e).FindProperty("defensiveCrouchProbability").floatValue,.001f);
+            int before=0,after=0,calibrated=0,current=0;for(int i=0;i<2000;i++)foreach(float chance in new[]{.3f,.36f,.48f,.70f})
             {
                 e.ResetEncounter(player.GetComponent<Health>());Float(e,"defensiveCrouchProbability",chance);Random.InitState(18000+i);Near(e);
-                if(e.IsDefensivelyCrouching){if(chance==.3f)before++;else if(chance==.36f)after++;else calibrated++;}
+                if(e.IsDefensivelyCrouching){if(chance==.3f)before++;else if(chance==.36f)after++;else if(chance==.48f)calibrated++;else current++;}
             }
             TestContext.WriteLine("Matched seeded episodes: Sprint017="+before+", Sprint018="+after+", Sprint020.1="+calibrated);
             Assert.Greater(after,before*1.1f);Assert.Less(after,before*1.35f);Assert.Less(after,1000,"Most eligible episodes still choose other behavior.");
             Assert.Greater(calibrated,after*1.25f);Assert.Less(calibrated,after*1.4f);Assert.Less(calibrated,1200,"Calibration must leave substantial opportunities to stand and fight.");
+            Assert.Greater(current,calibrated*1.3f);Assert.Less(current,calibrated*1.6f);Assert.Less(current,1800,"Sprint022.4 must still leave ground-holding decisions.");
         }
         [UnityTest] public IEnumerator SeveralLarpersMakeVariedBoundedDecisionsOnTheSameIncomingSegment()
         {

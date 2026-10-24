@@ -16,10 +16,13 @@ namespace InsaneDreams.Combat
         [SerializeField, Range(.08f,.5f)] private float particleSeconds=.24f;
         [SerializeField, Range(0,.15f)] private float pitchVariation=.07f;
         [SerializeField] private bool muzzleGlowEnabled=true;
+        [SerializeField] private Sprite muzzleFlashSprite;
+        [SerializeField] private InsaneDreams.Inventory.WeaponDefinition muzzleFlashWeapon;
+        private InsaneDreams.Inventory.PlayerLoadout loadout;
         private SpriteRenderer glow;
         private SpriteRenderer[] particles;
         private Vector2[] particlePositions,particleVelocities;
-        private float[] particleExpires;
+        private float[] particleExpires,particleDurations;
         private Color[] particleColors;
         private int nextParticle;
         private readonly AudioSource[] voices=new AudioSource[2];
@@ -63,6 +66,7 @@ namespace InsaneDreams.Combat
         {
             health = GetComponent<Health>(); executor = GetComponent<AttackExecutor>();
             player = GetComponent<PlayerCombat>(); enemy = GetComponent<EnemyCombat>(); audioSource = GetComponent<AudioSource>();
+            loadout=GetComponent<InsaneDreams.Inventory.PlayerLoadout>();
             audioSource.playOnAwake = false; audioSource.spatialBlend = 0;
             renderers = GetComponentsInChildren<SpriteRenderer>(true); colors = new Color[renderers.Length];
             for (int i = 0; i < renderers.Length; i++) colors[i] = renderers[i].color;
@@ -70,7 +74,7 @@ namespace InsaneDreams.Combat
             surface = Effect("SurfaceImpact", Color.white); if (surfaceImpactSprite != null) surface.sprite = surfaceImpactSprite;
             glow=Effect("MuzzleGlow",new Color(1,.75f,.2f,.18f));
             int capacity=Mathf.Clamp(maximumImpactParticles,4,24);
-            particles=new SpriteRenderer[capacity];particlePositions=new Vector2[capacity];particleVelocities=new Vector2[capacity];particleExpires=new float[capacity];particleColors=new Color[capacity];
+            particles=new SpriteRenderer[capacity];particlePositions=new Vector2[capacity];particleVelocities=new Vector2[capacity];particleExpires=new float[capacity];particleDurations=new float[capacity];particleColors=new Color[capacity];
             for(int i=0;i<capacity;i++)particles[i]=Effect("ImpactParticle_"+i,Color.white);
             for(int i=0;i<voices.Length;i++)
             {
@@ -115,14 +119,21 @@ namespace InsaneDreams.Combat
         }
         private void Fired(Vector2 direction, Vector2 point, bool damaged)
         {
+            if(executor.LastAttackUsesAmmunition)
+            {
             ShotCues++; Sound(firingSound); muzzle.enabled = true; muzzleUntil = Time.time + muzzleSeconds;
+            var definition=loadout!=null?loadout.SelectedWeapon?.Definition:enemy!=null?enemy.Weapon?.Definition:null;
+            bool custom=muzzleFlashSprite!=null&&definition==muzzleFlashWeapon;
+            muzzle.sprite=custom?muzzleFlashSprite:effectSprite;
             muzzle.transform.position = (Vector3)executor.LastShotOrigin + Vector3.back * .15f;
-            float variation=Random.Range(.88f,1.12f);muzzle.transform.localScale = new Vector3(.28f*variation, .14f*variation, 1);
+            float variation=Random.Range(.88f,1.12f);muzzle.transform.localScale = custom?Vector3.one*variation:new Vector3(.28f*variation, .14f*variation, 1);
             muzzle.color=Color.Lerp(new Color(1,.65f,.1f),Color.white,Random.Range(.15f,.5f));
             glow.enabled=muzzleGlowEnabled;glow.transform.position=muzzle.transform.position;glow.transform.localScale=new Vector3(.45f,.3f,1);
             muzzle.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
+            }
+            else{muzzle.enabled=false;glow.enabled=false;}
             if (!damaged) return;
-            HitCues++; Sound(hitSound); hit.enabled = true; hitUntil = Time.time + hitSeconds;
+            HitCues++; Sound(hitSound); hit.color=Color.white;hit.enabled = true; hitUntil = Time.time + hitSeconds;
             hitPoint = point; hit.transform.position = new Vector3(point.x, point.y, -.2f);
             hit.transform.localScale = new Vector3(.18f, .18f, 1); hit.transform.rotation = Quaternion.Euler(0, 0, 45);
         }
@@ -138,7 +149,7 @@ namespace InsaneDreams.Combat
             {
                 int n=nextParticle;nextParticle=(n+1)%particles.Length;var p=particles[n];p.enabled=true;p.color=particleColors[n]=color;
                 particlePositions[n]=point;particleVelocities[n]=Quaternion.Euler(0,0,Random.Range(-65f,65f))*executor.LastHitNormal*Random.Range(.6f,2.5f);
-                particleExpires[n]=Time.time+particleSeconds*Random.Range(.75f,1.2f);
+                particleDurations[n]=particleSeconds*Random.Range(.75f,1.2f);particleExpires[n]=Time.time+particleDurations[n];
                 float length=LastImpactMaterial==ImpactMaterial.Metal?(Random.value<.2f?.3f:.13f):LastImpactMaterial==ImpactMaterial.Wood?.12f:.07f;
                 p.transform.localScale=new Vector3(length,.04f,1);p.transform.rotation=Quaternion.Euler(0,0,Mathf.Atan2(particleVelocities[n].y,particleVelocities[n].x)*Mathf.Rad2Deg);
                 p.transform.position=new Vector3(point.x,point.y,-.22f);
@@ -186,10 +197,10 @@ namespace InsaneDreams.Combat
             {
                 var p=particles[i];if(!p.enabled)continue;float remaining=particleExpires[i]-Time.time;if(remaining<=0){p.enabled=false;continue;}
                 particleVelocities[i]+=Vector2.down*(4*Time.deltaTime);particlePositions[i]+=particleVelocities[i]*Time.deltaTime;
-                p.transform.position=new Vector3(particlePositions[i].x,particlePositions[i].y,-.22f);Color c=particleColors[i];c.a=Mathf.Clamp01(remaining/particleSeconds);p.color=c;
+                p.transform.position=new Vector3(particlePositions[i].x,particlePositions[i].y,-.22f);Color c=particleColors[i];c.a*=Mathf.Clamp01(remaining/particleDurations[i]);p.color=c;
             }
             if (Time.time >= hitUntil) hit.enabled = false;
-            else hit.transform.position = new Vector3(hitPoint.x, hitPoint.y, -.2f);
+            else {hit.transform.position = new Vector3(hitPoint.x, hitPoint.y, -.2f);hit.color=new Color(1,1,1,Mathf.Clamp01((hitUntil-Time.time)/hitSeconds));}
             if (Time.time >= tintUntil) RestoreTint();
             if (Time.time >= surfaceUntil) surface.enabled = false;
             else

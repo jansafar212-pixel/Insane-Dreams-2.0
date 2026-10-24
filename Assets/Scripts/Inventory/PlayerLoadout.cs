@@ -10,6 +10,16 @@ namespace InsaneDreams.Inventory
         [SerializeField] private WeaponDefinition initialFirearm2;
         [SerializeField] private WeaponDefinition initialMelee;
         [SerializeField, Min(0)] private int initialReserveAmmo = 36;
+        [SerializeField, Min(1)] private int maximumReserveAmmo=432;
+        public int MaximumReserveAmmo=>maximumReserveAmmo;
+        public int AddReserveAmmunition(int amount)
+        {
+            var weapon=SelectedWeapon;
+            if(weapon==null||!weapon.UsesAmmunition)weapon=firearm1!=null&&firearm1.UsesAmmunition?firearm1:firearm2;
+            if(weapon==null||!weapon.UsesAmmunition||amount<=0)return 0;
+            int added=Mathf.Min(amount,Mathf.Max(0,maximumReserveAmmo-weapon.ReserveAmmo));
+            weapon.SetAmmunition(weapon.MagazineAmmo,weapon.ReserveAmmo+added);return added;
+        }
         [SerializeField] private RuntimeWeapon firearm1;
         [SerializeField] private RuntimeWeapon firearm2;
         [SerializeField] private RuntimeWeapon melee;

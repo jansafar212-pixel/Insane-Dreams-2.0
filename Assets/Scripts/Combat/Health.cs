@@ -10,8 +10,9 @@ namespace InsaneDreams.Combat
         public readonly CombatTeam Team;
         public readonly GameObject Source;
         public readonly PhysicalImpact? Impact;
-        public DamageInfo(float amount, CombatTeam team, GameObject source = null, PhysicalImpact? impact = null)
-        { Amount = amount; Team = team; Source = source; Impact = impact; }
+        public readonly bool AllowFriendlyFire;
+        public DamageInfo(float amount, CombatTeam team, GameObject source = null, PhysicalImpact? impact = null,bool allowFriendlyFire=false)
+        { Amount = amount; Team = team; Source = source; Impact = impact;AllowFriendlyFire=allowFriendlyFire; }
     }
     public sealed class Health : MonoBehaviour
     {
@@ -20,13 +21,14 @@ namespace InsaneDreams.Combat
         [SerializeField] private bool allowFriendlyFire;
         [SerializeField] private float current;
         private float protectedUntil;
+        private BodyArmor armor;
         public float Maximum => maximum;
         public float Current => current;
         public CombatTeam Team => team;
         public bool IsDefeated { get; private set; }
         public event Action<DamageInfo> Damaged;
         public event Action<DamageInfo> Defeated;
-        private void Awake() => Restore();
+        private void Awake() {armor=GetComponent<BodyArmor>();Restore();}
         public void Restore() { current = maximum; IsDefeated = false; }
         public void ProtectFor(float seconds) => protectedUntil = Time.time + Mathf.Max(0, seconds);
         public float Heal(float amount)
@@ -38,8 +40,8 @@ namespace InsaneDreams.Combat
         {
             if (IsDefeated || Time.time < protectedUntil || damage.Amount <= 0 || float.IsNaN(damage.Amount) ||
                 float.IsInfinity(damage.Amount) || damage.Source == gameObject) return false;
-            if (!allowFriendlyFire && team != CombatTeam.Neutral && damage.Team == team) return false;
-            current = Mathf.Max(0, current - damage.Amount);
+            if (!allowFriendlyFire && !damage.AllowFriendlyFire && team != CombatTeam.Neutral && damage.Team == team) return false;
+            current = Mathf.Max(0, current - (armor!=null?armor.Absorb(damage):damage.Amount));
             bool defeated = current <= 0;
             if (defeated) IsDefeated = true;
             Damaged?.Invoke(damage);

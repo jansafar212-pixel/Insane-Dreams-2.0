@@ -18,11 +18,13 @@ namespace InsaneDreams.Traversal
         private PlayerTraversal2D traversal;
         private Vector2 standingSize, standingOffset, move;
         private float jumpStandUntil;
+        private bool coverHeightActive;
         public bool IsCrouched { get; private set; }
         public float SpeedMultiplier => IsCrouched ? speedMultiplier : 1;
         public Vector2 WorldCenter => box.bounds.center;
         public Vector2 LocalCenter => box.offset;
-        public float HeightRatio => IsCrouched ? heightMultiplier : 1;
+        public float HeightRatio => box.size.y / standingSize.y;
+        public float CurrentWorldHeight => box.size.y * Mathf.Abs(transform.lossyScale.y);
         public float CrouchedHeightRatio => heightMultiplier;
         public float StandingWorldHeight => standingSize.y * Mathf.Abs(transform.lossyScale.y);
         private void Awake()
@@ -39,11 +41,30 @@ namespace InsaneDreams.Traversal
         }
         private void Crouch()
         {
-            if (IsCrouched) return;
+            if (IsCrouched) { if (!coverHeightActive) ClearCoverHeight(); return; }
             box.size = new Vector2(standingSize.x, standingSize.y * heightMultiplier);
             box.offset = standingOffset + Vector2.down * (standingSize.y - box.size.y) * .5f;
             IsCrouched = true;
         }
+        // Cover changes the existing damageable box, keeping the feet fixed. Expansion
+        // uses the same solid clearance rule as standing up; no temporary invulnerability.
+        public bool TrySetCoverHeight(float worldHeight)
+        {
+            if (!IsCrouched) return false;
+            coverHeightActive = true;
+            float height = Mathf.Clamp(worldHeight / Mathf.Max(.001f, Mathf.Abs(transform.lossyScale.y)), standingSize.y * .45f, standingSize.y);
+            Vector2 size = new Vector2(standingSize.x, height);
+            Vector2 offset = standingOffset + Vector2.down * (standingSize.y - height) * .5f;
+            if (height > box.size.y + .001f)
+            {
+                var filter = new ContactFilter2D { useTriggers = false }; filter.SetLayerMask(solids);
+                int count = Physics2D.OverlapBox(transform.TransformPoint(offset), Vector2.Scale(size, transform.lossyScale) - Vector2.one * .04f, 0, filter, overlaps);
+                if (count == overlaps.Length) return false;
+                for (int i = 0; i < count; i++) if (!overlaps[i].transform.IsChildOf(transform)) return false;
+            }
+            box.size = size; box.offset = offset; return true;
+        }
+        public void ClearCoverHeight() { if (IsCrouched) TrySetCoverHeight(StandingWorldHeight * heightMultiplier); coverHeightActive = false; }
         public bool TryStand()
         {
             if (!IsCrouched) return true;
@@ -52,7 +73,7 @@ namespace InsaneDreams.Traversal
             int count = Physics2D.OverlapBox(transform.TransformPoint(standingOffset), size, 0, filter, overlaps);
             if (count == overlaps.Length) return false;
             for (int i = 0; i < count; i++) if (!overlaps[i].transform.IsChildOf(transform)) return false;
-            box.size = standingSize; box.offset = standingOffset; IsCrouched = false; return true;
+            box.size = standingSize; box.offset = standingOffset; IsCrouched = false; coverHeightActive = false; return true;
         }
         public bool PrepareJump()
         {

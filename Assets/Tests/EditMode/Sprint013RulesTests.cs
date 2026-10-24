@@ -27,10 +27,12 @@ namespace InsaneDreams.Tests
             var prefab=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemies/Larper.prefab");var ai=new SerializedObject(prefab.GetComponent<EnemyCombat>());
             var tracer=prefab.GetComponentInChildren<LineRenderer>();Assert.AreEqual("Sprites/Default",tracer.sharedMaterial.shader.name);Assert.AreEqual(Color.white,tracer.sharedMaterial.color);
             Assert.AreEqual(22,ai.FindProperty("detectionRange").floatValue);Assert.AreEqual(18,ai.FindProperty("engagementRange").floatValue);Assert.AreEqual(40,ai.FindProperty("distantSpread").floatValue);Assert.AreEqual(6,ai.FindProperty("withdrawalDistance").floatValue);
-            var pistol=AssetDatabase.LoadAssetAtPath<WeaponDefinition>("Assets/Data/Items/LarperBuzzbox.asset");Assert.AreEqual(27,pistol.MagazineCapacity);Assert.AreEqual(.105f,pistol.FiringInterval);Assert.AreEqual(4,pistol.ReloadDuration);Assert.AreEqual(5,pistol.Damage);
+            var pistol=AssetDatabase.LoadAssetAtPath<WeaponDefinition>("Assets/Data/Items/LarperBuzzbox.asset");Assert.AreEqual(27,pistol.MagazineCapacity);Assert.AreEqual(.07f,pistol.FiringInterval);Assert.AreEqual(4,pistol.ReloadDuration);Assert.AreEqual(5,pistol.Damage);
             var scene=EditorSceneManager.OpenPreviewScene("Assets/Scenes/Warehouse_Testbed.unity");
             try{
-                var colliders=scene.GetRootGameObjects().SelectMany(g=>g.GetComponentsInChildren<Collider2D>(true)).ToArray();Assert.AreEqual(31,colliders.Length);
+                var allColliders=scene.GetRootGameObjects().SelectMany(g=>g.GetComponentsInChildren<Collider2D>(true)).ToArray();Assert.AreEqual(7,allColliders.Count(c=>c.GetComponentInParent<LarperBrain>()!=null));
+                Assert.AreEqual(2,allColliders.Count(c=>c.GetComponentInParent<InsaneDreams.Inventory.SupplyCrate2D>()!=null&&c.isTrigger));
+                var colliders=allColliders.Where(c=>c.GetComponentInParent<LarperBrain>()==null&&c.GetComponentInParent<InsaneDreams.Inventory.SupplyCrate2D>()==null).ToArray();Assert.AreEqual(31,colliders.Length);
                 foreach(var c in colliders.Where(c=>!c.isTrigger&&c.gameObject.layer==0))Assert.IsNotNull(c.GetComponent<ImpactSurface2D>(),c.name);
                 Assert.AreEqual(ImpactMaterial.Wood,colliders.Single(c=>c.name=="Crate_21").GetComponent<ImpactSurface2D>().Material);
                 Assert.AreEqual(ImpactMaterial.Metal,colliders.Single(c=>c.name=="BasementPipeBridge").GetComponent<ImpactSurface2D>().Material);

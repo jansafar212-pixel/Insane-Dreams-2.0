@@ -569,7 +569,7 @@ Transform:
   m_GameObject: {fileID: 8763459325104589144}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.6375, y: 0.03125, z: 0}
+  m_LocalPosition: {x: 0.71875, y: 0.03125, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -586,6 +586,14 @@ PrefabInstance:
     - target: {fileID: 1229176398983300271, guid: cd4f5843982b0a148872e6244b91d26b, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2301375456118214163, guid: cd4f5843982b0a148872e6244b91d26b, type: 3}
+      propertyPath: moveSpeed
+      value: 8.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2301375456118214163, guid: cd4f5843982b0a148872e6244b91d26b, type: 3}
+      propertyPath: allowAirJump
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3238488678541685392, guid: cd4f5843982b0a148872e6244b91d26b, type: 3}
       propertyPath: m_Name
@@ -696,6 +704,21 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3238488678541685392, guid: cd4f5843982b0a148872e6244b91d26b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 444807282281913829}
+    - targetCorrespondingSourceObject: {fileID: 3238488678541685392, guid: cd4f5843982b0a148872e6244b91d26b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 297681504541394847}
+    - targetCorrespondingSourceObject: {fileID: 3238488678541685392, guid: cd4f5843982b0a148872e6244b91d26b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4457614828171959983}
+    - targetCorrespondingSourceObject: {fileID: 3238488678541685392, guid: cd4f5843982b0a148872e6244b91d26b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5793267517244201352}
+    - targetCorrespondingSourceObject: {fileID: 3238488678541685392, guid: cd4f5843982b0a148872e6244b91d26b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8547456878488807533}
+    - targetCorrespondingSourceObject: {fileID: 3238488678541685392, guid: cd4f5843982b0a148872e6244b91d26b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3774186861527489551}
   m_SourcePrefab: {fileID: 100100000, guid: cd4f5843982b0a148872e6244b91d26b, type: 3}
 --- !u!4 &3084045251787293455 stripped
 Transform:
@@ -720,7 +743,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InsaneDreams.Traversal.PlayerTraversal2D
   climbSpeed: 4.5
-  ladderJumpSpeed: 10
   ladderJumpHorizontalSpeed: 7
   reattachDelay: 0.3
   captureWidthMultiplier: 1.25
@@ -792,6 +814,7 @@ MonoBehaviour:
   initialFirearm2: {fileID: 11400000, guid: 2d59804bf74db5842a92644e840bc441, type: 2}
   initialMelee: {fileID: 11400000, guid: 82b20f5de82ce3e4dbfcd07239f36ec9, type: 2}
   initialReserveAmmo: 108
+  maximumReserveAmmo: 432
   firearm1:
     definition: {fileID: 0}
     instanceId: 
@@ -996,6 +1019,8 @@ MonoBehaviour:
   particleSeconds: 0.24
   pitchVariation: 0.07
   muzzleGlowEnabled: 1
+  muzzleFlashSprite: {fileID: 21300000, guid: 542d1bb265b91ea44912c43f29fcd3f8, type: 2}
+  muzzleFlashWeapon: {fileID: 11400000, guid: a19415bc42a5c1749983394fafeb429d, type: 2}
   muzzleSeconds: 0.06
   hitSeconds: 0.12
   hurtSeconds: 0.1
@@ -1055,6 +1080,8 @@ MonoBehaviour:
   expressionSeconds: 1.4
   flinchSeconds: 0.1
   flinchDegrees: 3
+  walkStartSpeed: 0.3
+  walkStopSpeed: 0.1
 --- !u!114 &7914022673129099316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1085,10 +1112,96 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a44572fc6cc850145bd29db2b899fcd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Combat.PlayerHealing
-  amount: 35
-  cooldownSeconds: 3
-  unlimitedUses: 1
-  remainingUses: 3
+  healingPerSecond: 25
+  initialDuctTape: 200
+  maximumDuctTape: 200
+  damageInterruptionSeconds: 0.8
+  requireReleaseAfterDamage: 1
+--- !u!114 &297681504541394847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7868476103539599707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d45724424c7a1847b484effa611737b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Combat.PlayerCover2D
+  interactionDistance: 0.55
+  minimumHeight: 0.85
+  maximumHeight: 1.15
+  peekExposureHeight: 0.45
+  transitionSeconds: 0.14
+  blindSpreadMultiplier: 5
+  minimumBlindSpreadDegrees: 5
+  solids:
+    serializedVersion: 2
+    m_Bits: 1
+--- !u!114 &4457614828171959983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7868476103539599707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 979905efe169b854f8050198e1dd4c47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Inventory.PlayerSupplies
+--- !u!114 &5793267517244201352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7868476103539599707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74104e6d9dc573f4884509e8b8e546fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Combat.PlayerSuppression
+  nearMissRadius: 1.2
+  closeGain: 0.22
+  decayPerSecond: 0.45
+  gainInterval: 0.08
+  maximumVolume: 0.07
+  nearMissSound: {fileID: 8300000, guid: 0c43fbfb27dbc1545a64cc78d1ea378f, type: 3}
+--- !u!114 &8547456878488807533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7868476103539599707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 839924efbee43f544bd846dc46129b56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Combat.PlayerRevive
+  initialInjections: 2
+--- !u!114 &3774186861527489551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7868476103539599707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2551ac13e7c03f4489ee847be2f07aa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Visuals.PistolMagazineReload
+  pistols:
+  - {fileID: 11400000, guid: 2d59804bf74db5842a92644e840bc441, type: 2}
+  - {fileID: 11400000, guid: 67c88bc28be6401419eaffaf19d822a0, type: 2}
+  debrisCapacity: 3
+  debrisLifetime: 4
+  geometry:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!1001 &5706764124496338293
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1098,16 +1211,56 @@ PrefabInstance:
     m_TransformParent: {fileID: 3084045251787293455}
     m_Modifications:
     - target: {fileID: 380435326331076377, guid: ed0469b33f1ae2544828fb77c95382ca, type: 3}
+      propertyPath: skin
+      value: 
+      objectReference: {fileID: 11400000, guid: 253d7ddcabf5770409893368be2203f2, type: 2}
+    - target: {fileID: 380435326331076377, guid: ed0469b33f1ae2544828fb77c95382ca, type: 3}
       propertyPath: muzzle
       value: 
       objectReference: {fileID: 5153464704109863991}
     - target: {fileID: 380435326331076377, guid: ed0469b33f1ae2544828fb77c95382ca, type: 3}
+      propertyPath: rearArmShade
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 380435326331076377, guid: ed0469b33f1ae2544828fb77c95382ca, type: 3}
       propertyPath: crouchedMuzzleCeiling
       value: -0.06
       objectReference: {fileID: 0}
+    - target: {fileID: 596715862020921885, guid: ed0469b33f1ae2544828fb77c95382ca, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1bbd9c6e96c0559459a8af9102c90a13, type: 2}
     - target: {fileID: 933686478411375274, guid: ed0469b33f1ae2544828fb77c95382ca, type: 3}
       propertyPath: m_Name
       value: VisualRoot
+      objectReference: {fileID: 0}
+    - target: {fileID: 1242457048344921831, guid: ed0469b33f1ae2544828fb77c95382ca, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 95d85204b3a8b004fa29119c830d9148, type: 2}
+    - target: {fileID: 2349644356772457258, guid: ed0469b33f1ae2544828fb77c95382ca, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: de1e319f881b02c408a722b56fe266c8, type: 2}
+    - target: {fileID: 3250917601700338533, guid: ed0469b33f1ae2544828fb77c95382ca, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6972fcf7b1c65ed4e8d09b0d80159172, type: 2}
+    - target: {fileID: 4188002218569594257, guid: ed0469b33f1ae2544828fb77c95382ca, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6972fcf7b1c65ed4e8d09b0d80159172, type: 2}
+    - target: {fileID: 4188002218569594257, guid: ed0469b33f1ae2544828fb77c95382ca, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4188002218569594257, guid: ed0469b33f1ae2544828fb77c95382ca, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4188002218569594257, guid: ed0469b33f1ae2544828fb77c95382ca, type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6793892886298600212, guid: ed0469b33f1ae2544828fb77c95382ca, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1149,6 +1302,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6843075248855030215, guid: ed0469b33f1ae2544828fb77c95382ca, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3cc96e65a061e494a8c138c9ab6610ca, type: 2}
+    - target: {fileID: 7307588612124706772, guid: ed0469b33f1ae2544828fb77c95382ca, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.53125
+      objectReference: {fileID: 0}
+    - target: {fileID: 7390936132474622638, guid: ed0469b33f1ae2544828fb77c95382ca, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: de1e319f881b02c408a722b56fe266c8, type: 2}
+    - target: {fileID: 8631697509752865136, guid: ed0469b33f1ae2544828fb77c95382ca, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ee653c3947dd44e4bb81b51d314b4f33, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

@@ -1,0 +1,22 @@
+.flow-background { position: absolute; left: 0; right: 0; top: 0; bottom: 0; background-color: rgb(17,27,37); align-items: center; justify-content: center; padding: 20px 36px; }
+.flow-scroll { width: 100%; max-width: 1050px; max-height: 100%; }
+.flow-content { padding: 16px 20px; }
+.flow-brand { color: rgb(62,222,243); font-size: 44px; -unity-font-style: bold; }
+.flow-kicker { color: rgb(163,183,193); font-size: 16px; margin-bottom: 18px; }
+.flow-title { color: rgb(255,219,117); font-size: 23px; white-space: normal; margin: 8px 0; }
+.flow-copy { color: rgb(232,239,241); font-size: 19px; white-space: normal; margin: 6px 0; }
+.flow-warning { color: rgb(255,177,130); font-size: 18px; white-space: normal; margin: 8px 0; }
+.flow-button { min-height: 52px; margin: 5px 4px; padding: 8px 14px; background-color: rgb(34,77,88); border-width: 2px; border-color: rgb(86,151,166); color: white; font-size: 18px; white-space: normal; }
+.flow-button:hover, .flow-button:focus { background-color: rgb(51,108,119); border-color: rgb(255,219,117); }
+.flow-button:disabled { opacity: .45; }
+.flow-row { flex-direction: row; flex-wrap: wrap; }
+.flow-list { flex-grow: 1; flex-basis: 240px; }
+.flow-detail { flex-grow: 2; flex-basis: 300px; padding: 12px 18px; background-color: rgb(26,42,54); }
+.flow-row > .flow-button { flex-grow: 1; }
+.flow-slider { min-height: 48px; margin: 8px 12px; }
+.level-entry { padding: 12px; background-color: rgb(26,42,54); margin-bottom: 12px; }
+.level-icon { width: 72px; height: 72px; -unity-background-scale-mode: scale-to-fit; }
+.campaign-pause { position: absolute; left: 50%; translate: -50% 0; top: 12px; bottom: auto; min-width: 124px; min-height: 52px; margin: 0; }
+.top-pause .mission-card { right: 50%; margin-right: 80px; max-width: none; }
+.campaign-overlay { position: absolute; left: 0; right: 0; top: 0; bottom: 0; background-color: rgba(10,20,28,.97); align-items: center; justify-content: center; }
+.campaign-panel { width: 80%; max-width: 560px; padding: 20px; }

@@ -17,10 +17,12 @@ namespace InsaneDreams.Enemies
         private PlayerMotor2D motor;
         private PlayerTraversal2D traversal;
         private float began;
+        private bool platformExit,platformAttached;private float exitDirection;
         public LadderRouteState State { get; private set; }
         public bool IsRunning => State == LadderRouteState.Approaching || State == LadderRouteState.Climbing;
         private void Awake() { brain = GetComponent<LarperBrain>(); motor = GetComponent<PlayerMotor2D>(); traversal = GetComponent<PlayerTraversal2D>(); }
-        public void Configure(LadderVolume value, float height) { ladder = value; targetHeight = height; began = Time.time; State = LadderRouteState.Approaching; }
+        public void Configure(LadderVolume value, float height) { platformExit=false;ladder = value; targetHeight = height; began = Time.time; State = LadderRouteState.Approaching; }
+        public void ConfigurePlatform(LadderVolume value,float height,float direction){Configure(value,height);platformExit=true;platformAttached=false;exitDirection=direction;}
         private void Start() { began = Time.time; if (ladder != null) State = LadderRouteState.Approaching; }
         private void FixedUpdate()
         {
@@ -34,6 +36,14 @@ namespace InsaneDreams.Enemies
             if (!ladder.isActiveAndEnabled || brain.Archetype == null || !brain.Archetype.Allows(MovementCapabilities.Climb) || Time.time - began > timeoutSeconds)
             { Finish(LadderRouteState.Unavailable); return; }
             brain.DecisionsSuspended = true;
+            if(platformExit&&State==LadderRouteState.Climbing&&(traversal.IsClimbing||platformAttached))
+            {
+                platformAttached|=traversal.IsClimbing;
+                motor.SetMoveInput(0);
+                if(!traversal.IsClimbing){if(motor.IsGrounded)Finish(LadderRouteState.Complete);return;}
+                traversal.SetInput(Mathf.Abs(transform.position.y-targetHeight)<.16f?Vector2.right*exitDirection:Vector2.up*Mathf.Sign(targetHeight-transform.position.y),false);
+                return;
+            }
             if (State == LadderRouteState.Climbing && !traversal.IsClimbing && transform.position.y >= targetHeight - .5f)
             {
                 // Let the assisted exit settle on its landing before patrol can steer it away.

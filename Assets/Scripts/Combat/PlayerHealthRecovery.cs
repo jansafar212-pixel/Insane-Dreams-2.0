@@ -9,10 +9,11 @@ namespace InsaneDreams.Combat
         [SerializeField, Min(0)] private float recoveryProtection = 2;
         private Health health;
         private PlayerRecovery recovery;
-        private void Awake() { health = GetComponent<Health>(); recovery = GetComponent<PlayerRecovery>(); }
+        private PlayerRevive revive;
+        private void Awake() { health = GetComponent<Health>(); recovery = GetComponent<PlayerRecovery>();revive=GetComponent<PlayerRevive>(); }
         private void OnEnable() { health.Defeated += Defeated; recovery.Recovered += Recovered; }
         private void OnDisable() { health.Defeated -= Defeated; recovery.Recovered -= Recovered; }
-        private void Defeated(DamageInfo damage) => recovery.Respawn();
+        private void Defeated(DamageInfo damage) {if(revive==null||!revive.CanOfferRevive)recovery.Respawn();}
         private void Recovered() { health.Restore(); health.ProtectFor(recoveryProtection); }
     }
 }

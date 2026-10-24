@@ -11,6 +11,7 @@ namespace InsaneDreams.Visuals
     {
         public Sprite head, torso, arm, leg, weapon, parachute;
         public Sprite secondaryWeapon, meleeWeapon;
+        public Sprite panicFace;
         public Sprite[] faces = new Sprite[6];
         public Color clothing = Color.white;
         [TextArea] public string provenance;

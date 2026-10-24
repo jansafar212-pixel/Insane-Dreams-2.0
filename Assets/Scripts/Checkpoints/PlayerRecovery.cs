@@ -46,6 +46,7 @@ namespace InsaneDreams.Checkpoints
         {
             actions.ResetActions();
             traversal.ResetTraversal();
+            GetComponent<InsaneDreams.Prototype.PlayerMotor2D>()?.ResetJumpBudget();
             body.linearVelocity = Vector2.zero;
             body.angularVelocity = 0;
             body.rotation = 0;

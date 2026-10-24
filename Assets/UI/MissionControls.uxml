@@ -10,6 +10,7 @@
         </ui:VisualElement>
         <ui:VisualElement class="equipment">
             <ui:Label name="loadout" class="loadout" picking-mode="Ignore" />
+            <ui:Label name="suppliesNotice" class="supply-notice" picking-mode="Ignore" />
             <ui:VisualElement class="equipment-buttons">
                 <ui:Button name="slot1" text="1" /><ui:Button name="slot2" text="2" /><ui:Button name="melee" text="M" />
             </ui:VisualElement>
@@ -18,7 +19,10 @@
         <ui:VisualElement name="aimStick" class="stick aim-stick"><ui:Label text="AIM / FIRE" class="stick-label" picking-mode="Ignore" /><ui:VisualElement class="knob" picking-mode="Ignore" /></ui:VisualElement>
         <ui:VisualElement name="parachuteButton" class="action parachute-button"><ui:Label text="DEPLOY&#10;CHUTE" picking-mode="Ignore" /></ui:VisualElement>
         <ui:Button name="reload" text="RELOAD" class="action reload-button" />
-        <ui:Button name="heal" text="HEAL" class="action heal-button" />
+        <ui:Button name="heal" text="HOLD&#10;HEAL" class="action heal-button" />
+        <ui:Button name="supplyInteract" text="SUPPLIES [E]" class="action supply-button hidden" />
+        <ui:VisualElement name="fireButton" class="action fire-button"><ui:Label text="FIRE" picking-mode="Ignore" /></ui:VisualElement>
+        <ui:VisualElement name="jumpButton" class="action jump-button"><ui:Label text="JUMP" picking-mode="Ignore" /></ui:VisualElement>
         <ui:Label name="interactionPrompt" class="interaction-prompt" picking-mode="Ignore" />
         <ui:Button name="interact" text="INTERACT" class="interact-button hidden" />
         <ui:VisualElement name="missionResults" class="results hidden">

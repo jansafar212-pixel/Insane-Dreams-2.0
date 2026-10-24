@@ -49,7 +49,7 @@ namespace InsaneDreams.Tests
             Assert.IsTrue(posture.IsCrouched);Assert.That(box.size.y,Is.EqualTo(standing*.7f).Within(.001f));Assert.That(box.bounds.min.y,Is.EqualTo(feet).Within(.025f));
             Assert.That(player.transform.Find("PostureVisual").GetComponent<SpriteRenderer>().bounds.size.y,Is.EqualTo(box.bounds.size.y).Within(.02f));
             actions.SetTouchMove(new Vector2(.7f,-.7f));actions.SetTouchAim(Vector2.left);actions.SetFireIntent(true);yield return new WaitForSeconds(.3f);
-            Assert.Greater(body.linearVelocity.x,1);Assert.Less(body.linearVelocity.x,2.3f);Assert.Less(actions.AimDirection.x,0);
+            Assert.Greater(body.linearVelocity.x,1);Assert.AreEqual(player.GetComponent<InsaneDreams.Prototype.PlayerMotor2D>().MoveSpeed*.7f*.45f,body.linearVelocity.x,.08f);Assert.Less(actions.AimDirection.x,0);
             Assert.Greater(player.GetComponent<AttackExecutor>().ShotsFired,0);Assert.Less(player.GetComponent<AttackExecutor>().Origin.y,body.position.y);
             Assert.Less(Vector2.Distance(player.GetComponent<AttackExecutor>().Origin,player.GetComponent<InsaneDreams.Visuals.CharacterVisualDriver>().Rig.MuzzlePosition),.002f);
             Assert.AreEqual(0,body.linearVelocity.y,.03f);
@@ -105,7 +105,7 @@ namespace InsaneDreams.Tests
         {
             Air(12);yield return new WaitForFixedUpdate();actions.SetTouchMove(Vector2.right);actions.SetTouchParachute(true);
             yield return new WaitForSeconds(.35f);Assert.IsTrue(traversal.IsParachuting);
-            Assert.That(body.linearVelocity.x,Is.EqualTo(2.8f).Within(.08f));Assert.GreaterOrEqual(body.linearVelocity.y,-2.85f);Assert.Less(body.linearVelocity.y,0);
+            Assert.That(body.linearVelocity.x,Is.EqualTo(player.GetComponent<InsaneDreams.Prototype.PlayerMotor2D>().MoveSpeed*.4f).Within(.08f));Assert.GreaterOrEqual(body.linearVelocity.y,-2.85f);Assert.Less(body.linearVelocity.y,0);
             Assert.IsTrue(traversal.ToggleParachute());float vertical=body.linearVelocity.y;
             Assert.IsFalse(traversal.ToggleParachute());Assert.AreEqual(vertical,body.linearVelocity.y);
             yield return new WaitForSeconds(.22f);Assert.IsTrue(traversal.ToggleParachute());Assert.Less(body.linearVelocity.y,0);
@@ -140,7 +140,7 @@ namespace InsaneDreams.Tests
         {
             var ui=Keep(Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/UI/WarehouseControls.prefab")));ui.GetComponent<WarehouseTouchControls>().Bind(actions);yield return null;yield return null;
             var root=ui.GetComponent<UIDocument>().rootVisualElement;var move=root.Q<VisualElement>("moveStick");var aim=root.Q<VisualElement>("aimStick");var chute=root.Q<VisualElement>("parachuteButton");
-            TouchEvent(move,0,new Vector2(-25,45),true);TouchEvent(aim,1,new Vector2(55,0),true);yield return new WaitForSeconds(.15f);
+            TouchEvent(move,0,new Vector2(-25,45),true);TouchEvent(aim,1,Vector2.right*aim.worldBound.width*.35f*.95f,true);yield return new WaitForSeconds(.15f);
             Assert.IsTrue(posture.IsCrouched);Assert.IsTrue(actions.FireHeld);Assert.Less(actions.Move.x,0);Assert.Greater(actions.AimDirection.x,0);
             body.position=new Vector2(5000,7);body.linearVelocity=Vector2.down*5;Physics2D.SyncTransforms();yield return new WaitForFixedUpdate();
             TouchEvent(chute,2,Vector2.zero,true);TouchEvent(chute,2,Vector2.zero,false);yield return new WaitForSeconds(.12f);

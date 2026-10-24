@@ -12,16 +12,27 @@ namespace InsaneDreams.CameraSystem
         [SerializeField] private Vector2 offset = new Vector2(0, 1.2f);
         [SerializeField, Min(0.01f)] private float smoothTime = 0.16f;
         [SerializeField, Min(1)] private float orthographicSize = 7.2f;
+        [SerializeField, Range(1, 1.5f)] private float gameplayZoomMultiplier = 1.155f;
+        [Tooltip("Gameplay rectangle relative to this camera viewport. Overlay touch buttons do not crop the world.")]
+        [SerializeField] private Rect gameplayViewport = new Rect(0, 0, 1, 1);
+        [SerializeField, Min(.01f)] private float directionTransitionSeconds = .75f;
+        [SerializeField, Min(0)] private float directionCommitSeconds = .12f;
         [SerializeField, Min(0)] private int visualPixelsPerUnit = 32;
         [SerializeField, Range(1,1.25f)] private float androidCharacterScale=1.125f;
         [SerializeField] private bool previewAndroidFraming;
         private Camera view;
         private Vector3 velocity;
         private Vector3 followPosition;
+        private InsaneDreams.Visuals.CharacterVisualDriver targetVisual;
+        private InsaneDreams.Traversal.PlayerTraversal2D targetTraversal;
+        private float facing = 1, pendingFacing = 1, pendingSince, framing = 1, framingVelocity;
+        private float lastTargetX;
         private void Awake() => view = GetComponent<Camera>();
         private void Start() => SnapToTarget();
         public void Bind(Transform value) { target = value; velocity = Vector3.zero; if (value != null) SnapToTarget(); }
         public Transform Target => target;
+        public float DesiredPlayerViewportX => Mathf.Lerp(gameplayViewport.xMin + gameplayViewport.width * 2 / 3,
+            gameplayViewport.xMin + gameplayViewport.width / 3, (framing + 1) * .5f);
 
         private Vector3 FramedPosition()
         {
@@ -39,11 +50,15 @@ namespace InsaneDreams.CameraSystem
             }
             // Apply after the integer zoom calculation: otherwise rounding can
             // silently erase a modest Android framing adjustment.
+            view.orthographicSize /= Mathf.Clamp(gameplayZoomMultiplier, 1, 1.5f);
             if(Application.platform==RuntimePlatform.Android||Application.isEditor&&previewAndroidFraming)
                 view.orthographicSize/=Mathf.Clamp(androidCharacterScale,1,1.25f);
             float halfY = view.orthographicSize;
             float halfX = halfY * view.aspect;
             Vector2 desired = (Vector2)target.position + offset;
+            // Use the final zoomed projection and actual pixelRect aspect, not a fixed
+            // offset. The optional gameplay rectangle supports asymmetric side crops.
+            desired.x += (0.5f - DesiredPlayerViewportX) * 2 * halfX;
             return new Vector3(Mathf.Clamp(desired.x, levelMin.x + halfX, levelMax.x - halfX),
                 Mathf.Clamp(desired.y, levelMin.y + halfY, levelMax.y - halfY), -10);
         }
@@ -52,6 +67,12 @@ namespace InsaneDreams.CameraSystem
         {
             if (target == null) return;
             if (view == null) view = GetComponent<Camera>();
+            targetVisual = target.GetComponent<InsaneDreams.Visuals.CharacterVisualDriver>();
+            targetTraversal = target.GetComponent<InsaneDreams.Traversal.PlayerTraversal2D>();
+            facing = pendingFacing = framing = targetVisual != null ? targetVisual.Facing : 1;
+            if(targetTraversal!=null&&targetTraversal.IsClimbing)framing=0;
+            framingVelocity = 0; pendingSince = Time.time;
+            lastTargetX = target.position.x;
             velocity = Vector3.zero;
             followPosition=FramedPosition();transform.position = PixelPosition(followPosition);
         }
@@ -59,7 +80,21 @@ namespace InsaneDreams.CameraSystem
         private void LateUpdate()
         {
             if (target == null) return;
+            bool climbing=targetTraversal!=null&&targetTraversal.IsClimbing;
+            if(!climbing)
+            {
+                float intent = targetVisual != null ? targetVisual.Facing : facing;
+                if (intent != pendingFacing) { pendingFacing = intent; pendingSince = Time.time; }
+                if (Time.time - pendingSince >= directionCommitSeconds) facing = pendingFacing;
+            }
+            // Zero uses the center of the gameplay rectangle. Keep one continuous
+            // damping state through entry/exit; climbing aim must not steer framing.
+            framing = Mathf.SmoothDamp(framing, climbing?0:facing, ref framingVelocity, directionTransitionSeconds);
             Vector3 desired = FramedPosition();
+            // Track interpolated horizontal displacement directly. Smoothing only the
+            // composition error avoids a speed-dependent trailing offset at full run.
+            followPosition.x += target.position.x - lastTargetX;
+            lastTargetX = target.position.x;
             // The target transform is Rigidbody2D's interpolated presentation position.
             // Never feed the pixel-rounded render output back into the smoothing state.
             Vector3 position = Vector3.SmoothDamp(followPosition, desired, ref velocity, smoothTime);

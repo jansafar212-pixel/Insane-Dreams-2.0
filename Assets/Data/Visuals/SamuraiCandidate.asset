@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb528433d18e7c24b94402c75f563040, type: 3}
+  m_Name: SamuraiCandidate
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Visuals.CharacterSkin
+  head: {fileID: 21300000, guid: 26e3045da748ac041bb1d0cfdaf287c2, type: 2}
+  torso: {fileID: 21300000, guid: 64a9d30d84a22aa41ab47b5047aaaa39, type: 2}
+  arm: {fileID: 21300000, guid: 2c340eda9c9d10d4a9d5e6df7db051e7, type: 2}
+  leg: {fileID: 21300000, guid: c60f4cce1cb032640b12bc3f23ced601, type: 2}
+  weapon: {fileID: 21300000, guid: a281ae73b84f4ea44ad8319fe3434386, type: 2}
+  parachute: {fileID: 21300000, guid: f89cc3f609931e34791fea7c21333f51, type: 3}
+  secondaryWeapon: {fileID: 21300000, guid: 0d9544d255dbe2e43a08107018622f45, type: 3}
+  meleeWeapon: {fileID: 21300000, guid: a281ae73b84f4ea44ad8319fe3434386, type: 2}
+  panicFace: {fileID: 0}
+  faces:
+  - {fileID: 21300000, guid: 3cc96e65a061e494a8c138c9ab6610ca, type: 2}
+  - {fileID: 21300000, guid: 46ecc2563a8086f408a6d2fc6408ac27, type: 2}
+  - {fileID: 21300000, guid: df642fc573017f642807ecf3222c6318, type: 2}
+  - {fileID: 21300000, guid: 064662672f17b2644bd52c092b075098, type: 2}
+  - {fileID: 21300000, guid: 44e0e4e8da3f0e44f97d6820a1ed47c4, type: 2}
+  - {fileID: 21300000, guid: 75738ae5cb121a644b868a783e7dca48, type: 2}
+  clothing: {r: 1, g: 1, b: 1, a: 1}
+  provenance: "Sprint 024.5 candidate \u2014 awaiting artistic approval. Historical Enemak PNGs and selected numbered GIFs inspected; primitive generated atlas quantized to eight flat colors, 32 PPU. Originals preserved."

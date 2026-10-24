@@ -106,15 +106,17 @@ namespace InsaneDreams.Tests
         }
         [UnityTest] public IEnumerator HealingCapsRepeatsHonorsCooldownAndCannotResurrect()
         {
-            var h=player.GetComponent<Health>();var healing=player.GetComponent<PlayerHealing>();Assert.IsNotNull(healing);Assert.IsFalse(healing.TryHeal());
-            h.ApplyDamage(new DamageInfo(80,CombatTeam.Enemy));player.GetComponent<PlayerActions>().RequestHeal();Assert.AreEqual(55,h.Current);Assert.AreEqual(35,healing.LastRestored);Assert.IsFalse(healing.TryHeal());Assert.Greater(healing.FeedbackUntil,Time.time);
-            yield return new WaitForSeconds(3.05f);Assert.IsTrue(healing.TryHeal());Assert.AreEqual(90,h.Current);yield return new WaitForSeconds(3.05f);Assert.IsTrue(healing.TryHeal());Assert.AreEqual(100,h.Current);
-            h.ApplyDamage(new DamageInfo(1000,CombatTeam.Enemy));yield return new WaitForSeconds(3.05f);Assert.IsTrue(h.IsDefeated);Assert.IsFalse(healing.TryHeal());Assert.AreEqual(0,h.Current);
+            var h=player.GetComponent<Health>();var healing=player.GetComponent<PlayerHealing>();Assert.IsNotNull(healing);Assert.IsFalse(healing.TryHeal());Setting(healing,"damageInterruptionSeconds",0);
+            h.ApplyDamage(new DamageInfo(80,CombatTeam.Enemy));player.GetComponent<PlayerActions>().RequestHeal();Assert.AreEqual(20,h.Current,"Held intent must not heal instantly.");
+            yield return new WaitForSeconds(.4f);Assert.That(h.Current,Is.InRange(28,35));Assert.Greater(healing.FeedbackUntil,Time.time);
+            yield return new WaitForSeconds(3.05f);Assert.AreEqual(100,h.Current);Assert.AreEqual(120,healing.DuctTape,.01f);Assert.IsFalse(healing.TryHeal());
+            h.ApplyDamage(new DamageInfo(1000,CombatTeam.Enemy));yield return new WaitForSeconds(.1f);Assert.IsTrue(h.IsDefeated);Assert.IsFalse(healing.TryHeal());Assert.AreEqual(0,h.Current);
         }
         [UnityTest] public IEnumerator LimitedHealingDoesNotConsumeUsesOnRejectedAttempts()
         {
-            var healing=player.GetComponent<PlayerHealing>();Flag(healing,"unlimitedUses",false);var s=new SerializedObject(healing);s.FindProperty("remainingUses").intValue=1;s.ApplyModifiedPropertiesWithoutUndo();Setting(healing,"cooldownSeconds",0);
-            Assert.IsFalse(healing.TryHeal());player.GetComponent<Health>().ApplyDamage(new DamageInfo(70,CombatTeam.Enemy));Assert.IsTrue(healing.TryHeal());Assert.AreEqual(65,player.GetComponent<Health>().Current);Assert.IsFalse(healing.TryHeal());yield return null;
+            var healing=player.GetComponent<PlayerHealing>();Setting(healing,"initialDuctTape",5);Setting(healing,"damageInterruptionSeconds",0);healing.ResetSupply();
+            Assert.IsFalse(healing.TryHeal());Assert.AreEqual(5,healing.DuctTape);player.GetComponent<Health>().ApplyDamage(new DamageInfo(70,CombatTeam.Enemy));Assert.IsTrue(healing.TryHeal());Assert.AreEqual(30,player.GetComponent<Health>().Current);
+            yield return new WaitForSeconds(.4f);Assert.AreEqual(35,player.GetComponent<Health>().Current,.01f);Assert.AreEqual(0,healing.DuctTape,.001f);Assert.IsFalse(healing.TryHeal());
         }
         [UnityTest] public IEnumerator FiveFullReloadsAndReserveDepletionRemainFinite()
         {

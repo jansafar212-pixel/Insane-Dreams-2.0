@@ -3,14 +3,17 @@
     <ui:VisualElement name="safeArea" class="safe-area" picking-mode="Ignore">
         <ui:VisualElement class="instructions" picking-mode="Ignore">
             <ui:Label text="WAREHOUSE / TRAVERSAL TESTBED" class="title" picking-mode="Ignore" />
+            <ui:Label text="DEVELOPMENT ONLY — no shop or mission results. Exit markers save respawn positions." picking-mode="Ignore" />
+            <ui:Label text="Campaign: open MainMenu, or use AKUMU 2 > Play Campaign in the Editor." picking-mode="Ignore" />
             <ui:Label text="A/D: move   S: crouch / descend   SPACE: jump   SHIFT: toggle chute" picking-mode="Ignore" />
             <ui:Label text="Stick up: jump / grab ladder; down: crouch / descend at ladder top" picking-mode="Ignore" />
             <ui:Label text="Aim stick: inner zone aims / outer zone fires. R: reload. RMB aim + LMB/F fire." picking-mode="Ignore" />
             <ui:Label text="A: ground   B: amber mezzanine / roof   C: blue basement" picking-mode="Ignore" />
-            <ui:Label text="Low passage: down + sideways. CHUTE button: tap to toggle." picking-mode="Ignore" />
+            <ui:Label text="Cover: crouch + F/FIRE blind-fires; add RMB / aim stick to peek." picking-mode="Ignore" />
         </ui:VisualElement>
         <ui:VisualElement class="equipment">
             <ui:Label name="loadout" text="Loadout: awaiting binding" class="loadout" picking-mode="Ignore" />
+            <ui:Label name="suppliesNotice" class="supply-notice" picking-mode="Ignore" />
             <ui:VisualElement class="equipment-buttons">
                 <ui:Button name="slot1" text="1" />
                 <ui:Button name="slot2" text="2" />
@@ -29,6 +32,10 @@
             <ui:Label text="DEPLOY&#10;CHUTE" picking-mode="Ignore" />
         </ui:VisualElement>
         <ui:Button name="reload" text="RELOAD" class="action reload-button" />
-        <ui:Button name="heal" text="HEAL" class="action heal-button" />
+        <ui:Button name="heal" text="HOLD&#10;HEAL" class="action heal-button" />
+        <ui:Button name="supplyInteract" text="SUPPLIES [E]" class="action supply-button hidden" />
+        <ui:VisualElement name="fireButton" class="action fire-button"><ui:Label text="FIRE" picking-mode="Ignore" /></ui:VisualElement>
+        <ui:VisualElement name="blindFireButton" class="action fire-button hidden"><ui:Label text="BLIND&#10;FIRE" picking-mode="Ignore" /></ui:VisualElement>
+        <ui:VisualElement name="jumpButton" class="action jump-button"><ui:Label text="JUMP" picking-mode="Ignore" /></ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

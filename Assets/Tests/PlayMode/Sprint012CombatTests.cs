@@ -6,6 +6,7 @@ using InsaneDreams.Enemies;
 using InsaneDreams.Input;
 using InsaneDreams.Inventory;
 using InsaneDreams.Visuals;
+using InsaneDreams.Traversal;
 using NUnit.Framework;
 using UnityEditor;
 using UnityEngine;
@@ -39,6 +40,17 @@ namespace InsaneDreams.Tests
         private void BlindPolicy(EnemyCombat e,float chance=1,float seconds=2)
         {var s=new SerializedObject(e);foreach(string key in new[]{"ordinaryBlindChance","cowardBlindChance","overconfidentBlindChance"})s.FindProperty(key).floatValue=chance;s.FindProperty("blindFireSeconds").floatValue=seconds;s.ApplyModifiedPropertiesWithoutUndo();}
         private IEnumerator Engage(EnemyCombat e){for(int i=0;i<60&&e.GetComponent<AttackExecutor>().ShotsFired<2;i++)yield return new WaitForFixedUpdate();Assert.GreaterOrEqual(e.GetComponent<AttackExecutor>().ShotsFired,2);}
+        [UnityTest] public IEnumerator FirstSightReactionIsSlowerButEstablishedAutomaticFireKeepsItsCadence()
+        {
+            var e=Enemy();var a=e.GetComponent<AttackExecutor>();float until=Time.time+2;
+            while(!e.TargetVisible&&Time.time<until)yield return null;
+            Assert.IsTrue(e.TargetVisible);float seen=Time.time;
+            while(a.ShotsFired==0&&Time.time<until)yield return null;
+            Assert.Greater(a.ShotsFired,0);Assert.That(Time.time-seen,Is.InRange(.52f,1.4f));
+            int first=a.ShotsFired;float fired=Time.time;
+            while(a.ShotsFired==first&&Time.time<until)yield return null;
+            Assert.Greater(a.ShotsFired,first);Assert.Less(Time.time-fired,.25f);
+        }
         [UnityTest] public IEnumerator BlindBurstFreezesMemoryAndConsumesRealAmmoIntoCover()
         {
             var e=Enemy();BlindPolicy(e);yield return Engage(e);var a=e.GetComponent<AttackExecutor>();Vector2 known=e.LastKnownPosition;int shots=a.ShotsFired,ammo=e.Weapon.MagazineAmmo;
@@ -72,8 +84,12 @@ namespace InsaneDreams.Tests
             {
                 cover.transform.position=new Vector3(180+sign*2,.45f);target.transform.position=new Vector3(180+sign*5,1);Physics2D.SyncTransforms();target.Restore();
                 actions.SetTouchMove(Vector2.zero);actions.SetTouchAim(Vector2.right*sign);yield return new WaitForSeconds(.15f);
+                float standBy=Time.realtimeSinceStartup+1;
+                while((player.GetComponent<PlayerPosture2D>().IsCrouched||attack.Origin.y<=cover.GetComponent<Collider2D>().bounds.max.y+.03f)&&Time.realtimeSinceStartup<standBy)yield return null;
                 Assert.IsTrue(attack.Attack(weapon,Vector2.right*sign,now+=1));Assert.Less(target.Current,target.Maximum);
                 float health=target.Current;actions.SetTouchMove(Vector2.down);yield return new WaitForSeconds(.15f);
+                float crouchBy=Time.realtimeSinceStartup+1;
+                while((!player.GetComponent<PlayerPosture2D>().IsCrouched||attack.Origin.y>=.9f)&&Time.realtimeSinceStartup<crouchBy)yield return null;
                 Assert.IsTrue(attack.Attack(weapon,new Vector2(sign,.15f),now+=1));Assert.AreEqual(health,target.Current);Assert.AreEqual(ShotSurface.Geometry,attack.LastSurface);
                 Assert.Less(attack.LastShotOrigin.y,.9f);
             }
@@ -102,8 +118,11 @@ namespace InsaneDreams.Tests
         {
             var e=Enemy();e.BindTarget(null);e.Weapon.SetAmmunition(0,36);Assert.IsTrue(e.Weapon.Cycle.TryReload(Time.time));
             yield return new WaitForSeconds(e.Weapon.Definition.ReloadDuration*.25f);var v=e.GetComponent<CharacterVisualDriver>();var rig=v.Rig;
-            Assert.IsTrue(v.ReloadPoseActive);Assert.IsTrue(rig.weapon.enabled);Assert.IsTrue(rig.magazine.enabled);Assert.Greater(Mathf.Abs(rig.magazine.transform.localPosition.y),.3f);
-            Assert.Less(Vector2.Dot(rig.BarrelDirection,Vector2.right),.8f);Assert.AreEqual(0,e.Weapon.MagazineAmmo);
+            Assert.IsTrue(v.ReloadPoseActive);Assert.IsTrue(rig.weapon.enabled);Assert.IsTrue(rig.magazine.enabled);
+            // The accepted 0025.3 exchange replaced the old levitating fumble.
+            Assert.Greater(Vector2.Distance(rig.magazine.transform.localPosition,e.Weapon.Definition.MagazineMountOffset),.01f);
+            var hand=rig.Segmented.leftHand.TransformPoint(Vector3.down*rig.Segmented.hand.bounds.size.y*.55f);
+            Assert.Less(Vector3.Distance(hand,rig.magazine.transform.position),.055f);Assert.Less(Vector3.Distance(rig.weaponMount.position,rig.Segmented.grip.position),.01f);Assert.AreEqual(0,e.Weapon.MagazineAmmo);
             float deadline=e.Weapon.Cycle.ReloadEndsAt;e.GetComponent<Health>().ApplyDamage(new DamageInfo(1000,CombatTeam.Player));e.Weapon.Cycle.Tick(deadline+1);
             Assert.AreEqual(0,e.Weapon.MagazineAmmo);Assert.AreEqual(36,e.Weapon.ReserveAmmo);
         }
@@ -159,7 +178,9 @@ namespace InsaneDreams.Tests
         {
             Solid("RetreatWall",new Vector2(184.7f,1),new Vector2(.2f,3));var e=Enemy();e.Weapon.SetAmmunition(0,36);int moves=0,reloads=0,lines=0;
             e.WithdrawalStarted+=()=>moves++;e.ReloadStarted+=()=>reloads++;e.GetComponent<LarperAwareness>().LineDelivered+=c=>{if(c==LarperSpeechEvent.Withdraw)lines++;};
-            yield return new WaitForSeconds(.55f);Assert.AreEqual(EngagementState.Reloading,e.State);Assert.AreEqual(0,moves);Assert.AreEqual(0,lines);Assert.AreEqual(1,reloads);
+            // Wait through the existing .55s reaction plus jitter before checking blocked reload.
+            float until=Time.time+1.5f;while(e.State!=EngagementState.Reloading&&Time.time<until)yield return new WaitForFixedUpdate();
+            Assert.AreEqual(EngagementState.Reloading,e.State);Assert.AreEqual(0,moves);Assert.AreEqual(0,lines);Assert.AreEqual(1,reloads);
             yield return new WaitForSeconds(.4f);Assert.AreEqual(1,reloads);Assert.AreEqual(0,e.GetComponent<AttackExecutor>().ShotsFired);
         }
     }

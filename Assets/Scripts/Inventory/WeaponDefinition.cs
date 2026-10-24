@@ -13,8 +13,12 @@ namespace InsaneDreams.Inventory
         [SerializeField, Min(0)] private float reloadDuration = 1.5f;
         [SerializeField] private GameObject presentationPrefab;
         [SerializeField] private Sprite equippedSprite, magazineSprite;
+        [SerializeField] private Vector2 magazineMountOffset=new Vector2(.125f,-.0625f);
+        public Vector2 MagazineMountOffset=>magazineMountOffset;
         public Sprite EquippedSprite => equippedSprite;
         public Sprite MagazineSprite => magazineSprite;
+        [SerializeField] private bool physicalMagazineReload;
+        public bool PhysicalMagazineReload=>physicalMagazineReload;
         [SerializeField, Min(.1f)] private float firearmRange = 22;
         [SerializeField, Min(.1f)] private float meleeRange = 1.6f;
         [SerializeField, Min(0)] private float impactImpulse = .9f;

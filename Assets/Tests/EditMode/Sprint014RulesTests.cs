@@ -22,7 +22,7 @@ namespace InsaneDreams.Tests
                 CollectionAssert.AreEqual(new[]{1,4,5},mission.Encounters.Select(e=>e.Count).ToArray());var points=roots.SelectMany(g=>g.GetComponentsInChildren<EnemySpawnPoint>()).ToArray();Assert.AreEqual(10,points.Length);
                 foreach(var point in points){Assert.IsNotNull(point.GetComponentInParent<MissionEncounter>());Assert.IsFalse(new SerializedObject(point).FindProperty("spawnOnStart").boolValue);Assert.IsNull(point.ValidationError);}
                 var document=roots.SelectMany(g=>g.GetComponentsInChildren<UIDocument>()).Single();Assert.AreEqual("Assets/UI/MissionControls.uxml",AssetDatabase.GetAssetPath(document.visualTreeAsset));var tree=document.visualTreeAsset.Instantiate();Assert.IsNotNull(tree.Q<Button>("replayMission"));Assert.IsNotNull(tree.Q<Button>("interact"));Assert.IsNotNull(tree.Q("resultsExtras"));
-                Assert.AreEqual(0,roots.SelectMany(g=>g.GetComponentsInChildren<RagdollPracticeStation>()).Count());Assert.AreEqual(6,roots.SelectMany(g=>g.GetComponentsInChildren<MissionTrigger>()).Count());
+                Assert.AreEqual(0,roots.SelectMany(g=>g.GetComponentsInChildren<RagdollPracticeStation>()).Count());Assert.AreEqual(7,roots.SelectMany(g=>g.GetComponentsInChildren<MissionTrigger>()).Count());
                 foreach(var zone in roots.SelectMany(g=>g.GetComponentsInChildren<MissionTrigger>()))Assert.AreEqual(2,zone.gameObject.layer,"Mission zones must not enter solid-geometry probes: "+zone.name);
                 var zones=roots.SelectMany(g=>g.GetComponentsInChildren<MissionTrigger>()).ToArray();foreach(var zone in zones)Assert.AreEqual(Vector3.one,zone.transform.lossyScale,"Visuals must not scale trigger volumes.");
                 Assert.AreEqual(new Vector2(2,2),(Vector2)zones.Single(z=>z.Zone==MissionZone.Records).Region.bounds.size);
@@ -32,7 +32,7 @@ namespace InsaneDreams.Tests
                 Assert.IsTrue(EditorBuildSettings.scenes.Any(s=>s.path==Path&&s.enabled));
             }finally{EditorSceneManager.ClosePreviewScene(scene);}
             var testbed=EditorSceneManager.OpenPreviewScene("Assets/Scenes/Warehouse_Testbed.unity");
-            try{Assert.AreEqual(31,testbed.GetRootGameObjects().Sum(g=>g.GetComponentsInChildren<Collider2D>(true).Length));Assert.AreEqual(1,testbed.GetRootGameObjects().Sum(g=>g.GetComponentsInChildren<RagdollPracticeStation>(true).Length));Assert.AreEqual(0,testbed.GetRootGameObjects().Sum(g=>g.GetComponentsInChildren<WarehouseMission>(true).Length));}
+            try{var colliders=testbed.GetRootGameObjects().SelectMany(g=>g.GetComponentsInChildren<Collider2D>(true)).ToArray();Assert.AreEqual(7,colliders.Count(c=>c.GetComponentInParent<LarperBrain>()!=null));Assert.AreEqual(2,colliders.Count(c=>c.GetComponentInParent<InsaneDreams.Inventory.SupplyCrate2D>()!=null&&c.isTrigger));Assert.AreEqual(31,colliders.Count(c=>c.GetComponentInParent<LarperBrain>()==null&&c.GetComponentInParent<InsaneDreams.Inventory.SupplyCrate2D>()==null));Assert.AreEqual(1,testbed.GetRootGameObjects().Sum(g=>g.GetComponentsInChildren<RagdollPracticeStation>(true).Length));Assert.AreEqual(0,testbed.GetRootGameObjects().Sum(g=>g.GetComponentsInChildren<WarehouseMission>(true).Length));}
             finally{EditorSceneManager.ClosePreviewScene(testbed);}
         }
         [Test] public void MissionSpawnsCheckpointsAndSteppedRouteHaveSupportedClearanceWithinExistingJumpLimits()

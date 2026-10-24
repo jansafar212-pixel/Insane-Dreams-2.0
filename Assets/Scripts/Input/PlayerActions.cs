@@ -12,6 +12,14 @@ namespace InsaneDreams.Input
         [SerializeField] private Transform aimIndicator;
         [SerializeField] private bool debugAimMarker;
         [SerializeField] private JoystickJumpGesture jumpGesture = new JoystickJumpGesture();
+        [Header("Post-double-jump landing slide")]
+        [SerializeField] private bool allowLandingSlide=true;
+        [SerializeField,Range(.15f,.6f)] private float landingSlideSeconds=.35f;
+        private bool slideArmed,wasGrounded,airSliding;
+        private float slideUntil,slideDirection;
+        public bool IsLandingSliding=>Time.time<slideUntil;
+        public bool IsAirSliding=>airSliding;
+        private InsaneDreams.Combat.PlayerCover2D cover;
         private PlayerMotor2D motor;
         private PlayerTraversal2D traversal;
         private PlayerPosture2D posture;
@@ -19,6 +27,8 @@ namespace InsaneDreams.Input
         private Vector2 touchAim;
         private bool touchParachute;
         private bool touchFire;
+        private bool touchHeal;
+        private bool touchJumpRequested;
         private Camera aimCamera;
         public event System.Action InputReset;
         public event System.Action ReloadRequested;
@@ -28,6 +38,8 @@ namespace InsaneDreams.Input
         public Vector2 Move { get; private set; }
         public Vector2 AimDirection { get; private set; } = Vector2.right;
         public bool FireHeld { get; private set; }
+        public bool HealHeld { get; private set; }
+        public void SetHealIntent(bool held)=>touchHeal=held;
         public bool HasAimIntent { get; private set; }
 
         private void Awake()
@@ -35,8 +47,30 @@ namespace InsaneDreams.Input
             motor = GetComponent<PlayerMotor2D>();
             traversal = GetComponent<PlayerTraversal2D>();
             posture = GetComponent<PlayerPosture2D>();
+            cover=GetComponent<InsaneDreams.Combat.PlayerCover2D>();
             aimCamera = Camera.main;
             if (aimIndicator != null) aimIndicator.gameObject.SetActive(debugAimMarker);
+        }
+        private void OnEnable(){motor.AirJumped+=ArmLandingSlide;wasGrounded=motor.IsGrounded;}
+        private void ArmLandingSlide()=>slideArmed=allowLandingSlide;
+        private float LandingMoveInput(float normal)
+        {
+            bool safe=posture!=null&&!traversal.IsClimbing&&!traversal.ParachuteFlightActive&&(cover==null||!cover.IsCovered);
+            if(slideArmed&&safe&&!motor.IsGrounded&&Move.y<-.35f)
+            {slideArmed=false;airSliding=true;motor.RequestAirDive();}
+            if(motor.IsGrounded&&!wasGrounded)
+            {
+                if(airSliding&&safe&&Move.y<-.35f&&Mathf.Abs(Move.x)>.35f)
+                {slideUntil=Time.time+landingSlideSeconds;slideDirection=Mathf.Sign(Move.x);}
+                slideArmed=airSliding=false;
+            }
+            wasGrounded=motor.IsGrounded;
+            if(!safe||Move.y>=-.2f)airSliding=false;
+            if(!safe||!motor.IsGrounded||Move.y>=-.2f||Move.x*slideDirection<.1f)slideUntil=0;
+            if(!IsLandingSliding)return normal;
+            // Reuse normal acceleration/collision ownership and the existing crouch
+            // pose. Speed never exceeds an ordinary run; releasing/reversing cancels.
+            return slideDirection*Mathf.Lerp(.45f,1,Mathf.Clamp01((slideUntil-Time.time)/landingSlideSeconds))*traversal.HorizontalSpeedMultiplier;
         }
 
         public void SetTouchMove(Vector2 value) => touchMove = Vector2.ClampMagnitude(value, 1);
@@ -49,16 +83,18 @@ namespace InsaneDreams.Input
         public void SetFireIntent(bool held) => touchFire = held;
         public void RequestReload() => ReloadRequested?.Invoke();
         public void RequestInteraction() => InteractionRequested?.Invoke();
-        public void RequestHeal() => HealRequested?.Invoke();
+        public void RequestHeal() {SetHealIntent(true);HealRequested?.Invoke();}
         public void BindAimCamera(Camera camera) => aimCamera = camera;
         public void SelectWeapon(InsaneDreams.Inventory.EquipmentSlot slot) => WeaponSelectionRequested?.Invoke(slot);
-        public void Jump() { if (posture == null || posture.PrepareJump()) traversal.Jump(); }
+        public void Jump() { slideUntil=0;airSliding=false;if (posture == null || posture.PrepareJump()) traversal.Jump(); }
+        public void RequestTouchJump() { if (isActiveAndEnabled) touchJumpRequested = true; }
 
         private void Update()
         {
             Vector2 keyboardMove = Vector2.zero;
             bool keyboardParachute = false;
             bool desktopFire = false;
+            bool keyboardJump = false;
             Keyboard key = readKeyboard ? Keyboard.current : null;
             if (key != null && Application.isFocused)
             {
@@ -67,10 +103,9 @@ namespace InsaneDreams.Input
                 keyboardMove.y = (key.wKey.isPressed || key.upArrowKey.isPressed ? 1 : 0)
                     - (key.sKey.isPressed || key.downArrowKey.isPressed ? 1 : 0);
                 keyboardParachute = key.leftShiftKey.wasPressedThisFrame;
-                if (key.spaceKey.wasPressedThisFrame) Jump();
+                keyboardJump = key.spaceKey.wasPressedThisFrame;
                 if (key.rKey.wasPressedThisFrame) RequestReload();
                 if (key.eKey.wasPressedThisFrame) RequestInteraction();
-                if (key.hKey.wasPressedThisFrame) RequestHeal();
                 desktopFire = key.fKey.isPressed;
                 if (key.digit1Key.wasPressedThisFrame) SelectWeapon(InsaneDreams.Inventory.EquipmentSlot.Firearm1);
                 if (key.digit2Key.wasPressedThisFrame) SelectWeapon(InsaneDreams.Inventory.EquipmentSlot.Firearm2);
@@ -80,9 +115,10 @@ namespace InsaneDreams.Input
             if (keyboardParachute) traversal.ToggleParachute();
             posture?.SetInput(Move);
             bool usableLadder = jumpGesture.NeedsDecision(touchMove) && traversal.CanUseLadder;
-            // Consume airborne jump gestures without queuing a jump that could execute upon landing.
-            if (jumpGesture.Evaluate(touchMove, usableLadder, traversal.IsClimbing, motor.IsGrounded) && motor.IsGrounded) Jump();
-            motor.SetMoveInput(Move.x * traversal.HorizontalSpeedMultiplier * (posture != null ? posture.SpeedMultiplier : 1));
+            // Each neutral-to-up gesture is one request. The motor owns the finite
+            // airborne budget; held input cannot consume both jumps or queue a third.
+            bool gestureJump = jumpGesture.Evaluate(touchMove, usableLadder, traversal.IsClimbing, motor.IsGrounded);
+            motor.SetMoveInput(LandingMoveInput(Move.x * traversal.HorizontalSpeedMultiplier * (posture != null ? posture.SpeedMultiplier : 1)));
             Vector2 traversalMove = Move;
             // A jump consumes its edge, not ongoing airborne climb intent. Traversal still owns
             // reachable-candidate checks, smooth alignment and post-dismount lockout/release.
@@ -90,6 +126,10 @@ namespace InsaneDreams.Input
             if (touchMove.sqrMagnitude > 0.01f && jumpGesture.ClimbSuppressed && !airborneClimbIntent) traversalMove.y = 0;
             if (posture != null && !traversal.IsClimbing && motor.IsGrounded && Move.y < 0 && !traversal.CanEnterFromTop(Move)) traversalMove.y = 0;
             traversal.SetInput(traversalMove, false);
+            // Consume one explicit press after applying this frame's directional input.
+            // A simultaneous upward gesture must not spend the second jump as well.
+            if (keyboardJump || touchJumpRequested || gestureJump) Jump();
+            touchJumpRequested = false;
             var mouse = readKeyboard && Application.isFocused ? Mouse.current : null;
             if (mouse != null && mouse.rightButton.isPressed)
             {
@@ -102,6 +142,7 @@ namespace InsaneDreams.Input
                 desktopFire |= mouse.leftButton.isPressed;
             }
             FireHeld = touchFire || desktopFire;
+            HealHeld=touchHeal||key!=null&&Application.isFocused&&key.hKey.isPressed;
             HasAimIntent = touchAim.sqrMagnitude > .04f || mouse != null && mouse.rightButton.isPressed;
             if (touchAim.sqrMagnitude > 0.04f) AimDirection = touchAim.normalized;
             if (aimIndicator != null)
@@ -119,6 +160,9 @@ namespace InsaneDreams.Input
             touchMove = touchAim = Move = Vector2.zero;
             touchParachute = false;
             touchFire = FireHeld = false;
+            touchHeal=HealHeld=false;
+            touchJumpRequested=false;
+            slideArmed=airSliding=false;slideUntil=0;wasGrounded=motor!=null&&motor.IsGrounded;motor?.CancelAirDive();
             HasAimIntent = false;
             jumpGesture.Reset();
             if (motor != null) motor.SetMoveInput(0);
@@ -130,6 +174,6 @@ namespace InsaneDreams.Input
 
         private void OnApplicationFocus(bool focused) { if (!focused) ResetInput(false); }
         private void OnApplicationPause(bool paused) { if (paused) ResetInput(false); }
-        private void OnDisable() => ResetActions();
+        private void OnDisable() { motor.AirJumped-=ArmLandingSlide;ResetActions(); }
     }
 }

@@ -24,6 +24,8 @@ namespace InsaneDreams.Tests
             background=Application.runInBackground;Application.runInBackground=true;
             yield return EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Scenes/Warehouse_Mission01.unity",new LoadSceneParameters(LoadSceneMode.Single));yield return null;
             var roots=SceneManager.GetActiveScene().GetRootGameObjects();mission=roots.SelectMany(g=>g.GetComponentsInChildren<WarehouseMission>()).Single();zones=roots.SelectMany(g=>g.GetComponentsInChildren<MissionTrigger>()).ToArray();mission.Player.GetComponent<Health>().ProtectFor(60);
+            // These cases exercise checkpoint fallback; in-place injection revival has separate coverage.
+            mission.Player.GetComponent<PlayerRevive>()?.RestoreInventory(0);
         }
         [UnityTearDown] public IEnumerator Cleanup(){yield return EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Scenes/Warehouse_Testbed.unity",new LoadSceneParameters(LoadSceneMode.Single));Application.runInBackground=background;}
         private bool Enter(MissionZone kind)
@@ -33,7 +35,7 @@ namespace InsaneDreams.Tests
         private void Defeat(int group)
         {foreach(var point in mission.Encounters[group].Points)point.Spawned.GetComponent<Health>().ApplyDamage(new DamageInfo(1000,CombatTeam.Player,mission.Player.gameObject));Assert.IsTrue(mission.Encounters[group].Cleared);}
         private void StorageCheckpoint(){Assert.IsTrue(Enter(MissionZone.Entrance));Defeat(0);Assert.IsTrue(Enter(MissionZone.Storage));Defeat(1);Assert.IsTrue(Enter(MissionZone.Checkpoint));}
-        private void Records(){StorageCheckpoint();Assert.IsTrue(Enter(MissionZone.Processing));Defeat(2);Assert.IsTrue(Enter(MissionZone.Records));Assert.IsTrue(mission.TryRecoverRecords());}
+        private void Records(){StorageCheckpoint();Assert.IsTrue(Enter(MissionZone.Processing));Defeat(2);Assert.IsTrue(Enter(MissionZone.OfficeCheckpoint));Assert.IsTrue(Enter(MissionZone.Records));Assert.IsTrue(mission.TryRecoverRecords());}
         private EnemyCombat[] Actors()=>SceneManager.GetActiveScene().GetRootGameObjects().SelectMany(g=>g.GetComponentsInChildren<EnemyCombat>(true)).ToArray();
         [UnityTest] public IEnumerator DisabledOfficeMarkerCannotStealCheckpointBeforeRecordsAreAuthorized()
         {
@@ -80,7 +82,7 @@ namespace InsaneDreams.Tests
         {
             Assert.IsFalse(Enter(MissionZone.Exit));Assert.AreEqual(0,mission.Completions);Assert.IsFalse(mission.TryRecoverRecords());
             StorageCheckpoint();Assert.IsTrue(Enter(MissionZone.Processing));Assert.IsFalse(Enter(MissionZone.Exit));Assert.IsFalse(Enter(MissionZone.Records));Assert.IsFalse(mission.TryRecoverRecords());
-            Assert.IsFalse(Enter(MissionZone.Exit));Defeat(2);Assert.IsFalse(mission.TryRecoverRecords());var body=mission.Player.GetComponent<Rigidbody2D>();body.position=new Vector2(18,6.25f);mission.Player.transform.position=body.position;Physics2D.SyncTransforms();Assert.IsFalse(mission.TryRecoverRecords(),"Records need a close approach on the same floor.");Assert.IsTrue(Enter(MissionZone.Records));mission.Player.RequestInteraction();Assert.IsTrue(mission.HasRecords);Assert.AreEqual(MissionStage.Escape,mission.Stage);Assert.IsFalse(mission.TryRecoverRecords());Assert.AreEqual(3,mission.CheckpointCommits);yield return null;
+            Assert.IsFalse(Enter(MissionZone.Exit));Defeat(2);Assert.IsFalse(mission.TryRecoverRecords());var body=mission.Player.GetComponent<Rigidbody2D>();body.position=new Vector2(18,6.25f);mission.Player.transform.position=body.position;Physics2D.SyncTransforms();Assert.IsFalse(mission.TryRecoverRecords(),"Records need a close approach on the same floor.");Assert.IsTrue(Enter(MissionZone.Records));mission.Player.RequestInteraction();Assert.IsTrue(mission.HasRecords);Assert.AreEqual(MissionStage.Escape,mission.Stage);Assert.IsFalse(mission.TryRecoverRecords());Assert.AreEqual(1,mission.CheckpointCommits,"Collecting evidence must not also activate a checkpoint.");yield return null;
         }
         [UnityTest] public IEnumerator CheckpointRollbackPreservesClearedGroupsRestoresAmmoAndNeverDuplicatesActors()
         {
@@ -96,11 +98,13 @@ namespace InsaneDreams.Tests
         }
         [UnityTest] public IEnumerator RecordsCheckpointCompletionResultsAndReplayReflectActualEventsExactlyOnce()
         {
-            var actors=Actors();Records();var health=mission.Player.GetComponent<Health>();health.ProtectFor(0);health.ApplyDamage(new DamageInfo(1000,CombatTeam.Enemy));Assert.AreEqual(1,mission.Deaths);Assert.IsTrue(mission.HasRecords);Assert.AreEqual(MissionStage.Escape,mission.Stage);
+            var actors=Actors();var supplies=mission.Player.GetComponent<PlayerSupplies>();Assert.IsTrue(supplies.CollectWallet("s023-results",42));Records();var health=mission.Player.GetComponent<Health>();health.ProtectFor(0);health.ApplyDamage(new DamageInfo(1000,CombatTeam.Enemy));Assert.AreEqual(1,mission.Deaths);Assert.IsTrue(mission.HasRecords);Assert.AreEqual(MissionStage.Escape,mission.Stage);Assert.AreEqual(42,mission.Earnings);Assert.IsFalse(supplies.CollectWallet("s023-results",42));
             Assert.IsTrue(Enter(MissionZone.Exit));Assert.IsFalse(Enter(MissionZone.Exit));Assert.AreEqual(1,mission.Completions);Assert.AreEqual(10,mission.Kills);float time=mission.Elapsed;yield return new WaitForSeconds(.2f);Assert.AreEqual(time,mission.Elapsed);Assert.IsFalse(mission.Player.enabled);
             var doc=SceneManager.GetActiveScene().GetRootGameObjects().SelectMany(g=>g.GetComponentsInChildren<UIDocument>()).Single();var root=doc.rootVisualElement;Assert.IsFalse(root.Q("missionResults").ClassListContains("hidden"));StringAssert.Contains("ENEMIES DEFEATED   10",root.Q<Label>("resultStats").text);StringAssert.Contains("DEATHS   1",root.Q<Label>("resultStats").text);
+            StringAssert.Contains("MISSION EARNINGS   $42",root.Q<Label>("resultStats").text);Assert.IsFalse(supplies.CollectWallet("after-completion",99));Assert.AreEqual(42,mission.Earnings);
             var button=root.Q<Button>("replayMission");using(var evt=NavigationSubmitEvent.GetPooled()){evt.target=button;button.SendEvent(evt);}yield return null;
             Assert.AreEqual(MissionStage.EnterWarehouse,mission.Stage);Assert.AreEqual(0,mission.Deaths);Assert.AreEqual(0,mission.Kills);Assert.AreEqual(0,mission.TotalDefeats);Assert.IsFalse(mission.HasRecords);Assert.Less(mission.Elapsed,.3f);Assert.IsTrue(mission.Player.enabled);Assert.AreEqual(10,Actors().Count(a=>!a.GetComponent<Health>().IsDefeated));Assert.AreEqual(10,Actors().Count(a=>a.gameObject.activeInHierarchy));Assert.AreEqual(DisplayStyle.Flex,root.Q("missionResetCover").resolvedStyle.display);CollectionAssert.AreEquivalent(actors,Actors());Assert.IsTrue(root.Q("missionResults").ClassListContains("hidden"));
+            Assert.AreEqual(0,mission.Earnings);Assert.AreEqual(200,mission.Player.GetComponent<PlayerHealing>().DuctTape);Assert.IsFalse(root.Q<Label>("resultStats").text.Contains("MISSION EARNINGS"));
         }
         [UnityTest] public IEnumerator MissionEnemyKeepsCameraGateHitscanAndFourSecondReloadRules()
         {

@@ -2947,3 +2947,2234 @@ ally fear 0.60, collapse 0.08/spread 0.35. Warehouse_Testbed hash unchanged:
 DBD270D874D8BDE8F12B0EA43746C00F0906104F888B392718C3F053146F3915.
 Earlier work and historical diagnostic screenshots preserved. No staging, commit,
 push or Sprint022 work.
+
+## Character Rigging Addendum — Visible Second Arm (2026-10-20)
+
+Root cause: both sprites and shoulder pivots existed, but ordinary armed poses
+gave the rear arm the same angle as the carrying arm. The torso (order 10) hid
+its upper segment (order 9), while the front arm (14) covered the remainder.
+This was geometric occlusion, not a missing limb or sprite.
+
+CutoutRig now gives the free/rear arm its own relaxed silhouette (-14 degrees
+standing, -20 crouched, +/-12 running swing, small existing-recoil response).
+Its shoulder, sprite, scale and length are unchanged. Existing climbing/raised
+poses are retained; reload handling blends from the free pose into the existing
+two hand strokes and back. Rear shading is a configurable 0.88 multiplier using
+the existing sprite; no new artwork. Normal depth is behind the torso; the
+reaching reload hand may draw at 11, still below front arm 14 and weapon 15.
+ApplySkin restores both arm renderers and caches the rear renderer/order once.
+The rig's existing mirrored root handles orientation changes and independent aim.
+The carrying arm, weapon mount, muzzle math and recoil shortening are unchanged.
+
+CartoonRagdoll copies source sorting and base rear-arm shading while preserving
+the current pose snapshot and mirrored directions. It deliberately uses the
+stable rig shade rather than copying a transient red damage tint. No collider,
+mass, hinge, anchor, impulse, velocity limit or recovery mechanic was changed.
+
+Five relevant prefabs updated through the Editor: PlayerCutoutVisual,
+LarperCutoutVisual, WarehousePlayer, Larper and LarperCartoonRagdoll. Source
+changes are limited to CutoutRig.cs and CartoonRagdoll.cs. Added focused
+SecondArmRigTests.cs and SecondArmIntegrationTests.cs with Unity metas.
+Diagnostics outside Assets: TestResults/ArmRigPreview.cs, ArmRig_Before.png,
+ArmRig_After.png and CharacterRiggingAddendum.json. Preview columns are idle,
+run, crouch, reload, climb and upward aim; rows are player/enemy facing each way.
+The initial before diagnostic omitted an optional player equipped-sprite
+fallback; that preview-only assignment was corrected for the final pose sheet.
+The weapon assets and gameplay presentation selection are unchanged.
+
+Focused validation: seven Edit and two Play cases passed. Pixel-difference
+rendering checks 56 combinations (both characters, both facings, seven poses,
+with/without reload) and requires actual rear-arm pixel contribution. Other
+cases check mirrored aim and carrying-hand/muzzle alignment, saved prefab
+sorting/sprites, mirrored ragdoll pose transfer and five intact hinges, bounded
+physics, plus real player reload/cancel/recovery with restored normal depth.
+
+Full regression validation: **51 Edit tests passed**; full Play run was 175/176.
+The unchanged Sprint005 touch-pointer ladder dismount case failed its 0.08-second
+timing assertion, then passed unchanged in isolation. **All 227 cases have passing
+latest results (51 Edit + 176 Play)** across the full suite plus that rerun; all
+218 prior Sprint021 names are retained. No existing tests or assertions changed.
+Compilation and diff checks passed. The final pose sheet was visually inspected
+for both characters and facings, including attached shoulders and reload/climb
+silhouettes. No new runtime renderer, physics object or framework was introduced;
+changes are scalar pose/sorting operations with cached renderer access, and
+spawn-time ragdoll appearance transfer. Android hardware profiling and manual
+human firefight testing were not performed.
+
+Final audit: Warehouse_Mission01 saved, clean, open and outside Play Mode;
+compilation idle, Console zero errors/warnings. 280 scene/player/Larper/ragdoll
+behaviours checked: zero missing scripts or non-null missing references.
+Warehouse_Testbed hash remains
+DBD270D874D8BDE8F12B0EA43746C00F0906104F888B392718C3F053146F3915.
+Earlier dirty work preserved; no staging, commit, push or unrelated sprint work.
+
+## Sprint 022 — Contextual player cover, peeking and blind-fire (2026-10-20)
+
+Implemented a local PlayerCover2D extension on WarehousePlayer, reusing the
+existing crouch box, actions, weapon cycle and modular poses. No enemy decision
+code, weapon assets, damage rules, ragdoll joints or animation assets changed.
+Solid layer-0 geometry is sampled with a bounded non-allocating overlap and
+horizontal face check at 10 Hz while eligible and crouched. Suitable obstacles
+must be ahead, near the feet, within reach and of low-cover height. Triggers,
+floors, tall walls and one-way platform effectors are rejected. There is no
+snapping or root translation. Moving away, jumping/falling, climbing, disabled
+simulation, defeat, input reset or selecting melee exits contextual cover.
+
+Concealment lowers the existing damageable box and upper-body pose below the
+crate top while retaining grounded feet and existing crouch movement. Real
+geometry stops bullets; rear-side/unobstructed shots still damage the player.
+Aim raises that same box and pose, exposing the upper body. Accurate firing
+waits until enough body is exposed, including when a ceiling blocks expansion.
+Releasing Aim conceals again. Expansion checks solid clearance; a blocked exit
+retries normal crouch-height restoration once space becomes available. Reload
+takes priority over raised-weapon poses. Recovery and ordinary stand/jump retain
+their existing gravity and collider owners.
+
+Blind-fire retains the low body and rotates the existing carrying arm to raise
+the actual gun. The muzzle clearance path follows torso/shoulder, rigid arm and
+barrel; obstructions retract the gun/hand together rather than moving the player
+or letting shots originate through cover. Only active player cover adds the
+extra held-path segment check; enemy clearance remains unchanged. Shot spread
+is applied before the synchronous firing pose, retaining real muzzle/tracer
+alignment, recoil, ammo, reload, sounds and impacts. Both arms remain attached,
+visible and mirrored using the existing sprites and layering.
+
+Controls: PC S/down + F without RMB blind-fires along the remembered aim;
+S/down + RMB peeks; add LMB or F for accurate fire. Android holds the move stick
+down and the new FIRE button for blind-fire, or uses the aim stick to peek
+(its existing outer firing zone still works). FIRE and the aim firing zone are
+combined independently; pointer cancellation, reset and focus loss release them.
+No other controls were remapped. FIRE is above the aim pad, clear of existing
+heal/reload/chute/interaction controls.
+
+Inspector defaults: .55 m maximum edge gap, .85–1.15 m valid cover top above
+feet, .45 m peek exposure (clamped to standing height), .14 s transition scale,
+5x blind spread multiplier. Player weapons previously have zero angular spread,
+so a configurable 5-degree reference floor yields uniform +/-25 degrees for
+blind-fire; ordinary aimed accuracy is unchanged. Body concealment uses .05 m
+top clearance; detection interval is .1 s with fixed 16-candidate/8-ray-hit
+buffers. Raising height probes clearance during transitions, not steady poses.
+
+Files for this sprint: new Combat/PlayerCover2D.cs (+ Unity meta); changes to
+Combat/PlayerCombat.cs, Combat/AttackExecutor.cs, Traversal/PlayerPosture2D.cs,
+Visuals/CharacterVisualDriver.cs, Visuals/CutoutRig.cs and
+Input/WarehouseTouchControls.cs. UI: WarehouseControls.uxml/.uss and
+MissionControls.uxml. Assets: WarehousePlayer.prefab and Warehouse_Testbed.unity,
+edited through Unity APIs. The testbed reuses LowCover_Sprint012 at (-14,.45),
+adds a control label and moves the existing encounter at x=6 to x=-4.5, forming
+a compact crate encounter with the existing Larpers at -10/-7. Original active
+encounter count, geometry and level-entry bindings are preserved. Unity saving
+also serialized existing default fields previously absent from this older scene.
+
+Validation: compilation succeeded. **51/51 Edit Mode passed. Full Play Mode
+187/188; all 188 have passing latest results after one unchanged rerun** at
+1280x720. The Sprint020 pad-size assertion failed twice at the tiny 321x531
+Game View (186.18 versus 187.5 +/-1 logical pixels), then passed unchanged using
+the existing 1280x720 Landscape preset. All 227 prior names remain, with 12 new
+Sprint022CoverTests covering real protected/rear hits, peek damage/exposure,
+seeded blind spread versus aimed accuracy, ammo/reload/healing, left/right
+clearance, invalid geometry, ceiling-blocked accurate fire, movement/disable/
+defeat/recovery, jump/gravity, delayed height restoration, rigid arms/feet/head
+alignment, independent touch cancellation and both UI templates at four sizes.
+No existing assertions were modified. Raw full-run and rerun results are saved
+in TestResults/Sprint022.json (239 passing latest cases in total).
+
+Performed controlled live Warehouse_Testbed validation and inspected its HUD:
+concealed body top .85 m, blind muzzle above .9 m cover, peek box top 1.35 m
+with rendered head top 1.329 m. Both arms remain visible. Capture used temporary
+runtime input/position and damage protection only; real damage/protection tests
+used no such protection. TestResults/Sprint022_Warehouse.png is a camera capture
+without the HUD; screen capture including the HUD was inspected through MCP.
+Sprint022PosePreview.cs / Sprint022_Poses.png render existing art in both facings
+for comparison, with a documented static near-face stop for the concealed gun.
+No replacement artwork generated. Diagnostics live outside Assets.
+
+Final audit: Warehouse_Testbed saved, clean, open and Play Mode stopped; compiler
+idle; 108 scene/prefab behaviours checked with zero missing scripts/references.
+Final live Console counts: zero errors/warnings. Captured earlier compilation
+included pre-existing obsolete-API warnings, and the Editor intermittently
+reported FMOD output-device / Unity AI account connectivity warnings. No new
+cover gameplay warnings observed. Source whitespace checks pass; whole-tree
+git diff --check flags Unity's generated blank `m_Name: ` serialization line.
+Android hardware performance, human control feel and device multitouch remain
+manual validation items; no Android frame-rate claim is made. Existing damage
+uses the body box, not separate raised-arm hitboxes. Very high/overhung cover
+can physically obstruct blind shots; ammunition is not magically redirected.
+Earlier arm-addendum changes preserved. Nothing staged, committed or pushed.
+
+## Sprint 022.1 — Forward enemy spawning hotfix (2026-10-20)
+
+Root cause: EnemySpawnPoint treated any off-screen location as eligible. A
+visible or obstructed point could wait until the player/camera passed, then
+activate in the rear. It had neither a progression history nor a terminal
+activation latch, so repeat activation could also reopen an inactive actor.
+
+Changed EnemySpawnPoint.cs only in production code. Added Inspector-configurable
+progressionDirection (default east/+X, matching both warehouse layouts' overall
+west-to-east progression) and minimumPlayerDistance (3 m of forward clearance
+from the furthest recorded player progress to the candidate's rear edge).
+Direction comes from authored spawn-zone data, never player facing, aim, input
+or velocity. Existing authored locations remain fixed; there is no relocation
+fallback, procedural population or global spawn manager.
+
+Every unfinished point records monotonically increasing progress, including
+before its zone is requested. A passed runtime point becomes terminally skipped;
+turning, camera movement, backtracking and repeated Spawn/Activate calls cannot
+reopen it. Already revealed actors keep running and may remain/pursue behind
+the player. Defeated actors are not reactivated by repeat triggers. Only an
+explicit encounter/checkpoint/replay reset clears this lifecycle history.
+Temporarily unbinding a previously bound player pauses activation, retaining
+history through rebinding. A defeated bound player cannot initiate new spawns.
+
+Preserved the existing final camera check after camera LateUpdate, 1.25 m
+visibility safety margin, .2 s retry, 1.5 m enemy-spacing check, non-trigger
+body clearance and two ground-support checks (.6 m distance, upward normal).
+Added a camera-depth validity guard. Invalid/visible/near/crowded forward
+locations wait; passed locations are skipped. No additional physics queries,
+global searches or per-frame allocations were introduced; progress updates
+are scalar/bounds checks and cease after activation or skipping. No enemy AI,
+combat, navigation, camera or suppression code changed. Ordinary off-screen
+shooting restrictions and the explicit off-screen/sniper capability are intact.
+
+Inspected Warehouse_Testbed and Warehouse_Mission01 through Unity preview
+scenes. No scene/prefab/asset edits were needed for this hotfix. Testbed retains
+its nine configured points/seven enabled startup encounters; the mission's ten
+existing scene occupants and staged objectives retain their current lifecycle.
+Preplaced occupants remain existing actors, including covered checkpoint resets;
+they are not treated as newly generated rear enemies. Skipping a missed runtime
+point can reduce actual testbed population when rushing past it, as required
+instead of spawning behind; configured counts were not increased or moved.
+
+Added Sprint0221SpawnTests.cs (+ Unity meta) with nine focused Play Mode cases:
+forward/rear selection with camera margin; turning/backtracking/defeat repeat
+calls; a visible pending point passed by player/camera; authored reverse route;
+camera movement/proximity; ground/obstacle/spacing validation; persistent actor
+ammo and regular off-screen firing gate; unbind/rebind history; explicit reset
+versus completed reset. Prior tests/assertions remain unchanged. Full validation
+results are recorded below after the regression run.
+
+Limitations: this lightweight guard uses authored per-zone linear progression,
+not a new route graph or pathfinding system. Future reverse/branching routes
+must author the appropriate direction on their spawn points. Reachable terrain
+continues to use designated level positions with existing clearance/support
+validation, rather than introducing navigation queries. Device profiling and
+human playtesting are separate follow-up validation; no new performance claim.
+Earlier uncommitted Sprint022/arm work is preserved; nothing staged or committed.
+
+Final validation: compilation succeeded; **51/51 Edit Mode and 197/197 Play
+Mode tests passed in the full runs**, including all nine new spawn tests and
+all 239 previous cases. No existing tests/assertions changed. Mission enemy
+counts, checkpoint rollback/replay, off-screen firing and explicit exception,
+terrain/spacing, persistence, camera, combat and cover regressions are green.
+Raw results: TestResults/Sprint0221.json. Source diff whitespace check passed.
+Final Editor audit: Warehouse_Testbed clean/open, Play Mode stopped and compiler
+idle. All authored point directions resolve to east in both warehouse scenes;
+spawn archetype/reference validation remains intact. Existing Unity account
+connectivity warnings are unrelated; no new spawning exceptions observed.
+
+## Sprint 022.2 — Authored occupants and player animation stabilization (2026-10-20)
+
+Scope confirmed by the developer: the three-enemy opening is Warehouse_Testbed,
+not Warehouse_Mission01's separate one-guard Arrival group. Mission composition
+and difficulty remain unchanged. Inspected both scene layouts, actual runtime
+actors, pending spawn states, progression/camera filters, terrain/spacing checks,
+checkpoint/replay lifecycle, player motor/interpolation, input ownership, cover,
+procedural poses and ragdoll handoff before changing production code.
+
+Verified spawning causes: the testbed's authored startup encounters were still
+using runtime dynamic activation. During a live reproduction at the start,
+EnemySpawn_WitnessPatrol at (-10,.8) was instantiated but inactive/pending while
+the points at (-7,.8) and (-4.5,.85) were active. Its expanded body intersected
+the camera safety margin. After advancing past it, the Sprint022.1 terminal
+skip marked it skipped/inactive, silently removing the third opening actor.
+This also made other initial occupants dependent on camera position and timing.
+
+Fixed the scene through Unity APIs: seven existing enabled startup points now
+reference seven scene-authored instances of the existing Larper prefab using
+the already established placedActor path. All seven exist before the first
+gameplay frame; exactly three belong to the opening at -10/-7/-4.5. Positions,
+personalities, archetypes, enabled point counts, weapons and terrain are unchanged.
+All seven placement bodies passed solid-clearance checks; opening terrain
+support and spacing are checked by regression tests. The two deliberately
+disabled startup points remain disabled. No enemies were added to encounter
+composition: this restores the intended seven residents, including all three
+opening Larpers. Mission01 already uses authored occupants and was not edited.
+
+Dynamic spawning retains the authored forward direction/highest-progress guard,
+camera safety margin/final LateUpdate check, proximity, spacing and ground checks.
+A failed/passed dynamic member remains pending with a specific BlockReason;
+it is never silently treated as fulfilled, removed from the intended count or
+relocated behind the player. Backtracking cannot erase progress. Successful or
+defeated actors retain the one-activation latch, health/ammo/morale and persistence.
+An explicit encounter reset still controls replay/checkpoint lifecycle. Optional
+Log Spawn Diagnostics is an Editor-only context-menu command: encounter/point,
+intended/instantiated/active count, pending/finished state, rejection reason,
+authored position, progression direction and actor presence. No automatic or
+per-frame logs, and the logging code is excluded from player builds.
+
+Verified animation causes with controlled failing Play Mode reproductions:
+(1) velocity reversals of +/- .2 m/s mirrored the player even with rightward
+input held; (2) .14/.16 m/s noise crossed the single .15 Idle/Walk threshold,
+alternating leg poses; (3) repeated shot pose evaluation in one frame advanced
+the crouch blend again. The third reproduction uses a deliberately slow blend
+to measure the extra time advance independently of frame rate. These demonstrate
+specific code defects, not a claim to reproduce every subjective hitch on a device.
+
+CharacterVisualDriver now derives player facing from held movement intent and
+retains it when neutral; independent aim and enemy velocity-facing are unchanged.
+Player locomotion uses a small .3 m/s start / .1 m/s stop hysteresis. Motor speed,
+acceleration, collision, jump and controls were not smoothed or changed. Pose
+phase and CutoutRig crouch/climb blends advance once per render frame, including
+frames where synchronous muzzle preparation is followed by LateUpdate. Poses
+can still refresh the actual aim/weapon/recoil/hitbox presentation immediately.
+Recoil, hit flinch, reload and ragdoll parameters remain intact. No cover detection
+retuning was necessary; repeated stationary cover and moving exit tests are stable.
+
+Ruled out during inspection: the old DesktopPlayerInput is disabled; there is
+one modular rig/driver; Rigidbody2D already uses Interpolate/Continuous with
+rotation frozen. The fallback crouch renderer does not render over a modular rig,
+and the player's current recovery architecture is checkpoint respawn, not a live
+physics ragdoll. Existing enemy ragdoll physics/ownership are preserved. No
+speculative interpolation, camera, navigation or physics-joint rewrite was made.
+
+Files: EnemySpawnPoint.cs (deferred reasons/authored lifecycle/Editor diagnostics),
+CharacterVisualDriver.cs (player facing/hysteresis/frame clock), CutoutRig.cs
+(optional single-advance pose evaluation), Warehouse_Testbed.unity (existing
+startup resident references), new Sprint0222MovementTests.cs and
+Sprint0222OpeningTests.cs with Unity metas. Sprint0221SpawnTests.cs now requires
+passed points to remain pending with PassedProgress rather than silently skipped;
+the forward/backtracking/persistence/reset assertions remain. Three old Edit Mode
+scene tests now assert seven authored enemy colliders separately while retaining
+the exact 31 environment/player collider count and all existing geometry checks:
+Sprint008PresentationTests.cs, Sprint013RulesTests.cs, Sprint014RulesTests.cs.
+
+Focused validation: all seven new stabilization tests and all nine updated spawn
+cases passed; all 51 Edit Mode tests passed. New tests cover pre-input three/seven
+counts, two full scene restarts, no repeat-trigger duplicates or defeated-actor
+revival, terrain support, controlled micro-velocity/facing and pose-clock repros,
+fast run/reversals/stops, moving fire/reload, hit/respawn recovery, stable cover,
+crouch movement, jumping/landing and rigid arm/weapon/root alignment. Full suite
+and final audit results are appended below after completion.
+
+Limitations: a dynamic point with no valid forward location stays explicitly
+pending until a suitable authored location or reset is available; no automatic
+alternate-point selection or navigation framework was introduced. Current required
+startup counts are guaranteed through scene authoring. Human visual/control-feel
+playtesting and Android device profiling remain necessary; no hardware frame-rate
+claim is made. The verified movement defects are fixed without claiming that all
+possible platform-specific visual artifacts have been measured. Earlier dirty
+work is preserved; nothing staged, committed or pushed.
+
+Final results: **51/51 Edit Mode and 204/204 Play Mode passed in full runs**,
+255 total cases including seven new stabilization cases. All 248 previous
+cases are retained, with the documented dynamic-defer and scene-collider
+contract updates; two test names replace "Skipped" with the new deferred/passed
+terminology. Existing ragdoll, morale, suppression, off-screen fire/sniper
+exception, camera, reload, healing, cover and mission checkpoint/replay tests
+are green. Compilation succeeded; source whitespace checks passed. A final
+post-suite code change was comment-only and recompilation also succeeded.
+Raw before/after runtime captures, controlled failure repros, full test results
+and audit are saved in TestResults/Sprint0222.json.
+
+Final live audit confirmed all three opening actors active, none pending,
+all using Larper, seven instantiated/active startup actors total and zero player
+movement input. This was a controlled count audit, not a human playtest; runtime
+damage protection was used only for that follow-up count capture. Terrain and
+damage/recovery checks used their separate automated fixtures. Final saved scene
+audit: Warehouse_Testbed clean/open, Play Mode stopped, compiler idle, seven
+placedActor references; 179 behaviours with zero missing scripts or dangling
+references. Console ground truth: zero errors; one pre-existing Unity AI account
+connectivity warning remains. Earlier compilations also emitted existing API
+deprecation warnings outside the changed gameplay code. No new gameplay errors
+observed. Nothing staged, committed or pushed.
+
+## Sprint 022.3 — Movement presentation, combat spacing and suppression (2026-10-20)
+
+Implemented by Codex:
+
+- Continued from the existing dirty Sprint 022 work, without resetting it. No
+  spawning code, scene composition, enemy count, camera controller, damage,
+  detection range, health, controls, rig proportions or animation assets changed.
+- Remaining movement source identified: CharacterVisualDriver rounded the player's
+  already interpolated Rigidbody presentation to a 1/32-world-unit grid every
+  render frame. A render callback trace measured a 0.016069-unit presentation
+  error before the fix; no physics rewind or late-to-render transform conflict
+  was observed in the controlled flat-ground test. The player visual now follows
+  the interpolated root directly, with zero added smoothing. Enemy snapping and
+  camera framing remain intact. Existing acceleration/deceleration, facing
+  hysteresis and one-pose-clock-per-frame fixes are preserved.
+- Crowding sources: destinations were reserved but cover objects were not;
+  avoidance was bypassed while airborne, and a .75-unit vertical cutoff ignored
+  neighbors standing/hopping on a low crate. Existing reservation registry now
+  leases one slot per small cover collider, releases it with the owning position,
+  and rejects occupied cover at selection/commit. Cached avoidance also applies
+  during hops; the same-platform vertical tolerance is 1.6 units. It uses the
+  last occupied platform height while airborne, rather than the jump's current
+  height, so followers cannot walk underneath a jumping neighbor. Separate floors
+  remain independent. No teleportation, rigid formation or new navigation system.
+- Existing suppression already had clipped-segment near misses, distance weighting,
+  bounded accumulation/decay, hesitation, crouching and withdrawal. Added the
+  missing pressure-related aim imprecision: 0 to +10 degrees above the moderate
+  threshold, returning to ordinary spread as pressure falls. Confident actors
+  decay pressure 20% faster (21.6 rather than 18 units/s). Gain 31.5, distance
+  weights .4–1.45, thresholds 25/60, cap 100, quiet gap .65 seconds, ordinary
+  decay 18/s, retreat chance .55 and reaction cooldown 6 seconds are preserved.
+- Impacts on reserved cover can create local pressure without projecting a shot
+  through arbitrary walls. A separate barrier and parallel non-impact path still
+  reject the event. Pressure distance accounts for the selected crate's depth
+  (bounded at 1.8 units), so its front face is not incorrectly considered distant
+  from the actor occupying its rear face. These checks occur on shot events,
+  never in a frame scan.
+- Full suppression panic uses existing personality chances (ordinary .08,
+  coward .20, confident .02) only after a saturated, uninterrupted burst lasting
+  at least 1.5 seconds, on an existing high-pressure decision opportunity, after
+  the retreat roll fails. Each eligible panic roll, including failure, consumes
+  at least 45 seconds. It reuses the finite panic action and existing dialogue;
+  it never broadcasts a defeat or starts a morale-collapse chain.
+- Witness pipeline inspected end to end: Health defeat -> one event ID -> nearby
+  FOV/LOS test -> probability/cooldown -> timed morale -> action/expression/speech.
+  Holding-cover/retreating actors previously rejected the entire event. They now
+  receive eligible finite influence without interrupting cover/retreat; immediate
+  panic and defensive action retain the incompatible-state guards. Reloading and
+  ladder traversal remain protected. Ordinary fear .60, defensive duck .48,
+  witness radius 9 with LOS, five-second influence, and bounded rare cascade are
+  retained. Morale cooldown changed 18 -> 45 seconds in the three personality
+  assets and source default. Unity serialized their existing malfunction lines
+  when saving; no new dialogue was authored.
+- Added an Inspector psychological-suppression opt-out, covering pressure,
+  accuracy penalties, duck/retreat/panic and witnessed morale while retaining
+  ordinary hearing. No Grandpa prefab/archetype exists in current project data;
+  its future/current external prefab must disable this option. No new archetype
+  was invented. Existing speech maximum two bubbles, 3–4-second reading time and
+  cascade chance/caps are unchanged.
+
+Focused automated verification initially passed 8/8 new Play Mode cases; the
+movement presentation test failed before the visual fix and passed afterward.
+They exercise rendering, cover-lease release, airborne/low-crate spacing versus
+separate floors, pressure spread/decay/personality, cover-impact rejection rules,
+immunity, cover-state witnessing and non-propagating panic cooldown. All 51 Edit
+Mode cases passed in the full run. Full Play Mode results and final scene audit
+are appended below when complete. These are automated Editor runs, not a human
+visual/control-feel playtest or an Android performance benchmark.
+
+Manual acceptance playtest:
+
+1. Start Warehouse_Testbed. Count the three opening Larpers; approach, stop and
+   reverse repeatedly with A/D or the movement joystick, including firing while
+   moving. Watch torso/root motion rather than ordinary leg swing. Repeat around
+   a crate while crouching (S/down), peeking with aim and blind-firing without aim.
+2. Let the opening encounter run, then pressure enemies into retreat. Observe
+   distinct ground/cover positions; brief incompetent crowding is acceptable,
+   persistent overlap or all three collecting at one box is not. Backtrack and
+   turn around: existing enemies persist and no new rear enemies appear.
+3. Aim just past a Larper, then fire repeated close misses or hit its occupied
+   cover. Compare an isolated distant miss. Look for hesitation, intermittent
+   duck/retreat, inaccurate return fire and occasional finite panic. Stop firing
+   for 7 seconds: normal combat should resume. Full panic should remain uncommon.
+4. Defeat an ally in a nearby Larper's view, then repeat with a wall or >9-unit
+   separation. Visible eligible witnesses may react differently; hidden events
+   must not grant knowledge. Confirm readable dialogue with at most two bubbles.
+5. Confirm reloads, cover/peek/blind fire, camera visibility restrictions, ladder
+   travel, healing and ragdolls during ordinary play; check on an Android device
+   for control feel, sprite crispness and sustained frame rate. Stop Play Mode.
+
+Human visual acceptance, a hardware frame-rate comparison and a Grandpa-specific
+prefab check remain unverified. The render trace identifies/removes quantized
+player presentation; it does not prove absence of every platform-specific visual
+artifact. Cover impact pressure is local to existing selected cover, rather than
+an expensive level-wide impact/morale scan. No double jump was implemented.
+
+Sprint 022.3 modified files (earlier dirty work in other files is preserved):
+Assets/Scripts/Visuals/CharacterVisualDriver.cs;
+Assets/Scripts/Enemies/CombatPositionReservations.cs, EnemyCombat.cs,
+LarperBrain.cs, LarperAwareness.cs, LarperPersonalityProfile.cs;
+Assets/Data/Enemies/Personalities/{Ordinary,Cowardly,Overconfident}.asset;
+Assets/Tests/PlayMode/Sprint0223MotionTests.cs, Sprint0223CombatTests.cs,
+Sprint0223OpeningTests.cs and their Unity-generated .meta files;
+DEVELOPMENT_LOG.md and TestResults/Sprint0223*.json evidence reports.
+
+Final validation: **51/51 Edit Mode and 213/213 Play Mode passed**, 264 total,
+preserving all 255 previous cases and adding nine focused cases. The full Play
+Mode suite was repeated after the platform-height fix. Long run_tests responses
+hit the MCP client's 300-second response timeout; subsequent test_status calls
+confirmed completed successful suites, rather than assuming success from the
+transport timeout. Final complete results are saved in TestResults/Sprint0223.json.
+
+The added 12-second real Warehouse_Testbed opening test caught the jumping-neighbor
+bypass after the isolated spacing tests passed: minimum gap .312 units and
+10.8 seconds of persistent crowding before the platform-height correction. After
+that correction its closest horizontal gap was 1.74 units in the focused run
+and 1.656 units in the full-suite run, both with zero persistent crowding, all
+three opening enemies still present, and no additional startup
+enemies. Detailed samples are in TestResults/Sprint0223OpeningTrace.json. The final
+render callback trace reports zero player/root presentation error, zero unexpected
+backward movement and zero late-to-render transform change; see
+TestResults/Sprint0223MotionTrace.json. These are controlled automated runtime
+observations, not a human playtest or a guarantee for every random encounter.
+
+Final Editor audit: Warehouse_Testbed saved and open, Play Mode stopped, compiler
+idle; 179 behaviours, zero missing scripts and zero dangling references; seven
+placedActor references, including exactly three opening actors at authored X
+positions -10, -7 and -4.5. Console ground truth after final tests: zero errors
+and zero warnings. Source whitespace checks passed and the Git index is empty.
+Nothing staged, committed or pushed. Manual acceptance and Android checks above
+remain outstanding; no additional features were implemented.
+
+## Sprint 022.4 — Double jump and readable suppression (2026-10-20)
+
+Implemented by Codex, preserving Sprint 022.3's interpolated player presentation,
+grounded animation, camera and horizontal acceleration/deceleration:
+
+- PlayerMotor2D owns one additional airborne jump, enabled on WarehousePlayer
+  only. Ground launch remains 12 units/s; air launch replaces vertical velocity
+  with 10.2 units/s (configurable .85 multiplier), rather than adding impulses.
+  Walking off a ledge leaves one air jump. Genuine floor support resets the
+  budget; wall contact, cover, input reset and motor disable/re-enable do not.
+  Explicit checkpoint respawn resets it. Ladder jump-off consumes the ground
+  slot without granting another air slot; successful air jumping closes an
+  open parachute through its existing API. Enemy motors retain single jumping.
+- PC Space retains its existing pressed-this-frame input. Android uses the
+  existing neutral-to-up joystick edge, now forwarded while airborne; holding
+  upward cannot double jump or auto-jump after landing. Existing reachable
+  ladder intent still takes priority. No new UI or input framework.
+- The second jump gets an .18-second, 14-degree opposing leg kick and surprised
+  face through CharacterVisualDriver. It changes no root transform, camera,
+  arm/weapon alignment, grounded bob, rig assets or physics joints.
+- Suppression diagnosis: distance was measured only to the changing torso
+  centre. Real shots just above the visual head were weak at the old radius;
+  after ducking, that same overhead path could fall outside the radius entirely.
+  A failed duck roll also prevented retry for the entire continuous burst.
+  Overhead proximity now also uses a standing-height head reference plus a
+  configurable .35-unit bias, retaining distance falloff. LOS still targets the
+  actual body. Real clipped hitscan segments, direct-hit exclusion, protective
+  walls/ceilings, reserved-cover impacts and psychological immunity are retained.
+- Existing shot-event processing remains the only accumulator; no per-frame
+  suppression scan, allocation, projectile simulation or new manager. Ducking
+  can retry during a pressured burst after its ordinary cooldown, without
+  extending an active duck or rerolling for every bullet. Personality scales
+  the duck chance as well as pressure gain/retreat. Full panic chances, its
+  prolonged-exposure requirement/45-second limit and bounded morale cascades
+  are unchanged.
+
+Suppression settings, before -> after (source defaults and Larper prefab):
+
+| Parameter | Before | After |
+| --- | --- | --- |
+| Per-event gain before distance/personality weighting | 31.5 | 40 |
+| Moderate/high thresholds | 25 / 60 | 18 / 55 |
+| Decay after quiet gap, units/s | 18 | 12 |
+| Quiet gap, seconds | .65 | .8 |
+| Ordinary defensive duck probability | .48 | .70 |
+| Defensive decision cooldown, seconds | 5–8 | 3–5 |
+| High-pressure retreat probability | .55 | .70 |
+| High-pressure reaction cooldown, seconds | 6 | 4 |
+
+Cap 100, near-miss radius 1.25, distance weights .4–1.45, +10-degree bounded
+pressure spread, existing finite duck durations and 20% faster confident decay
+are retained. Coward/ordinary/confident gain multipliers remain 1.25 / 1 / .75;
+duck probabilities now also use these differences. Ordinary full panic stays
+.08, coward .20 and confident .02, under the existing restrictive panic gate.
+No changes to damage, weapon cadence/reloads, spawning, enemy spacing, morale
+event probabilities, dialogue limits, player cover, camera or ragdoll assets.
+
+Automated verification and final Editor audit are appended after completion.
+Human PC/Android playtesting and device performance remain unverified.
+
+Focused validation: all nine new Sprint0224Tests cases passed in Unity Play Mode.
+They exercise unchanged first launch, capped second launch and horizontal momentum,
+third-jump rejection, landing reset, held/fresh Android gestures, wall contact and
+motor re-enable, cover exit with unchanged visual-root/weapon alignment, modest
+air-jump pose, checkpoint recovery and enemy single-jump behavior. Suppression
+cases use real AttackExecutor hitscan shots for a three-shot overhead burst with
+no damage, visible ducking/high pressure and complete recovery, plus controlled
+segments for standing-versus-ducking consistency, shielded/far rejection, a failed
+duck's cooldown-limited retry in the same burst, and short-burst hesitation/retreat
+without full panic or cascade. Forced probabilities isolate action paths in
+several tests; the existing seeded frequency/variation suite covers ordinary
+random choices. These are automated runtime tests, not human gameplay acceptance.
+
+Legacy test updates preserve coverage while replacing obsolete tuning contracts:
+Sprint017Tests.cs checks bounded pressure-related spread, .70 default ducking and
+the seeded .30/.36/.48 historical comparisons plus .70 current opportunities;
+Sprint0202Tests.cs checks exact new gain/head weighting, complete slower decay
+and eligibility after the new four-second reaction window; Sprint021Tests.cs
+checks exact new overhead values/decay/cooldown; Sprint0223CombatTests.cs allows
+the new finite decay duration; TraversalRegressionTests.cs replaces the obsolete
+airborne-rejection contract with one fresh-gesture airborne boost while keeping
+diagonal movement, held-input and landing checks. No previous cases were removed.
+
+One full run also exposed an older nondeterministic Sprint020Tests.cs fixture:
+it teleported a newly created actor into empty air, calling that a separate
+platform. Sprint022.3 intentionally remembers the last occupied floor while an
+actor is airborne, so whether that fixture passed depended on neighbors' sampled
+positions. The fixture now supplies a real upper platform and confirms ground
+support before asserting independent movement. The corrected focused test passes.
+No spacing gameplay code was changed for this fixture. The final full run follows
+these test updates; 51/51 Edit Mode cases have already passed.
+
+Modified production files: Assets/Scripts/Prototype/PlayerMotor2D.cs;
+Assets/Scripts/Input/PlayerActions.cs; Assets/Scripts/Traversal/PlayerTraversal2D.cs;
+Assets/Scripts/Checkpoints/PlayerRecovery.cs;
+Assets/Scripts/Visuals/CharacterVisualDriver.cs;
+Assets/Scripts/Enemies/EnemyCombat.cs;
+Assets/Prefabs/Player/WarehousePlayer.prefab and Assets/Prefabs/Enemies/Larper.prefab.
+Verification files: new Assets/Tests/PlayMode/Sprint0224Tests.cs and its Unity .meta;
+the six existing test files listed above; DEVELOPMENT_LOG.md;
+TestResults/Sprint0224.json. Earlier dirty work remains intact.
+
+Manual acceptance steps:
+
+1. In Warehouse_Testbed, run/reverse with A/D, press Space twice with a deliberate
+   release between presses, then try a third press. Land on ground and boxes;
+   repeat. Horizontal response and the first jump should match Sprint022.3.
+2. Hold Space once; on Android hold upward once. Neither should auto-double-jump.
+   On Android return to neutral and push up again while airborne for the boost.
+   Repeat near walls, cover, ladder capture zones and platform edges. Look for
+   the brief leg kick; confirm no root twitch, third boost or accidental refill.
+3. Fire two or three shots just above exposed Larper heads, then repeat while
+   they duck. Compare a distant path and a protected enemy behind solid cover.
+   Look for hesitation/ducking or retreat within a short burst, with different
+   responses across personalities. Stop fire for about ten seconds and confirm
+   recovery, normal shooting/reloading and no permanent immobilization.
+4. Check cover/peek/blind fire, enemy spacing/persistence, dialogue/morale and
+   ordinary movement on PC and Android. Full panic/cascades should remain rare.
+   Stop Play Mode after testing. Hardware performance and control feel need a
+   human/device check; no device-level frame-rate claim is made here.
+
+Final validation: **51/51 Edit Mode and 222/222 Play Mode passed**, 273 total,
+including nine new cases and all previous coverage with the documented contract
+updates. Final full runs followed the platform-fixture correction and air-jump
+visual recovery reset. Compile and whitespace checks passed. Long run_tests calls
+hit the MCP client's 300-second response timeout; test_status subsequently
+confirmed completed suites. Full results, earlier failures/contract updates,
+focused tests, parameter changes and final audit are saved in
+TestResults/Sprint0224.json. No cases were skipped or removed.
+
+Final live Editor audit: Warehouse_Testbed saved/open, Play Mode stopped and
+compiler idle. The actual scene player has air jump enabled, launch speed 12 and
+air multiplier .85, with Rigidbody interpolation still Interpolate. All seven
+authored enemy occupants inherit gain 40 and duck chance .70, and all retain
+single-jump motors. Audit found 179 behaviours, zero missing scripts and zero
+dangling references. Console ground truth after the final tests: zero errors and
+zero warnings. Git index empty; nothing staged, committed or pushed. Human
+control-feel/visual acceptance and Android performance remain unverified.
+
+## Sprint 023 — Suppression, Faintanyl & Duct Tape, supplies and wallets (2026-10-20)
+
+Implemented by Codex:
+
+- Suppression reuses Sprint022.4's real clipped hitscan segments, standing head
+  envelope, protective LOS/cover checks, bounded reactions and personality weights.
+  Gain changed 40 -> 49 (+22.5%); moderate/high thresholds 18/55 -> 16/48
+  (-11.1%/-12.7%). Duck/retreat probabilities, panic probabilities, 45-second major
+  panic gate, cascade limits, decay 12/s, quiet gap .8s and dialogue are unchanged.
+- PlayerHealing replaces instant unlimited 35-HP use with continuous held healing
+  at 25 HP/s. Initial tape is exactly 200 HP, capacity 200, and only HP actually
+  restored is deducted, 1:1 including fractional HP. Full health/empty tape/release
+  stop spending. Damage interrupts for .8s and, by default, requires release and a
+  fresh hold. Shooting, reloads, jumping, climbing and parachuting take priority;
+  ordinary grounded movement and crouched cover remain available without a speed
+  change. These rates, capacities and damage interruption settings are Inspector
+  fields. TryHeal/RequestHeal now begin held intent rather than granting instant HP.
+- H uses held keyboard state; the existing Android heal button handles captured
+  pointer down/up/cancel/lost-capture and input reset. Its press/release handlers
+  run before Button's Clickable handler, which initially swallowed pointer-down
+  in the real UI test. HUD shows current HP, tape, healing/interruption feedback
+  and the satirical Faintanyl + Duct Tape identity even with an empty weapon slot.
+- PlayerSupplies provides actor-local finite pickup/earnings tracking, using the
+  existing interaction event and PlayerLoadout/PlayerHealing APIs. SupplyCrate2D
+  has 50 tape HP and 72 reserve rounds by default, accepts E or the contextual
+  SUPPLIES button within 1.8 units, and checks solid LOS. Only accepted quantities
+  leave the crate. Unaccepted stock remains; depleted stock never resets from
+  disable/re-enable. Player reserve ammunition has a configurable 432-round cap
+  per firearm for replenishment; magazine sizes, damage and reloads are untouched.
+- Two supply props per warehouse are authored through Unity's prefab/scene APIs,
+  using the existing ShippingCrate art, a cyan band and a short world label. They
+  sit by the safe entry and mezzanine/checkpoint area, on existing terrain. Their
+  interaction volumes are trigger-only; original terrain and cover remain intact.
+- EnemyWalletDrop reuses Health.Defeated, including the event invocation after
+  ordinary enemy deactivation. Each Larper can drop one wallet worth 5–20 currency
+  units (configurable range/chance), with a stable per-actor reward ID. WalletPickup
+  automatically collects within 1.2 units with LOS and emits exactly "Wallet
+  collected"; the amount never appears in combat UI. Actor drop flags and player
+  reward-ID claims independently prevent duplicates. Wallets use tiny reused pixel
+  sprites and triggers; no new physics bodies or update-time global searches.
+- Existing WarehouseMission/MissionHud freeze earnings at completion and append
+  them to the existing results statistics. No shop/menu framework was added.
+  Tape, crate stocks and wallet claims persist across checkpoint death, preventing
+  refill/reward farming; full Replay clears earnings/claims, resets tape and crates,
+  and retires old drops. Weapon ammunition retains the existing checkpoint rollback
+  policy: ammunition collected after a checkpoint can be lost on death while its
+  finite crate stock remains consumed. This conservative policy is intentional;
+  no broader checkpoint inventory rewrite was introduced.
+- Surface impacts already faded. CombatFeedback now also fades hit confirmation
+  rather than abruptly hiding it, resets its alpha on each hit, and fades pooled
+  material particles over each particle's actual randomized lifetime. Existing
+  colors, materials, pool sizes, tracer behavior and impact sounds remain intact.
+
+New pickup proximity uses trigger contacts and a small nearby-crate registry.
+Wallet stay LOS retries are throttled to .2s; scene enumeration occurs only at a
+full mission replay. No new per-frame physics scan, global manager, movement
+writer, camera behavior, rig, enemy archetype or visual redesign was introduced.
+Sprint022.4's double jump and Sprint022.3's unsnapped interpolated player visual
+are untouched. Earlier dirty work is preserved; nothing staged, committed or pushed.
+
+Focused verification: 8/8 new Sprint023Tests pass, covering held/released/full/empty
+healing, exact conservation, damage rearming, cover/fire/reload/air priorities,
+partial capped supplies, real E interaction, depletion/toggle/replay, wall-blocked
+supplies/loot, real defeated-actor automatic pickup and duplicate prevention,
+and hit/material impact fading without pool growth. The mission completion/replay
+test also passes with earnings retained across death, displayed only in results,
+frozen after completion and reset by replay. A genuine held/released UI Toolkit
+button test passes across existing screen-size/non-overlap checks. 51/51 Edit Mode
+cases pass. Full Play Mode results and final audit are appended below.
+
+Legacy coverage is retained: old instant-heal contracts in Sprint015/Sprint020/
+Sprint022Cover tests now assert held finite healing, and Sprint015Rules checks
+the new 200/200 configuration. Exact suppression gain checks reflect 49 while
+retaining proximity/personality/decay/cooldown assertions. Three older scene tests
+count the two new pickup triggers separately while retaining the exact 31 original
+environment/player colliders, seven authored Larpers and all geometry/binding checks.
+
+Modified production files: Assets/Scripts/Combat/PlayerHealing.cs, CombatFeedback.cs;
+Assets/Scripts/Input/PlayerActions.cs, WarehouseTouchControls.cs;
+Assets/Scripts/Inventory/PlayerLoadout.cs and new PlayerSupplies.cs,
+SupplyCrate2D.cs, WalletPickup.cs; new Assets/Scripts/Enemies/EnemyWalletDrop.cs;
+Assets/Scripts/Enemies/EnemyCombat.cs; Assets/Scripts/Missions/WarehouseMission.cs,
+MissionHud.cs; Assets/UI/WarehouseControls.uxml, MissionControls.uxml,
+WarehouseControls.uss; Assets/Prefabs/Player/WarehousePlayer.prefab,
+Assets/Prefabs/Enemies/Larper.prefab and new Assets/Prefabs/Pickups/{SupplyCrate,
+WalletPickup}.prefab; Assets/Scenes/Warehouse_Testbed.unity and Warehouse_Mission01.unity.
+Verification: new Assets/Tests/PlayMode/Sprint023Tests.cs; existing Sprint015,
+Sprint020, Sprint022Cover, Sprint014Mission, Sprint0202, Sprint021 Play Mode tests;
+Sprint008Presentation, Sprint013Rules, Sprint014Rules, Sprint015Rules Edit Mode tests;
+Unity-generated meta files for new assets; DEVELOPMENT_LOG.md and TestResults/Sprint023*.
+
+Manual acceptance:
+1. Damage the player, hold H / the HEAL button, then release. Check gradual HP
+   gain and equal tape reduction; confirm no consumption at full HP/empty tape.
+   Take a hit while healing: release/rehold after interruption. Repeat in cover,
+   while walking, firing/reloading, and around single/double jumps and ladders.
+2. Approach a cyan-marked supply crate near the entry or checkpoint. Press E /
+   SUPPLIES. Check capacity limits, partial stock retention and EMPTY after use.
+   Backtrack and die at a checkpoint: depleted stock must not refill.
+3. Defeat a Larper and walk near its wallet. Check "Wallet collected" without a
+   money amount; crossing the same spot/defeating a reset actor cannot reward it
+   twice. Complete Mission01 to see earnings, then Replay for a fresh run.
+4. Fire short overhead bursts at exposed Larpers, including after ducking, then
+   stop to observe recovery. Compare genuinely protected/distant enemies. Watch
+   hit and material-impact fades, normal shooting, cover, spacing and movement.
+5. Verify readability/control feel and sustained frame rate on a real Android
+   device. Automated Editor results do not establish hardware performance or
+   human gameplay feel; those checks remain unverified.
+
+Final Sprint023 verification (2026-10-20): 51/51 Edit Mode and 230/230 Play Mode
+tests passed, 281 total (previous 273 retained plus eight focused cases).
+The full Play Mode request exceeded the MCP client's 300-second response window;
+test_status subsequently confirmed completed, zero failures, duration 344.55s.
+Raw results, focused/UI/mission checks and scene audit: TestResults/Sprint023.json.
+Actual running Warehouse_Testbed smoke restored 50 HP for approximately 50 tape,
+then E replenished 50 tape and 72 reserve rounds, depleting the crate. The held
+Android-style UI button was exercised through real pointer events and its HUD
+appearance visually inspected in Game View. These controlled Editor checks do
+not establish human combat balance or physical Android performance.
+
+Final saved scene audit: Warehouse_Testbed has seven Larpers, seven wallet drop
+bindings, one PlayerSupplies and two crates; Mission01 has ten Larpers, ten drop
+bindings, one PlayerSupplies and two crates. Both have zero missing scripts and
+zero dangling serialized object references. Both retain heal 25 HP/s, tape 200/200,
+damage interruption .8s and suppression 49/16/48. Unity is ready, compilation
+successful, current Console ground truth zero errors/warnings. Warehouse_Testbed
+is saved, open and outside Play Mode. Source/UI/log whitespace checks pass;
+Unity-serialized empty m_Name fields retain the serializer's trailing spaces.
+Earlier modifications remain intact; index is empty, nothing committed or pushed.
+
+## Sprint 022.5 — Mobile camera, controls and ladder-jump polish (2026-10-20)
+
+Implemented after Sprint023; its healing, supplies, wallet and suppression work
+is preserved. Scope is camera framing, touch controls and deliberate ladder jumps.
+
+Root cause: Warehouse/Mission UXML had no dedicated touch jump control. The
+joystick's upward gesture intentionally refuses jumps while climbing, so there
+was no reliable explicit touch action to dismount and jump while holding climb.
+Existing traversal already restores gravity, enables the motor and blocks ladder
+reattachment for .3s plus a climb-release guard. Those protections are retained.
+
+- WarehouseCameraFollow adds Inspector gameplayZoomMultiplier=1.10. The existing
+  framing is divided by 1.10 after integer baseline selection, so rounding cannot
+  erase the change. Base authored orthographicSize stays 7.2; existing Android
+  character scale 1.125 remains. At a 720px viewport height the existing integer
+  baseline is 5.625: PC becomes 5.113636, Android 5.0 becomes 4.545455. Follow
+  smoothing, bounds, vertical offset and target interpolation are unchanged.
+- WarehouseTouchControls adds Inspector joystickScale=1.15. Both pad dimensions
+  and interactive bounds grow 187.5 to 215.625 UI units; knobs 77.5 to 89.125.
+  Normalized deflection, fire thresholds, sensitivity, movement speed, existing
+  safe-area insets and independent pointer captures are preserved. Nearby action
+  columns move only enough to keep a gap; supply button narrows to the existing
+  action-column width. Extremely narrow safe areas constrain pad size to fit.
+- Both existing HUDs gain a JUMP action with independent pointer capture and one
+  request per pointer-down. Up/cancel/lost-capture/input reset clear ownership.
+  PlayerActions consumes one explicit press after current directional input,
+  merging simultaneous button/keyboard/up-gesture requests into one jump. Holding
+  the joystick does not need to stop; holding JUMP cannot auto-double-jump.
+- Ladder jumps reuse motor.JumpSpeed (12, formerly traversal-only 10), not an
+  increased global jump force. A deliberate attached ladder jump counts as jump
+  one even after a previous flight; overlap alone never resets the counter.
+  Existing second jump remains .85 of normal speed, with the usual two-jump cap
+  and landing reset. No walking physics, animation, head bob or AI code changed.
+
+Files changed in this sprint: Assets/Scripts/Camera/WarehouseCameraFollow.cs;
+Assets/Scripts/Input/WarehouseTouchControls.cs, PlayerActions.cs;
+Assets/Scripts/Traversal/PlayerTraversal2D.cs; Assets/Scripts/Prototype/PlayerMotor2D.cs
+(normal-speed accessor and deliberate traversal jump budget only);
+Assets/UI/WarehouseControls.uxml, MissionControls.uxml, WarehouseControls.uss;
+Assets/Prefabs/UI/WarehouseControls.prefab; Assets/Scenes/Warehouse_Testbed.unity,
+Warehouse_Mission01.unity (Editor-authored settings);
+new Assets/Tests/PlayMode/Sprint0225Tests.cs and Unity-generated meta;
+existing Assets/Tests/PlayMode/Sprint020Tests.cs and
+Assets/Tests/EditMode/VisualAssetTests.cs (new size/zoom contracts, old checks kept);
+DEVELOPMENT_LOG.md and TestResults/Sprint0225.json.
+
+Focused Editor tests cover up/down/left/right ladder jumps via actual UI events,
+one remaining air jump, held-button non-repeat, third-jump rejection, held climb
+lockout, simultaneous gesture deduplication, landing reset, independent three-touch
+move/aim-fire/jump, both UXML layouts at four aspect ratios and 10% zoom with
+Android framing and bounds. This is controlled Unity Editor verification, not
+Android-device playtesting. Final regression/audit results are recorded below.
+
+Android manual acceptance still required: on a real device hold MOVE up/down/
+left/right on a ladder and tap JUMP once; confirm immediate launch, directional
+control, no reattach and one further airborne jump. Repeat with aim/fire held.
+Check notches, narrow screens, HUD readability, smooth follow, cover transitions
+and ordinary movement/head bob during an extended firefight. No physical Android
+performance or subjective control feel is claimed by automated Editor tests.
+
+Verification follow-up: the enlarged-stick tests now express outer firing
+positions as normalized radius fractions, preserving the original inner/outer
+zone checks. Traversal ownership coverage now expects the requested JUMP control.
+The legacy typed-spawn fixture now binds its own small offscreen camera rather
+than relying on a Camera.main left by another test. These are test-only updates
+in CombatIntegrationTests.cs, MovementCompletionTests.cs and
+TraversalRegressionTests.cs; runtime spawn/AI code is unchanged.
+The safe-area action inset is bounded as well as the joystick diameter, avoiding
+column overlap when a cutout leaves only 648 logical units of usable width.
+Eight focused tests pass, including both HUD assets at that narrow width.
+CombatIntegrationTests 8/8, MovementCompletionTests 11/11,
+TraversalRegressionTests 12/12 and Sprint014MissionTests 9/9 pass in focused runs.
+The first full run exposed three stale touch contracts plus a non-reproducing
+mission-entry failure; mission entry passed both alone and with all mission cases.
+Final full-suite verdict, live visual inspection and saved-reference audit follow.
+
+Final verdict: 51/51 Edit Mode and 238/238 Play Mode passed, 289 total; all prior
+281 cases retained plus eight new cases. Full Play Mode took 350.86s and exceeded
+the MCP client's 300s response limit; test_status confirmed completed with zero
+failures. TestResults/Sprint0225.json records final raw results and the initial
+failures/focused follow-up. No unresolved automated failure remains.
+
+Actual Warehouse_Testbed live check: confirmed advancing frames, then a captured
+touch JUMP press while holding upward input detached from the west ladder.
+Frames 2161 to 2165 recorded jump budget one, upward velocity exactly 12 and
+restored gravity 3 with move input still (0,1). The normal Game View screenshot
+was inspected: enlarged sticks, separated JUMP/fire/reload/chute columns and
+health/ammo/tape HUD remain readable. All runtime preview changes were discarded.
+An initial smoke attempt overlapped deferred test-runner cleanup; the fresh
+standalone Play session supplied the successful evidence. One isolated eval
+snippet required correcting its Editor update delegate type; project compilation
+remained successful. Neither issue changed project source or saved scene data.
+
+Saved-reference audit: Testbed seven Larpers/two crates; Mission01 ten Larpers/two
+crates. Both have zero missing scripts or dangling references, player at the
+original (-24,.85), zoom 1.10, Android scale 1.125, preview disabled and joystick
+scale 1.15. Current Console ground truth has zero errors/warnings and no compile
+failure. Warehouse_Testbed is saved, open and outside Play Mode. Physical Android
+touch feel, cutout readability and device performance remain pending acceptance.
+Nothing staged, committed or pushed; all earlier sprint work is preserved.
+
+## Sprint 024 — Vertical-slice progression, equipment and specialists (2026-10-21)
+
+Status: Implemented by Codex — awaiting playtest verification.
+Milestones A–E implemented; F automated integration, visual audit and reporting
+recorded below. Physical Android/Windows build playtesting is still required.
+
+A — Progression
+- MainMenu is the first enabled build scene. It provides Play, Settings and a
+  desktop-only Quit action. Level selection registers only the implemented
+  Warehouse_Demo mission, with title, preview icon, completion and prerequisite
+  lock support. Choosing a level must enter preparation; buying is optional.
+- The menu and shop use the existing UI Toolkit panel/input setup, scrolling
+  layouts, focusable buttons and screen safe-area insets. Settings expose the
+  existing master audio volume and touch-joystick scale, plus control reminders.
+- CampaignMissionBridge connects the existing mission/result UI to return/retry
+  navigation and a pause overlay (Escape or PAUSE), suspending player combat and
+  input while paused and restoring time on resume/exit. The original result
+  statistics and wallet earnings display remain in use.
+- A GUID per attempt deduplicates settlement. Completion banks actual earnings
+  and records completion once. Retry/exit captures stock and settles earned money
+  without granting completion. Interrupted attempts capture stock/pending earnings
+  on pause/quit; next startup settles that saved pending amount once, without
+  pretending the interrupted mission was completed. Mid-mission position/checkpoint
+  resume is not implemented.
+
+B — Equipment and persistence
+- GameCatalog is the central Inspector asset for real levels, supported weapons,
+  prices, quantities and capacities. Starter carbine/baton remain available with
+  zero starting currency; the first shop can always be skipped.
+- Four shop categories: weapons, compatible ammunition, body armor, duct tape.
+  Owned weapons can be assigned to primary/secondary/melee; the same firearm
+  cannot be duplicated across two slots. Unowned items cannot be equipped.
+  Full, owned, incompatible or unaffordable purchases are disabled. Purchase
+  callbacks have a .25s debounce. Failed save writes roll back a purchase/equip.
+- Prices: backup pistol $35, existing automatic Buzzbox $60; carbine 72 rounds
+  $12, pistol 48 rounds $8, Buzzbox 72 rounds $15; armor 60 condition $30;
+  tape 50 HP worth $10. Ammo cap 432 per weapon, tape cap 200, armor cap 60.
+  Prices/quantities/caps are in Assets/Data/Progression/DemoCatalog.asset.
+- BodyArmor absorbs 65% of appropriate body damage, bounded by remaining
+  condition; head impacts and neutral hazards bypass it. It never replaces HP.
+  Damage validation/friendly-fire defaults remain in Health. Armor condition
+  appears alongside the existing HP/ammo/tape readout.
+- Campaign loadouts apply after legacy mission reset but before the existing
+  checkpoint snapshot. Stock comes from the profile rather than a free retry
+  refill. Tape uses a small restore API on the existing PlayerHealing component;
+  its actual healing, resource accounting and interruption mechanics are reused.
+- GameProgress stores currency, ownership, equipment slots, ammunition, tape,
+  armor, completed levels, settings and bounded settlement IDs. ProgressStore uses
+  akumu2_progress_v1.json under Application.persistentDataPath with a temporary
+  write and previous-file .bak. Missing data creates starters; unknown/corrupt or
+  unsupported-version files are preserved and treated read-only with a warning.
+  Existing unrelated saves/PlayerPrefs are not migrated, deleted or overwritten.
+
+C — Samurai
+- Separate Samurai prefab/archetype/personality/skin; 70 HP, existing motor
+  moveInput 1.0 (versus the slower Larper), 25 melee damage, 1.65 reach, .45s
+  windup, 1.1s recovery, .18s visual sword swing. Damage interrupts preparation.
+- Reuses EnemyCombat perception, visibility/camera permission, suppression,
+  morale and spacing, plus LarperBrain obstacle jumping and authored route support.
+  Its adapter replaces only the final specialist action decision. Ordinary Larpers
+  take the same prior path. A committed strike does not retarget; the existing
+  AttackExecutor raycast handles actual range, intervening bodies and solid walls.
+- Existing modular sprites/limbs are reused with a red skin/headband and a narrow
+  blade accessory. Existing speech gates/two-bubble cap handle overconfident lines.
+  No player rig or crouch pose is redesigned.
+
+D — Czech fireworks expert
+- Separate prefab/archetype/personality/skin; 60 HP, moveInput .55, preferred
+  range 7, .85s visible preparation, 3.8s recovery, 20% large-miss chance.
+  Warning destinations lock before launch; no homing. Damage/camera/visibility
+  interruptions cancel preparation.
+- Two projectiles are prewarmed per expert. A colored ring warns of impact;
+  a visible fictional rocket follows a short arc (.95s flight, 2.6 arc height).
+  Terrain collision updates the warning and delays the blast .25s. Radius 2.2,
+  damage up to 24 with distance falloff, impact impulse up to 4; the brief ring
+  fades over .35s. No new global projectile manager, unbounded particles or
+  per-frame enemy search is used.
+- A 25% per-attack opt-in allows nearby allies to be damaged. Ordinary friendly
+  fire remains rejected. Blast victims are deduplicated; solid LOS is required.
+  Surviving allies receive existing temporary fear/crouch influence and dialogue;
+  ordinary defeat witnessing handles casualties. No recursive explosion chain.
+- Teal clothing, a yellow hardhat, orange backpack and purple launcher accessory
+  distinguish the expert while retaining the existing modular pixel sprites.
+  Czech dialogue uses the existing speech system and display limits.
+
+Shared impact handling
+- Weak hits retain the existing small flinch. The optional demo-only
+  HitReaction2D component adds bounded visual stumble at impulse 2.2+ and a 15%
+  knockdown opportunity at impulse 3.5+, with .65s recovery and a 3s cooldown.
+  Climbing/dead actors reject it. The existing visual driver owns the pose;
+  the existing motor decelerates while input/combat are briefly suspended.
+  No competing root velocity, teleport or nonlethal physics-ragdoll controller
+  is introduced. Death still uses the established ragdoll path.
+
+E — Warehouse encounter design
+- Warehouse_Demo is a copy of Warehouse_Mission01, preserving the original
+  Mission01/Testbed authoring and regression targets. Ten intended occupants
+  remain: the opening guard stays a basic Larper; one ground-floor storage
+  occupant becomes the Samurai; the later east-mezzanine occupant becomes the
+  fireworks expert. Supporting Larpers and existing encounter gates stay intact.
+- Three additional solid pieces: a 1.6x.35 gap step at (12,2), and two low
+  cover boxes at (7.8,.45) and (18.2,.45). The step gives another double-jump route
+  between the existing ground gap and elevated spaces. Original ladders, upper
+  steps, boxes, barriers, alternate routes and cover arrangements are retained.
+- A floor marking and office sign stage the future Officer area by the east
+  exit. There is no Officer actor, boss health inflation or placeholder boss AI.
+- Natural spawning, persistence, camera-aware regular firing, reservations,
+  suppression, wallet drops and speech remain the existing systems.
+
+F — Automated QA before full regression
+- 54/54 Edit Mode tests pass (51 retained plus three new progress/scene checks).
+- 12 focused Play Mode tests pass: money/ownership/debounce, save rollback,
+  missing/future data, interrupted-run settlement, finite stock carry/retry,
+  armor/body/head/hazard rules, real keyboard/mouse/touch UI navigation through
+  completion and return, pause/resume, reachable alternate step, committed melee
+  with wall rejection, bounded heavy-hit recovery, projectile telegraph/pool/
+  destination, deduplicated and LOS-protected blast/friendly fire.
+- The initial menu scene-authoring request timed out and left its panel reference
+  unset. The real UI test caught this (unattached/NaN layout); the scene now
+  explicitly references WarehousePanel, and an Edit Mode asset assertion protects
+  that binding. Buttons are exercised after layout resolves, including the
+  newly displayed results return button.
+- Full regression results, final saved-reference audit and visual inspection
+  evidence are appended below. Editor automation does not verify physical Android
+  touch feel, hardware frame rate, built-player suspend/restart or human balancing.
+
+Sprint024 production files
+- New Assets/Scripts/Progression/{GameCatalog,ProgressStore,GameSession,
+  GameFlowController,CampaignMissionBridge}.cs.
+- New Assets/Scripts/Combat/{BodyArmor,HitReaction2D}.cs and
+  Assets/Scripts/Enemies/{SamuraiCombat,FireworksCombat,FireworkProjectile}.cs.
+- Modified Health.cs (optional armor/explicit special friendly fire),
+  PlayerHealing.cs (finite-stock restore API), WarehouseTouchControls.cs (optional
+  armor readout/configurable existing stick scale), WarehouseMission.cs (two
+  replay integration events), EnemyCombat.cs (cached specialist action adapters),
+  LarperAwareness.cs (friendly-hit reaction through existing speech), and
+  CharacterVisualDriver.cs (optional specialist/impact presentation).
+- New Assets/UI/GameFlow.uxml/.uss; MainMenu.unity and Warehouse_Demo.unity.
+  EditorBuildSettings now starts MainMenu then Demo, retaining the old entries.
+- New DemoCatalog asset; Samurai/FireworksExpert archetypes, personalities and
+  skins; SamuraiSword/FireworkLauncher definitions; Samurai/FireworksExpert/
+  CartoonFirework prefabs; shared FireworkWarning material; generated meta files.
+- New Sprint024ProgressTests.cs, Sprint024FlowTests.cs, Sprint024EnemyTests.cs;
+  DEVELOPMENT_LOG.md and TestResults/Sprint024.json. Earlier dirty files and
+  existing regression cases are preserved; no staging, commit or push.
+
+Android/Windows manual acceptance
+1. Open MainMenu (or launch the build). Test Play, level status, preparation and
+   proceeding with no purchase. Exercise keyboard focus, mouse and physical touch.
+2. Complete or exit a run with collected wallets. Verify one balance award,
+   results earnings, return/retry, ownership and completion after restarting.
+3. Buy/equip a weapon and compatible ammo, armor and depleted tape. Check caps,
+   insufficient funds, rapid taps, disabled full purchases and stock after scene
+   transitions/retry. Test suspend/resume and low-storage/save-error feedback.
+4. Take body/head hits with armor, deplete it, heal in cover, and exercise weak
+   flinches/heavy recovery without movement twitching or stuck input.
+5. Play the opening Larpers, middle Samurai and later fireworks expert. Dodge
+   committed strikes/marked rockets, test wall protection, rare ally accidents,
+   ordinary suppression/dialogue and the existing two-bubble cap.
+6. Use the gap step, ladders and double jumps while aiming/firing. Test notches,
+   narrow screens and scrollable shop controls. Measure sustained frame rate on
+   the target Android device. New skins/accessories reuse prototype art; final
+   independent publication art remains the previously documented later task.
+
+Final-integration follow-up: the first full Play Mode run passed 249/250 and
+reported one legacy low-cover shot assertion. That case passed alone and its
+entire Sprint012CombatTests fixture then passed 13/13 without a gameplay change.
+The new hit-reaction completion edge was corrected: a mission result cancels the
+reaction without restoring controls, while checkpoint recovery explicitly clears
+it and restores ownership. Existing focused cases now exercise both transitions.
+Blast falloff measures true distance before choosing a fallback zero-distance
+impulse direction; exact-centre damage is asserted as 24, once per actor.
+All 12 focused cases and 54 Edit Mode cases pass after these integration checks.
+The repeat full-suite verdict and live visual/reference audit follow.
+
+The second full run passed 249/250, this time reporting the legacy visual crouch
+pose after a fixed .15s sleep; the earlier cover case passed. Both fixtures used
+sleep durations close to the existing .14s visual transition and assumed an
+unfocused Editor had processed enough input/physics/presentation updates.
+Test-only bounded state waits now observe the actual posture/muzzle/geometry
+transition before retaining every original assertion. VisualIntegrationTests
+passes 8/8 and Sprint012CombatTests 13/13. No movement or animation tuning was
+changed to satisfy these cases. A missing test namespace import was fixed;
+the interrupted test job was cancelled and compilation rechecked as up to date
+before restarting. These intermediate failures are retained in the evidence.
+
+Sprint024 resumed verification — 2026-10-21
+- Inspected existing sources, assets, scenes and prior milestone evidence before
+  proceeding. A–E are implemented; resumed F only. No production source, prefab,
+  scene or gameplay tuning was changed during this resumed verification pass.
+- Status: **Implemented by Codex — awaiting playtest verification**.
+  Milestone F does not have a clean full-suite sign-off yet.
+- Compilation is up to date without compiler errors. All 54 Edit Mode tests pass.
+  Latest full Play Mode run: 247/250, 402.46 seconds; all 12 Sprint024 cases pass.
+  The MCP call timed out after 300 seconds; the final result was obtained from
+  test_status, rather than interpreting the timeout as success.
+- Full-run failures: Sprint015Tests.FinalCameraMovementAndMissingCameraCannotExposeANewSpawn
+  (final activation false), Sprint015Tests.HealingCapsRepeatsHonorsCooldownAndCannotResurrect
+  (52.94 health instead of 100), and VisualIntegrationTests.WalkingFacingAimRecoilAndCrouchRemainIndependentOfGameplay
+  (initial Fall instead of Idle). Subsequent complete fixture reruns passed
+  Sprint015Tests 12/12 and VisualIntegrationTests 8/8. Different legacy cases
+  failed in preceding full runs. This suggests timing/order sensitivity, but its
+  precise cause remains unresolved; do not describe the full regression suite as
+  passing. No further production changes or weakened assertions were made.
+- Saved-reference audit: MainMenu, Warehouse_Demo, Warehouse_Mission01 and
+  Warehouse_Testbed contain zero missing scripts and zero dangling serialized
+  object references. Actor counts are respectively 0/10/10/7. Player, Larper,
+  Samurai, FireworksExpert and CartoonFirework prefabs also have no missing
+  scripts/dangling references. Original Player/Larper prefabs have no optional
+  Sprint024 armor/hit-reaction component added.
+- Actual live Editor smoke: frames advanced; inspected MainMenu, weapon and armor
+  shop tabs, scrollable start/back actions, Demo HUD and pause overlay at 1280x720.
+  UI navigation reached Demo without purchasing. Pause disabled player actions
+  and set timeScale to zero; resume restored simulation. A dedicated GUID-named
+  temporary QA save was used after startup, without deliberately changing the
+  user's real campaign progress. These are automated Editor checks, not human
+  gameplay or physical touchscreen verification.
+- One active Demo sample: 35 draw calls, 4,476 vertices, CPU main thread 1.87 ms,
+  GPU 2.19 ms, total CPU frame 17.23 ms with temporary 60 FPS test cap. Editor
+  allocated memory was about 1.81 GB after extensive tests. This is neither a
+  before/after performance comparison nor evidence of Android frame rate.
+- Evidence: TestResults/Sprint024.json records complete latest Edit/Play results,
+  focused reruns, earlier available failure results, reference and smoke audits.
+  Current Editor console ground truth is zero errors/warnings; historical MCP
+  buffer still contains the fixed earlier import and interrupted-runner errors.
+- Remaining acceptance: investigate full-suite intermittency; human combat and
+  movement playtest; Android safe areas, physical touch, sustained performance,
+  and built-player persistence/suspend testing. Samurai uses the existing local
+  obstacle/jump routing rather than a new global pathfinding system. Officer is
+  staged only, not playable. Prototype modular art still needs the previously
+  planned independently created publication replacement.
+- Final state: Warehouse_Testbed saved/open, Play Mode stopped. Restored the
+  temporary Application.targetFrameRate to its prior -1 after leaving Play Mode.
+  MainMenu remains first in build settings; open it to test the new campaign.
+  Existing unrelated dirty changes preserved. Nothing staged, committed or pushed.
+
+SPRINT 024.1 — Shop access and warehouse exit integration hotfix (2026-10-21)
+Status: **Implemented by Codex — awaiting actual player verification.**
+
+Diagnosis
+- The global on-disk build scene list was already MainMenu/Demo first, but the
+  active in-memory Android profile had Override Global Scene List enabled with
+  only Warehouse_Testbed. Normal profile launches therefore bypassed the entire
+  campaign. Editor Play from the open Testbed also bypassed it independently.
+- Testbed's Checkpoint_Exit at (23,1) contains a CheckpointMarker, whose purpose
+  is setting a respawn position. Testbed has no WarehouseMission, MissionTrigger
+  or campaign results bridge. Its exit cannot complete the campaign; this was a
+  wrong-scene integration problem, not evidence of a faulty real mission collider.
+- The actual Demo Mission_Exit is enabled, a trigger at (25,1), size 1.5x3, layer
+  2, correctly bound to the mission. Player layer 2 collisions are enabled.
+  Completion legitimately requires both encounter gates and recovering records.
+  Previously locked-exit feedback was brief and vague; Stay ignored locked exit
+  stages, including retry after an early collider-edge callback.
+
+Focused fixes / files
+- Assets/Settings/Build Profiles/Android™.asset: persist global-scene inheritance
+  and synchronize the cached list with the campaign scenes, replacing the stale
+  Testbed-only list. Global EditorBuildSettings already has the correct entry.
+- Assets/Editor/CampaignEntry.cs (+ generated meta): AKUMU 2 > Play Campaign
+  (Main Menu) opens MainMenu before entering Play Mode. Direct Testbed play stays
+  available for development; there is no global Play-mode scene override.
+- Assets/UI/WarehouseControls.uxml: explicit development-only/no-shop/no-results
+  warning, respawn-only exit explanation and campaign entry instructions.
+- WarehouseMission.cs: persistent, stage-specific locked-exit feedback while
+  physically overlapping; replay clears cached contact. Existing completion,
+  results and reward guards retained. No objective gate bypass introduced.
+- MissionTrigger.cs: allow Stay overlap retries at locked exits too; notification
+  is emitted only on first cached contact, avoiding per-step UI event spam.
+- Sprint024ProgressTests.cs: validate effective startup scenes and saved build
+  profile inheritance, rather than relying only on global scene settings.
+- Sprint024FlowTests.cs: two new repeated full-loop tests and scroll-aware button
+  input. All prior tests retained. No scene/prefab duplication or new exit.
+
+Automated verification
+- Compilation passes; 55/55 Edit Mode tests, 14/14 Sprint024 Play Mode tests,
+  9/9 Sprint014MissionTests and 8/8 Sprint023Tests pass (31 relevant Play cases).
+- Each new loop runs MainMenu > Levels > Shop > Demo > actual physical Exit >
+  Results > Levels > Shop > second Demo > physical Exit > Results > Levels.
+  One variant makes no purchases. The other buys/equips a pistol ($35), buys
+  reserve ammunition ($8) and armor ($30) through UI. Pistol ownership, selected
+  slot, 48 reserve rounds, armor condition and wallet persist through both runs
+  and actual disk save reload. Temporary QA profiles/funds isolate test data.
+- PlayerActions movement physically drives the real Rigidbody2D across the exit;
+  neither new test directly calls EnterZone for the exit. An actual enemy
+  rigidbody cannot activate it. Locked feedback remains visible beyond four
+  seconds. Results, one earnings award, continued-contact deduplication, control
+  shutdown, return navigation and second mission start are asserted.
+- Intermediate objectives/defeats are controlled setup; records use the INTERACT
+  button. This verifies scene/UI integration and exit physics, not natural combat
+  or whole-level navigation. The older menu test invoked EnterZone directly for
+  exit and could not prove collider activation or Testbed/profile entry routing.
+- Initial new runs exposed a test driver clicking clipped shop buttons without
+  scrolling. The driver now scrolls buttons into view before input; final runs
+  pass. This is recorded alongside final results in TestResults/Sprint0241.json;
+  TestResults/Sprint024.json links that supplement and retains earlier failures.
+- Live Editor smoke executed Play Campaign from open Testbed and observed a
+  rendered MainMenu with session MainMenu state. Final compiler/console ground
+  truth: no errors or warnings. No device build or physical touch test performed.
+
+Remaining verification / next playtest
+- Use the already-open MainMenu, or AKUMU 2 > Play Campaign (Main Menu).
+  Play > Warehouse preparation must show the shop before Start Mission. Fresh
+  profiles with $0 can start without buying; collect wallets before later buys.
+- Follow the objective HUD: guard/storage, mezzanine checkpoint, processing,
+  east mezzanine records (E / INTERACT), then east ground-floor exit. Early exit
+  visits should explain the remaining objective. Confirm Results earnings, return
+  to Levels, buy/equip, and launch another mission without restarting.
+- Human Windows/Android gameplay, natural traversal, touch/readability and built
+  player restart persistence remain unverified. The previous full Play run was
+  247/250 with intermittent Sprint015 spawn/healing and VisualIntegration idle
+  failures that passed isolated reruns. This hotfix did not rerun or claim a green
+  full legacy suite and did not change those systems.
+- MainMenu is saved/open, Play Mode stopped, prior frame cap remains -1. No
+  unrelated mechanics changed; earlier dirty work preserved. No staging/commit/push.
+
+Playtest starting funds — 2026-10-21
+- User requested $1000 at the start. DemoCatalog.startingMoney now configures
+  fresh campaign balances at $1000; existing balances are not reset on launch.
+- Granted the current local campaign a one-time $1000 credit (0 -> 1000), using
+  the existing atomic save/backup path and preserving equipment/progression.
+- Existing flow test fixtures explicitly retain their controlled $0 baseline.
+  Compilation passes and Sprint024FlowTests passes 10/10. MainMenu reopened,
+  Play Mode stopped; saved wallet verified at $1000. No staging/commit/push.
+
+SPRINT 024.2 — Thrown fireworks, ladder clearance and readable testing encounters
+Date: 2026-10-21
+Status: **Implemented by Codex — awaiting playtest verification.**
+
+Fireworks rework
+- Replaced the specialist's active launcher silhouette with an oversized colorful
+  pixel bundle. Removed LaunchTube; retained the legacy item asset GUID/path for
+  prefab compatibility, renamed its display text and replaced its equipped sprite.
+  The adapter throws from the actual hand, without calling firearm Attack/Fired.
+- Existing rigid modular arm/weapon mount poses now show carrying, winding up,
+  release and recovery. Held packet follows the final posed hand in LateUpdate.
+  Anticipated failure shows surprise .18s before exploding, including fatal cases.
+- Added real Rigidbody2D ballistic motion, continuous collision and a .4-world-unit
+  circle fitting the larger bundle. Terrain collisions stop it visibly; an
+  independent 1.1s landing delay allows repositioning. No instantaneous impact
+  blast. Radius 2.2, damage 24, impulse 4, .95s nominal flight, 2.6 arc height,
+  .85s preparation and 3.8s recovery remain Inspector-configurable.
+- A single randomized 6% roll per prepared throw schedules a held failure at 65%
+  of windup. Pending throw is cleared before explosion; owner and nearby allies
+  can be hurt, with existing hit reactions/morale/dialogue. A weakened specialist
+  can defeat himself. Ordinary throws retain 25% ally-damage opt-in and 20% bad
+  miss chance. General Health self-hit rejection is unchanged and tested.
+- Existing wall shielding, falloff, victim deduplication and fixed query buffers
+  remain. Two prewarmed projectiles per specialist each own ten reusable colored
+  spark/smoke renderers, cleaned after .35s; no per-throw GameObject allocation.
+  Reused speech cooldowns/two-bubble cap with contextual Czech preparation and
+  malfunction lines. No global suppression, fear or collapse rebalance.
+- Optional pooled burstSound slot is available, but no suitable game AudioClip
+  existed to assign. No new audio framework or camera shake was introduced.
+
+Ladder root cause and repair
+- Warehouse_Demo's AlternateGapStep was centred at (12,2), directly crossing
+  Ladder_Basement_Mezzanine. This Sprint024 platform was the actual obstruction.
+- Moved that one step to x=10.2, keeping y=2, size 1.6x.35 and solid collision.
+  The ladder shaft is clear; surrounding platforms remain solid. Traversal,
+  motor, double-jump, camera and touch-controller code were not rewritten.
+- Physical tests climb basement to mezzanine and auto-land, descend to basement,
+  jump away through desktop/touch paths and retain one air jump. The relocated
+  step remains reachable and solid in the existing double-jump integration test.
+
+World readability and population
+- Small olive supply crate with gold ammo symbols replaces shipping-crate art;
+  bright SupplyBand is disabled. Existing finite ammo/tape pickup/interaction and
+  EMPTY state are unchanged. Checkpoints use grounded flag posts with CHECKPOINT
+  labels, amber/green activation cue and modest pulse. Exit has a larger cyan
+  door frame, pulsing header and EXIT / MISSION RESULTS sign. Sprint024.1 locks,
+  persistent objective feedback, result navigation and reward deduplication remain.
+- As confirmed by the user, Demo has three opening Larpers and five additions in
+  total. Added: Arrival (-19.2,.85), Arrival atop existing low cover (-14,1.75),
+  Storage (-.2,.85), Processing near cover (16.2,6.25), Processing/exit (25,.85).
+  Groups are now 3/5/7; total 15 = 13 basic Larpers + Samurai + fireworks expert.
+  Entrance HUD now shows its actual defeated/total count.
+- Residents are authored before the first rendered frame with existing point,
+  encounter, reset, spacing, perception and camera-firing behavior. No runtime
+  spawn code changed. Testbed's original three opening enemies/seven residents
+  remain; its exit still correctly identifies development-only respawn behavior.
+
+Files / assets
+- Modified FireworksCombat.cs, FireworkProjectile.cs, LarperAwareness.cs,
+  CharacterVisualDriver.cs, CutoutRig.cs, CheckpointMarker.cs and WarehouseMission.cs.
+  New WorldMarkerCue.cs reads existing progression state for presentation only.
+- New Editor/Sprint0242Setup.cs authors repeatable assets/visuals/population.
+  New Art/Sprint0242/{QuestionableBundle,AmmoSupplyCrate,CheckpointFlag}.asset
+  contain point-filtered editor-authored pixel sprites, not recovered artwork.
+- Updated FireworksExpert, CartoonFirework and SupplyCrate prefabs; FireworksExpert
+  skin/personality, legacy FireworkLauncher item presentation; Warehouse_Demo
+  geometry/residents/markers and Mission01/Testbed marker presentation.
+- New Sprint0242RulesTests.cs, Sprint0242Tests.cs and Sprint0242SceneTests.cs.
+  Existing Sprint024 tests retain assertions, updated for the intentional 15
+  actors/new step location, deterministic successful throw and longer fuse.
+  TestResults/Sprint0242.json and five Sprint0242_*.png files hold QA evidence.
+
+Verification and limits
+- 57/57 Edit Mode tests passed. Relevant Play Mode fixtures passed 74/74:
+  Sprint024/024.2 21, mobile Sprint0225 8, Sprint0224 9, movement stability 1,
+  opening spacing 1, Sprint023 pickups/healing 8, mission 9, second-arm 2,
+  morale Sprint019 6 and spawning Sprint0221 9. Final affected 21-case fixture
+  passed again after fitting the larger collider; final Edit run passed after
+  grounding the flag visuals. New coverage is 2 Edit + 7 Play cases.
+- New tests cover actual arc/collision/visible fuse/exactly-once damage, walls,
+  held failure/self/ally damage, recovery/reuse, real ladder passage and desktop/
+  touch double jump, supported separated residents and multiple-target real
+  hitscan suppression/decay. Test-only probabilities deliberately control the
+  defensive-response branches; production suppression values are untouched.
+- Initial fixture mistakes were corrected: shots faster than the existing .2s
+  carbine interval, frozen actors above grounded height, and premature ladder
+  side exit instead of waiting for auto landing. No gameplay tuning was used to
+  force these assertions. The repeat authoring helper's destroyed-Transform
+  references were fixed; one 5s Pipeline timeout was handled through one Editor
+  update and completion confirmed. Final scenes are saved, references valid.
+- Actual controlled Editor rendering inspected held, landed and burst stages,
+  grounded flag vs supply crate, and prominent exit with a real locked-contact
+  message. Visual inspection caught the old narrow projectile collider causing
+  sinking; the enlarged collider visibly fixes it. Fireworks captures precede
+  final flag grounding; supply/exit captures show final marker placement.
+- Saved-reference audit: zero missing scripts/dangling refs across MainMenu,
+  Demo (15 actors), Mission01 (10) and Testbed (7). No remaining LaunchTube in
+  those scenes. Compiler and current Editor console ground truth are clean.
+- One active Editor sample: 51 draw calls, 5,020 vertices, main thread 2.35ms,
+  GPU 1.86ms, total CPU frame 4.41ms. Editor allocated memory ~2.12GB after tests.
+  This is not an Android benchmark or a reliable baseline comparison.
+- Full legacy suite was not rerun; earlier Sprint024 full-run 247/250 intermittent
+  Sprint015 spawn/healing and VisualIntegration idle failures remain unresolved.
+  Isolated fixture successes do not establish full-suite reliability.
+
+Android / human acceptance still required
+1. Build/launch Landscape Left: MainMenu > Warehouse > Shop > Demo. Confirm saved
+   equipment and $1000 fresh-profile funds, then return/retry without duplicate money.
+2. Watch the specialist carry, wind up, throw, land and warn before exploding.
+   Dodge the packet; check wall protection and occasional ally accidents. Held
+   failures are intentionally rare: automated forced cases verify the branch,
+   not its subjective natural frequency. Check Czech bubbles/readability.
+3. Climb the x=12 basement ladder through y=2 to the mezzanine and back, enter/
+   exit, jump away with touch controls and use the remaining air jump. Land on
+   the relocated step and ordinary platforms; check responsiveness near boxes.
+4. Distinguish the olive ammo/tape crate, checkpoint flags and cyan EXIT doorway.
+   Activate a checkpoint, die/recover and check green state. Visit exit early
+   for objective feedback, then complete requirements and verify Results/earnings.
+5. Observe exposed/covered/mixed Larpers under real near-miss bursts and ally
+   defeats. Check varied recovery, spacing, persistence, firing visibility and
+   rare panic; profile sustained frame rate/temperature on the target phone.
+
+No human gameplay or APK/device test claimed. Final MainMenu saved/open, Play
+Mode stopped; Landscape Left, campaign scene list and $1000 starting funds
+preserved. Existing unrelated dirty work retained. No staging, commit or push.
+
+## Sprint 024.3 — Samurai aggression, platform pursuit and modular art (2026-10-21)
+
+**Implemented by Codex — awaiting playtest verification**
+
+Root causes inspected: SamuraiCombat previously stopped for the entire 1.1-second
+recovery and immediately stopped pursuing when visibility broke, despite the
+caller retaining a legitimate last-seen position. Shared Larper pursuit could
+hop a low wall but did not plan gap or elevated-platform landings. The Samurai
+reused BucketLarper body parts and a ScrapCarbine, with rectangular Blade and
+RedHeadband accessories. The band was 0.52 units wide on a roughly 0.375-unit
+head, at local y=0.05 and sorting order 14, above FaceOverlay's order 13: it
+covered the upper face/eyes and produced the reported blindfold impression.
+
+Exact tuning (Inspector/definition configurable):
+
+| Parameter | Before | After |
+| --- | ---: | ---: |
+| SamuraiSword damage | 25 | 40 |
+| Strike wind-up | 0.45 s | 0.40 s |
+| Post-strike recovery | 1.10 s | 0.70 s |
+| Initial visual reaction delay | 0.30 s | 0.18 s |
+| Shared re-engagement delay, Samurai override | 0.35 s | 0.20 s |
+
+Attack distance/weapon range remain 1.65; weapon firing interval remains 1.10 s.
+Motor speed 7, jump speed 12, gravity scale 3, single enemy jump, health 70,
+suppression susceptibility/personality and hit-interruption delay are unchanged.
+One committed strike remains the moveset; no heavier/extra attack was added.
+Forty damage is serious against 100 unarmored HP without being a one-hit kill.
+
+Gameplay implementation:
+
+- Continue toward the supplied last-seen position while EnemyCombat's existing
+  memory permits it. No access to a hidden target's current position is used.
+  Existing perception, panic, suppression withdrawal, knockdown and camera gates
+  retain authority. Active defensive ducking interrupts wind-up and movement.
+- Commit aim when anticipation begins, face that direction through the swing,
+  and retain wall-blocked melee rays and damage interruption. Arm and sword now
+  move together: smooth 15-to-65-degree anticipation, 0.18-second committed
+  65-to-minus-35-degree swing, then recovery toward the ready pose.
+- Samurai-local platform planning samples at most every 0.30 s while grounded.
+  Search is 6 units horizontally, with a maximum 6.5-unit descent. Actual motor
+  jump velocity and gravity determine feasible rise/flight time; no added jump
+  force, teleport, position assignment, air jump or gravity override is used.
+- A fixed 32-collider terrain buffer yields at most four ranked landings. At
+  most 20 swept body-box checks per candidate reject obstructed arcs; saturated
+  buffers reject safely. Existing combat-position occupancy rejects allied
+  landing conflicts. Launch requires the existing spacing permission.
+- Flight uses the existing motor input and one jump request, commits the
+  landing, and brakes after reaching/passing it without retargeting in midair.
+  Successful landings impose 1.2 s between planned jumps. Failed attempts impose
+  3 s and block the same launch origin until at least 0.8 units of progress.
+  Flight has a finite timeout. One validated 0.25 s backstep at 70% input can
+  create launch room under a step; it cannot repeatedly oscillate at a wall.
+- When the remembered player is directly below, a bounded support/edge check
+  can approach an existing ledge with suitable ground below, then validate the
+  actual jump normally. This is local pursuit, not a global route graph.
+  No new per-frame physics scan, allocation, enemy search or manager was added.
+
+Visual/encounter implementation:
+
+- Original imagegen artwork supplies a modular head, teal/gold wrap torso,
+  sleeved arm, wrapped trouser/boot leg and dedicated katana. Existing body-part
+  heights and shoulder/hip/grip pivots are retained. Point filtering, no mipmaps,
+  one shared atlas and a non-readable runtime texture avoid a retained CPU copy.
+- Eyes/eyebrows are visibly below the crimson forehead band, with navy hair and
+  a topknot. Remove the old rectangular band/blade, carbine and inherited visible
+  magazine from the Samurai presentation. No Larper/player redesign occurred.
+- The new head embeds its eyes. Samurai's generic Larper face overlay is disabled;
+  head tilt, flinch and pose reactions remain, but no separate expression sheet
+  was generated. Ragdoll copies the source face-overlay visibility as well as the
+  existing six parts; the same five limited joints and physics remain intact.
+- Warehouse_Demo only: Storage_Spawn_1 and its existing Occupant_Samurai_Storage
+  move from (3, 0.85) to (-0.5, 6.11), on the existing central mezzanine near
+  the authored upper steps. Same resident, encounter binding and enemy counts:
+  15 total, one Samurai; opening three Larpers unchanged. No terrain changes.
+
+Files changed by this sprint (other pre-existing dirty work preserved):
+
+- `Assets/Scripts/Enemies/SamuraiCombat.cs`
+- `Assets/Scripts/Prototype/PlayerMotor2D.cs` — read-only MoveSpeed getter only
+- `Assets/Scripts/Visuals/CutoutRig.cs`
+- `Assets/Scripts/Visuals/CharacterVisualDriver.cs`
+- `Assets/Scripts/Visuals/CartoonRagdoll.cs`
+- `Assets/Prefabs/Enemies/Samurai.prefab`
+- `Assets/Data/Items/SamuraiSword.asset`
+- `Assets/Data/Visuals/SamuraiSkin.asset`
+- `Assets/Scenes/Warehouse_Demo.unity`
+- `Assets/Art/Sprint0243/` — source atlas and five Sprite assets, associated metas
+- `Assets/Editor/Sprint0243Setup.cs` — repeatable asset setup/placement/preview
+- `Assets/Tests/PlayMode/Sprint0243Tests.cs` — 15 focused cases, associated metas
+- `TestResults/Sprint0243.json`, `TestResults/Sprint0243_RigPreview.png`
+- `DEVELOPMENT_LOG.md`
+
+Automated verification through the running Unity 6000.6.6f1 Editor:
+
+- Edit Mode: **57/57 passed**.
+- Focused Play Mode: **87/87 passed**, counted once per final fixture. Includes
+  15 new Samurai cases; 4 existing specialist/hit tests; 7 Sprint 024.2 cases;
+  movement stability 1; double-jump/suppression 9; mobile camera/touch/ladder 8;
+  morale 6; second-arm integration 2; shared visuals/ragdolls 8; spawning 9;
+  opening spacing 1; suppression/positioning 7; campaign/shop/exit flow 10.
+- New cases exercise physical ascent, gaps, descent including a warehouse-height
+  drop, actual warehouse step dimensions, impossible/blocked arcs, changing
+  target positions, finite failed attempts, launch clearance, occupied landings,
+  directly-below ledge approach, 40 damage, recovery/hit interruption, defensive
+  ducking, hand attachment and new-skin ragdoll/joint continuity.
+- Rig preview rendered from the actual prefab in idle, run, jump and anticipation
+  poses and visually inspected. This is a pose preview, not a combat playtest.
+- One combined `Sprint024` batch lost its MCP connection after a 300-second
+  tool timeout. No result was recoverable after the connection returned in a
+  new Editor session. The relevant fixtures were rerun separately as above;
+  the interrupted batch is not counted as passed. Full legacy Play Mode assembly
+  was not run; earlier documented full-suite/order-dependent issues are not
+  claimed resolved. Detailed final results/error are in Sprint0243.json.
+- Final inspection: Demo has 15 spawn points, one bound Samurai and zero missing
+  scripts. Compilation clean; final Console has zero errors/warnings. MainMenu
+  open, clean and outside Play Mode; Landscape Left preserved.
+
+Manual verification still required:
+
+1. Start MainMenu > Play > Warehouse, with/without armor. Let the Samurai approach;
+   compare 40-damage hits, anticipate the wind-up, dodge behind him and interrupt
+   with gunfire. Confirm recovery is punishable without removing his pressure.
+2. Bait him from the central mezzanine through UpperStep01/02/03 to the roof,
+   across gaps and down toward ground. Move during jumps; check readable launches,
+   landings, partial occlusion, crowded platforms and obstacles. The planner is
+   local and conservative; arbitrary long or obstructed routes can still be
+   unreachable, and a new actor/obstacle can move into an already committed arc.
+3. Inspect both facing directions at normal gameplay zoom: exposed eyes, rear arm,
+   grip, anticipation/swing/recovery, jump/fall, hit flinch and defeat/ragdoll.
+4. Check live Larper suppression/morale, fireworks, three opening Larpers, shop,
+   armor/healing, checkpoints, ladders/double jump, cover, pause and results.
+5. Profile a sustained encounter on the Android target and judge difficulty/art
+   in actual play. No human combat playtest, APK/device test, or frame-rate
+   benchmark is claimed; automated physics/flow tests cannot establish feel.
+
+No staging, commit or push. No unrelated gameplay systems rewritten.
+
+## Sprint 024.4 — Samurai articulation, grip and platform routes (2026-10-21)
+
+**Implemented by Codex — awaiting playtest verification**
+
+Inspected the live Editor, Samurai prefab, modular posing, firearm muzzle
+constraints, six-body ragdoll, motor, authored ladders and Sprint 024.3 planner.
+The arms/legs were single SpriteRenderers rotating as rigid appendages; the grip
+was inferred from the entire arm length, and generic muzzle clipping could
+stretch that arm. Navigation considered one local jump at a time, without an
+airborne second impulse or a connected route through intermediate platforms.
+
+Samurai design/art and combat tuning are preserved: damage 40; wind-up 0.40 s;
+recovery 0.70 s; reaction 0.18 s; re-engagement 0.20 s. No hitbox, strike timing,
+weapon range, movement speed, gravity or jump-force rebalance was made.
+
+The optional SamuraiArticulatedRig extends the existing CutoutRig:
+
+```
+LeftArm / RightArm        upper arm at shoulder
+  Elbow                  forearm at elbow
+    WristHand            hand at wrist
+      SwordGrip          right hand only
+LeftLeg / RightLeg        thigh at hip
+  Knee                   shin at knee
+    AnkleFoot            foot at ankle
+WeaponMount              follows the actual right-hand SwordGrip
+```
+
+Six new Sprite assets crop the existing Sprint 024.3 atlas; source pixels,
+head/eyes/hair, torso, palette and sword are unchanged. Adjacent crops overlap
+slightly at their shared pivots (0.01125 world units) to close rotating seams.
+No new bitmap, animation framework, character redesign or live limb physics was
+introduced. Larper/player/fireworks rigs do not opt into the extension.
+
+Elbows clamp to 8..135 degrees, wrists -55..55, knees -120..-2 and ankles
+-40..45. Cached joint angles blend over 0.09 s; running bends alternate knees,
+airborne poses tuck legs, the second impulse adds a distinct 0.24 s tuck, and
+landings add 0.24 s leg compression with visual-only foot/stance correction.
+The attack varies arm extension and elbow flexion through preparation, swing
+and recovery while retaining the existing combat timing.
+
+A small analytic two-link carrying arm follows a palm grip. The sword follows
+the filtered hand rather than its requested endpoint. Hand sorting covers the
+hilt, mirrored orientation uses the actual hand axis, and muzzle clipping
+re-solves the arm instead of stretching a full-limb sprite. Climbing also updates
+the grip. CharacterVisualDriver is the sole live pose owner; shared torso/head
+flinch and body hit reactions remain. Death transfers the current articulated
+pose to 14 ragdoll bodies and 13 limited joints. Limb mass is split 50/32/18%
+between the upper/lower/end segments, preserving total configured limb mass;
+gravity, collision settings and shared velocity clamps apply to all bodies.
+Generic ragdolls retain their original six bodies/five joints.
+
+Navigation extends the existing bounded ballistic validation:
+
+- A Samurai-local cache gathers up to 48 nearby terrain nodes and eight ladders
+  from a 38-by-30-unit region (64-hit query buffer), refreshed once per second
+  or after substantial movement. No per-frame full-scene scan or new manager.
+- A nonnegative-cost connectivity search chooses intermediate platforms and can
+  initially move away from the target. It distinguishes walk, single jump,
+  double jump, ladder and unreachable transitions. Route estimates alone never
+  authorize a launch: body sweeps, landing occupancy and actual motor timing do.
+- Tactical sampling stays at 0.30 s. Single-jump horizontal limit remains 6;
+  the configurable double-jump limit is 8.5, still capped by real flight time
+  and speed. Maximum descent stays 6.5. Launch candidates include platform edges
+  and nearby adjustments; normal hops prefer a better launch before consuming
+  a second impulse merely to compensate for a poor one.
+- Only the Samurai prefab enables the existing motor's airborne jump option.
+  First impulse stays 12, second 10.2 (existing 0.85 multiplier), with a planned
+  configurable 0.32 s second-impulse delay. Single arcs use 20 swept checks;
+  double arcs use 32 checks over the two real ballistic phases. The motor owns
+  velocity, gravity, grounding and the two-jump limit. No root snapping or extra
+  airborne impulses; grounding resets the budget through existing motor logic.
+- Flights retain committed destinations if the player moves. Failure records
+  are bounded to 16 edges: ordinary failures penalize an edge for 5 s, hit
+  interruptions 3 s, ladder failures 8 s. Two seconds without launch-position
+  progress triggers replanning. Existing 1.2 s successful/3 s failed jump
+  cooldowns and same-origin protection remain; an alternative edge can be tried
+  after a failed transition. Backstep input now explicitly ends at its deadline.
+- Existing AuthoredLadderRoute gains an opt-in intermediate-platform exit using
+  PlayerTraversal2D's existing side landing. Standard Configure behavior remains
+  unchanged. EnemyCombat still owns perception, suppression, panic and attack
+  permission; authored ladder traversal retains exclusive motor ownership.
+- Optional Draw Navigation on a selected Samurai displays the destination,
+  committed launch/landing, jump count and failure reason. Drawing is Editor-only
+  and disabled by default; there is no release gameplay overlay.
+
+The current Warehouse_Demo encounter remains on the existing central mezzanine.
+The authored upper steps provide both single- and double-jump route opportunities
+(verified using their exact dimensions in a physical test). No scene, terrain,
+spawn count, shop, progression, wallet, player control or Larper tuning change.
+
+Exact files changed/added, plus Unity-generated metas for new files/folders:
+
+- `Assets/Scripts/Visuals/SamuraiArticulatedRig.cs` (new)
+- `Assets/Scripts/Enemies/SamuraiPlatformRoutes.cs` (new)
+- `Assets/Scripts/Enemies/SamuraiCombat.cs`
+- `Assets/Scripts/Enemies/AuthoredLadderRoute.cs`
+- `Assets/Scripts/Prototype/PlayerMotor2D.cs` — read-only AirJumpSpeed getter only
+- `Assets/Scripts/Visuals/CutoutRig.cs`
+- `Assets/Scripts/Visuals/CharacterVisualDriver.cs`
+- `Assets/Scripts/Visuals/CartoonRagdoll.cs`
+- `Assets/Prefabs/Enemies/Samurai.prefab` — only gameplay prefab modified
+- `Assets/Art/Sprint0244/Samurai_UpperArm.asset`
+- `Assets/Art/Sprint0244/Samurai_Forearm.asset`
+- `Assets/Art/Sprint0244/Samurai_Hand.asset`
+- `Assets/Art/Sprint0244/Samurai_Thigh.asset`
+- `Assets/Art/Sprint0244/Samurai_Shin.asset`
+- `Assets/Art/Sprint0244/Samurai_Foot.asset`
+- `Assets/Editor/Sprint0244Setup.cs` (new; repeatable native Sprite/prefab setup and preview)
+- `Assets/Tests/EditMode/Sprint0244RigTests.cs` (new)
+- `Assets/Tests/PlayMode/Sprint0244Tests.cs` (new)
+- `Assets/Tests/PlayMode/Sprint0243Tests.cs` — retain all cases, adapt three
+  assertions to the actual segmented grip, expanded ragdoll, and valid route shortcuts
+- `TestResults/Sprint0244.json`, `TestResults/Sprint0244_Articulation.png`
+- `DEVELOPMENT_LOG.md`
+
+Automated verification through Unity 6000.6.6f1:
+
+- **Full Edit Mode suite: 59/59 passed.**
+- **Focused Play Mode fixtures: 98/98 passed.** This is not full Play Mode-suite
+  verification. Includes 11 new Sprint 024.4 cases, all 15 Sprint 024.3 cases,
+  specialist tests 4, fireworks/scene fixes 7, movement stability 1, player double
+  jump/suppression 9, mobile/ladder 8, morale 6, second-arm 2, shared visuals 8,
+  spawning 9, opening spacing 1, combat positioning/suppression 7, campaign flow 10.
+- New coverage checks hierarchy/art preservation, joint limits and attachments
+  in both directions, grip orientation across poses, real higher-platform and
+  wide-gap double jumps, single-jump conservation, third-impulse rejection,
+  grounding reset, moving targets, destroyed destinations, blocked ceilings,
+  alternate route/failed-edge penalties, intermediate ladder exit, warehouse
+  single/double pursuit and 14-body ragdoll constraints/velocity limits.
+- Actual-prefab pose preview visually inspected: idle, run, mirrored jump,
+  second-jump tuck, wind-up and swing. Preview is not a live combat playtest.
+- Final Demo inspection: 15 enemies, one Samurai, zero missing scripts, all
+  articulated references bound; original head/sword assets and damage 40 intact.
+  Final Console zero errors/warnings; compilation complete. MainMenu clean,
+  open, outside Play Mode; Landscape Left preserved.
+
+Manual verification still required:
+
+1. MainMenu > Play > Warehouse: bait Samurai along the central mezzanine and
+   UpperStep01/02/03 toward the roof; change platforms during his pursuit.
+   Check meaningful use of ordinary hops versus a second impulse, launch
+   positioning, ceilings, occupied landings, recovery after obstruction and
+   routes which use an existing ladder.
+2. Inspect elbows, wrists/hilt, knees and ankles at gameplay zoom during fast
+   turns, run/stop, first/second jump, landing, crouch, climb, anticipation,
+   slash, recovery, flinch and ragdoll. Check seams and clipping around cover.
+3. Verify melee still feels threatening/fair at 40 damage and the preserved
+   timings; check player double jump, ladders, Larper suppression/morale,
+   fireworks, checkpoints, shop, pause/results and saved progression in play.
+4. Profile sustained combat on the target Android device. No APK/device run,
+   human combat playtest or Android performance benchmark is claimed.
+
+The route cache is deliberately local and bounded, not a global navigation
+solution. Conservative rejection can leave some long/dynamic routes unavailable;
+new obstacles or actors can enter a committed arc. Those cases use failure
+cooldowns/replanning rather than teleporting. Full legacy Play Mode-suite/order
+issues from earlier sprints have not been claimed resolved. No unresolved
+failures remain in the suites executed for this sprint.
+
+Existing unrelated dirty work preserved. No staging, commit or push.
+
+## Sprint 024.5 — Master Larper candidate, consistent Samurai, armor and interactions
+
+**Implemented by Codex — awaiting playtest and artistic approval.**
+
+Inspected actual Enemak Postava PNGs and selected numbered GIF pose files from
+Google Drive/local references. Originals preserved; measured dimensions/palettes,
+reference paths and approval rules are recorded in new ART_BIBLE.md and AGENTS.md.
+The three inspected GIFs contain one frame each; no animation-timeline claim.
+
+Added reversible LarperCandidate/SamuraiCandidate skins: deliberately primitive
+flat pixels, 32 PPU, uniform peach Larper skin, red shirt/blue trousers/dark shoes,
+six existing expressions plus a distinct optional panic face. Extended the existing
+optional segmented cutout rig for Larper firearm/reload poses and 14-body corpses.
+Samurai retains outfit/katana/AI/mobility tuning; duplicate inherited old limb chains
+were removed and the blade reduced to the same simple pixel density. No player
+movement/crouch-pose rewrite or new animation framework.
+
+ArmorVisual observes existing armor restore/damage events, showing intact/damaged/
+depleted vest overlays only for actual equipment and copying the state to corpses.
+Ordinary Larpers remain unarmored. Existing condition-only saves cannot distinguish
+depleted from unequipped after a new restore; broken visuals persist in the current
+equipped run. Gameplay armor values/absorption are unchanged.
+
+Separated the office checkpoint from the records case in Demo/Mission01: flag/zone
+(15.3,6.4), supported respawn (14.5,6.25), evidence remains x20. Previously they shared
+one object and collection also committed a checkpoint. Independent activation now
+preserves objective snapshots and EXIT gating without simultaneous activation.
+
+Fixed downward ladder acquisition treating crouch input as upward through Abs(y).
+Downward entry now requires a valid ladder top; intentional cover has priority via
+the existing bounded local probe. Verified the real LowCover_Sprint012/west ladder
+arrangement from behind/on/off the box, plus left/right overlapping-ladder cases.
+Upward climbing, release, jump-off/double-jump, lockouts and gravity are preserved.
+
+Automated Unity verification: **63/63 full Edit Mode; 155/155 focused Play Mode**
+across 20 fixtures. Existing tests retained; changed sprite/body-count/checkpoint
+expectations reflect the requested implementation. No full Play Mode assembly run,
+human gameplay validation, APK run or Android benchmark is claimed. Source diff
+whitespace check passed; whole dirty-tree diff check also reports Unity serializer
+trailing spaces in YAML (not hand-edited for cosmetic cleanup).
+
+Reference sheet and controlled actual-zoom warehouse camera captures are under
+TestResults/Sprint0245_*.png. Capture-only player placement/protection/armor changes
+were in Play Mode with no GameSession and were discarded on stopping. Full results,
+file manifest, reference accessibility, manual checklist and limitations:
+TestResults/Sprint0245.json and TestResults/Sprint0245_Report.md.
+
+Candidate art is **not approved as a permanent master**. Human playtest and artistic
+review remain necessary. Warehouse_Demo saved/open and outside Play Mode; no missing
+scripts. No staging, commit or push; existing unrelated work preserved.
+
+## Sprint 024.6 — Main Menu entry, corpse collision and extended-mag pistol
+
+**Implemented by Codex — awaiting playtest verification.**
+
+Global Windows/default and inherited Android build scenes already began with
+MainMenu; no runtime Testbed startup override was found. The confirmed Editor
+cause was leaving Warehouse_Demo open with no playModeStartScene. CampaignEntry
+now defaults ordinary Editor Play to MainMenu, retaining explicit open-scene
+development Play and restoring the menu afterward. An Editor-only test-job
+exception prevents the menu override from replacing Unity's test initialization
+scene; the final real menu/shop/results flow passed with the override enabled.
+
+Actual configured Editor Play from an open Warehouse_Demo loaded MainMenu, with
+MainMenu session screen, zero enemies and advancing frames. Deliberate development
+Play still loaded the warehouse and restored the menu entry on stopping. Windows
+and Android binary/device launches remain manual; working build lists were not
+rewritten. Campaign UI, purchases, equipped stock and wallet settlement passed
+the existing ten-test progression suite using temporary saves.
+
+Ragdoll cause: six original colliders excluded character layers, but the eight
+articulated segments defaulted to excludeLayers=0. New segment colliders now copy
+the original limb's exclude/include masks and override priority. Current masks
+remain -2 (physical Default terrain contact, no character contact), with colliders
+enabled/non-trigger and layer 1 still included in hitscan physical-impact queries.
+Both Player/Enemy shots hit corpses and trigger impacts. Walking/jumping through
+overlapping corpses, environmental settling and a pile beside a narrow-platform
+ladder passed automated checks. Living actors and global physics matrix untouched.
+
+Pistol: native flat dark 20×8 sprite, 32 PPU, three colors; clear 5×13 extended
+magazine replaces 8×18. Visual socket moves from (4/32,-2/32) to (1/32,-2/32) beneath
+the grip for this weapon only. Other weapons keep their old default. Existing aim,
+reload and recoil systems retained. Damage5/interval.105/capacity27/reload4/range28/
+impulse.9/reserve135 all unchanged. No unrelated Larper art or gameplay edits.
+
+Verification: **65/65 full Edit Mode and 102/102 unique focused Play Mode** tests.
+An extra configured-entry UI flow rerun passed after resolving a test-launcher
+timeout caused by the menu override. No unresolved failures in completed suites;
+full Play Mode assembly, human gameplay and Android profiling not claimed.
+Gameplay-scale pistol image: TestResults/Sprint0246_Pistol_Gameplay.png.
+Detailed root causes, files, exact filters/visual values and manual checklist:
+TestResults/Sprint0246_Report.md; raw results: TestResults/Sprint0246.json.
+
+Finish: MainMenu saved/open, default Play entry MainMenu, Play Mode stopped.
+No staging, commit or push; existing unrelated dirty work preserved.
+
+## Sprint 024.7 — graphics, directional camera and suppression (2026-10-22)
+
+Implemented by Codex — awaiting playtest verification.
+
+The brief explicitly selects the existing Larper as production baseline. Inspected
+original Postava/current Larper references; all six historical reference hashes
+remain unchanged. Updated ART_BIBLE/AGENTS. Added editable native flat-pixel hero,
+tiny cardboard-cosplay Samurai and colorful amateur fireworks skins, preserving
+the existing rigs, equipment, player physics and enemy roles. Samurai authored
+height is 70.16% of Larper; sword length 146.03% of Samurai. Living target collider,
+40 damage, 1.65 melee reach and .4/.7-second wind-up/recovery remain. Resized corpse
+colliders fit copied native sprites and retain Sprint0246 contact filtering.
+
+Camera derives one-third/two-thirds composition from final orthographic width,
+aspect and configurable effective viewport. .12-second facing commitment and
+.22-second framing smoothing filter rapid reversals; interpolated horizontal
+displacement tracking prevents steady running lag. Vertical behavior/bounds remain.
+Zoom 1.10→1.155 (+5%); Android's separate 1.125 scale stays. Player motor 7→8.4,
+basic Larper 7→7.7; specialists stay 7. No multiplier compounding or acceleration,
+deceleration, collision/input update rewrite.
+
+Suppression already used clipped real shot segments. Fixed high first-pulse
+hesitation being bypassed by the retreat branch. Added bounded randomized
+hesitation beats and meaningful five-second contextual suppression cues using
+existing flinch/faces/speech queue. Radius 1.25→1.5, overhead bias .35→.15,
+gain49→58, moderate16→14, high48→42, duck .70→.80, duck cooldown3–5→2.5–4.25s.
+Preserved decay12/s, quiet .8s, cap100, retreat .7/4s, personality differences,
+rare panic/cascades, cover occlusion and two readable simultaneous bubbles.
+
+Verification: full Edit Mode75/75; unique targeted Play Mode137/137. Covered
+camera ratios/zoom/full-speed reversals, rendered movement, double jump/touch,
+cover/spacing/spawning/offscreen firing, morale/speech, real-hit-scan suppression,
+Samurai platform traversal/attacks/ragdolls, fireworks and menu/shop/results.
+Updated obsolete hidden-face/native-art/hardcoded-speed expectations; no tests
+removed. Two MCP transport interruptions were retried, with results recorded.
+Controlled warehouse frames advanced; interior player viewportX=.333612 at
+1902×870, matching one-third within pixel rounding. Protected player/diagnostic
+reposition were used; no campaign save session was active. This is not a human
+gameplay/artistic approval or Android performance claim.
+
+No missing scripts/broken references in the three warehouse scenes. MainMenu
+saved/open, default entry MainMenu, Play Mode stopped; current Console0errors/
+0warnings. Historical compiler/account warnings are not attributed to this sprint.
+No staging/commit/push. Detailed files, exact tuning, test evidence, captures,
+limitations and manual checklist: TestResults/Sprint0247_Report.md,
+Sprint0247_Files.txt and Sprint0247.json. Still requires human gameplay/art review,
+Android device profiling and Japanese font/glyph verification.
+
+## Sprint 024.8 — Hotfix O'Clock (2026-10-22)
+
+Implemented by Codex — awaiting human playtest verification.
+
+Warehouse_Demo now has three registered Samurai /17 total enemies (3/6/8 groups).
+Original moved to(-4.8,.529232); added(-.8,5.929232) and(23,.529232). Authored
+positions/reset points match and have valid ground/clearance/spacing. Static
+inspection did not reproduce the original saved-platform overlap. Tests caught
+and removed intermediate cloned child residents; setup is now idempotent.
+
+Visual scale is exactly1.05. Per developer follow-up, living Samurai geometry now
+matches visible body size/position: standing movement box about.75396×1.02846,
+centered on the rebased body. A non-contact animated body hitbox tracks body bounds
+through both facing directions and poses, excluding the sword. Shots/blasts ignore
+the separate movement shape; empty-space hits do no damage. Mass center remains
+fixed; corpse segment scale/filtering is preserved. Health70, damage40, speed7,
+attack range1.65 and .4/.7-second anticipation/recovery remain unchanged.
+
+Shrinking to actual body size exposed floating-step wedging: body-height rays can
+miss an overhang. Existing single backstep recovery now recognizes the cached
+route overhang, validates1.8units/.38seconds in that case, and preserves normal
+1.2/.25 recovery plus existing jump/cooldown/blacklist systems. All formerly
+failing authored-step/single/double-jump cases pass.
+
+New native32PPU art: crude purple firework-logo shirt, matching sleeves, larger
+bright-yellow hardhat; clearer30×11 carbine; directional15×9 white/yellow/red
+carbine-only flash using existing .06-second cue/glow. Carbine stats unchanged.
+Firework damage radius2.2→2.7, visual spread1.5→2.7, fading lifetime.35→.8; same
+ten prewarmed sparks and damage24/LOS/falloff. Normal/short/long release fuses
+.8–1.5/.25–.45/2–3.2s, with18% short/18% long. Premature held failure6→8%, at
+configurable35–80% of preparation. All firework blasts can damage all teams and
+self; ordinary bullet friendly-fire rules remain. Pending throws clear before
+held blasts; detonation guards and pooling remain.
+
+Camera side damping.22→.75 with existing composition, commitment, zoom1.155,
+vertical behavior and input responsiveness preserved. Larper pistol interval
+.105→.07 (9.52→14.29shots/s), capacity27/damage5/reload4/spread unchanged.
+
+Validation: compilation successful; full Edit Mode78/78 and unique targeted Play
+Mode92/92. Includes three-Samurai runtime pursuit/engagement/reset, exact animated
+hitbox geometry and no invisible hits, traversal/ragdolls, fuse variations, held
+failures, self/allied damage/dedupe/occlusion, pistol cues/ammo/reload, flash,
+camera, spawning, suppression/morale, motion and campaign flow. An unfocused flow
+fixture timeout was resolved with background-execution setup/restore; retry passed.
+Controlled live captures show carbine flash and colorful burst. Actual prefab
+blast health: Larper50→27.7548, Samurai70→54.86103, expert60→39.53453, one hit each.
+These are controlled Editor checks, not human gameplay/art/Android acceptance.
+
+Updated ART_BIBLE; detailed report/raw results/captures: TestResults/Sprint0248*.
+Zero broken references/missing scripts across warehouse scenes; populations17/7/10.
+MainMenu saved/open/default entry, Play Mode stopped, background-running restored
+off; current Console0errors/0warnings. No staging/commit/push; unrelated work kept.
+
+## 2026-10-22 — Focused gameplay and visual hotfix
+
+Implemented the six requested focused changes. Checked available chats for another
+active local project sprint before editing; preserved existing dirty/untracked work.
+
+Basic pistol Larper first-sight/reacquisition reaction .30→.55 seconds, existing
+0–.05 jitter unchanged. Established firing cadence unchanged. Samurai reaction
+remains .18; fireworks specialist explicitly retains .30 through a prefab variant
+override, preventing the parent Larper tuning from leaking into its behavior.
+Wallet auto-pickup distance AND trigger radius1.20→1.62 (+35%); existing LOS,
+reward-ID deduplication and amount-free `Wallet collected` notification retained.
+Samurai jump velocity12→13.28; second impulse10.2→11.288 via existing .85 multiplier.
+Ideal single-jump height +22.47%; actual physics apex ratio tested within20–25%.
+Player and other enemy movement/jump values unchanged.
+
+Reproduced a real Warehouse_Demo stall before x7.8 low cover at x6.61. Route cache
+excluded one-unit crates and landing margins rejected their tops. Minimum node
+width1.1→.9 and landing/launch side margins.15/.20→.10/.10 allow these footholds,
+still using actual collider dimensions and swept arc/occupancy checks. Then
+reproduced a descent stall on the alternate gap step: the old waypoint was inside
+the edge and generic movement refused to leave it. A validated physical walk-off
+now uses existing finite flight/landing recovery; timeout derives from distance
+and gravity. Existing sampled planning, stuck-progress watchdog, failed-edge
+cooldowns, arrays and gravity behavior retained; no new per-frame scan or manager.
+
+New native four-color30×11 carbine with wooden butt/handguard, darker receiver,
+thin barrel and bent magazine. Same32PPU/pivot(7,5), no mipmaps, point filtering;
+weapon stats, aiming, sounds and flash unchanged. Historical Postava and actual
+Larper/pistol presentation inspected; originals preserved. Controlled both-facing
+idle/walk/crouch/reload sheet: TestResults/FocusedHotfix_Carbine.png.
+
+Armor bug: old code intentionally retained a broken overlay at zero and did not
+observe armor component disabling. Positive condition/active equipment is now
+required; depletion/removal/disable clears the sprite and disables the overlay.
+Re-equipping restores intact/damaged art. Depleted armor is not copied to corpses.
+Armor damage/protection, underlying character sprites and saves remain unchanged.
+
+Validation: compilation successful, full Edit Mode78/78, unique targeted Play
+Mode76/76. Includes actual warehouse crate/cover/raised-step/upper-route traversal,
+physical jump height/landing reset, first-shot delay versus automatic cadence,
+wallet auto pickup at1.5/rejection at1.9/dedupe/LOS, armor transitions/corpse,
+Samurai melee/blocked routes/air jumps/ladder/ragdolls/animated hurtbox, carbine
+flash, player motion/double jump, scene equipment/encounters and combat. Baseline
+and failed intermediate runs retained. Updated old assertions for zero-impulse
+walk-off and stronger-jump shortcuts; separate single/double coverage preserved.
+Art allowlist extended with original PPU/filter/mipmap safeguards unchanged.
+
+Zero missing scripts/broken serialized references across three warehouse scenes;
+camera source hashes unchanged. MainMenu saved/open/not dirty, Play Mode stopped,
+background-running restored off; final Console0errors/0warnings. Human feel/art
+approval and Android-device performance remain unverified; manual checklist,
+file list and exact tuning: TestResults/FocusedHotfix_Report.md. Raw results:
+TestResults/FocusedHotfix.json. ART_BIBLE updated. No staging/commit/push.
+
+## 2026-10-23 — Interrupted camera/player/Samurai hotfix recovered and verified
+
+Recovery inspection confirmed the earlier six-change hotfix was already complete:
+Larper first reaction.55s, wallet radius1.62, Samurai jump13.28, crate/cover/descent
+fixes, native carbine and complete depleted/removed armor visual disappearance.
+Preserved that implementation and its existing report/results; did not repeat it.
+
+The later camera/player/Samurai follow-up had explicitly been requested and was
+already implemented on disk before the usage interruption. This recovery finished
+pending verification, refreshed final art evidence and wrote the report/log. It
+introduced no further gameplay features or source rewrites.
+
+Camera now caches existing ladder traversal state, damping directional framing to
+center during climbing and back on dismount. Climbing aim does not steer it.
+Normal1/3–2/3 composition, .75 transition, .12 commitment, .16 follow smoothing,
+vertical following, zoom/clamps and pixel presentation are preserved.
+
+HeroRefined retains the yellow-cap/orange-shirt worker and32PPU module bounds/
+pivots. Cleaner cap/hair, short neckline, coherent shoulders/sleeves, trimmed hand
+corners and transparent trouser edges fix the fused-leg silhouette. Body/physics,
+animation timing, two arms, grip/muzzle, armor and equipment states unchanged.
+Native recipe/source and older art retained; historical Postava1 was inspected,
+originals untouched. Shared skin reaches all three warehouse scenes.
+
+Small Samurai collider detection hypothesis was not reproduced: real .7539605×
+1.028464 collider detects unobstructed targets at different heights and solid walls
+occlude correctly. Detection remains22 units; collider-top−.15 sight origin and
+existing geometry mask/raycast are unchanged. No hitbox enlargement or omniscience.
+
+Samurai acquisition now requires explicit gameplay viewport overlap plus valid
+existing LOS/range. Existing engagement flag latches aggro beyond camera exit and
+old3-second sight-memory timeout, while hidden player movement cannot update the
+last-seen destination. Defeat/target/reset still clears it. Offscreen melee is
+blocked; wind-up.4, recovery.7, damage40/range1.65 and suppression remain. Samurai
+reaction.18+0–.05→.04+0–.02; startup random.3–.8→.05. Larper tuning untouched.
+
+Confirmed traversal fixes: stationary failed-jump rejection previously persisted
+forever after a temporary obstruction; now expires after at least5 seconds and
+still requires validated arcs. Brief decision gaps no longer cancel finite
+in-flight plans. Combat enable/target-reset synchronously suspends unacquired
+Samurai patrol, preventing a first-FixedUpdate unplanned jump. Existing local
+graph, arrays, sample intervals, failed-edge cooldowns and previous terrain fixes
+are preserved. No new per-frame physics scans or global searches.
+
+Verification: compile successful; full Edit78/78 and86 unique targeted Play checks
+pass across retained runs, final affected fixtures rerun after the last fix.
+Includes six new actual-small-body/warehouse tests, ladder/normal camera framing,
+autonomous visible acquisition/cover/elevated pursuit/melee, camera exit and
+occlusion memory without hidden tracking, reset, removed-obstacle replanning,
+decision-gap flight, old traversal/ragdolls/hitbox, player visual integration,
+double jump/motion, mobile controls, armor, combat and Larper reaction/cadence.
+Earlier failed attempts retained in TestResults/CameraSamuraiHotfix.json.
+
+Controlled final comparison sheet and live warehouse camera render reviewed;
+runtime advanced frame2622→6163/time8.098→18.799s, camera size4.843074. These are
+Editor evidence, not human PC playtesting or art acceptance. No Android/device
+profile. Zero missing scripts/broken references in three warehouses; final Console
+0errors/0warnings. MainMenu saved/open/not dirty, Play stopped, background-running
+restored off. No staging/commit/push; existing uncommitted work preserved.
+
+Detailed files/settings/manual checklist: TestResults/CameraSamuraiHotfix_Report.md;
+raw tests and verification: CameraSamuraiHotfix.json and
+CameraSamuraiHotfix_Verification.json. ART_BIBLE updated. Pending future agenda:
+player melee tracer/swing/hit-feedback investigation is not implemented or verified.
+Larper knife is explicitly excluded; their pistols remain. Human PC camera/AI feel,
+refined sprite approval and Android performance still need manual validation.
+
+## 2026-10-23 — Sprint 0025: combat readability and Faintanyl revival
+
+Implemented by Codex — pending playtest. Reused the existing follow-up's fixed
+camera/ladder, player art, armor cleanup and Samurai navigation; no repeat rewrite.
+Samurai viewport activation now follows cached animated body bounds rather than
+the physical box. Player melee has a .22s articulated swing and range-bounded
+contact sweep; shared feedback no longer emits gunshot/muzzle cues for melee.
+Actual opening fire/cover decisions and ally/panic events use the tactical speech
+queue, preserving two bubbles, readable duration, priorities and repetition gates.
+Enemy suppression and rare cascade probabilities remain unchanged. New player
+near-miss pressure uses clipped hostile shot segments, occlusion, bounded gain,
+gentle sound/border and decay; no movement, aim or camera penalties.
+
+User clarified Faintanyl: centered death-screen revive, exactly two seconds of
+invincibility, inventory maximum two. Implemented separate injection stock
+(configurable initial two), in-place full-health revival, a checkpoint alternative,
+input/physics suspension while dead, immediate campaign save on consumption and
+no retry refill. No checkpoint reset/ammo refill on injection. Legacy saves get
+the finite initial stock; empty stock preserves checkpoint fallback. Continuous
+duct-tape healing and its 200-point baseline remain. Capture review fixed enemy
+speech overlapping the death caption without obscuring a paused menu.
+
+Dedicated Android BLIND FIRE is conditional on cover; normal FIRE remains outside.
+Control transitions release captured input and guard against other-control release
+events. Wallet radius and trigger 1.62 → 1.95 (+20.4%); LOS/deduplication retained.
+Existing HeroRefined/Larper/Samurai/carbine art and muzzle/fireworks presentation
+were preserved; armor disappearance passed existing regression checks.
+
+Verification: 78 Edit Mode and 145 unique selected Play Mode tests pass (223 total,
+latest result per test). Includes small-body Samurai LOS/viewport/pursuit/platform
+routes, camera/ladder, local melee/no muzzle, speech/cascades, suppression, armor,
+healing/wallets, cover/touch, double jump/motion, opening enemies, combat/reload,
+campaign/reward flow and new keyboard/touch revive/protection/stock persistence.
+Updated checkpoint-specific fixtures for finite injection stock, actual reward
+banking and input timing; moved only the ladder test's isolation origin closer to
+avoid floating-point camera damping stalls. No ladder/camera runtime changes.
+
+Compilation succeeds; final Console has zero errors and one Unity AI Toolkit
+account-service timeout warning. Existing obsolete API compiler warnings remain
+in retained history; unrelated API migrations were not performed. Android build
+configuration dry run valid; no APK build/device verification claimed. All three
+warehouse scenes have zero missing scripts and inherit new player components.
+Controlled runtime revive capture reviewed; not human playtesting. MainMenu open,
+clean and stopped; MainMenu startup setting/background-off restored. No staging,
+commit or push. Full files/parameters/root causes/manual checklist:
+TestResults/Sprint0025_Report.md; raw runs including reruns: Sprint0025.json;
+controlled UI evidence: Sprint0025_Revive.png. Human gameplay feel, remaining
+unrepresented Samurai stuck cases, art acceptance and Android performance remain
+pending playtest; no claim of human-accepted completion.
+
+## 2026-10-23 — Hotfix 0025.1: enemy mobility, top pause, carbine exchange
+
+Implemented by Codex — awaiting playtest verification. Ground pursuit previously
+stopped horizontal drive against a box during the airborne part of a jump. It now
+continues physical airborne movement; low hops validate clearance/landing and a
+bounded arc, with 1.2s cooldown. Requested grounded movement without .12 units of
+progress for .9s triggers existing-goal reconsideration: three-second failed-goal
+exclusion, existing reachable/reserved alternatives, withdrawal fallback and
+Samurai safe .35s staging backoff/failed-edge reconsideration. Spacing accounts for
+actual vertical separation. No teleportation/new navigation framework. Larper
+reposition interval8–13→4–7s, roll20→35%; personality choices, morale, suppression,
+firing, spawning and reservations remain. New stuck/jump cooldown fields exposed.
+
+Pause moved from bottom43% to safe-area top12px/center50%, minimum124×52. Existing
+look/action preserved; mission card reserves space to its left to avoid overlap.
+Other mobile action/joystick positions and camera/ladder code unchanged.
+
+Carbine magazine was baked into its sprite with no separate magazine assigned.
+Native Editor authoring separates the same pixels/palette into receiver and4×5
+magazine at32PPU, retaining pivots/muzzle. Existing arms reach/remove/put aside,
+fetch a distinct replacement, insert, latch and regrip on the real reload clock.
+Two prewarmed components, no physics litter/new rig. Original1.5s/20damage/.2s/
+24round/22range unchanged. WeaponCycle remains sole ammo authority; insertion
+marker fires once at deadline; interruption transfers nothing/restores visual.
+Other weapons retain their existing animations. Original source/historical art
+and HeroRefined/Larper proportions preserved; actual Postava1 inspected.
+
+Verification:78Edit+107unique selectedPlay tests pass (185 total), including six
+focused hotfix cases, actual low-box crossing, bounded blocked recovery/ceiling
+rejection, magazine exchange/atomic ammo/cancellation, three safe-area resolutions
+and pause/resume, plus Samurai/platform/crowd/opening/weapon/effects/control/cover/
+morale/revive/healing/camera/ladder/motion/campaign regressions. Initial test actor
+archetype setup was corrected; raw runs retained. Final compile and focused rerun
+pass; Console0errors/0warnings. Android build configuration dry-run valid; no APK
+or Android-device playtest/profiling claimed. Approved Unity CLI update verified
+beta.14. One tool review timeout/reload reconnect was retried successfully.
+
+Controlled two-facing reload storyboard and live warehouse pause/reload capture
+reviewed. Runtime frame17126→18766/time49.9249→50.4685 before intentional capture
+freeze at.3624reload; ammo3/72 unchanged. Temporary save/capture state removed;
+MainMenu clean/open/stopped/startup restored/backgroundoff. No commit/stage/push.
+Details/files/parameters/manual checklist: TestResults/Hotfix00251_Report.md;
+raw tests/verification: Hotfix00251.json; images: Hotfix00251_Reload.png and
+Hotfix00251_Gameplay.png. Real combat feel, exceptional terrain layouts, reload
+readability at device zoom and Android touch/performance remain pending playtest.
+
+## 2026-10-23 — Hotfix 0025.2: Glock magazine physics and reliable enemy suppression
+
+**Implemented by Codex — awaiting playtest verification.**
+
+Diagnosed floating player Glock magazines as generic gun-child sinusoidal offsets
+without hand attachment or release physics. Added player-only PistolMagazineReload
+using existing fixed-length arms, socket and original reload clock: seated until20%,
+extraction20–40%, release42%, replacement58–88%, regrip by100%. Three prewarmed
+geometry-only Rigidbody2D magazines fall under gravity and expire after4s; pooled
+simulation resumes at the actual hand Transform. BackupPistol reuses existing
+approved Glock/magazine art; player prefab accepts BackupPistol/Buzzbox explicitly.
+Cancellation/switching restores the seated visual; ammo remains solely WeaponCycle.
+Carbine's intentionally bizarre reload is retained exactly: CutoutRig, WeaponCycle,
+WarehouseCarbine and both carbine sprite assets match hotfix-start SHA256 hashes.
+
+Actual AttackExecutor overhead shots already reached/saturated enemy suppression.
+Downstream optional retreat cooldown/failed roll, reload/cover compatibility gates
+and failed long-retreat→stationary-reload fallback masked meaningful movement.
+After>=3 credible close misses over.45s at high pressure, an independent evasion
+opportunity uses existing cover/withdrawal/reservations, retries every1.5–2.2s divided
+by susceptibility, can cancel a reload without transferring ammo, and holds genuine
+protective cover. Blocked long retreats try reachable/reserved short alternatives
+(minimum1unit, open reach up to2); impossible escape uses.6s hesitation instead of
+fake full-magazine reload. Existing rare panic opportunity runs before ordinary
+escalation, retaining probability/long cooldown and no new collapse/social events.
+Active Samurai keeps pressure/brief hesitation without Larper duck/withdraw/panic.
+Two short suppressed speech lines reuse existing5s cue gate and two-bubble cap.
+Gain58/radius1.5/moderate14/high42/max100/decay12/quiet.8, optional70%/4s, personality
+weights and defensive/panic/cascade tuning unchanged. No new per-frame scans or
+route framework; player pressure, camera/ladder/spawn/movement code untouched.
+
+Verification:78Edit+84unique selectedPlay=162pass, including7focused cases for
+real-hit-scan overhead pressure/actual displacement/decay, reload interruption,
+blocked alternatives, wall/distance rejection, Samurai pressure/role, Glock hand
+attachment/gravity/floor collision/4s cleanup/pool limit/atomic ammo and unchanged
+carbine poses. Existing combat/reload/cover/morale/speech/rare-cascade/ragdoll/revive/
+Samurai/navigation/double-jump/touch/motion checks pass. Early failures revealed
+pooled pose reset and panic-priority interaction; corrected and affected suites
+rerun, raw history retained. Static two-facing reload storyboard inspected; actual
+physics tested in Play Mode, no human normal-speed or Android-device acceptance
+claimed. Final compile up-to-date, current Console0errors/0warnings, native player/
+Larper/Samurai prefab checks0missing refs. Android configuration dry-run valid;
+no APK built. MainMenu clean/open/stopped, startup preserved/backgroundoff. No
+stage/commit/push. Details, exact files/values and manual checklist:
+TestResults/Hotfix00252_Report.md; raw Hotfix00252.json; native checks
+Hotfix00252_Verification.json; carbine hash manifest; Hotfix00252_Reload.png.
+
+## 2026-10-23 — Hotfix 0025.3: mission gates, Larper reloads and fireworks
+
+**Implemented by Codex — awaiting user playtest verification.**
+
+User identified the menu-launched Demo and a checkpoint that would not activate.
+Baseline9mission/12campaign checks passed; no missing mission bindings or runtime
+exceptions found. Checkpoint contacts silently rejected unmet objective stages,
+and the Processing boundary existed only at y8–11 on the upper stairs. Lower-route
+entry could miss that stage gate and leave office checkpoint/records locked. Exact
+checkpoint/original run unavailable; do not claim this conclusively reproduced the
+user's particular run. Existing eastward boundary x7.5/width2 now spans y−8…20
+(center6/height28), including lower routes and high jumps, in Demo/Mission01 via
+Editor APIs. Storage checkpoint and encounter objectives remain mandatory. Locked
+flags explain prerequisites/remaining enemies/floors through throttled4s existing
+notifications; active flags are not reported locked. Encounter callbacks evaluate
+completed prerequisites, with one explicit context-menu diagnostic and no log spam.
+
+Larper reloads had never received the player-only working magazine component or
+enemy weapon clock. Reused PistolMagazineReload unchanged on basic Larper, wiring
+the existing enemy cycle and adding an enemy-only articulated-grip adaptation.
+No joint/pivot/proportion/art changes. Existing exchange/physics/4s cleanup and
+atomic ammunition authority reused; two prewarmed debris slots per NPC. Inherited
+component removed on Samurai/fireworks variants to avoid useless pools. All13Demo
+and7Testbed basic Larpers inherit the fix. Player Glock source/definition/prefab,
+CutoutRig, WeaponCycle, carbine definition and both carbine sprites remain byte-for-
+byte equal to hotfix-start hashes; player adaptation path unchanged.
+
+Larper-base near-miss gain58→63.8 (+10%); decay/thresholds/personality weights,
+sustained evasion, rare panic/cascade rules and speech cap unchanged. Specialist
+recovery3.8→3s; .85s anticipation preserved (~17% more nominal opportunities).
+Projectile speed/arc/fuses/damage/radius/malfunction/survival remain. Existing pool2
+still bounds concurrency. Firework visuals reuse prewarmed sprite effects:24radial
+trails,6delayed sparkles,3haze, .075s crisp star flash/.14s faint soft glow;35visual
+slots per projectile, original.8s expiry. Two tiny native pixel masks, no bloom,
+new dynamic lights, damage-query changes or per-burst allocation/instantiation.
+Cosmetic glow is a world-space wash; Android GPU/device acceptance remains open.
+
+Verification:78Edit+80unique selectedPlay=158pass, including4new focused cases.
+Controlled mission test fulfills encounters/records/checkpoint gates, physically
+contacts checkpoint/lower Processing, retains records on respawn, walks through
+the exit, verifies Results/rewards/save and return to Level Selection. Combat and
+intermediate placement are controlled; no unassisted full gameplay run claimed.
+Real-clock Larper hand/grip/drop/atomic ammo and reusable fireworks sequence/damage
+checks pass. Existing mission/campaign/player reload/AI/crouch/cover/morale/rare
+cascade/Samurai/weapon/fireworks/double-jump/ladder/movement regressions pass.
+One old burst assertion now observes initial duck plus valid later evasion rather
+than requiring a frame-dependent final crouch; damage/decay checks retained. One
+transient Edit sprite identity failure passed unchanged on isolated/full reruns.
+Static two-facing reload and four-phase fireworks storyboards inspected. Final
+compile current, Console0errors/0warnings; five native prefab scans0missing refs;
+Demo opening3 unchanged. Android configuration dry-run valid; no APK/device test.
+MainMenu clean/open/stopped/startup preserved/backgroundoff. No stage/commit/push.
+Full details, exact files, parameters, limitations and manual checklist:
+TestResults/Hotfix00253_Report.md; raw Hotfix00253.json; protected hash manifests;
+Hotfix00253_LarperReload.png and Hotfix00253_Fireworks.png. User confirmation of
+normal completion, enemy reloads, suppression feel and fireworks appearance pending.
+
+## 2026-10-24 — Hotfix 0025.4: Suppression-driven panic escapes
+
+Implemented by Codex — awaiting user playtest verification. Started Oct23;
+resumed Oct24 without restarting existing implementation. Latest recovery continued
+the running test job and finalized verification/evidence/documentation. Existing
+uncommitted work preserved; no staging, commits or pushes.
+
+Root cause: FULL_PANIC stops movement; real running uses Withdrawing, previously
+repeatable without a success budget. Severe sustained suppression now selects an
+actual bounded withdrawal for explicitly opted-in basic Larpers. No accumulation
+increase: gain63.8, thresholds14/42, decay12/s and rare full panic/cascade unchanged.
+Base major roll90% at pressure70 after3misses over.45s; neutral personality results
+coward98%/ordinary90%/confident67.5%. Existing morale modifies the roll within98%.
+Decision cooldown4–6s divided by existing susceptibility. Maximum2 successful
+escapes per explicit encounter reset; quota is charged only at a grounded endpoint,
+at least2units from start and within.25vertical units. Failure/interruption/timeout
+does not charge. Target/camera rebinding and disable/enable do not reset quota.
+
+Planned destinations≤6units, duration≤3.5s, encounter-anchor leash12units, last2
+endpoints excluded within1.25units. Major choices prefer farther reachable cover;
+failed goals reuse existing blocked cache6s. Existing reservations, ground/low-hop
+checks and motor handle movement; no teleportation/new scans/per-frame queries.
+After quota, ordinary fear/ducking/accuracy/cover/reload remain; withdrawals stay
+local≤1.5units. Successful major escape adds bounded.8s defensive hesitation.
+Existing withdrawal dialogue event fires after actual movement;4new lines reuse
+the existing speech cap2/cooldowns. Samurai/fireworks explicitly excluded; no
+Officer asset exists, so distinct-archetype surrogate tests exclusion only.
+
+Changed EnemyCombat.cs, Hotfix00254Setup.cs, Larper.prefab and3personality dialogue
+assets; added6focused tests. Existing00253mission test now includes an actual
+completed Larper retreat before checkpoints/records/exit/results/save/level select.
+Updated stale0202configured-gain,012magazine-extraction and0245nativeSprite-identity
+assertions while preserving their coverage; no production reload/visual changes.
+All13protected source/prefab/scene hashes match hotfix-start manifests.
+
+Final automated results:99unique selectedPlay+78Edit=177passed, including6focused.
+Checks cover actual hitscan/physical escape, safe low-box hop, blocked/interrupted
+routes, first/second success/third denial, post-cap fear/local movement, reset
+boundaries, eventual suppression recovery/return fire, offscreen firing gate,
+personality/exclusion and mission completion after a fleeing enemy stays tracked.
+Mission setup/intermediate combat controlled: not an unassisted gameplay run.
+Compile completed; post-test Console0errors/0warnings; final Console1Pipeline inspection-timeout error/0warnings. Native prefab checks
+confirm basic reference/cap2/chance.9/threshold70/gain63.8 and0missing scripts on
+Larper/Samurai/fireworks. A broad reference audit eval timed out; smaller checks
+succeeded. Android build-configuration dry-run valid; no APK/device verification.
+MainMenu clean/open/stopped/startup preserved; background execution off.
+
+Human acceptance still required: cowardice frequency, two escapes then combat,
+crowded/multifloor routes and failures, normal mission completion, rare cascades,
+specialist/reload preservation and Android performance/controls. Full details and
+manual checklist: TestResults/Hotfix00254_Report.md; raw test history/latest unique
+results/native checks: Hotfix00254.json; protected before/after hash manifests.
+
+## 2026-10-24 — Sprint 0026: Tactical retreats, cover and gameplay agenda
+
+Implemented by Codex — awaiting human playtest and Android-device verification.
+Inspected existing dirty work/log/AGENTS/art bible. First reran0025.3:4/4pass,
+including checkpoint/records/Results/save after a real retreat. No mission rewrite.
+
+Basic Larper withdrawal opportunities: threshold70→55; sustained misses3→2 and
+duration.45→.30s; major roll cooldown4–6→2–3s before personality.90%base roll,
+personality modifiers, gain63.8/decay12 and rare panic/cascades unchanged. Quota2
+successful major escapes,6unit planned bound/3.5s timeout/12unit leash unchanged;
+failures free, later local steps≤1.5. Existing reservations/navigation reused.
+
+Cover checks now validate floor-relative crouched centre AND head. Old.25face gap
+plus braking could expose the head; gap.08 keeps normal collision clearance.
+Existing reachability validates widths instead of discarding all obstacles>1.8.
+Protected arrival/reload recovery hides2–3.5s (was1.2–2.4), extends under pressure
+but hard-caps6s, releases flanked/destroyed cover and resumes uncertain investigation
+or normal engagement. No hidden player tracking. Local non-hop steps may crouch at
+65% pursuit input. Occasional grounded withdrawal fire20%per1.1–1.6s opportunity
+uses existing camera/LOS/actual trajectory/ammo logic. A forced failing test proved
+gun jams froze retreat motion; fixed by keeping committed withdrawals moving while
+the weapon cycle still blocks firing. No reload timing/choreography changes.
+
+Actual suppressed major movement emits one awareness event; eligible basic witnesses
+within6units/view/LOS may gain2s fear at30%chance,8s witness cooldown. No direct
+panic/collapse/relay, no overwrite of existing major morale. Distinct roles intact.
+Basic event callout gap3.5→2.8s; existing readable bubble lifetime/hard cap2 remain.
+
+Added3native-authored existing-style solid wood crates to menu-launched Demo:
+(3.5,.5)ground storage,(-5.5,5.9)west mezzanine,(13.3,12.5)processing roof.
+10→13freestanding cover objects (+30%), excluding platforms/boundaries/hitboxes.
+Editor setup idempotent; ground/solid-shot/trigger/spawn-clearance checks pass.
+No objectives/spawns/ladders relocated; Testbed and Mission01 unchanged.
+
+Secondary: analog walk/run already proportional; verified25%input/speed. Per user
+clarification, down OR down-diagonal in midair after double jump queues one14units/s
+dive through existing motor. Same gravity/collisions/two-jump budget, existing crouch
+visual, unchanged airborne hitbox. Sideways/down landing tail.35s capped at run speed;
+input reset/reversal/release cancels tail. No new animation assets. Aim stick right
+inset28→44px shifts16left, retains diameter/sensitivity. Existing safe-top-centre
+pause, conditional blind fire, local melee/no tracers, mild player pressure and
+Faintanyl2injections/2s protection pass existing tests; hold healing preserved.
+Camera, approved fireworks/frequency, player/Larper reloads and silly carbine remain.
+Existing Samurai and local low-hop/stuck/ladder ownership preserved. New automatic
+cross-floor/ladder retreat destination planning remains pending; no broad nav rewrite.
+No Officer asset exists; basic opt-in keeps other archetypes out of the quota.
+
+Final197unique checks pass:119selectedPlay+78Edit;11newfocused cases. Whole affected
+0025.2/.3/.4 suites pass, plus suppression/morale/cascades, cover, actual rendered
+motion, movement/double jump, Samurai/camera, local melee/player pressure/revival,
+reloads/VFX, mission/flow/save/pause. Controlled tests, no human playthrough claim.
+Initial failures retained in raw results. Duck retry test now isolates its cooldown
+from earlier retreat; blocked-major fixture leaves a valid>=1unit local step;
+UI assertions account for panel pixel rounding. Added route failure diagnostics.
+One transient FMOD output-device initialization error occurred in an earlier run;
+final affected suites passed. Compile succeeds; final Console0errors/0warnings.
+Native4prefab scans0missing scripts; configured limits and3saved crate positions
+confirmed. Android build-config dry-run valid, no APK/device profiling.12protected
+files identical;2intentional motor/pose additions;0unexpected hash changes.
+MainMenu clean/open/stopped/startup retained; background off. No stage/commit/push.
+
+Remaining manual: retreat frequency/variety and two-success cap, multi-level/crowded
+cover/failed routes, re-engagement and flanks, full normal mission completion, slide
+feel near boxes/cover/ladders/platform edges, Android input/safe areas/readability/FPS.
+Exact files, parameters, secondary status and manual checklist:
+TestResults/Sprint0026_Report.md. Raw history/latest results Sprint0026.json;
+protected before/after manifests Sprint0026_ProtectedBefore/After.json.

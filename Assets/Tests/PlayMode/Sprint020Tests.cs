@@ -73,17 +73,21 @@ namespace InsaneDreams.Tests
         }
         [UnityTest] public IEnumerator TouchPadsGrowWithoutOverlapsAndHealClickUsesExistingMechanic()
         {
-            var player=Player();player.GetComponent<PlayerHealthRecovery>().enabled=false;player.GetComponent<Health>().ProtectFor(0);ui.GetComponent<WarehouseTouchControls>().Bind(player.GetComponent<PlayerActions>());Assert.IsTrue(player.GetComponent<Health>().ApplyDamage(new DamageInfo(70,CombatTeam.Enemy)));
+            var player=Player();Float(player.GetComponent<PlayerHealing>(),"damageInterruptionSeconds",0);player.GetComponent<PlayerHealthRecovery>().enabled=false;player.GetComponent<Health>().ProtectFor(0);ui.GetComponent<WarehouseTouchControls>().Bind(player.GetComponent<PlayerActions>());Assert.IsTrue(player.GetComponent<Health>().ApplyDamage(new DamageInfo(70,CombatTeam.Enemy)));
             var root=ui.rootVisualElement;var names=new[]{"moveStick","aimStick","heal","reload","parachuteButton"};
             foreach(var size in new[]{new Vector2(1280,720),new Vector2(960,720),new Vector2(1560,720),new Vector2(720,1280)})
             {
                 root.style.width=size.x;root.style.height=size.y;yield return null;yield return null;
                 var pads=names.Select(n=>root.Q<VisualElement>(n)).ToArray();foreach(var pad in pads){Assert.IsNotNull(pad);Assert.AreEqual(.5f,pad.resolvedStyle.opacity,.01f);}
                 // UI Toolkit resolves dimensions onto the current panel's pixel grid.
-                Assert.AreEqual(187.5f,pads[0].resolvedStyle.width,1f);Assert.AreEqual(187.5f,pads[1].resolvedStyle.width,1f);
+                Assert.AreEqual(215.625f,pads[0].resolvedStyle.width,1f);Assert.AreEqual(215.625f,pads[1].resolvedStyle.width,1f);
                 for(int i=0;i<pads.Length;i++)for(int j=i+1;j<pads.Length;j++)Assert.IsFalse(pads[i].worldBound.Overlaps(pads[j].worldBound),names[i]+" overlaps "+names[j]+" at "+size);
             }
-            var button=root.Q<Button>("heal");using(var click=ClickEvent.GetPooled()){click.target=button;button.SendEvent(click);}Assert.AreEqual(65,player.GetComponent<Health>().Current);Assert.Greater(player.GetComponent<PlayerHealing>().CooldownRemaining,0);
+            var button=root.Q<Button>("heal");
+            using(var down=PointerDownEvent.GetPooled(new Event{type=EventType.MouseDown,button=0,mousePosition=button.worldBound.center})){down.target=button;button.SendEvent(down);}
+            yield return new WaitForSeconds(.4f);Assert.Greater(player.GetComponent<Health>().Current,30);Assert.Less(player.GetComponent<Health>().Current,65);
+            using(var up=PointerUpEvent.GetPooled(new Event{type=EventType.MouseUp,button=0,mousePosition=button.worldBound.center})){up.target=button;button.SendEvent(up);}
+            yield return null;yield return null;float hp=player.GetComponent<Health>().Current;yield return new WaitForSeconds(.15f);Assert.AreEqual(hp,player.GetComponent<Health>().Current);
         }
         [UnityTest] public IEnumerator AndroidFramingIsTwelveAndAHalfPercentCloserWithoutChangingPcSize()
         {
@@ -94,7 +98,12 @@ namespace InsaneDreams.Tests
         {
             var player=Player();var a=Enemy(12008,false);var b=Enemy(12008.1f,false);a.BindTarget(player.GetComponent<Health>());b.BindTarget(player.GetComponent<Health>());yield return new WaitForSeconds(2);
             Assert.Greater(Vector2.Distance(a.transform.position,b.transform.position),1.2f);Assert.Less(a.transform.position.x,b.transform.position.x);Assert.IsTrue(a.HasCombatPosition);Assert.IsTrue(b.HasCombatPosition);
-            var high=Enemy(12008);high.GetComponent<Rigidbody2D>().position=new Vector2(12008,5);Physics2D.SyncTransforms();Assert.IsTrue(high.CanAdvance(-1),"Different platforms must not form a crowd obstacle.");
+            // A floating, freshly teleported actor still belongs to its previous
+            // floor under Sprint022.3's jump-spacing rules. Give this actor a real
+            // upper platform before testing independent floor occupancy.
+            Solid(new Vector2(12008,3.8f),new Vector2(4,1));
+            var high=Enemy(12008);high.GetComponent<Rigidbody2D>().position=new Vector2(12008,5);Physics2D.SyncTransforms();yield return new WaitForSeconds(.15f);
+            Assert.IsTrue(high.GetComponent<InsaneDreams.Prototype.PlayerMotor2D>().IsGrounded);Assert.IsTrue(high.CanAdvance(-1),"Different platforms must not form a crowd obstacle.");
         }
         [UnityTest] public IEnumerator RagdollImpulseIncreasesFifteenPercentWhileVelocityLimitsStayIntact()
         {

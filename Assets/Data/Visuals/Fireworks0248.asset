@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb528433d18e7c24b94402c75f563040, type: 3}
+  m_Name: Fireworks0248
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Visuals.CharacterSkin
+  head: {fileID: 21300000, guid: cbcf7f5d7dfe79b41a1db986fcb3c81a, type: 2}
+  torso: {fileID: 21300000, guid: 537674ae1a20570428b3f83616105c99, type: 2}
+  arm: {fileID: 21300000, guid: 52037ff03e67d0e439d2cab69c3e38d9, type: 2}
+  leg: {fileID: 21300000, guid: 12e8d43e6d3c7904db1ed0f0e64b7a3e, type: 2}
+  weapon: {fileID: 1654527611769721033, guid: 9d1f8c2918ca8084f89560db99c4eb77, type: 2}
+  parachute: {fileID: 21300000, guid: f89cc3f609931e34791fea7c21333f51, type: 3}
+  secondaryWeapon: {fileID: 21300000, guid: 0d9544d255dbe2e43a08107018622f45, type: 3}
+  meleeWeapon: {fileID: 21300000, guid: 2f5b2ca3950189843963dc27d4609498, type: 3}
+  panicFace: {fileID: 21300000, guid: 3481ee439abf71d4682c52c44716a0a5, type: 2}
+  faces:
+  - {fileID: 21300000, guid: 3cc96e65a061e494a8c138c9ab6610ca, type: 2}
+  - {fileID: 21300000, guid: 46ecc2563a8086f408a6d2fc6408ac27, type: 2}
+  - {fileID: 21300000, guid: df642fc573017f642807ecf3222c6318, type: 2}
+  - {fileID: 21300000, guid: 064662672f17b2644bd52c092b075098, type: 2}
+  - {fileID: 21300000, guid: 44e0e4e8da3f0e44f97d6820a1ed47c4, type: 2}
+  - {fileID: 21300000, guid: 75738ae5cb121a644b868a783e7dca48, type: 2}
+  clothing: {r: 1, g: 1, b: 1, a: 1}
+  provenance: Sprint 024.8 primitive native-pixel shirt/scribbled bomb logo and oversized cheap hardhat; Larper/Enemak Graphics Bible.

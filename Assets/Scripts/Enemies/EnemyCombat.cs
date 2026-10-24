@@ -29,17 +29,36 @@ namespace InsaneDreams.Enemies
         [SerializeField, Range(.8f,1)] private float suppressedRepositionDistanceMultiplier=.8f;
         private float nextPositionSample;
         private Vector2 positionAnchor;
-        [SerializeField] private Vector2 combatRepositionSeconds=new Vector2(8,13);
-        [SerializeField, Range(0,1)] private float combatRepositionChance=.2f;
-        private float nextCombatReposition,repositionStandOff,coverHoldUntil;
+        [SerializeField] private Vector2 combatRepositionSeconds=new Vector2(4,7);
+        [SerializeField, Range(0,1)] private float combatRepositionChance=.35f;
+        private Vector2 blockedPosition;
+        private float blockedPositionUntil;
+        private void ReconsiderBlockedPosition()
+        {
+            if(!isActiveAndEnabled)return;
+            if(samurai!=null&&samurai.isActiveAndEnabled){samurai.ReconsiderBlockedPath();return;}
+            if(withdrawing){withdrawalStarted=Time.time-withdrawalSeconds;return;}
+            blockedPosition=CombatPosition;blockedPositionUntil=Time.time+3;
+            ReleasePosition();nextCombatReposition=Time.time+Random.Range(1,2);
+        }
+        private void OnDestroy(){if(patrol!=null)patrol.ReplanRequested-=ReconsiderBlockedPosition;}
+        private float nextCombatReposition,repositionStandOff,coverHoldUntil,coverHoldDeadline;
+        [Header("Retreat cover recovery")]
+        [SerializeField] private Vector2 retreatHideSeconds=new Vector2(2,3.5f);
+        [SerializeField,Min(1)] private float maximumCoverHideSeconds=6;
+        private float withdrawalFeet,nextWithdrawalFire;
+        public bool IsRetreatCrouching=>UsesPanicEscapes&&withdrawing&&localWithdrawal&&!withdrawalAllowsHop&&motor.IsGrounded&&UnderSuppression;
         public int TacticalRepositions { get; private set; }
         public bool IsHoldingCover=>Time.time<coverHoldUntil&&selectedCover!=null&&selectedCover.isActiveAndEnabled;
         private bool retreatReservation;
         private float nextCrowdCheck,crowdDirection;
+        private float spacingFloorY;
+        internal float SpacingFloorY=>motor!=null&&motor.IsGrounded?transform.position.y:spacingFloorY;
         private bool crowdBlocked;
         public bool CanAdvance(float direction)
         {
-            if(!motor.IsGrounded||route!=null&&route.IsRunning)return true;
+            if(motor.IsGrounded)spacingFloorY=transform.position.y;
+            if(route!=null&&route.IsRunning)return true;
             direction=Mathf.Sign(direction);
             if(Time.time>=nextCrowdCheck||direction!=crowdDirection)
             {
@@ -52,7 +71,7 @@ namespace InsaneDreams.Enemies
         internal bool PositionActive=>isActiveAndEnabled&&owner!=null&&!owner.IsDefeated;
         public bool HasCombatPosition=>CombatPositionReservations.TryGet(this,out _);
         public Vector2 CombatPosition=>CombatPositionReservations.TryGet(this,out var point)?point:(Vector2)transform.position;
-        private void ReleasePosition(){CombatPositionReservations.Release(this);retreatReservation=false;nextPositionSample=0;}
+        private void ReleasePosition(){CombatPositionReservations.Release(this);selectedCover=null;retreatReservation=false;nextPositionSample=0;}
         private void MoveToCombatPosition(Vector2 focus,float standOff)
         {
             // Briefly hold ground while returning inaccurate fire. Keep any existing
@@ -92,6 +111,7 @@ namespace InsaneDreams.Enemies
                     {
                         float offset=i==0?0:((i+1)/2)*minimumCombatSpacing*(i%2==1?-sign:sign);
                         Vector2 candidate=new Vector2(desired+offset,transform.position.y);float travel=candidate.x-transform.position.x;
+                        if(Time.time<blockedPositionUntil&&Vector2.SqrMagnitude(candidate-blockedPosition)<minimumCombatSpacing*minimumCombatSpacing)continue;
                         if(Mathf.Abs(travel)>.2f&&!patrol.CanReachCover(Mathf.Sign(travel),Mathf.Abs(travel),out _))continue;
                         if(CombatPositionReservations.TryClaim(this,candidate)){positionAnchor=focus;break;}
                     }
@@ -105,28 +125,58 @@ namespace InsaneDreams.Enemies
         [SerializeField, Range(.05f,1)] private float obstructedHearingMultiplier=.45f;
         [SerializeField, Min(.1f)] private float hearingMemorySeconds=4;
         [SerializeField, Min(.1f)] private float soundPositionUncertainty=2;
-        [SerializeField, Min(.1f)] private float nearMissDistance=1.25f;
+        [SerializeField, Min(.1f)] private float nearMissDistance=1.5f;
         [SerializeField, Min(.05f)] private float gunfireHearingInterval=.25f;
         private Vector2 heardPosition;
         private float heardUntil,underFireUntil,nextGunfireHearing,hesitateUntil,nextHesitation;
         [Header("Defensive crouch (near-miss suppression)")]
-        [SerializeField, Range(0,1)] private float defensiveCrouchProbability=.48f;
+        [SerializeField, Range(0,1)] private float defensiveCrouchProbability=.8f;
         [SerializeField] private Vector2 defensiveCrouchSeconds=new Vector2(.8f,2);
-        [SerializeField] private Vector2 defensiveCrouchCooldown=new Vector2(5,8);
-        [Tooltip("A continuous burst is one episode; only a quiet gap permits another decision.")]
-        [SerializeField, Min(.1f)] private float suppressionQuietSeconds=.65f;
+        [SerializeField] private Vector2 defensiveCrouchCooldown=new Vector2(2.5f,4.25f);
+        [Tooltip("Quiet gap separating bursts. Sustained pressure can retry ducking after its ordinary decision cooldown.")]
+        [SerializeField, Min(.1f)] private float suppressionQuietSeconds=.8f;
         private float defensiveUntil,nextDefensiveDecision,suppressionUntil;
         [Header("Accumulated near-miss suppression")]
+        [Tooltip("Disable for characters such as Grandpa that ignore psychological pressure.")]
+        [SerializeField] private bool susceptibleToSuppression=true;
+        [SerializeField, Range(0,20)] private float suppressionSpreadDegrees=10;
         [SerializeField, Min(1)] private float maximumSuppression=100;
-        [SerializeField, Min(0)] private float nearMissSuppression=31.5f;
-        [SerializeField, Min(0)] private float suppressionDecayPerSecond=18;
-        [SerializeField, Min(0)] private float moderateSuppression=25;
-        [SerializeField, Min(0)] private float highSuppression=60;
-        [SerializeField, Range(0,1)] private float suppressionRetreatChance=.55f;
-        [SerializeField, Min(.1f)] private float suppressionReactionCooldown=6;
+        [SerializeField, Min(0)] private float nearMissSuppression=58;
+        [SerializeField, Min(0)] private float suppressionDecayPerSecond=12;
+        [SerializeField, Min(0)] private float moderateSuppression=14;
+        [SerializeField, Min(0)] private float highSuppression=42;
+        [SerializeField, Range(0,1)] private float suppressionRetreatChance=.7f;
+        [SerializeField, Min(.1f)] private float suppressionReactionCooldown=4;
+        [SerializeField, Range(0,1)] private float overheadDistanceBias=.15f;
         private SuppressionMeter suppression;
         private float nextSuppressionReaction;
+        private float suppressionEpisodeStart,nextSuppressionPanic;
         private bool suppressionWithdrawal;
+        [SerializeField,Min(.1f)] private float sustainedSuppressionSeconds=.45f;
+        [SerializeField,Min(2)] private int sustainedNearMisses=3;
+        private int episodeMisses;
+        private float nextSustainedEvasion;
+        public int NearMissEvents{get;private set;}
+        public int SuppressionEvasions{get;private set;}
+        [Header("Basic Larper panic escapes (explicit archetype opt-in)")]
+        [SerializeField] private EnemyArchetype panicEscapeArchetype;
+        [SerializeField,Min(0)] private int maximumPanicEscapes=2;
+        [SerializeField,Range(0,1)] private float panicEscapeChance=.9f;
+        [SerializeField,Min(0)] private float panicEscapeSuppression=55;
+        [SerializeField] private Vector2 panicEscapeCooldown=new Vector2(2,3);
+        [SerializeField,Min(1)] private float panicEscapeDistance=6,panicEscapeSeconds=3.5f;
+        [SerializeField,Min(.5f)] private float meaningfulEscapeDistance=2;
+        [SerializeField,Min(1)] private float escapeLeash=12;
+        private float nextPanicEscape;
+        private bool majorEscape,escapeCounted,limitedWithdrawal,localWithdrawal;
+        private Vector2 escapeAnchor,lastEscapeDestination,previousEscapeDestination;
+        public int PanicEscapes{get;private set;}
+        public bool UsesPanicEscapes=>panicEscapeArchetype!=null&&patrol!=null&&patrol.Archetype==panicEscapeArchetype&&samurai==null&&fireworks==null;
+        public bool IsPanicEscaping=>majorEscape&&withdrawing;
+        public float PanicEscapeProbability=>Mathf.Clamp(panicEscapeChance*SuppressionSusceptibility*(MoraleInfluence<0?1.15f:MoraleInfluence>0?.9f:1),0,.98f);
+        private float WithdrawalLimit=>localWithdrawal?1.5f:majorEscape?Mathf.Min(withdrawalDistance,panicEscapeDistance):withdrawalDistance;
+        private float WithdrawalMinimum=>majorEscape?Mathf.Max(1,meaningfulEscapeDistance):localWithdrawal||suppressionWithdrawal?1:minimumWithdrawalDistance;
+        private float WithdrawalTimeout=>majorEscape?Mathf.Min(withdrawalSeconds,panicEscapeSeconds):withdrawalSeconds;
         [Header("Basic Larper equipment reliability")]
         [SerializeField] private bool unreliableWeapon;
         [SerializeField, Range(0,.01f)] private float malfunctionChance=.0075f;
@@ -136,17 +186,21 @@ namespace InsaneDreams.Enemies
         public int Malfunctions { get; private set; }
         public event System.Action WeaponMalfunctioned;
         private Vector2 withdrawalThreat;
-        public float Suppression=>suppression.Sample(Time.time,suppressionDecayPerSecond,suppressionQuietSeconds);
+        public float Suppression=>susceptibleToSuppression?suppression.Sample(Time.time,SuppressionDecay,suppressionQuietSeconds):0;
+        private float SuppressionDecay=>suppressionDecayPerSecond*(awareness!=null&&awareness.Personality!=null&&awareness.Personality.Disposition==LarperDisposition.Overconfident?1.2f:1);
+        public bool SusceptibleToSuppression=>susceptibleToSuppression;
+        public bool UnderSuppression=>Suppression>=moderateSuppression;
         private float SuppressionSusceptibility=>awareness!=null&&awareness.Personality!=null?
             awareness.Personality.Disposition switch {LarperDisposition.Cowardly=>1.25f,LarperDisposition.Overconfident=>.75f,_=>1}:1;
         private float moraleUntil,morale;
         public float MoraleInfluence=>Time.time<moraleUntil?morale:0;
-        public bool CanReactToAllyDefeat=>isActiveAndEnabled&&owner!=null&&!owner.IsDefeated&&Time.time>=panicUntil&&
-            !withdrawing&&!IsHoldingCover&&weapon!=null&&!weapon.Cycle.IsReloading&&
+        public bool CanObserveAllyDefeat=>susceptibleToSuppression&&isActiveAndEnabled&&owner!=null&&!owner.IsDefeated&&Time.time>=panicUntil&&
+            weapon!=null&&!weapon.Cycle.IsReloading&&
             (route==null||!route.IsRunning)&&(traversal==null||!traversal.IsClimbing&&!traversal.ParachuteFlightActive);
+        public bool CanReactToAllyDefeat=>CanObserveAllyDefeat&&!withdrawing&&!IsHoldingCover;
         public bool ApplyAllyMorale(bool fearful,float seconds)
         {
-            if(!CanReactToAllyDefeat)return false;
+            if(!CanObserveAllyDefeat)return false;
             morale=fearful?-1:1;moraleUntil=Time.time+Mathf.Clamp(seconds,.1f,8);
             if(fearful)hesitateUntil=Mathf.Max(hesitateUntil,Time.time+Random.Range(.15f,.45f));
             return true;
@@ -166,22 +220,77 @@ namespace InsaneDreams.Enemies
             (route==null||!route.IsRunning)&&(traversal==null||!traversal.IsClimbing&&!traversal.ParachuteFlightActive);
         private void Suppressed(float proximity,Vector2 threat)
         {
-            float previous=Suppression;
+            if(!susceptibleToSuppression)return;
             float influence=SuppressionSusceptibility*(MoraleInfluence<0?1.15f:MoraleInfluence>0?.9f:1);
-            float level=suppression.Add(nearMissSuppression*Mathf.Lerp(.4f,1.45f,proximity)*influence,Time.time,maximumSuppression,suppressionDecayPerSecond,suppressionQuietSeconds);
+            float level=suppression.Add(nearMissSuppression*Mathf.Lerp(.4f,1.45f,proximity)*influence,Time.time,maximumSuppression,SuppressionDecay,suppressionQuietSeconds);
             bool fresh=Time.time>=suppressionUntil;
+            if(fresh){suppressionEpisodeStart=Time.time;episodeMisses=0;}
+            episodeMisses++;NearMissEvents++;
             suppressionUntil=Time.time+Mathf.Max(.1f,suppressionQuietSeconds);
-            if(fresh)TryDefensiveCrouch(defensiveCrouchProbability*(MoraleInfluence<0?1.25f:MoraleInfluence>0?.9f:1));
-            if(!CanReactToAllyDefeat||!motor.IsGrounded)return;
-            if(level>=highSuppression&&Time.time>=nextSuppressionReaction)
+            if(IsHoldingCover)withdrawalThreat=threat;
+            // High first pulses used to bypass hesitation. Bounded beats during a
+            // burst leave combat windows and never reroll major panic per bullet.
+            if(level>=moderateSuppression&&Time.time>=nextHesitation)
+            {
+                hesitateUntil=Mathf.Max(hesitateUntil,Time.time+Random.Range(.22f,.36f)*SuppressionSusceptibility);
+                nextHesitation=Time.time+Random.Range(1.2f,1.8f);
+                awareness?.SuppressionCue();
+            }
+            // Melee hunters can hesitate, but never inherit Larper fear/withdrawal.
+            if(samurai!=null&&samurai.isActiveAndEnabled)return;
+            if(fresh||level>=moderateSuppression&&!IsDefensivelyCrouching)TryDefensiveCrouch(defensiveCrouchProbability*SuppressionSusceptibility*(MoraleInfluence<0?1.25f:MoraleInfluence>0?.9f:1));
+            if(CanReactToAllyDefeat&&motor.IsGrounded&&level>=highSuppression&&Time.time>=nextSuppressionReaction)
             {
                 // Failed rolls also consume the window. Bursts cannot reroll every
                 // bullet until everyone retreats; this emits no morale events.
                 nextSuppressionReaction=Time.time+Mathf.Max(.1f,suppressionReactionCooldown);
                 if(Random.value<Mathf.Clamp01(suppressionRetreatChance*influence))StartWithdrawal(true,threat);
+                else if(level>=maximumSuppression&&Time.time-suppressionEpisodeStart>=1.5f&&Time.time>=nextSuppressionPanic)
+                {
+                    // Only a prolonged, saturated burst can roll major panic, and
+                    // even a failed roll consumes the long personality cooldown.
+                    // This is not an ally defeat and never seeds a collapse chain.
+                    var personality=awareness!=null?awareness.Personality:null;
+                    nextSuppressionPanic=Time.time+Mathf.Max(45,personality!=null?personality.MoraleCooldown:45);
+                    if(Random.value<(personality!=null?personality.PanicChance:.08f)&&PanicFor(personality!=null?personality.PanicSeconds:2.5f))
+                        awareness?.SuppressionPanic();
+                }
             }
-            else if(previous<moderateSuppression&&level>=moderateSuppression&&Time.time>=nextHesitation)
-            {hesitateUntil=Mathf.Max(hesitateUntil,Time.time+.25f);nextHesitation=Time.time+1;}
+            // Preserve the existing rare panic opportunity before bounded ordinary
+            // evasion. Reloading must not veto a sustained, reachable escape.
+            bool sustained=level>=highSuppression&&episodeMisses>=sustainedNearMisses&&Time.time-suppressionEpisodeStart>=sustainedSuppressionSeconds;
+            if(sustained&&TryPanicEscape(level,threat))return;
+            if(sustained&&Time.time>=nextSustainedEvasion&&!withdrawing&&motor.IsGrounded&&Time.time>=panicUntil&&
+                (route==null||!route.IsRunning)&&(traversal==null||!traversal.IsClimbing&&!traversal.ParachuteFlightActive))
+            {
+                nextSustainedEvasion=Time.time+Random.Range(1.5f,2.2f)/SuppressionSusceptibility;
+                if(IsHoldingCover&&CoveredAt(transform.position.x)){coverHoldUntil=Mathf.Min(coverHoldDeadline,Mathf.Max(coverHoldUntil,Time.time+1.5f));return;}
+                bool reloading=weapon!=null&&weapon.Cycle.IsReloading;
+                if(StartWithdrawal(true,threat)){if(reloading)weapon.Cycle.CancelReload();SuppressionEvasions++;}
+            }
+        }
+        private bool TryPanicEscape(float level,Vector2 threat)
+        {
+            if(!UsesPanicEscapes||PanicEscapes>=maximumPanicEscapes||level<panicEscapeSuppression||Time.time<nextPanicEscape||IsHoldingCover||
+                majorEscape&&withdrawing||withdrawing&&!suppressionWithdrawal||!motor.IsGrounded||Time.time<panicUntil||
+                route!=null&&route.IsRunning||traversal!=null&&(traversal.IsClimbing||traversal.ParachuteFlightActive))return false;
+            float min=Mathf.Max(.5f,panicEscapeCooldown.x);
+            nextPanicEscape=Time.time+Random.Range(min,Mathf.Max(min,panicEscapeCooldown.y))/SuppressionSusceptibility;
+            if(Random.value>=PanicEscapeProbability)return false;
+            bool reloading=weapon!=null&&weapon.Cycle.IsReloading;
+            if(!StartWithdrawal(true,threat,true))return false;
+            if(reloading)weapon.Cycle.CancelReload();SuppressionEvasions++;return true;
+        }
+        private bool EscapePositionAllowed(float x)
+        {
+            if(!limitedWithdrawal)return true;
+            Vector2 candidate=new Vector2(x,withdrawalY);
+            if(Mathf.Abs(x-withdrawalX)>WithdrawalLimit+.01f||Vector2.Distance(candidate,escapeAnchor)>escapeLeash)return false;
+            // Use incoming-fire origin and existing player memory, never hidden target tracking.
+            if((x-withdrawalX)*(withdrawalThreat.x-withdrawalX)>.01f||tracking&&(x-withdrawalX)*(lastSeen.x-withdrawalX)>.01f)return false;
+            if(PanicEscapes>0&&Vector2.Distance(candidate,lastEscapeDestination)<1.25f||PanicEscapes>1&&Vector2.Distance(candidate,previousEscapeDestination)<1.25f)return false;
+            if(Time.time<blockedPositionUntil&&Vector2.SqrMagnitude(candidate-blockedPosition)<minimumCombatSpacing*minimumCombatSpacing)return false;
+            return true;
         }
         private void TryDefensiveCrouch(float probability)
         {
@@ -206,8 +315,29 @@ namespace InsaneDreams.Enemies
             float t=segment.sqrMagnitude>.0001f?Mathf.Clamp01(Vector2.Dot(origin-noise.Position,segment)/segment.sqrMagnitude):0;
             Vector2 closest=noise.Position+segment*t;
             float missDistance=Vector2.Distance(origin,closest);
-            bool near=shot&&noise.HitTarget!=owner&&segment.sqrMagnitude>.0001f&&missDistance<=nearMissDistance&&
+            // The standing head envelope keeps overhead bursts meaningful after a
+            // duck. Visibility still ends at the real body, so protective geometry
+            // cannot be bypassed by an imaginary standing head above a crate.
+            Vector2 head=new Vector2(origin.x,actorBox.bounds.min.y+(posture!=null?posture.StandingWorldHeight:actorBox.bounds.size.y)-.1f);
+            float headT=segment.sqrMagnitude>.0001f?Mathf.Clamp01(Vector2.Dot(head-noise.Position,segment)/segment.sqrMagnitude):0;
+            Vector2 overhead=noise.Position+segment*headT;
+            float overheadDistance=Vector2.Distance(head,overhead)+overheadDistanceBias;
+            if(overhead.y>=head.y&&overheadDistance<missDistance){closest=overhead;missDistance=overheadDistance;}
+            bool near=susceptibleToSuppression&&shot&&noise.HitTarget!=owner&&segment.sqrMagnitude>.0001f&&missDistance<=nearMissDistance&&
                 !CombatVisibility2D.IsBlocked(closest,origin,geometry,sightHits,transform,noise.Source!=null?noise.Source.transform:null);
+            // A real impact on this actor's reserved cover also creates pressure.
+            // Do not extend a clipped trajectory through arbitrary walls, or count a
+            // parallel shot above cover as an impact. No additional frame-time scans.
+            if(!near&&susceptibleToSuppression&&shot&&noise.HitTarget==null&&selectedCover!=null&&selectedCover.isActiveAndEnabled&&
+                segment.sqrMagnitude>.0001f&&Vector2.Distance(noise.End,origin)<=nearMissDistance+Mathf.Min(1.8f,selectedCover.bounds.size.x)&&
+                Vector2.Distance(selectedCover.ClosestPoint(noise.End),noise.End)<.025f&&
+                Vector2.Distance(selectedCover.ClosestPoint(noise.End-segment.normalized*.05f),noise.End-segment.normalized*.05f)>.025f&&
+                !CombatVisibility2D.IsBlocked(origin,noise.End,geometry,sightHits,transform,selectedCover.transform))
+            {
+                // The struck front face can be a crate-width farther away than its
+                // occupied rear face. Measure pressure from that protected face.
+                near=true;missDistance=Mathf.Max(0,Vector2.Distance(noise.End,origin)-Mathf.Min(1.8f,selectedCover.bounds.size.x));
+            }
             if(near)
             {
                 Suppressed(1-missDistance/Mathf.Max(.1f,nearMissDistance),noise.Position);
@@ -227,13 +357,17 @@ namespace InsaneDreams.Enemies
         }
         private float nextCameraLookup;
         private Transform visibleBody;
+        private SamuraiBodyHitbox visualBodyBounds;
         public bool HasEngaged => engagementAuthorized;
         // Checkpoint/replay boundary only; normal combat still owns its state machine.
         public void ResetEncounter(Health value)
         {
+            PanicEscapes=0;majorEscape=escapeCounted=limitedWithdrawal=localWithdrawal=false;nextPanicEscape=0;escapeAnchor=transform.position;lastEscapeDestination=previousEscapeDestination=default;
+            episodeMisses=NearMissEvents=SuppressionEvasions=0;nextSustainedEvasion=0;
+            blockedPositionUntil=0;
             nextCombatReposition=repositionStandOff=coverHoldUntil=0;
             nextMalfunction=Time.time+2;
-            suppression=default;nextSuppressionReaction=0;suppressionWithdrawal=false;
+            suppression=default;nextSuppressionReaction=suppressionEpisodeStart=nextSuppressionPanic=0;suppressionWithdrawal=false;
             nextCrowdCheck=0;crowdBlocked=false;moraleUntil=morale=0;defensiveUntil=nextDefensiveDecision=suppressionUntil=0;
             ReleasePosition();panicUntil=blindUntil=reengageAt=readyAt=nextAimSample=heardUntil=underFireUntil=hesitateUntil=nextGunfireHearing=0;withdrawing=false;selectedCover=null;
             weapon?.Cycle.CancelReload();if(firearm!=null)weapon=new RuntimeWeapon(firearm,initialReserveAmmo);
@@ -247,7 +381,8 @@ namespace InsaneDreams.Enemies
             {
                 if(!cameraBound&&(gameplayCamera==null||!gameplayCamera.isActiveAndEnabled||!gameplayCamera.CompareTag("MainCamera"))&&Time.unscaledTime>=nextCameraLookup)
                 {gameplayCamera=Camera.main;nextCameraLookup=Time.unscaledTime+.5f;}
-                return InsaneDreams.CameraSystem.GameplayViewport.Overlaps(gameplayCamera,actorBox.bounds,visibleBody!=null?visibleBody.gameObject.layer:gameObject.layer);
+                var bounds=samurai!=null&&visualBodyBounds!=null&&visualBodyBounds.HasVisibleBody?visualBodyBounds.VisibleBounds:actorBox.bounds;
+                return InsaneDreams.CameraSystem.GameplayViewport.Overlaps(gameplayCamera,bounds,visibleBody!=null?visibleBody.gameObject.layer:gameObject.layer);
             }
         }
         [SerializeField, Min(0)] private float closeRange = 3;
@@ -298,6 +433,8 @@ namespace InsaneDreams.Enemies
         private float withdrawalGoal;
         private bool withdrawalAnnounced;
         private Health owner, target;
+        private SamuraiCombat samurai;
+        private FireworksCombat fireworks;
         private LarperBrain patrol;
         private PlayerMotor2D motor;
         private AttackExecutor executor;
@@ -332,13 +469,26 @@ namespace InsaneDreams.Enemies
             hesitateUntil=0;ReleasePosition();panicUntil=Mathf.Max(panicUntil,Time.time+seconds);blindUntil=0;withdrawing=false;weapon?.Cycle.CancelReload();return true;
         }
         public bool TargetVisible { get; private set; }
-        public float SpreadAtDistance(float distance) => Mathf.Lerp(closeSpread, distantSpread, Mathf.InverseLerp(closeRange, effectiveRange, distance));
+        public float SpreadAtDistance(float distance) => Mathf.Lerp(closeSpread, distantSpread, Mathf.InverseLerp(closeRange, effectiveRange, distance))+
+            suppressionSpreadDegrees*Mathf.InverseLerp(moderateSuppression,maximumSuppression,Suppression);
         public EngagementState State { get; private set; }
         public Vector2 AimDirection { get; private set; } = Vector2.right;
-        private void OnEnable() {nextMalfunction=Time.time+2;nextCombatReposition=repositionStandOff=coverHoldUntil=0;suppression=default;nextSuppressionReaction=0;suppressionWithdrawal=false;engagementAuthorized=false;CombatPositionReservations.Register(this);}
+        private void OnEnable() {spacingFloorY=transform.position.y;nextMalfunction=Time.time+2;nextCombatReposition=repositionStandOff=coverHoldUntil=0;suppression=default;nextSuppressionReaction=0;suppressionWithdrawal=false;engagementAuthorized=false;CombatPositionReservations.Register(this);HoldUnacquiredSamurai();}
+        private void HoldUnacquiredSamurai()
+        {
+            // FixedUpdate can precede the first combat Update after spawn/reset.
+            // Do not let generic patrol queue an unplanned jump in that interval.
+            if(samurai==null||!samurai.isActiveAndEnabled||patrol==null||motor==null)return;
+            patrol.DecisionsSuspended=true;patrol.ClearPursuit();motor.SetMoveInput(0);
+        }
         private void Awake()
         {
+            escapeAnchor=transform.position;
             owner = GetComponent<Health>(); patrol = GetComponent<LarperBrain>();
+            patrol.ReplanRequested+=ReconsiderBlockedPosition;
+            samurai=GetComponent<SamuraiCombat>();
+            visualBodyBounds=GetComponent<SamuraiBodyHitbox>();
+            fireworks=GetComponent<FireworksCombat>();
             motor = GetComponent<PlayerMotor2D>(); executor = GetComponent<AttackExecutor>();
             route = GetComponent<AuthoredLadderRoute>();
             awareness = GetComponent<LarperAwareness>();
@@ -347,7 +497,7 @@ namespace InsaneDreams.Enemies
             var rig=GetComponentInChildren<InsaneDreams.Visuals.CutoutRig>(true);visibleBody=rig!=null?rig.torso:transform;
             if (firearm != null) weapon = new RuntimeWeapon(firearm, initialReserveAmmo);
         }
-        public void BindTarget(Health value) { nextPerception=0;TargetVisible=false;engagementAuthorized=false;target = value; targetCollider=value!=null?value.GetComponent<Collider2D>():null;tracking = wasVisible = false; blindUntil=0;lastFiredAt=float.NegativeInfinity; }
+        public void BindTarget(Health value) { nextPerception=0;TargetVisible=false;engagementAuthorized=false;target = value; targetCollider=value!=null?value.GetComponent<Collider2D>():null;tracking = wasVisible = false; blindUntil=0;lastFiredAt=float.NegativeInfinity;HoldUnacquiredSamurai(); }
         private void Update()
         {
             // The existing posture controller owns collider changes and safe standing.
@@ -356,10 +506,11 @@ namespace InsaneDreams.Enemies
             bool coverReload=weapon!=null&&weapon.Cycle.IsReloading&&Time.time>=panicUntil&&selectedCover!=null&&selectedCover.isActiveAndEnabled&&
                 motor.IsGrounded&&Mathf.Abs(transform.position.y-withdrawalY)<.25f&&
                 Mathf.Abs(transform.position.x-RetreatDestination.x)<.65f&&CoveredAt(transform.position.x);
-            posture?.SetInput(coverReload||IsDefensivelyCrouching||IsHoldingCover?Vector2.down:Vector2.zero);
+            posture?.SetInput(coverReload||IsDefensivelyCrouching||IsHoldingCover||IsRetreatCrouching?Vector2.down:Vector2.zero);
             if (owner.IsDefeated) { ReleasePosition();blindUntil=0;withdrawing=false; weapon?.Cycle.CancelReload(); patrol.ClearPursuit(); motor.SetMoveInput(0); State = EngagementState.Defeated; return; }
             if(Time.time<panicUntil){patrol.DecisionsSuspended=true;patrol.ClearPursuit();motor.SetMoveInput(0);State=EngagementState.Panicked;return;}
             bool routing = route != null && route.IsRunning;
+            bool meleeHunter=samurai!=null&&samurai.isActiveAndEnabled;
             Vector2 delta = target != null ? (Vector2)(target.transform.position - transform.position) : Vector2.zero;
             bool available = !routing && target != null && target.isActiveAndEnabled && !target.IsDefeated;
             float range = detectionRange + (tracking ? rangeHysteresis : 0);
@@ -372,10 +523,16 @@ namespace InsaneDreams.Enemies
                 if(TargetVisible){lastSeenAt=Time.time;lastSeen=target.transform.position;}
             }
             if(previouslyVisible!=TargetVisible)VisibilityChanged?.Invoke(TargetVisible);
-            if(TargetVisible&&!encounterEnabled){encounterEnabled=true;ThreatNoticed?.Invoke();}
+            // Acquire only through the gameplay viewport and existing sampled LOS.
+            // Once acquired, camera movement is not a reason to forget a melee hunter's target.
+            if(meleeHunter&&!engagementAuthorized&&TargetVisible&&InGameplayViewport)
+            {engagementAuthorized=true;readyAt=Time.time+reactionSeconds+Random.Range(0,reactionJitterSeconds);}
+            if(TargetVisible&&!encounterEnabled&&(!meleeHunter||engagementAuthorized)){encounterEnabled=true;ThreatNoticed?.Invoke();}
             if(!encounterEnabled){ReleasePosition();patrol.DecisionsSuspended=true;patrol.ClearPursuit();motor.SetMoveInput(0);State=EngagementState.Patrol;return;}
             // Authored traversal owns the motor. Do not resume a stale retreat after it.
             if (routing) { ReleasePosition();blindUntil=0;withdrawing=false; weapon?.Cycle.CancelReload(); patrol.ClearPursuit(); patrol.DecisionsSuspended=true; State=EngagementState.Patrol; return; }
+            if(meleeHunter&&!engagementAuthorized)
+            {patrol.DecisionsSuspended=true;patrol.SetPursuit(0);motor.SetMoveInput(0);State=EngagementState.Searching;return;}
             if (wasVisible && !TargetVisible && available && tracking && State==EngagementState.Engaging && weapon!=null && !weapon.Cycle.IsReloading &&
                 weapon.MagazineAmmo>0 && Time.time-lastFiredAt<=Mathf.Max(.35f,weapon.Definition.FiringInterval*1.5f))
             {
@@ -398,15 +555,24 @@ namespace InsaneDreams.Enemies
             // Tick is the sole ammunition transfer authority; defeat/panic cancel first.
             bool wasReloading = weapon != null && weapon.Cycle.IsReloading;
             weapon?.Cycle.Tick(Time.time);
-            if (wasReloading && !weapon.Cycle.IsReloading) { ReleasePosition();reengageAt = Time.time + reengagementDelay; posture?.SetInput(Vector2.zero); posture?.TryStand(); }
+            if (wasReloading && !weapon.Cycle.IsReloading)
+            {
+                if(UsesPanicEscapes&&selectedCover!=null&&CoveredAt(transform.position.x))BeginCoverHold();
+                else {ReleasePosition();posture?.SetInput(Vector2.zero);posture?.TryStand();}
+                reengageAt=Time.time+reengagementDelay;
+            }
             if (weapon != null && weapon.Cycle.IsReloading)
             { blindUntil=0;patrol.DecisionsSuspended=true; patrol.SetPursuit(0); State=EngagementState.Reloading; return; }
-            if(weapon!=null&&weapon.Cycle.IsMalfunctioning(Time.time))
+            if(!withdrawing&&weapon!=null&&weapon.Cycle.IsMalfunctioning(Time.time))
             {patrol.DecisionsSuspended=true;patrol.SetPursuit(0);State=EngagementState.Reacting;return;}
             if (withdrawing)
             {
                 patrol.DecisionsSuspended=true; State=EngagementState.Withdrawing;
                 float travelled = Mathf.Max(0,(transform.position.x-withdrawalX)*retreatDirection);
+                if(majorEscape&&!escapeCounted&&travelled>=meaningfulEscapeDistance&&travelled>=withdrawalGoal&&motor.IsGrounded&&Mathf.Abs(transform.position.y-withdrawalY)<.25f)
+                {
+                    escapeCounted=true;PanicEscapes++;previousEscapeDestination=lastEscapeDestination;lastEscapeDestination=RetreatDestination;
+                }
                 // Stop at the endpoint between tactical samples; inertia still belongs
                 // to the motor. Otherwise a sample interval can overshoot low cover.
                 if(travelled>=withdrawalGoal)patrol.SetPursuit(0);
@@ -418,29 +584,50 @@ namespace InsaneDreams.Enemies
                     // Settle from a planned hop before crouching/reloading. A finite
                     // timeout and local safety checks still terminate changing routes.
                     bool settling=!motor.IsGrounded||selectedCover!=null&&Mathf.Abs(transform.position.y-withdrawalY)>.25f;
-                    if (reached && settling && Time.time-withdrawalStarted<withdrawalSeconds) { patrol.SetPursuit(0); return; }
-                    if (reached || Time.time-withdrawalStarted >= withdrawalSeconds || !patrol.CanWithdraw(retreatDirection,withdrawalAllowsHop))
+                    if (reached && settling && Time.time-withdrawalStarted<WithdrawalTimeout) { patrol.SetPursuit(0); return; }
+                    if (reached || Time.time-withdrawalStarted >= WithdrawalTimeout || !patrol.CanWithdraw(retreatDirection,withdrawalAllowsHop))
                     {
+                        if(majorEscape&&!reached){blockedPosition=RetreatDestination;blockedPositionUntil=Time.time+6;}
+                        if(majorEscape&&escapeCounted){hesitateUntil=Mathf.Max(hesitateUntil,Time.time+.8f);defensiveUntil=Mathf.Max(defensiveUntil,Time.time+.8f);}
+                        majorEscape=false;
                         if (!reached && travelled < minimumWithdrawalDistance) WithdrawalFailed?.Invoke();
                         if(suppressionWithdrawal&&weapon.MagazineAmmo>Mathf.FloorToInt(weapon.Definition.MagazineCapacity*ReloadFraction))
                         {
                             withdrawing=suppressionWithdrawal=false;patrol.SetPursuit(0);reengageAt=Time.time+reengagementDelay;State=EngagementState.Searching;
-                            if(reached&&selectedCover!=null&&CoveredAt(transform.position.x))coverHoldUntil=Time.time+Random.Range(1.2f,2.4f);
+                            if(reached&&selectedCover!=null&&CoveredAt(transform.position.x))BeginCoverHold();
                             else ReleasePosition();
                         }
                         else BeginReload();
                         return;
                     }
-                    patrol.SetPursuit(retreatDirection, withdrawalAllowsHop, true);
+                    patrol.SetPursuit(retreatDirection*(IsRetreatCrouching?.65f:1), withdrawalAllowsHop, true);
+                    // Occasional imperfect defensive shot uses existing visibility,
+                    // camera, ammo and clipped-trajectory rules; never shoot through cover.
+                    if(UsesPanicEscapes&&TargetVisible&&motor.IsGrounded&&Time.time>=nextWithdrawalFire&&travelled>.25f)
+                    {nextWithdrawalFire=Time.time+Random.Range(1.1f,1.6f);if(Random.value<.2f){AimAtMemory();FireAtMemory(delta.magnitude,false);}}
                 }
                 return;
             }
             if(IsHoldingCover)
             {
-                if(Time.time>=nextPositionSample){nextPositionSample=Time.time+positionSampleSeconds;if(!motor.IsGrounded||!CoveredAt(transform.position.x))coverHoldUntil=0;}
+                if(Time.time>=nextPositionSample)
+                {
+                    nextPositionSample=Time.time+positionSampleSeconds;
+                    if(TargetVisible)withdrawalThreat=SightTarget;
+                    if(!motor.IsGrounded||!CoveredAt(transform.position.x))coverHoldUntil=0;
+                    else if(UsesPanicEscapes&&Suppression>=moderateSuppression)
+                        coverHoldUntil=Mathf.Min(coverHoldDeadline,Mathf.Max(coverHoldUntil,Time.time+.6f));
+                }
                 if(IsHoldingCover){patrol.DecisionsSuspended=true;patrol.SetPursuit(0);State=EngagementState.Reacting;return;}
             }
-            if(coverHoldUntil>0){coverHoldUntil=0;selectedCover=null;ReleasePosition();posture?.SetInput(Vector2.zero);}
+            if(coverHoldUntil>0)
+            {
+                coverHoldUntil=0;
+                // Resume a short investigation of the existing uncertain sound memory,
+                // rather than forgetting combat solely because hiding took several seconds.
+                if(UsesPanicEscapes&&tracking)heardUntil=Mathf.Max(heardUntil,Time.time+1.5f);
+                selectedCover=null;ReleasePosition();posture?.SetInput(Vector2.zero);
+            }
             if(Time.time<hesitateUntil){patrol.DecisionsSuspended=true;patrol.SetPursuit(0);State=EngagementState.Reacting;return;}
             if (blindUntil>0)
             {
@@ -458,7 +645,7 @@ namespace InsaneDreams.Enemies
                 weapon != null && weapon.ReserveAmmo > 0 && weapon.MagazineAmmo <= Mathf.FloorToInt(weapon.Definition.MagazineCapacity * ReloadFraction) &&
                 Vector2.Distance(lastSeen,transform.position) <= engagementRange)
             { StartWithdrawal(); return; }
-            if (!available || !TargetVisible && (!tracking || Time.time - lastSeenAt > visibilityMemory))
+            if (!available || !TargetVisible && (!tracking || Time.time - lastSeenAt > visibilityMemory)&&!(meleeHunter&&engagementAuthorized))
             {
                 engagementAuthorized=false;tracking = wasVisible = false; patrol.ClearPursuit();
                 if(Time.time<heardUntil)
@@ -471,6 +658,18 @@ namespace InsaneDreams.Enemies
                 State = EngagementState.Patrol; return;
             }
             patrol.DecisionsSuspended = true;
+            if(samurai!=null&&samurai.isActiveAndEnabled)
+            {
+                ReleasePosition();AimAtMemory();
+                State=samurai.Tick(target,lastSeen,TargetVisible,InGameplayViewport,Time.time>=Mathf.Max(readyAt,reengageAt));
+                if(samurai.Winding)AimDirection=samurai.CommittedAim;
+                return;
+            }
+            if(fireworks!=null&&fireworks.isActiveAndEnabled)
+            {
+                ReleasePosition();AimAtMemory();
+                State=fireworks.Tick(target,lastSeen,TargetVisible,MayInitiateFire,Time.time>=Mathf.Max(readyAt,reengageAt));return;
+            }
             Vector2 rememberedDelta = lastSeen - (Vector2)transform.position;
             MoveToCombatPosition(lastSeen,preferredDistance*(MoraleInfluence>0?.9f:1));
             AimAtMemory();
@@ -511,6 +710,7 @@ namespace InsaneDreams.Enemies
         }
         private void BeginReload()
         {
+            majorEscape=false;
             suppressionWithdrawal=false;
             EndDefensiveCrouch();
             blindUntil=0;
@@ -518,8 +718,17 @@ namespace InsaneDreams.Enemies
             if (weapon.Cycle.TryReload(Time.time,Random.Range(1-reloadDurationVariation,1+reloadDurationVariation))) ReloadStarted?.Invoke();
             State=weapon.Cycle.IsReloading?EngagementState.Reloading:EngagementState.Searching;
         }
-        private void StartWithdrawal(bool fromSuppression=false,Vector2 threat=default)
+        private void BeginCoverHold()
         {
+            float duration=UsesPanicEscapes?Random.Range(retreatHideSeconds.x,Mathf.Max(retreatHideSeconds.x,retreatHideSeconds.y)):Random.Range(1.2f,2.4f);
+            coverHoldDeadline=Time.time+Mathf.Max(duration,maximumCoverHideSeconds);
+            coverHoldUntil=Time.time+duration;awareness?.CoverCue();
+        }
+        private bool StartWithdrawal(bool fromSuppression=false,Vector2 threat=default,bool major=false)
+        {
+            majorEscape=major&&UsesPanicEscapes&&PanicEscapes<maximumPanicEscapes;escapeCounted=false;
+            limitedWithdrawal=UsesPanicEscapes&&(fromSuppression||PanicEscapes>=maximumPanicEscapes);
+            localWithdrawal=limitedWithdrawal&&!majorEscape;
             coverHoldUntil=0;
             suppressionWithdrawal=fromSuppression;
             withdrawalThreat=fromSuppression?threat:lastSeen+Vector2.up*.35f;
@@ -528,19 +737,47 @@ namespace InsaneDreams.Enemies
             blindUntil=0;
             float dx = (fromSuppression?threat.x:lastSeen.x)-transform.position.x;
             retreatDirection = Mathf.Abs(dx) > .1f ? -Mathf.Sign(dx) : -Mathf.Sign(AimDirection.x);
-            withdrawalX=transform.position.x;withdrawalY=transform.position.y;selectedCover=null;withdrawalAllowsHop=false;
-            if(!PickReachableCover())withdrawalGoal = patrol.WithdrawalReach(retreatDirection, withdrawalDistance);
-            while(withdrawalGoal>=minimumWithdrawalDistance&&!CombatPositionReservations.TryClaim(this,RetreatDestination))withdrawalGoal-=minimumCombatSpacing;
+            withdrawalX=transform.position.x;withdrawalY=transform.position.y;withdrawalFeet=actorBox.bounds.min.y;selectedCover=null;withdrawalAllowsHop=false;
+            nextWithdrawalFire=Time.time+Random.Range(.7f,1.2f);
+            if(!PickReachableCover())withdrawalGoal = patrol.WithdrawalReach(retreatDirection, WithdrawalLimit);
+            if(selectedCover!=null&&!CombatPositionReservations.TryClaimCover(this,selectedCover,RetreatDestination))
+            {selectedCover=null;withdrawalAllowsHop=false;withdrawalGoal=patrol.WithdrawalReach(retreatDirection,WithdrawalLimit);}
+            if(selectedCover==null)
+                while(withdrawalGoal>=WithdrawalMinimum&&(!EscapePositionAllowed(RetreatDestination.x)||!CombatPositionReservations.TryClaim(this,RetreatDestination)))withdrawalGoal-=minimumCombatSpacing;
             retreatReservation=HasCombatPosition;
-            if (withdrawalGoal < minimumWithdrawalDistance) { WithdrawalFailed?.Invoke(); BeginReload(); return; }
+            if(selectedCover!=null)awareness?.CoverCue();
+            if(fromSuppression&&withdrawalGoal<WithdrawalMinimum){CombatPositionReservations.Release(this);retreatReservation=false;TryShortSuppressionEscape();}
+            if (withdrawalGoal < WithdrawalMinimum)
+            {
+                majorEscape=false;withdrawing=false;patrol.SetPursuit(0);
+                WithdrawalFailed?.Invoke();
+                if(fromSuppression){suppressionWithdrawal=false;hesitateUntil=Mathf.Max(hesitateUntil,Time.time+.6f);State=EngagementState.Reacting;}
+                else BeginReload();
+                return false;
+            }
             withdrawing=true; withdrawalAnnounced=false; withdrawalStarted=Time.time; withdrawalX=transform.position.x;
             nextTacticalSample=Time.time+tacticalSampleSeconds; State=EngagementState.Withdrawing; patrol.SetPursuit(retreatDirection,withdrawalAllowsHop,true);
+            return true;
+        }
+        private void TryShortSuppressionEscape()
+        {
+            float away=retreatDirection;
+            for(int side=0;side<2;side++)
+            {
+                retreatDirection=side==0?away:-away;selectedCover=null;withdrawalAllowsHop=false;
+                if(PickReachableCover()&&CombatPositionReservations.TryClaimCover(this,selectedCover,RetreatDestination)){retreatReservation=true;return;}
+                selectedCover=null;withdrawalAllowsHop=false;withdrawalGoal=patrol.WithdrawalReach(retreatDirection,Mathf.Min(2,WithdrawalLimit));
+                if(withdrawalGoal>=WithdrawalMinimum&&EscapePositionAllowed(RetreatDestination.x)&&CombatPositionReservations.TryClaim(this,RetreatDestination)){retreatReservation=true;return;}
+            }
+            withdrawalGoal=0;
         }
         private bool CoveredAt(float x)
         {
             float height=posture!=null?posture.StandingWorldHeight:actorBox.bounds.size.y;
-            Vector2 crouchedCentre=new Vector2(x,withdrawalY+height*((posture!=null?posture.CrouchedHeightRatio:.7f)-.5f)-.15f);
-            return CombatVisibility2D.IsBlocked(withdrawalThreat,crouchedCentre,geometry,sightHits);
+            float crouchedHeight=height*(posture!=null?posture.CrouchedHeightRatio:.7f);
+            Vector2 centre=new Vector2(x,withdrawalFeet+crouchedHeight*.5f),head=new Vector2(x,withdrawalFeet+crouchedHeight-.05f);
+            // Cover must protect both body and head, not just a single low ray.
+            return CombatVisibility2D.IsBlocked(withdrawalThreat,centre,geometry,sightHits)&&CombatVisibility2D.IsBlocked(withdrawalThreat,head,geometry,sightHits);
         }
         private bool PickReachableCover()
         {
@@ -551,11 +788,13 @@ namespace InsaneDreams.Enemies
             for(int i=0;i<count;i++)
             {
                 var c=coverCandidates[i];if(c==null||c.transform.IsChildOf(transform))continue;var b=c.bounds;
-                if(b.size.y<.55f||b.size.x>1.8f||Mathf.Abs(b.min.y-actorBox.bounds.min.y)>.2f)continue;
-                float x=(retreatDirection>0?b.max.x:b.min.x)+retreatDirection*(actorBox.bounds.extents.x+.25f);
+                if(b.size.y<.55f||Mathf.Abs(b.min.y-withdrawalFeet)>.2f||!CombatPositionReservations.IsCoverFree(this,c))continue;
+                // Stay just outside the solid face. The old .25 gap plus braking
+                // drift could expose the crouched head above low cover on arrival.
+                float x=(retreatDirection>0?b.max.x:b.min.x)+retreatDirection*(actorBox.bounds.extents.x+.08f);
                 float distance=(x-withdrawalX)*retreatDirection;
-                if(distance<minimumWithdrawalDistance||distance>coverSearchDistance||!CoveredAt(x)||!CombatPositionReservations.IsFree(this,new Vector2(x,withdrawalY))||!CombatPositionReservations.IsPathFree(this,new Vector2(x,withdrawalY))||!patrol.CanReachCover(retreatDirection,distance,out bool hop))continue;
-                float score=coverSearchDistance-distance-(hop?.75f:0)+Random.Range(-.25f,.25f);
+                if(distance<WithdrawalMinimum||distance>coverSearchDistance||limitedWithdrawal&&!EscapePositionAllowed(x)||!CoveredAt(x)||!CombatPositionReservations.IsFree(this,new Vector2(x,withdrawalY))||!CombatPositionReservations.IsPathFree(this,new Vector2(x,withdrawalY))||!patrol.CanReachCover(retreatDirection,distance,out bool hop))continue;
+                float score=(majorEscape?distance:coverSearchDistance-distance)-(hop?.75f:0)+Random.Range(-.25f,.25f);
                 if(score<=best)continue;best=score;selectedCover=c;withdrawalGoal=distance;withdrawalAllowsHop=hop;
             }
             return selectedCover!=null;
