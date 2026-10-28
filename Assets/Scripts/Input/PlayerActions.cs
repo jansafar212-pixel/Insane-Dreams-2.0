@@ -16,6 +16,9 @@ namespace InsaneDreams.Input
         [SerializeField] private bool allowLandingSlide=true;
         [SerializeField,Range(.15f,.6f)] private float landingSlideSeconds=.35f;
         private bool slideArmed,wasGrounded,airSliding;
+        private bool slideQueued,downHeld;
+        [SerializeField,Min(1)] private float runningSlideMinimumSpeed=3;
+        private float slideSpeed=1;
         private float slideUntil,slideDirection;
         public bool IsLandingSliding=>Time.time<slideUntil;
         public bool IsAirSliding=>airSliding;
@@ -31,6 +34,24 @@ namespace InsaneDreams.Input
         private bool touchJumpRequested;
         private Camera aimCamera;
         public event System.Action InputReset;
+        public event System.Action<Vector2,bool> AimReleased;
+        public event System.Action AimCancelled;
+        private bool touchAimGesture;
+        private int releasedAimFrame=-1;
+        private bool desktopAimNeedsNeutral;
+        // Keep the intentional release's peek/pose through this frame's shot.
+        // Movement input is untouched; cancellation clears this immediately.
+        internal void PreserveReleasedAim(Vector2 direction){releasedAimFrame=Time.frameCount;AimDirection=direction;HasAimIntent=true;}
+        public void CancelWeaponAim()
+        {
+            EndTouchAim(false);releasedAimFrame=-1;desktopAimNeedsNeutral=true;touchAim=Vector2.zero;touchFire=FireHeld=HasAimIntent=false;AimCancelled?.Invoke();
+        }
+        public void BeginTouchAim()=>touchAimGesture=true;
+        public void EndTouchAim(bool normalRelease)
+        {
+            if(!touchAimGesture)return;touchAimGesture=false;
+            AimReleased?.Invoke(touchAim.sqrMagnitude>=.09f?touchAim.normalized:AimDirection,normalRelease&&touchAim.sqrMagnitude>=.09f);
+        }
         public event System.Action ReloadRequested;
         public event System.Action InteractionRequested;
         public event System.Action HealRequested;
@@ -41,6 +62,8 @@ namespace InsaneDreams.Input
         public bool HealHeld { get; private set; }
         public void SetHealIntent(bool held)=>touchHeal=held;
         public bool HasAimIntent { get; private set; }
+        // Read-only observation for presentation. Input/weapon processing is unchanged.
+        public float AimIntentStrength=>!HasAimIntent?0:touchAim.sqrMagnitude>.04f?Mathf.Clamp01(touchAim.magnitude):1;
 
         private void Awake()
         {
@@ -56,21 +79,25 @@ namespace InsaneDreams.Input
         private float LandingMoveInput(float normal)
         {
             bool safe=posture!=null&&!traversal.IsClimbing&&!traversal.ParachuteFlightActive&&(cover==null||!cover.IsCovered);
+            bool down=Move.y<-.35f,pressed=down&&!downHeld;downHeld=down;
             if(slideArmed&&safe&&!motor.IsGrounded&&Move.y<-.35f)
-            {slideArmed=false;airSliding=true;motor.RequestAirDive();}
+            {slideArmed=false;airSliding=slideQueued=true;slideDirection=Mathf.Abs(Move.x)>.2f?Mathf.Sign(Move.x):Mathf.Sign(GetComponent<Rigidbody2D>().linearVelocity.x);slideSpeed=1;motor.RequestAirDive();}
             if(motor.IsGrounded&&!wasGrounded)
             {
-                if(airSliding&&safe&&Move.y<-.35f&&Mathf.Abs(Move.x)>.35f)
-                {slideUntil=Time.time+landingSlideSeconds;slideDirection=Mathf.Sign(Move.x);}
-                slideArmed=airSliding=false;
+                if(slideQueued&&safe)slideUntil=Time.time+landingSlideSeconds;
+                slideArmed=airSliding=slideQueued=false;
             }
+            if(safe&&motor.IsGrounded&&pressed&&wasGrounded&&Mathf.Abs(GetComponent<Rigidbody2D>().linearVelocity.x)>=runningSlideMinimumSpeed)
+            {float vx=GetComponent<Rigidbody2D>().linearVelocity.x;slideDirection=Mathf.Sign(vx);slideSpeed=Mathf.Clamp01(Mathf.Abs(vx)/motor.MoveSpeed);slideUntil=Time.time+landingSlideSeconds;}
             wasGrounded=motor.IsGrounded;
             if(!safe||Move.y>=-.2f)airSliding=false;
-            if(!safe||!motor.IsGrounded||Move.y>=-.2f||Move.x*slideDirection<.1f)slideUntil=0;
+            if(!safe){slideQueued=false;slideUntil=0;}
+            if(!motor.IsGrounded||Move.x*slideDirection<-.1f)slideUntil=0;
             if(!IsLandingSliding)return normal;
             // Reuse normal acceleration/collision ownership and the existing crouch
             // pose. Speed never exceeds an ordinary run; releasing/reversing cancels.
-            return slideDirection*Mathf.Lerp(.45f,1,Mathf.Clamp01((slideUntil-Time.time)/landingSlideSeconds))*traversal.HorizontalSpeedMultiplier;
+            posture.BeginSlide();posture.SetInput(new Vector2(Move.x,-1));
+            return slideDirection*slideSpeed*Mathf.Lerp(.45f,1,Mathf.Clamp01((slideUntil-Time.time)/landingSlideSeconds))*traversal.HorizontalSpeedMultiplier;
         }
 
         public void SetTouchMove(Vector2 value) => touchMove = Vector2.ClampMagnitude(value, 1);
@@ -86,7 +113,7 @@ namespace InsaneDreams.Input
         public void RequestHeal() {SetHealIntent(true);HealRequested?.Invoke();}
         public void BindAimCamera(Camera camera) => aimCamera = camera;
         public void SelectWeapon(InsaneDreams.Inventory.EquipmentSlot slot) => WeaponSelectionRequested?.Invoke(slot);
-        public void Jump() { slideUntil=0;airSliding=false;if (posture == null || posture.PrepareJump()) traversal.Jump(); }
+        public void Jump() { slideUntil=0;airSliding=slideQueued=false;if (posture == null || posture.PrepareJump()) traversal.Jump(); }
         public void RequestTouchJump() { if (isActiveAndEnabled) touchJumpRequested = true; }
 
         private void Update()
@@ -131,6 +158,14 @@ namespace InsaneDreams.Input
             if (keyboardJump || touchJumpRequested || gestureJump) Jump();
             touchJumpRequested = false;
             var mouse = readKeyboard && Application.isFocused ? Mouse.current : null;
+            if(readKeyboard&&desktopAimNeedsNeutral)
+            {
+                var physical=Mouse.current;
+                bool held=physical!=null&&(physical.rightButton.isPressed||physical.leftButton.isPressed)||key!=null&&key.fKey.isPressed;
+                if(Application.isFocused&&!held)desktopAimNeedsNeutral=false;
+                mouse=null;desktopFire=false;
+            }
+            if(mouse!=null&&mouse.rightButton.wasReleasedThisFrame&&HasAimIntent)AimReleased?.Invoke(AimDirection,true);
             if (mouse != null && mouse.rightButton.isPressed)
             {
                 if (aimCamera != null && touchAim.sqrMagnitude <= .04f)
@@ -143,7 +178,7 @@ namespace InsaneDreams.Input
             }
             FireHeld = touchFire || desktopFire;
             HealHeld=touchHeal||key!=null&&Application.isFocused&&key.hKey.isPressed;
-            HasAimIntent = touchAim.sqrMagnitude > .04f || mouse != null && mouse.rightButton.isPressed;
+            HasAimIntent = touchAim.sqrMagnitude > .04f || mouse != null && mouse.rightButton.isPressed || releasedAimFrame==Time.frameCount;
             if (touchAim.sqrMagnitude > 0.04f) AimDirection = touchAim.normalized;
             if (aimIndicator != null)
             {
@@ -157,12 +192,15 @@ namespace InsaneDreams.Input
         public void SuspendInput() => ResetInput(false);
         private void ResetInput(bool resetDeployment)
         {
+            EndTouchAim(false);
+            releasedAimFrame=-1;
+            desktopAimNeedsNeutral=true;
             touchMove = touchAim = Move = Vector2.zero;
             touchParachute = false;
             touchFire = FireHeld = false;
             touchHeal=HealHeld=false;
             touchJumpRequested=false;
-            slideArmed=airSliding=false;slideUntil=0;wasGrounded=motor!=null&&motor.IsGrounded;motor?.CancelAirDive();
+            slideArmed=airSliding=slideQueued=downHeld=false;slideUntil=0;wasGrounded=motor!=null&&motor.IsGrounded;motor?.CancelAirDive();
             HasAimIntent = false;
             jumpGesture.Reset();
             if (motor != null) motor.SetMoveInput(0);

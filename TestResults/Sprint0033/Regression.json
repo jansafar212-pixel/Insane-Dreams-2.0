@@ -1,0 +1,56 @@
+[
+  {
+    "Suite": "CombatRulesTests",
+    "Total": 7,
+    "Passed": 7,
+    "Failed": 0
+  },
+  {
+    "Suite": "CowardsBunkerRulesTests",
+    "Total": 2,
+    "Passed": 2,
+    "Failed": 0
+  },
+  {
+    "Suite": "CowardsBunkerTests",
+    "Total": 4,
+    "Passed": 4,
+    "Failed": 0
+  },
+  {
+    "Suite": "FirstOperationLayoutTests",
+    "Total": 2,
+    "Passed": 2,
+    "Failed": 0
+  },
+  {
+    "Suite": "FirstOperationTests",
+    "Total": 6,
+    "Passed": 6,
+    "Failed": 0
+  },
+  {
+    "Suite": "Level1CombatHotfixTests",
+    "Total": 5,
+    "Passed": 5,
+    "Failed": 0
+  },
+  {
+    "Suite": "Sprint00271Tests",
+    "Total": 3,
+    "Passed": 3,
+    "Failed": 0
+  },
+  {
+    "Suite": "Sprint0030Tests",
+    "Total": 4,
+    "Passed": 4,
+    "Failed": 0
+  },
+  {
+    "Suite": "Sprint0031Tests",
+    "Total": 3,
+    "Passed": 3,
+    "Failed": 0
+  }
+]

@@ -1,0 +1,38 @@
+{
+  "apkBytes": 67235220,
+  "sha256": "dd7c5b7104e646eb0538e62347ab3bbc901b87e70375e6d1ebaedd57a829080e",
+  "entriesChangedFrom0030": [
+    "lib/arm64-v8a/libil2cpp.so",
+    "lib/arm64-v8a/libswappywrapper.so",
+    "assets/bin/Data/Managed/Metadata/global-metadata.dat",
+    "assets/bin/Data/boot.config",
+    "assets/bin/Data/globalgamemanagers",
+    "assets/bin/Data/level0",
+    "assets/bin/Data/level1",
+    "assets/bin/Data/level2",
+    "assets/bin/Data/sharedassets0.assets.split0",
+    "assets/bin/Data/sharedassets0.assets.split1",
+    "assets/bin/Data/sharedassets1.assets.split0",
+    "assets/bin/Data/sharedassets1.assets.split1",
+    "assets/bin/Data/sharedassets1.assets.split2",
+    "assets/bin/Data/sharedassets2.assets",
+    "assets/bin/Data/unity_app_guid"
+  ],
+  "uiContentMarkers": {
+    "purchase-state": [
+      "assets/bin/Data/Managed/Metadata/global-metadata.dat",
+      "assets/bin/Data/sharedassets0.assets.split1"
+    ],
+    "FAINTANYL": [
+      "assets/bin/Data/Managed/Metadata/global-metadata.dat",
+      "assets/bin/Data/sharedassets1.assets.split2"
+    ],
+    "wallet-row": [
+      "assets/bin/Data/Managed/Metadata/global-metadata.dat",
+      "assets/bin/Data/sharedassets0.assets.split1"
+    ],
+    "HandmadeUI": [
+      "assets/bin/Data/sharedassets0.assets.split1"
+    ]
+  }
+}

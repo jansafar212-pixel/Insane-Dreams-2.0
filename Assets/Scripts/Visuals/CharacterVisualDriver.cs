@@ -29,6 +29,8 @@ namespace InsaneDreams.Visuals
         private PlayerCover2D cover;
         private PlayerActions player;
         private PistolMagazineReload pistolReload;
+        private OfficerWeaponPresentation officerWeapon;
+        private PlayerHealingPresentation healingVisual;
         private WeaponCycle observedReload;
         private void MagazineInserted()=>rig.FinishMagazineExchange();
         private EnemyCombat enemy;
@@ -66,6 +68,8 @@ namespace InsaneDreams.Visuals
         private void OnEnable()
         {
             pistolReload=GetComponent<PistolMagazineReload>();
+            officerWeapon=GetComponent<OfficerWeaponPresentation>();
+            healingVisual=GetComponent<PlayerHealingPresentation>();
             if (attacks != null) attacks.Fired += Fired;
             if(motor!=null)motor.AirJumped+=AirJump;
             if (health != null) health.Damaged += Hurt;
@@ -76,6 +80,7 @@ namespace InsaneDreams.Visuals
         }
         private void OnDisable()
         {
+            if(rig!=null){rig.PoseReloadShell(null,false,0);rig.FinishMagazineExchange();}
             if(observedReload!=null)observedReload.MagazineInserted-=MagazineInserted;observedReload=null;
             if (attacks != null) attacks.Fired -= Fired;
             if(motor!=null)motor.AirJumped-=AirJump;
@@ -86,12 +91,13 @@ namespace InsaneDreams.Visuals
         private void ResetVisuals() { lastPoseFrame=-1; phase = recoilUntil = expressionUntil = shotPoseUntil = airJumpUntil = meleeUntil = 0; ReloadPoseActive = false; reaction = Expression = FaceExpression.Neutral; }
         private void Fired(Vector2 direction, Vector2 end, bool hit)
         {
-            if(attacks.LastAttackUsesAmmunition)recoilUntil=Time.time+.12f;
+            if(attacks.LastAttackUsesAmmunition)recoilUntil=Time.time+RecoilSeconds;
             else if(player!=null){meleeAim=direction;meleeUntil=Time.time+.22f;}
         }
+        private float RecoilSeconds=>loadout!=null&&loadout.SelectedWeapon!=null&&loadout.SelectedWeapon.Definition.FireMode==InsaneDreams.Inventory.WeaponFireMode.ReleaseToFire?.35f:.12f;
         private void Hurt(DamageInfo damage)
         {
-            SetReaction(FaceExpression.Stunned);flinchUntil=Time.time+flinchSeconds;
+            SetReaction(FaceExpression.Stunned);flinchUntil=hitReaction!=null&&hitReaction.UsesLivingPhysics?0:Time.time+flinchSeconds;
             flinchSign=damage.Impact.HasValue?Mathf.Sign(damage.Impact.Value.Direction.x):1;
         }
         private void SetReaction(FaceExpression value) { reaction = value; expressionUntil = Time.time + expressionSeconds; }
@@ -138,22 +144,25 @@ namespace InsaneDreams.Visuals
             else if(Mathf.Abs(body.linearVelocity.x)>.15f)facing=Mathf.Sign(body.linearVelocity.x);
             if(samurai!=null&&samurai.StrikePoseActive&&Mathf.Abs(samurai.CommittedAim.x)>.01f)facing=Mathf.Sign(samurai.CommittedAim.x);
             Aim = player != null ? player.AimDirection : enemy != null && (enemy.TargetVisible || enemy.IsBlindFiring) ? enemy.AimDirection : new Vector2(facing, 0);
+            if(officerWeapon!=null)Aim=officerWeapon.DisplayAim(Aim);
             bool shotPose = Time.time < shotPoseUntil;
             if (shotPose) Aim = shotAim;
             if (advance) phase += Time.deltaTime * (CurrentPose == CharacterPose.Climb ? Mathf.Abs(body.linearVelocity.y) * 3 : Mathf.Abs(body.linearVelocity.x) * 3);
             Expression = CurrentPose == CharacterPose.Panic ? FaceExpression.Scared : Time.time < expressionUntil ? reaction : FaceExpression.Neutral;
-            if (loadout != null)
-                rig.weapon.sprite = loadout.SelectedSlot == InsaneDreams.Inventory.EquipmentSlot.Melee ? rig.skin.meleeWeapon :
-                    loadout.SelectedSlot == InsaneDreams.Inventory.EquipmentSlot.Firearm2 && rig.skin.secondaryWeapon != null ? rig.skin.secondaryWeapon : rig.skin.weapon;
             var definition = loadout != null ? loadout.SelectedWeapon?.Definition : enemy != null ? enemy.Weapon?.Definition : null;
-            if (definition != null && definition.EquippedSprite != null) rig.weapon.sprite = definition.EquippedSprite;
+            // Resolve once: assigning a fallback and then its equipment override each
+            // frame dirties sprite geometry/batching even though the final art is unchanged.
+            var weaponSprite = loadout != null ? loadout.SelectedSlot == InsaneDreams.Inventory.EquipmentSlot.Melee ? rig.skin.meleeWeapon :
+                loadout.SelectedSlot == InsaneDreams.Inventory.EquipmentSlot.Firearm2 && rig.skin.secondaryWeapon != null ? rig.skin.secondaryWeapon : rig.skin.weapon : rig.weapon.sprite;
+            if (definition != null && definition.EquippedSprite != null) weaponSprite = definition.EquippedSprite;
+            if (rig.weapon.sprite != weaponSprite) rig.weapon.sprite = weaponSprite;
             rig.SetMagazine(definition != null ? definition.MagazineSprite : null,definition?.MagazineMountOffset,definition!=null&&definition.PhysicalMagazineReload);
             if(samurai!=null)rig.weapon.color=samurai.Winding?new Color(1,.45f,.25f):Color.white;
             if(fireworks!=null)rig.weapon.color=fireworks.Preparing?Color.yellow:Color.white;
             var cycle = loadout != null ? loadout.SelectedWeapon?.Cycle : enemy != null ? enemy.Weapon?.Cycle : null;
             if(cycle!=observedReload){if(observedReload!=null)observedReload.MagazineInserted-=MagazineInserted;observedReload=cycle;if(cycle!=null)cycle.MagazineInserted+=MagazineInserted;}
             ReloadPoseActive = cycle != null && cycle.IsReloading && health != null && !health.IsDefeated;
-            rig.Pose(CurrentPose, phase, Aim, facing, Mathf.Clamp01((recoilUntil - Time.time) / .12f), Expression,
+            rig.Pose(CurrentPose, phase, Aim, facing, Mathf.Clamp01((recoilUntil - Time.time) / RecoilSeconds)*(definition!=null?definition.RecoilScale:1), Expression,
                 shotPose || (player != null ? player.HasAimIntent || player.FireHeld : enemy != null && (enemy.TargetVisible || enemy.IsBlindFiring)), loadout == null || loadout.SelectedWeapon != null,
                 ReloadPoseActive, cycle != null ? cycle.ReloadProgress(Time.time) : 0,
                 cover != null && cover.IsCovered ? cover.VisualCrouchAmount : -1,
@@ -165,6 +174,7 @@ namespace InsaneDreams.Visuals
                 rig.PoseSamurai(baseAngle+Mathf.Lerp(60,-50,Mathf.SmoothStep(0,1,progress)));
             }
             // Deployment remains authoritative even while grounded or climbing. Only the
+            rig.PoseReloadShell(definition?.ShellSprite,ReloadPoseActive&&definition!=null&&definition.LoadsIndividually,cycle!=null?cycle.ReloadProgress(Time.time):0);
             if(pistolReload!=null)pistolReload.Pose(rig,loadout!=null?loadout.SelectedWeapon:enemy!=null?enemy.Weapon:null,ReloadPoseActive,cycle!=null?cycle.ReloadProgress(Time.time):0);
             if(player==null&&enemy!=null&&ReloadPoseActive&&pistolReload!=null&&pistolReload.Handles(definition)&&rig.Segmented!=null)
                 rig.Segmented.PosePistolExchange(cycle.ReloadProgress(Time.time));
@@ -196,7 +206,11 @@ namespace InsaneDreams.Visuals
             rig.transform.position+=new Vector3(rig.PresentationOffset.x*facing,rig.PresentationOffset.y+rig.GroundAlignmentOffset,0);
             if(rig.Segmented!=null&&samurai!=null&&CurrentPose!=CharacterPose.Defeated)
                 rig.Segmented.Pose(CurrentPose,phase,(samurai.StrikePoseActive?Mathf.Atan2(samurai.CommittedAim.y,samurai.CommittedAim.x*facing)*Mathf.Rad2Deg:0)+samurai.BladeAngle,motor.IsGrounded,advance?Time.deltaTime:0);
+            if(definition!=null&&definition.CustomMuzzle)rig.ApplyWeaponMuzzle(definition.MuzzleOffset,(CurrentPose==CharacterPose.Crouch||CurrentPose==CharacterPose.CrouchWalk)&&!(cover!=null&&cover.RaiseWeapon));
             if (cover != null && cover.RaiseWeapon && !ReloadPoseActive) rig.RaiseWeaponOverCover(cover.CoverTop, cover.NearEdge);
+            officerWeapon?.Pose(rig,ReloadPoseActive,CurrentPose);
+            healingVisual?.Pose(rig);
+            hitReaction?.ApplyPose(facing,ReloadPoseActive);
             attacks?.ConstrainMuzzle();
         }
     }

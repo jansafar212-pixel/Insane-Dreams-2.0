@@ -1,0 +1,28 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <ui:Style src="WarehouseControls.uss" />
+    <ui:VisualElement name="safeArea" class="safe-area" picking-mode="Ignore">
+        <ui:VisualElement class="vitals-panel" picking-mode="Ignore">
+            <ui:Label text="SURVIVAL / NO WARRANTY" class="hud-eyebrow" />
+            <ui:VisualElement class="health-row"><ui:Label text="HP" class="health-caption" /><ui:Label name="healthValue" text="--" class="health-value" /></ui:VisualElement>
+            <ui:VisualElement class="health-track"><ui:VisualElement name="healthFill" class="health-fill" /></ui:VisualElement>
+            <ui:VisualElement class="supplies-row"><ui:Label name="armorValue" text="VEST -- / HELMET --" /><ui:Label name="tapeValue" text="DUCT TAPE --" /></ui:VisualElement>
+            <ui:Label name="reviveValue" text="FAINTANYL --" class="revive-value" />
+        </ui:VisualElement>
+        <ui:VisualElement class="instructions" picking-mode="Ignore"><ui:Label text="WAREHOUSE / FIELD TEST" class="hud-eyebrow" /><ui:Label text="A/D move · S crouch · SPACE jump&#10;RMB aim + LMB/F fire · H hold heal" /></ui:VisualElement>
+        <ui:VisualElement class="equipment">
+            <ui:VisualElement class="weapon-heading"><ui:Label name="weaponStatus" text="PRIMARY" class="hud-eyebrow" picking-mode="Ignore" /><ui:Image name="weaponIcon" class="weapon-icon" picking-mode="Ignore" /></ui:VisualElement>
+            <ui:Label name="loadout" text="EQUIPMENT" class="loadout" picking-mode="Ignore" />
+            <ui:VisualElement class="ammo-row" picking-mode="Ignore"><ui:Label name="ammoValue" text="--" class="ammo-value" /><ui:Label name="reserveValue" text="RESERVE --" class="reserve-value" /></ui:VisualElement>
+            <ui:VisualElement class="equipment-buttons"><ui:Button name="slot1" text="1 / MAIN" /><ui:Button name="slot2" text="2 / SIDE" /><ui:Button name="melee" text="M / TOOL" /></ui:VisualElement>
+            <ui:Label name="suppliesNotice" class="supply-notice" picking-mode="Ignore" />
+        </ui:VisualElement>
+        <ui:VisualElement name="moveStick" class="stick move-stick"><ui:Label text="MOVE / CLIMB" class="stick-label" picking-mode="Ignore" /><ui:VisualElement class="knob" picking-mode="Ignore" /></ui:VisualElement>
+        <ui:VisualElement name="aimStick" class="stick aim-stick"><ui:Label text="AIM / FIRE" class="stick-label" picking-mode="Ignore" /><ui:VisualElement class="knob" picking-mode="Ignore" /></ui:VisualElement>
+        <ui:VisualElement name="parachuteButton" class="action parachute-button"><ui:Label text="DEPLOY&#10;CHUTE" picking-mode="Ignore" /></ui:VisualElement>
+        <ui:Button name="reload" text="RELOAD" class="action reload-button" />
+        <ui:Button name="heal" text="HOLD&#10;HEAL" class="action heal-button" />
+        <ui:Button name="supplyInteract" text="SUPPLIES [E]" class="action supply-button hidden" />
+        <ui:VisualElement name="blindFireButton" class="action blind-fire-button hidden"><ui:Label text="BLIND&#10;FIRE" picking-mode="Ignore" /></ui:VisualElement>
+        <ui:VisualElement name="jumpButton" class="action jump-button"><ui:Label text="JUMP" picking-mode="Ignore" /></ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

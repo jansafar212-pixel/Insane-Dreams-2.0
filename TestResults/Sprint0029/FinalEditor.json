@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "if(UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode)throw new System.InvalidOperationException(\"Unexpected Play Mode\");var s=UnityEngine.SceneManagement.SceneManager.GetActiveScene();if(s.path!=\"Assets/Scenes/Warehouse_Demo.unity\"){if(s.isDirty)throw new System.InvalidOperationException(\"Preserve unsaved scene\");s=UnityEditor.SceneManagement.EditorSceneManager.OpenScene(\"Assets/Scenes/Warehouse_Demo.unity\");}int missing=0;foreach(var g in s.GetRootGameObjects())foreach(var t in g.GetComponentsInChildren<UnityEngine.Transform>(true))missing+=UnityEditor.GameObjectUtility.GetMonoBehavioursWithMissingScriptCount(t.gameObject);return Newtonsoft.Json.JsonConvert.SerializeObject(new{scene=s.path,dirty=s.isDirty,playing=UnityEditor.EditorApplication.isPlaying,compiling=UnityEditor.EditorApplication.isCompiling,missingScripts=missing,target=UnityEditor.EditorUserBuildSettings.activeBuildTarget.ToString()});"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": "{\"scene\":\"Assets/Scenes/Warehouse_Demo.unity\",\"dirty\":false,\"playing\":false,\"compiling\":false,\"missingScripts\":0,\"target\":\"Android\"}"
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

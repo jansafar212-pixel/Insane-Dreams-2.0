@@ -1,0 +1,91 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 7.51,
+      "summary": {
+        "total": 9,
+        "passed": 9,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "InsaneDreams.Tests.Sprint023Tests.CrateCapsBothInventoriesAndKeepsUnacceptedContents",
+          "Status": "Passed",
+          "Duration": 0.684797,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint023Tests.EmptyTapeCannotHealOrResurrectAndDamageRequiresFreshIntent",
+          "Status": "Passed",
+          "Duration": 1.381117,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint023Tests.HealingWorksInCoverBlocksFireButReloadAndAirborneActionsTakePriority",
+          "Status": "Passed",
+          "Duration": 1.154146,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint023Tests.HeldHealingConsumesExactlyRestoredHpAndStopsOnReleaseOrFullHealth",
+          "Status": "Passed",
+          "Duration": 1.0777738,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint023Tests.ImpactCueAndMaterialParticlesFadeWithinExistingPools",
+          "Status": "Passed",
+          "Duration": 0.7272616,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint023Tests.RealDefeatDropsAutomaticWalletExactlyOnceAcrossEnemyReactivation",
+          "Status": "Passed",
+          "Duration": 0.57645,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint023Tests.RealInteractionDepletesCrateOnceAndDisableDoesNotRefillIt",
+          "Status": "Passed",
+          "Duration": 0.4232082,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint023Tests.SuppliesAndWalletsRespectSolidBarriers",
+          "Status": "Passed",
+          "Duration": 0.5705372,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint023Tests.WalletAutomaticallyCollectsAtExpandedRadiusButNotBeyondIt",
+          "Status": "Passed",
+          "Duration": 0.8720633,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

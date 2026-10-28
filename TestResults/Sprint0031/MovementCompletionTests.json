@@ -1,0 +1,105 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 11.41,
+      "summary": {
+        "total": 11,
+        "passed": 11,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "InsaneDreams.Tests.MovementCompletionTests.AscendingDeploymentKeepsNormalGravityAndCannotAddUpwardPropulsion",
+          "Status": "Passed",
+          "Duration": 0.5345128,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.MovementCompletionTests.CrouchAnchorsFeetAndDiagonalWalkKeepsIndependentAimFireAndLowerOrigin",
+          "Status": "Passed",
+          "Duration": 0.7907356,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.MovementCompletionTests.CrouchedTopApproachKeepsStandingReachAtHighLadderEndpoints",
+          "Status": "Passed",
+          "Duration": 0.992839,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.MovementCompletionTests.CrouchPassageCanBeTraversedAndStandingResumesAfterLeaving",
+          "Status": "Passed",
+          "Duration": 2.2729393,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.MovementCompletionTests.GroundDownCrouchesButLadderTopDownEntersAndDescends",
+          "Status": "Passed",
+          "Duration": 1.3714419,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.MovementCompletionTests.LadderRecoveryAndDisableClearParachuteAndRestoreGravity",
+          "Status": "Passed",
+          "Duration": 0.8560422,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.MovementCompletionTests.LandingClearsParachuteAndAllowsCrouchWithoutAnotherToggle",
+          "Status": "Passed",
+          "Duration": 0.9892836,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.MovementCompletionTests.LowCeilingBlocksStandingAndJumpThenClearanceAllowsOrdinaryJump",
+          "Status": "Passed",
+          "Duration": 1.0160953,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.MovementCompletionTests.ParachutePenalizesBothAxesAndRapidTogglingCannotBoostOrRedeployImmediately",
+          "Status": "Passed",
+          "Duration": 0.957887,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.MovementCompletionTests.ParachuteTapReleaseAndSecondTapToggleOnceWithoutUpwardPropulsion",
+          "Status": "Passed",
+          "Duration": 0.8998365,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.MovementCompletionTests.ThreeTouchPointersCrouchAimFireAndToggleUseAuthoritativeState",
+          "Status": "Passed",
+          "Duration": 0.6938398,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

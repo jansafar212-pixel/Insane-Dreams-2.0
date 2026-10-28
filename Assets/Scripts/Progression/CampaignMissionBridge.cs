@@ -14,15 +14,24 @@ namespace InsaneDreams.Progression
         private float previousScale;
         private VisualElement overlay;
         private Combat.PlayerRevive revive;
+        private Combat.PlayerThrowables throwables;
+        private bool applyingEquipment;
+        private Inventory.PlayerSupplies supplies;
+        private readonly int[] uncarriedAmmo=new int[3],uncarriedGrenades=new int[3];
+        private readonly string[] packedAmmoIds=new string[3];
         private GameSession Session=>GameSession.Instance;
         private void Awake()
         {
             mission.BeforeReplay+=BeforeReplay;mission.PreparingRun+=Prepare;mission.Changed+=Changed;
             revive=mission.Player.GetComponent<Combat.PlayerRevive>();
             if(revive!=null)revive.InventoryChanged+=SaveInjections;
+            throwables=mission.Player.GetComponent<Combat.PlayerThrowables>();if(throwables!=null)throwables.InventoryChanged+=SaveThrowables;
+            supplies=mission.Player.GetComponent<Inventory.PlayerSupplies>();if(supplies!=null)supplies.WalletCollected+=SaveWallets;
         }
+        private void SaveWallets(int amount){if(applied&&Session!=null){Session.Data.pendingEarnings=amount;Session.Save();}}
         private void SaveInjections(int count)
-        {if(applied&&Session!=null&&Session.Data.faintanyl!=count){Session.Data.faintanyl=count;Session.Save();}}
+        {if(!applyingEquipment&&applied&&Session!=null&&Session.Data.faintanyl!=count){Session.Data.faintanyl=count;Session.Save();}}
+        private void SaveThrowables(){if(applyingEquipment||!applied||Session==null)return;for(int i=0;i<3;i++)Session.Data.grenades[i]=Mathf.Min(Combat.PlayerThrowables.Capacity,throwables.Count((Combat.ThrowableKind)i)+uncarriedGrenades[i]);Session.Save();}
         private void Start()
         {
             if(Session==null)return;
@@ -41,15 +50,16 @@ namespace InsaneDreams.Progression
         }
         public void SetPaused(bool value)
         {
-            if(value==paused||mission.Stage==MissionStage.Complete&&value)return;
+            if(value==paused||mission.AttemptEnded&&value)return;
+            if(!value&&Session!=null&&!string.IsNullOrEmpty(Session.Data.activeRun)&&!Session.Save())return;
             paused=value;var player=mission.Player;var combat=player.GetComponent<Combat.PlayerCombat>();
-            if(value){previousScale=Time.timeScale;actionsEnabled=player.enabled;combatEnabled=combat.enabled;player.SuspendInput();player.enabled=false;combat.enabled=false;Time.timeScale=0;}
+            if(value){previousScale=Time.timeScale;actionsEnabled=player.enabled;combatEnabled=combat.enabled;player.SuspendInput();player.enabled=false;combat.enabled=false;Time.timeScale=0;if(applied&&Session!=null){CaptureEquipment();Session.Save(false);}}
             else{Time.timeScale=previousScale;player.enabled=actionsEnabled;combat.enabled=combatEnabled;}
             if(overlay!=null){overlay.style.display=value?DisplayStyle.Flex:DisplayStyle.None;if(value)overlay.BringToFront();}
         }
         private void BeforeReplay()
         {
-            if(Session==null||!applied)return;Settle();applied=false;
+            if(Session==null||!applied)return;if(!Settle())throw new System.IO.IOException("Retry blocked until progress can be saved: "+Session.Notice);applied=false;
         }
         private void Prepare()
         {
@@ -59,58 +69,92 @@ namespace InsaneDreams.Progression
         public void ApplyEquipment()
         {
             if(Session==null)return;
+            applyingEquipment=true;
+            try{
             var data=Session.Data;var catalog=Session.Catalog;var player=mission.Player;
+            int grenadeCap=catalog.GrenadeCapacity(data);for(int i=0;i<3;i++)uncarriedGrenades[i]=Mathf.Max(0,data.grenades[i]-grenadeCap);
+            var grenades=player.GetComponent<Combat.PlayerThrowables>();if(grenades!=null){grenades.ConfigureCapacity(grenadeCap);grenades.RestoreStock(data.grenades);}
             var loadout=player.GetComponent<Inventory.PlayerLoadout>();
+            loadout.ConfigureReserveCapacity(catalog.ReserveCapacity(data));
+            loadout.ClearReserveLimits();
+            loadout.ConfigureReloadMultiplier(catalog.ReloadMultiplier(data));
             string[] ids={data.primary,data.secondary,data.melee};
             for(int i=0;i<3;i++)
             {
                 var offer=catalog.Find(ids[i]);var slot=(Inventory.EquipmentSlot)i;
-                if(offer?.weapon==null||!data.owned.Contains(ids[i])){loadout.Unequip(slot);continue;}
+                uncarriedAmmo[i]=0;packedAmmoIds[i]=ids[i];if(offer?.weapon==null||!data.owned.Contains(ids[i])){loadout.Unequip(slot);continue;}
                 var stock=data.Ammo(ids[i]);var weapon=new Inventory.RuntimeWeapon(offer.weapon);
-                weapon.SetAmmunition(stock.magazine,Mathf.Min(catalog.ammoCapacity,stock.reserve));loadout.Equip(slot,weapon);
+                int limit=catalog.ReserveCapacity(data,offer);loadout.ConfigureReserveLimit(offer.weapon,limit);
+                int carry=Mathf.Min(limit,stock.reserve);uncarriedAmmo[i]=Mathf.Max(0,stock.reserve-carry);weapon.SetAmmunition(stock.magazine,carry);loadout.Equip(slot,weapon);
             }
             loadout.Select(loadout.Get(Inventory.EquipmentSlot.Firearm1)!=null?Inventory.EquipmentSlot.Firearm1:loadout.Get(Inventory.EquipmentSlot.Firearm2)!=null?Inventory.EquipmentSlot.Firearm2:Inventory.EquipmentSlot.Melee);
             player.GetComponent<Combat.PlayerHealing>().RestoreSupply(data.tape,catalog.tapeCapacity);
             player.GetComponent<Combat.PlayerRevive>()?.RestoreInventory(data.faintanyl);
-            player.GetComponent<Combat.BodyArmor>()?.Restore(data.armor,catalog.armorCapacity,catalog.armorAbsorption);
+            var armor=player.GetComponent<Combat.BodyArmor>();if(armor!=null){var body=catalog.Protection(false,catalog.BodyTier(data));var helmet=catalog.Protection(true,data.helmetTier);armor.Restore(data.armor,body.capacity,body.absorption);armor.RestoreHelmet(data.helmet,helmet.capacity,helmet.absorption,data.helmetTier==2);}
             document.GetComponent<Input.WarehouseTouchControls>()?.SetJoystickScale(data.joystickScale);
+            Session.MissionSaveSnapshot=ReservedInventorySnapshot;
+            if(!Session.Save()){player.SuspendInput();player.enabled=false;player.GetComponent<Combat.PlayerCombat>().enabled=false;throw new System.IO.IOException("Mission inventory reservation failed: "+Session.Notice);}
+            }finally{applyingEquipment=false;}
+        }
+        private GameProgress ReservedInventorySnapshot()
+        {
+            // Do not write after every shot/healing frame. Carried supplies stay reserved
+            // on disk until a normal result/return, so a hard kill cannot restore them.
+            var copy=JsonUtility.FromJson<GameProgress>(JsonUtility.ToJson(Session.Data));
+            for(int i=0;i<3;i++)if(!string.IsNullOrEmpty(packedAmmoIds[i])){var stock=copy.Ammo(packedAmmoIds[i]);stock.magazine=0;stock.reserve=uncarriedAmmo[i];}
+            for(int i=0;i<3;i++)copy.grenades[i]=uncarriedGrenades[i];
+            copy.tape=copy.armor=copy.helmet=0;copy.faintanyl=0;
+            foreach(var gear in copy.protection)if(gear.id==copy.bodyArmorId||gear.id==copy.helmetId)gear.condition=0;
+            return copy;
         }
         private void CaptureEquipment()
         {
             var data=Session.Data;var loadout=mission.Player.GetComponent<Inventory.PlayerLoadout>();
+            var grenades=mission.Player.GetComponent<Combat.PlayerThrowables>();if(grenades!=null)for(int i=0;i<3;i++)data.grenades[i]=Mathf.Min(Combat.PlayerThrowables.Capacity,grenades.Count((Combat.ThrowableKind)i)+uncarriedGrenades[i]);
             for(int i=0;i<3;i++)
             {
                 var weapon=loadout.Get((Inventory.EquipmentSlot)i);if(weapon==null)continue;
                 var offer=System.Array.Find(Session.Catalog.offers,x=>x.category==ShopCategory.Weapons&&x.weapon==weapon.Definition);
-                if(offer==null)continue;var ammo=data.Ammo(offer.id);ammo.magazine=weapon.MagazineAmmo;ammo.reserve=weapon.ReserveAmmo;
+                if(offer==null)continue;var ammo=data.Ammo(offer.id);ammo.magazine=weapon.MagazineAmmo;ammo.reserve=Mathf.Min(Session.Catalog.ammoCapacity,weapon.ReserveAmmo+(offer.id==packedAmmoIds[i]?uncarriedAmmo[i]:0));
             }
             data.tape=mission.Player.GetComponent<Combat.PlayerHealing>().DuctTape;
             var revive=mission.Player.GetComponent<Combat.PlayerRevive>();if(revive!=null)data.faintanyl=revive.Injections;
             var armor=mission.Player.GetComponent<Combat.BodyArmor>();data.armor=armor!=null?armor.Condition:0;
+            data.helmet=armor!=null?armor.HelmetCondition:0;
+            Session.StoreArmorCondition();
             data.pendingEarnings=mission.Earnings;
         }
         private void Changed()
         {
-            if(applied&&mission.Stage==MissionStage.Complete)
+            if(applied&&mission.AttemptEnded)
             {mission.Player.GetComponent<Combat.HitReaction2D>()?.CancelReaction(false);Settle();}
         }
-        private void Settle()
+        private bool Settle()
         {
-            if(Session==null||string.IsNullOrEmpty(Session.Data.activeRun))return;
+            if(Session==null||string.IsNullOrEmpty(Session.Data.activeRun))return true;
             CaptureEquipment();
-            Session.Settle(mission.Earnings,mission.Stage==MissionStage.Complete);
+            return Session.Settle(mission.Earnings,mission.Stage==MissionStage.Complete);
         }
         public void ReturnToLevels()
         {
-            if(Session==null)return;SetPaused(false);Settle();mission.Player.ResetActions();Session.Navigate(FlowScreen.Levels);SceneManager.LoadSceneAsync("MainMenu");
+            if(Session==null)return;SetPaused(false);if(!Settle())return;mission.Player.ResetActions();Session.Navigate(FlowScreen.Levels);SceneManager.LoadSceneAsync("MainMenu");
         }
         private void OnDestroy()
         {
             if(revive!=null)revive.InventoryChanged-=SaveInjections;
+            if(supplies!=null)supplies.WalletCollected-=SaveWallets;
+            if(Session!=null)Session.MissionSaveSnapshot=null;
+            if(throwables!=null)throwables.InventoryChanged-=SaveThrowables;
             if(paused)SetPaused(false);
             if(mission!=null){mission.BeforeReplay-=BeforeReplay;mission.PreparingRun-=Prepare;mission.Changed-=Changed;}
         }
-        private void OnApplicationPause(bool paused){if(paused&&applied&&Session!=null){CaptureEquipment();Session.Save();}}
-        private void OnApplicationQuit(){if(applied&&Session!=null){CaptureEquipment();Session.Save();}}
+        private void OnApplicationPause(bool paused)
+        {
+            if(!applied||Session==null)return;
+            if(paused){CaptureEquipment();Session.Save(false);}
+            else if(!string.IsNullOrEmpty(Session.Data.activeRun)&&!Session.Save())
+            {mission.Player.SuspendInput();mission.Player.enabled=false;mission.Player.GetComponent<Combat.PlayerCombat>().enabled=false;throw new System.IO.IOException("Resume blocked until inventory can be reserved: "+Session.Notice);}
+        }
+        private void OnApplicationQuit(){if(applied&&Session!=null)Settle();}
     }
 }

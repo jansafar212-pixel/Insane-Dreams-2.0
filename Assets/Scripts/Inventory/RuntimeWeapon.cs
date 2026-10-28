@@ -25,7 +25,10 @@ namespace InsaneDreams.Inventory
         public string InstanceId => instanceId;
         public int MagazineAmmo => magazineAmmo;
         public int ReserveAmmo => reserveAmmo;
+        public event Action AmmunitionChanged;
         public bool UsesAmmunition => definition != null && definition.WeaponCategory == WeaponCategory.Firearm;
+        public float ReloadMultiplier{get;private set;}=1;
+        public void SetReloadMultiplier(float value)=>ReloadMultiplier=float.IsNaN(value)||float.IsInfinity(value)?1:Mathf.Clamp(value,1,1.3f);
 
         public RuntimeWeapon(WeaponDefinition definition, int reserveAmmo = 0)
         {
@@ -37,8 +40,10 @@ namespace InsaneDreams.Inventory
 
         public void SetAmmunition(int magazine, int reserve)
         {
+            int previousMagazine=magazineAmmo,previousReserve=reserveAmmo;
             magazineAmmo = UsesAmmunition ? Mathf.Clamp(magazine, 0, definition.MagazineCapacity) : 0;
             reserveAmmo = UsesAmmunition ? Mathf.Max(0, reserve) : 0;
+            if(previousMagazine!=magazineAmmo||previousReserve!=reserveAmmo)AmmunitionChanged?.Invoke();
         }
 
         public WeaponSnapshot Capture() => new WeaponSnapshot

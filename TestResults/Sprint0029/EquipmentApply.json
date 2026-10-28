@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "return Sprint0029Setup.Equipment();"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": "Four protection choices, exact Medical copy, purchased-only automatic revivals and native helmet overlays saved."
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

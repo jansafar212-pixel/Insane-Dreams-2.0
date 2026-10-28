@@ -67,7 +67,12 @@ namespace InsaneDreams.Tests
         }
         [UnityTest] public IEnumerator SustainedMissesAloneCanRetreatThenResumeWithoutReloadOrMoraleWave()
         {
-            var e=Enemy();Float(e,"suppressionRetreatChance",1);yield return new WaitForSeconds(.2f);float hp=e.GetComponent<Health>().Current;
+            var e=Enemy();
+            // This fixture freezes its Rigidbody to test suppression windows. Do
+            // not simultaneously invoke real navigation's no-progress recovery;
+            // Sprint0032Tests separately exercises blocked physical movement.
+            e.GetComponent<LarperBrain>().enabled=false;
+            Float(e,"suppressionRetreatChance",1);yield return new WaitForSeconds(.2f);float hp=e.GetComponent<Health>().Current;
             for(int i=0;i<5;i++)Near(e);Assert.AreEqual(EngagementState.Withdrawing,e.State);Assert.Greater(e.RetreatDestination.x,e.transform.position.x);Assert.AreEqual(hp,e.GetComponent<Health>().Current);Assert.AreEqual(27,e.Weapon.MagazineAmmo);Assert.AreEqual(0,e.GetComponent<LarperAwareness>().SocialReactions);Assert.AreEqual(0,e.GetComponent<LarperAwareness>().CollapseReactions);
             var destination=e.RetreatDestination;for(int i=0;i<30;i++)Near(e);Assert.AreEqual(destination,e.RetreatDestination);
             yield return new WaitForSeconds(4.8f);Assert.AreNotEqual(EngagementState.Withdrawing,e.State);Assert.IsFalse(e.Weapon.Cycle.IsReloading);Assert.AreEqual(27,e.Weapon.MagazineAmmo);

@@ -1,0 +1,91 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 18.97,
+      "summary": {
+        "total": 9,
+        "passed": 9,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "InsaneDreams.Tests.Sprint014MissionTests.CheckpointRollbackPreservesClearedGroupsRestoresAmmoAndNeverDuplicatesActors",
+          "Status": "Passed",
+          "Duration": 3.1595589,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint014MissionTests.DisabledOfficeMarkerCannotStealCheckpointBeforeRecordsAreAuthorized",
+          "Status": "Passed",
+          "Duration": 1.7068898,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint014MissionTests.ExitAndRemoteRecordsStayLockedUntilBothEncountersAndInteractionComplete",
+          "Status": "Passed",
+          "Duration": 0.5355235,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint014MissionTests.InitializationHasSafeSpawnRealHudAndOnlyTenPrewarmedInactiveEnemies",
+          "Status": "Passed",
+          "Duration": 1.4701308,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint014MissionTests.MissionEnemyKeepsCameraGateHitscanAndFourSecondReloadRules",
+          "Status": "Passed",
+          "Duration": 5.2695708,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint014MissionTests.MissionZonesDoNotObstructRealWestLadderMezzanineLanding",
+          "Status": "Passed",
+          "Duration": 2.712824,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint014MissionTests.PhysicalColliderEdgeEntryActivatesBeforePivotReachesTriggerInterior",
+          "Status": "Passed",
+          "Duration": 1.646885,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint014MissionTests.RecordsCheckpointCompletionResultsAndReplayReflectActualEventsExactlyOnce",
+          "Status": "Passed",
+          "Duration": 1.8968369,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint014MissionTests.ZoneProgressionRequiresRealRegionAndCannotSkipGuardOrRepeatActivation",
+          "Status": "Passed",
+          "Duration": 0.5043175,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

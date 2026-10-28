@@ -1,0 +1,49 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 4.36,
+      "summary": {
+        "total": 3,
+        "passed": 1,
+        "failed": 2,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "InsaneDreams.Tests.FirstOperationTests.AuthoredRosterSupportBulletproofPlatformsAndFiveCameraViews",
+          "Status": "Failed",
+          "Duration": 1.6983502,
+          "Message": "  Platforms must block real bullet segments from below\r\n  Expected: <PursuitDeckCover (UnityEngine.BoxCollider2D)>\r\n  But was:  <SamuraiDeck (UnityEngine.BoxCollider2D)>\r\n",
+          "StackTrace": "at InsaneDreams.Tests.FirstOperationTests+<AuthoredRosterSupportBulletproofPlatformsAndFiveCameraViews>d__9.MoveNext () [0x0036b] in C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Tests\\PlayMode\\FirstOperationTests.cs:46\r\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in .\\Library\\PackageCache\\com.unity.test-framework@80f691d4262b\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:52\r\n"
+        },
+        {
+          "FullName": "InsaneDreams.Tests.FirstOperationTests.SamuraiUsesActualSmallColliderToPursueElevatedPlayer",
+          "Status": "Passed",
+          "Duration": 1.6130854,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.FirstOperationTests.TwoPurchasedRevivalsThenFailureAndRetryNeverRefillThem",
+          "Status": "Failed",
+          "Duration": 1.0067515,
+          "Message": "  Expected: 0\r\n  But was:  2\r\n",
+          "StackTrace": "at InsaneDreams.Tests.FirstOperationTests+<TwoPurchasedRevivalsThenFailureAndRetryNeverRefillThem>d__10.MoveNext () [0x0005f] in C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Tests\\PlayMode\\FirstOperationTests.cs:53\r\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in .\\Library\\PackageCache\\com.unity.test-framework@80f691d4262b\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:52\r\n"
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

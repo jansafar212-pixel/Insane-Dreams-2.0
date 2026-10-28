@@ -69,8 +69,14 @@ namespace InsaneDreams.Tests
    yield return UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("Warehouse_Demo",UnityEngine.SceneManagement.LoadSceneMode.Additive);yield return null;
    // LoadScene is synchronous, but scene-owned components finish binding on the next tick.
    var loaded=UnityEngine.SceneManagement.SceneManager.GetSceneByName("Warehouse_Demo");
-   var root=System.Array.Find(loaded.GetRootGameObjects(),g=>g.name=="Sprint0026_Cover");Assert.NotNull(root);Assert.AreEqual(3,root.transform.childCount);
-   foreach(var c in root.GetComponentsInChildren<BoxCollider2D>())
+   var root=System.Array.Find(loaded.GetRootGameObjects(),g=>g.name=="Sprint0026_Cover");BoxCollider2D[] covers;
+   if(root!=null){Assert.AreEqual(3,root.transform.childCount);covers=root.GetComponentsInChildren<BoxCollider2D>();}
+   else{
+    // Level1's redesign replaced the old trio with these route-side retreat covers.
+    var terrain=System.Array.Find(loaded.GetRootGameObjects(),g=>g.name=="FirstOperationTerrain");Assert.NotNull(terrain);
+    covers=new BoxCollider2D[3];string[] names={"ArrivalRetreatA","ArrivalRetreatB","StorageFloorCover"};for(int i=0;i<3;i++){var t=terrain.transform.Find(names[i]);Assert.NotNull(t);covers[i]=t.GetComponent<BoxCollider2D>();Assert.NotNull(covers[i]);}
+   }
+   foreach(var c in covers)
    {
     Assert.IsFalse(c.isTrigger);Assert.NotNull(c.GetComponent<SpriteRenderer>().sprite);var b=c.bounds;
     Assert.IsTrue(Physics2D.Raycast(new Vector2(b.center.x,b.min.y-.03f),Vector2.down,.15f,1));

@@ -1,0 +1,10 @@
+Assets/Data/Progression\DemoCatalog.asset
+Assets/Scripts\Missions\MissionHud.cs
+Assets/Scripts\Combat\PlayerCombat.cs
+Assets/Scripts\Progression\ProgressStore.cs
+Assets/Scripts\Progression\GameSession.cs
+Assets/Scripts\Progression\GameFlowController.cs
+Assets/Scripts\Progression\GameCatalog.cs
+Assets/Scripts\Progression\CampaignMissionBridge.cs
+Assets/Scripts\Inventory\PlayerSupplies.cs
+Assets/Scripts\Inventory\PlayerLoadout.cs

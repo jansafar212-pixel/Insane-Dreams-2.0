@@ -1,0 +1,118 @@
+[
+  {
+    "Path": "Assets/Scripts/Enemies/EnemyCombat.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "Assets/Scripts/Enemies/LarperBrain.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "Assets/Scripts/Enemies/SamuraiCombat.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "Assets/Scripts/Enemies/SamuraiPlatformRoutes.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "Assets/Scripts/Enemies/OfficerShotTelegraph.cs",
+    "Unchanged": false
+  },
+  {
+    "Path": "Assets/Scripts/Prototype/PlayerMotor2D.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "Assets/Scripts/Input/WarehouseTouchControls.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "Assets/Scripts/Combat/AttackExecutor.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "Assets/Data/FirstOperation/Officer.prefab",
+    "Unchanged": true
+  },
+  {
+    "Path": "Assets/Data/FirstOperation/OfficerPistol.asset",
+    "Unchanged": true
+  },
+  {
+    "Path": "Assets/Scenes/Warehouse_Testbed.unity",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\UI\\AkumuTypography.uss",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\UI\\AkumuTypography.uss.meta",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\UI\\GameFlow.uss",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\UI\\GameFlow.uss.meta",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\UI\\GameFlow.uxml",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\UI\\GameFlow.uxml.meta",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\UI\\HandmadeUI.uss",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\UI\\HandmadeUI.uss.meta",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\UI\\MissionControls.uss",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\UI\\MissionControls.uss.meta",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\UI\\MissionControls.uxml",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\UI\\MissionControls.uxml.meta",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\UI\\WarehouseControls.uss",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\UI\\WarehouseControls.uss.meta",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\UI\\WarehouseControls.uxml",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\UI\\WarehouseControls.uxml.meta",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\UI\\WarehousePanel.asset",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\UI\\WarehousePanel.asset.meta",
+    "Unchanged": true
+  }
+]

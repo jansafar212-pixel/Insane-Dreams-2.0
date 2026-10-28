@@ -1,0 +1,114 @@
+{
+  "Passed": 61.0,
+  "Failed": 0.0,
+  "Suites": [
+    {
+      "Suite": "Rules",
+      "Status": "completed",
+      "Summary": {
+        "total": 2,
+        "passed": 2,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "Evidence": "Rules.json"
+    },
+    {
+      "Suite": "Layout",
+      "Status": "completed",
+      "Summary": {
+        "total": 2,
+        "passed": 2,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "Evidence": "Layout.json"
+    },
+    {
+      "Suite": "Combat",
+      "Status": "completed",
+      "Summary": {
+        "total": 5,
+        "passed": 5,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "Evidence": "Combat.json"
+    },
+    {
+      "Suite": "Level1",
+      "Status": "completed",
+      "Summary": {
+        "total": 6,
+        "passed": 6,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "Evidence": "Level1.json"
+    },
+    {
+      "Suite": "Campaign",
+      "Status": "completed",
+      "Summary": {
+        "total": 12,
+        "passed": 12,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "Evidence": "Campaign.json"
+    },
+    {
+      "Suite": "MovementSuppression",
+      "Status": "completed",
+      "Summary": {
+        "total": 9,
+        "passed": 9,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "Evidence": "MovementSuppression.json"
+    },
+    {
+      "Suite": "Cover",
+      "Status": "completed",
+      "Summary": {
+        "total": 12,
+        "passed": 12,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "Evidence": "Cover.json"
+    },
+    {
+      "Suite": "LegacyMission",
+      "Status": "completed",
+      "Summary": {
+        "total": 9,
+        "passed": 9,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "Evidence": "LegacyMission.json"
+    },
+    {
+      "Suite": "Specialists",
+      "Status": "completed",
+      "Summary": {
+        "total": 4,
+        "passed": 4,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "Evidence": "Specialists.json"
+    }
+  ]
+}

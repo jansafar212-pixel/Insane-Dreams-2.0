@@ -1,0 +1,42 @@
+[
+  {
+    "Path": "Assets/Art/CowardsBunker/Environment.asset",
+    "Unchanged": true
+  },
+  {
+    "Path": "Assets/Scenes/Warehouse_Demo.unity",
+    "Unchanged": false
+  },
+  {
+    "Path": "Assets/Scenes/Warehouse_Testbed.unity",
+    "Unchanged": true
+  },
+  {
+    "Path": "Assets/Data/FirstOperation/Officer.prefab",
+    "Unchanged": true
+  },
+  {
+    "Path": "Assets/Scripts/Enemies/EnemyCombat.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "Assets/Scripts/Enemies/OfficerShotTelegraph.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "Assets/Scripts/Prototype/PlayerMotor2D.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "Assets/Scripts/Combat/PlayerThrowables.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "Assets/Scripts/Progression/GameSession.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "Assets/Data/Progression/DemoCatalog.asset",
+    "Unchanged": true
+  }
+]

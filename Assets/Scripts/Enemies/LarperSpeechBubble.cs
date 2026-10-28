@@ -13,17 +13,21 @@ namespace InsaneDreams.Enemies
         private float until;
         private Transform headAnchor;
         private static readonly List<LarperSpeechBubble> visible = new List<LarperSpeechBubble>();
+        private static bool presentationBlocked;
+        public static void SetPresentationBlocked(bool blocked)
+        {presentationBlocked=blocked;if(blocked)while(visible.Count>0){var bubble=visible[visible.Count-1];if(bubble!=null)bubble.Hide();else visible.RemoveAt(visible.Count-1);}}
         public Rect Placement { get; private set; }
         public static int VisibleCount => visible.Count;
         public Transform HeadAnchor => headAnchor;
         public bool IsVisible => label != null && label.style.display.value != DisplayStyle.None && Time.time < until;
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)] private static void ResetRegistry()=>visible.Clear();
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)] private static void ResetRegistry(){visible.Clear();presentationBlocked=false;}
         public string LastLine { get; private set; }
         public int LinesShown { get; private set; }
         public void Bind(Camera camera,UIDocument ui) { if(label!=null)label.RemoveFromHierarchy();label=null;view=camera;document=ui; }
         private void Start(){var rig=GetComponentInChildren<InsaneDreams.Visuals.CutoutRig>();if(rig!=null)headAnchor=rig.speechAnchor;}
         public bool IsRelevant(Vector3 position)
         {
+            if(presentationBlocked)return false;
             if(view==null)view=Camera.main;
             if(document==null)document=Object.FindFirstObjectByType<UIDocument>();
             if(view==null||document==null||document.rootVisualElement?.panel==null)return false;
@@ -37,15 +41,11 @@ namespace InsaneDreams.Enemies
             if(label==null)
             {
                 label=new Label { name="larperSpeech",pickingMode=PickingMode.Ignore };
-                label.style.position=Position.Absolute;label.style.width=220;label.style.whiteSpace=WhiteSpace.Normal;
-                label.style.fontSize=18;label.style.unityFontStyleAndWeight=FontStyle.Bold;label.style.unityTextAlign=TextAnchor.MiddleCenter;
-                label.style.color=Color.white;label.style.backgroundColor=new Color(.04f,.07f,.12f,.95f);
-                label.style.paddingLeft=6;label.style.paddingRight=6;label.style.paddingTop=5;label.style.paddingBottom=5;
-                label.style.borderTopLeftRadius=8;label.style.borderTopRightRadius=8;label.style.borderBottomLeftRadius=8;label.style.borderBottomRightRadius=8;
+                label.AddToClassList("larper-speech");
                 document.rootVisualElement.Add(label);
             }
             if(!visible.Contains(this))visible.Add(this);
-            label.style.backgroundColor=panic?new Color(.35f,.08f,.05f,.97f):new Color(.04f,.07f,.12f,.95f);
+            label.EnableInClassList("panic-speech",panic);
             LastLine=text;LinesShown++;label.text=text;until=Time.time+Mathf.Clamp(visibleSeconds+Mathf.Max(0,text.Length-20)*.025f,3,4);label.style.display=DisplayStyle.Flex;return true;
         }
         public static Rect AvoidOverlap(Rect desired,Rect screen,IReadOnlyList<Rect> occupied)

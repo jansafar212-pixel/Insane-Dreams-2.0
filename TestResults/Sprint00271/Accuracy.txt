@@ -1,0 +1,1 @@
+seed271; range10; shots=6; hits=6; HP=9670

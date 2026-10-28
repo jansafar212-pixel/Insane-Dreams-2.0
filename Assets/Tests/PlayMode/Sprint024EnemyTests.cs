@@ -51,7 +51,7 @@ namespace InsaneDreams.Tests
             var go=Keep(new GameObject("S024Victim"));go.layer=2;go.transform.position=position;go.AddComponent<BoxCollider2D>().size=new Vector2(.6f,1);
             var hp=go.AddComponent<Health>();var so=new SerializedObject(hp);so.FindProperty("team").enumValueIndex=(int)team;so.ApplyModifiedPropertiesWithoutUndo();return hp;
         }
-        [UnityTest] public IEnumerator FireworkBlastDeduplicatesVictimsRespectsWallsAndOnlyOptInAttacksHurtAllies()
+        [UnityTest] public IEnumerator FireworkBlastDeduplicatesVictimsRespectsWallsAndPreservesFriendlyFire()
         {
             var source=Keep(new GameObject("S024Source"));source.transform.position=new Vector2(35997,1);
             var player=Dummy(new Vector2(36000,.8f),CombatTeam.Player);var ally=Dummy(new Vector2(36001,.8f),CombatTeam.Enemy);var shielded=Dummy(new Vector2(36002,.8f),CombatTeam.Player);
@@ -59,15 +59,18 @@ namespace InsaneDreams.Tests
             Solid(new Vector2(36001.5f,1),new Vector2(.15f,3));Physics2D.SyncTransforms();
             var rocket=Keep(Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemies/CartoonFirework.prefab"))).GetComponent<FireworkProjectile>();
             rocket.Prepare(source,new Vector2(36000,.8f),Color.cyan,false);rocket.Detonate();
-            Assert.AreEqual(76,player.Current,.01f);Assert.AreEqual(100,ally.Current);Assert.AreEqual(100,shielded.Current);Assert.AreEqual(1,rocket.LastAffected);
-            player.Restore();rocket.gameObject.SetActive(false);rocket.Prepare(source,new Vector2(36000,.8f),Color.magenta,true);rocket.Detonate();
+            // The preserved global projectile already uses 31.2 damage and always-on friendly fire.
+            Assert.AreEqual(68.8f,player.Current,.01f);Assert.Less(ally.Current,100);Assert.AreEqual(100,shielded.Current);Assert.AreEqual(2,rocket.LastAffected);
+            player.Restore();ally.Restore();rocket.gameObject.SetActive(false);rocket.Prepare(source,new Vector2(36000,.8f),Color.magenta,true);rocket.Detonate();
             Assert.Less(player.Current,100);Assert.Less(ally.Current,100);Assert.AreEqual(100,shielded.Current);Assert.AreEqual(2,rocket.LastAffected);
-            yield return new WaitForSeconds(.4f);Assert.IsFalse(rocket.Busy);
+            float deadline=Time.time+2;while(rocket.Busy&&Time.time<deadline)yield return null;Assert.IsFalse(rocket.Busy);
         }
         [UnityTest] public IEnumerator FireworksTelegraphLocksDestinationAndReusesTwoProjectileInstances()
         {
             var go=Keep(Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemies/FireworksExpert.prefab"),new Vector3(36000,.71f),Quaternion.identity));
-            go.GetComponent<EnemyCombat>().enabled=false;go.GetComponent<LarperBrain>().enabled=false;var expert=go.GetComponent<FireworksCombat>();var target=Dummy(new Vector2(36007,.8f),CombatTeam.Player);
+            var combat=go.GetComponent<EnemyCombat>();combat.BindTarget(null);go.GetComponent<LarperBrain>().enabled=false;var expert=go.GetComponent<FireworksCombat>();var target=Dummy(new Vector2(36007,.8f),CombatTeam.Player);
+            // A committed throw now advances independently and honors real combat/camera gates.
+            var camera=Keep(new GameObject("S024ThrowCamera")).AddComponent<Camera>();camera.orthographic=true;camera.orthographicSize=8;camera.transform.position=new Vector3(36003,3,-10);combat.BindGameplayCamera(camera);
             var settings=new SerializedObject(expert);settings.FindProperty("heldMalfunctionChance").floatValue=0;settings.ApplyModifiedPropertiesWithoutUndo();
             yield return new WaitForSeconds(2.2f);expert.Tick(target,target.transform.position,true,true,true);Assert.IsTrue(expert.Preparing);Assert.AreEqual(0,expert.Launches);Assert.AreEqual(2,expert.PoolSize);
             var active=Object.FindObjectsByType<FireworkProjectile>(FindObjectsSortMode.None);var rocket=System.Array.Find(active,p=>p.Busy);Assert.IsNotNull(rocket);Vector2 destination=rocket.Destination;

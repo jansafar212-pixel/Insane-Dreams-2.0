@@ -1,0 +1,86 @@
+[
+  {
+    "bundle": "level1",
+    "assetPath": "Assets/Scenes/Warehouse_Demo.unity",
+    "records": 2082,
+    "bytes": 236603.0
+  },
+  {
+    "bundle": "sharedassets0.assets",
+    "assetPath": "Assets/Art/ReloadRepair/DesertEagleMagazine.asset",
+    "records": 1,
+    "bytes": 452.0
+  },
+  {
+    "bundle": "sharedassets0.assets",
+    "assetPath": "Assets/Art/ReloadRepair/DesertEagleMagazinePixels.asset",
+    "records": 1,
+    "bytes": 308.0
+  },
+  {
+    "bundle": "sharedassets0.assets",
+    "assetPath": "Assets/Art/ReloadRepair/LmgBody.asset",
+    "records": 1,
+    "bytes": 440.0
+  },
+  {
+    "bundle": "sharedassets0.assets",
+    "assetPath": "Assets/Art/ReloadRepair/LmgBodyPixels.asset",
+    "records": 1,
+    "bytes": 2200.0
+  },
+  {
+    "bundle": "sharedassets0.assets",
+    "assetPath": "Assets/Art/ReloadRepair/LmgContainer.asset",
+    "records": 1,
+    "bytes": 444.0
+  },
+  {
+    "bundle": "sharedassets0.assets",
+    "assetPath": "Assets/Art/ReloadRepair/LmgContainerPixels.asset",
+    "records": 1,
+    "bytes": 276.0
+  },
+  {
+    "bundle": "sharedassets0.assets",
+    "assetPath": "Assets/Art/ReloadRepair/ShotgunShell.asset",
+    "records": 1,
+    "bytes": 444.0
+  },
+  {
+    "bundle": "sharedassets0.assets",
+    "assetPath": "Assets/Art/ReloadRepair/ShotgunShellPixels.asset",
+    "records": 1,
+    "bytes": 192.0
+  },
+  {
+    "bundle": "sharedassets0.assets",
+    "assetPath": "Assets/Art/ReloadRepair/SmgBody.asset",
+    "records": 1,
+    "bytes": 440.0
+  },
+  {
+    "bundle": "sharedassets0.assets",
+    "assetPath": "Assets/Art/ReloadRepair/SmgBodyPixels.asset",
+    "records": 1,
+    "bytes": 1752.0
+  },
+  {
+    "bundle": "sharedassets0.assets",
+    "assetPath": "Assets/Art/ReloadRepair/SmgMagazine.asset",
+    "records": 1,
+    "bytes": 444.0
+  },
+  {
+    "bundle": "sharedassets0.assets",
+    "assetPath": "Assets/Art/ReloadRepair/SmgMagazinePixels.asset",
+    "records": 1,
+    "bytes": 216.0
+  },
+  {
+    "bundle": "sharedassets0.assets",
+    "assetPath": "Assets/Data/Progression/DemoCatalog.asset",
+    "records": 1,
+    "bytes": 5076.0
+  }
+]

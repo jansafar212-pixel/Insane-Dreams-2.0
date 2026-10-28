@@ -33,6 +33,7 @@ namespace InsaneDreams.Traversal
             standingSize = box.size; standingOffset = box.offset;
         }
         public void SetInput(Vector2 value) => move = value;
+        public void BeginSlide(){if(motor.IsGrounded)Crouch();}
         private void FixedUpdate()
         {
             if (traversal != null && (traversal.IsClimbing || traversal.CanEnterFromTop(move))) { TryStand(); return; }

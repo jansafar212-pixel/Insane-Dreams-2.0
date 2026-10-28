@@ -1,0 +1,866 @@
+{
+    "context": "Controlled Unity Editor, NOT Android",
+    "phase": "after",
+    "frames": 600,
+    "enemyCount": 15,
+    "seconds": 3.004486083984375,
+    "averageFps": 199.69505254597215,
+    "medianMs": 4.711401648819447,
+    "p95Ms": 6.6276006400585175,
+    "p99Ms": 10.67549642175436,
+    "onePercentLowFps": 61.34882183939843,
+    "memoryBytes": 2850265137.0,
+    "cpu": [
+        {
+            "name": "RenderPlayModeViewCameras",
+            "msPerFrame": 0.7981499950091044
+        },
+        {
+            "name": "UnityEngine.CoreModule.dll!UnityEngine.Rendering::RenderPipelineManager.DoRenderLoop_Internal() [Invoke]",
+            "msPerFrame": 0.7142050017913183
+        },
+        {
+            "name": "Inl_UniversalRenderTotal",
+            "msPerFrame": 0.6929366658131282
+        },
+        {
+            "name": "Inl_RenderCameraStack",
+            "msPerFrame": 0.6578783283631007
+        },
+        {
+            "name": "PreLateUpdate.ScriptRunBehaviourLateUpdate",
+            "msPerFrame": 0.5333400020996729
+        },
+        {
+            "name": "LateBehaviourUpdate",
+            "msPerFrame": 0.5330149963498115
+        },
+        {
+            "name": "Inl_UniversalRenderPipeline.RenderSingleCameraInternal: Main Camera",
+            "msPerFrame": 0.3965816636880239
+        },
+        {
+            "name": "Update.ScriptRunBehaviourUpdate",
+            "msPerFrame": 0.2975233333806197
+        },
+        {
+            "name": "BehaviourUpdate",
+            "msPerFrame": 0.29692166298627853
+        },
+        {
+            "name": "Inl_ScriptableRenderContext.Submit",
+            "msPerFrame": 0.17768833190202712
+        },
+        {
+            "name": "UniversalRenderPipeline.RenderSingleCameraInternal: Main Camera",
+            "msPerFrame": 0.15404499992728232
+        },
+        {
+            "name": "ExecuteRenderGraph",
+            "msPerFrame": 0.14701833426952363
+        },
+        {
+            "name": "PostLateUpdate.UpdateAllRenderers",
+            "msPerFrame": 0.10214999963839849
+        },
+        {
+            "name": "UI.RenderOverlays",
+            "msPerFrame": 0.09434666646023591
+        },
+        {
+            "name": "UnityEngine.UIModule.dll!UnityEngine::Canvas.EndRenderExtraOverlays() [Invoke]",
+            "msPerFrame": 0.09031166707475981
+        },
+        {
+            "name": "FixedUpdate.ScriptRunBehaviourFixedUpdate",
+            "msPerFrame": 0.08798833315571149
+        },
+        {
+            "name": "FixedBehaviourUpdate",
+            "msPerFrame": 0.08783666665355365
+        },
+        {
+            "name": "Inl_RecordRenderGraph",
+            "msPerFrame": 0.08724500015377998
+        },
+        {
+            "name": "WarehousePanel.Render",
+            "msPerFrame": 0.08215499967336655
+        },
+        {
+            "name": "Inl_On Record Render Graph",
+            "msPerFrame": 0.08192833301921686
+        },
+        {
+            "name": "CullResults.CreateSharedRendererScene",
+            "msPerFrame": 0.07136499999711911
+        },
+        {
+            "name": "PostLateUpdate.UIElementsRepaintPanels",
+            "msPerFrame": 0.06308499959607919
+        },
+        {
+            "name": "UnityEngine.UIElementsModule.dll!UnityEngine.UIElements::UIElementsRuntimeUtilityNative.RepaintPanels() [Invoke]",
+            "msPerFrame": 0.061989999810854596
+        },
+        {
+            "name": "EndRenderQueueExtraction",
+            "msPerFrame": 0.05792499966919422
+        },
+        {
+            "name": "Inl_ExecuteRenderGraph",
+            "msPerFrame": 0.05624166658769051
+        },
+        {
+            "name": "UIElements.UpdateRenderData",
+            "msPerFrame": 0.04406833285465837
+        },
+        {
+            "name": "RenderTreeManager.Process",
+            "msPerFrame": 0.04336999921749036
+        },
+        {
+            "name": "PreLateUpdate.UIElementsUpdatePanels",
+            "msPerFrame": 0.04205666662504275
+        },
+        {
+            "name": "UnityEngine.UIElementsModule.dll!UnityEngine.UIElements::UIElementsRuntimeUtilityNative.UpdatePanels() [Invoke]",
+            "msPerFrame": 0.04133333327869574
+        },
+        {
+            "name": "FixedUpdate.Physics2DFixedUpdate",
+            "msPerFrame": 0.036296666413545606
+        },
+        {
+            "name": "Physics2D.Simulate",
+            "msPerFrame": 0.036018332839012145
+        },
+        {
+            "name": "SpriteRenderer.OnChangeSprite",
+            "msPerFrame": 0.035468333711226784
+        },
+        {
+            "name": "SpriteRenderer.PrepareNode",
+            "msPerFrame": 0.03474833313569737
+        },
+        {
+            "name": "Physics2D.RaycastAll",
+            "msPerFrame": 0.0317299996468743
+        },
+        {
+            "name": "RenderLoop.ScheduleDraw",
+            "msPerFrame": 0.031091666547581553
+        },
+        {
+            "name": "ExecuteRenderQueueJob",
+            "msPerFrame": 0.027963333235432705
+        },
+        {
+            "name": "PreUpdate.Physics2DUpdate",
+            "msPerFrame": 0.02481333309939752
+        },
+        {
+            "name": "UpdateRendererBoundingVolumes",
+            "msPerFrame": 0.02232999994412239
+        },
+        {
+            "name": "Inl_RenderPipeline.EndContextRendering",
+            "msPerFrame": 0.019303333169470232
+        },
+        {
+            "name": "Physics2D.InterpolatePoses",
+            "msPerFrame": 0.018623333245826264
+        },
+        {
+            "name": "Renderer2D Pass",
+            "msPerFrame": 0.01767666658076147
+        },
+        {
+            "name": "Physics2D.ColliderCast",
+            "msPerFrame": 0.01726833328527088
+        },
+        {
+            "name": "Physics2D.ColliderCastAll",
+            "msPerFrame": 0.016724999885385235
+        },
+        {
+            "name": "Physics2D.OverlapPointAll",
+            "msPerFrame": 0.015034999798202383
+        },
+        {
+            "name": "Inl_UniversalRenderPipeline.CreateCameraData",
+            "msPerFrame": 0.014819999892885486
+        },
+        {
+            "name": "Physics2D.Step",
+            "msPerFrame": 0.014689999756713708
+        },
+        {
+            "name": "UIElements.UpdateLayout",
+            "msPerFrame": 0.012761666600514825
+        },
+        {
+            "name": "ScheduleUpdateRendererBoundingVolumes",
+            "msPerFrame": 0.01263833330012858
+        },
+        {
+            "name": "RenderTree.UpdateVisuals",
+            "msPerFrame": 0.012628333212342113
+        },
+        {
+            "name": "Physics2D.CompileContactCallbacks",
+            "msPerFrame": 0.012204999895766377
+        },
+        {
+            "name": "Inl_NRPRGComp_ExecuteBeginRenderpassCommand",
+            "msPerFrame": 0.011743333299333851
+        },
+        {
+            "name": "Inl_ScriptableRenderer.SetPerCameraShaderVariables",
+            "msPerFrame": 0.011253333231434227
+        },
+        {
+            "name": "WaitForRenderJobs",
+            "msPerFrame": 0.0110700000312742
+        },
+        {
+            "name": "LineRenderer.ScheduleGeometryJobs",
+            "msPerFrame": 0.010456666583195329
+        },
+        {
+            "name": "Physics2D.SendContactCallbacks",
+            "msPerFrame": 0.010156666549543539
+        },
+        {
+            "name": "Inl_ScriptableRenderer.SetupCullingParameters",
+            "msPerFrame": 0.009444999943176905
+        },
+        {
+            "name": "Physics2D.InterpolatePoseSorting",
+            "msPerFrame": 0.008591666608117521
+        },
+        {
+            "name": "Inl_ComputeHashRenderGraph",
+            "msPerFrame": 0.008058333319301407
+        },
+        {
+            "name": "Physics2D.InterpolatePoseWriting",
+            "msPerFrame": 0.008011666603852063
+        },
+        {
+            "name": "Inl_UniversalRenderPipeline.SetupPerCameraShaderConstants",
+            "msPerFrame": 0.007736666593700647
+        },
+        {
+            "name": "Inl_CompileRenderGraph",
+            "msPerFrame": 0.007688333334711691
+        },
+        {
+            "name": "UnityEngine.CoreModule.dll!UnityEngine.Experimental.Rendering::ScriptableRuntimeReflectionSystemWrapper.Internal_ScriptableRuntimeReflectionSystemWrapper_TickRealtimeProbes() [Invoke]",
+            "msPerFrame": 0.007666666635001699
+        },
+        {
+            "name": "Inl_UniversalRenderPipeline.CreateRenderingData",
+            "msPerFrame": 0.007226666676190993
+        },
+        {
+            "name": "Physics2D.SolveDiscrete",
+            "msPerFrame": 0.006988333289821943
+        },
+        {
+            "name": "Inl_UniversalRenderPipeline.InitializeAdditionalCameraData",
+            "msPerFrame": 0.006548333292206128
+        },
+        {
+            "name": "PhysicsCore2D.DrawWorlds.ExecuteRenderCommands (SRP)",
+            "msPerFrame": 0.006526666639062265
+        },
+        {
+            "name": "PostLateUpdate.UpdateCustomRenderTextures",
+            "msPerFrame": 0.006104999959158401
+        },
+        {
+            "name": "Physics2D.SolveDiscreteTraversal",
+            "msPerFrame": 0.00580166665216287
+        },
+        {
+            "name": "Inl_Renderer2D Pass",
+            "msPerFrame": 0.005769999969440202
+        },
+        {
+            "name": "CustomRenderTextures.Update",
+            "msPerFrame": 0.0056316666305065155
+        },
+        {
+            "name": "Physics2D.SendCollisionContactCallbacks",
+            "msPerFrame": 0.005289999974775128
+        },
+        {
+            "name": "Physics2D.SolveDiscreteIsland",
+            "msPerFrame": 0.0052183333648523934
+        },
+        {
+            "name": "Physics2D.InterpolationPosesSetup",
+            "msPerFrame": 0.005151666669795911
+        },
+        {
+            "name": "Inl_UniversalRenderPipeline.InitializeStackedCameraData",
+            "msPerFrame": 0.0046783333100999394
+        },
+        {
+            "name": "UIEvents.UIElementsRenderOffscreenPanels",
+            "msPerFrame": 0.004644999982944379
+        },
+        {
+            "name": "BeginRenderQueueExtraction",
+            "msPerFrame": 0.00464333329970638
+        },
+        {
+            "name": "Physics2D.SendTriggerContactCallbacks",
+            "msPerFrame": 0.004618333293668305
+        },
+        {
+            "name": "UIElements.UpdateRuntimeBindings",
+            "msPerFrame": 0.00436333332133169
+        },
+        {
+            "name": "UnityEngine.UIElementsModule.dll!UnityEngine.UIElements::UIDocument.LateUpdate() [Invoke]",
+            "msPerFrame": 0.004260000000552585
+        },
+        {
+            "name": "UnityEngine.UIElementsModule.dll!UnityEngine.UIElements::UIElementsRuntimeUtilityNative.RenderOffscreenPanels() [Invoke]",
+            "msPerFrame": 0.004184999984378616
+        },
+        {
+            "name": "FrameEvents.NewInputBeforeRenderUpdate",
+            "msPerFrame": 0.0038199999757731955
+        },
+        {
+            "name": "Inl_UniversalRenderPipeline.SetupPerFrameShaderConstants",
+            "msPerFrame": 0.003586666670162231
+        },
+        {
+            "name": "Physics2D.SolveContinuous",
+            "msPerFrame": 0.0030099999625235797
+        },
+        {
+            "name": "Physics2D.ContactsCollide",
+            "msPerFrame": 0.0029966666207959253
+        },
+        {
+            "name": "Physics2D.SolveContinuousTraversal",
+            "msPerFrame": 0.0028633333121736845
+        },
+        {
+            "name": "UIEvents.WillRenderCanvases",
+            "msPerFrame": 0.0027833333141946545
+        },
+        {
+            "name": "Physics2D.Raycast",
+            "msPerFrame": 0.002754999982425943
+        },
+        {
+            "name": "PostLateUpdate.RenderAs2DUpdate",
+            "msPerFrame": 0.0027483333038010945
+        },
+        {
+            "name": "Physics2D.SolveDiscreteIslandVelocityConstraints",
+            "msPerFrame": 0.0026499999851997322
+        },
+        {
+            "name": "Physics2D.SyncTransformChanges",
+            "msPerFrame": 0.002578333343262784
+        },
+        {
+            "name": "UnityEngine.CoreModule.dll!UnityEngine.Rendering::RenderPipelineManager.HandleRenderPipelineChange() [Invoke]",
+            "msPerFrame": 0.0025566666382170903
+        },
+        {
+            "name": "PrepareUpdateRendererBoundingVolumes",
+            "msPerFrame": 0.0025349999879836103
+        },
+        {
+            "name": "Inl_ScriptableRenderer.ClearRenderingState",
+            "msPerFrame": 0.002498333319090307
+        },
+        {
+            "name": "UGUI.Rendering.UpdateBatches",
+            "msPerFrame": 0.0024916666424057137
+        },
+        {
+            "name": "Physics2D.WriteTransforms",
+            "msPerFrame": 0.0023716666735708715
+        },
+        {
+            "name": "PreLateUpdate.Physics2DLateUpdate",
+            "msPerFrame": 0.0022299999895039947
+        },
+        {
+            "name": "UnityEngine.CoreModule.dll!UnityEngine.Rendering::OnDemandRendering.GetRenderFrameInterval() [Invoke]",
+            "msPerFrame": 0.0021216666277420397
+        },
+        {
+            "name": "Physics2D.FindMinimumContinuousContact",
+            "msPerFrame": 0.0020800000008118027
+        },
+        {
+            "name": "EarlyUpdate.RendererNotifyInvisible",
+            "msPerFrame": 0.0020433333333736907
+        },
+        {
+            "name": "Inl_UniversalRenderPipeline.CreateShadowData",
+            "msPerFrame": 0.0020416666559564573
+        },
+        {
+            "name": "Physics2D.CollectProfileInfo",
+            "msPerFrame": 0.0019100000004982575
+        },
+        {
+            "name": "FrameEvents.OnBeforeRenderCallback",
+            "msPerFrame": 0.0018683333318525305
+        },
+        {
+            "name": "UnityEngine.UIModule.dll!UnityEngine::Canvas.BeginRenderExtraOverlays() [Invoke]",
+            "msPerFrame": 0.0018533333262894303
+        },
+        {
+            "name": "UnityEngine.CoreModule.dll!UnityEngine.Rendering::SupportedRenderingFeatures.IsLightmapBakeTypeSupportedByRef() [Invoke]",
+            "msPerFrame": 0.0018366666471896073
+        },
+        {
+            "name": "Inl_UniversalRenderPipeline.CreateLightData",
+            "msPerFrame": 0.001774999990205591
+        },
+        {
+            "name": "Physics2D.SyncRigidbodyTransformChanges",
+            "msPerFrame": 0.0016833332848667246
+        },
+        {
+            "name": "UnityEngine.UI.dll!UnityEngine.UIElements::PanelEventHandler.Update() [Invoke]",
+            "msPerFrame": 0.0016483333175225804
+        },
+        {
+            "name": "Physics2D.Collider2D.CreateShapes",
+            "msPerFrame": 0.0015866666469567766
+        },
+        {
+            "name": "UIElements.UpdateAnimation",
+            "msPerFrame": 0.0015516666559657704
+        },
+        {
+            "name": "UnityEngine.PhysicsCore2DModule.dll!Unity.U2D.Physics::PhysicsWorldRenderer.SendDrawResults() [Invoke]",
+            "msPerFrame": 0.0014766666494930784
+        },
+        {
+            "name": "RenderLoop.CleanupNodeQueue",
+            "msPerFrame": 0.0014233333109586964
+        },
+        {
+            "name": "beforeCameraRender.Invoke",
+            "msPerFrame": 0.0013649999814030404
+        },
+        {
+            "name": "SpriteRenderer.AwakeFromLoad",
+            "msPerFrame": 0.0013416666788543807
+        },
+        {
+            "name": "Physics2D.SolveDiscreteIslandPositionConstraints",
+            "msPerFrame": 0.0013300000039938216
+        },
+        {
+            "name": "UIElements.UpdateEditorBindings",
+            "msPerFrame": 0.0013299999865315235
+        },
+        {
+            "name": "UnityEngine.CoreModule.dll!UnityEngine::Application.InvokeOnBeforeRender() [Invoke]",
+            "msPerFrame": 0.0012233333303205047
+        },
+        {
+            "name": "GC.Alloc",
+            "msPerFrame": 0.0011366666324950832
+        },
+        {
+            "name": "UnityEngine.UI.dll!UnityEngine.UIElements::PanelEventHandler.LateUpdate() [Invoke]",
+            "msPerFrame": 0.0010716666671214624
+        },
+        {
+            "name": "Unity.AppUI.dll!Unity.AppUI.Core::AppUIManagerBehaviour.Update() [Invoke]",
+            "msPerFrame": 0.0009216666590267171
+        },
+        {
+            "name": "GarbageCollector.CollectIncremental",
+            "msPerFrame": 0.0008833333287232866
+        },
+        {
+            "name": "UIElements.PreUpdatePanelRenderers",
+            "msPerFrame": 0.0008666666525338466
+        },
+        {
+            "name": "Physics2D.FindNewContacts",
+            "msPerFrame": 0.0008499999825289706
+        },
+        {
+            "name": "UnityEngine.UIModule.dll!UnityEngine::Canvas.SendPreWillRenderCanvases() [Invoke]",
+            "msPerFrame": 0.0008333333219828395
+        },
+        {
+            "name": "UIElements.CollectLayoutNodes",
+            "msPerFrame": 0.0008116666538019975
+        },
+        {
+            "name": "Physics2D.BoxColliderPrepareShapes",
+            "msPerFrame": 0.0008083333251609777
+        },
+        {
+            "name": "UGUI.Rendering.EmitWorldScreenspaceCameraGeometry",
+            "msPerFrame": 0.0007699999818820895
+        },
+        {
+            "name": "UnityEngine.CoreModule.dll!UnityEngine.Rendering::GraphicsSettings.GetDefaultMaterial() [Invoke]",
+            "msPerFrame": 0.0007633333327248693
+        },
+        {
+            "name": "Renderers.OncePerFrameUpdate",
+            "msPerFrame": 0.0007566666497344462
+        },
+        {
+            "name": "RenderTexture.GarbageCollectTemporary",
+            "msPerFrame": 0.0007533333246101392
+        },
+        {
+            "name": "UnityEngine.CoreModule.dll!UnityEngine.Rendering::SupportedRenderingFeatures.IsUIOverlayRenderedBySRP() [Invoke]",
+            "msPerFrame": 0.0006916666514977502
+        },
+        {
+            "name": "Physics2D.PreSolveContact",
+            "msPerFrame": 0.0006816666518716374
+        },
+        {
+            "name": "FinalizeUpdateRendererBoundingVolumes",
+            "msPerFrame": 0.0006733333262673114
+        },
+        {
+            "name": "UnityEngine.UIModule.dll!UnityEngine::Canvas.SendWillRenderCanvases() [Invoke]",
+            "msPerFrame": 0.0006666666454596755
+        },
+        {
+            "name": "Physics2D.SyncColliderTransformChanges",
+            "msPerFrame": 0.0006349999905069126
+        },
+        {
+            "name": "EarlyUpdate.Physics2DEarlyUpdate",
+            "msPerFrame": 0.0006233333240137048
+        },
+        {
+            "name": "UIElements.UpdateAssetsInEditor",
+            "msPerFrame": 0.0005766666659231608
+        },
+        {
+            "name": "Physics2D.SynchronizeFixtures",
+            "msPerFrame": 0.0005733333334016303
+        },
+        {
+            "name": "CleanUp.TextRenderingGarbageCollect",
+            "msPerFrame": 0.0005449999910827804
+        },
+        {
+            "name": "PostLateUpdate.DirectorRenderImage",
+            "msPerFrame": 0.0005416666613503669
+        },
+        {
+            "name": "Physics2D.TriggerContactsFinalUpdate",
+            "msPerFrame": 0.0005316666676662863
+        },
+        {
+            "name": "Physics2D.OverlapBoxAll",
+            "msPerFrame": 0.0005183333375801643
+        },
+        {
+            "name": "EarlyUpdate.TilemapRendererEarlyUpdate",
+            "msPerFrame": 0.0005083333378327855
+        },
+        {
+            "name": "UIElements.UpdateAnimationProperties",
+            "msPerFrame": 0.0005049999922145314
+        },
+        {
+            "name": "Physics2D.SolveContinuousIsland",
+            "msPerFrame": 0.000493333339303111
+        },
+        {
+            "name": "Physics2D.Collider2D.DestroyShapes",
+            "msPerFrame": 0.00048500000242105064
+        },
+        {
+            "name": "UIElements.UpdateStyle",
+            "msPerFrame": 0.0004733333310772044
+        },
+        {
+            "name": "Camera.Render",
+            "msPerFrame": 0.00041666665735344094
+        },
+        {
+            "name": "EarlyUpdate.ClearIntermediateRenderers",
+            "msPerFrame": 0.00038166665860141317
+        },
+        {
+            "name": "UIElements.UpdateViewData",
+            "msPerFrame": 0.00034499998849544985
+        },
+        {
+            "name": "Physics2D.SolveDiscreteIslandPostSolve",
+            "msPerFrame": 0.00034333332490253573
+        },
+        {
+            "name": "RenderTarget.GrabPixels",
+            "msPerFrame": 0.00031666666424522795
+        },
+        {
+            "name": "TextRendering.CollectGarbage",
+            "msPerFrame": 0.00031166665782317673
+        },
+        {
+            "name": "Physics2D.ConvertCollision2DForScript",
+            "msPerFrame": 0.00030999999532165624
+        },
+        {
+            "name": "Inl_RenderPipeline.BeginContextRendering",
+            "msPerFrame": 0.0002899999902486646
+        },
+        {
+            "name": "UIElements.UpdatePanelRenderers",
+            "msPerFrame": 0.0002799999897736901
+        },
+        {
+            "name": "Inl_UniversalRenderPipeline.GetMainLightIndex",
+            "msPerFrame": 0.00024833332560471414
+        },
+        {
+            "name": "Physics2D.ClearIslandFlags",
+            "msPerFrame": 0.00023833332816138863
+        },
+        {
+            "name": "Inl_RenderPipeline.BeginCameraRendering",
+            "msPerFrame": 0.0002383333276763248
+        },
+        {
+            "name": "RenderTree.UpdateClips",
+            "msPerFrame": 0.00022499999419475596
+        },
+        {
+            "name": "Application.FlushRenderStats",
+            "msPerFrame": 0.0002249999931033623
+        },
+        {
+            "name": "Physics2D.StoreBodyMoveStates",
+            "msPerFrame": 0.0002183333281815673
+        },
+        {
+            "name": "UIElements.UpdateElementBounds",
+            "msPerFrame": 0.00021833332769650345
+        },
+        {
+            "name": "Inl_ScriptableRenderer.AddRenderPasses",
+            "msPerFrame": 0.0002049999933660729
+        },
+        {
+            "name": "PhysicsCore2D.DrawWorlds.AddRenderCommands",
+            "msPerFrame": 0.0001916666612184296
+        },
+        {
+            "name": "Inl_UniversalRenderPipeline.GetPerObjectLightFlags",
+            "msPerFrame": 0.00017833333028344594
+        },
+        {
+            "name": "Physics2D.BeginContact",
+            "msPerFrame": 0.0001766666612335636
+        },
+        {
+            "name": "ParticleSystem.WaitForPreviousRenderingToFinish",
+            "msPerFrame": 0.00016499999486162172
+        },
+        {
+            "name": "TextureStreamingManager.AddRenderer",
+            "msPerFrame": 0.00016333333114744165
+        },
+        {
+            "name": "Inl_Sort Render Passes",
+            "msPerFrame": 0.00015833332896969903
+        },
+        {
+            "name": "Inl_RenderPipeline.EndCameraRendering",
+            "msPerFrame": 0.00015666666331526358
+        },
+        {
+            "name": "TextureStreamingManager.RemoveRenderer",
+            "msPerFrame": 0.0001533333316425948
+        },
+        {
+            "name": "Physics2D.PostSolveContact",
+            "msPerFrame": 0.00015333332933854156
+        },
+        {
+            "name": "Physics2D.SolveContinuousIslandVelocityConstraints",
+            "msPerFrame": 0.0001499999954830855
+        },
+        {
+            "name": "Physics2D.SolveContinuousIslandPositionConstraints",
+            "msPerFrame": 0.00014833333116257564
+        },
+        {
+            "name": "Physics2D.SolveDiscreteIslandWritePoses",
+            "msPerFrame": 0.0001333333315415075
+        },
+        {
+            "name": "Inl_ScriptableRenderer.InternalFinishRenderingCommon",
+            "msPerFrame": 0.00011666666359815281
+        },
+        {
+            "name": "Physics2D.SolveDiscreteIslandVelocities",
+            "msPerFrame": 0.0001016666636132868
+        },
+        {
+            "name": "Physics2D.Rigidbody2D.RecalculateContacts",
+            "msPerFrame": 0.00009500000026794927
+        },
+        {
+            "name": "Terrain.Trees.OnWillRender",
+            "msPerFrame": 0.0000899999976051428
+        },
+        {
+            "name": "Physics2D.ClearContinuousIslandFlags",
+            "msPerFrame": 0.00008666666350715483
+        },
+        {
+            "name": "Physics2D.FlagContactsForRecreation",
+            "msPerFrame": 0.00007666666557876548
+        },
+        {
+            "name": "Physics2D.SolveDiscreteIslandBodySleep",
+            "msPerFrame": 0.00007333333148077752
+        },
+        {
+            "name": "RenderTree.UpdateTransforms",
+            "msPerFrame": 0.00007333333148077752
+        },
+        {
+            "name": "RenderTree.UpdateColors",
+            "msPerFrame": 0.00007166666485621438
+        },
+        {
+            "name": "RenderTree.UpdateOpacity",
+            "msPerFrame": 0.00007166666485621438
+        },
+        {
+            "name": "SortingGroup.UpdateRenderer",
+            "msPerFrame": 0.00006833333209215198
+        },
+        {
+            "name": "Physics2D.SolveDiscreteIslandIntegratePoses",
+            "msPerFrame": 0.00006333333173339876
+        },
+        {
+            "name": "Physics2D.ClosestPoint",
+            "msPerFrame": 0.00005666666584147606
+        },
+        {
+            "name": "Physics2D.ClearBodyForces",
+            "msPerFrame": 0.00004833333174853275
+        },
+        {
+            "name": "Physics2D.RestoreBodyMoveStates",
+            "msPerFrame": 0.000041666665492812174
+        },
+        {
+            "name": "Physics2D.Collider2D.RecalculateContacts",
+            "msPerFrame": 0.00003999999886824905
+        },
+        {
+            "name": "PostLateUpdate.UIElementsRenderBatchModeOffscreen",
+            "msPerFrame": 0.00003666666574038876
+        },
+        {
+            "name": "Physics2D.SolveContinuousIslandPostSolve",
+            "msPerFrame": 0.00003666666574038876
+        },
+        {
+            "name": "Physics2D.SolveContinuousSynchronizeFixtures",
+            "msPerFrame": 0.0000333333324912625
+        },
+        {
+            "name": "Physics2D.SolveContinuousIslandIntegratePoses",
+            "msPerFrame": 0.00003166666586669938
+        },
+        {
+            "name": "Physics2D.EndContact",
+            "msPerFrame": 0.000029999999969732017
+        },
+        {
+            "name": "Physics2D.JointBreakLimits",
+            "msPerFrame": 0.000021666666119320627
+        },
+        {
+            "name": "Physics2D.SolveContinuousIslandReadBodyState",
+            "msPerFrame": 0.000009999999747378752
+        },
+        {
+            "name": "Physics2D.EffectorFixedUpdate",
+            "msPerFrame": 0.000008333333122815626
+        },
+        {
+            "name": "Physics2D.CircleColliderPrepareShapes",
+            "msPerFrame": 0.000004999999752423415
+        },
+        {
+            "name": "RenderTarget.SetActive",
+            "msPerFrame": 0.0000016666666245631252
+        },
+        {
+            "name": "Render Panels",
+            "msPerFrame": 0.0
+        },
+        {
+            "name": "CPU Render Thread Frame Time",
+            "msPerFrame": 0.0
+        },
+        {
+            "name": "Render Textures Count",
+            "msPerFrame": 0.0
+        },
+        {
+            "name": "Render Textures Bytes",
+            "msPerFrame": 0.0
+        },
+        {
+            "name": "Prepare Render",
+            "msPerFrame": 0.0
+        }
+    ],
+    "probes": [
+        {
+            "name": "HUD steady frame",
+            "usPerCall": 2.3705000000000003,
+            "bytesPerCall": -1.0
+        },
+        {
+            "name": "HUD unchanged readout",
+            "usPerCall": 3.3514999999999997,
+            "bytesPerCall": -1.0
+        },
+        {
+            "name": "Mission unchanged readout",
+            "usPerCall": 1.332,
+            "bytesPerCall": -1.0
+        },
+        {
+            "name": "Player full pose",
+            "usPerCall": 22.977000000000004,
+            "bytesPerCall": -1.0
+        },
+        {
+            "name": "Tracer fade",
+            "usPerCall": 0.30250000000000005,
+            "bytesPerCall": -1.0
+        }
+    ]
+}

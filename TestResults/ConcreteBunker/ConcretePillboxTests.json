@@ -1,0 +1,56 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 28.77,
+      "summary": {
+        "total": 4,
+        "passed": 3,
+        "failed": 1,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "InsaneDreams.Tests.ConcretePillboxTests.ConcreteShellBlocksEveryExteriorBoundaryExceptTheEmbrasureAndOfficerCanBeShot",
+          "Status": "Passed",
+          "Duration": 2.4551529,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.ConcretePillboxTests.LaserClipsToConcreteAndOnlyPassesThroughFiringHole",
+          "Status": "Passed",
+          "Duration": 0.7697194,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.ConcretePillboxTests.OfficerPeeksTelegraphsFiresHidesAndReturnsInsideConcreteWithoutDeadlock",
+          "Status": "Failed",
+          "Duration": 22.746307,
+          "Message": "  Expected: True\r\n  But was:  False\r\n",
+          "StackTrace": "at InsaneDreams.Tests.ConcretePillboxTests+<OfficerPeeksTelegraphsFiresHidesAndReturnsInsideConcreteWithoutDeadlock>d__17.MoveNext () [0x00471] in C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Tests\\PlayMode\\ConcretePillboxTests.cs:60\r\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in .\\Library\\PackageCache\\com.unity.test-framework@80f691d4262b\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:52\r\n"
+        },
+        {
+          "FullName": "InsaneDreams.Tests.ConcretePillboxTests.PhysicalGrenadeRoofCollisionAndRealPlayerDoubleJumpRouteStayValid",
+          "Status": "Passed",
+          "Duration": 2.7195056,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

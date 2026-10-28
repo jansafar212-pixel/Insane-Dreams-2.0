@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.IO;
+using System.Linq;
 using InsaneDreams.Progression;
 using NUnit.Framework;
 using UnityEditor;
@@ -46,6 +47,7 @@ namespace InsaneDreams.Tests
         }
         [UnityTest] public IEnumerator FaintanylRevivePersistsImmediatelyWithoutResettingMissionAndRetryStock()
         {
+            session.Data.faintanyl=2; // Explicit pre-purchased stock, never a free retry refill.
             session.Navigate(FlowScreen.Levels);session.SelectLevel("warehouse");Assert.IsTrue(session.PrepareMission());
             yield return UnityEditor.SceneManagement.EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Scenes/Warehouse_Demo.unity",new UnityEngine.SceneManagement.LoadSceneParameters(UnityEngine.SceneManagement.LoadSceneMode.Single));yield return null;
             var mission=Object.FindAnyObjectByType<InsaneDreams.Missions.WarehouseMission>();var player=mission.Player;
@@ -59,7 +61,7 @@ namespace InsaneDreams.Tests
             Assert.Greater(root.hierarchy.IndexOf(pause),root.hierarchy.IndexOf(death),"Pause must remain usable above death UI");
             bridge.SetPaused(false);Assert.IsFalse(player.enabled,"Unpausing must preserve death suspension");
             Assert.IsTrue(revive.TryRevive());Assert.AreEqual(0,recovered);Assert.AreEqual(2,weapon.MagazineAmmo);Assert.AreEqual(5,weapon.ReserveAmmo);
-            Assert.AreEqual(1,session.Data.faintanyl);var saved=new ProgressStore(session.Store.Path).Load(()=>new GameProgress());Assert.AreEqual(1,saved.faintanyl);
+            Assert.AreEqual(1,session.Data.faintanyl);var saved=new ProgressStore(session.Store.Path).Load(()=>new GameProgress());Assert.AreEqual(0,saved.faintanyl,"Deployed stock is reserved on disk until settlement");
             mission.Replay();Assert.AreEqual(1,revive.Injections,"Retry cannot replenish consumed injections");Assert.AreEqual(1,session.Data.faintanyl);yield return null;
         }
         [Test] public void PreparationIsMandatoryPurchasesOptionalAndResultMoneySettlesOnlyOnce()
@@ -69,25 +71,25 @@ namespace InsaneDreams.Tests
             Assert.AreEqual(FlowScreen.Shop,session.Screen);Assert.AreEqual(0,session.Data.balance);
             Assert.IsTrue(session.PrepareMission());Assert.IsFalse(session.PrepareMission());
             Assert.IsTrue(session.Settle(37,true));Assert.IsFalse(session.Settle(37,true));
-            Assert.AreEqual(37,session.Data.balance);CollectionAssert.Contains(session.Data.completed,"warehouse");
-            var stored=new ProgressStore(session.Store.Path).Load(()=>new GameProgress());Assert.AreEqual(37,stored.balance);
+            Assert.AreEqual(session.Catalog.Payout(37,true),session.Data.balance);CollectionAssert.Contains(session.Data.completed,"warehouse");
+            var stored=new ProgressStore(session.Store.Path).Load(()=>new GameProgress());Assert.AreEqual(session.Catalog.Payout(37,true),stored.balance);
         }
         [Test] public void PurchasesRequireFundsOwnershipAndDebounceAndEquipmentPersists()
         {
             session.Navigate(FlowScreen.Levels);session.SelectLevel("warehouse");
-            Assert.IsFalse(session.Buy("pistol",0));Assert.IsFalse(session.Equip("pistol"));Assert.IsFalse(session.Buy("pistol-ammo",0));
-            session.Data.balance=200;Assert.IsTrue(session.Buy("pistol",1));Assert.AreEqual(165,session.Data.balance);
-            Assert.IsFalse(session.Buy("pistol",2));Assert.IsTrue(session.Equip("pistol",true));
-            Assert.IsTrue(session.Buy("pistol-ammo",3));Assert.IsFalse(session.Buy("pistol-ammo",3.01f));Assert.AreEqual(48,session.Data.Ammo("pistol").reserve);
+            Assert.IsFalse(session.Buy("buzzbox",0));Assert.IsFalse(session.Equip("buzzbox"));Assert.IsFalse(session.Buy("buzzbox-ammo",0));
+            session.Data.balance=500;Assert.IsTrue(session.Buy("buzzbox",1));Assert.AreEqual(500-session.Catalog.Find("buzzbox").price,session.Data.balance);
+            Assert.IsFalse(session.Buy("buzzbox",2));Assert.IsTrue(session.Equip("buzzbox",true));
+            Assert.IsTrue(session.Buy("buzzbox-ammo",3));Assert.IsFalse(session.Buy("buzzbox-ammo",3.01f));Assert.AreEqual(session.Catalog.Find("buzzbox-ammo").quantity,session.Data.Ammo("buzzbox").reserve);
             session.Data.tape=20;Assert.IsTrue(session.Buy("tape",4));Assert.AreEqual(70,session.Data.tape);
             Assert.IsTrue(session.Buy("armor",5));Assert.AreEqual(60,session.Data.armor);
             Assert.IsFalse(session.Buy("armor",6));
-            var data=new ProgressStore(session.Store.Path).Load(()=>new GameProgress());Assert.AreEqual("pistol",data.secondary);Assert.AreEqual(48,data.Ammo("pistol").reserve);Assert.AreEqual(60,data.armor);
+            var data=new ProgressStore(session.Store.Path).Load(()=>new GameProgress());Assert.AreEqual("buzzbox",data.secondary);Assert.AreEqual(session.Catalog.Find("buzzbox-ammo").quantity,data.Ammo("buzzbox").reserve);Assert.AreEqual(60,data.armor);
         }
         [UnityTest] public IEnumerator PurchasedEquipmentReachesMissionAndRetryDoesNotRefillFiniteStock()
         {
-            session.Navigate(FlowScreen.Levels);session.SelectLevel("warehouse");session.Data.balance=100;
-            Assert.IsTrue(session.Buy("armor",1));session.Data.tape=42;session.Data.Ammo("carbine").magazine=3;session.Data.Ammo("carbine").reserve=6;
+            session.Navigate(FlowScreen.Levels);session.SelectLevel("warehouse");session.Data.balance=1000;
+            Assert.IsTrue(session.Buy("carbine",0));Assert.IsTrue(session.Equip("carbine"));Assert.IsTrue(session.Buy("armor",1));session.Data.tape=42;session.Data.Ammo("carbine").magazine=3;session.Data.Ammo("carbine").reserve=6;
             Assert.IsTrue(session.PrepareMission());
             yield return UnityEditor.SceneManagement.EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Scenes/Warehouse_Demo.unity",new UnityEngine.SceneManagement.LoadSceneParameters(UnityEngine.SceneManagement.LoadSceneMode.Single));yield return null;
             var mission=Object.FindAnyObjectByType<InsaneDreams.Missions.WarehouseMission>();mission.Player.GetComponent<InsaneDreams.Combat.Health>().ProtectFor(60);
@@ -97,7 +99,7 @@ namespace InsaneDreams.Tests
             Assert.AreEqual(60,mission.Player.GetComponent<InsaneDreams.Combat.BodyArmor>().Condition);
             Assert.IsTrue(mission.Player.GetComponent<InsaneDreams.Inventory.PlayerSupplies>().CollectWallet("controlled-wallet",20));
             weapon.SetAmmunition(1,2);mission.Replay();yield return null;
-            Assert.AreEqual(90,session.Data.balance);Assert.AreEqual(1,mission.Player.GetComponent<InsaneDreams.Inventory.PlayerLoadout>().SelectedWeapon.MagazineAmmo);
+            Assert.AreEqual(1000-session.Catalog.Find("carbine").price-session.Catalog.Find("armor").price+session.Catalog.Payout(20,false),session.Data.balance);Assert.AreEqual(1,mission.Player.GetComponent<InsaneDreams.Inventory.PlayerLoadout>().SelectedWeapon.MagazineAmmo);
             Assert.AreEqual(2,mission.Player.GetComponent<InsaneDreams.Inventory.PlayerLoadout>().SelectedWeapon.ReserveAmmo);
         }
         [Test] public void ArmorAbsorbsBodyDamageConsumesConditionAndDoesNotProtectHeadOrNeutralHazards()
@@ -119,9 +121,9 @@ namespace InsaneDreams.Tests
             session.Navigate(FlowScreen.Levels);session.SelectLevel("warehouse");session.PrepareMission();
             session.Data.pendingEarnings=19;session.Data.tape=81;session.Save();var catalog=session.Catalog;string path=session.Store.Path;
             Object.Destroy(session.gameObject);yield return null;
-            session=new GameObject("ReloadedCampaign").AddComponent<GameSession>();session.Initialize(catalog,path);
-            Assert.AreEqual(19,session.Data.balance);Assert.AreEqual(81,session.Data.tape);Assert.IsNull(session.Data.activeRun);Assert.IsEmpty(session.Data.completed);
-            var reload=new ProgressStore(path).Load(()=>new GameProgress());Assert.AreEqual(19,reload.balance);Assert.AreEqual(0,reload.pendingEarnings);
+            session=new GameObject("ReloadedCampaign").AddComponent<GameSession>();session.Initialize(catalog,path,false);
+            Assert.AreEqual(session.Catalog.Payout(19,false),session.Data.balance);Assert.AreEqual(81,session.Data.tape);Assert.IsNull(session.Data.activeRun);Assert.IsEmpty(session.Data.completed);
+            var reload=new ProgressStore(path).Load(()=>new GameProgress());Assert.AreEqual(session.Catalog.Payout(19,false),reload.balance);Assert.AreEqual(0,reload.pendingEarnings);
         }
         private IEnumerator Press(string text,bool keyboard=false,bool touch=false)
         {
@@ -158,13 +160,13 @@ namespace InsaneDreams.Tests
         }
         [UnityTest] public IEnumerator RealMenuShopMissionResultsAndReturnFlowBanksOneReward()
         {
-            session.Data.balance=100;
+            session.Data.balance=500;
             string entry=Array.Find(EditorBuildSettings.scenes,s=>s.enabled).path;Assert.AreEqual("Assets/Scenes/MainMenu.unity",entry);
             yield return UnityEditor.SceneManagement.EditorSceneManager.LoadSceneAsyncInPlayMode(entry,new UnityEngine.SceneManagement.LoadSceneParameters(UnityEngine.SceneManagement.LoadSceneMode.Single));yield return null;yield return null;
             Assert.AreEqual(FlowScreen.MainMenu,session.Screen);Assert.AreEqual("MainMenu",UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
             Assert.IsNotNull(Object.FindAnyObjectByType<UnityEngine.EventSystems.EventSystem>());
             yield return Press("PLAY",true);Assert.AreEqual(FlowScreen.Levels,session.Screen);yield return Press("PREPARE EQUIPMENT");Assert.AreEqual(FlowScreen.Shop,session.Screen);
-            yield return Press("Body armor");yield return Press("BUY",false,true);Assert.AreEqual(70,session.Data.balance);Assert.AreEqual(60,session.Data.armor);
+            yield return Press("Body armor");yield return Press("BUY",false,true);Assert.AreEqual(500-session.Catalog.Find("armor").price,session.Data.balance);Assert.AreEqual(60,session.Data.armor);
             yield return Press("START MISSION — PURCHASE OPTIONAL");yield return Scene("Warehouse_Demo");
             var mission=Object.FindAnyObjectByType<InsaneDreams.Missions.WarehouseMission>();mission.Player.GetComponent<InsaneDreams.Combat.Health>().ProtectFor(60);
             Assert.AreEqual(60,mission.Player.GetComponent<InsaneDreams.Combat.BodyArmor>().Condition);
@@ -174,17 +176,28 @@ namespace InsaneDreams.Tests
             {
                 var zone=Array.Find(zones,z=>z.Zone==kind);var body=mission.Player.GetComponent<Rigidbody2D>();body.position=zone.Region.bounds.center;body.linearVelocity=Vector2.zero;mission.Player.transform.position=body.position;Physics2D.SyncTransforms();return mission.EnterZone(kind,zone.Region);
             }
-            void Defeat(int group){foreach(var point in mission.Encounters[group].Points)point.Spawned.GetComponent<InsaneDreams.Combat.Health>().ApplyDamage(new InsaneDreams.Combat.DamageInfo(1000,InsaneDreams.Combat.CombatTeam.Player,mission.Player.gameObject));}
-            Assert.IsTrue(Enter(InsaneDreams.Missions.MissionZone.Entrance));Defeat(0);Assert.IsTrue(Enter(InsaneDreams.Missions.MissionZone.Storage));Defeat(1);
-            Assert.IsTrue(Enter(InsaneDreams.Missions.MissionZone.Checkpoint));Assert.IsTrue(Enter(InsaneDreams.Missions.MissionZone.Processing));Defeat(2);
-            Assert.IsTrue(Enter(InsaneDreams.Missions.MissionZone.Records));Assert.IsTrue(mission.TryRecoverRecords());
+            void Defeat(int group){foreach(var point in (mission.FirstOperation&&group==4?mission.Encounters[group].Points.Take(1):mission.Encounters[group].Points))point.Spawned.GetComponent<InsaneDreams.Combat.Health>().ApplyDamage(new InsaneDreams.Combat.DamageInfo(1000,InsaneDreams.Combat.CombatTeam.Player,mission.Player.gameObject));}
+            Assert.IsTrue(Enter(InsaneDreams.Missions.MissionZone.Entrance));
+            if(mission.FirstOperation)
+            {
+                Assert.IsTrue(Enter(InsaneDreams.Missions.MissionZone.Storage));Assert.IsTrue(Enter(InsaneDreams.Missions.MissionZone.SamuraiArena));
+                Assert.IsTrue(Enter(InsaneDreams.Missions.MissionZone.FireworksArena));Assert.IsTrue(Enter(InsaneDreams.Missions.MissionZone.Command));
+                Assert.IsFalse(Enter(InsaneDreams.Missions.MissionZone.Exit));Defeat(4);
+                Assert.AreEqual(0,mission.CheckpointCommits);Assert.AreEqual(1,mission.TotalDefeats,"Retreating ordinary enemies cannot lock the exit");
+            }
+            else
+            {
+                Defeat(0);Assert.IsTrue(Enter(InsaneDreams.Missions.MissionZone.Storage));Defeat(1);
+                Assert.IsTrue(Enter(InsaneDreams.Missions.MissionZone.Checkpoint));Assert.IsTrue(Enter(InsaneDreams.Missions.MissionZone.Processing));Defeat(2);
+                Assert.IsTrue(Enter(InsaneDreams.Missions.MissionZone.Records));Assert.IsTrue(mission.TryRecoverRecords());
+            }
             Assert.IsTrue(mission.Player.GetComponent<InsaneDreams.Inventory.PlayerSupplies>().CollectWallet("result-test",37));
-            var playerBody=mission.Player.GetComponent<Rigidbody2D>();playerBody.position=new Vector2(22,.85f);playerBody.linearVelocity=Vector2.zero;mission.Player.transform.position=playerBody.position;Physics2D.SyncTransforms();yield return new WaitForSeconds(.15f);
+            var playerBody=mission.Player.GetComponent<Rigidbody2D>();playerBody.position=new Vector2(mission.FirstOperation?152:22,.85f);playerBody.linearVelocity=Vector2.zero;mission.Player.transform.position=playerBody.position;Physics2D.SyncTransforms();yield return new WaitForSeconds(.15f);
             var hitReaction=mission.Player.GetComponent<InsaneDreams.Combat.HitReaction2D>();var hitSettings=new SerializedObject(hitReaction);hitSettings.FindProperty("knockdownChance").floatValue=1;hitSettings.ApplyModifiedPropertiesWithoutUndo();
             var playerHealth=mission.Player.GetComponent<InsaneDreams.Combat.Health>();playerHealth.ProtectFor(0);playerHealth.ApplyDamage(new InsaneDreams.Combat.DamageInfo(1,InsaneDreams.Combat.CombatTeam.Enemy,null,new InsaneDreams.Combat.PhysicalImpact(playerBody.position,Vector2.right,4)));
-            Assert.IsTrue(hitReaction.KnockedDown);
+            Assert.IsFalse(hitReaction.KnockedDown,"Ordinary gunfire must preserve player mobility");
             // Real nearby dropped wallets can also be collected while crossing the scene.
-            Assert.GreaterOrEqual(mission.Earnings,37);int expectedBalance=session.Data.balance+mission.Earnings;
+            Assert.GreaterOrEqual(mission.Earnings,37);int expectedBalance=session.Data.balance+session.Catalog.Payout(mission.Earnings,true);
             Assert.IsTrue(Enter(InsaneDreams.Missions.MissionZone.Exit));Assert.AreEqual(expectedBalance,session.Data.balance);
             Assert.IsFalse(Enter(InsaneDreams.Missions.MissionZone.Exit));Assert.AreEqual(expectedBalance,session.Data.balance);
             yield return new WaitForSeconds(.75f);Assert.IsFalse(mission.Player.enabled);Assert.IsFalse(hitReaction.KnockedDown);
@@ -196,17 +209,17 @@ namespace InsaneDreams.Tests
             session.Navigate(FlowScreen.Levels);session.SelectLevel("warehouse");session.PrepareMission();
             yield return UnityEditor.SceneManagement.EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Scenes/Warehouse_Demo.unity",new UnityEngine.SceneManagement.LoadSceneParameters(UnityEngine.SceneManagement.LoadSceneMode.Single));yield return null;
             var mission=Object.FindAnyObjectByType<InsaneDreams.Missions.WarehouseMission>();var p=mission.Player;var body=p.GetComponent<Rigidbody2D>();p.GetComponent<InsaneDreams.Combat.Health>().ProtectFor(60);
-            body.position=new Vector2(7.8f,1.75f);body.linearVelocity=Vector2.zero;Physics2D.SyncTransforms();yield return new WaitForSeconds(.15f);
+            body.position=new Vector2(mission.FirstOperation?52.8f:7.8f,mission.FirstOperation?.75f:1.75f);body.linearVelocity=Vector2.zero;Physics2D.SyncTransforms();yield return new WaitForSeconds(.15f);
             p.SetTouchMove(Vector2.right);p.Jump();yield return new WaitForSeconds(.18f);p.Jump();
-            for(int i=0;i<30&&body.position.x<10.2f;i++)yield return new WaitForFixedUpdate();
+            for(int i=0;i<30&&body.position.x<(mission.FirstOperation?55.5f:10.2f);i++)yield return new WaitForFixedUpdate();
             p.SetTouchMove(Vector2.zero);yield return new WaitForSeconds(1.2f);
-            Assert.That(body.position.x,Is.InRange(9.4f,11f));Assert.IsTrue(p.GetComponent<InsaneDreams.Prototype.PlayerMotor2D>().IsGrounded);
-            Assert.AreEqual(2.175f,p.GetComponent<BoxCollider2D>().bounds.min.y,.12f);
+            Assert.That(body.position.x,Is.InRange(mission.FirstOperation?54.5f:9.4f,mission.FirstOperation?56.8f:11f));Assert.IsTrue(p.GetComponent<InsaneDreams.Prototype.PlayerMotor2D>().IsGrounded);
+            Assert.AreEqual(mission.FirstOperation?1.6f:2.175f,p.GetComponent<BoxCollider2D>().bounds.min.y,.12f);
         }
         [Test] public void FailedSaveRollsBackPurchaseWithoutChargingOrGrantingAnItem()
         {
-            Directory.CreateDirectory(dir);session.Initialize(session.Catalog,dir);session.Navigate(FlowScreen.Levels);session.SelectLevel("warehouse");session.Data.balance=100;
-            Assert.IsFalse(session.Buy("pistol",1));Assert.AreEqual(100,session.Data.balance);CollectionAssert.DoesNotContain(session.Data.owned,"pistol");
+            Directory.CreateDirectory(dir);session.Initialize(session.Catalog,dir);session.Navigate(FlowScreen.Levels);session.SelectLevel("warehouse");session.Data.balance=500;
+            Assert.IsFalse(session.Buy("buzzbox",1));Assert.AreEqual(500,session.Data.balance);CollectionAssert.DoesNotContain(session.Data.owned,"buzzbox");
             if(File.Exists(dir+".tmp"))File.Delete(dir+".tmp");
         }
         [UnityTest] public IEnumerator PhysicalExitFullLoopRepeatsWithPurchasedEquipmentAndSavedEarnings()
@@ -217,16 +230,17 @@ namespace InsaneDreams.Tests
         private IEnumerator CrossExit(InsaneDreams.Missions.WarehouseMission mission,bool complete)
         {
             var player=mission.Player;var body=player.GetComponent<Rigidbody2D>();
-            player.SetTouchMove(Vector2.zero);body.position=new Vector2(23.1f,.71f);body.linearVelocity=Vector2.zero;player.transform.position=body.position;Physics2D.SyncTransforms();
+            var exitRegion=Object.FindObjectsByType<InsaneDreams.Missions.MissionTrigger>().Single(z=>z.Zone==InsaneDreams.Missions.MissionZone.Exit).Region;
+            player.SetTouchMove(Vector2.zero);body.position=new Vector2(exitRegion.bounds.min.x-.55f,.71f);body.linearVelocity=Vector2.zero;player.transform.position=body.position;Physics2D.SyncTransforms();
             yield return new WaitForFixedUpdate();yield return new WaitForFixedUpdate();
             player.SetTouchMove(Vector2.right);
             float deadline=Time.realtimeSinceStartup+5;
-            while(Time.realtimeSinceStartup<deadline&&mission.Stage!=InsaneDreams.Missions.MissionStage.Complete&&body.position.x<24.9f)yield return new WaitForFixedUpdate();
+            while(Time.realtimeSinceStartup<deadline&&mission.Stage!=InsaneDreams.Missions.MissionStage.Complete&&body.position.x<exitRegion.bounds.center.x-.1f)yield return new WaitForFixedUpdate();
             player.SetTouchMove(Vector2.zero);
             if(complete)Assert.AreEqual(InsaneDreams.Missions.MissionStage.Complete,mission.Stage,"Real player movement must activate the exit through physics callbacks.");
             else
             {
-                Assert.Greater(body.position.x,24.25f,"The real player must reach the locked trigger.");
+                Assert.Greater(body.position.x,exitRegion.bounds.min.x-.75f,"The real player must reach the locked trigger.");
                 Assert.AreEqual(0,mission.Completions);StringAssert.Contains("EXIT LOCKED",mission.Notification);
                 // Feedback remains visible beyond the transient notification timeout.
                 yield return new WaitForSeconds(4.1f);StringAssert.Contains("EXIT LOCKED",mission.Notification);
@@ -235,7 +249,7 @@ namespace InsaneDreams.Tests
         }
         private IEnumerator PhysicalExitLoop(bool purchase)
         {
-            session.Data.balance=purchase?100:0;
+            session.Data.balance=purchase?1000:0;
             yield return UnityEditor.SceneManagement.EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Scenes/MainMenu.unity",new UnityEngine.SceneManagement.LoadSceneParameters(UnityEngine.SceneManagement.LoadSceneMode.Single));yield return null;yield return null;
             yield return Press("PLAY",true);
             for(int run=0;run<2;run++)
@@ -243,23 +257,23 @@ namespace InsaneDreams.Tests
                 Assert.AreEqual(FlowScreen.Levels,session.Screen);yield return Press("PREPARE EQUIPMENT");Assert.AreEqual(FlowScreen.Shop,session.Screen);
                 if(run==0&&purchase)
                 {
-                    yield return Press("Backup Pistol  $35");yield return Press("BUY",false,true);yield return Press("EQUIP / PRIMARY");
-                    yield return Press("Ammunition");yield return Press("Pistol / 48 rounds  $8");yield return Press("BUY",false,true);
-                    yield return Press("Body armor");yield return Press("BUY",false,true);Assert.AreEqual(27,session.Data.balance);
+                    yield return Press(session.Catalog.Find("buzzbox").title+"  $"+session.Catalog.Find("buzzbox").price);yield return Press("BUY",false,true);yield return Press("EQUIP / PRIMARY");
+                    yield return Press("Ammunition");yield return Press(session.Catalog.Find("buzzbox-ammo").title+"  $"+session.Catalog.Find("buzzbox-ammo").price);yield return Press("BUY",false,true);
+                    yield return Press("Body armor");yield return Press("BUY",false,true);Assert.AreEqual(1000-session.Catalog.Find("buzzbox").price-session.Catalog.Find("buzzbox-ammo").price-session.Catalog.Find("armor").price,session.Data.balance);
                 }
                 int balanceBefore=session.Data.balance;
                 yield return Press("START MISSION — PURCHASE OPTIONAL");yield return Scene("Warehouse_Demo");
                 var mission=Object.FindAnyObjectByType<InsaneDreams.Missions.WarehouseMission>();var player=mission.Player;
                 player.GetComponent<InsaneDreams.Combat.Health>().ProtectFor(120);
                 Assert.AreEqual(purchase?60:0,player.GetComponent<InsaneDreams.Combat.BodyArmor>().Condition);
-                Assert.AreEqual(purchase?"pistol":"carbine",session.Data.primary);
+                Assert.AreEqual(purchase?"buzzbox":"pistol",session.Data.primary);
                 Assert.AreSame(session.Catalog.Find(session.Data.primary).weapon,player.GetComponent<InsaneDreams.Inventory.PlayerLoadout>().SelectedWeapon.Definition);
-                if(purchase)Assert.AreEqual(48,player.GetComponent<InsaneDreams.Inventory.PlayerLoadout>().SelectedWeapon.ReserveAmmo);
+                if(purchase)Assert.AreEqual(session.Catalog.Find("buzzbox-ammo").quantity,player.GetComponent<InsaneDreams.Inventory.PlayerLoadout>().SelectedWeapon.ReserveAmmo);
                 Assert.AreEqual(session.Data.Ammo(session.Data.primary).reserve,player.GetComponent<InsaneDreams.Inventory.PlayerLoadout>().SelectedWeapon.ReserveAmmo);
                 var zones=Object.FindObjectsByType<InsaneDreams.Missions.MissionTrigger>(FindObjectsSortMode.None);
                 var exit=Array.Find(zones,z=>z.Zone==InsaneDreams.Missions.MissionZone.Exit);Assert.IsTrue(exit.Region.enabled);Assert.IsTrue(exit.Region.isTrigger);Assert.AreSame(mission,exit.Mission);
                 // An actual non-player rigidbody crossing must not activate the checkpoint.
-                var enemy=Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemies/Larper.prefab"),new Vector3(25,.85f),Quaternion.identity);
+                var enemy=Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Enemies/Larper.prefab"),new Vector3(exit.Region.bounds.center.x,.85f),Quaternion.identity);
                 enemy.GetComponent<InsaneDreams.Enemies.LarperBrain>().enabled=false;enemy.GetComponent<InsaneDreams.Enemies.EnemyCombat>().enabled=false;
                 enemy.GetComponent<Rigidbody2D>().constraints=RigidbodyConstraints2D.FreezeAll;
                 yield return new WaitForFixedUpdate();yield return new WaitForFixedUpdate();Assert.AreEqual(0,mission.Completions);Assert.AreEqual(InsaneDreams.Missions.MissionStage.EnterWarehouse,mission.Stage);Object.Destroy(enemy);yield return null;
@@ -269,20 +283,22 @@ namespace InsaneDreams.Tests
                 {
                     var zone=Array.Find(zones,z=>z.Zone==kind);var body=player.GetComponent<Rigidbody2D>();player.SetTouchMove(Vector2.zero);body.position=zone.Region.bounds.center;body.linearVelocity=Vector2.zero;player.transform.position=body.position;Physics2D.SyncTransforms();Assert.IsTrue(mission.EnterZone(kind,zone.Region));
                 }
-                void DefeatForSetup(int group){foreach(var point in mission.Encounters[group].Points)point.Spawned.GetComponent<InsaneDreams.Combat.Health>().ApplyDamage(new InsaneDreams.Combat.DamageInfo(1000,InsaneDreams.Combat.CombatTeam.Player,player.gameObject));}
+                void DefeatForSetup(int group){foreach(var point in (mission.FirstOperation&&group==4?mission.Encounters[group].Points.Take(1):mission.Encounters[group].Points))point.Spawned.GetComponent<InsaneDreams.Combat.Health>().ApplyDamage(new InsaneDreams.Combat.DamageInfo(1000,InsaneDreams.Combat.CombatTeam.Player,player.gameObject));}
                 EnterForSetup(InsaneDreams.Missions.MissionZone.Entrance);DefeatForSetup(0);EnterForSetup(InsaneDreams.Missions.MissionZone.Storage);DefeatForSetup(1);
-                EnterForSetup(InsaneDreams.Missions.MissionZone.Checkpoint);EnterForSetup(InsaneDreams.Missions.MissionZone.Processing);DefeatForSetup(2);EnterForSetup(InsaneDreams.Missions.MissionZone.Records);
-                yield return Press("INTERACT");Assert.IsTrue(mission.HasRecords);Assert.AreEqual(InsaneDreams.Missions.MissionStage.Escape,mission.Stage);
+                if(mission.FirstOperation)
+                {EnterForSetup(InsaneDreams.Missions.MissionZone.SamuraiArena);EnterForSetup(InsaneDreams.Missions.MissionZone.FireworksArena);EnterForSetup(InsaneDreams.Missions.MissionZone.Command);DefeatForSetup(4);Assert.AreEqual(InsaneDreams.Missions.MissionStage.Escape,mission.Stage);}
+                else
+                {EnterForSetup(InsaneDreams.Missions.MissionZone.Checkpoint);EnterForSetup(InsaneDreams.Missions.MissionZone.Processing);DefeatForSetup(2);EnterForSetup(InsaneDreams.Missions.MissionZone.Records);yield return Press("INTERACT");Assert.IsTrue(mission.HasRecords);Assert.AreEqual(InsaneDreams.Missions.MissionStage.Escape,mission.Stage);}
                 Assert.IsTrue(player.GetComponent<InsaneDreams.Inventory.PlayerSupplies>().CollectWallet("physical-loop-"+run,37+run));
                 yield return CrossExit(mission,true);
                 Assert.AreEqual(1,mission.Completions);Assert.IsFalse(player.enabled);Assert.IsFalse(player.GetComponent<InsaneDreams.Combat.PlayerCombat>().enabled);
                 var root=Object.FindAnyObjectByType<UIDocument>().rootVisualElement;Assert.IsFalse(root.Q("missionResults").ClassListContains("hidden"));
                 Assert.GreaterOrEqual(mission.Earnings,37+run);StringAssert.Contains("MISSION EARNINGS   $"+mission.Earnings,root.Q<Label>("resultStats").text);
-                int expected=balanceBefore+mission.Earnings;Assert.AreEqual(expected,session.Data.balance);
+                int expected=balanceBefore+session.Catalog.Payout(mission.Earnings,true);Assert.AreEqual(expected,session.Data.balance);
                 for(int i=0;i<5;i++)yield return new WaitForFixedUpdate();Assert.AreEqual(1,mission.Completions);Assert.AreEqual(expected,session.Data.balance);
                 var stored=new ProgressStore(session.Store.Path).Load(()=>new GameProgress());Assert.AreEqual(expected,stored.balance);Assert.AreEqual(purchase?60:0,stored.armor);CollectionAssert.Contains(stored.completed,"warehouse");
-                CollectionAssert.Contains(stored.owned,"carbine");Assert.AreEqual(session.Data.primary,stored.primary);
-                if(purchase){CollectionAssert.Contains(stored.owned,"pistol");Assert.AreEqual(48,stored.Ammo("pistol").reserve);}
+                CollectionAssert.Contains(stored.owned,"pistol");Assert.AreEqual(session.Data.primary,stored.primary);
+                if(purchase){CollectionAssert.Contains(stored.owned,"buzzbox");Assert.AreEqual(session.Catalog.Find("buzzbox-ammo").quantity,stored.Ammo("buzzbox").reserve);}
                 yield return Press("LEVEL SELECTION");yield return Scene("MainMenu");Assert.AreEqual(FlowScreen.Levels,session.Screen);Assert.AreEqual(expected,session.Data.balance);
             }
         }

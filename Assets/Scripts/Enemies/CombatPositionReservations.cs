@@ -12,6 +12,18 @@ namespace InsaneDreams.Enemies
         public static void Register(EnemyCombat actor)=>actors.Add(actor);
         public static void Remove(EnemyCombat actor){Release(actor);actors.Remove(actor);}
         public static void Release(EnemyCombat actor){positions.Remove(actor);covers.Remove(actor);}
+        // Read-only camera context from the existing registry; no target selection,
+        // scene searches, physics queries or changes to any actor/reservation.
+        internal static float LocalThreatPressure(Vector2 at,float radius)
+        {
+            float pressure=0,squared=Mathf.Max(.01f,radius*radius);
+            foreach(var actor in actors)
+            {
+                if(actor==null||!actor.PositionActive||!(actor.TargetVisible||actor.HasEngaged||actor.Awareness==ThreatAwareness.UnderFire))continue;
+                pressure=Mathf.Max(pressure,1-Vector2.SqrMagnitude((Vector2)actor.transform.position-at)/squared);
+            }
+            return Mathf.Clamp01(pressure);
+        }
         // One useful slot per small crate. Opposite faces are not independent slots
         // when the whole obstacle is narrower than the actors' comfortable spacing.
         public static bool IsCoverFree(EnemyCombat actor,Collider2D cover)

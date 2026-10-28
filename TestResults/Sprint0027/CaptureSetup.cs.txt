@@ -1,0 +1,4 @@
+var m=UnityEngine.Object.FindAnyObjectByType<InsaneDreams.Missions.WarehouseMission>();
+foreach(var c in UnityEngine.Object.FindObjectsByType<InsaneDreams.Enemies.EnemyCombat>()){c.enabled=false;c.GetComponent<InsaneDreams.Enemies.LarperBrain>().enabled=false;c.GetComponent<InsaneDreams.Prototype.PlayerMotor2D>().SetMoveInput(0);}
+var a=m.Player;a.ResetActions();a.GetComponent<InsaneDreams.Combat.Health>().ProtectFor(120);a.GetComponent<InsaneDreams.Combat.PlayerRevive>().RestoreInventory(2);a.GetComponent<InsaneDreams.Combat.PlayerThrowables>().RestoreStock(new[]{2,2,2});a.SelectWeapon(InsaneDreams.Inventory.EquipmentSlot.Melee);a.SetTouchAim(new UnityEngine.Vector2(1,.4f));UnityEngine.Application.runInBackground=true;
+return new { time=UnityEngine.Time.time,frame=UnityEngine.Time.frameCount };

@@ -1,0 +1,49 @@
+{
+  "success": true,
+  "command": "command run_tests",
+  "data": {
+    "command": "run_tests",
+    "parameters": {
+      "mode": "editor",
+      "filter": "FirstOperationLayoutTests"
+    },
+    "result": {
+      "Summary": {
+        "Total": 2,
+        "Passed": 2,
+        "Failed": 0,
+        "Skipped": 0,
+        "Inconclusive": 0
+      },
+      "Results": [
+        {
+          "FullName": "InsaneDreams.Tests.FirstOperationLayoutTests.OfficerRetainsModularDimensionsAndNoHealthInflationAndMissionFireworksAreScoped",
+          "Status": "Passed",
+          "Duration": 0.0111985,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.FirstOperationLayoutTests.SavedLayoutHasExactRosterSupportedStartsAndNoCheckpoints",
+          "Status": "Passed",
+          "Duration": 0.1221438,
+          "Message": null,
+          "StackTrace": null
+        }
+      ],
+      "Duration": 2.83,
+      "StatusPath": null,
+      "Mode": "EditMode",
+      "FilterApplied": "testname: FirstOperationLayoutTests",
+      "success": true,
+      "result": null
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

@@ -1,0 +1,27 @@
+diff --git a/TestResults/AdaptiveCombatCamera/Warehouse_Demo.before.txt b/Assets/Scenes/Warehouse_Demo.unity
+index 73163e7..3758f7e 100644
+--- a/TestResults/AdaptiveCombatCamera/Warehouse_Demo.before.txt
++++ b/Assets/Scenes/Warehouse_Demo.unity
+@@ -1105,2 +1105,17 @@ MonoBehaviour:
+   smoothTime: 0.16
++  combatSmoothTime: 0.11
++  directionTransitionSeconds: 0.5
++  directionCommitSeconds: 0.12
++  combatAttentionSeconds: 1
++  aimDeadZone: 0.3
++  horizontalLookAhead: 0.16666667
++  ladderRecenterSeconds: 0.4
++  verticalSmoothTime: 0.24
++  verticalDeadZone: 0.25
++  fallingLookAhead: 1.6
++  fallingLeadSpeed: 14
++  playerScreenMargins: {x: 0.18, y: 0.18}
++  boundaryEaseDistance: 2
++  closeThreatRadius: 6
++  closeThreatLeadReduction: 0.45
+   orthographicSize: 7.2
+@@ -1113,4 +1128,2 @@ MonoBehaviour:
+     height: 1
+-  directionTransitionSeconds: 0.75
+-  directionCommitSeconds: 0.12
+   visualPixelsPerUnit: 32

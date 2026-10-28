@@ -27,6 +27,26 @@ MonoBehaviour:
   magazineSprite: {fileID: 21300000, guid: e6e1e7e6feafb094a9a44300bdd9f990, type: 2}
   magazineMountOffset: {x: 0.28125, y: 0}
   physicalMagazineReload: 1
+  loadsIndividually: 0
+  shellSprite: {fileID: 0}
   firearmRange: 22
   meleeRange: 1.6
   impactImpulse: 0.9
+  hitReactionStrength: 1.1
+  developerReserve: 180
+  fireMode: 0
+  pellets: 1
+  spreadDegrees: 0
+  bloomPerShot: 0
+  maximumBloom: 0
+  falloffStart: 0
+  farDamageMultiplier: 1
+  recoilScale: 1
+  tracerScale: 1
+  flashScale: 1
+  customMuzzle: 0
+  customTracer: 0
+  muzzleOffset: {x: 0, y: 0}
+  tracerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  firingSound: {fileID: 0}
+  firingPitch: 1

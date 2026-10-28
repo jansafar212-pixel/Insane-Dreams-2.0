@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "var flags=System.Reflection.BindingFlags.Public|System.Reflection.BindingFlags.NonPublic|System.Reflection.BindingFlags.Instance;var asm=typeof(UnityEditor.Editor).Assembly;var type=asm.GetType(\"UnityEditor.GameViewSizes\");var sizes=typeof(UnityEditor.ScriptableSingleton<>).MakeGenericType(type).GetProperty(\"instance\").GetValue(null);var group=type.GetMethod(\"GetGroup\",flags).Invoke(sizes,new[]{type.GetProperty(\"currentGroupType\",flags).GetValue(sizes)});var gt=group.GetType();var names=(string[])gt.GetMethod(\"GetDisplayTexts\",flags).Invoke(group,null);var view=UnityEditor.EditorWindow.GetWindow(asm.GetType(\"UnityEditor.GameView\"));var selection=view.GetType().GetProperty(\"selectedSizeIndex\",flags);int old=(int)selection.GetValue(view);string selected=names[old];selection.SetValue(view,0);int n=0,built=(int)gt.GetMethod(\"GetBuiltinCount\",flags).Invoke(group,null);for(int i=names.Length-1;i>=built;i--)if(names[i].Contains(\"AKUMU0031\")){gt.GetMethod(\"RemoveCustomSize\",flags).Invoke(group,new object[]{i});n++;}var after=(string[])gt.GetMethod(\"GetDisplayTexts\",flags).Invoke(group,null);int restore=System.Array.IndexOf(after,selected);selection.SetValue(view,restore>=0?restore:0);return \"Removed only \"+n+\" temporary AKUMU0031 test resolutions; existing GameView entries/selection preserved.\";"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": "Removed only 8 temporary AKUMU0031 test resolutions; existing GameView entries/selection preserved."
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

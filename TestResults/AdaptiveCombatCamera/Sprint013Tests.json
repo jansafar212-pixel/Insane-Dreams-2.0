@@ -1,0 +1,70 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 5.09,
+      "summary": {
+        "total": 6,
+        "passed": 4,
+        "failed": 2,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "InsaneDreams.Tests.Sprint013Tests.AudioIntegrationBoundsVoicesAndReleasesThemOnDisable",
+          "Status": "Passed",
+          "Duration": 0.1774486,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint013Tests.EverySurfaceClassUsesRealNearestHitAndAutomaticEffectsStayBounded",
+          "Status": "Failed",
+          "Duration": 0.1420673,
+          "Message": "  Expected: 6\r\n  But was:  7\r\n",
+          "StackTrace": "at InsaneDreams.Tests.Sprint013Tests+<EverySurfaceClassUsesRealNearestHitAndAutomaticEffectsStayBounded>d__14.MoveNext () [0x002ed] in C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Tests\\PlayMode\\Sprint013Tests.cs:73\r\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in .\\Library\\PackageCache\\com.unity.test-framework@80f691d4262b\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:52\r\n"
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint013Tests.FreshOffscreenCannotFireButBodyEdgeEntryEngagesAndCameraExitPreservesBlindMemory",
+          "Status": "Failed",
+          "Duration": 1.8589518,
+          "Message": "  Expected: True\r\n  But was:  False\r\n",
+          "StackTrace": "at InsaneDreams.Tests.Sprint013Tests+<FreshOffscreenCannotFireButBodyEdgeEntryEngagesAndCameraExitPreservesBlindMemory>d__11.MoveNext () [0x002db] in C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Tests\\PlayMode\\Sprint013Tests.cs:45\r\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in .\\Library\\PackageCache\\com.unity.test-framework@80f691d4262b\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:52\r\n"
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint013Tests.InViewportOcclusionStillPreventsFreshFireUntilRealSightReturns",
+          "Status": "Passed",
+          "Duration": 0.8997426,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint013Tests.MissingDisabledOrWrongLayerGameplayCameraFailsClosedForFreshEnemy",
+          "Status": "Passed",
+          "Duration": 1.6934546,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint013Tests.SmallDirectionalFlinchNeverMovesPhysicsOrChangesCollider",
+          "Status": "Passed",
+          "Duration": 0.2694194,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

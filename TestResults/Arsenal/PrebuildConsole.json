@@ -1,0 +1,38 @@
+{
+  "success": true,
+  "command": "command console_status",
+  "data": {
+    "command": "console_status",
+    "parameters": {},
+    "result": {
+      "entries": [],
+      "cursor": 2786,
+      "session": "086938830a3c4dc7974294e3a3963306",
+      "returned": 0,
+      "dropped": false,
+      "reset": false,
+      "counts": {
+        "error": 2,
+        "warn": 780,
+        "log": 1218
+      },
+      "groundTruth": {
+        "sampledUtc": "2026-10-27T21:34:50.7147922Z",
+        "ageMs": 151,
+        "compilationFailed": false,
+        "compiling": false,
+        "consoleErrors": 0,
+        "consoleWarnings": 0,
+        "consoleLogs": 26,
+        "seeded": true
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

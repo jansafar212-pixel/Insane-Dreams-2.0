@@ -1,0 +1,70 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 22.05,
+      "summary": {
+        "total": 6,
+        "passed": 6,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "InsaneDreams.Tests.CameraSamuraiHotfixTests.AutonomousPursuitReachesElevatedWarehouseStepAfterVisibleAcquisition",
+          "Status": "Passed",
+          "Duration": 1.4187589,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.CameraSamuraiHotfixTests.AutonomousSmallSamuraiCrossesActualCoverAndKeepsMeleeTelegraph",
+          "Status": "Passed",
+          "Duration": 3.8552617,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.CameraSamuraiHotfixTests.BriefDecisionGapPreservesCommittedPhysicalFlight",
+          "Status": "Passed",
+          "Duration": 1.9021291,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.CameraSamuraiHotfixTests.RemovedObstructionAllowsReplanningInsteadOfPermanentStationaryFailure",
+          "Status": "Passed",
+          "Duration": 7.9192945,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.CameraSamuraiHotfixTests.SmallBodyDetectionWorksAtDifferentElevationsAndSolidWallsOcclude",
+          "Status": "Passed",
+          "Duration": 1.0474887,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.CameraSamuraiHotfixTests.VisibleEntryStartsPursuitAndCameraExitDoesNotClearAggro",
+          "Status": "Passed",
+          "Duration": 5.8674687,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

@@ -336,6 +336,10 @@ PrefabInstance:
       propertyPath: archetype
       value: 
       objectReference: {fileID: 11400000, guid: ef3f33c2d381b494f95cbcf521a8cf54, type: 2}
+    - target: {fileID: 7476120528033253239, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
+      propertyPath: stuckSeconds
+      value: 1.8
+      objectReference: {fileID: 0}
     - target: {fileID: 7934699871008284970, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.75000006
@@ -350,7 +354,19 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 238e6e579fbbeb74aafede1d96e75182, type: 2}
     - target: {fileID: 7952524903900054866, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
       propertyPath: reactionSeconds
-      value: 0.3
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7952524903900054866, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
+      propertyPath: visibilityMemory
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7952524903900054866, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
+      propertyPath: reactionJitterSeconds
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7952524903900054866, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
+      propertyPath: obstructedHearingMultiplier
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 8989811805195186138, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
       propertyPath: m_Sprite
@@ -377,7 +393,7 @@ PrefabInstance:
       addedObject: {fileID: 7624745743572533650}
     - targetCorrespondingSourceObject: {fileID: 6616293515568177051, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1705753465351473174}
+      addedObject: {fileID: 4602757296060747780}
   m_SourcePrefab: {fileID: 100100000, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
 --- !u!4 &2228065206930735938 stripped
 Transform:
@@ -409,7 +425,7 @@ MonoBehaviour:
   heldMalfunctionChance: 0.08
   heldFuseFraction: {x: 0.35, y: 0.8}
   recoveryVariation: 0.15
---- !u!114 &1705753465351473174
+--- !u!114 &4602757296060747780
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -418,14 +434,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5999157720124110755}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf9aff03771bdc04ebf7a6cce5b84060, type: 3}
+  m_Script: {fileID: 11500000, guid: efee507ca41b671478958bb842660b15, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Combat.HitReaction2D
-  stumbleImpulse: 2.2
-  knockdownImpulse: 3.5
-  knockdownChance: 0.15
-  recoverySeconds: 0.65
-  cooldown: 3
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Combat.BodyRegionDamage
+  headThreshold: 80
+  limbThreshold: 60
+  torsoThreshold: 150
+  armThreshold: 105
 --- !u!4 &7905096346310880547 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7287962135713957147, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}

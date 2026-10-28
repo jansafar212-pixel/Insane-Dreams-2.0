@@ -17,6 +17,14 @@ namespace InsaneDreams.Missions
         [SerializeField] private MissionTrigger recordsZone;
         [SerializeField] private WarehouseCameraFollow cameraFollow;
         [SerializeField] private MissionHud hud;
+        [SerializeField] private bool firstOperation;
+        public bool FirstOperation=>firstOperation;
+        public bool AttemptFailed{get;private set;}
+        public bool AttemptEnded=>AttemptFailed||Stage==MissionStage.Complete;
+        public int OperationSection{get;private set;}
+        private static readonly string[] OperationObjectives={"ENTER THE INDUSTRIAL COMPOUND", "ADVANCE THROUGH STORAGE — ladders or loading floor", "CROSS THE PURSUIT BAY — keep moving", "CROSS FIREWORK STORAGE — watch the colored warnings", "DEFEAT THE OFFICER — command office ahead"};
+        private Health operationOfficer;
+        private bool OfficerDefeated=>operationOfficer!=null&&operationOfficer.IsDefeated;
         private PlayerRecovery recovery;
         private Health health;
         private PlayerLoadout loadout;
@@ -46,10 +54,10 @@ namespace InsaneDreams.Missions
         public int CheckpointCommits{get;private set;}
         public int Completions{get;private set;}
         public MissionEncounter[] Encounters=>encounters;
-        public float Elapsed=>Stage==MissionStage.Complete?completedTime:Mathf.Max(0,Time.time-startedAt);
+        public float Elapsed=>AttemptEnded?completedTime:Mathf.Max(0,Time.time-startedAt);
         public string Notification=>visitedExit!=null&&playerBox!=null&&Stage!=MissionStage.Complete&&visitedExit.bounds.Intersects(playerBox.bounds)
             ? ExitRequirement : Time.time<noticeUntil?notice:string.Empty;
-        public string ExitRequirement=>Stage switch
+        public string ExitRequirement=>firstOperation?(OfficerDefeated?"EXIT OPEN — leave through the marked dispatch door.":"EXIT LOCKED — defeat the Officer in command."):Stage switch
         {
             MissionStage.EnterWarehouse=>"EXIT LOCKED — enter the warehouse and recover the corporate records.",
             MissionStage.ClearStorage=>"EXIT LOCKED — "+Objective,
@@ -59,8 +67,8 @@ namespace InsaneDreams.Missions
             MissionStage.Escape=>"EXIT OPEN — leave through the east ground-floor door.",
             _=>string.Empty
         };
-        public bool CanInteract=>ready&&Stage==MissionStage.RecoverRecords&&recordsZone.Region.OverlapPoint(playerBox.bounds.center);
-        public string Objective=>Stage switch
+        public bool CanInteract=>!firstOperation&&ready&&Stage==MissionStage.RecoverRecords&&recordsZone.Region.OverlapPoint(playerBox.bounds.center);
+        public string Objective=>firstOperation?(AttemptFailed?"ATTEMPT ENDED — restart from the entrance":Stage==MissionStage.Complete?"OPERATION COMPLETE":OfficerDefeated?"REACH DISPATCH — marked exit beyond command":OperationObjectives[OperationSection]):Stage switch
         {
             MissionStage.EnterWarehouse=>"ENTER THE WAREHOUSE — find the corporate records",
             MissionStage.ClearStorage=>!encounters[0].Cleared?$"CLEAR THE ENTRANCE — {encounters[0].DefeatedCount}/{encounters[0].Count}":!encounters[1].IsActive&&!encounters[1].Cleared?"REACH THE STORAGE FLOOR — continue right":$"CLEAR STORAGE — {encounters[1].DefeatedCount}/{encounters[1].Count}",
@@ -74,16 +82,17 @@ namespace InsaneDreams.Missions
         {
             recovery=player.GetComponent<PlayerRecovery>();health=player.GetComponent<Health>();loadout=player.GetComponent<PlayerLoadout>();supplies=player.GetComponent<PlayerSupplies>();playerBox=player.GetComponent<BoxCollider2D>();
             foreach(var group in encounters){group.Initialize(health);group.Progressed+=EncounterProgress;}
+            if(firstOperation)operationOfficer=encounters[4].Points[0].Spawned.GetComponent<Health>();
             recovery.Recovered+=Recovered;health.Defeated+=PlayerDefeated;player.InteractionRequested+=Interact;ready=true;Replay();hud.Bind(this);
         }
         public void Replay()
         {
-            if(!ready)return;BeforeReplay?.Invoke();restoring=true;storageEntered=false;Stage=MissionStage.EnterWarehouse;HasRecords=false;Deaths=Kills=TotalDefeats=CheckpointCommits=Completions=0;officeSaved=false;startedAt=Time.time;completedTime=0;
-            completedEarnings=0;visitedExit=null;supplies?.ResetMission();
+            if(!ready)return;BeforeReplay?.Invoke();restoring=true;AttemptFailed=false;OperationSection=0;storageEntered=false;Stage=MissionStage.EnterWarehouse;HasRecords=false;Deaths=Kills=TotalDefeats=CheckpointCommits=Completions=0;officeSaved=false;startedAt=Time.time;completedTime=0;
+            completedEarnings=0;visitedExit=null;supplies?.ResetMission(!firstOperation);
             bool covered=hud!=null&&hud.CoverReset();for(int i=0;i<encounters.Length;i++)encounters[i].ResetEncounter(false,false,covered);
             foreach(EquipmentSlot slot in System.Enum.GetValues(typeof(EquipmentSlot))){var weapon=loadout.Get(slot);if(weapon!=null){weapon.Cycle.CancelReload();weapon.SetAmmunition(weapon.Definition.MagazineCapacity,weapon.UsesAmmunition?72:0);}}
             loadout.Select(EquipmentSlot.Firearm1);player.enabled=true;player.GetComponent<PlayerCombat>().enabled=true;recovery.Bind(initialSpawn,cameraFollow);
-            PreparingRun?.Invoke();CaptureSnapshot();recovery.Respawn();ClearRagdolls();restoring=false;Notify("MISSION 01 — WAREHOUSE INCIDENT\nThe police have had five days. That's long enough.",6);
+            PreparingRun?.Invoke();if(!firstOperation)CaptureSnapshot();player.GetComponent<Rigidbody2D>().simulated=true;recovery.Respawn();ClearRagdolls();restoring=false;Notify(firstOperation?"THE FIRST OPERATION — MANY TRACERS, FEW HITS; EVERYONE SCARED.":"MISSION 01 — WAREHOUSE INCIDENT\nThe police have had five days. That's long enough.",6);
         }
         private void CaptureSnapshot()
         {
@@ -95,25 +104,37 @@ namespace InsaneDreams.Missions
         {recovery.Activate(marker,spawn.position);CaptureSnapshot();CheckpointCommits++;Notify("CHECKPOINT REACHED",2.5f);}
         private void Recovered()
         {
-            if(!ready||restoring||Stage==MissionStage.Complete)return;restoring=true;Stage=savedStage;HasRecords=savedRecords;storageEntered=savedStage>=MissionStage.ReachProcessing;officeSaved=savedStage>=MissionStage.RecoverRecords;
+            if(!ready||restoring||firstOperation||Stage==MissionStage.Complete)return;restoring=true;Stage=savedStage;HasRecords=savedRecords;storageEntered=savedStage>=MissionStage.ReachProcessing;officeSaved=savedStage>=MissionStage.RecoverRecords;
             bool covered=hud!=null&&hud.CoverReset();Kills=0;for(int i=0;i<encounters.Length;i++){encounters[i].ResetEncounter(savedEncounters[i],false,covered);Kills+=encounters[i].DefeatedCount;}
             for(int i=0;i<3;i++){var weapon=loadout.Get((EquipmentSlot)i);if(weapon!=null){weapon.Cycle.CancelReload();weapon.SetAmmunition(savedMagazine[i],savedReserve[i]);}}
             loadout.Select(savedSelection);ClearRagdolls();restoring=false;Notify("BACK AT THE CHECKPOINT",3);
         }
-        private void PlayerDefeated(DamageInfo damage){if(Stage!=MissionStage.Complete){Deaths++;Changed?.Invoke();}}
+        private void PlayerDefeated(DamageInfo damage)
+        {
+            if(AttemptEnded)return;Deaths++;
+            if(firstOperation&&!(player.GetComponent<PlayerRevive>()?.CanOfferRevive??false))
+            {AttemptFailed=true;completedTime=Time.time-startedAt;player.SuspendInput();player.enabled=false;player.GetComponent<PlayerCombat>().enabled=false;player.GetComponent<Rigidbody2D>().simulated=false;}
+            Changed?.Invoke();
+        }
         private void ClearRagdolls()
         {foreach(var root in gameObject.scene.GetRootGameObjects()){var ragdoll=root.GetComponent<CartoonRagdoll>();if(ragdoll!=null)ragdoll.Retire();}}
         private void EncounterProgress(MissionEncounter group)
         {
             if(restoring)return;TotalDefeats++;Kills=0;foreach(var encounter in encounters)Kills+=encounter.DefeatedCount;
+            if(firstOperation){if(OfficerDefeated)Stage=MissionStage.Escape;Changed?.Invoke();return;}
             if(Stage==MissionStage.ClearStorage&&storageEntered&&encounters[0].Cleared&&encounters[1].Cleared){Stage=MissionStage.ReachProcessing;Notify("STORAGE SECURED — checkpoint upstairs to the right",4);}
             else if(Stage==MissionStage.ClearProcessing&&encounters[2].Cleared){Stage=MissionStage.RecoverRecords;Notify("PROCESSING SECURED — records office on the east mezzanine",4);}
             else Changed?.Invoke();
         }
         public bool EnterZone(MissionZone zone,Collider2D region)
         {
-            if(!ready||restoring||Stage==MissionStage.Complete||region==null||!region.bounds.Intersects(playerBox.bounds))return false;
+            if(!ready||restoring||AttemptEnded||health.IsDefeated||region==null||!region.bounds.Intersects(playerBox.bounds))return false;
             var trigger=region.GetComponent<MissionTrigger>();if(trigger==null||trigger.Mission!=this||trigger.Zone!=zone)return false;
+            if(firstOperation)
+            {
+                if(zone==MissionZone.Exit){bool first=visitedExit!=region;visitedExit=region;if(!OfficerDefeated&&!first)return false;}
+                return EnterOperationZone(zone);
+            }
             switch(zone)
             {
                 case MissionZone.Entrance:
@@ -137,6 +158,19 @@ namespace InsaneDreams.Missions
             }
         }
         private void Interact()=>TryRecoverRecords();
+        private bool EnterOperationZone(MissionZone zone)
+        {
+            if(zone==MissionZone.Exit)
+            {
+                if(!OfficerDefeated){Notify(ExitRequirement,3);return false;}
+                completedEarnings=supplies!=null?supplies.Earnings:0;Stage=MissionStage.Complete;Completions++;completedTime=Time.time-startedAt;
+                player.ResetActions();player.enabled=false;player.GetComponent<PlayerCombat>().enabled=false;player.GetComponent<Rigidbody2D>().linearVelocity=Vector2.zero;Changed?.Invoke();return true;
+            }
+            int index=zone==MissionZone.Entrance?0:zone==MissionZone.Storage?1:zone==MissionZone.SamuraiArena?2:zone==MissionZone.FireworksArena?3:zone==MissionZone.Command?4:-1;
+            if(index<0||index<OperationSection||index==OperationSection&&Stage!=MissionStage.EnterWarehouse)return false;
+            // Progression is spatial, never gated by a frightened ordinary enemy's survival.
+            for(int i=0;i<=index;i++)encounters[i].Activate();OperationSection=index;Stage=OfficerDefeated?MissionStage.Escape:MissionStage.ClearStorage;Notify(OperationObjectives[index],3);return true;
+        }
         private void CheckpointBlocked(bool office)
         {
             if(Stage>=MissionStage.Escape||officeSaved&&office||(office?officeCheckpoint:storageCheckpoint).IsLit)return;

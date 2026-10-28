@@ -1,0 +1,122 @@
+[
+  {
+    "Path": "Assets/Scenes/Warehouse_Demo.unity",
+    "Hash": "9ACAD955C4A766A4166DAD6A0D259DAF17C27C285136700A536CB197BFE0FC6D"
+  },
+  {
+    "Path": "Assets/Scenes/Warehouse_Testbed.unity",
+    "Hash": "239069EBB6576EBF8426B2F36398E20C65E2A91A28C7B52B216CC60F69F81773"
+  },
+  {
+    "Path": "Assets/Scenes/Warehouse_Mission01.unity",
+    "Hash": "6AC81F3F8DA0668FF80F2E4B5FDAAB6002E759DE37D043DCFDFA1B1CDDF28113"
+  },
+  {
+    "Path": "Assets/Scripts/Prototype/PlayerMotor2D.cs",
+    "Hash": "740FD99A969CECF1DC00FE0AD3F310729B5BDE79F5FAD09B5544EB686CDE794E"
+  },
+  {
+    "Path": "Assets/Scripts/Traversal/PlayerTraversal2D.cs",
+    "Hash": "52EB2CBDEC6A9991AEE6364EB997342B7EEDB40FC33618C9A090CF9434882DBA"
+  },
+  {
+    "Path": "Assets/Scripts/Combat/PlayerFallDamage.cs",
+    "Hash": "66CEC10AC45DB40FA86EC71B16820DE222A26D2BD6C47E7F26A6369AEAE264C4"
+  },
+  {
+    "Path": "Assets/Scripts/Input/WarehouseTouchControls.cs",
+    "Hash": "6927F83B1DF4C51B1815FB14FFAC29CB12AE825D132D1F24FAEBE4548E41D04D"
+  },
+  {
+    "Path": "Assets/Scripts/Enemies/EnemyCombat.cs",
+    "Hash": "7C6B7C5587BCF6C0C00C912C75DB0D4DC575B45CC5904E8E44525236A7D8EE4F"
+  },
+  {
+    "Path": "Assets/Scripts/Enemies/LarperBrain.cs",
+    "Hash": "7ADC9B2A2059FA7DEB723B711D35B389D70686C26E56872DBEBEB2EF91A18EA5"
+  },
+  {
+    "Path": "Assets/Scripts/Enemies/SamuraiCombat.cs",
+    "Hash": "DE6F5CEF3AFCC777C2A18C9CE7394A0A6CBEAF1A42B604CFAECF9C9E36ED9014"
+  },
+  {
+    "Path": "Assets/Scripts/Enemies/OfficerShotTelegraph.cs",
+    "Hash": "C34F229C7751B52EA7702F6FCCACDB2597E8D06E543F85D88655DC825CFAAD87"
+  },
+  {
+    "Path": "Assets/Scripts/Combat/AttackExecutor.cs",
+    "Hash": "ED08250E59D914B9148D2D97571B930B157FC96E826C6FD49679149BDD65B855"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\UI\\AkumuTypography.uss",
+    "Hash": "760D9BA3CC8534089943D967F9B9D9F54B2E0489DA0919DF5A21C3D0B23AB3DD"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\UI\\AkumuTypography.uss.meta",
+    "Hash": "CC04A7F3FC16D35C4E5FB68ED7E25CCEB73DB462AC58CAEBDCB04E59353A8E53"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\UI\\GameFlow.uss",
+    "Hash": "5EA8C178AAE266A13857FAE5703CFDD2734D4800B2DDBB7B31157355B01977E7"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\UI\\GameFlow.uss.meta",
+    "Hash": "B85BCEADC764C27B9069DF8E40F4BD7098A3106C5127519C06F247AABE9ABDFB"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\UI\\GameFlow.uxml",
+    "Hash": "466A9AC87BAF4DC86F152CD8AA0680DFCAEF8D9976AEC11A2756D0D73B5D355D"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\UI\\GameFlow.uxml.meta",
+    "Hash": "20EA0ABA4894B2D831B8E0D23032722BFC78CB14A8D017C38EC5C2353D2E6584"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\UI\\HandmadeUI.uss",
+    "Hash": "5AD5D4E723DCEBBBD18ADFC9CAD65342B003B4E60A4111D79ABA4714FE440B2F"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\UI\\HandmadeUI.uss.meta",
+    "Hash": "710FF175342CE9ACBB857656C399393C80113622D9110A9672F64063E817C658"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\UI\\MissionControls.uss",
+    "Hash": "507819984F493BA786CE832EEC453AF5DE4DED6E8A728EF0411BA29644169343"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\UI\\MissionControls.uss.meta",
+    "Hash": "2AFF5471A848D6791D20CF3C91FABED389544FDDC2EB24654C13F57D4E50DF6C"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\UI\\MissionControls.uxml",
+    "Hash": "F67511AC29172AE6D3C2C0FFDFB1C3B118F654BAAF0451B7B3461D84732DEE34"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\UI\\MissionControls.uxml.meta",
+    "Hash": "4CFC4DDC681CF7CDD5BC6C53C3C549F69C0A6B94F28768B2ADE5D22F2B25E5A2"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\UI\\WarehouseControls.uss",
+    "Hash": "ED6518AAF8AF43A29CF794C602BE681A5BE91595B373F12A9D68AE97DBBF5A0F"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\UI\\WarehouseControls.uss.meta",
+    "Hash": "9230761A81E184F22B2EF5DB368F4182A5779FB51F150183F598B2A94928420C"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\UI\\WarehouseControls.uxml",
+    "Hash": "5338230B2498344D4C2752228B3C64E605ED06554156A36FD15A635732988FC4"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\UI\\WarehouseControls.uxml.meta",
+    "Hash": "950102C1A7A5062A205592864C58010580C983AF9489DA1794AB506D8C5107A6"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\UI\\WarehousePanel.asset",
+    "Hash": "CB57B8014DE6AAF37C7839E1A3A38E439BC66DB8C532DA88F3268BC38C90836E"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\UI\\WarehousePanel.asset.meta",
+    "Hash": "4E26CA258B5200B9C2F9EB718DBF09DA37766C49EAE078011CE461B6E6E25F1E"
+  }
+]

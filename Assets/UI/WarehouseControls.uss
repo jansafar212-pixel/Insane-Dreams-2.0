@@ -1,45 +1,107 @@
-.safe-area { position: absolute; left: 0; right: 0; top: 0; bottom: 0; color: #ffffeb; }
-.hud-eyebrow { color: #f7c92c; font-size: 11px; -unity-font-style: bold; letter-spacing: 1px; }
-.vitals-panel { position: absolute; left: 18px; top: 14px; width: 220px; padding: 7px 9px; background-color: rgba(25,29,43,.86); border-left-width: 5px; border-left-color: #e2671e; }
+@import url("HandmadeUI.uss");
+.safe-area { position: absolute; left: 0; right: 0; top: 0; bottom: 0; color: var(--cream); }
+.hud-eyebrow { color: var(--gold); font-size: 11px; letter-spacing: 1px; }
+.vitals-panel { position: absolute; left: 18px; top: 14px; width: 220px; padding: 7px 9px; background-color: rgba(23,28,29,.94); border-left-width: 5px; border-left-color: var(--edge); border-bottom-width: 3px; border-bottom-color: var(--ink); }
 .health-row { flex-direction: row; align-items: center; justify-content: space-between; margin: 2px 0; }
-.health-caption { color: #ffffeb; font-size: 17px; -unity-font-style: bold; }
-.health-value { font-size: 24px; -unity-font-style: bold; color: #ffffeb; }
+.health-caption { color: var(--cream); font-size: 17px; }
+.health-value { font-size: 24px; color: var(--cream); }
 .health-track { height: 8px; background-color: #514337; margin: 3px 0 7px; }
-.health-fill { width: 100%; height: 100%; background-color: #f7c92c; }
-.health-fill.critical { background-color: #e2671e; }
-.supplies-row { flex-direction: row; justify-content: space-between; font-size: 12px; color: #ded8c2; }
-.revive-value { font-size: 10px; color: #ded8c2; margin-top: 3px; }
-.instructions { position: absolute; left: 18px; top: 192px; max-width: 32%; padding: 7px 10px; background-color: rgba(25,29,43,.72); color: #ded8c2; font-size: 12px; white-space: normal; }
-.stick { position: absolute; width: 187.5px; height: 187.5px; bottom: 30px; border-radius: 12px; border-width: 3px; border-color: rgba(255,255,235,.6); background-color: rgba(25,29,43,.5); align-items: center; justify-content: center; }
+.health-fill { width: 100%; height: 100%; background-color: var(--gold); }
+.health-fill.critical { background-color: var(--danger); }
+.low-health { color: #ef9c7a; }
+.supplies-row { flex-direction: column; align-items: flex-start; font-size: 12px; color: #d1d1b7; }
+.revive-value { font-size: 11px; color: #d1d1b7; margin-top: 3px; }
+#revivePips { flex-direction: row; height: 16px; }
+.revive-slot { width: 24px; height: 14px; margin-right: 4px; background-color: var(--raised); border-width: 1px; border-color: var(--gold); }
+.revive-slot.is-empty { opacity: .4; border-color: var(--edge); }
+.pip-empty-mark { display: none; position: absolute; left: 7px; top: -2px; color: var(--cream); font-size: 14px; }
+.is-empty > .pip-empty-mark { display: flex; }
+.instructions { position: absolute; left: 18px; top: 192px; max-width: 32%; padding: 7px 10px; background-color: rgba(23,28,29,.9); color: #d1d1b7; font-size: 12px; white-space: normal; }
+.stick { position: absolute; width: 187.5px; height: 187.5px; bottom: 30px; border-radius: 0; border-width: 3px; border-color: rgba(177,180,157,.65); background-color: rgba(23,28,29,.5); align-items: center; justify-content: center; }
 .move-stick { left: 28px; }
-.aim-stick { right: 44px; border-color: rgba(247,201,44,.75); }
-.knob { width: 77.5px; height: 77.5px; border-radius: 4px; border-width: 2px; border-color: #191d2b; background-color: rgba(255,255,235,.68); }
-.aim-stick .knob { background-color: rgba(247,201,44,.78); }
-.stick-label { position: absolute; top: 10px; color: #ffffeb; font-size: 12px; letter-spacing: 1px; -unity-font-style: bold; }
-.action { position: absolute; width: 88px; height: 88px; border-radius: 3px; border-width: 2px; border-color: #d6d2bc; background-color: rgba(25,29,43,.85); color: #ffffeb; font-size: 17px; -unity-font-style: bold; align-items: center; justify-content: center; }
-.action:active { background-color: #0c6374; border-color: #f7c92c; }
+.aim-stick { right: 44px; border-color: rgba(217,188,90,.8); }
+.knob { width: 77.5px; height: 77.5px; border-radius: 0; border-width: 2px; border-color: var(--ink); background-color: rgba(177,180,157,.8); }
+.aim-stick .knob { background-color: rgba(217,188,90,.85); }
+.stick-label { position: absolute; top: 10px; color: var(--cream); font-size: 12px; letter-spacing: 1px; }
+.action { position: absolute; width: 88px; height: 88px; border-radius: 0; border-width: 2px; border-color: var(--edge); background-color: rgba(37,44,43,.94); color: var(--cream); font-size: 17px; align-items: center; justify-content: center; }
+.action:active { background-color: var(--rust); color: var(--ink); border-color: var(--gold); }
 .parachute-button { right: 244px; bottom: 44px; }
-.parachute-button.deployed { background-color: #0c6374; border-color: #f7c92c; }
+.parachute-button.deployed { background-color: #68532f; border-color: var(--gold); }
 .reload-button { right: 244px; bottom: 146px; margin: 0; font-size: 14px; }
 .heal-button { left: 244px; bottom: 44px; margin: 0; font-size: 14px; }
-.blind-fire-button { right: 78px; bottom: 250px; font-size: 17px; background-color: #a72d20; border-color: #f7c92c; }
-.jump-button { right: 244px; bottom: 250px; background-color: rgba(12,99,116,.85); }
-.supply-button { left: 244px; bottom: 146px; width: 88px; height: 60px; border-radius: 3px; margin: 0; font-size: 12px; white-space: normal; }
-.supply-notice { color: #f7c92c; white-space: normal; font-size: 12px; }
-.heal-button.healing { background-color: #0c6374; border-color: #f7c92c; }
-.equipment { position: absolute; right: 18px; top: 14px; width: 196px; padding: 5px 6px; background-color: rgba(25,29,43,.76); border-right-width: 3px; border-right-color: #f7c92c; }
+.heal-button.is-unavailable { border-color: #704f47; color: #a7a792; }
+.blind-fire-button { right: 78px; bottom: 250px; font-size: 17px; background-color: #713f32; border-color: var(--gold); }
+.jump-button { right: 244px; bottom: 250px; background-color: #46513f; }
+.supply-button { left: 244px; bottom: 146px; width: 88px; height: 60px; border-radius: 0; margin: 0; font-size: 12px; white-space: normal; }
+.supply-notice { color: var(--gold); white-space: normal; font-size: 12px; }
+.heal-button.healing { background-color: #68532f; border-color: var(--gold); }
+.equipment { position: absolute; right: 18px; top: 14px; width: 196px; padding: 5px 6px; background-color: rgba(23,28,29,.94); border-right-width: 3px; border-right-color: var(--rust); border-bottom-width: 3px; border-bottom-color: var(--ink); }
 .weapon-heading { flex-direction: row; justify-content: space-between; align-items: center; min-height: 26px; }
 .weapon-icon { width: 68px; height: 26px; }
-.loadout { color: #ffffeb; white-space: normal; font-size: 14px; -unity-font-style: bold; margin-top: 1px; }
-.ammo-row { flex-direction: row; align-items: center; justify-content: space-between; margin: 0 0 3px; }
-.ammo-value { color: #f7c92c; font-size: 36px; -unity-font-style: bold; }
-.reserve-value { color: #ded8c2; font-size: 11px; white-space: normal; }
+.loadout { color: var(--cream); white-space: normal; font-size: 14px; margin-top: 1px; }
+.ammo-row { flex-direction: column; align-items: flex-start; margin: 0 0 3px; }
+.ammo-value { color: var(--gold); font-size: 36px; }
+.reserve-value { color: var(--quiet); font-size: 11px; white-space: normal; }
 .equipment-buttons { flex-direction: row; }
-.equipment-buttons > Button { flex-grow: 1; flex-basis: 0; height: 44px; margin: 0 2px 0 0; padding: 2px; font-size: 11px; -unity-font-style: bold; background-color: #303744; color: #ffffeb; border-width: 1px; border-color: #7b796f; border-radius: 0; }
-.equipment-buttons > Button.is-selected { background-color: #f7c92c; border-color: #f7c92c; color: #191d2b; }
+.equipment-buttons > Button { flex-grow: 1; flex-basis: 0; height: 44px; margin: 0 2px 0 0; padding: 2px; font-size: 11px; background-color: var(--raised); color: var(--cream); border-width: 2px; border-color: var(--edge); border-radius: 0; }
+.equipment-buttons > Button.is-selected { background-color: #68532f; border-top-color: var(--gold); border-left-color: var(--rust); color: #fff8d9; }
+.equipment-buttons > Button.is-empty { color: #858b7b; background-color: var(--panel); border-color: #484d43; }
+#throwableTypes > Button { padding-top: 15px; font-size: 10px; }
+.throwable-icon { position: absolute; top: 2px; left: 38%; width: 14px; height: 14px; -unity-background-scale-mode: scale-to-fit; }
 .hidden { display: none; }
-.revive-primary, .revive-back { border-radius: 0; border-width: 2px; border-color: #ffffeb; padding: 10px 18px; -unity-font-style: bold; }
-
+.revive-overlay { position: absolute; left: 0; right: 0; top: 0; bottom: 0; align-items: center; justify-content: center; background-color: rgba(23,28,29,.9); color: var(--cream); font-size: 20px; }
+.revive-card { padding: 20px; max-width: 560px; width: 80%; background-color: var(--panel); border-width: 3px; border-color: var(--edge); border-top-color: var(--rust); }
+.revive-primary, .revive-back { min-height: 56px; padding: 10px 18px; font-size: 18px; margin-top: 8px; }
+.revive-primary { background-color: var(--rust); color: var(--ink); }
 .vitals-panel .hud-eyebrow { font-size: 10px; letter-spacing: 0; }
 .vitals-panel .unity-label { margin-top: 1px; margin-bottom: 1px; }
 .equipment .unity-label { margin-top: 1px; margin-bottom: 1px; padding-top: 0; padding-bottom: 0; }
+
+/* Preserve all established touch bounds and joystick offsets. */
+.vitals-panel, .equipment { border-top-width: 3px; border-top-color: var(--gold); border-right-width: 3px; border-right-color: var(--ink); border-bottom-width: 5px; border-bottom-color: var(--ink); }
+.health-track { height: 12px; border-width: 2px; border-color: var(--ink); background-color: #65372e; }
+.health-fill { background-color: #86aa98; }
+.health-fill.critical { background-color: var(--danger); }
+.revive-slot.is-empty > .syringe-mark { display: none; }
+.action { border-top-color: var(--cream); border-bottom-color: var(--ink); }
+.knob { border-top-color: var(--cream); border-bottom-color: var(--ink); }
+.equipment-buttons > Button:focus { border-color: var(--gold); }
+.revive-card { border-width: 4px; border-top-color: var(--rust); border-bottom-width: 8px; }
+
+/* Hotfix0036.1: background alpha only; text, icons and touch geometry stay intact. */
+.stick { background-color: rgba(23,28,29,.40); }
+.knob { background-color: rgba(177,180,157,.65); }
+.aim-stick .knob { background-color: rgba(217,188,90,.65); }
+.vitals-panel, .equipment { background-color: rgba(23,28,29,.55); }
+.health-track { background-color: rgba(101,55,46,.55); }
+.health-fill { background-color: rgba(134,170,152,.85); }
+.health-fill.critical { background-color: rgba(180,90,75,.85); }
+.instructions { background-color: rgba(23,28,29,.65); }
+.action { background-color: rgba(37,44,43,.60); }
+.action:active { background-color: rgba(205,120,62,.60); }
+.jump-button { background-color: rgba(70,81,63,.60); }
+.blind-fire-button { background-color: rgba(113,63,50,.60); }
+.heal-button.healing, .parachute-button.deployed { background-color: rgba(104,83,47,.60); }
+.equipment-buttons > Button { background-color: rgba(56,63,56,.65); }
+.equipment-buttons > Button.is-selected { background-color: rgba(104,83,47,.65); }
+.equipment-buttons > Button.is-empty { background-color: rgba(37,44,43,.65); }
+.revive-slot { background-color: rgba(56,63,56,.65); }
+.revive-overlay { background-color: rgba(23,28,29,.60); }
+.revive-card { background-color: rgba(37,44,43,.65); }
+.revive-primary { background-color: rgba(205,120,62,.60); }
+.revive-back { background-color: rgba(56,63,56,.60); }
+.revive-back:hover { background-color: rgba(74,81,66,.60); }
+.revive-primary:active, .revive-back:active { background-color: rgba(205,120,62,.60); }
+
+/* Accepted-damage feedback: bounded edge strips, never a full-screen red fill. */
+.damage-feedback-overlay { position: absolute; left: 0; right: 0; top: 0; bottom: 0; }
+.damage-edge, .damage-direction { position: absolute; background-color: rgba(180,35,24,0); }
+.damage-edge-left { left: 0; top: 0; bottom: 0; width: 8px; }
+.damage-edge-right { right: 0; top: 0; bottom: 0; width: 8px; }
+.damage-edge-above { left: 8px; right: 8px; top: 0; height: 8px; }
+.damage-edge-below { left: 8px; right: 8px; bottom: 0; height: 8px; }
+.damage-direction-left { left: 10px; top: 43%; width: 12px; height: 42px; }
+.damage-direction-right { right: 10px; top: 43%; width: 12px; height: 42px; }
+.damage-direction-above { top: 78px; left: 48%; width: 42px; height: 10px; }
+.damage-direction-below { bottom: 16px; left: 48%; width: 42px; height: 10px; }
+.health-fill.damage-flash, .health-fill.critical.damage-flash { background-color: rgba(233,226,197,.85); }

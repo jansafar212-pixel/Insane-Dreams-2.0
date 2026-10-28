@@ -2,7 +2,7 @@ using InsaneDreams.Input;
 using UnityEngine;
 namespace InsaneDreams.Missions
 {
-    public enum MissionZone { Entrance, Storage, Checkpoint, Processing, Records, Exit, OfficeCheckpoint }
+    public enum MissionZone { Entrance, Storage, Checkpoint, Processing, Records, Exit, OfficeCheckpoint, SamuraiArena, FireworksArena, Command }
     [RequireComponent(typeof(BoxCollider2D))]
     public sealed class MissionTrigger : MonoBehaviour
     {

@@ -1,0 +1,28 @@
+{
+  "scene": "Assets/Scenes/Warehouse_Demo.unity",
+  "dirty": false,
+  "playing": false,
+  "missingScripts": 0,
+  "groups": [
+    3,
+    4,
+    3,
+    3,
+    2
+  ],
+  "damage": 55.0,
+  "capacity": 7,
+  "reload": 2.8,
+  "interval": 2.4,
+  "warning": 1.15,
+  "lockSeconds": 0.2,
+  "presenter": true,
+  "reloadHandler": true,
+  "health": 50.0,
+  "sprite": "DesertEagle",
+  "spriteWidth": 27.0,
+  "spriteHeight": 14.0,
+  "ppu": 32.0,
+  "filter": "Point",
+  "mipLevels": 1
+}

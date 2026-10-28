@@ -1,0 +1,21 @@
+{
+  "scene": "Assets/Scenes/Warehouse_Demo.unity",
+  "isDirty": false,
+  "playing": false,
+  "compiling": false,
+  "points": 15,
+  "groups": [
+    3,
+    4,
+    3,
+    3,
+    2
+  ],
+  "missingScripts": 0,
+  "validArchetypes": true,
+  "validPlacedActors": true,
+  "samuraiSpeed": 9.5,
+  "allyReferences": 1,
+  "assignedAlly": "CombatHotfix_CommandGuard_Actor",
+  "geometryUnchanged": true
+}

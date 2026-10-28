@@ -43,6 +43,7 @@ namespace InsaneDreams.Tests
             Assert.IsFalse(Enter(MissionZone.Records));yield return new WaitForFixedUpdate();yield return new WaitForFixedUpdate();
             Assert.AreEqual(saved,recovery.CurrentSpawn,"Disabled marker callbacks must not bypass the mission commit.");
             var health=mission.Player.GetComponent<Health>();health.ProtectFor(0);health.ApplyDamage(new DamageInfo(1000,CombatTeam.Enemy));
+            float recoverUntil=Time.time+3;while(health.IsDefeated&&Time.time<recoverUntil)yield return null;
             Assert.AreEqual(saved,(Vector2)mission.Player.transform.position);Assert.AreEqual(MissionStage.ReachProcessing,mission.Stage);Assert.AreEqual(100,health.Current);
         }
         [UnityTest] public IEnumerator InitializationHasSafeSpawnRealHudAndOnlyTenPrewarmedInactiveEnemies()
@@ -86,11 +87,12 @@ namespace InsaneDreams.Tests
         }
         [UnityTest] public IEnumerator CheckpointRollbackPreservesClearedGroupsRestoresAmmoAndNeverDuplicatesActors()
         {
-            var before=Actors();StorageCheckpoint();var weapon=mission.Player.GetComponent<PlayerLoadout>().SelectedWeapon;int ammo=weapon.MagazineAmmo,reserve=weapon.ReserveAmmo;
+            var before=Actors();foreach(var ai in before)ai.enabled=false; // Isolate checkpoint rollback from autonomous reacquisition during corpse recovery.
+            StorageCheckpoint();var weapon=mission.Player.GetComponent<PlayerLoadout>().SelectedWeapon;int ammo=weapon.MagazineAmmo,reserve=weapon.ReserveAmmo;
             Assert.IsTrue(Enter(MissionZone.Processing));foreach(var point in mission.Encounters[2].Points.Take(2))point.Spawned.GetComponent<Health>().ApplyDamage(new DamageInfo(1000,CombatTeam.Player,mission.Player.gameObject));Assert.AreEqual(7,mission.Kills);weapon.SetAmmunition(0,0);
             for(int attempt=0;attempt<2;attempt++)
             {
-                var health=mission.Player.GetComponent<Health>();health.ProtectFor(0);Assert.IsTrue(health.ApplyDamage(new DamageInfo(1000,CombatTeam.Enemy)));Assert.AreEqual(attempt+1,mission.Deaths);Assert.AreEqual(100,health.Current);
+                var health=mission.Player.GetComponent<Health>();health.ProtectFor(0);Assert.IsTrue(health.ApplyDamage(new DamageInfo(1000,CombatTeam.Enemy)));Assert.AreEqual(attempt+1,mission.Deaths);float recoverUntil=Time.time+3;while(health.IsDefeated&&Time.time<recoverUntil)yield return null;Assert.AreEqual(100,health.Current);
                 Assert.AreEqual(MissionStage.ReachProcessing,mission.Stage);Assert.AreEqual(5,mission.Kills);Assert.AreEqual(ammo,weapon.MagazineAmmo);Assert.AreEqual(reserve,weapon.ReserveAmmo);Assert.IsTrue(mission.Encounters[0].Cleared);Assert.IsTrue(mission.Encounters[1].Cleared);Assert.AreEqual(0,mission.Encounters[2].DefeatedCount);Assert.IsFalse(mission.Encounters[2].IsActive);
                 Assert.AreEqual(7,mission.TotalDefeats,"Results retain real defeat events even when encounter progress rolls back.");
                 Assert.Less(Vector2.Distance(mission.Player.transform.position,new Vector2(1,6.25f)),.02f);Assert.AreEqual(10,Actors().Length);CollectionAssert.AreEquivalent(before,Actors());yield return null;
@@ -98,7 +100,12 @@ namespace InsaneDreams.Tests
         }
         [UnityTest] public IEnumerator RecordsCheckpointCompletionResultsAndReplayReflectActualEventsExactlyOnce()
         {
-            var actors=Actors();var supplies=mission.Player.GetComponent<PlayerSupplies>();Assert.IsTrue(supplies.CollectWallet("s023-results",42));Records();var health=mission.Player.GetComponent<Health>();health.ProtectFor(0);health.ApplyDamage(new DamageInfo(1000,CombatTeam.Enemy));Assert.AreEqual(1,mission.Deaths);Assert.IsTrue(mission.HasRecords);Assert.AreEqual(MissionStage.Escape,mission.Stage);Assert.AreEqual(42,mission.Earnings);Assert.IsFalse(supplies.CollectWallet("s023-results",42));
+            var actors=Actors();
+            // This fixture owns one explicit $42 reward. Automatic enemy loot is
+            // covered separately; a nearby random wallet must not alter this input.
+            foreach(var actor in actors){var drop=actor.GetComponent<EnemyWalletDrop>();if(drop!=null)drop.enabled=false;}
+            var supplies=mission.Player.GetComponent<PlayerSupplies>();Assert.IsTrue(supplies.CollectWallet("s023-results",42));Records();var health=mission.Player.GetComponent<Health>();health.ProtectFor(0);health.ApplyDamage(new DamageInfo(1000,CombatTeam.Enemy));Assert.AreEqual(1,mission.Deaths);Assert.IsTrue(mission.HasRecords);Assert.AreEqual(MissionStage.Escape,mission.Stage);Assert.AreEqual(42,mission.Earnings);Assert.IsFalse(supplies.CollectWallet("s023-results",42));
+            float recoverUntil=Time.time+3;while(health.IsDefeated&&Time.time<recoverUntil)yield return null;
             Assert.IsTrue(Enter(MissionZone.Exit));Assert.IsFalse(Enter(MissionZone.Exit));Assert.AreEqual(1,mission.Completions);Assert.AreEqual(10,mission.Kills);float time=mission.Elapsed;yield return new WaitForSeconds(.2f);Assert.AreEqual(time,mission.Elapsed);Assert.IsFalse(mission.Player.enabled);
             var doc=SceneManager.GetActiveScene().GetRootGameObjects().SelectMany(g=>g.GetComponentsInChildren<UIDocument>()).Single();var root=doc.rootVisualElement;Assert.IsFalse(root.Q("missionResults").ClassListContains("hidden"));StringAssert.Contains("ENEMIES DEFEATED   10",root.Q<Label>("resultStats").text);StringAssert.Contains("DEATHS   1",root.Q<Label>("resultStats").text);
             StringAssert.Contains("MISSION EARNINGS   $42",root.Q<Label>("resultStats").text);Assert.IsFalse(supplies.CollectWallet("after-completion",99));Assert.AreEqual(42,mission.Earnings);

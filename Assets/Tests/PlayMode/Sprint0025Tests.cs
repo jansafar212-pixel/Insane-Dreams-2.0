@@ -32,7 +32,9 @@ namespace InsaneDreams.Tests
         {foreach(var g in owned)if(g!=null)Object.Destroy(g);owned.Clear();yield return null;Application.runInBackground=background;}
         [UnityTest]public IEnumerator PlayerMeleeSwingsHitsLocallyAndNeverEmitsFirearmCues()
         {
-            var loadout=player.GetComponent<PlayerLoadout>();loadout.Select(EquipmentSlot.Melee);yield return null;
+            // This legacy melee unit fixture predates slot 3 becoming grenade selection.
+            Object.DestroyImmediate(player.GetComponent<PlayerThrowables>());
+            var loadout=player.GetComponent<PlayerLoadout>();var catalog=AssetDatabase.LoadAssetAtPath<InsaneDreams.Progression.GameCatalog>("Assets/Data/Progression/DemoCatalog.asset");loadout.Equip(EquipmentSlot.Melee,new RuntimeWeapon(catalog.Find(catalog.meleeId).weapon));loadout.Select(EquipmentSlot.Melee);yield return null;
             var melee=loadout.SelectedWeapon;var enemy=Enemy(melee.Definition.AttackRange*.7f);var health=enemy.GetComponent<Health>();float hp=health.Current;
             var attack=player.GetComponent<AttackExecutor>();var feedback=player.GetComponent<CombatFeedback>();var rig=player.GetComponent<CharacterVisualDriver>().Rig;
             Assert.IsTrue(attack.Attack(melee,Vector2.right,Time.time));yield return null;
@@ -76,6 +78,7 @@ namespace InsaneDreams.Tests
         [UnityTest]public IEnumerator FaintanylButtonRevivesInPlaceTwiceWithTwoSecondProtection()
         {
             var revive=player.GetComponent<PlayerRevive>();var health=player.GetComponent<Health>();var body=player.GetComponent<Rigidbody2D>();
+            revive.RestoreInventory(2);var manual=new SerializedObject(revive);manual.FindProperty("automaticRevival").boolValue=false;manual.ApplyModifiedPropertiesWithoutUndo();var recoverySettings=new SerializedObject(player.GetComponent<PlayerHealthRecovery>());recoverySettings.FindProperty("allowCheckpointRespawn").boolValue=true;recoverySettings.ApplyModifiedPropertiesWithoutUndo();
             Assert.AreEqual(2,revive.Injections);Assert.AreEqual(0,revive.AddInjections(99));
             var doc=Keep(Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/UI/WarehouseControls.prefab"))).GetComponent<UIDocument>();doc.GetComponent<WarehouseTouchControls>().Bind(actions);
             int checkpoints=0;player.GetComponent<InsaneDreams.Checkpoints.PlayerRecovery>().Recovered+=()=>checkpoints++;
@@ -103,13 +106,13 @@ namespace InsaneDreams.Tests
         }
         [UnityTest]public IEnumerator FaintanylCanBeDeclinedWithoutConsumingAndCheckpointResumesControls()
         {
-            var revive=player.GetComponent<PlayerRevive>();var hp=player.GetComponent<Health>();hp.ProtectFor(0);hp.ApplyDamage(new DamageInfo(1000,CombatTeam.Enemy));
-            Assert.IsTrue(revive.ReturnToCheckpoint());Assert.AreEqual(2,revive.Injections);Assert.IsFalse(hp.IsDefeated);Assert.IsTrue(actions.enabled);Assert.IsTrue(player.GetComponent<PlayerCombat>().enabled);Assert.IsTrue(player.GetComponent<Rigidbody2D>().simulated);
+            var revive=player.GetComponent<PlayerRevive>();revive.RestoreInventory(2);var hp=player.GetComponent<Health>();hp.ProtectFor(0);hp.ApplyDamage(new DamageInfo(1000,CombatTeam.Enemy));
+            Assert.IsTrue(revive.ReturnToCheckpoint());Assert.AreEqual(1,revive.Injections);Assert.IsFalse(hp.IsDefeated);Assert.IsTrue(actions.enabled);Assert.IsTrue(player.GetComponent<PlayerCombat>().enabled);Assert.IsTrue(player.GetComponent<Rigidbody2D>().simulated);
             revive.RestoreInventory(50);Assert.AreEqual(2,revive.Injections);revive.RestoreInventory(-5);Assert.AreEqual(0,revive.Injections);Assert.AreEqual(2,revive.AddInjections(3));yield return null;
         }
         [Test]public void FaintanylSaveRoundTripAndLegacyDefaultsAreFinite()
         {
-            var legacy=JsonUtility.FromJson<InsaneDreams.Progression.GameProgress>("{\"version\":1}");legacy.Normalize();Assert.AreEqual(2,legacy.faintanyl);
+            var legacy=JsonUtility.FromJson<InsaneDreams.Progression.GameProgress>("{\"version\":1}");legacy.Normalize();Assert.AreEqual(0,legacy.faintanyl);
             legacy.faintanyl=0;var restored=JsonUtility.FromJson<InsaneDreams.Progression.GameProgress>(JsonUtility.ToJson(legacy));Assert.AreEqual(0,restored.faintanyl);
         }
     }

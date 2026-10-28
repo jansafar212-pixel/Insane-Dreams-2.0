@@ -1,0 +1,107 @@
+[
+  {
+    "Suite": "AdaptiveCombatCameraTests",
+    "Total": 9,
+    "Passed": 9,
+    "Failed": 0,
+    "Skipped": 0
+  },
+  {
+    "Suite": "AndroidPerformanceRegressionTests",
+    "Total": 2,
+    "Passed": 2,
+    "Failed": 0,
+    "Skipped": 0
+  },
+  {
+    "Suite": "ArsenalLabTests",
+    "Total": 1,
+    "Passed": 1,
+    "Failed": 0,
+    "Skipped": 0
+  },
+  {
+    "Suite": "ArsenalRulesTests",
+    "Total": 4,
+    "Passed": 4,
+    "Failed": 0,
+    "Skipped": 0
+  },
+  {
+    "Suite": "ArsenalTests",
+    "Total": 8,
+    "Passed": 8,
+    "Failed": 0,
+    "Skipped": 0
+  },
+  {
+    "Suite": "CombatRulesTests",
+    "Total": 7,
+    "Passed": 7,
+    "Failed": 0,
+    "Skipped": 0
+  },
+  {
+    "Suite": "DevelopmentFrameStatsTests",
+    "Total": 1,
+    "Passed": 1,
+    "Failed": 0,
+    "Skipped": 0
+  },
+  {
+    "Suite": "FirstOperationLayoutTests",
+    "Total": 2,
+    "Passed": 2,
+    "Failed": 0,
+    "Skipped": 0
+  },
+  {
+    "Suite": "FirstOperationTests",
+    "Total": 6,
+    "Passed": 6,
+    "Failed": 0,
+    "Skipped": 0
+  },
+  {
+    "Suite": "GrenadeResupplyHotfixTests",
+    "Total": 4,
+    "Passed": 4,
+    "Failed": 0,
+    "Skipped": 0
+  },
+  {
+    "Suite": "Hotfix00253PlaytestTests",
+    "Total": 6,
+    "Passed": 6,
+    "Failed": 0,
+    "Skipped": 0
+  },
+  {
+    "Suite": "ReactiveRagdollTests",
+    "Total": 5,
+    "Passed": 5,
+    "Failed": 0,
+    "Skipped": 0
+  },
+  {
+    "Suite": "Sprint0031Tests",
+    "Total": 3,
+    "Passed": 3,
+    "Failed": 0,
+    "Skipped": 0
+  },
+  {
+    "Suite": "Sprint0032Tests",
+    "Total": 10,
+    "Passed": 10,
+    "Failed": 0,
+    "Skipped": 0
+  },
+  {
+    "Suite": "Sprint0246Tests",
+    "Total": 5,
+    "Passed": 5,
+    "Failed": 0,
+    "Skipped": 0
+  }
+]

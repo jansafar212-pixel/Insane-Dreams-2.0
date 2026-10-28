@@ -1,0 +1,146 @@
+[
+  {
+    "name": "",
+    "classes": "pause-face",
+    "backgroundAlpha": 0.6,
+    "textAlpha": 1.0,
+    "opacity": 1.0,
+    "width": 52.0,
+    "height": 40.0
+  },
+  {
+    "name": "heal",
+    "classes": "unity-text-element unity-button action heal-button",
+    "backgroundAlpha": 0.6,
+    "textAlpha": 1.0,
+    "opacity": 1.0,
+    "width": 88.0,
+    "height": 88.0
+  },
+  {
+    "name": "reload",
+    "classes": "unity-text-element unity-button action reload-button",
+    "backgroundAlpha": 0.6,
+    "textAlpha": 1.0,
+    "opacity": 1.0,
+    "width": 88.0,
+    "height": 88.0
+  },
+  {
+    "name": "aimStick",
+    "classes": "stick aim-stick",
+    "backgroundAlpha": 0.4,
+    "textAlpha": 1.0,
+    "opacity": 1.0,
+    "width": 187.0,
+    "height": 187.0
+  },
+  {
+    "name": "",
+    "classes": "knob",
+    "backgroundAlpha": 0.65,
+    "textAlpha": 1.0,
+    "opacity": 1.0,
+    "width": 77.0,
+    "height": 77.0
+  },
+  {
+    "name": "moveStick",
+    "classes": "stick move-stick",
+    "backgroundAlpha": 0.4,
+    "textAlpha": 1.0,
+    "opacity": 1.0,
+    "width": 188.0,
+    "height": 187.0
+  },
+  {
+    "name": "",
+    "classes": "knob",
+    "backgroundAlpha": 0.65,
+    "textAlpha": 1.0,
+    "opacity": 1.0,
+    "width": 78.0,
+    "height": 77.0
+  },
+  {
+    "name": "",
+    "classes": "equipment",
+    "backgroundAlpha": 0.55,
+    "textAlpha": 1.0,
+    "opacity": 1.0,
+    "width": 196.0,
+    "height": 160.0
+  },
+  {
+    "name": "slot1",
+    "classes": "unity-text-element unity-button",
+    "backgroundAlpha": 0.65,
+    "textAlpha": 1.0,
+    "opacity": 1.0,
+    "width": 58.0,
+    "height": 44.0
+  },
+  {
+    "name": "ammoValue",
+    "classes": "unity-label unity-text-element ammo-value",
+    "backgroundAlpha": 0.0,
+    "textAlpha": 1.0,
+    "opacity": 1.0,
+    "width": 50.0,
+    "height": 36.0
+  },
+  {
+    "name": "",
+    "classes": "mission-card",
+    "backgroundAlpha": 0.55,
+    "textAlpha": 1.0,
+    "opacity": 1.0,
+    "width": 224.0,
+    "height": 24.0
+  },
+  {
+    "name": "objective",
+    "classes": "unity-label unity-text-element mission-objective",
+    "backgroundAlpha": 0.0,
+    "textAlpha": 1.0,
+    "opacity": 1.0,
+    "width": 205.0,
+    "height": 0.0
+  },
+  {
+    "name": "",
+    "classes": "vitals-panel",
+    "backgroundAlpha": 0.55,
+    "textAlpha": 1.0,
+    "opacity": 1.0,
+    "width": 220.0,
+    "height": 127.0
+  },
+  {
+    "name": "",
+    "classes": "health-track",
+    "backgroundAlpha": 0.55,
+    "textAlpha": 1.0,
+    "opacity": 1.0,
+    "width": 194.0,
+    "height": 12.0
+  },
+  {
+    "name": "healthFill",
+    "classes": "health-fill",
+    "backgroundAlpha": 0.85,
+    "textAlpha": 1.0,
+    "opacity": 1.0,
+    "width": 190.0,
+    "height": 8.0
+  },
+  {
+    "name": "healthValue",
+    "classes": "unity-label unity-text-element health-value",
+    "backgroundAlpha": 0.0,
+    "textAlpha": 1.0,
+    "opacity": 1.0,
+    "width": 35.0,
+    "height": 24.0
+  }
+]

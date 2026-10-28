@@ -14,20 +14,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Progression.GameCatalog
   levels:
   - id: warehouse
-    title: Warehouse Incident
+    title: THE FIRST OPERATION
     scene: Warehouse_Demo
-    description: Secure the records. Meet two entirely unqualified specialists.
+    description: Loading yard, storage decks, one very committed swordsman, questionable fireworks and management's last stand. No checkpoints; bring supplies.
     prerequisite: 
     icon: {fileID: 21300000, guid: 277e24238735d444eacfe21ff0f23424, type: 3}
   offers:
   - id: carbine
     title: Warehouse Carbine
-    description: Your existing carbine. Industrial problem-solving.
+    description: Permanent ownership; one loaded magazine included. Spare ammunition sold separately. Handling unchanged.
     category: 0
-    price: 0
+    price: 500
     quantity: 1
     weapon: {fileID: 11400000, guid: a19415bc42a5c1749983394fafeb429d, type: 2}
-    starter: 1
+    starter: 0
+    reserveCapacity: 144
+    throwable: 0
+    armorTier: 1
+    helmet: 0
   - id: baton
     title: Practice Baton
     description: 'Free professional qualification: stick.'
@@ -36,75 +40,333 @@ MonoBehaviour:
     quantity: 1
     weapon: {fileID: 11400000, guid: 82b20f5de82ce3e4dbfcd07239f36ec9, type: 2}
     starter: 1
+    reserveCapacity: 0
+    throwable: 0
+    armorTier: 1
+    helmet: 0
   - id: pistol
     title: Backup Pistol
-    description: A supported sidearm. Ownership does not imply competence.
+    description: Always available. Five magazines total at each mission start. No premium ammunition allowance.
     category: 0
-    price: 35
+    price: 0
     quantity: 1
     weapon: {fileID: 11400000, guid: 2d59804bf74db5842a92644e840bc441, type: 2}
-    starter: 0
+    starter: 1
+    reserveCapacity: 96
+    throwable: 0
+    armorTier: 1
+    helmet: 0
   - id: buzzbox
-    title: Automatic Buzzbox
-    description: The existing automatic pistol. Many bullets, dubious certainty.
+    title: Buzzbox Automatic Pistol
+    description: Permanent ownership; one loaded magazine included. Spare ammunition sold separately. Handling unchanged.
     category: 0
-    price: 60
+    price: 200
     quantity: 1
     weapon: {fileID: 11400000, guid: 67c88bc28be6401419eaffaf19d822a0, type: 2}
     starter: 0
+    reserveCapacity: 162
+    throwable: 0
+    armorTier: 1
+    helmet: 0
   - id: carbine-ammo
-    title: Carbine / 72 rounds
-    description: Adds up to 72 reserve rounds. Requires the carbine. Reserve cap 432.
+    title: Warehouse Carbine / 24 rounds
+    description: One magazine of ammunition for Warehouse Carbine only. Requires ownership and room for the whole pack.
     category: 1
-    price: 12
-    quantity: 72
+    price: 18
+    quantity: 24
     weapon: {fileID: 11400000, guid: a19415bc42a5c1749983394fafeb429d, type: 2}
     starter: 0
+    reserveCapacity: 0
+    throwable: 0
+    armorTier: 1
+    helmet: 0
   - id: pistol-ammo
-    title: Pistol / 48 rounds
-    description: Compatible reserve ammunition. Requires the backup pistol.
+    title: Backup Pistol / 8 rounds
+    description: One magazine of ammunition for Backup Pistol only. Requires ownership and room for the whole pack.
     category: 1
-    price: 8
-    quantity: 48
+    price: 5
+    quantity: 15
     weapon: {fileID: 11400000, guid: 2d59804bf74db5842a92644e840bc441, type: 2}
     starter: 0
+    reserveCapacity: 0
+    throwable: 0
+    armorTier: 1
+    helmet: 0
   - id: buzzbox-ammo
-    title: Buzzbox / 72 rounds
-    description: Compatible reserve ammunition. Requires the automatic Buzzbox.
+    title: Buzzbox Automatic Pistol / 27 rounds
+    description: One magazine of ammunition for Buzzbox Automatic Pistol only. Requires ownership and room for the whole pack.
     category: 1
-    price: 15
-    quantity: 72
+    price: 12
+    quantity: 27
     weapon: {fileID: 11400000, guid: 67c88bc28be6401419eaffaf19d822a0, type: 2}
     starter: 0
+    reserveCapacity: 0
+    throwable: 0
+    armorTier: 1
+    helmet: 0
   - id: armor
-    title: Body armor / 60 condition
-    description: Absorbs 65% of body-hit damage, consuming condition. Head hits and neutral hazards bypass it.
+    title: Light body armor
+    description: A modest ballistic vest. Small reload cost; movement stays fast.
     category: 2
-    price: 30
+    price: 150
     quantity: 60
     weapon: {fileID: 0}
     starter: 0
+    reserveCapacity: 0
+    throwable: 0
+    armorTier: 1
+    helmet: 0
   - id: tape
-    title: Faintanyl & Duct Tape / 50
-    description: Refills up to 50 HP worth of existing healing reserve. Cap 200.
+    title: Duct Tape
+    description: There is nothing duct tape can't fix.
     category: 3
-    price: 10
+    price: 25
     quantity: 50
     weapon: {fileID: 0}
     starter: 0
+    reserveCapacity: 0
+    throwable: 0
+    armorTier: 1
+    helmet: 0
   - id: faintanyl
     title: Faintanyl
     description: relax its not addictive, just habit forming
     category: 4
-    price: 75
+    price: 175
     quantity: 1
     weapon: {fileID: 0}
     starter: 0
-  primaryId: carbine
+    reserveCapacity: 0
+    throwable: 0
+    armorTier: 1
+    helmet: 0
+  - id: frag-grenade
+    title: Cartoon fragmentation grenade
+    description: Select grenade slot, choose type, aim and release the right stick to throw. Finite stock.
+    category: 5
+    price: 50
+    quantity: 1
+    weapon: {fileID: 0}
+    starter: 0
+    reserveCapacity: 0
+    throwable: 0
+    armorTier: 1
+    helmet: 0
+  - id: flash-grenade
+    title: Flashbang
+    description: Select grenade slot, choose type, aim and release the right stick to throw. Finite stock.
+    category: 5
+    price: 35
+    quantity: 1
+    weapon: {fileID: 0}
+    starter: 0
+    reserveCapacity: 0
+    throwable: 1
+    armorTier: 1
+    helmet: 0
+  - id: smoke-grenade
+    title: Smoke grenade
+    description: Select grenade slot, choose type, aim and release the right stick to throw. Finite stock.
+    category: 5
+    price: 30
+    quantity: 1
+    weapon: {fileID: 0}
+    starter: 0
+    reserveCapacity: 0
+    throwable: 2
+    armorTier: 1
+    helmet: 0
+  - id: heavy-armor
+    title: Heavy body armor
+    description: Stronger ballistic protection. Slower reloads and modest carrying costs; movement stays fast.
+    category: 2
+    price: 300
+    quantity: 90
+    weapon: {fileID: 0}
+    starter: 0
+    reserveCapacity: 0
+    throwable: 0
+    armorTier: 2
+    helmet: 0
+  - id: light-helmet
+    title: Light helmet
+    description: Ballistic head protection. Sword attacks still hurt; heavier equipment reloads more slowly.
+    category: 2
+    price: 60
+    quantity: 20
+    weapon: {fileID: 0}
+    starter: 0
+    reserveCapacity: 0
+    throwable: 0
+    armorTier: 1
+    helmet: 1
+  - id: heavy-helmet
+    title: Heavy helmet
+    description: Ballistic head protection. Sword attacks still hurt; heavier equipment reloads more slowly.
+    category: 2
+    price: 120
+    quantity: 35
+    weapon: {fileID: 0}
+    starter: 0
+    reserveCapacity: 0
+    throwable: 0
+    armorTier: 2
+    helmet: 1
+  - id: smg
+    title: Rattlebox SMG
+    description: Permanent ownership; one loaded magazine included. Spare ammunition sold separately. Handling unchanged.
+    category: 0
+    price: 350
+    quantity: 1
+    weapon: {fileID: 11400000, guid: 5ae8317f519c0264a9291e77c85028c5, type: 2}
+    starter: 0
+    reserveCapacity: 180
+    throwable: 0
+    armorTier: 1
+    helmet: 0
+  - id: smg-ammo
+    title: Rattlebox SMG / 30 rounds
+    description: One magazine of ammunition for Rattlebox SMG only. Requires ownership and room for the whole pack.
+    category: 1
+    price: 15
+    quantity: 30
+    weapon: {fileID: 11400000, guid: 5ae8317f519c0264a9291e77c85028c5, type: 2}
+    starter: 0
+    reserveCapacity: 0
+    throwable: 0
+    armorTier: 1
+    helmet: 0
+  - id: shotgun
+    title: Doorbell Shotgun
+    description: Permanent ownership; one loaded magazine included. Spare ammunition sold separately. Handling unchanged.
+    category: 0
+    price: 650
+    quantity: 1
+    weapon: {fileID: 11400000, guid: 8a43739a8731998499cf7e50b5f86642, type: 2}
+    starter: 0
+    reserveCapacity: 36
+    throwable: 0
+    armorTier: 1
+    helmet: 0
+  - id: shotgun-ammo
+    title: Doorbell Shotgun / 6 rounds
+    description: One magazine of ammunition for Doorbell Shotgun only. Requires ownership and room for the whole pack.
+    category: 1
+    price: 24
+    quantity: 6
+    weapon: {fileID: 11400000, guid: 8a43739a8731998499cf7e50b5f86642, type: 2}
+    starter: 0
+    reserveCapacity: 0
+    throwable: 0
+    armorTier: 1
+    helmet: 0
+  - id: desert-eagle
+    title: Desert Eagle
+    description: Permanent ownership; one loaded magazine included. Spare ammunition sold separately. Handling unchanged.
+    category: 0
+    price: 1200
+    quantity: 1
+    weapon: {fileID: 11400000, guid: 025459cc663dbb94fa9f8e2280f30802, type: 2}
+    starter: 0
+    reserveCapacity: 42
+    throwable: 0
+    armorTier: 1
+    helmet: 0
+  - id: desert-eagle-ammo
+    title: Desert Eagle / 7 rounds
+    description: One magazine of ammunition for Desert Eagle only. Requires ownership and room for the whole pack.
+    category: 1
+    price: 42
+    quantity: 7
+    weapon: {fileID: 11400000, guid: 025459cc663dbb94fa9f8e2280f30802, type: 2}
+    starter: 0
+    reserveCapacity: 0
+    throwable: 0
+    armorTier: 1
+    helmet: 0
+  - id: lmg
+    title: Lunchbox LMG
+    description: Permanent ownership; one loaded magazine included. Spare ammunition sold separately. Handling unchanged.
+    category: 0
+    price: 1600
+    quantity: 1
+    weapon: {fileID: 11400000, guid: a971933d931d6cb48acd980ff06f23cb, type: 2}
+    starter: 0
+    reserveCapacity: 200
+    throwable: 0
+    armorTier: 1
+    helmet: 0
+  - id: lmg-ammo
+    title: Lunchbox LMG / 100 rounds
+    description: One magazine of ammunition for Lunchbox LMG only. Requires ownership and room for the whole pack.
+    category: 1
+    price: 65
+    quantity: 100
+    weapon: {fileID: 11400000, guid: a971933d931d6cb48acd980ff06f23cb, type: 2}
+    starter: 0
+    reserveCapacity: 0
+    throwable: 0
+    armorTier: 1
+    helmet: 0
+  - id: sniper
+    title: Long Complaint Sniper
+    description: Permanent ownership; one loaded magazine included. Spare ammunition sold separately. Handling unchanged.
+    category: 0
+    price: 2000
+    quantity: 1
+    weapon: {fileID: 11400000, guid: 3338ea8cfe0f12f4bbcabd3022ab0651, type: 2}
+    starter: 0
+    reserveCapacity: 30
+    throwable: 0
+    armorTier: 1
+    helmet: 0
+  - id: sniper-ammo
+    title: Long Complaint Sniper / 5 rounds
+    description: One magazine of ammunition for Long Complaint Sniper only. Requires ownership and room for the whole pack.
+    category: 1
+    price: 50
+    quantity: 5
+    weapon: {fileID: 11400000, guid: 3338ea8cfe0f12f4bbcabd3022ab0651, type: 2}
+    starter: 0
+    reserveCapacity: 0
+    throwable: 0
+    armorTier: 1
+    helmet: 0
+  primaryId: pistol
   meleeId: baton
-  startingMoney: 1000
+  startingMoney: 100
+  developmentPlaytestCredits: 1
+  playtestWalletDiagnostics: 1
+  completionReward: 250
+  failureWalletFraction: 0.25
+  failurePayoutCap: 50
+  basicAllowanceMagazines: 5
   initialAmmo: 108
   ammoCapacity: 432
   tapeCapacity: 200
   armorCapacity: 60
   armorAbsorption: 0.65
+  lightBody:
+    capacity: 60
+    absorption: 0.65
+    reloadMultiplier: 1.04
+    reservePenalty: 0
+    grenadePenalty: 0
+  heavyBody:
+    capacity: 90
+    absorption: 0.75
+    reloadMultiplier: 1.18
+    reservePenalty: 36
+    grenadePenalty: 1
+  lightHelmet:
+    capacity: 20
+    absorption: 0.45
+    reloadMultiplier: 1.02
+    reservePenalty: 0
+    grenadePenalty: 0
+  heavyHelmet:
+    capacity: 35
+    absorption: 0.65
+    reloadMultiplier: 1.08
+    reservePenalty: 18
+    grenadePenalty: 0

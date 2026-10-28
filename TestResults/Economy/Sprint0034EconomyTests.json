@@ -1,0 +1,105 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 4.92,
+      "summary": {
+        "total": 11,
+        "passed": 11,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0034EconomyTests.AllExistingArsenalCanBePurchasedEquippedAndReloadedFromDiskWithoutDuplicateCharges",
+          "Status": "Passed",
+          "Duration": 0.9793119,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0034EconomyTests.ArmorOwnershipSelectionAndDamagePersistWithoutFreeRepairs",
+          "Status": "Passed",
+          "Duration": 0.1154284,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0034EconomyTests.BackgroundAndPauseSecureUnusedSuppliesThenResumeReservesBeforePlay",
+          "Status": "Passed",
+          "Duration": 0.8725967,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0034EconomyTests.CompletionReturnsUnusedStockPaysOnceAndAllowsReplayAndShopping",
+          "Status": "Passed",
+          "Duration": 1.0646572,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0034EconomyTests.ConsumableCapsAndFailurePayoutNeverCreateMoneyOrFreeInjections",
+          "Status": "Passed",
+          "Duration": 0.0752553,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0034EconomyTests.ExactAmmoPackFitAndOwnershipAreRequiredWithoutOvercharging",
+          "Status": "Passed",
+          "Duration": 0.0415437,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0034EconomyTests.ExistingAmmoSupplyUsesEquippedWeaponCapacityAndLeavesOverflowInBox",
+          "Status": "Passed",
+          "Duration": 0.7437374,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0034EconomyTests.ExistingVersionOneProfileRetainsBankedCashOwnedCarbineAmmoAndDamagedArmor",
+          "Status": "Passed",
+          "Duration": 0.0551863,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0034EconomyTests.FailedAtomicPurchasesDeploymentAndSettlementRollBackMemoryAndDisk",
+          "Status": "Passed",
+          "Duration": 0.05842,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0034EconomyTests.ForcedInterruptionCannotRestoreSpentInventoryOrDuplicateWalletPayouts",
+          "Status": "Passed",
+          "Duration": 0.757878,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0034EconomyTests.ZeroMoneyStillProvidesFiveBasicMagazinesWithoutFreePremiumRefills",
+          "Status": "Passed",
+          "Duration": 0.0500927,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

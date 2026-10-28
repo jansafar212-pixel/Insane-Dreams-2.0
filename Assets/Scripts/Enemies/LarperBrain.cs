@@ -28,16 +28,25 @@ namespace InsaneDreams.Enemies
         private bool pursuitAllowsJump = true;
         private bool pursuitIsRetreat;
         private EnemyCombat combat;
-        [SerializeField,Min(.3f)] private float stuckSeconds=.9f;
+        [SerializeField,Min(.3f)] private float stuckSeconds=1.8f;
+        [SerializeField,Min(.1f)] private float stuckRecoveryPause=.6f;
+        [SerializeField,Min(.5f)] private float stuckRetrySeconds=3;
+        private float recoveryUntil,nextRecovery;
+        public bool IsRecovering=>Time.time<recoveryUntil;
+        public int StuckRecoveries { get; private set; }
         [SerializeField,Min(.1f)] private float obstacleJumpCooldown=1.2f;
         private float progressAt,nextObstacleJump,progressX;
+        private float hopBackoffUntil,hopBackoffDirection,nextHopBackoff;
+        private Collider2D failedHop;private int hopBackoffs;
         private bool watchingProgress;
         public event System.Action ReplanRequested;
-        private void ObserveProgress()
+        private bool ObserveProgress()
         {
-            if(!motor.IsGrounded){watchingProgress=false;return;}
+            if(!motor.IsGrounded){watchingProgress=false;return false;}
             if(!watchingProgress||Mathf.Abs(body.position.x-progressX)>.12f){watchingProgress=true;progressX=body.position.x;progressAt=Time.time;}
-            else if(Time.time-progressAt>=stuckSeconds){progressAt=Time.time;ReplanRequested?.Invoke();}
+            else if(Time.time-progressAt>=stuckSeconds&&Time.time>=nextRecovery)
+            {watchingProgress=false;recoveryUntil=Time.time+stuckRecoveryPause;nextRecovery=Time.time+stuckRetrySeconds;StuckRecoveries++;ReplanRequested?.Invoke();return true;}
+            return false;
         }
         [SerializeField, Min(.1f)] private float retreatHopHeight = 1.6f;
         [SerializeField, Min(.1f)] private float retreatHopWidth = 1.8f;
@@ -50,7 +59,7 @@ namespace InsaneDreams.Enemies
             int count=Physics2D.Raycast(origin,forward,filter,probeHits,distance);
             return count>0?probeHits[0]:default;
         }
-        public void SetPursuit(float input, bool allowJump = true, bool plannedRetreat = false) { pursuing = true; pursuitInput = Mathf.Clamp(input, -1, 1); pursuitAllowsJump = allowJump; pursuitIsRetreat = plannedRetreat; }
+        public void SetPursuit(float input, bool allowJump = true, bool plannedRetreat = false) { if(Mathf.Sign(input)!=Mathf.Sign(pursuitInput)||Mathf.Abs(input)<.01f)watchingProgress=false;pursuing = true; pursuitInput = Mathf.Clamp(input, -1, 1); pursuitAllowsJump = allowJump; pursuitIsRetreat = plannedRetreat; }
         public void ClearPursuit() { pursuing = false;watchingProgress=false; }
         // Fallback withdrawal walks; a validated cover corridor may use low hops.
         public bool CanWithdraw(float sign, bool allowHop = false)
@@ -115,7 +124,7 @@ namespace InsaneDreams.Enemies
             motor = GetComponent<PlayerMotor2D>(); body = GetComponent<Rigidbody2D>(); box = GetComponent<BoxCollider2D>();combat=GetComponent<EnemyCombat>();
             originX = body.position.x;
         }
-        public void Configure(EnemyArchetype value) { archetype = value; originX = body.position.x; direction = 1; pauseUntil = 0; }
+        public void Configure(EnemyArchetype value) { archetype = value; originX = body.position.x; direction = 1; pauseUntil = recoveryUntil = nextRecovery = 0;watchingProgress=false; }
         private void FixedUpdate()
         {
             if (pursuing) { Pursue(); return; }
@@ -133,7 +142,7 @@ namespace InsaneDreams.Enemies
             float halfWidth = box.bounds.extents.x, halfHeight = box.bounds.extents.y;
             Vector2 forward = Vector2.right * direction;
             Vector2 nose = body.position + forward * (halfWidth + .05f);
-            bool wall = Physics2D.Raycast(nose, forward, wallProbe, surfaces);
+            var obstacle = Physics2D.Raycast(nose, forward, wallProbe, surfaces);bool wall=obstacle;
             Vector2 aheadFoot = nose + forward * ledgeProbe + Vector2.down * (halfHeight - .1f);
             bool floorAhead = Physics2D.Raycast(aheadFoot, Vector2.down, .5f, surfaces);
             bool limit = (body.position.x - originX) * direction >= archetype.PatrolHalfWidth;
@@ -141,9 +150,13 @@ namespace InsaneDreams.Enemies
             float landingX = body.position.x + direction * jumpLandingDistance;
             bool safeLanding = Mathf.Abs(landingX - originX) <= archetype.PatrolHalfWidth &&
                 Physics2D.Raycast(new Vector2(landingX, aheadFoot.y), Vector2.down, .7f, surfaces);
-            if (!limit && archetype.Allows(MovementCapabilities.Jump) && headClear && (wall || !floorAhead && safeLanding))
+            if (!limit && archetype.Allows(MovementCapabilities.Jump) && headClear && (wall || !floorAhead && safeLanding)&&Time.time>=nextObstacleJump)
             {
-                motor.SetMoveInput(direction * archetype.MoveInput); motor.RequestJump(); state = LocomotionState.Jumping; return;
+                nextObstacleJump=Time.time+obstacleJumpCooldown;
+                // Patrol must validate the same full-body arc as pursuit. A high
+                // head ray alone misses low ceilings and causes repeated bad hops.
+                if((!wall||RetreatHopSafe(obstacle.collider,direction))&&HopArcClear(direction*archetype.MoveInput))
+                {motor.SetMoveInput(direction * archetype.MoveInput); motor.RequestJump(); state = LocomotionState.Jumping; return;}
             }
             if (limit || wall || !floorAhead && !archetype.Allows(MovementCapabilities.Drop))
             {
@@ -156,7 +169,8 @@ namespace InsaneDreams.Enemies
             if (archetype == null || archetype.Allows(MovementCapabilities.Stationary) || !archetype.Allows(MovementCapabilities.Walk))
             { Stop(LocomotionState.Stationary); return; }
             if (Mathf.Abs(pursuitInput) < .01f) { watchingProgress=false;Stop(LocomotionState.Stationary); return; }
-            ObserveProgress();
+            if(motor.IsGrounded&&Time.time<hopBackoffUntil){motor.SetMoveInput(hopBackoffDirection*archetype.MoveInput);state=LocomotionState.Walking;return;}
+            if(IsRecovering||ObserveProgress()){Stop(LocomotionState.Blocked);return;}
             if (Time.time < pauseUntil) { Stop(LocomotionState.Blocked); return; }
             direction = Mathf.Sign(pursuitInput);
             // A committed grounded hop must keep horizontal drive while passing the
@@ -172,8 +186,19 @@ namespace InsaneDreams.Enemies
             if (pursuitAllowsJump && wall && headClear && Time.time>=nextObstacleJump && archetype.Allows(MovementCapabilities.Jump))
             {
                 nextObstacleJump=Time.time+obstacleJumpCooldown;
-                if(RetreatHopSafe(wallHit.collider,direction)&&HopArcClear())
-                {motor.SetMoveInput(pursuitInput*archetype.MoveInput);motor.RequestJump();state=LocomotionState.Jumping;return;}
+                if(RetreatHopSafe(wallHit.collider,direction))
+                {
+                    if(HopArcClear(pursuitInput*archetype.MoveInput)){failedHop=null;hopBackoffs=0;motor.SetMoveInput(pursuitInput*archetype.MoveInput);motor.RequestJump();state=LocomotionState.Jumping;return;}
+                    // A close box edge may need a little run-up; use the existing
+                    // safe-floor check, then replan instead of an infinite hop loop.
+                    if(Time.time>=nextHopBackoff&&combat!=null&&GetComponent<SamuraiCombat>()==null)
+                    {
+                        if(failedHop!=wallHit.collider){failedHop=wallHit.collider;hopBackoffs=0;}
+                        nextHopBackoff=Time.time+3;
+                        if(hopBackoffs++<2&&CanWithdraw(-direction)&&combat.CanAdvance(-direction)){hopBackoffDirection=-direction;hopBackoffUntil=Time.time+.18f;motor.SetMoveInput(-pursuitInput*archetype.MoveInput);return;}
+                        ReplanRequested?.Invoke();
+                    }
+                }
             }
             if (wall || motor.IsGrounded && !floor)
             { pauseUntil = Time.time + archetype.BlockedPause; Stop(LocomotionState.Blocked); return; }
@@ -181,7 +206,7 @@ namespace InsaneDreams.Enemies
             motor.SetMoveInput(pursuitInput * archetype.MoveInput);
         }
         private void Stop(LocomotionState value) { state = value; motor.SetMoveInput(0); }
-        private bool HopArcClear()
+        private bool HopArcClear(float input)
         {
             float g=-Physics2D.gravity.y*body.gravityScale;if(g<=0)return false;
             float v=motor.JumpSpeed-g*Time.fixedDeltaTime*.5f,duration=2*v/g;
@@ -189,13 +214,13 @@ namespace InsaneDreams.Enemies
             for(int step=1;step<=16;step++)
             {
                 float t=duration*step/17;
-                var p=(Vector2)box.bounds.center+new Vector2(pursuitInput*archetype.MoveInput*motor.MoveSpeed*t,v*t-.5f*g*t*t);
+                var p=(Vector2)box.bounds.center+new Vector2(input*motor.MoveSpeed*t,v*t-.5f*g*t*t);
                 int n=Physics2D.OverlapBox(p,(Vector2)box.bounds.size-Vector2.one*.06f,0,filter,clearanceHits);
                 if(n==clearanceHits.Length)return false;
                 for(int i=0;i<n;i++)if(!clearanceHits[i].transform.IsChildOf(transform))return false;
             }
             return true;
         }
-        private void OnDisable() { pursuing = watchingProgress = false; if (motor != null) motor.SetMoveInput(0); }
+        private void OnDisable() { pursuing = watchingProgress = false;hopBackoffUntil=nextHopBackoff=0;failedHop=null;hopBackoffs=0;if (motor != null) motor.SetMoveInput(0); }
     }
 }

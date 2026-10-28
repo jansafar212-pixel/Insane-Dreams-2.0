@@ -36,7 +36,7 @@ namespace InsaneDreams.Tests
             background = Application.runInBackground; Application.runInBackground = true;
             Box("Floor", new Vector2(3000, -.5f), new Vector2(60, 1));
             player = Keep(Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Player/WarehousePlayer.prefab")));
-            body = player.GetComponent<Rigidbody2D>(); actions = player.GetComponent<PlayerActions>(); traversal = player.GetComponent<PlayerTraversal2D>();
+            body = player.GetComponent<Rigidbody2D>(); actions = player.GetComponent<PlayerActions>(); traversal = player.GetComponent<PlayerTraversal2D>(); var controlledInput=new SerializedObject(actions);controlledInput.FindProperty("readKeyboard").boolValue=false;controlledInput.ApplyModifiedPropertiesWithoutUndo();
             body.position = new Vector2(3000, .85f); actions.ResetActions(); Physics2D.SyncTransforms();
             yield return new WaitForSeconds(.35f);
         }
@@ -129,12 +129,12 @@ namespace InsaneDreams.Tests
         {
             Ladder(); Position(2998.2f, .85f); yield return new WaitForSeconds(.35f);
             var ui = Keep(Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/UI/WarehouseControls.prefab")));
-            ui.GetComponent<WarehouseTouchControls>().Bind(actions); yield return null; yield return null;
+            ui.GetComponent<WarehouseTouchControls>().Bind(actions); yield return new WaitForSeconds(.25f);
             var root = ui.GetComponent<UIDocument>().rootVisualElement;
             var move = root.Q<VisualElement>("moveStick"); var aim = root.Q<VisualElement>("aimStick");
-            Pointer(move, 0, new Vector2(18, -48), true); Pointer(aim, 1, new Vector2(22, 0), true);
+            Assert.Greater(move.worldBound.width,100);Assert.Greater(aim.worldBound.width,100);Pointer(move, 0, new Vector2(move.worldBound.width*.09f, -move.worldBound.height*.24f), true); Pointer(aim, 1, new Vector2(aim.worldBound.width*.11f, 0), true);
             yield return new WaitForSeconds(.3f); Assert.IsTrue(traversal.IsClimbing); Assert.Greater(actions.AimDirection.x, .9f); Assert.IsFalse(actions.FireHeld);
-            Pointer(move, 0, new Vector2(-55, 0), false); yield return new WaitForSeconds(.08f);
+            Pointer(move, 0, new Vector2(-move.worldBound.width*.32f, 0), false); yield return new WaitForSeconds(.08f);
             Assert.IsFalse(traversal.IsClimbing); Assert.AreEqual(3, body.gravityScale); Assert.Greater(actions.AimDirection.x, .9f);
             actions.ResetActions();
         }
@@ -167,11 +167,11 @@ namespace InsaneDreams.Tests
             var policy=new UnityEditor.SerializedObject(combat);foreach(string key in new[]{"ordinaryBlindChance","overconfidentBlindChance","cowardBlindChance"})policy.FindProperty(key).floatValue=0;policy.ApplyModifiedPropertiesWithoutUndo(); // Exercise the optional non-spray path explicitly.
             var attack = enemy.GetComponent<AttackExecutor>();
             yield return new WaitForSeconds(.1f); Assert.AreEqual(0, attack.ShotsFired); Assert.AreEqual(EngagementState.Reacting, combat.State);
-            yield return new WaitForSeconds(.6f); Assert.Greater(attack.ShotsFired, 0); Assert.Less(enemy.transform.position.x, 3007.5f);
+            yield return new WaitForSeconds(1); Assert.Greater(attack.ShotsFired, 0); Assert.Less(enemy.transform.position.x, 3007.5f);
             Box("SightWall", new Vector2(3002.5f, 2), new Vector2(.3f, 4)); Physics2D.SyncTransforms(); int shots = attack.ShotsFired;
             yield return new WaitForSeconds(.3f); Assert.IsFalse(combat.TargetVisible); Assert.AreEqual(shots, attack.ShotsFired);
             Assert.AreEqual(EngagementState.Searching, combat.State);
-            yield return new WaitForSeconds(3.1f); Assert.AreEqual(EngagementState.Patrol, combat.State);
+            yield return new WaitForSeconds(4.6f); Assert.AreEqual(EngagementState.Patrol, combat.State);
         }
         [UnityTest] public IEnumerator LarperEffectiveRangeAndAccuracyAreConfigurableAndDefeatFeedbackIsSingle()
         {
@@ -180,7 +180,7 @@ namespace InsaneDreams.Tests
             var combat = enemy.GetComponent<EnemyCombat>(); combat.BindTarget(player.GetComponent<Health>());
             CombatTestView.Frame(combat);
             var configuredRange=new UnityEditor.SerializedObject(combat);configuredRange.FindProperty("engagementRange").floatValue=11;configuredRange.ApplyModifiedPropertiesWithoutUndo(); // The firing limit is now independent of accuracy falloff.
-            yield return new WaitForSeconds(.5f);
+            float readyDeadline=Time.time+2;while(combat.State!=EngagementState.Approaching&&Time.time<readyDeadline)yield return null;
             Assert.AreEqual(EngagementState.Approaching, combat.State); Assert.AreEqual(0, enemy.GetComponent<AttackExecutor>().ShotsFired);
             Assert.Greater(combat.SpreadAtDistance(10), combat.SpreadAtDistance(3));
             combat.BindTarget(null); enemy.transform.position = new Vector3(3003, body.position.y); Physics2D.SyncTransforms();

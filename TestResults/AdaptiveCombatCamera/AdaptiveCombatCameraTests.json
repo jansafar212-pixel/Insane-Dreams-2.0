@@ -1,0 +1,91 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 28.81,
+      "summary": {
+        "total": 9,
+        "passed": 9,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "InsaneDreams.Tests.AdaptiveCombatCameraTests.AimOverridesRetreatBothWaysAndDoesNotRequireFiring",
+          "Status": "Passed",
+          "Duration": 1.9383088,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.AdaptiveCombatCameraTests.BoundsEaseWithoutLeavingLevelAtPhoneAspects",
+          "Status": "Passed",
+          "Duration": 11.4088757,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.AdaptiveCombatCameraTests.CloseSamuraiContractsCompositionWithoutTargetLockOrJump",
+          "Status": "Passed",
+          "Duration": 2.590198,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.AdaptiveCombatCameraTests.DeadZoneAndRapidReversalsCannotChatterOrStepTheCamera",
+          "Status": "Passed",
+          "Duration": 2.6802686,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.AdaptiveCombatCameraTests.DeterministicRatesAndSteadyStateAllocationsRemainBounded",
+          "Status": "Passed",
+          "Duration": 0.2294551,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.AdaptiveCombatCameraTests.LargeFallAndParachuteChangesKeepLandingAreaAndPlayerVisible",
+          "Status": "Passed",
+          "Duration": 4.6476542,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.AdaptiveCombatCameraTests.MovementRespondsWhileCameraTransitionIsStillInProgress",
+          "Status": "Passed",
+          "Duration": 0.3587221,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.AdaptiveCombatCameraTests.ReleasedAimKeepsCombatMemoryThenReturnsToMovement",
+          "Status": "Passed",
+          "Duration": 2.8393877,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.AdaptiveCombatCameraTests.VerticalAimBiasRemainsBounded",
+          "Status": "Passed",
+          "Duration": 2.0208887,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

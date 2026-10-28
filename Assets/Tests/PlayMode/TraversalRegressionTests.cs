@@ -78,7 +78,11 @@ namespace InsaneDreams.Tests
             var landing = Keep(new GameObject("TopLanding")); landing.transform.position = new Vector3(1002.5f, 2.9f);
             landing.AddComponent<BoxCollider2D>().size = new Vector2(3, .3f);
             var ladder = Ladder(); actions.SetTouchMove(new Vector2(.7f, .7f));
-            yield return new WaitForSeconds(.15f); Assert.IsFalse(traversal.IsClimbing); Assert.Greater(body.linearVelocity.y, 3);
+            // Observe the rising arc, rather than requiring upward velocity after
+            // the character has already hit the underside of this real landing.
+            float rising=0,end=Time.time+.15f;
+            while(Time.time<end){rising=Mathf.Max(rising,body.linearVelocity.y);yield return new WaitForFixedUpdate();}
+            Assert.IsFalse(traversal.IsClimbing);Assert.Greater(rising,3);Assert.AreEqual(1,motor.JumpsUsed);
             actions.ResetActions(); traversal.ResetTraversal(); body.position = new Vector2(1000, 3.7f); body.linearVelocity = Vector2.zero;
             Physics2D.SyncTransforms(); yield return new WaitForSeconds(.35f);
             actions.SetTouchMove(Vector2.up); yield return new WaitForSeconds(.9f); // Includes the new smooth horizontal exit.
@@ -231,7 +235,9 @@ namespace InsaneDreams.Tests
             var second = root.Q<Button>("slot2"); Down(second, 5, second.worldBound.center); Up(second, 5);
             yield return null; Assert.AreEqual(InsaneDreams.Inventory.EquipmentSlot.Firearm2, loadout.SelectedSlot);
             actions.SelectWeapon(InsaneDreams.Inventory.EquipmentSlot.Melee); yield return new WaitForSeconds(.25f);
-            StringAssert.Contains("unlimited", root.Q<Label>("reserveValue").text);
+            Assert.IsNull(loadout.SelectedWeapon,"Player tool slot is now finite throwables; enemy melee remains available");
+            Assert.AreEqual("0/5",root.Q<Label>("ammoValue").text);
+            StringAssert.Contains("RELEASE TO THROW", root.Q<Label>("reserveValue").text);
             actions.SelectWeapon(InsaneDreams.Inventory.EquipmentSlot.Firearm1); yield return new WaitForSeconds(.25f);
             Assert.AreEqual(3, loadout.SelectedWeapon.MagazineAmmo); Assert.AreEqual($"3/{loadout.SelectedWeapon.Definition.MagazineCapacity}", root.Q<Label>("ammoValue").text);
         }

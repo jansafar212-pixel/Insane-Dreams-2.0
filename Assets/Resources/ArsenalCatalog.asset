@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96f1227bbfb272c43b9cf592b1aab874, type: 3}
+  m_Name: ArsenalCatalog
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Inventory.ArsenalCatalog
+  weapons:
+  - {fileID: 11400000, guid: 2d59804bf74db5842a92644e840bc441, type: 2}
+  - {fileID: 11400000, guid: 025459cc663dbb94fa9f8e2280f30802, type: 2}
+  - {fileID: 11400000, guid: 5ae8317f519c0264a9291e77c85028c5, type: 2}
+  - {fileID: 11400000, guid: a19415bc42a5c1749983394fafeb429d, type: 2}
+  - {fileID: 11400000, guid: 8a43739a8731998499cf7e50b5f86642, type: 2}
+  - {fileID: 11400000, guid: a971933d931d6cb48acd980ff06f23cb, type: 2}
+  - {fileID: 11400000, guid: 3338ea8cfe0f12f4bbcabd3022ab0651, type: 2}
+  - {fileID: 11400000, guid: 67c88bc28be6401419eaffaf19d822a0, type: 2}

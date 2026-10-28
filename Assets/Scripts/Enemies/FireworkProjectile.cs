@@ -16,6 +16,17 @@ namespace InsaneDreams.Enemies
         [SerializeField] private Sprite flashSprite,glowSprite;
         [SerializeField] private AudioClip burstSound;
         [SerializeField] private LayerMask geometry=1;
+        [Header("Radial damage (mission opt-in)")]
+        [SerializeField] private bool useRadialFalloff;
+        [SerializeField] private AnimationCurve damageFalloff=new AnimationCurve(new Keyframe(0,1),new Keyframe(.25f,.85f),new Keyframe(.5f,.5f),new Keyframe(.75f,.2f),new Keyframe(1,0));
+        [SerializeField,Min(0)] private float minimumEffectiveDamage;
+        public float DamageAtDistance(float distance)
+        {
+            if(float.IsNaN(distance)||float.IsInfinity(distance)||distance<0||radius<=0||distance>=radius)return 0;
+            float normalized=Mathf.Clamp01(distance/radius);
+            float amount=damage*(useRadialFalloff?Mathf.Clamp01(damageFalloff.Evaluate(normalized)):1-.5f*normalized);
+            return amount<minimumEffectiveDamage?0:amount;
+        }
         private readonly Collider2D[] overlaps=new Collider2D[32];
         private readonly Health[] affected=new Health[32];
         private readonly RaycastHit2D[] hits=new RaycastHit2D[8];
@@ -120,6 +131,7 @@ namespace InsaneDreams.Enemies
             HideEffects();foreach(var r in sparks){r.enabled=true;r.transform.position=(Vector3)end+Vector3.back*.2f;r.color=tint;}
             flash.enabled=true;flash.transform.position=(Vector3)end+Vector3.back*.25f;flash.transform.localScale=Vector3.one*.45f;flash.color=new Color(1,1,.9f,.85f);
             if(burstSound!=null)sound.PlayOneShot(burstSound);
+            CombatNoise.Report(new CombatNoiseEvent(source,CombatTeam.Enemy,CombatNoiseKind.Explosion,end,end,1));
             var filter=new ContactFilter2D{useTriggers=false};filter.SetLayerMask(~0);
             int count=Physics2D.OverlapCircle(end,radius,filter,overlaps);
             if(count==overlaps.Length)return; // Saturated query fails closed.
@@ -129,12 +141,13 @@ namespace InsaneDreams.Enemies
                 var hp=overlaps[i].GetComponentInParent<Health>();if(hp==null||hp.IsDefeated)continue;
                 bool duplicate=false;for(int j=0;j<LastAffected;j++)if(affected[j]==hp)duplicate=true;if(duplicate)continue;
                 Vector2 point=overlaps[i].bounds.center;
-                if(CombatVisibility2D.IsBlocked(end,point,geometry,hits,source!=null?source.transform:null,hp.transform))continue;
+                if(CombatVisibility2D.IsBlocked(end,point,geometry,hits,source!=null?source.transform:null,hp.transform,false))continue;
                 var direction=point-end;float distance=direction.magnitude;if(direction.sqrMagnitude<.01f)direction=Vector2.up;
+                float radialDamage=DamageAtDistance(distance);if(radialDamage<=0)continue;
                 float weight=1-.5f*Mathf.Clamp01(distance/radius);
                 var impact=new PhysicalImpact(point,direction,impulse*weight,hp.GetComponent<Rigidbody2D>());
                 bool self=hp.gameObject==source;
-                if(hp.ApplyDamage(new DamageInfo(damage*weight,CombatTeam.Enemy,self?null:source,impact,true)))
+                if(hp.ApplyDamage(new DamageInfo(radialDamage,CombatTeam.Enemy,self?null:source,impact,true,DamageKind.Explosion)))
                 {
                     affected[LastAffected++]=hp;
                     if(hp.Team==CombatTeam.Enemy&&!hp.IsDefeated)

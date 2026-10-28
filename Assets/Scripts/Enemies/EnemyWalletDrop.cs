@@ -27,6 +27,7 @@ namespace InsaneDreams.Enemies
             wallet.Initialize(rewardId,Random.Range(minimum,maximum+1));
         }
         public void ResetDrop(){if(wallet!=null)Destroy(wallet.gameObject);wallet=null;dropped=false;}
-        private void OnDestroy(){if(wallet!=null)Destroy(wallet.gameObject);}
+        // A defeated actor may be culled before its reward is collected. The pickup
+        // belongs to the scene; actor cleanup must not silently erase earned money.
     }
 }

@@ -5,6 +5,7 @@ using InsaneDreams.Combat;
 using InsaneDreams.Enemies;
 using InsaneDreams.Prototype;
 using NUnit.Framework;
+using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,18 +14,22 @@ namespace InsaneDreams.Tests
 {
     public sealed class CameraSamuraiHotfixTests
     {
-        private bool background;private SamuraiCombat samurai;private EnemyCombat combat;private Health target;private Rigidbody2D body,playerBody;private Camera camera;
+        private bool background;private SamuraiCombat samurai;private EnemyCombat combat;private Health target;private Rigidbody2D body,playerBody;private Camera camera;private Scene fixture,previousScene;
         [UnitySetUp] public IEnumerator Setup()
         {
             background=Application.runInBackground;Application.runInBackground=true;
-            yield return EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Scenes/Warehouse_Demo.unity",new LoadSceneParameters(LoadSceneMode.Single));yield return new WaitForSeconds(.2f);
-            var p=Object.FindFirstObjectByType<InsaneDreams.Missions.WarehouseMission>().Player;p.ResetActions();p.enabled=false;target=p.GetComponent<Health>();target.ProtectFor(120);playerBody=p.GetComponent<Rigidbody2D>();playerBody.constraints=RigidbodyConstraints2D.FreezeAll;
-            samurai=Object.FindObjectsByType<SamuraiCombat>().First();combat=samurai.GetComponent<EnemyCombat>();body=samurai.GetComponent<Rigidbody2D>();
-            foreach(var e in Object.FindObjectsByType<EnemyCombat>()){e.enabled=false;e.GetComponent<LarperBrain>().enabled=false;if(e!=combat)e.gameObject.SetActive(false);}
+            // The old warehouse coordinates were removed by the Level1 redesign.
+            // Use current production prefabs in an unsaved, isolated geometry fixture.
+            previousScene=SceneManager.GetActiveScene();fixture=SceneManager.CreateScene("SamuraiNavigationRegression");SceneManager.SetActiveScene(fixture);yield return null;
+            Solid("Floor",new Vector2(15,-.5f),new Vector2(80,1));
+            var p=Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Player/WarehousePlayer.prefab")).GetComponent<InsaneDreams.Input.PlayerActions>();p.ResetActions();p.enabled=false;target=p.GetComponent<Health>();target.ProtectFor(120);playerBody=p.GetComponent<Rigidbody2D>();playerBody.constraints=RigidbodyConstraints2D.FreezeAll;
+            samurai=Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Data/FirstOperation/OperationSamurai.prefab")).GetComponent<SamuraiCombat>();combat=samurai.GetComponent<EnemyCombat>();body=samurai.GetComponent<Rigidbody2D>();combat.enabled=false;samurai.GetComponent<LarperBrain>().enabled=false;
             body.position=new Vector2(23,.53f);body.linearVelocity=Vector2.zero;playerBody.position=new Vector2(25.5f,.85f);
             camera=new GameObject("HotfixGameplayCamera").AddComponent<Camera>();camera.orthographic=true;camera.orthographicSize=8;camera.transform.position=new Vector3(23,4,-10);combat.BindGameplayCamera(camera);combat.BindTarget(target);Physics2D.SyncTransforms();yield return new WaitForSeconds(.2f);
         }
-        [UnityTearDown] public IEnumerator Cleanup(){if(camera!=null)Object.Destroy(camera.gameObject);Application.runInBackground=background;yield return null;}
+        [UnityTearDown] public IEnumerator Cleanup(){if(previousScene.IsValid()&&previousScene.isLoaded)SceneManager.SetActiveScene(previousScene);if(fixture.IsValid()&&fixture.isLoaded)yield return SceneManager.UnloadSceneAsync(fixture);Application.runInBackground=background;yield return null;}
+        static void Solid(string name,Vector2 position,Vector2 size){var go=new GameObject(name);go.transform.position=position;go.AddComponent<BoxCollider2D>().size=size;}
+        static void ElevatedStep(){Solid("LaunchDeck",new Vector2(.5f,5.2f),new Vector2(3,.4f));Solid("TargetDeck",new Vector2(4.3f,7.1f),new Vector2(3,.4f));Physics2D.SyncTransforms();}
         private void Run(){samurai.GetComponent<LarperBrain>().enabled=true;combat.enabled=true;combat.SetEncounterEnabled(true);}
         [UnityTest] public IEnumerator SmallBodyDetectionWorksAtDifferentElevationsAndSolidWallsOcclude()
         {
@@ -38,7 +43,7 @@ namespace InsaneDreams.Tests
         [UnityTest] public IEnumerator VisibleEntryStartsPursuitAndCameraExitDoesNotClearAggro()
         {
             camera.transform.position=new Vector3(-20,4,-10);Run();float x=body.position.x;yield return new WaitForSeconds(.4f);Assert.Less(Mathf.Abs(body.position.x-x),.1f,"Unseen Samurai must not begin an aggressive approach");
-            camera.transform.position=new Vector3(23,4,-10);yield return new WaitForSeconds(.25f);Assert.Greater(Mathf.Abs(body.position.x-x),.2f,"Visible clear opportunity should trigger immediate chase");Assert.IsTrue(combat.HasEngaged);
+            camera.transform.position=new Vector3(23,4,-10);yield return new WaitForSeconds(.12f);Assert.Less(Mathf.Abs(body.position.x-x),.08f,"Sprint0032 preserves a brief recognition delay");yield return new WaitForSeconds(.5f);Assert.Greater(Mathf.Abs(body.position.x-x),.2f,"Recognized clear opportunity should trigger aggressive chase");Assert.IsTrue(combat.HasEngaged);
             camera.transform.position=new Vector3(-20,4,-10);int strikes=samurai.Strikes;yield return new WaitForSeconds(.7f);Assert.AreEqual(strikes,samurai.Strikes,"No offscreen attack initiation");
             body.constraints=RigidbodyConstraints2D.FreezeAll;float away=Mathf.Sign(playerBody.position.x-body.position.x);var wall=new GameObject("HotfixMemoryWall");wall.transform.position=new Vector2((body.position.x+playerBody.position.x)*.5f,3);wall.AddComponent<BoxCollider2D>().size=new Vector2(.1f,6);Physics2D.SyncTransforms();
             yield return new WaitForSeconds(.2f);Assert.IsFalse(combat.TargetVisible,$"body={body.position} player={playerBody.position} wall={wall.transform.position}");Vector2 memory=combat.LastKnownPosition;playerBody.position+=Vector2.right*away;Physics2D.SyncTransforms();
@@ -47,6 +52,7 @@ namespace InsaneDreams.Tests
         }
         [UnityTest] public IEnumerator AutonomousSmallSamuraiCrossesActualCoverAndKeepsMeleeTelegraph()
         {
+            Solid("RepresentativeCrate",new Vector2(7.5f,.5f),new Vector2(1.5f,1));
             body.position=new Vector2(5.5f,.53f);playerBody.position=new Vector2(10,.85f);camera.transform.position=new Vector3(8,4,-10);Physics2D.SyncTransforms();Run();
             float end=Time.time+18;var trace=new System.Text.StringBuilder();float sample=0;
             while(Time.time<end&&samurai.Strikes==0)
@@ -55,6 +61,7 @@ namespace InsaneDreams.Tests
         }
         [UnityTest] public IEnumerator RemovedObstructionAllowsReplanningInsteadOfPermanentStationaryFailure()
         {
+            ElevatedStep();
             body.position=new Vector2(1.5f,5.93f);playerBody.position=new Vector2(4.3f,8.15f);Physics2D.SyncTransforms();yield return new WaitForSeconds(.8f);
             var brain=samurai.GetComponent<LarperBrain>();brain.DecisionsSuspended=true;brain.enabled=true;
             samurai.Tick(target,target.transform.position,true,true,true);Assert.IsTrue(samurai.PlatformJumpActive);
@@ -66,6 +73,7 @@ namespace InsaneDreams.Tests
         }
         [UnityTest] public IEnumerator AutonomousPursuitReachesElevatedWarehouseStepAfterVisibleAcquisition()
         {
+            ElevatedStep();
             body.position=new Vector2(1.5f,5.93f);playerBody.position=new Vector2(4.3f,8.15f);camera.transform.position=new Vector3(4,9,-10);Physics2D.SyncTransforms();Run();
             float end=Time.time+12;bool saw=false;var trace=new System.Text.StringBuilder();float sample=0;
             while(Time.time<end)
@@ -74,6 +82,7 @@ namespace InsaneDreams.Tests
         }
         [UnityTest] public IEnumerator BriefDecisionGapPreservesCommittedPhysicalFlight()
         {
+            ElevatedStep();
             body.position=new Vector2(1.5f,5.93f);playerBody.position=new Vector2(4.3f,8.15f);Physics2D.SyncTransforms();yield return new WaitForSeconds(.8f);
             var brain=samurai.GetComponent<LarperBrain>();brain.DecisionsSuspended=true;brain.enabled=true;samurai.Tick(target,target.transform.position,true,true,true);Assert.IsTrue(samurai.PlatformJumpActive);
             yield return new WaitForSeconds(.22f);samurai.Tick(target,target.transform.position,true,true,true);Assert.IsTrue(samurai.PlatformJumpActive,"A short gap must not cancel a valid airborne plan");

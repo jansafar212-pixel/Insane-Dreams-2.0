@@ -1,0 +1,311 @@
+{
+    "minX": 136.03163146972656,
+    "maxX": 142.12200927734375,
+    "laser": true,
+    "retreated": true,
+    "crouched": true,
+    "ammo": 5,
+    "shots": 2,
+    "samples": [
+        {
+            "x": 142.12200927734375,
+            "y": 2.318228006362915,
+            "time": 0.0011849403381347656,
+            "state": "Patrol",
+            "cover": "",
+            "visible": false,
+            "crouched": false,
+            "shots": 0
+        },
+        {
+            "x": 141.41156005859375,
+            "y": 2.318228006362915,
+            "time": 0.20118498802185059,
+            "state": "Searching",
+            "cover": "",
+            "visible": false,
+            "crouched": false,
+            "shots": 0
+        },
+        {
+            "x": 140.48748779296875,
+            "y": 2.318228006362915,
+            "time": 0.4011847972869873,
+            "state": "Searching",
+            "cover": "",
+            "visible": false,
+            "crouched": false,
+            "shots": 0
+        },
+        {
+            "x": 139.56341552734375,
+            "y": 2.762911796569824,
+            "time": 0.6011848449707031,
+            "state": "Searching",
+            "cover": "",
+            "visible": false,
+            "crouched": false,
+            "shots": 0
+        },
+        {
+            "x": 138.63934326171875,
+            "y": 4.280011177062988,
+            "time": 0.8011846542358398,
+            "state": "Searching",
+            "cover": "",
+            "visible": true,
+            "crouched": false,
+            "shots": 0
+        },
+        {
+            "x": 137.71527099609375,
+            "y": 4.619911193847656,
+            "time": 1.0011847019195557,
+            "state": "Searching",
+            "cover": "",
+            "visible": true,
+            "crouched": false,
+            "shots": 0
+        },
+        {
+            "x": 136.79119873046875,
+            "y": 3.7826130390167236,
+            "time": 1.2011845111846924,
+            "state": "Searching",
+            "cover": "",
+            "visible": true,
+            "crouched": false,
+            "shots": 0
+        },
+        {
+            "x": 136.06155395507813,
+            "y": 2.314984083175659,
+            "time": 1.401184320449829,
+            "state": "Engaging",
+            "cover": "",
+            "visible": true,
+            "crouched": false,
+            "shots": 0
+        },
+        {
+            "x": 136.06155395507813,
+            "y": 2.314999580383301,
+            "time": 1.601184606552124,
+            "state": "Engaging",
+            "cover": "",
+            "visible": true,
+            "crouched": false,
+            "shots": 0
+        },
+        {
+            "x": 136.06155395507813,
+            "y": 2.314999580383301,
+            "time": 1.8011844158172607,
+            "state": "Engaging",
+            "cover": "",
+            "visible": true,
+            "crouched": false,
+            "shots": 0
+        },
+        {
+            "x": 136.58718872070313,
+            "y": 2.964367389678955,
+            "time": 2.0011842250823975,
+            "state": "Withdrawing",
+            "cover": "OfficerBarricade",
+            "visible": true,
+            "crouched": false,
+            "shots": 1
+        },
+        {
+            "x": 137.29763793945313,
+            "y": 4.3637471199035645,
+            "time": 2.201184034347534,
+            "state": "Withdrawing",
+            "cover": "OfficerBarricade",
+            "visible": true,
+            "crouched": false,
+            "shots": 1
+        },
+        {
+            "x": 138.22171020507813,
+            "y": 4.5859270095825195,
+            "time": 2.401184320449829,
+            "state": "Withdrawing",
+            "cover": "OfficerBarricade",
+            "visible": true,
+            "crouched": false,
+            "shots": 1
+        },
+        {
+            "x": 139.14578247070313,
+            "y": 3.630908966064453,
+            "time": 2.601184129714966,
+            "state": "Withdrawing",
+            "cover": "OfficerBarricade",
+            "visible": true,
+            "crouched": false,
+            "shots": 1
+        },
+        {
+            "x": 140.0358428955078,
+            "y": 2.3149898052215576,
+            "time": 2.8011839389801025,
+            "state": "Searching",
+            "cover": "OfficerBarricade",
+            "visible": true,
+            "crouched": false,
+            "shots": 1
+        },
+        {
+            "x": 140.06024169921875,
+            "y": 2.314999580383301,
+            "time": 3.0011837482452393,
+            "state": "Reacting",
+            "cover": "OfficerBarricade",
+            "visible": false,
+            "crouched": true,
+            "shots": 1
+        },
+        {
+            "x": 140.06024169921875,
+            "y": 2.314999580383301,
+            "time": 3.201184034347534,
+            "state": "Reacting",
+            "cover": "OfficerBarricade",
+            "visible": false,
+            "crouched": true,
+            "shots": 1
+        },
+        {
+            "x": 140.06024169921875,
+            "y": 2.314999580383301,
+            "time": 3.401183843612671,
+            "state": "Reacting",
+            "cover": "OfficerBarricade",
+            "visible": false,
+            "crouched": true,
+            "shots": 1
+        },
+        {
+            "x": 140.06024169921875,
+            "y": 2.314999580383301,
+            "time": 3.6011836528778076,
+            "state": "Reacting",
+            "cover": "OfficerBarricade",
+            "visible": false,
+            "crouched": true,
+            "shots": 1
+        },
+        {
+            "x": 140.06024169921875,
+            "y": 2.314999580383301,
+            "time": 3.8011834621429443,
+            "state": "Reacting",
+            "cover": "OfficerBarricade",
+            "visible": false,
+            "crouched": true,
+            "shots": 1
+        },
+        {
+            "x": 140.06024169921875,
+            "y": 2.314999580383301,
+            "time": 4.00118350982666,
+            "state": "Reacting",
+            "cover": "OfficerBarricade",
+            "visible": false,
+            "crouched": true,
+            "shots": 1
+        },
+        {
+            "x": 140.06024169921875,
+            "y": 2.314999580383301,
+            "time": 4.201183319091797,
+            "state": "Reacting",
+            "cover": "OfficerBarricade",
+            "visible": false,
+            "crouched": true,
+            "shots": 1
+        },
+        {
+            "x": 139.98223876953125,
+            "y": 2.314999580383301,
+            "time": 4.401183128356934,
+            "state": "Searching",
+            "cover": "",
+            "visible": false,
+            "crouched": false,
+            "shots": 1
+        },
+        {
+            "x": 139.2014617919922,
+            "y": 3.6653831005096436,
+            "time": 4.60118293762207,
+            "state": "Searching",
+            "cover": "",
+            "visible": true,
+            "crouched": false,
+            "shots": 1
+        },
+        {
+            "x": 138.3321990966797,
+            "y": 4.593883037567139,
+            "time": 4.801183700561523,
+            "state": "Searching",
+            "cover": "",
+            "visible": true,
+            "crouched": false,
+            "shots": 1
+        },
+        {
+            "x": 137.4081268310547,
+            "y": 4.345183849334717,
+            "time": 5.00118350982666,
+            "state": "Searching",
+            "cover": "",
+            "visible": true,
+            "crouched": false,
+            "shots": 1
+        },
+        {
+            "x": 136.4840545654297,
+            "y": 2.919285774230957,
+            "time": 5.201183319091797,
+            "state": "Searching",
+            "cover": "",
+            "visible": true,
+            "crouched": false,
+            "shots": 1
+        },
+        {
+            "x": 136.03163146972656,
+            "y": 2.3149983882904053,
+            "time": 5.401183128356934,
+            "state": "Engaging",
+            "cover": "",
+            "visible": true,
+            "crouched": false,
+            "shots": 1
+        },
+        {
+            "x": 136.03163146972656,
+            "y": 2.314999580383301,
+            "time": 5.60118293762207,
+            "state": "Engaging",
+            "cover": "",
+            "visible": true,
+            "crouched": false,
+            "shots": 1
+        },
+        {
+            "x": 136.05763244628906,
+            "y": 2.314999580383301,
+            "time": 5.801182746887207,
+            "state": "Withdrawing",
+            "cover": "OfficerBarricade",
+            "visible": true,
+            "crouched": false,
+            "shots": 2
+        }
+    ]
+}

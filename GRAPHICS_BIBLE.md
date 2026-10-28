@@ -107,7 +107,7 @@ separate from current implementation.
 | Player | `Assets/Data/Visuals/HeroRefined.asset`; `Assets/Art/CameraSamuraiHotfix/WorkerCapRefined.asset`, `WorkerShirtRefined.asset`, `WorkerSleeveRefined.asset`, `WorkerTrousersRefined.asset`; `Assets/Prefabs/Player/WarehousePlayer.prefab` | Current prefab dependency and refinement reference; redesigns require artistic/playtest review. `Hero0247.asset` is an earlier recipe, not the current player reference by default. |
 | Samurai | `Assets/Data/Visuals/Samurai0247.asset`; `Assets/Art/Sprint0247/SamuraiHelmet.asset`, `SamuraiCardboard.asset`, `SamuraiArm.asset`, `SamuraiLeg.asset`; `Assets/Prefabs/Enemies/Samurai.prefab` | Implemented redesign with later scale/hitbox refinements; not asserted artistically approved. Earlier high-resolution Sprint0243 art is not the target technique. |
 | Fireworks expert | `Assets/Data/Visuals/Fireworks0248.asset`; `Assets/Art/Sprint0248/CheapHardhat.asset`, `FireworksShirt.asset`, `FireworksSleeve.asset`; `Assets/Art/Sprint0247/FireworksLeg.asset`; `Assets/Prefabs/Enemies/FireworksExpert.prefab` | Current redesign reference; artistic/playtest acceptance pending. |
-| Officer | No Officer-specific sprite, skin or prefab identified in the inspected project | **No established approved reference.** Do not invent approval, alias another character as Officer, or create new art during documentation. Future work must establish the reference explicitly. |
+| Officer | `Assets/Data/FirstOperation/Officer.prefab`, `OfficerSkin.asset`, `OfficerHead.asset`, `OfficerTorso.asset`, `OfficerArm.asset`, `OfficerLeg.asset` in that folder | Sprint 0028 explicitly requested a new Officer. Independently authored blocky cap/uniform, existing Larper dimensions/pivots and articulated rig. **Provisional; awaiting artistic/playtest review**, not retroactive approval of a previously existing Officer. |
 | Menu/HUD/shop | Existing implementation and captures only | Functionality must be preserved; **not fully approved artistic references**. Future overhaul is separate. |
 
 Visual comparisons: `TestResults/HandmadeDetails_Runtime.png`,
@@ -221,3 +221,144 @@ amateur art. Revise an out-of-style new asset; do not redesign the game around i
 
 Documentation establishment changed no game artwork, scenes, UI or gameplay.
 Existing exceptions remain documented rather than silently normalized.
+
+## Current reusable Level 1 earth/bunker modules — Sprint 0028
+
+`Assets/Art/CowardsBunker/Environment.asset` is the current provisional reusable
+soil, grass, rocks, tree silhouette, wall/deck and timber/sandbag module family.
+Recipe: `Assets/Editor/CowardsBunkerSetup.cs`. Match the established4x4-native-pixel
+cells/32PPU/Point/binary transparency and limited flat palettes. Original approved
+crates remain unchanged. Controlled comparisons are in `TestResults/CowardsBunker/`;
+these modules still require human artistic and Android-device review. They do not
+supersede the character baseline or authorize further scene/UI redesigns.
+
+## Sprint 0029 — approved environment preservation and equipment/UI integration
+
+The user explicitly approved Sprint 0028's environmental artwork in Sprint 0029.
+Preserve Environment.asset and its existing drawing recipe; the sprint did not
+regenerate them. This approval does not imply human approval of new equipment/UI.
+Foreground bunker sandbags/roof now use matching solid collision; small solid
+header pieces reuse existing timber art. Receding full-height posts remain
+noncolliding background decoration. Maintain the open approach and escape route.
+
+AKUMU Block (Assets/Art/Interface0029/AkumuBlock.ttf) is an original compact block
+font derived from the existing AKUMU menu wordmark's visual construction, shared
+by the menu, store and HUD. Preserve hard-edged, flat-color presentation and
+existing touch target geometry. Native small Point-filtered 32PPU helmet overlays
+in Equipment0029 follow existing head/corpse presentation; no rig or original head
+redesign. New UI/equipment remain subject to human artistic and phone readability
+review. Advancing Editor captures and implementation details: TestResults/Sprint0029/.
+
+## Officer bunker correction — concrete pillbox (2026-10-26)
+
+The latest explicit user brief supersedes the earlier dirt/timber/sandbag bunker
+interpretation. The Officer's current shelter is a small concrete defensive box
+with one clear dark firing slit, thick simple slabs and modest chunky chips.
+Preserve approved Sprint 0028 environmental assets around it. This correction does
+not authorize another level-art or character-art overhaul.
+
+Assets/Art/ConcretePillbox contains native32PPU Point sprites/flat palettes/no
+mipmaps, authored through ConcretePillboxSetup. Match the compact concrete silhouette
+and legible interior opening. Foreground facade bands hide the occupant below and
+above the slit; the exterior collision shell has the matching single opening.
+Keep the real gameplay geometry, muzzle/slit alignment, existing character rig and
+ordinary routes. Controlled captures: TestResults/ConcreteBunker. Human artistic
+and Android-device acceptance remain separate from automated verification.
+
+## Sprint 0031 — shared handmade interface (2026-10-27)
+
+Use Assets/UI/HandmadeUI.uss as the shared presentation foundation for menus,
+HUDs, mission screens and speech. Retain the approved AKUMU wordmark glyphs.
+Palette: ink #171c1d, panel #252c2b, raised #383f38, cream #e9e2c5,
+quiet #b1b49d, edge #727965, rust #cd783e, gold #d9bc5a, danger #b45a4b.
+Use hard square edges, a heavier dark bottom border, existing AkumuBlock lettering,
+small flat icons and a rust/gold notch for selection. Pressed, focused, selected
+and unavailable states must remain distinguishable. No gradients, glossy cards,
+soft shadows or extra detail. Preserve existing joystick geometry and pointer
+handling. Available/empty revival slots remain visible; selected weapons and
+throwables remain explicit. Native tiny icons are Point-filtered at 32 PPU.
+Screens and acceptance evidence: TestResults/Sprint0031. Editor captures establish
+layout evidence, not human artistic acceptance or Android-device touch quality.
+
+## Sprint 0033 — enlarged concrete cutaway (2026-10-27)
+
+The user approved the concrete bunker design and requested double width/height.
+Current shell is9x6.35world units using the same chunky native Point/tiled sprites.
+Preserve its solid perimeter and clear firing slit. Front-facing panels now form
+simple floor/ceiling trim: the open side is a cutaway, so the Officer's crouch,
+weapon, reload and retreat are visible without a transparency shader. Keep the
+actual front/rear collision walls distinct from the noncolliding cutaway facade.
+Existing-system roof-access ladder preserves traversal above the taller shell.
+No character art, weapon proportions or approved surrounding art is changed.
+Controlled captures are under TestResults/Sprint0033; device readability/artistic
+acceptance still requires hands-on review. Older compact-bunker authoring is history;
+use Sprint0033Setup rather than regenerating the old dimensions.
+
+## Sprint 0036 UI presentation system — 2026-10-28
+
+The existing pixel AKUMU wordmark remains the identity anchor. UI uses the existing
+AkumuBlock font, flat ink #171c1d, dark teal panels #202b2c, cream #e9e2c5,
+warehouse ochre #d9bc5a and restrained rust #cd783e. Three-pixel structural edges,
+heavier dark lower edges, square corners and immediate pressed/focus states repeat
+across menus, shop, HUD, pause, revival and results. No gradients, blur, random
+pixel noise, new raster art, new materials or animated backgrounds were introduced.
+Main menu reuses the actual approved CrateWoodBrace_32x32 sprite rather than the
+old Sprint008 crate. Original wordmark, character pixels, pivots and equipment
+sprites are unchanged. Existing item sprites use fit scaling within shared icon
+frames; silhouettes are never stretched. Phone control dimensions/offsets remain.
+Speech uses cream notice cards with ink outlines, warm panic cards and existing
+block font. Results suppress speech to protect readable statistics. Empty revival
+slots show a dash without a ghost injection. This is implemented direction with
+controlled captures in TestResults/Sprint0036, awaiting human artistic/device review;
+it does not confer approval on unrelated provisional art.
+
+## Reload repair follow-up — Sprint0034 expanded brief — 2026-10-28
+
+The SMG reuses its existing29x14/32PPU sprite: a new native body variant removes
+only the integrated magazine pixels, retaining original grip/pivot/muzzle/bounds.
+Original SMGSprite.asset remains unchanged and is the complete inventory icon.
+A3x7Point-filtered flat magazine uses the existing rig's cached old/replacement
+sprites and exchange hand pose. New3x5flat red/brass shotgun shell uses one cached
+weapon-child renderer and existing rear-arm rotation, no joint/rig replacement.
+Original shotgun/character art and historical Enemak references remain intact.
+Controlled captures:TestResults/ReloadEconomy; human artistic/device review pending.
+No new styles, materials, particles or per-shell objects/debris introduced.
+
+## Expanded Sprint0035 reliability follow-up — 2026-10-28
+
+LMG uses a native body variant with exactly its existing6x6container pixels
+extracted into a detachable sprite. Original37x14sprite remains the icon;32PPU,
+Point sampling, original colors, grips, muzzle and rig pivots are preserved.
+Player Desert Eagle has a6x7slanted black magazine fitting inside its existing
+black grip; the old inherited OfficerPistol2x4sprite remains unchanged for NPCs.
+No character art or historical originals changed. Storage's three additional
+covers clone the existing approved wooden crate and its existing components.
+Controlled captures inTestResults/CombatReliability were inspected in both turn
+directions and all three storage heights; human artistic/device review pending.
+
+## UI transparency hotfix0036.1 — 2026-10-28
+
+Gameplay HUD backgrounds use moderate alpha: sticks40%, handles65%, actions60%,
+weapon selection65%, health/ammo/objective panels55%, health fill85%, other
+gameplay panels60–70%. Preserve opaque text/icons, existing palette, chunky
+borders, all positions/dimensions and touch areas. Front-end/shop remain readable;
+only overlays with gameplay behind them receive translucent panel backgrounds.
+No CanvasGroup or parent opacity. Existing selected/pressed/critical/healing
+states retain their background alpha. Controlled captures and resolved style
+audits:TestResults/UITransparency0036_1; physical Android review pending.
+
+## Sprint0037 — living impact and player feedback (2026-10-29)
+
+Existing character sprites,32PPU, palettes and pivot hierarchy are preserved.
+Reviewed the actual historical Enemak Postava.png and current character/HUD
+captures. Original artwork is untouched. Living hits add bounded regional joint
+motion through the existing pose/recovery owner; the gun follows its hand while
+retaining shot direction. Handling poses remain authoritative for reload/healing/
+cover/climbing. Collapse uses the existing recovery pose; death uses the existing
+corpse ragdoll. No new character redraw, skin, gore or free-floating equipment.
+Player damage uses flat rust/red edge strips and four small safe-area markers,
+never a full-screen opaque tint. HP flash retains85%alpha and transparent HUD
+backgrounds/text are preserved. DE/sniper tracer scales1.6/2.2 reuse the existing
+pool/material/fade; Officer's own red/thick presentation remains separate.
+Controlled captures:TestResults/Sprint0037. Human feel/artistic and phone review
+remain required; passing tests and captures are not artistic approval.

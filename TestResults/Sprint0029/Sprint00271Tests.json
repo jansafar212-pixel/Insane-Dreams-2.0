@@ -1,0 +1,49 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 20.97,
+      "summary": {
+        "total": 3,
+        "passed": 3,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "InsaneDreams.Tests.Sprint00271Tests.EveryRevisedWarehouseLadderAutomaticallyExitsWithHeldTouchUp",
+          "Status": "Passed",
+          "Duration": 13.6007077,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint00271Tests.SeededOfficerHitsStationaryTargetAtTenUnitsWithoutPerfectAimOrExtraShots",
+          "Status": "Passed",
+          "Duration": 6.0006393,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint00271Tests.SlimPauseRetainsTouchAreaAndOneMedicalTabPurchasesBothOriginalResources",
+          "Status": "Passed",
+          "Duration": 1.3368968,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

@@ -1,0 +1,77 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 0.23,
+      "summary": {
+        "total": 7,
+        "passed": 7,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "InsaneDreams.Tests.CombatRulesTests.AttacksAndReloadNeverMutateSharedDefinitions",
+          "Status": "Passed",
+          "Duration": 0.003716,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.CombatRulesTests.CancelledReloadTransfersNothingAndCanRestart",
+          "Status": "Passed",
+          "Duration": 0.0004219,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.CombatRulesTests.CooldownCannotBeBypassedAndEmptyAttemptsDoNotSpendAmmo",
+          "Status": "Passed",
+          "Duration": 0.000476,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.CombatRulesTests.DamageFiltersInvalidFriendlyAndSelfHitsAndDefeatsOnce",
+          "Status": "Passed",
+          "Duration": 0.0023521,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.CombatRulesTests.MagazineDepletesExactlyOncePerSuccessfulAttack",
+          "Status": "Passed",
+          "Duration": 0.0003578,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.CombatRulesTests.MeleeUsesCooldownButNeverAmmunitionOrReload",
+          "Status": "Passed",
+          "Duration": 0.0006136,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.CombatRulesTests.ReloadTransfersOnlyAtDeadlineAndConservesAmmunition",
+          "Status": "Passed",
+          "Duration": 0.000443,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

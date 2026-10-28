@@ -20,6 +20,22 @@ namespace InsaneDreams.Visuals
         private Vector2 magazineMountOffset=new Vector2(.125f,-.0625f);
         private bool physicalMagazineReload;
         private SpriteRenderer replacementMagazine;
+        private SpriteRenderer reloadShell;
+        public SpriteRenderer ReloadShell=>reloadShell;
+        public void PoseReloadShell(Sprite sprite,bool active,float progress)
+        {
+            if(reloadShell==null&&sprite!=null){var go=new GameObject("ReloadShell");go.transform.SetParent(weapon.transform,false);reloadShell=go.AddComponent<SpriteRenderer>();reloadShell.sortingLayerID=weapon.sortingLayerID;reloadShell.sortingOrder=weapon.sortingOrder+2;}
+            if(reloadShell==null)return;reloadShell.sprite=sprite;reloadShell.enabled=active&&sprite!=null&&weapon.enabled&&progress<.92f;
+            float flip=weapon.flipY?-1:1;
+            reloadShell.transform.localPosition=Vector3.Lerp(new Vector3(.22f,-.4f*flip,-.02f),new Vector3(.3f,-.04f*flip,-.02f),Mathf.SmoothStep(0,1,progress));
+            reloadShell.transform.localRotation=Quaternion.Euler(0,0,90);reloadShell.transform.localScale=new Vector3(1,flip,1);
+            if(active&&sprite!=null)
+            {
+                Vector3 to=transform.InverseTransformPoint(reloadShell.transform.position)-leftArm.localPosition;
+                float reach=Mathf.Atan2(to.x,-to.y)*Mathf.Rad2Deg;
+                leftArm.localRotation=Quaternion.Euler(0,0,Mathf.LerpAngle(leftArm.localEulerAngles.z,reach,Mathf.Sin(progress*Mathf.PI)));
+            }
+        }
         public void SetMagazine(Sprite sprite,Vector2? mountOffset=null,bool physicalExchange=false)
         {
             physicalMagazineReload=physicalExchange;
@@ -29,12 +45,13 @@ namespace InsaneDreams.Visuals
                 var go = new GameObject("ExtendedMagazine"); go.transform.SetParent(weapon.transform, false);
                 magazine = go.AddComponent<SpriteRenderer>(); magazine.sortingLayerID = weapon.sortingLayerID; magazine.sortingOrder = weapon.sortingOrder + 1;
             }
-            if (magazine != null) { magazine.sprite = sprite; magazine.enabled = sprite != null && weapon.enabled; }
+            if (magazine != null) { if(magazine.sprite!=sprite)magazine.sprite = sprite; magazine.enabled = sprite != null && weapon.enabled; }
             if(physicalExchange&&replacementMagazine==null)
             {var go=new GameObject("ReplacementMagazine");go.transform.SetParent(weapon.transform,false);replacementMagazine=go.AddComponent<SpriteRenderer>();replacementMagazine.sortingLayerID=weapon.sortingLayerID;replacementMagazine.sortingOrder=weapon.sortingOrder+1;}
-            if(replacementMagazine!=null){replacementMagazine.sprite=sprite;replacementMagazine.enabled=false;}
+            if(replacementMagazine!=null){if(replacementMagazine.sprite!=sprite)replacementMagazine.sprite=sprite;replacementMagazine.enabled=false;}
         }
         public void FinishMagazineExchange(){if(replacementMagazine!=null)replacementMagazine.enabled=false;if(magazine!=null)magazine.enabled=magazine.sprite!=null&&weapon.enabled;}
+        public void HideDefaultReplacementMagazine(){if(replacementMagazine!=null)replacementMagazine.enabled=false;}
         public Vector2 MuzzlePosition => muzzle != null ? (Vector2)muzzle.position : (Vector2)weapon.transform.position;
         public Vector2 BarrelDirection => weapon.transform.TransformVector(Vector3.right).normalized;
         [SerializeField] private float standingFeetY = -.7f;
@@ -66,7 +83,7 @@ namespace InsaneDreams.Visuals
             if(segmented!=null)segmented.BindSprites();
         }
         private static void Set(Transform part, Sprite sprite) { if (part != null) part.GetComponent<SpriteRenderer>().sprite = sprite; }
-        public void SetExpression(FaceExpression expression) { if (face != null && skin != null) face.sprite = skin.Face(expression); }
+        public void SetExpression(FaceExpression expression) { if (face != null && skin != null) {var sprite=skin.Face(expression);if(face.sprite!=sprite)face.sprite=sprite;} }
         private void Awake() { ApplySkin(skin); EnsureMuzzle(); }
         public void EnsureMuzzle()
         {
@@ -74,6 +91,15 @@ namespace InsaneDreams.Visuals
             if (muzzle == null) { muzzle = new GameObject("Muzzle").transform; muzzle.SetParent(weapon.transform, false); }
             // SpriteRenderer.flipY mirrors pixels without mirroring child transforms.
             if (weapon.sprite != null) muzzle.localPosition = new Vector3(weapon.sprite.bounds.max.x, (weapon.flipY ? -1f : 1f) / 32, 0);
+        }
+        public void ApplyWeaponMuzzle(Vector2 value,bool crouched)
+        {
+            if(muzzle==null)return;muzzle.localPosition=new Vector3(value.x,(weapon.flipY?-1:1)*value.y,0);
+            if(crouched)
+            {
+                float excess=transform.InverseTransformPoint(muzzle.position).y-crouchedMuzzleCeiling;
+                if(excess>0)RetractMuzzle(MuzzlePosition+(Vector2)transform.TransformVector(Vector3.down*excess));
+            }
         }
 
         public void Pose(CharacterPose pose, float phase, Vector2 aim, float facing, float recoil, FaceExpression expression, bool aimWhileClimbing = false, bool hasWeapon = true, bool reloading = false, float reloadProgress = 0, float coverCrouch = -1, float upperBodyTuck = 0, bool raisedCoverWeapon = false, bool advanceTransitions = true)
@@ -143,7 +169,7 @@ namespace InsaneDreams.Visuals
             weapon.enabled = hasWeapon && !raised && pose != CharacterPose.Defeated;
             parachute.enabled = pose == CharacterPose.Parachute;
             SetExpression(expression);
-            if(pose==CharacterPose.Panic&&skin.panicFace!=null)face.sprite=skin.panicFace;
+            if(pose==CharacterPose.Panic&&skin.panicFace!=null&&face.sprite!=skin.panicFace)face.sprite=skin.panicFace;
             EnsureMuzzle();
             if(segmented!=null&&segmented.firearm)segmented.PoseFirearm(pose,phase,0);
             if (crouch && !raisedCoverWeapon)

@@ -1,0 +1,17 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements">
+    <ui:Style src="GameFlow.uss" />
+    <ui:VisualElement name="flowSafeArea" class="flow-background">
+        <ui:VisualElement class="warehouse-scene" picking-mode="Ignore">
+            <ui:VisualElement class="warehouse-moon" picking-mode="Ignore" />
+            <ui:VisualElement class="warehouse-wall" picking-mode="Ignore">
+                <ui:Label text="ZERO DAYS WITHOUT INCIDENT" class="warehouse-sign" picking-mode="Ignore" />
+                <ui:VisualElement class="warehouse-door" picking-mode="Ignore" />
+                <ui:VisualElement class="warehouse-window" picking-mode="Ignore" />
+            </ui:VisualElement>
+            <ui:VisualElement class="warehouse-crate" picking-mode="Ignore" />
+            <ui:VisualElement class="warehouse-crate small" picking-mode="Ignore" />
+            <ui:VisualElement class="warehouse-floor" picking-mode="Ignore" />
+        </ui:VisualElement>
+        <ui:ScrollView mode="Vertical" class="flow-scroll"><ui:VisualElement name="flowContent" class="flow-content" /></ui:ScrollView>
+    </ui:VisualElement>
+</ui:UXML>

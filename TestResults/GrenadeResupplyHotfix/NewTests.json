@@ -1,0 +1,56 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 8.86,
+      "summary": {
+        "total": 4,
+        "passed": 3,
+        "failed": 1,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "InsaneDreams.Tests.GrenadeResupplyHotfixTests.ExistingBoxRestocksEveryTypeWithPartialAcceptanceFiniteStockImmediateHudAndSave",
+          "Status": "Failed",
+          "Duration": 1.4458367,
+          "Message": "  Expected: 72\r\n  But was:  108\r\n",
+          "StackTrace": "at InsaneDreams.Tests.GrenadeResupplyHotfixTests+<ExistingBoxRestocksEveryTypeWithPartialAcceptanceFiniteStockImmediateHudAndSave>d__7.MoveNext () [0x00294] in C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Tests\\PlayMode\\GrenadeResupplyHotfixTests.cs:33\r\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in .\\Library\\PackageCache\\com.unity.test-framework@80f691d4262b\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:52\r\n"
+        },
+        {
+          "FullName": "InsaneDreams.Tests.GrenadeResupplyHotfixTests.FragShakeIsDistanceBoundedExpiresAndActualEnemyDeathStillCreatesPhysicsCorpse",
+          "Status": "Passed",
+          "Duration": 1.1550941,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.GrenadeResupplyHotfixTests.FragUsesLargerRealFalloffFriendlyCoverAndPooledChunkyEffectsWithoutChangingOtherTypes",
+          "Status": "Passed",
+          "Duration": 4.2391167,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.GrenadeResupplyHotfixTests.OrdinaryLocalizedDeathKeepsArmsUntilOneRegionAccumulates105AndLegThresholdStays60",
+          "Status": "Passed",
+          "Duration": 1.8970619,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

@@ -1,0 +1,87 @@
+diff --git a/TestResults/Sprint0032/Assets_Prefabs_Enemies_Larper.prefab.before.txt b/Assets/Prefabs/Enemies/Larper.prefab
+index 1beeb87..f945b5d 100644
+--- a/TestResults/Sprint0032/Assets_Prefabs_Enemies_Larper.prefab.before.txt
++++ b/Assets/Prefabs/Enemies/Larper.prefab
+@@ -913,3 +913,5 @@ MonoBehaviour:
+   state: 0
+-  stuckSeconds: 0.9
++  stuckSeconds: 1.8
++  stuckRecoveryPause: 0.6
++  stuckRetrySeconds: 3
+   obstacleJumpCooldown: 1.2
+@@ -1040,2 +1042,3 @@ MonoBehaviour:
+   perceptionSeconds: 0.1
++  viewportAttackDelay: 0.18
+   minimumCombatSpacing: 1.75
+@@ -1094,3 +1097,3 @@ MonoBehaviour:
+   preferredDistance: 6
+-  visibilityMemory: 3
++  visibilityMemory: 4.5
+   rangeHysteresis: 2
+@@ -1107,3 +1110,3 @@ MonoBehaviour:
+   reloadDurationVariation: 0.05
+-  reactionJitterSeconds: 0.12
++  reactionJitterSeconds: 0.08
+   blindAimUncertainty: 3
+diff --git a/TestResults/Sprint0032/Assets_Prefabs_Enemies_FireworksExpert.prefab.before.txt b/Assets/Prefabs/Enemies/FireworksExpert.prefab
+index dc33a90..4dc78d2 100644
+--- a/TestResults/Sprint0032/Assets_Prefabs_Enemies_FireworksExpert.prefab.before.txt
++++ b/Assets/Prefabs/Enemies/FireworksExpert.prefab
+@@ -338,2 +338,6 @@ PrefabInstance:
+       objectReference: {fileID: 11400000, guid: ef3f33c2d381b494f95cbcf521a8cf54, type: 2}
++    - target: {fileID: 7476120528033253239, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
++      propertyPath: stuckSeconds
++      value: 1.8
++      objectReference: {fileID: 0}
+     - target: {fileID: 7934699871008284970, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
+@@ -352,3 +356,11 @@ PrefabInstance:
+       propertyPath: reactionSeconds
+-      value: 0.3
++      value: 0.6
++      objectReference: {fileID: 0}
++    - target: {fileID: 7952524903900054866, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
++      propertyPath: visibilityMemory
++      value: 4.5
++      objectReference: {fileID: 0}
++    - target: {fileID: 7952524903900054866, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
++      propertyPath: reactionJitterSeconds
++      value: 0.1
+       objectReference: {fileID: 0}
+diff --git a/TestResults/Sprint0032/Assets_Data_FirstOperation_Officer.prefab.before.txt b/Assets/Data/FirstOperation/Officer.prefab
+index dc0d28f..e8d675b 100644
+--- a/TestResults/Sprint0032/Assets_Data_FirstOperation_Officer.prefab.before.txt
++++ b/Assets/Data/FirstOperation/Officer.prefab
+@@ -422,3 +422,5 @@ MonoBehaviour:
+   state: 0
+-  stuckSeconds: 0.9
++  stuckSeconds: 1.8
++  stuckRecoveryPause: 0.6
++  stuckRetrySeconds: 3
+   obstacleJumpCooldown: 1.2
+@@ -549,2 +551,3 @@ MonoBehaviour:
+   perceptionSeconds: 0.1
++  viewportAttackDelay: 0.18
+   minimumCombatSpacing: 1.75
+@@ -598,3 +601,3 @@ MonoBehaviour:
+     m_Bits: 1
+-  reactionSeconds: 0.7
++  reactionSeconds: 0.45
+   aimSampleSeconds: 0.06
+@@ -603,3 +606,3 @@ MonoBehaviour:
+   preferredDistance: 10
+-  visibilityMemory: 3
++  visibilityMemory: 4.5
+   rangeHysteresis: 2
+diff --git a/TestResults/Sprint0032/Assets_Data_FirstOperation_OperationFireworksExpert.prefab.before.txt b/Assets/Data/FirstOperation/OperationFireworksExpert.prefab
+index 77a8476..a4130b8 100644
+--- a/TestResults/Sprint0032/Assets_Data_FirstOperation_OperationFireworksExpert.prefab.before.txt
++++ b/Assets/Data/FirstOperation/OperationFireworksExpert.prefab
+@@ -352,3 +352,7 @@ PrefabInstance:
+       propertyPath: reactionSeconds
+-      value: 0.3
++      value: 0.6
++      objectReference: {fileID: 0}
++    - target: {fileID: 7952524903900054866, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
++      propertyPath: reactionJitterSeconds
++      value: 0.1
+       objectReference: {fileID: 0}

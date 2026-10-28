@@ -1,0 +1,64 @@
+diff --git a/TestResults/Sprint0031/Before_Warehouse_Demo.unity.txt b/Assets/Scenes/Warehouse_Demo.unity
+index 010d6e9..117e5ae 100644
+--- a/TestResults/Sprint0031/Before_Warehouse_Demo.unity.txt
++++ b/Assets/Scenes/Warehouse_Demo.unity
+@@ -6799,3 +6799,3 @@ TextMesh:
+   m_RichText: 1
+-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
++  m_Font: {fileID: 12800000, guid: 3b846ddb00992a140b89b070ee2fce8c, type: 3}
+   m_Color:
+@@ -6828,3 +6828,3 @@ MeshRenderer:
+   m_Materials:
+-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
++  - {fileID: 2100000, guid: 3b846ddb00992a140b89b070ee2fce8c, type: 3}
+   m_StaticBatchInfo:
+@@ -10681,3 +10681,3 @@ TextMesh:
+   m_RichText: 1
+-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
++  m_Font: {fileID: 12800000, guid: 3b846ddb00992a140b89b070ee2fce8c, type: 3}
+   m_Color:
+@@ -10710,3 +10710,3 @@ MeshRenderer:
+   m_Materials:
+-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
++  - {fileID: 2100000, guid: 3b846ddb00992a140b89b070ee2fce8c, type: 3}
+   m_StaticBatchInfo:
+@@ -14562,3 +14562,3 @@ TextMesh:
+   m_RichText: 1
+-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
++  m_Font: {fileID: 12800000, guid: 3b846ddb00992a140b89b070ee2fce8c, type: 3}
+   m_Color:
+@@ -14591,3 +14591,3 @@ MeshRenderer:
+   m_Materials:
+-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
++  - {fileID: 2100000, guid: 3b846ddb00992a140b89b070ee2fce8c, type: 3}
+   m_StaticBatchInfo:
+@@ -14666,3 +14666,3 @@ TextMesh:
+   m_RichText: 1
+-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
++  m_Font: {fileID: 12800000, guid: 3b846ddb00992a140b89b070ee2fce8c, type: 3}
+   m_Color:
+@@ -14695,3 +14695,3 @@ MeshRenderer:
+   m_Materials:
+-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
++  - {fileID: 2100000, guid: 3b846ddb00992a140b89b070ee2fce8c, type: 3}
+   m_StaticBatchInfo:
+@@ -16818,3 +16818,3 @@ TextMesh:
+   m_RichText: 1
+-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
++  m_Font: {fileID: 12800000, guid: 3b846ddb00992a140b89b070ee2fce8c, type: 3}
+   m_Color:
+@@ -16847,3 +16847,3 @@ MeshRenderer:
+   m_Materials:
+-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
++  - {fileID: 2100000, guid: 3b846ddb00992a140b89b070ee2fce8c, type: 3}
+   m_StaticBatchInfo:
+@@ -19335,3 +19335,3 @@ TextMesh:
+   m_RichText: 1
+-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
++  m_Font: {fileID: 12800000, guid: 3b846ddb00992a140b89b070ee2fce8c, type: 3}
+   m_Color:
+@@ -19364,3 +19364,3 @@ MeshRenderer:
+   m_Materials:
+-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
++  - {fileID: 2100000, guid: 3b846ddb00992a140b89b070ee2fce8c, type: 3}
+   m_StaticBatchInfo:

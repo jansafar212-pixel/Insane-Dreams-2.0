@@ -1,0 +1,38 @@
+[
+  {
+    "name": "heal",
+    "backgroundAlpha": 0.6,
+    "textAlpha": 1.0,
+    "opacity": 1.0
+  },
+  {
+    "name": "slot1",
+    "backgroundAlpha": 0.65,
+    "textAlpha": 1.0,
+    "opacity": 1.0
+  },
+  {
+    "name": "ammoValue",
+    "backgroundAlpha": 0.0,
+    "textAlpha": 1.0,
+    "opacity": 1.0
+  },
+  {
+    "name": "objective",
+    "backgroundAlpha": 0.0,
+    "textAlpha": 1.0,
+    "opacity": 1.0
+  },
+  {
+    "name": "healthFill",
+    "backgroundAlpha": 0.85,
+    "textAlpha": 1.0,
+    "opacity": 1.0
+  },
+  {
+    "name": "healthValue",
+    "backgroundAlpha": 0.0,
+    "textAlpha": 1.0,
+    "opacity": 1.0
+  }
+]

@@ -1,0 +1,91 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 8.92,
+      "summary": {
+        "total": 9,
+        "passed": 9,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "InsaneDreams.Tests.AirborneLadderTests.AirborneDismountStillRequiresLockoutAndFreshGestureThenCanGrabAgain",
+          "Status": "Passed",
+          "Duration": 1.9426206,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.AirborneLadderTests.BlockedAndDistantLaddersDoNotCaptureHeldAirborneUpInput",
+          "Status": "Passed",
+          "Duration": 0.7227803,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.AirborneLadderTests.CandidateDestroyedBeforeCaptureLeavesTheHeldJumpAirborne",
+          "Status": "Passed",
+          "Duration": 0.6314242,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.AirborneLadderTests.CaptureZoneEnteredBeforeUpwardPressGrabsWhileFalling",
+          "Status": "Passed",
+          "Duration": 0.9540756,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.AirborneLadderTests.DisabledCandidateCanBecomeAvailableDuringHeldUpAndDestructionRestoresGravity",
+          "Status": "Passed",
+          "Duration": 0.7082367,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.AirborneLadderTests.HeldUpBeforeVerticalCaptureJumpsThenGrabsWithoutAnotherGesture",
+          "Status": "Passed",
+          "Duration": 0.782882,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.AirborneLadderTests.JumpFromLeftHoldsUpwardDiagonalBeforeHorizontalCapture",
+          "Status": "Passed",
+          "Duration": 1.1923308,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.AirborneLadderTests.JumpFromRightHoldsUpwardDiagonalBeforeHorizontalCapture",
+          "Status": "Passed",
+          "Duration": 1.1763676,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.AirborneLadderTests.LateralJumpPastLadderWithoutClimbIntentKeepsNormalAirborneMovement",
+          "Status": "Passed",
+          "Duration": 0.7264241,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

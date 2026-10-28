@@ -27,10 +27,58 @@ namespace InsaneDreams.Input
         private Label loadoutLabel;
         private Label ammoLabel,reserveLabel,healthLabel,armorLabel,tapeLabel,reviveLabel,weaponStatus;
         private VisualElement healthFill;
+        private InsaneDreams.Combat.PlayerDamageFeedback damageFeedback;
+        private uint damageRevision;
+        private VisualElement damageOverlay;
+        private readonly VisualElement[] damageEdges=new VisualElement[4],damageDirections=new VisualElement[4];
+        private static readonly string[] DamageSides={"left","right","above","below"};
+        private void BuildDamageOverlay()
+        {
+            damageOverlay?.RemoveFromHierarchy();
+            damageOverlay=new VisualElement{name="damageFeedbackOverlay",pickingMode=PickingMode.Ignore};damageOverlay.AddToClassList("damage-feedback-overlay");
+            for(int i=0;i<4;i++)
+            {
+                var edge=damageEdges[i]=new VisualElement{name="damageEdge"+i,pickingMode=PickingMode.Ignore};edge.AddToClassList("damage-edge");edge.AddToClassList("damage-edge-"+DamageSides[i]);damageOverlay.Add(edge);
+                var marker=damageDirections[i]=new VisualElement{name="damageDirection"+i,pickingMode=PickingMode.Ignore};marker.AddToClassList("damage-direction");marker.AddToClassList("damage-direction-"+DamageSides[i]);damageOverlay.Add(marker);
+            }
+            (safeArea??root).Insert(0,damageOverlay);damageOverlay.style.display=DisplayStyle.None;
+        }
+        private void UpdateDamageFeedback()
+        {
+            if(damageOverlay==null)return;
+            bool visible=damageFeedback!=null&&Time.timeScale>0&&!root.ClassListContains("mission-complete")&&!(safeArea!=null&&safeArea.ClassListContains("mission-complete"));
+            if(damageFeedback!=null&&damageRevision!=damageFeedback.Revision){damageRevision=damageFeedback.Revision;nextReadout=0;}
+            float edge=visible?damageFeedback.EdgeAlpha:0;bool any=edge>.001f;
+            if(visible)for(int i=0;i<4;i++)any|=damageFeedback.IndicatorAlpha(i)>.001f;
+            if(!any){damageOverlay.style.display=DisplayStyle.None;healthFill?.EnableInClassList("damage-flash",false);return;}
+            for(int i=0;i<4;i++)
+            {
+                float a=visible?damageFeedback.IndicatorAlpha(i):0;any|=a>.001f;
+                damageEdges[i].style.backgroundColor=new Color(.76f,.12f,.08f,edge);
+                damageDirections[i].style.backgroundColor=new Color(.84f,.16f,.1f,a);
+            }
+            damageOverlay.style.display=any?DisplayStyle.Flex:DisplayStyle.None;
+            healthFill?.EnableInClassList("damage-flash",visible&&damageFeedback.HealthFlashActive);
+        }
         private Image weaponIcon;
         private Button firstSlot,secondSlot,meleeSlot;
+        private InsaneDreams.Combat.PlayerThrowables throwables;
+        private VisualElement throwableTypes;
+        private Label healthCaption;
+        private readonly int[] shownThrowableCounts={-1,-1,-1};
+        private readonly Button[] throwableButtons=new Button[3];
+        private static readonly string[] ThrowableTitles={"FRAG","FLASH","SMOKE"};
+        private VisualElement revivePips;private readonly VisualElement[] injectionPips=new VisualElement[2];private int lastReviveCount=-1;
         private InsaneDreams.Visuals.CutoutRig visualRig;
         private float nextReadout;
+        private InsaneDreams.Inventory.RuntimeWeapon observedAmmo;
+        private void ObserveAmmo(InsaneDreams.Inventory.RuntimeWeapon weapon)
+        {
+            if(observedAmmo==weapon)return;
+            if(observedAmmo!=null)observedAmmo.AmmunitionChanged-=RefreshThrowableReadout;
+            observedAmmo=weapon;if(weapon!=null)weapon.AmmunitionChanged+=RefreshThrowableReadout;
+            nextReadout=0;
+        }
         private InsaneDreams.Combat.Health health;
         private InsaneDreams.Combat.PlayerHealing healing;
         private InsaneDreams.Combat.BodyArmor armor;
@@ -53,7 +101,9 @@ namespace InsaneDreams.Input
 
         public void Bind(PlayerActions target)
         {
-            if (subscribedActions != null) subscribedActions.InputReset -= ClearPointers;
+            ObserveAmmo(null);
+            if(throwables!=null)throwables.InventoryChanged-=RefreshThrowableReadout;
+            if (subscribedActions != null) { subscribedActions.InputReset -= ClearPointers;subscribedActions.AimCancelled-=ClearAimPointer; }
             ClearPointers();
             if (actions != null && actions != target) actions.ResetActions();
             actions = target;
@@ -61,23 +111,33 @@ namespace InsaneDreams.Input
             posture=target!=null?target.GetComponent<InsaneDreams.Traversal.PlayerPosture2D>():null;
             visualRig=target!=null?target.GetComponentInChildren<InsaneDreams.Visuals.CutoutRig>(true):null;
             suppression=target!=null?target.GetComponent<InsaneDreams.Combat.PlayerSuppression>():null;
+            if(revive!=null)revive.InventoryChanged-=RefreshInjectionReadout;
             revive=target!=null?target.GetComponent<InsaneDreams.Combat.PlayerRevive>():null;
+            if(revive!=null)revive.InventoryChanged+=RefreshInjectionReadout;
+            var reviveIcon=revive!=null?revive.GetComponent<InsaneDreams.Visuals.PlayerSyringeVisual>()?.InventoryIcon:null;
+            for(int i=0;i<2;i++)if(injectionPips[i] is Image pip)pip.sprite=reviveIcon;
+            lastReviveCount=-1;RefreshInjectionReadout(revive!=null?revive.Injections:0);
             subscribedActions = target;
             loadout = target != null ? target.GetComponent<InsaneDreams.Inventory.PlayerLoadout>() : null;
+            throwables=target!=null?target.GetComponent<InsaneDreams.Combat.PlayerThrowables>():null;
+            if(throwables!=null)throwables.InventoryChanged+=RefreshThrowableReadout;
             health = target != null ? target.GetComponent<InsaneDreams.Combat.Health>() : null;
+            damageFeedback=target!=null?target.GetComponent<InsaneDreams.Combat.PlayerDamageFeedback>():null;damageRevision=uint.MaxValue;
             healing = target != null ? target.GetComponent<InsaneDreams.Combat.PlayerHealing>() : null;
             armor = target != null ? target.GetComponent<InsaneDreams.Combat.BodyArmor>() : null;
             supplies=target!=null?target.GetComponent<InsaneDreams.Inventory.PlayerSupplies>():null;
             traversal = target != null ? target.GetComponent<InsaneDreams.Traversal.PlayerTraversal2D>() : null;
-            nextReadout = 0;
-            if (subscribedActions != null) subscribedActions.InputReset += ClearPointers;
+            nextReadout = 0;hasReadout=false;
+            if (subscribedActions != null) { subscribedActions.InputReset += ClearPointers;subscribedActions.AimCancelled+=ClearAimPointer; }
             IsBound = actions != null && moveStick != null;
         }
 
         private void OnEnable()
         {
+            hasReadout=false;shownReviveOffer=-1;
             root = GetComponent<UIDocument>().rootVisualElement;
             safeArea = root.Q<VisualElement>("safeArea");
+            BuildDamageOverlay();
             safeArea.RegisterCallback<GeometryChangedEvent>(LayoutControls);
             jumpButton = root.Q<VisualElement>("jumpButton");
             jumpButton?.RegisterCallback<PointerDownEvent>(JumpDown);
@@ -86,8 +146,10 @@ namespace InsaneDreams.Input
             jumpButton?.RegisterCallback<PointerCaptureOutEvent>(JumpLost);
             loadoutLabel = root.Q<Label>("loadout");
             ammoLabel=root.Q<Label>("ammoValue");reserveLabel=root.Q<Label>("reserveValue");weaponStatus=root.Q<Label>("weaponStatus");
-            healthLabel=root.Q<Label>("healthValue");healthFill=root.Q("healthFill");armorLabel=root.Q<Label>("armorValue");tapeLabel=root.Q<Label>("tapeValue");reviveLabel=root.Q<Label>("reviveValue");weaponIcon=root.Q<Image>("weaponIcon");
+            healthLabel=root.Q<Label>("healthValue");healthFill=root.Q("healthFill");armorLabel=root.Q<Label>("armorValue");tapeLabel=root.Q<Label>("tapeValue");reviveLabel=root.Q<Label>("reviveValue");weaponIcon=root.Q<Image>("weaponIcon");healthCaption=healthLabel?.parent.Q<Label>(className:"health-caption");
+            if(reviveLabel!=null){revivePips=new VisualElement{name="revivePips",pickingMode=PickingMode.Ignore};reviveLabel.parent.Add(revivePips);for(int i=0;i<2;i++){var pip=new Image{name="revivePip"+i,pickingMode=PickingMode.Ignore,sprite=revive!=null?revive.GetComponent<InsaneDreams.Visuals.PlayerSyringeVisual>()?.InventoryIcon:null,scaleMode=ScaleMode.ScaleToFit};pip.AddToClassList("revive-slot");var empty=new Label("-"){pickingMode=PickingMode.Ignore};empty.AddToClassList("pip-empty-mark");pip.Add(empty);revivePips.Add(pip);injectionPips[i]=pip;}lastReviveCount=-1;}
             firstSlot=root.Q<Button>("slot1");secondSlot=root.Q<Button>("slot2");meleeSlot=root.Q<Button>("melee");
+            if(meleeSlot!=null){meleeSlot.text="3 / GREN";throwableTypes=new VisualElement{name="throwableTypes"};throwableTypes.AddToClassList("equipment-buttons");meleeSlot.parent.parent.Add(throwableTypes);for(int i=0;i<3;i++){int kind=i;var b=new Button(()=>throwables?.Select((InsaneDreams.Combat.ThrowableKind)kind)){text=ThrowableTitles[i],name="throwable"+i};var mark=new VisualElement{pickingMode=PickingMode.Ignore};mark.AddToClassList("throwable-icon");mark.AddToClassList(i==0?"frag-mark":i==1?"flash-mark":"smoke-mark");b.Add(mark);throwableTypes.Add(b);throwableButtons[i]=b;shownThrowableCounts[i]=-1;}}
             firstSlot?.RegisterCallback<ClickEvent>(SelectFirst);secondSlot?.RegisterCallback<ClickEvent>(SelectSecond);meleeSlot?.RegisterCallback<ClickEvent>(SelectMelee);
             root.Q<Button>("reload")?.RegisterCallback<ClickEvent>(Reload);
             healButton=root.Q<Button>("heal");
@@ -96,7 +158,7 @@ namespace InsaneDreams.Input
             healButton?.RegisterCallback<PointerCancelEvent>(HealCancel);
             healButton?.RegisterCallback<PointerCaptureOutEvent>(HealLost);
             supplyButton=root.Q<Button>("supplyInteract");supplyButton?.RegisterCallback<ClickEvent>(Supply);
-            suppliesNotice=root.Q<Label>("suppliesNotice");
+            suppliesNotice=root.Q<Label>("suppliesNotice");suppliesNotice?.AddToClassList("pixel-notice");
             moveStick = new Stick(root.Q<VisualElement>("moveStick"), value => { if (actions != null) actions.SetTouchMove(value); });
             aimStick = new Stick(root.Q<VisualElement>("aimStick"), value =>
             {
@@ -106,7 +168,7 @@ namespace InsaneDreams.Input
                 if (magnitude >= fireThreshold) firingZone = true;
                 if (magnitude <= fireReleaseThreshold) firingZone = false;
                 UpdateFireIntent();
-            });
+            },()=>actions?.BeginTouchAim(),normal=>actions?.EndTouchAim(normal));
             parachute = root.Q<VisualElement>("parachuteButton");
             chuteLabel = parachute.Q<Label>();
             blindFireButton=root.Q<VisualElement>("blindFireButton");
@@ -118,21 +180,10 @@ namespace InsaneDreams.Input
             pressureFrame.style.position=Position.Absolute;pressureFrame.style.left=pressureFrame.style.right=pressureFrame.style.top=pressureFrame.style.bottom=0;
             pressureFrame.style.borderLeftWidth=pressureFrame.style.borderRightWidth=pressureFrame.style.borderTopWidth=pressureFrame.style.borderBottomWidth=3;
             root.Add(pressureFrame);
-            reviveOverlay=new VisualElement{name="reviveOverlay"};
-            reviveOverlay.style.position=Position.Absolute;
-            reviveOverlay.style.left=reviveOverlay.style.right=reviveOverlay.style.top=reviveOverlay.style.bottom=0;
-            reviveOverlay.style.alignItems=Align.Center;reviveOverlay.style.justifyContent=Justify.Center;
-            reviveOverlay.style.backgroundColor=new Color(.098f,.114f,.169f,.45f);
-            reviveOverlay.style.color=Color.white;reviveOverlay.style.fontSize=20;
-            reviveOverlay.style.display=DisplayStyle.None;
-            reviveOverlay.Add(new Label("YOU'RE NOT QUITE DONE YET."));
-            reviveButton=new Button(()=>revive?.TryRevive()){name="reviveButton",text="INJECT FAINTANYL — REVIVE"};
-            reviveButton.style.minWidth=300;reviveButton.style.minHeight=64;
-            reviveButton.style.fontSize=22;reviveButton.style.color=new Color(.098f,.114f,.169f);reviveButton.style.backgroundColor=new Color(.969f,.788f,.173f);reviveButton.AddToClassList("revive-primary");
-            reviveOverlay.Add(reviveButton);
-            var checkpoint=new Button(()=>revive?.ReturnToCheckpoint()){name="reviveCheckpoint",text="RETURN TO CHECKPOINT"};
-            checkpoint.style.minHeight=48;reviveOverlay.Add(checkpoint);root.Add(reviveOverlay);
-            checkpoint.style.color=new Color(1,1,.92f);checkpoint.style.backgroundColor=new Color(.16f,.19f,.23f);checkpoint.AddToClassList("revive-back");
+            reviveOverlay=new VisualElement{name="reviveOverlay"};reviveOverlay.AddToClassList("revive-overlay");reviveOverlay.style.display=DisplayStyle.None;var revivalCard=new VisualElement();revivalCard.AddToClassList("revive-card");reviveOverlay.Add(revivalCard);
+            revivalCard.Add(new Label("YOU'RE NOT QUITE DONE YET."));
+            reviveButton=new Button(()=>revive?.TryRevive()){name="reviveButton",text="INJECT FAINTANYL � REVIVE"};reviveButton.AddToClassList("revive-primary");revivalCard.Add(reviveButton);
+            var checkpoint=new Button(()=>revive?.ReturnToCheckpoint()){name="reviveCheckpoint",text="RETURN TO CHECKPOINT"};checkpoint.AddToClassList("revive-back");revivalCard.Add(checkpoint);root.Add(reviveOverlay);
             parachute.RegisterCallback<PointerDownEvent>(ChuteDown);
             parachute.RegisterCallback<PointerUpEvent>(ChuteUp);
             parachute.RegisterCallback<PointerCancelEvent>(ChuteCancel);
@@ -234,47 +285,93 @@ namespace InsaneDreams.Input
             if (actions != null) actions.SetTouchParachute(false);
         }
 
+        private int shownReviveOffer=-1;
+        private ReadoutState shownReadout;
+        private bool hasReadout;
+        // Compare values before formatting. Input/context controls retain their
+        // per-frame updates, and readouts retain the existing 0.2-second cadence.
+        private struct ReadoutState
+        {
+            public InsaneDreams.Inventory.RuntimeWeapon weapon,primary,secondary;
+            public Sprite icon;
+            public string title,notice;
+            public InsaneDreams.Inventory.SupplyCrate2D crate;
+            public int magazine,capacity,reserve,slot,kind,frag,flash,smoke,maximum,injections;
+            public float hp,maxHp,vest,helmet,tape,protection;
+            public bool throwing,reloading,cycling,healing,waiting;
+            public bool Same(ReadoutState b)=>weapon==b.weapon&&primary==b.primary&&secondary==b.secondary&&icon==b.icon&&title==b.title&&notice==b.notice&&crate==b.crate&&
+                magazine==b.magazine&&capacity==b.capacity&&reserve==b.reserve&&slot==b.slot&&kind==b.kind&&frag==b.frag&&flash==b.flash&&smoke==b.smoke&&maximum==b.maximum&&injections==b.injections&&
+                hp==b.hp&&maxHp==b.maxHp&&vest==b.vest&&helmet==b.helmet&&tape==b.tape&&protection==b.protection&&throwing==b.throwing&&reloading==b.reloading&&cycling==b.cycling&&healing==b.healing&&waiting==b.waiting;
+        }
+        private bool ReadoutChanged()
+        {
+            var w=loadout!=null?loadout.SelectedWeapon:null;
+            var state=new ReadoutState{weapon=w,primary=loadout!=null?loadout.Get(InsaneDreams.Inventory.EquipmentSlot.Firearm1):null,secondary=loadout!=null?loadout.Get(InsaneDreams.Inventory.EquipmentSlot.Firearm2):null,
+                icon=w!=null&&w.Definition.Icon!=null?w.Definition.Icon:w!=null&&w.Definition.EquippedSprite!=null?w.Definition.EquippedSprite:visualRig!=null?visualRig.weapon.sprite:null,title=w?.Definition.DisplayName,
+                magazine=w!=null?w.MagazineAmmo:0,capacity=w!=null?w.Definition.MagazineCapacity:0,reserve=w!=null?w.ReserveAmmo:0,slot=loadout!=null?(int)loadout.SelectedSlot:-1,
+                throwing=throwables!=null&&throwables.IsSelected,kind=throwables!=null?(int)throwables.Selected:0,maximum=throwables!=null?throwables.MaximumCapacity:0,
+                frag=throwables!=null?throwables.Count((InsaneDreams.Combat.ThrowableKind)0):0,flash=throwables!=null?throwables.Count((InsaneDreams.Combat.ThrowableKind)1):0,smoke=throwables!=null?throwables.Count((InsaneDreams.Combat.ThrowableKind)2):0,
+                reloading=w!=null&&w.Cycle.IsReloading,cycling=w!=null&&w.Cycle.IsRecovering(Time.time),hp=health!=null?health.Current:0,maxHp=health!=null?health.Maximum:0,vest=armor!=null?armor.Condition:0,helmet=armor!=null?armor.HelmetCondition:0,
+                tape=healing!=null?healing.DuctTape:0,healing=healing!=null&&healing.IsHealing,waiting=healing!=null&&healing.WaitingForRelease,
+                injections=revive!=null?revive.Injections:0,protection=revive!=null?revive.ProtectionRemaining:0,crate=supplies!=null?supplies.NearbyCrate:null,notice=supplies!=null?supplies.Notification:null};
+            if(hasReadout&&shownReadout.Same(state))return false;
+            shownReadout=state;hasReadout=true;return true;
+        }
+
         private void Update()
         {
+            UpdateDamageFeedback();
+            RefreshInjectionReadout(revive!=null?revive.Injections:0);
             bool inCover=cover!=null&&cover.IsCovered;
             bool crouched=posture!=null&&posture.IsCrouched;
+            bool canBlind=crouched&&inCover&&!(throwables!=null&&throwables.IsSelected);
             if(blindFireButton!=null)
             {
-                blindFireButton.style.display=crouched&&inCover?DisplayStyle.Flex:DisplayStyle.None;
-                blindFireButton.SetEnabled(crouched&&inCover);
+                blindFireButton.style.display=canBlind?DisplayStyle.Flex:DisplayStyle.None;
+                blindFireButton.SetEnabled(canBlind);
             }
-            if((!crouched||!inCover)&&firePointer>=0)ReleaseFire();
+            if(!canBlind&&firePointer>=0)ReleaseFire();
             if(pressureFrame!=null){float pressure=suppression!=null?suppression.Pressure:0;pressureFrame.style.display=pressure>.005f?DisplayStyle.Flex:DisplayStyle.None;var color=new Color(1,.7f,.2f,pressure*.12f);pressureFrame.style.borderLeftColor=pressureFrame.style.borderRightColor=pressureFrame.style.borderTopColor=pressureFrame.style.borderBottomColor=color;}
             bool deployed = traversal != null && traversal.IsParachuting;
             parachute.EnableInClassList("deployed", deployed);
             string caption = deployed ? "RETRACT\nCHUTE" : "DEPLOY\nCHUTE";
             if (chuteLabel != null && chuteLabel.text != caption) chuteLabel.text = caption;
+            ObserveAmmo(loadout!=null?loadout.SelectedWeapon:null);
             if (loadoutLabel != null && Time.unscaledTime >= nextReadout)
             {
                 nextReadout = Time.unscaledTime + .2f;
+                if(ReadoutChanged())
+                {
                 var weapon = loadout != null ? loadout.SelectedWeapon : null;
                 loadoutLabel.text=weapon!=null?weapon.Definition.DisplayName.ToUpperInvariant():"EMPTY HANDS";
                 if(ammoLabel!=null)ammoLabel.text=weapon!=null&&weapon.UsesAmmunition?$"{weapon.MagazineAmmo}/{weapon.Definition.MagazineCapacity}":"--";
                 if(reserveLabel!=null)reserveLabel.text=weapon==null?"NO WEAPON":weapon.UsesAmmunition?$"RESERVE {weapon.ReserveAmmo}":"MELEE / unlimited";
-                if(weaponStatus!=null)weaponStatus.text=weapon!=null&&weapon.Cycle.IsReloading?"RELOADING":loadout==null?"":loadout.SelectedSlot==InsaneDreams.Inventory.EquipmentSlot.Firearm1?"PRIMARY":loadout.SelectedSlot==InsaneDreams.Inventory.EquipmentSlot.Firearm2?"SIDEARM":"MELEE";
-                if(weaponIcon!=null){weaponIcon.sprite=weapon!=null?(weapon.Definition.EquippedSprite!=null?weapon.Definition.EquippedSprite:visualRig!=null?visualRig.weapon.sprite:null):null;weaponIcon.scaleMode=ScaleMode.ScaleToFit;}
+                if(weaponStatus!=null)weaponStatus.text=weapon!=null&&weapon.Cycle.IsReloading?"RELOADING":weapon!=null&&weapon.Cycle.IsRecovering(Time.time)?"CYCLING":weapon!=null&&weapon.Definition.FireMode==InsaneDreams.Inventory.WeaponFireMode.ReleaseToFire?"RELEASE TO FIRE":loadout==null?"":loadout.SelectedSlot==InsaneDreams.Inventory.EquipmentSlot.Firearm1?"PRIMARY":loadout.SelectedSlot==InsaneDreams.Inventory.EquipmentSlot.Firearm2?"SIDEARM":"MELEE";
+                if(weaponIcon!=null){weaponIcon.sprite=weapon!=null?(weapon.Definition.Icon!=null?weapon.Definition.Icon:weapon.Definition.EquippedSprite!=null?weapon.Definition.EquippedSprite:visualRig!=null?visualRig.weapon.sprite:null):null;weaponIcon.scaleMode=ScaleMode.ScaleToFit;}
+                bool grenade=throwables!=null&&throwables.IsSelected;if(throwableTypes!=null)throwableTypes.style.display=grenade?DisplayStyle.Flex:DisplayStyle.None;
+                for(int i=0;i<3;i++)if(throwableButtons[i]!=null&&throwables!=null){int stock=throwables.Count((InsaneDreams.Combat.ThrowableKind)i);if(shownThrowableCounts[i]!=stock){shownThrowableCounts[i]=stock;throwableButtons[i].text=ThrowableTitles[i]+" "+stock;}throwableButtons[i].EnableInClassList("is-selected",(int)throwables.Selected==i);throwableButtons[i].EnableInClassList("is-empty",stock==0);}
+                if(grenade){loadoutLabel.text=throwables.Selected.ToString().ToUpperInvariant();if(ammoLabel!=null)ammoLabel.text=throwables.Count(throwables.Selected)+"/"+throwables.MaximumCapacity;if(reserveLabel!=null)reserveLabel.text="RELEASE TO THROW";if(weaponStatus!=null)weaponStatus.text="THROWABLE";if(weaponIcon!=null)weaponIcon.sprite=throwables.Icon;}
                 if(healthLabel!=null)healthLabel.text=health!=null?$"{health.Current:0} / {health.Maximum:0}":"--";
-                if(healthFill!=null){float ratio=health!=null?Mathf.Clamp01(health.Current/Mathf.Max(1,health.Maximum)):0;healthFill.style.width=Length.Percent(ratio*100);healthFill.EnableInClassList("critical",ratio<=.25f);}
-                if(armorLabel!=null)armorLabel.text=armor!=null?$"VEST {armor.Condition:0}":"VEST --";
-                if(tapeLabel!=null)tapeLabel.text=healing==null?"TAPE --":healing.IsHealing?$"TAPE {healing.DuctTape:0} / HEALING":healing.WaitingForRelease?"RELEASE HEAL":$"TAPE {healing.DuctTape:0}";
-                if(reviveLabel!=null)reviveLabel.text=revive==null?"REVIVE --":revive.ProtectionRemaining>0?$"PROTECTED {revive.ProtectionRemaining:0.0}s":$"FAINTANYL {revive.Injections}/2";
+                if(healthFill!=null){float ratio=health!=null?Mathf.Clamp01(health.Current/Mathf.Max(1,health.Maximum)):0;healthFill.style.width=Length.Percent(ratio*100);healthFill.EnableInClassList("critical",ratio<=.25f);healthLabel?.EnableInClassList("low-health",ratio<=.25f);if(healthCaption!=null)healthCaption.text=ratio<=.25f?"HP!":"HP";}
+                if(armorLabel!=null)armorLabel.text=armor!=null?$"VEST {armor.Condition:0} / HELMET {armor.HelmetCondition:0}":"VEST -- / HELMET --";
+                if(tapeLabel!=null)tapeLabel.text=healing==null?"DUCT TAPE --":healing.IsHealing?$"DUCT TAPE {healing.DuctTape:0} / HEALING":healing.WaitingForRelease?"RELEASE HEAL":$"DUCT TAPE {healing.DuctTape:0}";
+                if(reviveLabel!=null)reviveLabel.text=revive==null?"FAINTANYL --":revive.ProtectionRemaining>0?$"FAINTANYL / SAFE {revive.ProtectionRemaining:0.0}s":$"FAINTANYL {revive.Injections}/2";
+                if(firstSlot!=null)firstSlot.text=loadout!=null&&loadout.Get(InsaneDreams.Inventory.EquipmentSlot.Firearm1)!=null?"1 / MAIN":"1 / EMPTY";if(secondSlot!=null)secondSlot.text=loadout!=null&&loadout.Get(InsaneDreams.Inventory.EquipmentSlot.Firearm2)!=null?"2 / SIDE":"2 / EMPTY";
+                firstSlot?.EnableInClassList("is-empty",loadout==null||loadout.Get(InsaneDreams.Inventory.EquipmentSlot.Firearm1)==null);secondSlot?.EnableInClassList("is-empty",loadout==null||loadout.Get(InsaneDreams.Inventory.EquipmentSlot.Firearm2)==null);
                 firstSlot?.EnableInClassList("is-selected",loadout!=null&&loadout.SelectedSlot==InsaneDreams.Inventory.EquipmentSlot.Firearm1);
                 secondSlot?.EnableInClassList("is-selected",loadout!=null&&loadout.SelectedSlot==InsaneDreams.Inventory.EquipmentSlot.Firearm2);
                 meleeSlot?.EnableInClassList("is-selected",loadout!=null&&loadout.SelectedSlot==InsaneDreams.Inventory.EquipmentSlot.Melee);
-                if(healButton!=null){healButton.text=healing!=null&&healing.IsHealing?"HEALING":"HOLD\nHEAL";healButton.EnableInClassList("healing",healing!=null&&healing.IsHealing);}
+                if(healButton!=null){healButton.text=healing!=null&&healing.IsHealing?"HEALING":healing!=null&&healing.DuctTape<=0?"NO TAPE":"HOLD\nHEAL";healButton.EnableInClassList("is-unavailable",healing==null||healing.DuctTape<=0);healButton.EnableInClassList("healing",healing!=null&&healing.IsHealing);}
                 if(supplyButton!=null)supplyButton.EnableInClassList("hidden",supplies==null||supplies.NearbyCrate==null);
-                if(suppliesNotice!=null)suppliesNotice.text=supplies!=null?supplies.Notification:"";
+                if(suppliesNotice!=null){suppliesNotice.text=supplies!=null?supplies.Notification:"";suppliesNotice.EnableInClassList("hidden",suppliesNotice.text.Length==0);}
+                }
             }
             if(reviveOverlay!=null)
             {
-                bool offer=revive!=null&&revive.CanOfferRevive;
+                bool offer=revive!=null&&!revive.IsAutomatic&&revive.CanOfferRevive;
                 reviveOverlay.style.display=offer?DisplayStyle.Flex:DisplayStyle.None;
-                if(offer){reviveButton.text=$"INJECT FAINTANYL — REVIVE ({revive.Injections}/2)";if(Time.timeScale>0)reviveOverlay.BringToFront();}
+                if(offer){if(shownReviveOffer!=revive.Injections){shownReviveOffer=revive.Injections;reviveButton.text=$"INJECT FAINTANYL — REVIVE ({revive.Injections}/2)";}if(Time.timeScale>0)reviveOverlay.BringToFront();}
+                else shownReviveOffer=-1;
             }
             var screen = new Vector2Int(Screen.width, Screen.height);
             if (lastSafeArea == Screen.safeArea && lastScreen == screen) return;
@@ -295,6 +392,10 @@ namespace InsaneDreams.Input
                 Mathf.Clamp01((height - safeArea.yMax) / height), Mathf.Clamp01(safeArea.yMin / height));
         }
 
+        private void RefreshThrowableReadout()=>nextReadout=0;
+        private void RefreshInjectionReadout(int count)
+        {if(revivePips==null||count==lastReviveCount)return;lastReviveCount=count;for(int i=0;i<2;i++){injectionPips[i].style.display=DisplayStyle.Flex;injectionPips[i].EnableInClassList("is-empty",i>=count);((Image)injectionPips[i]).tintColor=i<count?Color.white:Color.clear;injectionPips[i].tooltip=i<count?"FAINTANYL / AVAILABLE":"EMPTY REVIVAL SLOT";}if(reviveLabel!=null)reviveLabel.text="FAINTANYL "+count+"/2";}
+        private void ClearAimPointer(){aimStick?.Release();firingZone=false;ReleaseFire();}
         private void ClearPointers()
         {
             moveStick?.Release(); aimStick?.Release();
@@ -313,6 +414,12 @@ namespace InsaneDreams.Input
         private void OnApplicationPause(bool paused) { if (paused) CancelInput(false); }
         private void OnDisable()
         {
+            ObserveAmmo(null);
+            damageOverlay?.RemoveFromHierarchy();damageOverlay=null;
+            if(throwables!=null)throwables.InventoryChanged-=RefreshThrowableReadout;
+            if(revive!=null)revive.InventoryChanged-=RefreshInjectionReadout;
+            revivePips?.RemoveFromHierarchy();revivePips=null;
+            throwableTypes?.RemoveFromHierarchy();throwableTypes=null;
             blindFireButton?.UnregisterCallback<PointerDownEvent>(FireDown);
             blindFireButton?.UnregisterCallback<PointerUpEvent>(FireUp);
             blindFireButton?.UnregisterCallback<PointerCancelEvent>(FireCancel);
@@ -320,7 +427,7 @@ namespace InsaneDreams.Input
             pressureFrame?.RemoveFromHierarchy();pressureFrame=null;
             reviveOverlay?.RemoveFromHierarchy();reviveOverlay=null;
             CancelInput();
-            if (subscribedActions != null) subscribedActions.InputReset -= ClearPointers;
+            if (subscribedActions != null) { subscribedActions.InputReset -= ClearPointers;subscribedActions.AimCancelled-=ClearAimPointer; }
             subscribedActions = null;
             moveStick?.Dispose(); aimStick?.Dispose();
             if (root == null) return;
@@ -351,9 +458,10 @@ namespace InsaneDreams.Input
             private readonly VisualElement knob;
             private readonly System.Action<Vector2> changed;
             private int pointer = -1;
-            public Stick(VisualElement element, System.Action<Vector2> callback)
+            private readonly System.Action started;private readonly System.Action<bool> finished;
+            public Stick(VisualElement element, System.Action<Vector2> callback,System.Action started=null,System.Action<bool> finished=null)
             {
-                pad = element; knob = pad.Q<VisualElement>(className: "knob"); changed = callback;
+                pad = element; knob = pad.Q<VisualElement>(className: "knob"); changed = callback;this.started=started;this.finished=finished;
                 pad.RegisterCallback<PointerDownEvent>(Down);
                 pad.RegisterCallback<PointerMoveEvent>(Move);
                 pad.RegisterCallback<PointerUpEvent>(Up);
@@ -363,10 +471,10 @@ namespace InsaneDreams.Input
             private void Down(PointerDownEvent evt)
             {
                 if (pointer != -1) return;
-                pointer = evt.pointerId; pad.CapturePointer(pointer); SetPosition(evt.position); evt.StopPropagation();
+                pointer = evt.pointerId; pad.CapturePointer(pointer);started?.Invoke(); SetPosition(evt.position); evt.StopPropagation();
             }
             private void Move(PointerMoveEvent evt) { if (evt.pointerId == pointer) { SetPosition(evt.position); evt.StopPropagation(); } }
-            private void Up(PointerUpEvent evt) { if (evt.pointerId == pointer) Release(); }
+            private void Up(PointerUpEvent evt) { if (evt.pointerId == pointer) Release(true); }
             private void Cancel(PointerCancelEvent evt) { if (evt.pointerId == pointer) Release(); }
             private void CaptureLost(PointerCaptureOutEvent evt) { if (evt.pointerId == pointer) Release(); }
             private void SetPosition(Vector2 position)
@@ -377,9 +485,11 @@ namespace InsaneDreams.Input
                 knob.style.translate = new Translate(axis.x * radius, axis.y * radius);
                 changed(new Vector2(axis.x, -axis.y));
             }
-            public void Release()
+            public void Release()=>Release(false);
+            private void Release(bool normal)
             {
                 int old = pointer; pointer = -1;
+                if(old>=0)finished?.Invoke(normal);
                 if (old >= 0 && pad.HasPointerCapture(old)) pad.ReleasePointer(old);
                 knob.style.translate = new Translate(0, 0); changed(Vector2.zero);
             }

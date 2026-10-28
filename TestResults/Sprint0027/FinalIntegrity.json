@@ -1,0 +1,13 @@
+{
+  "checked": 813,
+  "changed": [
+    "Assets\\Prefabs\\Enemies\\Larper.prefab",
+    "Assets\\Prefabs\\Enemies\\FireworksExpert.prefab",
+    "Assets\\Prefabs\\Player\\WarehousePlayer.prefab",
+    "Assets\\Data\\Progression\\DemoCatalog.asset",
+    "Assets\\Data\\FirstOperation\\Officer.prefab"
+  ],
+  "geometryUnchanged": true,
+  "apkBytes": 51387294,
+  "apkSHA256": "089978273B4043F47D901F4FB5DA542C67784A241E3FED1539CC055F6825DD9F"
+}

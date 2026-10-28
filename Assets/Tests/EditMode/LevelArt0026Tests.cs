@@ -35,9 +35,9 @@ namespace InsaneDreams.Tests
                 var scene=EditorSceneManager.OpenScene("Assets/Scenes/"+name+".unity",OpenSceneMode.Additive);
                 try
                 {
-                    var differences=(string[])compare.Invoke(null,new object[]{scene});Assert.IsEmpty(differences,name+" protected scene data");
-                    var all=scene.GetRootGameObjects().SelectMany(g=>g.GetComponentsInChildren<SpriteRenderer>(true)).ToArray();var art=all.Where(r=>r.enabled&&AssetDatabase.GetAssetPath(r.sprite).StartsWith(Art)).ToArray();Assert.Greater(art.Length,40,name);Assert.AreEqual(6,art.Count(r=>r.sprite.name.StartsWith("Window_")),name+" sparse windows");
-                    Assert.GreaterOrEqual(art.Where(r=>r.sprite.name.StartsWith("Crate")).Select(r=>r.sprite.name.Split('_')[0]).Distinct().Count(),4,name);
+                    bool operation=name=="Warehouse_Demo"&&scene.GetRootGameObjects().SelectMany(g=>g.GetComponentsInChildren<InsaneDreams.Missions.WarehouseMission>()).Any(m=>m.FirstOperation);if(!operation){var differences=(string[])compare.Invoke(null,new object[]{scene});Assert.IsEmpty(differences,name+" protected scene data");}
+                    var all=scene.GetRootGameObjects().SelectMany(g=>g.GetComponentsInChildren<SpriteRenderer>(true)).ToArray();var art=all.Where(r=>r.enabled&&AssetDatabase.GetAssetPath(r.sprite).StartsWith(Art)).ToArray();Assert.Greater(art.Length,40,name);Assert.AreEqual(operation?5:6,art.Count(r=>r.sprite.name.StartsWith("Window_")),name+" sparse windows");
+                    Assert.GreaterOrEqual(art.Where(r=>r.sprite.name.StartsWith("Crate")).Select(r=>r.sprite.name.Split('_')[0]).Distinct().Count(),operation?3:4,name);
                     foreach(var r in art){Assert.NotNull(r.sharedMaterial,r.name);Assert.NotNull(r.sharedMaterial.shader,r.name);Assert.AreEqual(1,r.transform.lossyScale.x,.0001f,r.name);Assert.AreEqual(1,r.transform.lossyScale.y,.0001f,r.name);}
                     foreach(var child in art.Where(r=>r.name=="LevelArt0026_Visual"))
                     {

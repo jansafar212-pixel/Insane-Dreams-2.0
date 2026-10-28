@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "UnityEditor.EditorApplication.delayCall += () => {\n    string evidence=\"TestResults/Sprint0027/AndroidBuild.json\";\n    bool bundle=UnityEditor.EditorUserBuildSettings.buildAppBundle;\n    try {\n        UnityEditor.EditorUserBuildSettings.buildAppBundle=false;\n        string folder=System.IO.Path.GetFullPath(\"build/Sprint0027\");System.IO.Directory.CreateDirectory(folder);\n        string apk=System.IO.Path.Combine(folder,\"AKUMU2-dev.apk\");\n        if(System.IO.File.Exists(apk))throw new System.InvalidOperationException(\"Sprint APK already exists; refusing to overwrite\");\n        System.IO.File.WriteAllText(\"TestResults/Sprint0027/AndroidBuild-started.txt\",System.DateTime.UtcNow.ToString(\"O\"));\n        var options=new UnityEditor.BuildPlayerOptions{scenes=UnityEditor.EditorBuildSettings.scenes.Where(s=>s.enabled).Select(s=>s.path).ToArray(),target=UnityEditor.BuildTarget.Android,locationPathName=apk,options=UnityEditor.BuildOptions.Development};\n        var report=UnityEditor.BuildPipeline.BuildPlayer(options);\n        var result=new{result=report.summary.result.ToString(),report.summary.totalErrors,report.summary.totalWarnings,report.summary.totalSize,seconds=report.summary.totalTime.TotalSeconds,apk,scenes=options.scenes,errors=report.steps.SelectMany(s=>s.messages).Where(m=>m.type==UnityEngine.LogType.Error||m.type==UnityEngine.LogType.Exception).Select(m=>m.content).ToArray()};\n        System.IO.File.WriteAllText(evidence,Newtonsoft.Json.JsonConvert.SerializeObject(result,Newtonsoft.Json.Formatting.Indented));\n    }catch(System.Exception e){System.IO.File.WriteAllText(evidence,Newtonsoft.Json.JsonConvert.SerializeObject(new{result=\"Exception\",error=e.ToString()},Newtonsoft.Json.Formatting.Indented));}\n    finally{UnityEditor.EditorUserBuildSettings.buildAppBundle=bundle;}\n};\nreturn \"Queued development Android APK; durable result: TestResults/Sprint0027/AndroidBuild.json\";\r\n"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": "Queued development Android APK; durable result: TestResults/Sprint0027/AndroidBuild.json"
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

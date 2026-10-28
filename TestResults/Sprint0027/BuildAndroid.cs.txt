@@ -1,0 +1,17 @@
+UnityEditor.EditorApplication.delayCall += () => {
+    string evidence="TestResults/Sprint0027/AndroidBuild.json";
+    bool bundle=UnityEditor.EditorUserBuildSettings.buildAppBundle;
+    try {
+        UnityEditor.EditorUserBuildSettings.buildAppBundle=false;
+        string folder=System.IO.Path.GetFullPath("build/Sprint0027");System.IO.Directory.CreateDirectory(folder);
+        string apk=System.IO.Path.Combine(folder,"AKUMU2-dev.apk");
+        if(System.IO.File.Exists(apk))throw new System.InvalidOperationException("Sprint APK already exists; refusing to overwrite");
+        System.IO.File.WriteAllText("TestResults/Sprint0027/AndroidBuild-started.txt",System.DateTime.UtcNow.ToString("O"));
+        var options=new UnityEditor.BuildPlayerOptions{scenes=UnityEditor.EditorBuildSettings.scenes.Where(s=>s.enabled).Select(s=>s.path).ToArray(),target=UnityEditor.BuildTarget.Android,locationPathName=apk,options=UnityEditor.BuildOptions.Development};
+        var report=UnityEditor.BuildPipeline.BuildPlayer(options);
+        var result=new{result=report.summary.result.ToString(),report.summary.totalErrors,report.summary.totalWarnings,report.summary.totalSize,seconds=report.summary.totalTime.TotalSeconds,apk,scenes=options.scenes,errors=report.steps.SelectMany(s=>s.messages).Where(m=>m.type==UnityEngine.LogType.Error||m.type==UnityEngine.LogType.Exception).Select(m=>m.content).ToArray()};
+        System.IO.File.WriteAllText(evidence,Newtonsoft.Json.JsonConvert.SerializeObject(result,Newtonsoft.Json.Formatting.Indented));
+    }catch(System.Exception e){System.IO.File.WriteAllText(evidence,Newtonsoft.Json.JsonConvert.SerializeObject(new{result="Exception",error=e.ToString()},Newtonsoft.Json.Formatting.Indented));}
+    finally{UnityEditor.EditorUserBuildSettings.buildAppBundle=bundle;}
+};
+return "Queued development Android APK; durable result: TestResults/Sprint0027/AndroidBuild.json";

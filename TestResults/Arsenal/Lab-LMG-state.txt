@@ -1,0 +1,1 @@
+frame=377; combatEnabled=True; actionsEnabled=True; aim=True; fire=True; sniper=False; shots=3; ammo=99; origin=(-22.38, 1.12); muzzle=(-22.44, 0.99); parent=Weapon

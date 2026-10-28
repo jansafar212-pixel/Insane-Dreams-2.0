@@ -1,0 +1,45 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "if(UnityEditor.EditorApplication.isPlaying||UnityEditor.EditorApplication.isCompiling||UnityEngine.SceneManagement.SceneManager.GetActiveScene().isDirty)throw new System.Exception(\"Busy or dirty scene; preserve current state\");\nvar s=UnityEditor.SceneManagement.EditorSceneManager.OpenScene(\"Assets/Scenes/Warehouse_Demo.unity\");int missing=0;foreach(var g in s.GetRootGameObjects())foreach(var t in g.GetComponentsInChildren<UnityEngine.Transform>(true))missing+=UnityEditor.GameObjectUtility.GetMonoBehavioursWithMissingScriptCount(t.gameObject);\nvar officer=UnityEngine.Object.FindAnyObjectByType<InsaneDreams.Enemies.OfficerShotTelegraph>();var roof=UnityEngine.GameObject.Find(\"BunkerRoof\").GetComponent<UnityEngine.BoxCollider2D>();var m=UnityEngine.Object.FindAnyObjectByType<InsaneDreams.Missions.WarehouseMission>();\nreturn new{scene=s.path,dirty=s.isDirty,playing=UnityEditor.EditorApplication.isPlaying,compiling=UnityEditor.EditorApplication.isCompiling,missingScripts=missing,counts=m.Encounters.Select(g=>g.Count).ToArray(),peekX=officer.BunkerPeek.position.x,coverGap=officer.CoverStandOff(officer.BunkerCover),roof=new[]{roof.bounds.min.x,roof.bounds.max.x,roof.bounds.min.y,roof.bounds.max.y},decorColliders=UnityEngine.GameObject.Find(\"HandmadeEarthAndVegetation\").GetComponentsInChildren<UnityEngine.Collider2D>().Length};"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": {
+        "scene": "Assets/Scenes/Warehouse_Demo.unity",
+        "dirty": false,
+        "playing": false,
+        "compiling": false,
+        "missingScripts": 0,
+        "counts": [
+          3,
+          4,
+          3,
+          3,
+          2
+        ],
+        "peekX": 136,
+        "coverGap": 0.65,
+        "roof": [
+          140.5,
+          145,
+          4.6875,
+          5.0625
+        ],
+        "decorColliders": 0
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

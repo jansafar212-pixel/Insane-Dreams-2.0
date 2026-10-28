@@ -47,11 +47,11 @@ namespace InsaneDreams.Tests
         }
         [UnityTest] public IEnumerator WalletAutomaticallyCollectsAtExpandedRadiusButNotBeyondIt()
         {
-            var g=Keep(Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Pickups/WalletPickup.prefab"),player.transform.position+Vector3.right*2.2f,Quaternion.identity));
+            var g=Keep(Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Pickups/WalletPickup.prefab"),player.transform.position+Vector3.right*3f,Quaternion.identity));
             var wallet=g.GetComponent<WalletPickup>();wallet.Initialize("expanded-radius",17);
             yield return new WaitForSeconds(.3f);Assert.AreEqual(0,supplies.Earnings);Assert.IsFalse(wallet.TryCollect(supplies));
             g.transform.position=player.transform.position+Vector3.right*1.5f;Physics2D.SyncTransforms();
-            yield return new WaitForSeconds(.3f);Assert.AreEqual(17,supplies.Earnings);Assert.AreEqual("Wallet collected",supplies.Notification);
+            yield return new WaitForSeconds(.3f);Assert.AreEqual(17,supplies.Earnings);Assert.That(supplies.Notification,Does.StartWith("+$").And.Contain(" / WALLETS $"));
             Assert.IsFalse(supplies.CollectWallet("expanded-radius",17));Assert.AreEqual(17,supplies.Earnings);
         }
         [UnityTest] public IEnumerator HeldHealingConsumesExactlyRestoredHpAndStopsOnReleaseOrFullHealth()
@@ -69,13 +69,13 @@ namespace InsaneDreams.Tests
             actions.SetHealIntent(false);yield return null;actions.SetHealIntent(true);yield return new WaitForSeconds(.15f);Assert.Greater(health.Current,hp);
             health.ApplyDamage(new DamageInfo(1000,CombatTeam.Enemy));yield return new WaitForSeconds(.15f);Assert.AreEqual(0,health.Current);Assert.IsFalse(healing.TryHeal());
         }
-        [UnityTest] public IEnumerator HealingWorksInCoverButFireReloadAndAirborneActionsTakePriority()
+        [UnityTest] public IEnumerator HealingWorksInCoverBlocksFireAndReloadButAirborneActionsTakePriority()
         {
             Solid(new Vector2(X+1.1f,.45f),new Vector2(1,.9f));actions.SetTouchMove(Vector2.down);yield return new WaitForSeconds(.25f);Assert.IsTrue(player.GetComponent<PlayerCover2D>().IsCovered);
             health.ApplyDamage(new DamageInfo(60,CombatTeam.Enemy));actions.SetHealIntent(true);yield return new WaitForSeconds(.2f);Assert.IsTrue(healing.IsHealing);
-            actions.SetFireIntent(true);yield return null;yield return null;float hp=health.Current;yield return new WaitForSeconds(.15f);Assert.AreEqual(hp,health.Current);Assert.IsFalse(healing.IsHealing);
-            actions.SetFireIntent(false);var weapon=player.GetComponent<PlayerLoadout>().SelectedWeapon;weapon.SetAmmunition(1,20);actions.RequestReload();yield return new WaitForSeconds(.15f);Assert.IsFalse(healing.IsHealing);
-            weapon.Cycle.CancelReload();actions.SetTouchMove(Vector2.zero);actions.Jump();yield return new WaitForSeconds(.12f);Assert.IsFalse(healing.IsHealing);
+            actions.SetFireIntent(true);yield return null;yield return null;float hp=health.Current;int ammo=player.GetComponent<PlayerLoadout>().SelectedWeapon.MagazineAmmo;yield return new WaitForSeconds(.15f);Assert.Greater(health.Current,hp);Assert.IsTrue(healing.IsHealing);Assert.AreEqual(ammo,player.GetComponent<PlayerLoadout>().SelectedWeapon.MagazineAmmo);
+            actions.SetFireIntent(false);var weapon=player.GetComponent<PlayerLoadout>().SelectedWeapon;weapon.SetAmmunition(1,20);actions.RequestReload();yield return new WaitForSeconds(.15f);Assert.IsTrue(healing.IsHealing);Assert.IsFalse(weapon.Cycle.IsReloading);
+            weapon.Cycle.CancelReload();actions.SetTouchMove(Vector2.zero);yield return null;Assert.IsTrue(player.GetComponent<InsaneDreams.Traversal.PlayerPosture2D>().PrepareJump(),"The test must have standing clearance before checking airborne healing");actions.Jump();yield return new WaitForSeconds(.12f);Assert.IsFalse(player.GetComponent<InsaneDreams.Prototype.PlayerMotor2D>().IsGrounded,"The healing check requires an actual airborne jump");Assert.IsFalse(healing.IsHealing);
         }
         [UnityTest] public IEnumerator CrateCapsBothInventoriesAndKeepsUnacceptedContents()
         {
@@ -95,14 +95,14 @@ namespace InsaneDreams.Tests
         {
             var crate=Crate(1.1f);var wall=Solid(new Vector2(X+.55f,1.5f),new Vector2(.1f,3));Assert.IsFalse(crate.TrySupply(supplies));Assert.AreEqual(72,crate.AmmoLeft);
             var wallet=Keep(Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Pickups/WalletPickup.prefab"),new Vector3(X+1,.85f),Quaternion.identity)).GetComponent<WalletPickup>();wallet.Initialize("blocked-wallet",11);
-            Assert.IsFalse(wallet.TryCollect(supplies));Assert.AreEqual(0,supplies.Earnings);Object.Destroy(wall);yield return new WaitForSeconds(.3f);Assert.AreEqual(11,supplies.Earnings);Assert.AreEqual("Wallet collected",supplies.Notification);
+            Assert.IsFalse(wallet.TryCollect(supplies));Assert.AreEqual(0,supplies.Earnings);Object.Destroy(wall);yield return new WaitForSeconds(.3f);Assert.AreEqual(11,supplies.Earnings);Assert.That(supplies.Notification,Does.StartWith("+$").And.Contain(" / WALLETS $"));
         }
         [UnityTest] public IEnumerator RealDefeatDropsAutomaticWalletExactlyOnceAcrossEnemyReactivation()
         {
             var enemy=Enemy();var drop=Defeat(enemy);Assert.IsFalse(enemy.activeSelf);Assert.IsNotNull(drop.Wallet);var wallet=drop.Wallet;
             string id=(string)typeof(WalletPickup).GetField("rewardId",BindingFlags.Instance|BindingFlags.NonPublic).GetValue(wallet);
             player.GetComponent<Rigidbody2D>().position=new Vector2(X+4,.85f);Physics2D.SyncTransforms();yield return new WaitForSeconds(.3f);
-            Assert.That(supplies.Earnings,Is.InRange(5,20));Assert.AreEqual("Wallet collected",supplies.Notification);int money=supplies.Earnings;Assert.IsFalse(supplies.CollectWallet(id,999));Assert.AreEqual(money,supplies.Earnings);
+            Assert.That(supplies.Earnings,Is.InRange(5,20));Assert.That(supplies.Notification,Does.StartWith("+$").And.Contain(" / WALLETS $"));int money=supplies.Earnings;Assert.IsFalse(supplies.CollectWallet(id,999));Assert.AreEqual(money,supplies.Earnings);
             enemy.GetComponent<Health>().Restore();enemy.SetActive(true);Defeat(enemy);Assert.IsTrue(drop.Wallet==null);Assert.AreEqual(money,supplies.Earnings);
         }
         [UnityTest] public IEnumerator ImpactCueAndMaterialParticlesFadeWithinExistingPools()

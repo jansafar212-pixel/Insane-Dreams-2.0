@@ -24,7 +24,8 @@ namespace InsaneDreams.Tests
         [Test] public void DecorativeObjectsHaveNoBehaviorOrCollisionAndOriginalSceneDataMatches()
         {
             var setup=AppDomain.CurrentDomain.GetAssemblies().Select(a=>a.GetType("HandmadeEnvironmentDetailsSetup")).First(t=>t!=null);
-            foreach(string name in new[]{"Warehouse_Demo","Warehouse_Testbed","Warehouse_Mission01"})
+            // Demo is the authorized Sprint0028 spatial redesign; validated by FirstOperationLayoutTests.
+            foreach(string name in new[]{"Warehouse_Testbed","Warehouse_Mission01"})
             {
                 var scene=UnityEngine.SceneManagement.SceneManager.GetSceneByPath("Assets/Scenes/"+name+".unity");bool opened=!scene.isLoaded;if(opened)scene=EditorSceneManager.OpenScene("Assets/Scenes/"+name+".unity",OpenSceneMode.Additive);
                 try

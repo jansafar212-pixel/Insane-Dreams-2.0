@@ -1,0 +1,84 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 20.2,
+      "summary": {
+        "total": 8,
+        "passed": 6,
+        "failed": 2,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "InsaneDreams.Tests.AdaptiveCombatCameraTests.AimOverridesRetreatBothWaysAndDoesNotRequireFiring",
+          "Status": "Passed",
+          "Duration": 2.2424746,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.AdaptiveCombatCameraTests.BoundsEaseWithoutLeavingLevelAtPhoneAspects",
+          "Status": "Failed",
+          "Duration": 5.7912364,
+          "Message": "  Expected: in range (0,08,0,92)\r\n  But was:  0.920364439f\r\n",
+          "StackTrace": "at InsaneDreams.Tests.AdaptiveCombatCameraTests+<BoundsEaseWithoutLeavingLevelAtPhoneAspects>d__19.MoveNext () [0x001a8] in C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Tests\\PlayMode\\AdaptiveCombatCameraTests.cs:72\r\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in .\\Library\\PackageCache\\com.unity.test-framework@80f691d4262b\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:52\r\n"
+        },
+        {
+          "FullName": "InsaneDreams.Tests.AdaptiveCombatCameraTests.CloseSamuraiContractsCompositionWithoutTargetLockOrJump",
+          "Status": "Passed",
+          "Duration": 2.589713,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.AdaptiveCombatCameraTests.DeadZoneAndRapidReversalsCannotChatterOrStepTheCamera",
+          "Status": "Failed",
+          "Duration": 2.6731934,
+          "Message": "  Expected: greater than 0.600000024f\r\n  But was:  0.350345045f\r\n",
+          "StackTrace": "at InsaneDreams.Tests.AdaptiveCombatCameraTests+<DeadZoneAndRapidReversalsCannotChatterOrStepTheCamera>d__15.MoveNext () [0x001cd] in C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Tests\\PlayMode\\AdaptiveCombatCameraTests.cs:47\r\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in .\\Library\\PackageCache\\com.unity.test-framework@80f691d4262b\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:52\r\n"
+        },
+        {
+          "FullName": "InsaneDreams.Tests.AdaptiveCombatCameraTests.DeterministicRatesAndSteadyStateAllocationsRemainBounded",
+          "Status": "Passed",
+          "Duration": 0.2252906,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.AdaptiveCombatCameraTests.LargeFallAndParachuteChangesKeepLandingAreaAndPlayerVisible",
+          "Status": "Passed",
+          "Duration": 3.4244136,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.AdaptiveCombatCameraTests.MovementRespondsWhileCameraTransitionIsStillInProgress",
+          "Status": "Passed",
+          "Duration": 0.3554819,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.AdaptiveCombatCameraTests.ReleasedAimKeepsCombatMemoryThenReturnsToMovement",
+          "Status": "Passed",
+          "Duration": 2.8258699,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

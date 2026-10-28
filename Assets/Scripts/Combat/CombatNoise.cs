@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 namespace InsaneDreams.Combat
 {
-    public enum CombatNoiseKind { Movement, Gunfire }
+    public enum CombatNoiseKind { Movement, Gunfire, Explosion }
     public readonly struct CombatNoiseEvent
     {
         public readonly GameObject Source;

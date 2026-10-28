@@ -1,0 +1,357 @@
+{
+  "success": true,
+  "command": "command console",
+  "data": {
+    "command": "console",
+    "parameters": {
+      "tail": "35",
+      "level": "warn"
+    },
+    "result": {
+      "entries": [
+        {
+          "seq": 4127,
+          "timestampUtc": "2026-10-27T19:50:54.9309446Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "Assets\\Tests\\PlayMode\\Sprint024EnemyTests.cs(76,24): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 4128,
+          "timestampUtc": "2026-10-27T19:50:54.9309446Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "Assets\\Tests\\PlayMode\\Sprint0248SceneTests.cs(22,25): warning CS0618: 'Object.FindFirstObjectByType<T>()' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 4129,
+          "timestampUtc": "2026-10-27T19:51:32.724096Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "Account API did not become accessible within 30 seconds. This may be due to network issues or editor focus.",
+          "stackTrace": "UnityEngine.Debug:LogWarning (object)\nUnity.AI.Toolkit.Accounts.Services.States.ApiAccessibleState/<WaitForCloudProjectSettings>d__4:MoveNext () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Modules/Unity.AI.Toolkit.Accounts/Services/States/ApiAccessibleState.cs:46)\nSystem.Threading.Tasks.TaskCompletionSource`1<bool>:TrySetResult (bool)\nUnity.AI.Toolkit.EditorTask/<>c__DisplayClass22_0:<WaitForCondition>b__0 () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Modules/Unity.AI.Toolkit.Async/EditorTask.cs:420)\nUnityEditor.EditorApplication:Internal_CallUpdateFunctions ()\n",
+          "seeded": false
+        },
+        {
+          "seq": 4131,
+          "timestampUtc": "2026-10-27T19:51:50.0744296Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "FMOD failed to switch back to normal output, audio output stays suspended until the device can be re-initialized: \"Error initializing output device. \" (60)",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 4134,
+          "timestampUtc": "2026-10-27T19:51:50.5236023Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "FMOD failed to switch back to normal output, audio output stays suspended until the device can be re-initialized: \"Error initializing output device. \" (60)",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 4135,
+          "timestampUtc": "2026-10-27T19:51:50.5296361Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "FMOD failed to switch back to normal output, audio output stays suspended until the device can be re-initialized: \"Error initializing output device. \" (60)",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 4136,
+          "timestampUtc": "2026-10-27T19:51:50.5351488Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "FMOD failed to switch back to normal output, audio output stays suspended until the device can be re-initialized: \"Error initializing output device. \" (60)",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 4138,
+          "timestampUtc": "2026-10-27T19:51:52.3878337Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "FMOD failed to switch back to normal output, audio output stays suspended until the device can be re-initialized: \"Error initializing output device. \" (60)",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 4139,
+          "timestampUtc": "2026-10-27T19:51:52.3981241Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "FMOD failed to switch back to normal output, audio output stays suspended until the device can be re-initialized: \"Error initializing output device. \" (60)",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 4140,
+          "timestampUtc": "2026-10-27T19:51:52.4071908Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "FMOD failed to switch back to normal output, audio output stays suspended until the device can be re-initialized: \"Error initializing output device. \" (60)",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 4142,
+          "timestampUtc": "2026-10-27T19:52:03.8010642Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "FMOD failed to switch back to normal output, audio output stays suspended until the device can be re-initialized: \"Error initializing output device. \" (60)",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 4143,
+          "timestampUtc": "2026-10-27T19:52:03.8071036Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "FMOD failed to switch back to normal output, audio output stays suspended until the device can be re-initialized: \"Error initializing output device. \" (60)",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 4144,
+          "timestampUtc": "2026-10-27T19:52:03.812128Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "FMOD failed to switch back to normal output, audio output stays suspended until the device can be re-initialized: \"Error initializing output device. \" (60)",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 4146,
+          "timestampUtc": "2026-10-27T19:52:04.7909717Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "FMOD failed to switch back to normal output, audio output stays suspended until the device can be re-initialized: \"Error initializing output device. \" (60)",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 4147,
+          "timestampUtc": "2026-10-27T19:52:04.797483Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "FMOD failed to switch back to normal output, audio output stays suspended until the device can be re-initialized: \"Error initializing output device. \" (60)",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 4148,
+          "timestampUtc": "2026-10-27T19:52:04.8030123Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "FMOD failed to switch back to normal output, audio output stays suspended until the device can be re-initialized: \"Error initializing output device. \" (60)",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 4149,
+          "timestampUtc": "2026-10-27T19:52:04.8095326Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "FMOD failed to switch back to normal output, audio output stays suspended until the device can be re-initialized: \"Error initializing output device. \" (60)",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 4151,
+          "timestampUtc": "2026-10-27T19:52:06.3896291Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "FMOD failed to switch back to normal output, audio output stays suspended until the device can be re-initialized: \"Error initializing output device. \" (60)",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 4152,
+          "timestampUtc": "2026-10-27T19:52:06.3946608Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "FMOD failed to switch back to normal output, audio output stays suspended until the device can be re-initialized: \"Error initializing output device. \" (60)",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 4153,
+          "timestampUtc": "2026-10-27T19:52:06.4006795Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "FMOD failed to switch back to normal output, audio output stays suspended until the device can be re-initialized: \"Error initializing output device. \" (60)",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 4155,
+          "timestampUtc": "2026-10-27T19:52:09.0525832Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "FMOD failed to switch back to normal output, audio output stays suspended until the device can be re-initialized: \"Error initializing output device. \" (60)",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 4156,
+          "timestampUtc": "2026-10-27T19:52:09.0586093Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "FMOD failed to switch back to normal output, audio output stays suspended until the device can be re-initialized: \"Error initializing output device. \" (60)",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 4157,
+          "timestampUtc": "2026-10-27T19:52:09.0636345Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "FMOD failed to switch back to normal output, audio output stays suspended until the device can be re-initialized: \"Error initializing output device. \" (60)",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 4159,
+          "timestampUtc": "2026-10-27T19:52:09.2908422Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "FMOD failed to switch back to normal output, audio output stays suspended until the device can be re-initialized: \"Error initializing output device. \" (60)",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 4160,
+          "timestampUtc": "2026-10-27T19:52:09.2973739Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "FMOD failed to switch back to normal output, audio output stays suspended until the device can be re-initialized: \"Error initializing output device. \" (60)",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 4161,
+          "timestampUtc": "2026-10-27T19:52:09.3044054Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "FMOD failed to switch back to normal output, audio output stays suspended until the device can be re-initialized: \"Error initializing output device. \" (60)",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 4163,
+          "timestampUtc": "2026-10-27T19:52:13.9146228Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "FMOD failed to switch back to normal output, audio output stays suspended until the device can be re-initialized: \"Error initializing output device. \" (60)",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 4164,
+          "timestampUtc": "2026-10-27T19:52:13.9216505Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "FMOD failed to switch back to normal output, audio output stays suspended until the device can be re-initialized: \"Error initializing output device. \" (60)",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 4165,
+          "timestampUtc": "2026-10-27T19:52:13.9276788Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "FMOD failed to switch back to normal output, audio output stays suspended until the device can be re-initialized: \"Error initializing output device. \" (60)",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 4167,
+          "timestampUtc": "2026-10-27T19:52:14.2678018Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "FMOD failed to switch back to normal output, audio output stays suspended until the device can be re-initialized: \"Error initializing output device. \" (60)",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 4168,
+          "timestampUtc": "2026-10-27T19:52:14.2733325Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "FMOD failed to switch back to normal output, audio output stays suspended until the device can be re-initialized: \"Error initializing output device. \" (60)",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 4169,
+          "timestampUtc": "2026-10-27T19:52:14.2788467Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "FMOD failed to switch back to normal output, audio output stays suspended until the device can be re-initialized: \"Error initializing output device. \" (60)",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 4171,
+          "timestampUtc": "2026-10-27T19:52:17.096425Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "FMOD failed to switch back to normal output, audio output stays suspended until the device can be re-initialized: \"Error initializing output device. \" (60)",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 4172,
+          "timestampUtc": "2026-10-27T19:52:17.1024488Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "FMOD failed to switch back to normal output, audio output stays suspended until the device can be re-initialized: \"Error initializing output device. \" (60)",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 4173,
+          "timestampUtc": "2026-10-27T19:52:17.1084805Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "FMOD failed to switch back to normal output, audio output stays suspended until the device can be re-initialized: \"Error initializing output device. \" (60)",
+          "stackTrace": "",
+          "seeded": false
+        }
+      ],
+      "cursor": 4176,
+      "session": "74d3ba7134f244ffbe7c2fb9d91ab225",
+      "returned": 35,
+      "dropped": false,
+      "reset": false,
+      "counts": {
+        "error": 1,
+        "warn": 1303,
+        "log": 696
+      },
+      "groundTruth": {
+        "sampledUtc": "2026-10-27T19:53:57.0597335Z",
+        "ageMs": 66,
+        "compilationFailed": false,
+        "compiling": false,
+        "consoleErrors": 0,
+        "consoleWarnings": 32,
+        "consoleLogs": 14,
+        "seeded": true
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

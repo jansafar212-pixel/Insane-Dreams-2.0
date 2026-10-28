@@ -74,6 +74,7 @@ namespace InsaneDreams.Enemies
             {if(ladderRoute.State==LadderRouteState.Unavailable)routes.Fail(ladderFrom,ladderTo,8,"Ladder unavailable or timed out");ladderAttempt=false;}
             if(target==null||target.IsDefeated){winding=flying=false;backoffUntil=0;brain.SetPursuit(0);return EngagementState.Searching;}
             if(combat.IsDefensivelyCrouching){winding=false;backoffUntil=0;brain.SetPursuit(0);motor.SetMoveInput(0);return EngagementState.Reacting;}
+            if(!ready&&!flying){brain.SetPursuit(0);motor.SetMoveInput(0);return EngagementState.Reacting;}
             if(Time.time<backoffUntil)
             {brain.ClearPursuit();motor.SetMoveInput(backoffDirection*.7f);return EngagementState.Approaching;}
             if(backoffUntil>0){backoffUntil=0;motor.SetMoveInput(0);}
@@ -104,7 +105,8 @@ namespace InsaneDreams.Enemies
                 if(Time.time>=strikeAt){executor.Attack(combat.Weapon,CommittedAim,Time.time);Strikes++;swingUntil=Time.time+.18f;winding=false;nextAttack=Time.time+recoverySeconds;}
                 return EngagementState.Reacting;
             }
-            if(Time.time<nextAttack){brain.SetPursuit(0);return EngagementState.Reacting;}
+            // Recovery limits the next strike, not pursuit of an escaping target.
+            if(Time.time<nextAttack&&delta.magnitude<=attackDistance&&Mathf.Abs(delta.y)<=.9f){brain.SetPursuit(0);return EngagementState.Reacting;}
             if(delta.magnitude>attackDistance||Mathf.Abs(delta.y)>.9f)
             {
                 float direction=Mathf.Sign(delta.x);
@@ -116,7 +118,7 @@ namespace InsaneDreams.Enemies
                 brain.SetPursuit(Mathf.Abs(travel)>.15f&&combat.CanAdvance(direction)?direction:0,false);return EngagementState.Approaching;
             }
             brain.SetPursuit(0);
-            if(!visible||!ready||!cameraAllowed||!motor.IsGrounded)return EngagementState.Reacting;
+            if(Time.time<nextAttack||!visible||!ready||!cameraAllowed||!motor.IsGrounded)return EngagementState.Reacting;
             CommittedAim=delta.sqrMagnitude>.01f?delta.normalized:Vector2.right;winding=true;strikeAt=Time.time+windupSeconds;return EngagementState.Engaging;
         }
 

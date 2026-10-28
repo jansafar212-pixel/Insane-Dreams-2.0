@@ -1,0 +1,77 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 22.59,
+      "summary": {
+        "total": 7,
+        "passed": 7,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "InsaneDreams.Tests.Hotfix00252Tests.BlockedLongRetreatCanChooseShortAlternativeRatherThanFakeFullMagazineReload",
+          "Status": "Passed",
+          "Duration": 1.6949789,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Hotfix00252Tests.CarbinePoseIsUntouchedByPistolHandler",
+          "Status": "Passed",
+          "Duration": 0.2286963,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Hotfix00252Tests.DistantOrClippedShotsDoNotGenerateNearMissPressure",
+          "Status": "Passed",
+          "Duration": 1.2785219,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Hotfix00252Tests.GlockHandAttachmentReleaseGravityCollisionAndPoolLifetime",
+          "Status": "Passed",
+          "Duration": 4.424295,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Hotfix00252Tests.SamuraiKeepsMeleeRoleUnderCloseFire",
+          "Status": "Passed",
+          "Duration": 1.7160784,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Hotfix00252Tests.SaturatedReloadingLarperCanCancelReloadAndMoveToSafetyWithoutAmmoTransfer",
+          "Status": "Passed",
+          "Duration": 1.4926717,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Hotfix00252Tests.SustainedRealOverheadFireEscapesEvenWhenOptionalRetreatRollIsZero",
+          "Status": "Passed",
+          "Duration": 11.7130571,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

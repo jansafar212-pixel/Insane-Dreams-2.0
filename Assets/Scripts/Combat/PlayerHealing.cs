@@ -41,15 +41,15 @@ namespace InsaneDreams.Combat
             float added=Mathf.Min(amount,Mathf.Max(0,maximumDuctTape-DuctTape));DuctTape+=added;return added;
         }
         private bool CanHeal=>isActiveAndEnabled&&actions.isActiveAndEnabled&&!health.IsDefeated&&health.Current<health.Maximum&&DuctTape>0&&
-            !waitingForRelease&&Time.time>=blockedUntil&&!actions.FireHeld&&
-            (motor==null||motor.enabled&&motor.IsGrounded)&&(traversal==null||!traversal.IsClimbing&&!traversal.ParachuteFlightActive)&&
-            (loadout==null||loadout.SelectedWeapon==null||!loadout.SelectedWeapon.Cycle.IsReloading);
+            !waitingForRelease&&Time.time>=blockedUntil&&
+            (motor==null||motor.enabled&&motor.IsGrounded)&&(traversal==null||!traversal.IsClimbing&&!traversal.ParachuteFlightActive);
         public bool TryHeal(){if(!CanHeal)return false;actions.SetHealIntent(true);return true;}
         private void Update()
         {
             IsHealing=false;
             if(!actions.HealHeld){waitingForRelease=false;return;}
             if(!CanHeal)return;
+            loadout?.SelectedWeapon?.Cycle.CancelReload();
             float restored=health.Heal(Mathf.Min(DuctTape,healingPerSecond*Time.deltaTime));
             if(restored<=0)return;
             DuctTape=Mathf.Max(0,DuctTape-restored);LastRestored=restored;IsHealing=true;FeedbackUntil=Time.time+.25f;Healed?.Invoke(restored);

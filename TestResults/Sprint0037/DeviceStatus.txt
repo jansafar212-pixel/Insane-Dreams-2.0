@@ -1,0 +1,1 @@
+2026-10-29: adb devices -l returned an empty list. No APK was installed or tested on Android hardware.

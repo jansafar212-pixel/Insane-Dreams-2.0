@@ -1,0 +1,1 @@
+before=37077:256 / Assets/Art/Sprint0246/LarperPistol.asset; after=37077:256 / Assets/Art/Sprint0246/LarperPistol.asset; definition=37077:256 / Assets/Art/Sprint0246/LarperPistol.asset; referenceSame=True

@@ -1,0 +1,112 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 22.71,
+      "summary": {
+        "total": 12,
+        "passed": 12,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "InsaneDreams.Tests.Sprint024FlowTests.AlternateGapStepCanBeReachedUsingExistingDoubleJump",
+          "Status": "Passed",
+          "Duration": 2.605288,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint024FlowTests.ArmorAbsorbsBodyDamageConsumesConditionAndDoesNotProtectHeadOrNeutralHazards",
+          "Status": "Passed",
+          "Duration": 0.1255148,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint024FlowTests.FailedSaveRollsBackPurchaseWithoutChargingOrGrantingAnItem",
+          "Status": "Passed",
+          "Duration": 0.0402916,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint024FlowTests.FaintanylRevivePersistsImmediatelyWithoutResettingMissionAndRetryStock",
+          "Status": "Passed",
+          "Duration": 0.7852141,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint024FlowTests.Hotfix00251PauseCentersInSafeTopAreaWithoutCoveringHudAndStillPauses",
+          "Status": "Passed",
+          "Duration": 0.6591749,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint024FlowTests.InterruptedRunRestoresSavedStockAndSettlesPendingEarningsOnlyOnce",
+          "Status": "Passed",
+          "Duration": 0.178968,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint024FlowTests.PhysicalExitFullLoopRepeatsWithoutAnyPurchases",
+          "Status": "Passed",
+          "Duration": 6.8196329,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint024FlowTests.PhysicalExitFullLoopRepeatsWithPurchasedEquipmentAndSavedEarnings",
+          "Status": "Passed",
+          "Duration": 8.277258,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint024FlowTests.PreparationIsMandatoryPurchasesOptionalAndResultMoneySettlesOnlyOnce",
+          "Status": "Passed",
+          "Duration": 0.118745,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint024FlowTests.PurchasedEquipmentReachesMissionAndRetryDoesNotRefillFiniteStock",
+          "Status": "Passed",
+          "Duration": 0.4893815,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint024FlowTests.PurchasesRequireFundsOwnershipAndDebounceAndEquipmentPersists",
+          "Status": "Passed",
+          "Duration": 0.1327911,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint024FlowTests.RealMenuShopMissionResultsAndReturnFlowBanksOneReward",
+          "Status": "Passed",
+          "Duration": 2.4325153,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

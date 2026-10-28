@@ -30,7 +30,8 @@ namespace InsaneDreams.Tests
             float end=Time.time+2.8f;float previous=c.WorldToViewportPoint(p.transform.position).x,maxStep=0;
             while(Time.time<end){yield return null;float x=c.WorldToViewportPoint(p.transform.position).x;maxStep=Mathf.Max(maxStep,Mathf.Abs(x-previous));previous=x;}
             Assert.IsTrue(p.GetComponent<PlayerTraversal2D>().IsClimbing);Assert.AreEqual(.5f,previous,.008f);Assert.Less(maxStep,.06f);
-            for(int i=0;i<8;i++){actions.SetTouchAim(i%2==0?Vector2.left:Vector2.right);yield return new WaitForSeconds(.06f);Assert.AreEqual(.5f,c.WorldToViewportPoint(p.transform.position).x,.008f);Assert.That(c.WorldToViewportPoint(p.transform.position).y,Is.InRange(.15f,.85f));}
+            var aimDirections=new[]{Vector2.left,Vector2.right,Vector2.up,Vector2.down};
+            for(int i=0;i<8;i++){actions.SetTouchAim(aimDirections[i%4]);yield return new WaitForSeconds(.06f);Assert.AreEqual(.5f,c.WorldToViewportPoint(p.transform.position).x,.008f);Assert.That(c.WorldToViewportPoint(p.transform.position).y,Is.InRange(.15f,.85f));}
             actions.SetTouchMove(Vector2.right);actions.SetTouchAim(Vector2.right);actions.Jump();yield return new WaitForSeconds(.1f);Assert.IsFalse(p.GetComponent<PlayerTraversal2D>().IsClimbing);
             yield return new WaitForSeconds(3.4f);Assert.AreEqual(1f/3,c.WorldToViewportPoint(p.transform.position).x,.012f);
         }

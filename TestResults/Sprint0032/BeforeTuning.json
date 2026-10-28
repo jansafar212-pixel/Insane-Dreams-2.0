@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "var rows=new System.Collections.Generic.List<object>();foreach(var p in new[]{\"Assets/Prefabs/Enemies/Larper.prefab\",\"Assets/Prefabs/Enemies/Samurai.prefab\",\"Assets/Prefabs/Enemies/FireworksExpert.prefab\",\"Assets/Data/FirstOperation/Officer.prefab\"}){var g=UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.GameObject>(p);var c=new UnityEditor.SerializedObject(g.GetComponent<InsaneDreams.Enemies.EnemyCombat>());var b=new UnityEditor.SerializedObject(g.GetComponent<InsaneDreams.Enemies.LarperBrain>());rows.Add(new{path=p,reaction=c.FindProperty(\"reactionSeconds\").floatValue,jitter=c.FindProperty(\"reactionJitterSeconds\").floatValue,memory=c.FindProperty(\"visibilityMemory\").floatValue,hearing=c.FindProperty(\"gunfireHearingRange\").floatValue,hearingMemory=c.FindProperty(\"hearingMemorySeconds\").floatValue,stuck=b.FindProperty(\"stuckSeconds\").floatValue});}return Newtonsoft.Json.JsonConvert.SerializeObject(rows);"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": "[{\"path\":\"Assets/Prefabs/Enemies/Larper.prefab\",\"reaction\":0.7,\"jitter\":0.12,\"memory\":3.0,\"hearing\":24.0,\"hearingMemory\":4.0,\"stuck\":0.9},{\"path\":\"Assets/Prefabs/Enemies/Samurai.prefab\",\"reaction\":0.25,\"jitter\":0.08,\"memory\":3.0,\"hearing\":24.0,\"hearingMemory\":4.0,\"stuck\":0.9},{\"path\":\"Assets/Prefabs/Enemies/FireworksExpert.prefab\",\"reaction\":0.3,\"jitter\":0.12,\"memory\":3.0,\"hearing\":24.0,\"hearingMemory\":4.0,\"stuck\":0.9},{\"path\":\"Assets/Data/FirstOperation/Officer.prefab\",\"reaction\":0.7,\"jitter\":0.05,\"memory\":3.0,\"hearing\":24.0,\"hearingMemory\":4.0,\"stuck\":0.9}]"
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7802,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

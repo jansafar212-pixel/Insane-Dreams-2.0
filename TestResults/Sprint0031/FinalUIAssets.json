@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "var s=UnityEngine.SceneManagement.SceneManager.GetActiveScene();var icons=new System.Collections.Generic.List<string>();foreach(var n in new[]{\"DuctTape\",\"Coin\",\"Ammo\"}){var a=UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.Sprite>(\"Assets/Art/Interface0031/\"+n+\".asset\");if(a==null||a.texture==null||a.texture.filterMode!=UnityEngine.FilterMode.Point)throw new System.Exception(\"Invalid icon \"+n);icons.Add(n);}return Newtonsoft.Json.JsonConvert.SerializeObject(new{scene=s.path,dirty=s.isDirty,playing=UnityEditor.EditorApplication.isPlaying,icons=icons,stylesheet=UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.UIElements.StyleSheet>(\"Assets/UI/HandmadeUI.uss\")!=null});"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": "{\"scene\":\"Assets/Scenes/Warehouse_Demo.unity\",\"dirty\":false,\"playing\":false,\"icons\":[\"DuctTape\",\"Coin\",\"Ammo\"],\"stylesheet\":true}"
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

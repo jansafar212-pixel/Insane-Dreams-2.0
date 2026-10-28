@@ -1,0 +1,57 @@
+[
+  {
+    "suite": "walletTests",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"status\": \"completed\",\n  \"duration\": 0.28,\n  \"summary\": {\n    \"total\": 5,\n    \"passed\": 5,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0035Tests.BasicPistolUsesOrdinaryArtAndExactlyFifteenRounds\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0365576,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0035Tests.DisabledSettingPreservesReleaseEconomyAndCanBeEnabledLater\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.026363,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0035Tests.ExistingLowSavePurchaseEquipsThenRestartRestoresPlaytestFloor\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.083678,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0035Tests.FailedTopUpRollsBackMarkerAndBalanceAndCanRetry\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0180179,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0035Tests.NewProfilesAndPreviouslyGrantedLowProfilesReceiveFloorWithoutReducingRichBalances\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0430972,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+        }
+      ]
+    }
+  },
+  {
+    "suite": "walletEconomy",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"status\": \"completed\",\n  \"duration\": 4.49,\n  \"summary\": {\n    \"total\": 11,\n    \"passed\": 11,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0034EconomyTests.AllExistingArsenalCanBePurchasedEquippedAndReloadedFromDiskWithoutDuplicateCharges\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.7960774,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0034EconomyTests.ArmorOwnershipSelectionAndDamagePersistWithoutFreeRepairs\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0780606,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0034EconomyTests.BackgroundAndPauseSecureUnusedSuppliesThenResumeReservesBeforePlay\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.9868453,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0034EconomyTests.CompletionReturnsUnusedStockPaysOnceAndAllowsReplayAndShopping\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.9954221,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0034EconomyTests.ConsumableCapsAndFailurePayoutNeverCreateMoneyOrFreeInjections\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0592245,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0034EconomyTests.ExactAmmoPackFitAndOwnershipAreRequiredWithoutOvercharging\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.038987,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0034EconomyTests.ExistingAmmoSupplyUsesEquippedWeaponCapacityAndLeavesOverflowInBox\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.6948965,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0034EconomyTests.ExistingVersionOneProfileRetainsBankedCashOwnedCarbineAmmoAndDamagedArmor\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0402596,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0034EconomyTests.FailedAtomicPurchasesDeploymentAndSettlementRollBackMemoryAndDisk\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0506467,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0034EconomyTests.ForcedInterruptionCannotRestoreSpentInventoryOrDuplicateWalletPayouts\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.6770559,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0034EconomyTests.ZeroMoneyStillProvidesFiveBasicMagazinesWithoutFreePremiumRefills\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0414651,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+        }
+      ]
+    }
+  },
+  {
+    "suite": "walletFlow",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"status\": \"completed\",\n  \"duration\": 21.76,\n  \"summary\": {\n    \"total\": 12,\n    \"passed\": 11,\n    \"failed\": 1,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint024FlowTests.AlternateGapStepCanBeReachedUsingExistingDoubleJump\",\n      \"Status\": \"Failed\",\n      \"Duration\": 2.6466134,\n      \"Message\": \"  Expected: True\\r\\n  But was:  False\\r\\n\",\n      \"StackTrace\": \"at InsaneDreams.Tests.Sprint024FlowTests+<AlternateGapStepCanBeReachedUsingExistingDoubleJump>d__16.MoveNext () [0x0028d] in C:\\\\Users\\\\jansa\\\\Documents\\\\GitHub\\\\Insane-Dreams-2.0\\\\Assets\\\\Tests\\\\PlayMode\\\\Sprint024FlowTests.cs:216\\r\\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in .\\\\Library\\\\PackageCache\\\\com.unity.test-framework@80f691d4262b\\\\UnityEngine.TestRunner\\\\NUnitExtensions\\\\Attributes\\\\TestEnumerator.cs:52\\r\\n\"\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint024FlowTests.ArmorAbsorbsBodyDamageConsumesConditionAndDoesNotProtectHeadOrNeutralHazards\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0996403,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint024FlowTests.FailedSaveRollsBackPurchaseWithoutChargingOrGrantingAnItem\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0294487,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint024FlowTests.FaintanylRevivePersistsImmediatelyWithoutResettingMissionAndRetryStock\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.5869346,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint024FlowTests.Hotfix00251PauseCentersInSafeTopAreaWithoutCoveringHudAndStillPauses\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.5334819,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint024FlowTests.InterruptedRunRestoresSavedStockAndSettlesPendingEarningsOnlyOnce\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.1246032,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint024FlowTests.PhysicalExitFullLoopRepeatsWithoutAnyPurchases\",\n      \"Status\": \"Passed\",\n      \"Duration\": 6.6619826,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint024FlowTests.PhysicalExitFullLoopRepeatsWithPurchasedEquipmentAndSavedEarnings\",\n      \"Status\": \"Passed\",\n      \"Duration\": 7.9346784,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint024FlowTests.PreparationIsMandatoryPurchasesOptionalAndResultMoneySettlesOnlyOnce\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0995539,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint024FlowTests.PurchasedEquipmentReachesMissionAndRetryDoesNotRefillFiniteStock\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.5067231,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint024FlowTests.PurchasesRequireFundsOwnershipAndDebounceAndEquipmentPersists\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.1376939,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint024FlowTests.RealMenuShopMissionResultsAndReturnFlowBanksOneReward\",\n      \"Status\": \"Passed\",\n      \"Duration\": 2.3229906,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+        }
+      ]
+    }
+  },
+  {
+    "suite": "walletTraversalRetry",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"status\": \"completed\",\n  \"duration\": 2.29,\n  \"summary\": {\n    \"total\": 1,\n    \"passed\": 1,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint024FlowTests.AlternateGapStepCanBeReachedUsingExistingDoubleJump\",\n      \"Status\": \"Passed\",\n      \"Duration\": 2.2651785,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+        }
+      ]
+    }
+  },
+  {
+    "suite": "walletUI",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"status\": \"completed\",\n  \"duration\": 2.05,\n  \"summary\": {\n    \"total\": 2,\n    \"passed\": 2,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0036PresentationTests.MissionPauseEmptyRevivalAndTerminalPanelsRemainIntegrated\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.993492,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0036PresentationTests.ScreensCategoriesAndResponsiveCardsUseRealInventoryWithoutDuplicates\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.0260706,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+        }
+      ]
+    }
+  }
+]

@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using InsaneDreams.Visuals;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -71,6 +72,16 @@ public static class LevelArt0026Setup
             {
                 var c=components[i];if(c==null){result[key+"/MissingScript"]=i.ToString();continue;}if(c is Transform||c is SpriteRenderer)continue;
                 string json=EditorJsonUtility.ToJson(c);
+                // Legacy art snapshots predate the opt-in Operation mode. Normalize
+                // only its behavior-preserving defaults; non-default values remain
+                // visible to the snapshot guard and have dedicated mission checks.
+                if(c is InsaneDreams.Combat.PlayerHealthRecovery||c is InsaneDreams.Missions.WarehouseMission)
+                {
+                    var state=JObject.Parse(json);var data=state["MonoBehaviour"] as JObject??state;
+                    if(c is InsaneDreams.Combat.PlayerHealthRecovery&&data["allowCheckpointRespawn"]?.Value<bool>()==true)data.Remove("allowCheckpointRespawn");
+                    if(c is InsaneDreams.Missions.WarehouseMission&&data["firstOperation"]?.Value<bool>()==false)data.Remove("firstOperation");
+                    json=state.ToString(Formatting.None);
+                }
                 result[key+"/"+c.GetType().FullName+"/"+i]=json;
             }
         }

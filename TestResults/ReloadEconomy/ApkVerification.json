@@ -1,0 +1,10 @@
+{
+  "bytes": 39817203,
+  "sha256": "98A13F846658F116D8EC897582344C4E1407C90A49F06B3717B246AA1D128398",
+  "releaseNotDebuggable": true,
+  "shellReload": true,
+  "shellVisual": true,
+  "ammoEvent": true,
+  "walletHotfix": true,
+  "physicalDeviceVerified": false
+}

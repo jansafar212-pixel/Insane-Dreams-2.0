@@ -53,12 +53,12 @@ namespace InsaneDreams.Tests
                     samurai+=root.GetComponentsInChildren<InsaneDreams.Enemies.SamuraiCombat>(true).Length;fireworks+=root.GetComponentsInChildren<InsaneDreams.Enemies.FireworksCombat>(true).Length;
                     foreach(var t in root.GetComponentsInChildren<Transform>(true))Assert.AreEqual(0,UnityEditor.GameObjectUtility.GetMonoBehavioursWithMissingScriptCount(t.gameObject),t.name);
                 }
-                Assert.AreEqual(17,brains.Count);Assert.AreEqual(3,samurai);Assert.AreEqual(1,fireworks);
+                Assert.AreEqual(15,brains.Count);Assert.AreEqual(1,samurai);Assert.AreEqual(1,fireworks);
                 InsaneDreams.Missions.WarehouseMission mission=null;foreach(var root in scene.GetRootGameObjects()){mission=root.GetComponentInChildren<InsaneDreams.Missions.WarehouseMission>();if(mission!=null)break;}
                 Assert.IsNotNull(mission);
                 foreach(var point in mission.Encounters[0].Points)Assert.IsNull(point.Archetype.Prefab.GetComponent<InsaneDreams.Enemies.SamuraiCombat>());
-                Assert.IsNotNull(mission.Encounters[1].Points[1].Archetype.Prefab.GetComponent<InsaneDreams.Enemies.SamuraiCombat>());
-                Assert.IsNotNull(mission.Encounters[2].Points[4].Archetype.Prefab.GetComponent<InsaneDreams.Enemies.FireworksCombat>());
+                Assert.IsNotNull(mission.Encounters[2].Points[0].Archetype.Prefab.GetComponent<InsaneDreams.Enemies.SamuraiCombat>());
+                Assert.IsNotNull(mission.Encounters[3].Points[0].Archetype.Prefab.GetComponent<InsaneDreams.Enemies.FireworksCombat>());
                 foreach(var brain in brains)Assert.IsTrue(brain.GetComponentInChildren<InsaneDreams.Visuals.CutoutRig>(true).IsBound);
             }
             finally{UnityEditor.SceneManagement.EditorSceneManager.ClosePreviewScene(scene);}

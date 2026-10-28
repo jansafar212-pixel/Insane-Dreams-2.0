@@ -5,7 +5,7 @@
             <ui:Label text="SURVIVAL / NO WARRANTY" class="hud-eyebrow" />
             <ui:VisualElement class="health-row"><ui:Label text="HP" class="health-caption" /><ui:Label name="healthValue" text="--" class="health-value" /></ui:VisualElement>
             <ui:VisualElement class="health-track"><ui:VisualElement name="healthFill" class="health-fill" /></ui:VisualElement>
-            <ui:VisualElement class="supplies-row"><ui:Label name="armorValue" text="VEST --" /><ui:Label name="tapeValue" text="TAPE --" /></ui:VisualElement>
+            <ui:VisualElement class="supplies-row"><ui:Label name="armorValue" text="VEST -- / HELMET --" /><ui:Label name="tapeValue" text="DUCT TAPE --" /></ui:VisualElement>
             <ui:Label name="reviveValue" text="FAINTANYL --" class="revive-value" />
         </ui:VisualElement>
         <ui:VisualElement class="instructions" picking-mode="Ignore"><ui:Label text="WAREHOUSE / FIELD TEST" class="hud-eyebrow" /><ui:Label text="A/D move · S crouch · SPACE jump&#10;RMB aim + LMB/F fire · H hold heal" /></ui:VisualElement>

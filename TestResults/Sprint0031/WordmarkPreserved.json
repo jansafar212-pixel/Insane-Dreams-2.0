@@ -1,0 +1,12 @@
+[
+  {
+    "Pattern": "private static readonly string\\[\\] LogoGlyphs=\\{[\\s\\S]*?\\};",
+    "Nonempty": true,
+    "Identical": true
+  },
+  {
+    "Pattern": "private void PixelLogo\\(VisualElement parent\\)[\\s\\S]*?(?=        private void Draw)",
+    "Nonempty": true,
+    "Identical": true
+  }
+]

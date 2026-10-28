@@ -1162,6 +1162,22 @@ MonoBehaviour:
   levelMax: {x: 28, y: 20}
   offset: {x: 0, y: 1.2}
   smoothTime: 0.16
+  combatSmoothTime: 0.11
+  directionTransitionSeconds: 0.5
+  directionCommitSeconds: 0.12
+  combatAttentionSeconds: 1
+  aimDeadZone: 0.3
+  horizontalLookAhead: 0.16666667
+  ladderRecenterSeconds: 0.4
+  verticalSmoothTime: 0.24
+  verticalDeadZone: 0.25
+  fallingLookAhead: 1.6
+  verticalAimLookAhead: 1.2
+  fallingLeadSpeed: 14
+  playerScreenMargins: {x: 0.18, y: 0.18}
+  boundaryEaseDistance: 2
+  closeThreatRadius: 6
+  closeThreatLeadReduction: 0.45
   orthographicSize: 7.2
   gameplayZoomMultiplier: 1.155
   gameplayViewport:
@@ -1170,8 +1186,6 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
-  directionTransitionSeconds: 0.75
-  directionCommitSeconds: 0.12
   visualPixelsPerUnit: 32
   androidCharacterScale: 1.125
   previewAndroidFraming: 0
@@ -10297,6 +10311,7 @@ MonoBehaviour:
   recordsZone: {fileID: 1056024328}
   cameraFollow: {fileID: 89708303}
   hud: {fileID: 8796835485834412467}
+  firstOperation: 0
 --- !u!4 &1046474055
 Transform:
   m_ObjectHideFlags: 0

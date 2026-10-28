@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "var rows=new System.Collections.Generic.List<object>();foreach(var p in new[]{\"Assets/Prefabs/Enemies/Larper.prefab\",\"Assets/Prefabs/Enemies/Samurai.prefab\",\"Assets/Prefabs/Enemies/FireworksExpert.prefab\",\"Assets/Data/FirstOperation/Officer.prefab\",\"Assets/Data/FirstOperation/OperationSamurai.prefab\",\"Assets/Data/FirstOperation/OperationFireworksExpert.prefab\"}){var g=UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.GameObject>(p);var c=new UnityEditor.SerializedObject(g.GetComponent<InsaneDreams.Enemies.EnemyCombat>());var b=new UnityEditor.SerializedObject(g.GetComponent<InsaneDreams.Enemies.LarperBrain>());rows.Add(new{path=p,reaction=c.FindProperty(\"reactionSeconds\").floatValue,jitter=c.FindProperty(\"reactionJitterSeconds\").floatValue,memory=c.FindProperty(\"visibilityMemory\").floatValue,cameraGrace=c.FindProperty(\"viewportAttackDelay\").floatValue,offscreen=c.FindProperty(\"allowOffscreenFire\").boolValue,stuck=b.FindProperty(\"stuckSeconds\").floatValue,recovery=b.FindProperty(\"stuckRecoveryPause\").floatValue,retry=b.FindProperty(\"stuckRetrySeconds\").floatValue});}return Newtonsoft.Json.JsonConvert.SerializeObject(rows);"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": "[{\"path\":\"Assets/Prefabs/Enemies/Larper.prefab\",\"reaction\":0.7,\"jitter\":0.08,\"memory\":4.5,\"cameraGrace\":0.18,\"offscreen\":false,\"stuck\":1.8,\"recovery\":0.6,\"retry\":3.0},{\"path\":\"Assets/Prefabs/Enemies/Samurai.prefab\",\"reaction\":0.25,\"jitter\":0.08,\"memory\":4.5,\"cameraGrace\":0.18,\"offscreen\":false,\"stuck\":1.8,\"recovery\":0.6,\"retry\":3.0},{\"path\":\"Assets/Prefabs/Enemies/FireworksExpert.prefab\",\"reaction\":0.6,\"jitter\":0.1,\"memory\":4.5,\"cameraGrace\":0.18,\"offscreen\":false,\"stuck\":1.8,\"recovery\":0.6,\"retry\":3.0},{\"path\":\"Assets/Data/FirstOperation/Officer.prefab\",\"reaction\":0.45,\"jitter\":0.05,\"memory\":4.5,\"cameraGrace\":0.18,\"offscreen\":false,\"stuck\":1.8,\"recovery\":0.6,\"retry\":3.0},{\"path\":\"Assets/Data/FirstOperation/OperationSamurai.prefab\",\"reaction\":0.25,\"jitter\":0.08,\"memory\":4.5,\"cameraGrace\":0.18,\"offscreen\":false,\"stuck\":1.8,\"recovery\":0.6,\"retry\":3.0},{\"path\":\"Assets/Data/FirstOperation/OperationFireworksExpert.prefab\",\"reaction\":0.6,\"jitter\":0.1,\"memory\":4.5,\"cameraGrace\":0.18,\"offscreen\":false,\"stuck\":1.8,\"recovery\":0.6,\"retry\":3.0}]"
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

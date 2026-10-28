@@ -1,0 +1,56 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 21.23,
+      "summary": {
+        "total": 4,
+        "passed": 4,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "InsaneDreams.Tests.CowardsBunkerTests.ConcreteShellBlocksEveryExteriorBoundaryExceptTheEmbrasureAndOfficerCanBeShot",
+          "Status": "Passed",
+          "Duration": 4.0110681,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.CowardsBunkerTests.LaserClipsToConcreteAndOnlyPassesThroughFiringHole",
+          "Status": "Passed",
+          "Duration": 0.9652136,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.CowardsBunkerTests.OfficerPeeksTelegraphsFiresHidesAndReturnsInsideConcreteWithoutDeadlock",
+          "Status": "Passed",
+          "Duration": 13.1904825,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.CowardsBunkerTests.PhysicalGrenadeRoofCollisionAndRealPlayerDoubleJumpRouteStayValid",
+          "Status": "Passed",
+          "Duration": 3.0305753,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

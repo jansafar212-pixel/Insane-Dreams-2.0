@@ -3,8 +3,9 @@ namespace InsaneDreams.Combat
 {
     public static class CombatVisibility2D
     {
-        public static bool IsBlocked(Vector2 origin, Vector2 end, LayerMask geometry, RaycastHit2D[] buffer,Transform ignore=null,Transform ignoreTarget=null)
+        public static bool IsBlocked(Vector2 origin, Vector2 end, LayerMask geometry, RaycastHit2D[] buffer,Transform ignore=null,Transform ignoreTarget=null,bool includeSmoke=true)
         {
+            if(includeSmoke&&SmokeCloud2D.Blocks(origin,end))return true;
             Vector2 delta=end-origin;if(delta.sqrMagnitude<.0001f)return false;
             var filter=new ContactFilter2D{useTriggers=false};filter.SetLayerMask(geometry);
             int count=Physics2D.Raycast(origin,delta.normalized,filter,buffer,delta.magnitude);

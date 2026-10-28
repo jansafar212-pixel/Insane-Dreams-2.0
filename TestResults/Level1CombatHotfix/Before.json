@@ -1,0 +1,349 @@
+{
+  "samurai": {
+    "MonoBehaviour": {
+      "m_Enabled": true,
+      "m_EditorHideFlags": 0,
+      "m_Name": "",
+      "m_EditorClassIdentifier": "InsaneDreams.Runtime::InsaneDreams.Enemies.SamuraiCombat",
+      "windupSeconds": 0.40000000596046448,
+      "recoverySeconds": 0.699999988079071,
+      "attackDistance": 1.6499999761581421,
+      "platforms": {
+        "serializedVersion": "2",
+        "m_Bits": 1
+      },
+      "jumpSampleSeconds": 0.30000001192092896,
+      "jumpCooldown": 1.2000000476837158,
+      "failedJumpCooldown": 3.0,
+      "jumpSearchDistance": 6.0,
+      "maximumDrop": 6.5,
+      "doubleJumpReach": 8.5,
+      "secondJumpDelay": 0.31999999284744263,
+      "drawNavigation": false
+    }
+  },
+  "motor": {
+    "MonoBehaviour": {
+      "m_Enabled": true,
+      "m_EditorHideFlags": 0,
+      "m_Name": "",
+      "m_EditorClassIdentifier": "InsaneDreams.Runtime::InsaneDreams.Prototype.PlayerMotor2D",
+      "moveSpeed": 7.0,
+      "acceleration": 65.0,
+      "deceleration": 85.0,
+      "jumpSpeed": 15.0,
+      "allowAirJump": true,
+      "airJumpSpeedMultiplier": 0.85000002384185791,
+      "airDiveSpeed": 14.0,
+      "groundProbeDistance": 0.079999998211860657,
+      "groundLayers": {
+        "serializedVersion": "2",
+        "m_Bits": 1
+      }
+    }
+  },
+  "officer": {
+    "MonoBehaviour": {
+      "m_Enabled": true,
+      "m_EditorHideFlags": 0,
+      "m_Name": "",
+      "m_EditorClassIdentifier": "InsaneDreams.Runtime::InsaneDreams.Enemies.EnemyCombat",
+      "firearm": {
+        "fileID": 11400000,
+        "guid": "ac2794aae8dfe464a8385994b6e9c6a6",
+        "type": 2
+      },
+      "detectionRange": 22.0,
+      "engagementRange": 18.0,
+      "gameplayCamera": {
+        "instanceID": 0
+      },
+      "allowOffscreenFire": false,
+      "perceptionSeconds": 0.10000000149011612,
+      "minimumCombatSpacing": 1.75,
+      "positionSampleSeconds": 0.25,
+      "suppressedRepositionDistanceMultiplier": 0.800000011920929,
+      "combatRepositionSeconds": {
+        "x": 2.5,
+        "y": 4.5
+      },
+      "combatRepositionChance": 0.550000011920929,
+      "retreatHideSeconds": {
+        "x": 2.0,
+        "y": 3.5
+      },
+      "maximumCoverHideSeconds": 6.0,
+      "movementHearingRange": 11.0,
+      "gunfireHearingRange": 24.0,
+      "obstructedHearingMultiplier": 0.44999998807907104,
+      "hearingMemorySeconds": 4.0,
+      "soundPositionUncertainty": 2.0,
+      "nearMissDistance": 1.5,
+      "gunfireHearingInterval": 0.25,
+      "defensiveCrouchProbability": 0.800000011920929,
+      "defensiveCrouchSeconds": {
+        "x": 0.800000011920929,
+        "y": 2.0
+      },
+      "defensiveCrouchCooldown": {
+        "x": 2.5,
+        "y": 4.25
+      },
+      "suppressionQuietSeconds": 0.800000011920929,
+      "susceptibleToSuppression": true,
+      "suppressionSpreadDegrees": 10.0,
+      "maximumSuppression": 100.0,
+      "nearMissSuppression": 63.799999237060547,
+      "suppressionDecayPerSecond": 12.0,
+      "moderateSuppression": 14.0,
+      "highSuppression": 42.0,
+      "suppressionRetreatChance": 0.699999988079071,
+      "suppressionReactionCooldown": 4.0,
+      "overheadDistanceBias": 0.15000000596046448,
+      "sustainedSuppressionSeconds": 0.30000001192092896,
+      "sustainedNearMisses": 2,
+      "panicEscapeArchetype": {
+        "fileID": 11400000,
+        "guid": "88dbd94266ff3a542a1a7db9cc4ad2a4",
+        "type": 2
+      },
+      "maximumPanicEscapes": 2,
+      "panicEscapeChance": 0.89999997615814209,
+      "panicEscapeSuppression": 55.0,
+      "panicEscapeCooldown": {
+        "x": 2.0,
+        "y": 3.0
+      },
+      "panicEscapeDistance": 6.0,
+      "panicEscapeSeconds": 3.5,
+      "meaningfulEscapeDistance": 2.0,
+      "escapeLeash": 12.0,
+      "unreliableWeapon": true,
+      "malfunctionChance": 0.0074999998323619366,
+      "malfunctionRecoverySeconds": 1.3999999761581421,
+      "malfunctionCooldown": 18.0,
+      "closeRange": 3.0,
+      "closeSpread": 3.0,
+      "distantSpread": 40.0,
+      "geometry": {
+        "serializedVersion": "2",
+        "m_Bits": 1
+      },
+      "reactionSeconds": 0.699999988079071,
+      "aimSampleSeconds": 0.18000000715255737,
+      "aimDegreesPerSecond": 240.0,
+      "effectiveRange": 11.0,
+      "preferredDistance": 7.0,
+      "visibilityMemory": 3.0,
+      "rangeHysteresis": 2.0,
+      "ordinaryReloadFraction": 0.5,
+      "cowardReloadFraction": 0.40000000596046448,
+      "overconfidentReloadFraction": 0.0,
+      "suppressedReloadFractionMultiplier": 1.2000000476837158,
+      "withdrawalDistance": 6.0,
+      "withdrawalSeconds": 4.5,
+      "tacticalSampleSeconds": 0.18000000715255737,
+      "reengagementDelay": 0.34999999403953552,
+      "initialReserveAmmo": 135,
+      "minimumWithdrawalDistance": 2.5,
+      "reloadDurationVariation": 0.05000000074505806,
+      "reactionJitterSeconds": 0.05000000074505806,
+      "blindAimUncertainty": 3.0,
+      "coverSearchDistance": 7.0,
+      "ordinaryBlindChance": 0.699999988079071,
+      "overconfidentBlindChance": 0.949999988079071,
+      "cowardBlindChance": 0.40000000596046448,
+      "blindFireSeconds": 2.0,
+      "cowardBlindDuration": 0.44999998807907104
+    }
+  },
+  "telegraph": {
+    "MonoBehaviour": {
+      "m_Enabled": true,
+      "m_EditorHideFlags": 0,
+      "m_Name": "",
+      "m_EditorClassIdentifier": "InsaneDreams.Runtime::InsaneDreams.Enemies.OfficerShotTelegraph",
+      "windupSeconds": 0.699999988079071,
+      "commitSeconds": 0.20000000298023224,
+      "shotCooldown": 2.4000000953674316,
+      "supportedExtraCooldown": 0.800000011920929,
+      "retreatDistance": 6.0,
+      "retreatCooldown": {
+        "x": 2.5,
+        "y": 4.0
+      },
+      "nearbyAllies": [],
+      "allyRange": 14.0,
+      "geometry": {
+        "serializedVersion": "2",
+        "m_Bits": 1
+      }
+    }
+  },
+  "gun": {
+    "MonoBehaviour": {
+      "m_Enabled": true,
+      "m_EditorHideFlags": 0,
+      "m_Name": "OfficerPistol",
+      "m_EditorClassIdentifier": "InsaneDreams.Runtime::InsaneDreams.Inventory.WeaponDefinition",
+      "stableId": "978d97346ada47b881e4f0c4fbb8ff68",
+      "displayName": "Officer's Impossibly Important Pistol",
+      "description": "Fictional bargain automatic pistol with an unnecessarily long magazine. Original Sprint 012 pixel patterns.",
+      "icon": {
+        "instanceID": 0
+      },
+      "category": 0,
+      "weaponCategory": 0,
+      "damage": 18.0,
+      "firingInterval": 1.3999999761581421,
+      "magazineCapacity": 6,
+      "reloadDuration": 4.0,
+      "presentationPrefab": {
+        "instanceID": 0
+      },
+      "equippedSprite": {
+        "fileID": 21300000,
+        "guid": "9ece9c252eb2fa7428e54081f295ac8a",
+        "type": 2
+      },
+      "magazineSprite": {
+        "fileID": 21300000,
+        "guid": "c86887c677b489c4ea609cbb28004fd0",
+        "type": 2
+      },
+      "magazineMountOffset": {
+        "x": 0.03125,
+        "y": -0.0625
+      },
+      "physicalMagazineReload": false,
+      "firearmRange": 28.0,
+      "meleeRange": 1.6000000238418579,
+      "impactImpulse": 0.89999997615814209
+    }
+  },
+  "rocket": {
+    "MonoBehaviour": {
+      "m_Enabled": true,
+      "m_EditorHideFlags": 0,
+      "m_Name": "",
+      "m_EditorClassIdentifier": "InsaneDreams.Runtime::InsaneDreams.Enemies.FireworkProjectile",
+      "rocket": {
+        "fileID": 2163891403367633932,
+        "guid": "0a96455b791129641866c9062af9c914",
+        "type": 3
+      },
+      "warning": {
+        "fileID": 4356979568658235215,
+        "guid": "0a96455b791129641866c9062af9c914",
+        "type": 3
+      },
+      "radius": 2.7999999523162842,
+      "flightSeconds": 0.949999988079071,
+      "arcHeight": 2.5999999046325684,
+      "damage": 26.0,
+      "impulse": 4.0,
+      "normalFuse": {
+        "x": 1.1000000238418579,
+        "y": 1.7999999523162842
+      },
+      "shortFuse": {
+        "x": 0.64999997615814209,
+        "y": 0.89999997615814209
+      },
+      "longFuse": {
+        "x": 2.2000000476837158,
+        "y": 3.2000000476837158
+      },
+      "shortFuseChance": 0.11999999731779099,
+      "longFuseChance": 0.18000000715255737,
+      "burstSeconds": 0.800000011920929,
+      "effectSprite": {
+        "fileID": 137350209972927885,
+        "guid": "c5350611e5a6f6549a08fffbdd6875a4",
+        "type": 3
+      },
+      "flashSprite": {
+        "fileID": 5865827020102933794,
+        "guid": "86919fc9fb55ecb45bfa7ef641267910",
+        "type": 2
+      },
+      "glowSprite": {
+        "fileID": -7930119283347016648,
+        "guid": "629fdf5fd37a89c439d05fee71844db3",
+        "type": 2
+      },
+      "burstSound": {
+        "instanceID": 0
+      },
+      "geometry": {
+        "serializedVersion": "2",
+        "m_Bits": 1
+      },
+      "useRadialFalloff": false,
+      "damageFalloff": {
+        "serializedVersion": "2",
+        "m_Curve": [
+          {
+            "serializedVersion": "3",
+            "time": 0.0,
+            "value": 1.0,
+            "inSlope": 0.0,
+            "outSlope": 0.0,
+            "tangentMode": 0,
+            "weightedMode": 0,
+            "inWeight": 0.0,
+            "outWeight": 0.0
+          },
+          {
+            "serializedVersion": "3",
+            "time": 0.25,
+            "value": 0.85000002384185791,
+            "inSlope": 0.0,
+            "outSlope": 0.0,
+            "tangentMode": 0,
+            "weightedMode": 0,
+            "inWeight": 0.0,
+            "outWeight": 0.0
+          },
+          {
+            "serializedVersion": "3",
+            "time": 0.5,
+            "value": 0.5,
+            "inSlope": 0.0,
+            "outSlope": 0.0,
+            "tangentMode": 0,
+            "weightedMode": 0,
+            "inWeight": 0.0,
+            "outWeight": 0.0
+          },
+          {
+            "serializedVersion": "3",
+            "time": 0.75,
+            "value": 0.20000000298023224,
+            "inSlope": 0.0,
+            "outSlope": 0.0,
+            "tangentMode": 0,
+            "weightedMode": 0,
+            "inWeight": 0.0,
+            "outWeight": 0.0
+          },
+          {
+            "serializedVersion": "3",
+            "time": 1.0,
+            "value": 0.0,
+            "inSlope": 0.0,
+            "outSlope": 0.0,
+            "tangentMode": 0,
+            "weightedMode": 0,
+            "inWeight": 0.0,
+            "outWeight": 0.0
+          }
+        ],
+        "m_PreInfinity": 2,
+        "m_PostInfinity": 2,
+        "m_RotationOrder": 4
+      },
+      "minimumEffectiveDamage": 0.0
+    }
+  }
+}

@@ -1,0 +1,14 @@
+Assets/Data/Items/BackupPistol.asset
+Assets/Resources/Arsenal/DesertEagle.asset
+Assets/Resources/Arsenal/SMG.asset
+Assets/Data/Items/WarehouseCarbine.asset
+Assets/Resources/Arsenal/Shotgun.asset
+Assets/Resources/Arsenal/LMG.asset
+Assets/Resources/Arsenal/Sniper.asset
+Assets/Data/Items/LarperBuzzbox.asset
+Assets/Prefabs/Player/WarehousePlayer.prefab
+Assets/Prefabs/Enemies/Larper.prefab
+Assets/Prefabs/Enemies/Samurai.prefab
+Assets/Prefabs/Enemies/FireworksExpert.prefab
+Assets/Data/FirstOperation/Officer.prefab
+Assets/Data/FirstOperation/OperationFireworksExpert.prefab

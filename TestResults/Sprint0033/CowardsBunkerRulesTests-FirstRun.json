@@ -1,0 +1,42 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 0.94,
+      "summary": {
+        "total": 2,
+        "passed": 1,
+        "failed": 1,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "InsaneDreams.Tests.CowardsBunkerRulesTests.ConcreteShellPreservesSurroundingTerrainAndRoster",
+          "Status": "Failed",
+          "Duration": 0.1467753,
+          "Message": "  Visible shell matches collision\r\n  Expected: (0.38, 0.90)\r\n  But was:  (0.38, 0.90)\r\n",
+          "StackTrace": "at InsaneDreams.Tests.CowardsBunkerRulesTests.ConcreteShellPreservesSurroundingTerrainAndRoster () [0x00372] in C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Tests\\EditMode\\CowardsBunkerRulesTests.cs:24\r\n"
+        },
+        {
+          "FullName": "InsaneDreams.Tests.CowardsBunkerRulesTests.EnvironmentModulesUseFourPixelCellsPointFilteringBinaryAlphaAndSmallPalettes",
+          "Status": "Passed",
+          "Duration": 0.4658497,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

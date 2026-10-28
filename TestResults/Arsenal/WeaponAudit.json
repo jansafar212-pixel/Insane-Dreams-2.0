@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "var rows=new System.Collections.Generic.List<object>();foreach(var guid in UnityEditor.AssetDatabase.FindAssets(\"t:WeaponDefinition\",new[]{\"Assets/Data\"})){var path=UnityEditor.AssetDatabase.GUIDToAssetPath(guid);var w=UnityEditor.AssetDatabase.LoadAssetAtPath<InsaneDreams.Inventory.WeaponDefinition>(path);rows.Add(new{path,w.DisplayName,w.Damage,w.FiringInterval,w.MagazineCapacity,w.ReloadDuration,w.AttackRange,sprite=w.EquippedSprite!=null?w.EquippedSprite.name:null});if(w.EquippedSprite!=null&&(w.name==\"BackupPistol\"||w.name==\"WarehouseCarbine\"||w.name==\"OfficerPistol\"))System.IO.File.WriteAllBytes(\"TestResults/Arsenal/Reference-\"+w.name+\".png\",w.EquippedSprite.texture.EncodeToPNG());}return Newtonsoft.Json.JsonConvert.SerializeObject(rows);"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": "[{\"path\":\"Assets/Data/FirstOperation/OfficerPistol.asset\",\"DisplayName\":\"Desert Eagle\",\"Damage\":55.0,\"FiringInterval\":2.4,\"MagazineCapacity\":7,\"ReloadDuration\":2.8,\"AttackRange\":28.0,\"sprite\":\"DesertEagle\"},{\"path\":\"Assets/Data/Items/BackupPistol.asset\",\"DisplayName\":\"Backup Pistol\",\"Damage\":14.0,\"FiringInterval\":0.2,\"MagazineCapacity\":8,\"ReloadDuration\":1.5,\"AttackRange\":22.0,\"sprite\":\"LarperPistol\"},{\"path\":\"Assets/Data/Items/FireworkLauncher.asset\",\"DisplayName\":\"Questionable Fireworks Bundle\",\"Damage\":0.0,\"FiringInterval\":0.45,\"MagazineCapacity\":0,\"ReloadDuration\":1.5,\"AttackRange\":1.6,\"sprite\":\"QuestionableBundle\"},{\"path\":\"Assets/Data/Items/LarperBuzzbox.asset\",\"DisplayName\":\"Buzzbox Automatic Pistol\",\"Damage\":5.0,\"FiringInterval\":0.07,\"MagazineCapacity\":27,\"ReloadDuration\":4.0,\"AttackRange\":28.0,\"sprite\":\"LarperPistol\"},{\"path\":\"Assets/Data/Items/LarperPistol.asset\",\"DisplayName\":\"Larper Training Pistol\",\"Damage\":5.0,\"FiringInterval\":0.8,\"MagazineCapacity\":6,\"ReloadDuration\":2.0,\"AttackRange\":14.0,\"sprite\":null},{\"path\":\"Assets/Data/Items/PracticeBaton.asset\",\"DisplayName\":\"Practice Baton\",\"Damage\":25.0,\"FiringInterval\":0.45,\"MagazineCapacity\":0,\"ReloadDuration\":1.5,\"AttackRange\":1.6,\"sprite\":null},{\"path\":\"Assets/Data/Items/SamuraiSword.asset\",\"DisplayName\":\"Questionable Katana\",\"Damage\":40.0,\"FiringInterval\":1.1,\"MagazineCapacity\":0,\"ReloadDuration\":1.5,\"AttackRange\":1.65,\"sprite\":\"HugeCardboardKatana\"},{\"path\":\"Assets/Data/Items/WarehouseCarbine.asset\",\"DisplayName\":\"Warehouse Carbine\",\"Damage\":20.0,\"FiringInterval\":0.2,\"MagazineCapacity\":24,\"ReloadDuration\":1.5,\"AttackRange\":22.0,\"sprite\":\"CarbineReceiver\"}]"
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

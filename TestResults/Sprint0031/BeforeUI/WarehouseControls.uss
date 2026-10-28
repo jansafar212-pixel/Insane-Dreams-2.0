@@ -1,0 +1,50 @@
+@import url("AkumuTypography.uss");
+.safe-area { position: absolute; left: 0; right: 0; top: 0; bottom: 0; color: #ffffeb; }
+.hud-eyebrow { color: #f7c92c; font-size: 11px; -unity-font-style: bold; letter-spacing: 1px; }
+.vitals-panel { position: absolute; left: 18px; top: 14px; width: 220px; padding: 7px 9px; background-color: rgba(25,29,43,.86); border-left-width: 5px; border-left-color: #e2671e; }
+.health-row { flex-direction: row; align-items: center; justify-content: space-between; margin: 2px 0; }
+.health-caption { color: #ffffeb; font-size: 17px; -unity-font-style: bold; }
+.health-value { font-size: 24px; -unity-font-style: bold; color: #ffffeb; }
+.health-track { height: 8px; background-color: #514337; margin: 3px 0 7px; }
+.health-fill { width: 100%; height: 100%; background-color: #f7c92c; }
+.health-fill.critical { background-color: #e2671e; }
+.supplies-row { flex-direction: row; justify-content: space-between; font-size: 12px; color: #ded8c2; }
+.revive-value { font-size: 10px; color: #ded8c2; margin-top: 3px; }
+.instructions { position: absolute; left: 18px; top: 192px; max-width: 32%; padding: 7px 10px; background-color: rgba(25,29,43,.72); color: #ded8c2; font-size: 12px; white-space: normal; }
+.stick { position: absolute; width: 187.5px; height: 187.5px; bottom: 30px; border-radius: 12px; border-width: 3px; border-color: rgba(255,255,235,.6); background-color: rgba(25,29,43,.5); align-items: center; justify-content: center; }
+.move-stick { left: 28px; }
+.aim-stick { right: 44px; border-color: rgba(247,201,44,.75); }
+.knob { width: 77.5px; height: 77.5px; border-radius: 4px; border-width: 2px; border-color: #191d2b; background-color: rgba(255,255,235,.68); }
+.aim-stick .knob { background-color: rgba(247,201,44,.78); }
+.stick-label { position: absolute; top: 10px; color: #ffffeb; font-size: 12px; letter-spacing: 1px; -unity-font-style: bold; }
+.action { position: absolute; width: 88px; height: 88px; border-radius: 3px; border-width: 2px; border-color: #d6d2bc; background-color: rgba(25,29,43,.85); color: #ffffeb; font-size: 17px; -unity-font-style: bold; align-items: center; justify-content: center; }
+.action:active { background-color: #0c6374; border-color: #f7c92c; }
+.parachute-button { right: 244px; bottom: 44px; }
+.parachute-button.deployed { background-color: #0c6374; border-color: #f7c92c; }
+.reload-button { right: 244px; bottom: 146px; margin: 0; font-size: 14px; }
+.heal-button { left: 244px; bottom: 44px; margin: 0; font-size: 14px; }
+.blind-fire-button { right: 78px; bottom: 250px; font-size: 17px; background-color: #a72d20; border-color: #f7c92c; }
+.jump-button { right: 244px; bottom: 250px; background-color: rgba(12,99,116,.85); }
+.supply-button { left: 244px; bottom: 146px; width: 88px; height: 60px; border-radius: 3px; margin: 0; font-size: 12px; white-space: normal; }
+.supply-notice { color: #f7c92c; white-space: normal; font-size: 12px; }
+.heal-button.healing { background-color: #0c6374; border-color: #f7c92c; }
+.equipment { position: absolute; right: 18px; top: 14px; width: 196px; padding: 5px 6px; background-color: rgba(25,29,43,.76); border-right-width: 3px; border-right-color: #f7c92c; }
+.weapon-heading { flex-direction: row; justify-content: space-between; align-items: center; min-height: 26px; }
+.weapon-icon { width: 68px; height: 26px; }
+.loadout { color: #ffffeb; white-space: normal; font-size: 14px; -unity-font-style: bold; margin-top: 1px; }
+.ammo-row { flex-direction: row; align-items: center; justify-content: space-between; margin: 0 0 3px; }
+.ammo-value { color: #f7c92c; font-size: 36px; -unity-font-style: bold; }
+.reserve-value { color: #ded8c2; font-size: 11px; white-space: normal; }
+.equipment-buttons { flex-direction: row; }
+.equipment-buttons > Button { flex-grow: 1; flex-basis: 0; height: 44px; margin: 0 2px 0 0; padding: 2px; font-size: 11px; -unity-font-style: bold; background-color: #303744; color: #ffffeb; border-width: 1px; border-color: #7b796f; border-radius: 0; }
+.equipment-buttons > Button.is-selected { background-color: #f7c92c; border-color: #f7c92c; color: #191d2b; }
+.hidden { display: none; }
+.revive-primary, .revive-back { border-radius: 0; border-width: 2px; border-color: #ffffeb; padding: 10px 18px; -unity-font-style: bold; }
+
+.vitals-panel .hud-eyebrow { font-size: 10px; letter-spacing: 0; }
+.vitals-panel .unity-label { margin-top: 1px; margin-bottom: 1px; }
+.equipment .unity-label { margin-top: 1px; margin-bottom: 1px; padding-top: 0; padding-bottom: 0; }
+/* Medical resources remain separate and fit inside the existing compact panel. */
+.supplies-row { flex-direction: column; align-items: flex-start; }
+/* A separate reserve line avoids clipping the compact current/capacity count. */
+.ammo-row { flex-direction: column; align-items: flex-start; }

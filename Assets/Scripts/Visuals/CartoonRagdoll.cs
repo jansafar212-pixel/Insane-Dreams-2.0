@@ -28,6 +28,10 @@ namespace InsaneDreams.Visuals
         public SpriteRenderer face;
         private static readonly List<CartoonRagdoll> active = new List<CartoonRagdoll>();
         private float age, resting;
+        private readonly float[] regionalDamage=new float[6],regionalThreshold=new float[6];
+        private readonly bool[] separated=new bool[6];
+        public bool IsRegionSeparated(int region)=>separated[region];
+        public float RegionDamage(int region)=>regionalDamage[region];
         public static int ActiveCount => active.Count;
         public bool IsResting { get; private set; }
         public float Lifetime { get => lifetime; set => lifetime = Mathf.Max(.1f, value); }
@@ -60,6 +64,7 @@ namespace InsaneDreams.Visuals
             face.sprite = source.skin.Face(FaceExpression.Stunned); face.flipX = source.transform.lossyScale.x < 0;
             face.enabled = source.face != null && source.face.enabled;
             simulationParts=source.Segmented!=null?source.Segmented.BuildRagdoll(this):parts;
+            var regions=source.GetComponentInParent<BodyRegionDamage>(true);for(int i=0;i<6;i++){regionalDamage[i]=regions!=null?regions.DamageAt(i):0;regionalThreshold[i]=regions!=null?regions.Threshold(i):float.PositiveInfinity;}
             source.GetComponentInParent<ArmorVisual>(true)?.CopyTo(parts[0].transform);
             for (int i = 1; i < parts.Length; i++)
             {
@@ -77,6 +82,18 @@ namespace InsaneDreams.Visuals
                 Bodies[i].linearVelocity = Vector2.ClampMagnitude(momentum, 8) + Vector2.up * .6f;
                 Bodies[i].angularVelocity = i % 2 == 0 ? 35 : -35;
             }
+            for(int i=1;i<6;i++)TrySeparate(i);
+        }
+        public void ReceiveRegionDamage(float amount,PhysicalImpact impact)
+        {
+            if(amount<=0||float.IsNaN(amount)||float.IsInfinity(amount))return;int nearest=0;float best=float.PositiveInfinity;
+            for(int i=0;i<Bodies.Length;i++){if(Bodies[i]==impact.Body){nearest=i;break;}float distance=((Vector2)Bodies[i].GetComponent<Collider2D>().bounds.ClosestPoint(impact.Point)-impact.Point).sqrMagnitude;if(distance<best){best=distance;nearest=i;}}
+            int region=nearest<6?nearest:2+(nearest-6)/2;regionalDamage[region]+=amount;TrySeparate(region);
+        }
+        private void TrySeparate(int region)
+        {
+            if(region==0||separated[region]||regionalDamage[region]<regionalThreshold[region])return;
+            var joint=Bodies[region].GetComponent<HingeJoint2D>();if(joint==null)return;joint.enabled=false;separated[region]=true;Bodies[region].WakeUp();IsResting=false;resting=0;
         }
         public void ReceiveImpact(PhysicalImpact impact) => ApplyImpact(impact, postDefeatMultiplier);
         public void ReceiveDefeatImpact(PhysicalImpact impact) => ApplyImpact(impact, initialDefeatMultiplier);

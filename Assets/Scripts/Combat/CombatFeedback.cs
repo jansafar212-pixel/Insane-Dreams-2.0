@@ -112,13 +112,13 @@ namespace InsaneDreams.Combat
             for(int i=0;i<voices.Length;i++){voices[i].Stop();ReleaseVoice(i);}
         }
         private void ReleaseVoice(int i){if(!voiceReserved[i])return;voiceReserved[i]=false;activeVoices=Mathf.Max(0,activeVoices-1);}
-        private void Sound(AudioClip clip,bool vary=true)
+        private void Sound(AudioClip clip,bool vary=true,float pitch=1)
         {
             if(clip==null||!isActiveAndEnabled)return;
             for(int i=0;i<voices.Length;i++)
             {
                 if(voices[i].isPlaying)continue;ReleaseVoice(i);if(activeVoices>=GlobalVoiceLimit)return;
-                voices[i].clip=clip;voices[i].volume=volume;voices[i].pitch=vary?Random.Range(1-pitchVariation,1+pitchVariation):1;
+                voices[i].clip=clip;voices[i].volume=volume;voices[i].pitch=pitch*(vary?Random.Range(1-pitchVariation,1+pitchVariation):1);
                 voices[i].Play();voiceReserved[i]=true;activeVoices++;return;
             }
         }
@@ -126,13 +126,13 @@ namespace InsaneDreams.Combat
         {
             if(executor.LastAttackUsesAmmunition)
             {
-            ShotCues++; Sound(firingSound); muzzle.enabled = true; muzzleUntil = Time.time + muzzleSeconds;
             var definition=loadout!=null?loadout.SelectedWeapon?.Definition:enemy!=null?enemy.Weapon?.Definition:null;
-            shotAnchoredFlash=definition!=null&&shotAnchoredFlashWeapons!=null&&System.Array.IndexOf(shotAnchoredFlashWeapons,definition)>=0;
+            ShotCues++; Sound(definition!=null&&definition.FiringSound!=null?definition.FiringSound:firingSound,true,definition!=null?definition.FiringPitch:1); muzzle.enabled = true; muzzleUntil = Time.time + muzzleSeconds;
+            shotAnchoredFlash=definition!=null&&(definition.CustomMuzzle||shotAnchoredFlashWeapons!=null&&System.Array.IndexOf(shotAnchoredFlashWeapons,definition)>=0);
             bool custom=muzzleFlashSprite!=null&&definition==muzzleFlashWeapon;
             muzzle.sprite=custom?muzzleFlashSprite:effectSprite;
             muzzle.transform.position = (Vector3)executor.LastShotOrigin + Vector3.back * .15f;
-            float variation=Random.Range(.88f,1.12f);muzzle.transform.localScale = custom?Vector3.one*variation:new Vector3(.28f*variation, .14f*variation, 1);
+            float variation=Random.Range(.88f,1.12f)*(definition!=null?definition.FlashScale:1);muzzle.transform.localScale = custom?Vector3.one*variation:new Vector3(.28f*variation, .14f*variation, 1);
             muzzle.color=Color.Lerp(new Color(1,.65f,.1f),Color.white,Random.Range(.15f,.5f));
             glow.enabled=muzzleGlowEnabled;glow.transform.position=muzzle.transform.position;glow.transform.localScale=new Vector3(.45f,.3f,1);
             muzzle.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
@@ -141,7 +141,7 @@ namespace InsaneDreams.Combat
             else{muzzle.enabled=false;glow.enabled=false;}
             if (!damaged) return;
             HitCues++; Sound(hitSound); hit.color=Color.white;hit.enabled = true; hitUntil = Time.time + hitSeconds;
-            hitPoint = point; hit.transform.position = new Vector3(point.x, point.y, -.2f);
+            hitPoint = executor.LastDamagePoint; hit.transform.position = new Vector3(hitPoint.x, hitPoint.y, -.2f);
             hit.transform.localScale = new Vector3(.18f, .18f, 1); hit.transform.rotation = Quaternion.Euler(0, 0, 45);
         }
         private void Surface(Vector2 point, ShotSurface kind)

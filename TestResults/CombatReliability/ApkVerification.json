@@ -1,0 +1,15 @@
+{
+  "path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\build\\CombatReliability\\AKUMU2-combat-reliability-release.apk",
+  "buildId": "build_27fac48c3adc",
+  "bytes": 39818983,
+  "writtenUtc": "2026-10-28T19:22:11.3995895Z",
+  "sha256": "34101A343CD859B368716A8E862A31A236F7274D96BE1BEB34E34758AB77FFB7",
+  "package": "package: name='com.GAMES.AKUMU2' versionCode='1' versionName='0.12' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'",
+  "nativeCode": "native-code: 'arm64-v8a'",
+  "debuggable": false,
+  "walletReleaseTag": true,
+  "safeWalletPlacement": true,
+  "sharedGrenadeRelease": true,
+  "throwExposure": true,
+  "deviceTested": false
+}

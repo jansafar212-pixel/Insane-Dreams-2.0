@@ -456,7 +456,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 47a40f3686c5cb6429cf885a0f4d6b10, type: 2}
     - target: {fileID: 7952524903900054866, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
       propertyPath: reactionSeconds
-      value: 0.04
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 7952524903900054866, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
       propertyPath: reengagementDelay
@@ -464,7 +464,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7952524903900054866, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
       propertyPath: reactionJitterSeconds
-      value: 0.02
+      value: 0.08
       objectReference: {fileID: 0}
     - target: {fileID: 8365198463960391945, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -490,6 +490,22 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: a82f35520cc8a7f47866ef423a9ee2f6, type: 2}
+    - target: {fileID: 8813474979453803750, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
+      propertyPath: susceptibility
+      value: 0.85
+      objectReference: {fileID: 0}
+    - target: {fileID: 8813474979453803750, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
+      propertyPath: recoverySeconds
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8813474979453803750, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
+      propertyPath: knockdownImpulse
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8813474979453803750, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
+      propertyPath: maximumJointAngle
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 8900685380474566528, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -509,9 +525,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6616293515568177051, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2519289318142374797}
-    - targetCorrespondingSourceObject: {fileID: 6616293515568177051, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3029815738019386572}
     - targetCorrespondingSourceObject: {fileID: 6616293515568177051, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8973496603877359703}
@@ -579,23 +592,6 @@ MonoBehaviour:
   doubleJumpReach: 8.5
   secondJumpDelay: 0.32
   drawNavigation: 0
---- !u!114 &3029815738019386572
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7909795113297446030}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf9aff03771bdc04ebf7a6cce5b84060, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Combat.HitReaction2D
-  stumbleImpulse: 2.2
-  knockdownImpulse: 3.5
-  knockdownChance: 0.15
-  recoverySeconds: 0.65
-  cooldown: 3
 --- !u!114 &8973496603877359703
 MonoBehaviour:
   m_ObjectHideFlags: 0

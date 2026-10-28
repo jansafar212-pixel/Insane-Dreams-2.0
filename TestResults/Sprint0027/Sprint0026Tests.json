@@ -1,0 +1,105 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 28.58,
+      "summary": {
+        "total": 11,
+        "passed": 11,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0026Tests.AddedDemoCoverHasGroundClearanceNoObjectiveOrSpawnOverlapAndBlocksBullets",
+          "Status": "Passed",
+          "Duration": 0.7259028,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0026Tests.AimStickMovesLeftWithoutChangingDiameterAndBlindFireStartsHidden",
+          "Status": "Passed",
+          "Duration": 0.4824585,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0026Tests.AnalogWalkingAndIntentionalDoubleJumpLandingSlideReuseNormalMotor",
+          "Status": "Passed",
+          "Duration": 1.2747931,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0026Tests.FlankedOrDestroyedCoverCannotLeaveEnemyHoldingAnExposedPosition",
+          "Status": "Passed",
+          "Duration": 2.8031116,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0026Tests.InsufficientHeadProtectionIsRejectedAndReservationsSeparateRetreats",
+          "Status": "Passed",
+          "Duration": 2.240969,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0026Tests.RetreatReachesPhysicalCoverHidesUnderPressureAndEventuallyReleases",
+          "Status": "Passed",
+          "Duration": 11.5419933,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0026Tests.SingleJumpCannotArmSlideAndInputResetCancelsDoubleJumpSlide",
+          "Status": "Passed",
+          "Duration": 2.0478433,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0026Tests.StraightDownAfterDoubleJumpDivesInMidairWithoutAnExtraJump",
+          "Status": "Passed",
+          "Duration": 0.4463446,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0026Tests.TwoCloseTrajectoryMissesAfterShortBurstStartRealEscapeWithoutIncreasingGain",
+          "Status": "Passed",
+          "Duration": 2.218873,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0026Tests.WeaponMalfunctionDuringDefensiveFireMustNotFreezeRetreatMovement",
+          "Status": "Passed",
+          "Duration": 1.8801123,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0026Tests.WitnessedActualRetreatAddsOnlyBriefLocalInfluenceWithoutWallLeakOrCascade",
+          "Status": "Passed",
+          "Duration": 2.8245083,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

@@ -36,13 +36,17 @@ namespace InsaneDreams.Combat
         private float nextProbe, side;
         private float nextIntentProbe, intentSide;
         private Collider2D intentObstacle;
+        private float throwExposureUntil;
+        private PlayerThrowables throwables;
+        private bool ThrowableSelected => loadout != null && loadout.SelectedSlot == EquipmentSlot.Melee && throwables != null;
+        public void ExposeThrow() { if (IsCovered) throwExposureUntil = Time.time + .24f; }
         // Resolve downward input before posture/traversal acquire a nearby ladder.
         // This shares the existing bounded cover probe, cached at 10 Hz.
         public bool OwnsDownwardInput(Vector2 move)
         {
             if (!isActiveAndEnabled || move.y >= -.2f || motor == null || !motor.IsGrounded ||
                 !motor.enabled || !actions.enabled || health.IsDefeated ||
-                loadout?.SelectedWeapon == null || !loadout.SelectedWeapon.UsesAmmunition ||
+                !ThrowableSelected && (loadout?.SelectedWeapon == null || !loadout.SelectedWeapon.UsesAmmunition) ||
                 traversal != null && (traversal.IsClimbing || traversal.ParachuteFlightActive)) return false;
             float direction = Mathf.Abs(actions.AimDirection.x) > .1f ? Mathf.Sign(actions.AimDirection.x) : 1;
             if (Time.time >= nextIntentProbe || intentSide != direction)
@@ -68,18 +72,20 @@ namespace InsaneDreams.Combat
             actions = GetComponent<PlayerActions>(); posture = GetComponent<PlayerPosture2D>(); motor = GetComponent<PlayerMotor2D>();
             traversal = GetComponent<PlayerTraversal2D>(); loadout = GetComponent<PlayerLoadout>(); health = GetComponent<Health>();
             body = GetComponent<Rigidbody2D>(); box = GetComponent<BoxCollider2D>();
+            throwables = GetComponent<PlayerThrowables>();
         }
         private void OnEnable() { actions.InputReset += ResetCover; }
         private void OnDisable() { actions.InputReset -= ResetCover; ResetCover(); }
         public void ResetCover()
         {
             Obstacle = null; Stance = PlayerCoverStance.None; nextProbe = 0;
+            throwExposureUntil = 0;
             if (posture != null) posture.ClearCoverHeight();
         }
         private bool Eligible => actions.enabled && motor != null && motor.enabled && motor.IsGrounded && posture.IsCrouched && actions.Move.y < -.2f &&
             body.simulated && body.bodyType == RigidbodyType2D.Dynamic && !health.IsDefeated &&
             (traversal == null || !traversal.IsClimbing && !traversal.ParachuteFlightActive) &&
-            loadout != null && loadout.SelectedWeapon != null && loadout.SelectedWeapon.UsesAmmunition;
+            loadout != null && (ThrowableSelected || loadout.SelectedWeapon != null && loadout.SelectedWeapon.UsesAmmunition);
         private void Update()
         {
             if (!Eligible) { if (IsCovered) ResetCover(); return; }
@@ -89,9 +95,9 @@ namespace InsaneDreams.Combat
                 side = direction; nextProbe = Time.time + .1f; Obstacle = FindCover();
             }
             if (Obstacle == null) { if (IsCovered) { ResetCover(); nextProbe = Time.time + .1f; } return; }
-            bool reloading = loadout.SelectedWeapon.Cycle.IsReloading;
-            Stance = !reloading && actions.HasAimIntent ? PlayerCoverStance.Peek :
-                !reloading && actions.FireHeld ? PlayerCoverStance.BlindFire : PlayerCoverStance.Concealed;
+            bool reloading = loadout.SelectedWeapon != null && loadout.SelectedWeapon.Cycle.IsReloading;
+            Stance = Time.time < throwExposureUntil || !ThrowableSelected && !reloading && actions.HasAimIntent ? PlayerCoverStance.Peek :
+                !ThrowableSelected && !reloading && actions.FireHeld ? PlayerCoverStance.BlindFire : PlayerCoverStance.Concealed;
             float height = Stance == PlayerCoverStance.Peek ? Mathf.Min(posture.StandingWorldHeight, CoverTop - box.bounds.min.y + peekExposureHeight) :
                 Mathf.Min(posture.StandingWorldHeight * posture.CrouchedHeightRatio, CoverTop - box.bounds.min.y - .05f);
             posture.TrySetCoverHeight(Mathf.MoveTowards(posture.CurrentWorldHeight, height, Time.deltaTime * posture.StandingWorldHeight / transitionSeconds));

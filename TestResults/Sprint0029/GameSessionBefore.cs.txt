@@ -1,0 +1,122 @@
+using System;
+using UnityEngine;
+namespace InsaneDreams.Progression
+{
+    public enum FlowScreen { MainMenu, Levels, Shop, Settings, Mission }
+    public sealed class GameSession : MonoBehaviour
+    {
+        public static GameSession Instance{get;private set;}
+        [SerializeField] private GameCatalog catalog;
+        public GameCatalog Catalog=>catalog;
+        public GameProgress Data{get;private set;}
+        public FlowScreen Screen{get;private set;}
+        public string SelectedLevel{get;private set;}
+        public string Notice{get;private set;}
+        public ProgressStore Store{get;private set;}
+        private float nextPurchase;
+        public void Initialize(GameCatalog value,string path)
+        {
+            catalog=value;Store=new ProgressStore(path);Data=Store.Load(NewProgress);
+            Screen=FlowScreen.MainMenu;AudioListener.volume=Data.volume;
+            if(!string.IsNullOrEmpty(Data.activeRun))Settle(Data.pendingEarnings,false);
+        }
+        private void Awake()
+        {
+            if(Instance!=null&&Instance!=this){Destroy(gameObject);return;}
+            Instance=this;DontDestroyOnLoad(gameObject);
+            if(catalog!=null)Initialize(catalog,System.IO.Path.Combine(Application.persistentDataPath,"akumu2_progress_v1.json"));
+        }
+        private GameProgress NewProgress()
+        {
+            var data=new GameProgress{balance=Mathf.Clamp(catalog.startingMoney,0,1000000),primary=catalog.primaryId,melee=catalog.meleeId,tape=catalog.tapeCapacity,faintanyl=0};
+            foreach(var offer in catalog.offers)if(offer.starter&&offer.weapon!=null)
+            {data.owned.Add(offer.id);var ammo=data.Ammo(offer.id);ammo.magazine=offer.weapon.MagazineCapacity;ammo.reserve=offer.weapon.WeaponCategory==Inventory.WeaponCategory.Firearm?catalog.initialAmmo:0;}
+            return data;
+        }
+        public bool IsUnlocked(LevelEntryData level)=>level!=null&&(string.IsNullOrEmpty(level.prerequisite)||Data.completed.Contains(level.prerequisite));
+        public void Navigate(FlowScreen screen)
+        {
+            if(screen==FlowScreen.Mission||screen==FlowScreen.Shop)return;
+            Screen=screen;Notice=Store?.Problem;
+        }
+        public bool SelectLevel(string id)
+        {
+            var level=catalog.Level(id);if(Screen!=FlowScreen.Levels||!IsUnlocked(level)||string.IsNullOrEmpty(level.scene))return false;
+            SelectedLevel=id;Screen=FlowScreen.Shop;Notice=null;return true;
+        }
+        public bool PrepareMission()
+        {
+            if(Screen!=FlowScreen.Shop||!IsUnlocked(catalog.Level(SelectedLevel)))return false;
+            BeginAttempt();Screen=FlowScreen.Mission;return true;
+        }
+        public void BeginAttempt(){Data.activeRun=Guid.NewGuid().ToString("N");Data.activeLevel=SelectedLevel;Data.pendingEarnings=0;Save();}
+        public bool Settle(int earnings,bool complete)
+        {
+            string run=Data.activeRun;
+            if(string.IsNullOrEmpty(run)||Data.settledRuns.Contains(run))return false;
+            Data.settledRuns.Add(run);if(Data.settledRuns.Count>64)Data.settledRuns.RemoveAt(0);
+            Data.balance=(int)Math.Min(1000000L,(long)Data.balance+Math.Max(0,earnings));
+            if(complete&&!Data.completed.Contains(Data.activeLevel))Data.completed.Add(Data.activeLevel);
+            Data.activeRun=null;Data.pendingEarnings=0;Save();return true;
+        }
+        public bool Buy(string id,float now)
+        {
+            if(!CanBuy(id)||float.IsNaN(now)||float.IsInfinity(now)||now<nextPurchase)return false;
+            var item=catalog.Find(id);if(item==null||item.price<0||Data.balance<item.price)return false;
+            string snapshot=JsonUtility.ToJson(Data);
+            int quantity=Mathf.Max(1,item.quantity);
+            switch(item.category)
+            {
+                case ShopCategory.Throwables:Data.grenades[(int)item.throwable]=Mathf.Min(Combat.PlayerThrowables.Capacity,Data.grenades[(int)item.throwable]+quantity);break;
+                case ShopCategory.Weapons:
+                    if(item.weapon==null||Data.owned.Contains(id))return false;
+                    Data.owned.Add(id);Data.Ammo(id).magazine=item.weapon.MagazineCapacity;break;
+                case ShopCategory.Ammunition:
+                    var gun=Array.Find(catalog.offers,x=>x.weapon==item.weapon&&x.category==ShopCategory.Weapons);
+                    if(gun==null||!Data.owned.Contains(gun.id)||item.weapon.WeaponCategory!=Inventory.WeaponCategory.Firearm)return false;
+                    var ammo=Data.Ammo(gun.id);int accepted=Math.Min(quantity,Math.Max(0,catalog.ammoCapacity-ammo.reserve));if(accepted==0)return false;ammo.reserve+=accepted;break;
+                case ShopCategory.BodyArmor:
+                    if(Data.armor>=catalog.armorCapacity)return false;Data.armor=Mathf.Min(catalog.armorCapacity,Data.armor+quantity);break;
+                case ShopCategory.DuctTape:
+                    if(Data.tape>=catalog.tapeCapacity)return false;Data.tape=Mathf.Min(catalog.tapeCapacity,Data.tape+quantity);break;
+                case ShopCategory.Faintanyl:
+                    if(Data.faintanyl>=Combat.PlayerRevive.Capacity)return false;
+                    Data.faintanyl+=Math.Min(quantity,Combat.PlayerRevive.Capacity-Data.faintanyl);break;
+                default:return false;
+            }
+            Data.balance-=item.price;
+            if(!Store.Save(Data)){Data=JsonUtility.FromJson<GameProgress>(snapshot);Notice=Store.Problem;return false;}
+            nextPurchase=now+.25f;Notice="Purchased. Financial responsibility remains optional.";return true;
+        }
+        public bool CanBuy(string id)
+        {
+            if(Screen!=FlowScreen.Shop||Store==null||Store.ReadOnly)return false;
+            var item=catalog.Find(id);if(item==null||item.price<0||Data.balance<item.price)return false;
+            switch(item.category)
+            {
+                case ShopCategory.Throwables:return Data.grenades[(int)item.throwable]<Combat.PlayerThrowables.Capacity;
+                case ShopCategory.Weapons:return item.weapon!=null&&!Data.owned.Contains(id);
+                case ShopCategory.BodyArmor:return Data.armor<catalog.armorCapacity;
+                case ShopCategory.DuctTape:return Data.tape<catalog.tapeCapacity;
+                case ShopCategory.Faintanyl:return Data.faintanyl<Combat.PlayerRevive.Capacity;
+                case ShopCategory.Ammunition:
+                    var gun=Array.Find(catalog.offers,x=>x.category==ShopCategory.Weapons&&x.weapon==item.weapon);
+                    return gun!=null&&item.weapon!=null&&item.weapon.WeaponCategory==Inventory.WeaponCategory.Firearm&&Data.owned.Contains(gun.id)&&(Data.ammunition.Find(x=>x.id==gun.id)?.reserve??0)<catalog.ammoCapacity;
+                default:return false;
+            }
+        }
+        public bool Equip(string id,bool secondary=false)
+        {
+            var item=catalog.Find(id);if(Screen!=FlowScreen.Shop||Store.ReadOnly||item?.weapon==null||!Data.owned.Contains(id))return false;
+            string snapshot=JsonUtility.ToJson(Data);
+            if(item.weapon.WeaponCategory==Inventory.WeaponCategory.Melee)Data.melee=id;
+            else if(secondary){if(Data.primary==id)Data.primary=null;Data.secondary=id;}
+            else{if(Data.secondary==id)Data.secondary=null;Data.primary=id;}
+            if(!Store.Save(Data)){Data=JsonUtility.FromJson<GameProgress>(snapshot);Notice=Store.Problem;return false;}return true;
+        }
+        public void Save(){if(Store!=null&&!Store.Save(Data))Notice=Store.Problem??"Save unavailable; original data preserved.";}
+        private void OnDestroy(){if(Instance==this)Instance=null;}
+        private void OnApplicationPause(bool paused){if(paused&&Data!=null)Save();}
+        private void OnApplicationQuit(){if(Data!=null)Save();}
+    }
+}

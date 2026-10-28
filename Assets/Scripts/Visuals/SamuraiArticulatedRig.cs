@@ -101,6 +101,20 @@ namespace InsaneDreams.Visuals
             rig.weapon.flipY=Mathf.Cos(barrel*Mathf.Deg2Rad)<0;
             posed=true;
         }
+        public void PosePistolRecoil(float kick,float setback)
+        {
+            if(!firearm||!IsBound)return;if(rig==null)rig=GetComponent<CutoutRig>();
+            float barrel=rig.weaponMount.localEulerAngles.z;
+            Vector2 axis=new Vector2(Mathf.Cos(barrel*Mathf.Deg2Rad),Mathf.Sin(barrel*Mathf.Deg2Rad));
+            Vector2 target=(Vector2)transform.InverseTransformPoint(rig.weaponMount.position)-axis*setback;
+            barrel+=kick*(axis.x>=0?1:-1);SolveGrip(target,barrel,0);
+            rig.weaponMount.localRotation=Quaternion.Euler(0,0,barrel);
+            rig.weapon.flipY=Mathf.Cos(barrel*Mathf.Deg2Rad)<0;
+        }
+        public void PoseWrapping(float phase)
+        {
+            if(!IsBound)return;if(rig==null)rig=GetComponent<CutoutRig>();Vector2 target=(Vector2)rig.torso.localPosition+new Vector2(.08f,Mathf.Sin(phase)*.04f);SolveGrip(target,-35,0);ArmAngles(rig.leftArm,leftElbow,leftHand,-55+Mathf.Sin(phase)*12,65,-15,0,6);
+        }
         // Enemy-only adaptation of the existing pistol exchange to this rig's
         // shorter, articulated hand grip. Player pistol/carbine poses never call it.
         public void PosePistolExchange(float progress)
@@ -146,6 +160,7 @@ namespace InsaneDreams.Visuals
             rig.weaponMount.localRotation=Quaternion.Euler(0,0,Mathf.Atan2(axis.y,axis.x)*Mathf.Rad2Deg);
             rig.weapon.flipY=false;
         }
+        public void FollowImpactGrip(){if(IsBound)FollowGrip();}
         public void RetractMuzzle(Vector2 safe)
         {
             Vector2 shift=safe-rig.MuzzlePosition;

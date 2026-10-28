@@ -1,0 +1,38 @@
+[
+  {
+    "Path": "Assets/Scripts/Combat/ThrowableProjectile2D.cs",
+    "Hash": "7414CBBDEF5A2AC8ECABAC13970D7EBEC0C33999D10396861F45E58E84866364"
+  },
+  {
+    "Path": "Assets/Scripts/Combat/PlayerThrowables.cs",
+    "Hash": "0EF851024D440C435C5C3A2938CF4C80424F35456E34010EBFA766C96D46D759"
+  },
+  {
+    "Path": "Assets/Scripts/Combat/BodyRegionDamage.cs",
+    "Hash": "9734EEF58F55E34F9AB23CC164CB212E506C6C7199C4308F88FA7BBB11BB93BF"
+  },
+  {
+    "Path": "Assets/Scripts/Inventory/SupplyCrate2D.cs",
+    "Hash": "110D6783605253A09A29FDF781CB220B8BD785287351E8F1C55340A0A98D1F72"
+  },
+  {
+    "Path": "Assets/Scripts/Traversal/PlayerTraversal2D.cs",
+    "Hash": "52EB2CBDEC6A9991AEE6364EB997342B7EEDB40FC33618C9A090CF9434882DBA"
+  },
+  {
+    "Path": "Assets/Scripts/Prototype/PlayerMotor2D.cs",
+    "Hash": "740FD99A969CECF1DC00FE0AD3F310729B5BDE79F5FAD09B5544EB686CDE794E"
+  },
+  {
+    "Path": "Assets/Scenes/Warehouse_Testbed.unity",
+    "Hash": "239069EBB6576EBF8426B2F36398E20C65E2A91A28C7B52B216CC60F69F81773"
+  },
+  {
+    "Path": "Assets/Prefabs/Enemies/Larper.prefab",
+    "Hash": "B97AEF56E7BCB2BEFAB972F215CBBB93FE5A5669C108873019446396B2F52761"
+  },
+  {
+    "Path": "Assets/Data/FirstOperation/OfficerPistol.asset",
+    "Hash": "9E47EBFC7DEA699413423B3FEFFA32728D671377C0631F3DB3D9858715E02024"
+  }
+]

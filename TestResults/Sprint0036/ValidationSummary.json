@@ -1,0 +1,46 @@
+{
+  "date": "2026-10-28",
+  "tests": {
+    "total": 100,
+    "passed": 100,
+    "playMode": 97,
+    "editMode": 3,
+    "fullProjectSuite": false
+  },
+  "build": {
+    "id": "build_7cc902915c2c",
+    "result": "Succeeded",
+    "milliseconds": 124941,
+    "errors": 0,
+    "warnings": 977,
+    "warningGroups": {
+      "API/config/development warnings": 7,
+      "package shader warnings": 970
+    },
+    "apk": "build/Sprint0036/AKUMU2-sprint0036-dev.apk",
+    "bytes": 67236575,
+    "sha256": "5b3d9b4099571648cd6a478f193fe3a0bbf274d817cc411af3311d44877eda13"
+  },
+  "actualSave": {
+    "balance": 10000,
+    "revision": 35,
+    "readOnlyAudit": true
+  },
+  "music": "User confirmed tracks not uploaded; integration deferred",
+  "editor": {
+    "ready": true,
+    "stopped": true,
+    "scene": "Warehouse_Demo",
+    "sceneDirty": false,
+    "compilationErrors": 0,
+    "consoleErrors": 0,
+    "consoleWarnings": 87,
+    "priorAdtmFatal": "Undiagnosed; not declared fixed"
+  },
+  "physicalAndroidTest": false,
+  "performanceMatrixMeasured": false,
+  "windowsPlayerBuild": false,
+  "staged": false,
+  "committed": false,
+  "pushed": false
+}

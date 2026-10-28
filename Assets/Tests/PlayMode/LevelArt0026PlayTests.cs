@@ -23,9 +23,9 @@ namespace InsaneDreams.Tests
         [UnityTearDown] public IEnumerator Cleanup(){if(SceneManager.GetActiveScene().name!="Warehouse_Testbed")yield return EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Scenes/Warehouse_Testbed.unity",new LoadSceneParameters(LoadSceneMode.Single));if(session!=null)Object.Destroy(session.gameObject);yield return null;foreach(var suffix in new[]{"",".bak",".tmp"})if(File.Exists(save+suffix))File.Delete(save+suffix);AudioListener.volume=volume;Application.runInBackground=background;}
         [UnityTest] public IEnumerator ActualWarehouseShowsNewCratesWithoutChangingTheirCollisionOrLadderEndpoints()
         {
-            yield return EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Scenes/Warehouse_Demo.unity",new LoadSceneParameters(LoadSceneMode.Single));yield return new WaitForSeconds(.3f);
+            yield return EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Scenes/Warehouse_Mission01.unity",new LoadSceneParameters(LoadSceneMode.Single));yield return new WaitForSeconds(.3f);
             foreach(var e in Object.FindObjectsByType<EnemyCombat>()){e.enabled=false;e.GetComponent<LarperBrain>().enabled=false;}
-            var sprites=Object.FindObjectsByType<SpriteRenderer>().Where(r=>r.gameObject.scene==SceneManager.GetActiveScene()&&r.enabled&&AssetDatabase.GetAssetPath(r.sprite).StartsWith("Assets/Art/LevelArt0026")).ToArray();Assert.Greater(sprites.Length,60);
+            var sprites=Object.FindObjectsByType<SpriteRenderer>().Where(r=>r.gameObject.scene==SceneManager.GetActiveScene()&&r.enabled&&AssetDatabase.GetAssetPath(r.sprite).StartsWith("Assets/Art/LevelArt0026")).ToArray();Assert.Greater(sprites.Length,40);
             var decoration=SceneManager.GetActiveScene().GetRootGameObjects().Single(g=>g.name=="HandmadeEnvironmentDetails");foreach(var c in decoration.GetComponentsInChildren<Component>())Assert.IsTrue(c is Transform||c is SpriteRenderer);Assert.AreEqual(19,decoration.GetComponentsInChildren<SpriteRenderer>().Length);
             foreach(var r in sprites.Where(r=>r.name=="LevelArt0026_Visual"))
             {
@@ -36,13 +36,13 @@ namespace InsaneDreams.Tests
             {
                 Assert.AreEqual(ladder.BottomWorld,ladder.BottomCap.bounds.min.y,.0002f);Assert.AreEqual(ladder.TopWorld,ladder.TopCap.bounds.max.y,.0002f);Assert.AreEqual(32,ladder.Body.sprite.pixelsPerUnit);
             }
-            yield return new WaitForEndOfFrame();ScreenCapture.CaptureScreenshot(Path.Combine(Path.GetDirectoryName(Application.dataPath),"TestResults/HandmadeDetails_Runtime.png"));yield return new WaitForEndOfFrame();yield return null;
+            yield return new WaitForEndOfFrame();ScreenCapture.CaptureScreenshot(Path.Combine(Path.GetDirectoryName(Application.dataPath),"TestResults/ArchivedLevelArt_Runtime.png"));yield return new WaitForEndOfFrame();yield return null;
             var player=Object.FindAnyObjectByType<InsaneDreams.Missions.WarehouseMission>().Player;player.GetComponent<InsaneDreams.Combat.Health>().ProtectFor(120);
             var firstLadder=Object.FindObjectsByType<LadderVisual2D>().OrderBy(l=>l.transform.position.x).First();var body=player.GetComponent<Rigidbody2D>();body.position=new Vector2(firstLadder.transform.position.x+2,6.11f);body.linearVelocity=Vector2.zero;player.transform.position=body.position;Physics2D.SyncTransforms();Object.FindAnyObjectByType<InsaneDreams.CameraSystem.WarehouseCameraFollow>().SnapToTarget();yield return new WaitForSeconds(.15f);
             foreach(var e in Object.FindObjectsByType<EnemyCombat>()){e.enabled=false;e.GetComponent<LarperBrain>().enabled=false;}
-            yield return new WaitForEndOfFrame();ScreenCapture.CaptureScreenshot(Path.Combine(Path.GetDirectoryName(Application.dataPath),"TestResults/HandmadeDetails_LadderRuntime.png"));yield return new WaitForEndOfFrame();yield return null;
+            yield return new WaitForEndOfFrame();ScreenCapture.CaptureScreenshot(Path.Combine(Path.GetDirectoryName(Application.dataPath),"TestResults/ArchivedLevelArt_LadderRuntime.png"));yield return new WaitForEndOfFrame();yield return null;
             body.position=new Vector2(18,6.11f);body.linearVelocity=Vector2.zero;player.transform.position=body.position;Physics2D.SyncTransforms();Object.FindAnyObjectByType<InsaneDreams.CameraSystem.WarehouseCameraFollow>().SnapToTarget();yield return new WaitForSeconds(.15f);foreach(var e in Object.FindObjectsByType<EnemyCombat>()){e.enabled=false;e.GetComponent<LarperBrain>().enabled=false;}
-            yield return new WaitForEndOfFrame();ScreenCapture.CaptureScreenshot(Path.Combine(Path.GetDirectoryName(Application.dataPath),"TestResults/HandmadeDetails_ProcessingRuntime.png"));yield return new WaitForEndOfFrame();yield return null;
+            yield return new WaitForEndOfFrame();ScreenCapture.CaptureScreenshot(Path.Combine(Path.GetDirectoryName(Application.dataPath),"TestResults/ArchivedLevelArt_ProcessingRuntime.png"));yield return new WaitForEndOfFrame();yield return null;
         }
     }
 }

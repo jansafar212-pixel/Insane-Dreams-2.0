@@ -1,20 +1,49 @@
-.mission-card { position: absolute; left: 18px; top: 174px; width: 224px; max-width: 34%; padding: 6px 8px; background-color: rgba(25,29,43,.65); border-left-width: 3px; border-left-color: #b58441; color: #ffffeb; white-space: normal; }
-.mission-heading { color: #b58441; font-size: 10px; -unity-font-style: bold; letter-spacing: 1px; }
-.mission-objective { color: #ffffeb; font-size: 15px; -unity-font-style: bold; white-space: normal; margin-top: 2px; }
-.mission-notice { color: #f7c92c; font-size: 12px; white-space: normal; margin-top: 4px; }
-.mission-time { color: #bdbda8; font-size: 10px; margin-top: 3px; }
-.interaction-prompt { align-self: center; margin-top: 26%; color: #191d2b; background-color: #f7c92c; padding: 6px 12px; font-size: 18px; -unity-font-style: bold; }
-.interact-button { position: absolute; left: 42%; bottom: 260px; padding: 12px 20px; font-size: 18px; -unity-font-style: bold; background-color: #f7c92c; color: #191d2b; border-width: 2px; border-color: #191d2b; border-radius: 0; }
-.results { position: absolute; left: 0; right: 0; top: 0; bottom: 0; align-items: center; justify-content: center; background-color: rgba(25,29,43,.96); }
-.results-card { width: 76%; max-width: 640px; padding: 28px; background-color: #ffffeb; border-left-width: 8px; border-left-color: #e2671e; color: #191d2b; }
-.results-heading { color: #0c6374; font-size: 30px; -unity-font-style: bold; }
-.results-title { font-size: 19px; margin-top: 6px; color: #775122; }
-.results-stats { font-size: 22px; margin: 22px 0; white-space: normal; }
-.results-replay { min-height: 56px; padding: 12px; background-color: #f7c92c; border-width: 2px; border-color: #191d2b; color: #191d2b; font-size: 21px; -unity-font-style: bold; border-radius: 0; }
-.results-note { margin-top: 14px; font-size: 15px; white-space: normal; color: #775122; }
+@import url("HandmadeUI.uss");
+.mission-card { position: absolute; left: 18px; top: 174px; width: 224px; max-width: 34%; padding: 6px 8px; background-color: rgba(23,28,29,.92); border-left-width: 3px; border-left-color: var(--edge); border-bottom-width: 3px; border-bottom-color: var(--ink); color: var(--cream); white-space: normal; }
+.mission-heading { color: var(--quiet); font-size: 10px; letter-spacing: 1px; }
+.mission-objective { color: var(--cream); font-size: 15px; white-space: normal; margin-top: 2px; }
+.mission-notice { color: var(--gold); font-size: 12px; white-space: normal; margin-top: 4px; }
+.mission-time { color: #a7ad98; font-size: 10px; margin-top: 3px; }
+.interaction-prompt { align-self: center; margin-top: 26%; color: var(--ink); background-color: var(--gold); border-width: 2px; border-color: var(--ink); padding: 6px 12px; font-size: 18px; }
+.interact-button { position: absolute; left: 42%; bottom: 260px; padding: 12px 20px; font-size: 18px; }
+.results { position: absolute; left: 0; right: 0; top: 0; bottom: 0; align-items: center; justify-content: center; background-color: rgba(23,28,29,.92); }
+.results-card { width: 76%; max-width: 640px; padding: 20px; background-color: var(--panel); border-width: 3px; border-color: var(--edge); border-top-color: var(--rust); border-bottom-width: 7px; border-bottom-color: var(--ink); color: var(--cream); }
+.results-heading { color: var(--gold); font-size: 28px; white-space: normal; }
+.results-title { font-size: 17px; margin-top: 6px; color: var(--quiet); }
+.results-stats { font-size: 20px; margin: 14px 0; white-space: normal; }
+.results-replay { min-height: 56px; padding: 10px; background-color: var(--rust); color: var(--ink); font-size: 19px; }
+.results-note { margin-top: 12px; font-size: 14px; white-space: normal; color: var(--quiet); }
 .mission-complete .equipment, .mission-complete .vitals-panel, .mission-complete .stick, .mission-complete .action, .mission-complete .mission-card, .mission-complete .interact-button, .mission-complete .interaction-prompt { display: none; }
 .hidden { display: none; }
-
 .mission-details { max-height: 140px; flex-shrink: 1; }
 .mission-card .unity-label { margin-left: 0; margin-right: 0; padding: 0; }
 
+.results.is-failed .results-heading { color: #ef9c7a; }
+.results.is-failed .results-card { border-top-color: var(--danger); }
+
+.mission-card { border-left-color: var(--gold); background-color: rgba(23,28,29,.88); }
+.mission-heading { display: none; }
+.mission-notice { font-size: 11px; }
+.results-card { border-width: 4px; border-top-color: var(--gold); border-bottom-width: 8px; background-color: #202b2c; }
+.results-heading { padding: 8px; background-color: var(--gold); color: var(--ink); font-size: 28px; }
+.results.is-failed .results-heading { background-color: var(--rust); color: var(--ink); }
+.results-stats { border-left-width: 4px; border-left-color: var(--gold); padding-left: 12px; }
+.mission-details { max-height: 112px; }
+.mission-complete .campaign-pause { display: none; }
+
+/* Hotfix0036.1: keep objective/results text fully readable. */
+.mission-card { background-color: rgba(23,28,29,.55); }
+.interaction-prompt { background-color: rgba(217,188,90,.65); }
+.interact-button { background-color: rgba(56,63,56,.60); }
+.results-replay { background-color: rgba(205,120,62,.60); }
+.results-replay:hover { background-color: rgba(74,81,66,.60); }
+.interact-button:active, .results-replay:active { background-color: rgba(205,120,62,.60); }
+.results { background-color: rgba(23,28,29,.60); }
+.results-card { background-color: rgba(32,43,44,.65); }
+.results-heading { background-color: rgba(217,188,90,.65); }
+.results.is-failed .results-heading { background-color: rgba(205,120,62,.65); }
+.results-card .flow-button { background-color: rgba(56,63,56,.65); }
+.results-card .flow-button:hover, .results-card .flow-button:focus { background-color: rgba(74,81,66,.65); }
+.results-card .flow-button.is-selected { background-color: rgba(104,83,47,.65); }
+.results-card .flow-button:active { background-color: rgba(205,120,62,.65); }
+.results-card .flow-button:disabled { background-color: rgba(41,45,42,.65); }

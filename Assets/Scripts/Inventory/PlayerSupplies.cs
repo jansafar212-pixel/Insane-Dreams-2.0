@@ -12,7 +12,9 @@ namespace InsaneDreams.Inventory
         private PlayerActions actions;private Health health;
         public PlayerHealing Healing{get;private set;}
         public PlayerLoadout Loadout{get;private set;}
+        public PlayerThrowables Throwables{get;private set;}
         public int Earnings{get;private set;}
+        public event System.Action<int> WalletCollected;
         public string Notification=>Time.unscaledTime<noticeUntil?notice:string.Empty;
         private float noticeUntil;private string notice;
         public bool CanCollect=>isActiveAndEnabled&&actions.isActiveAndEnabled&&!health.IsDefeated;
@@ -26,7 +28,7 @@ namespace InsaneDreams.Inventory
                 return best;
             }
         }
-        private void Awake(){actions=GetComponent<PlayerActions>();health=GetComponent<Health>();Healing=GetComponent<PlayerHealing>();Loadout=GetComponent<PlayerLoadout>();}
+        private void Awake(){actions=GetComponent<PlayerActions>();health=GetComponent<Health>();Healing=GetComponent<PlayerHealing>();Loadout=GetComponent<PlayerLoadout>();Throwables=GetComponent<PlayerThrowables>();}
         private void OnEnable()=>actions.InteractionRequested+=Interact;
         private void OnDisable(){actions.InteractionRequested-=Interact;nearby.Clear();}
         private void Interact(){var crate=NearbyCrate;if(crate!=null&&crate.TrySupply(this))Notify("Supplies replenished");}
@@ -35,13 +37,13 @@ namespace InsaneDreams.Inventory
         public bool CollectWallet(string id,int amount)
         {
             if(!CanCollect||string.IsNullOrEmpty(id)||amount<=0||!wallets.Add(id))return false;
-            Earnings=(int)System.Math.Min(int.MaxValue,(long)Earnings+amount);Notify("Wallet collected");return true;
+            Earnings=(int)System.Math.Min(int.MaxValue,(long)Earnings+amount);Notify("+$"+amount+" / WALLETS $"+Earnings);WalletCollected?.Invoke(Earnings);return true;
         }
         private void Notify(string message){notice=message;noticeUntil=Time.unscaledTime+2.5f;}
-        public void ResetMission()
+        public void ResetMission(bool resetRevival=true)
         {
             wallets.Clear();Earnings=0;noticeUntil=0;Healing.ResetSupply();
-            GetComponent<Combat.PlayerRevive>()?.ResetInventory();
+            if(resetRevival)GetComponent<Combat.PlayerRevive>()?.ResetInventory();
             // Only at an explicit full replay; checkpoint deaths preserve finite
             // supplies and reward claims. No scene search occurs during gameplay.
             foreach(var root in gameObject.scene.GetRootGameObjects())

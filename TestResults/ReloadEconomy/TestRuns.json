@@ -1,0 +1,123 @@
+[
+  {
+    "suite": "reloadRules",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"status\": \"completed\",\n  \"duration\": 0.39,\n  \"summary\": {\n    \"total\": 11,\n    \"passed\": 11,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.ReloadRepairRulesTests.FullEmptyReserveArmorAndLargeTickAreBounded\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0308998,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.ReloadRepairRulesTests.InterruptedShellsRemainUsableAndResumeDoesNotRepeatThem(1)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0013302,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.ReloadRepairRulesTests.InterruptedShellsRemainUsableAndResumeDoesNotRepeatThem(2)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.000101,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.ReloadRepairRulesTests.ShellSnapshotKeepsCompletedInsertionAndResumeDoesNotGrantPendingShell\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0011564,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.ReloadRepairRulesTests.ShellStepsTransferExactlyOneAndRepeatedTicksCannotDuplicate(0,20)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0014164,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.ReloadRepairRulesTests.ShellStepsTransferExactlyOneAndRepeatedTicksCannotDuplicate(2,10)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0001492,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.ReloadRepairRulesTests.ShellStepsTransferExactlyOneAndRepeatedTicksCannotDuplicate(2,1)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0001727,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.ReloadRepairRulesTests.ShellStepsTransferExactlyOneAndRepeatedTicksCannotDuplicate(5,1)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0001693,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.ReloadRepairRulesTests.SmgAtomicExchangeConservesTacticalRounds(0,60,30,30)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0018137,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.ReloadRepairRulesTests.SmgAtomicExchangeConservesTacticalRounds(12,60,30,42)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.000274,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.ReloadRepairRulesTests.SmgAtomicExchangeConservesTacticalRounds(12,3,15,0)\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0000806,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+        }
+      ]
+    }
+  },
+  {
+    "suite": "reloadArsenalRules",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"status\": \"completed\",\n  \"duration\": 0.24,\n  \"summary\": {\n    \"total\": 4,\n    \"passed\": 4,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.ArsenalRulesTests.CloseRangeWeaponsLoseEffectivenessWhilePrecisionAndLegacyDamageStayConstant\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0138778,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.ArsenalRulesTests.EveryMagazineReloadAndInterruptedReloadConservesAmmunitionWithArmorPenalty\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0011604,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.ArsenalRulesTests.NewLongGunsDoNotInheritThePistolMagazine\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0027396,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.ArsenalRulesTests.SevenCoreWeaponsAndRetainedGlockHaveDistinctDataWithoutChangingEnemyEagle\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0079579,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+        }
+      ]
+    }
+  },
+  {
+    "suite": "reloadPlay",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"status\": \"completed\",\n  \"duration\": 9.56,\n  \"summary\": {\n    \"total\": 4,\n    \"passed\": 4,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.ReloadRepairPlayTests.HudShowsEachInsertedShellOnNextUiFrameAndRebindIsSafe\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.0913661,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.ReloadRepairPlayTests.ShotgunRealClockShellsPersistOnFireAndDeathAndVisualIsBounded\",\n      \"Status\": \"Passed\",\n      \"Duration\": 2.0093154,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.ReloadRepairPlayTests.SmgExchangeTracksFacingMovementAndCancelsOnSwitchWithoutDebris\",\n      \"Status\": \"Passed\",\n      \"Duration\": 4.6386434,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.ReloadRepairPlayTests.StartingTapeHealingCancelsReloadWithoutDiscardingCompletedShells\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.7398788,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+        }
+      ]
+    }
+  },
+  {
+    "suite": "reloadArsenal",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"status\": \"completed\",\n  \"duration\": 12.1,\n  \"summary\": {\n    \"total\": 8,\n    \"passed\": 8,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.ArsenalTests.AllWeaponsDamageAllFourArchetypesThroughActualHitboxes\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.686361,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.ArsenalTests.EagleUsesNormalHeldFireWhileMovingAndJumpingAndMuzzleRemainsAligned\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.8511824,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.ArsenalTests.EveryGunFiresWhileMovingAirborneAndCrouchingAndReloadSwitchConservesAmmo\",\n      \"Status\": \"Passed\",\n      \"Duration\": 9.1494923,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.ArsenalTests.ShotgunPelletsConsumeOneRoundAndDoNotDuplicateColliderDamage\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0336168,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.ArsenalTests.SniperHoldCancelReleaseAndAutomaticRecoveryNeverDoubleFire\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.1292653,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.ArsenalTests.SniperSwitchPauseReloadResetDeathAndRevivalCannotReleaseAnAccidentalShot\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0801591,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.ArsenalTests.SustainedAutomaticAndPelletFireKeepTheEffectPoolBounded\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0718922,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.ArsenalTests.SustainedLmgBloomBuildsAndRecoversWithoutMovementPenalty\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0295815,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+        }
+      ]
+    }
+  },
+  {
+    "suite": "reloadEconomy",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"status\": \"completed\",\n  \"duration\": 4.12,\n  \"summary\": {\n    \"total\": 11,\n    \"passed\": 11,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0034EconomyTests.AllExistingArsenalCanBePurchasedEquippedAndReloadedFromDiskWithoutDuplicateCharges\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.6572774,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0034EconomyTests.ArmorOwnershipSelectionAndDamagePersistWithoutFreeRepairs\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0804359,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0034EconomyTests.BackgroundAndPauseSecureUnusedSuppliesThenResumeReservesBeforePlay\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.8601093,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0034EconomyTests.CompletionReturnsUnusedStockPaysOnceAndAllowsReplayAndShopping\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.9140259,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0034EconomyTests.ConsumableCapsAndFailurePayoutNeverCreateMoneyOrFreeInjections\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0606794,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0034EconomyTests.ExactAmmoPackFitAndOwnershipAreRequiredWithoutOvercharging\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0319723,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0034EconomyTests.ExistingAmmoSupplyUsesEquippedWeaponCapacityAndLeavesOverflowInBox\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.68225,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0034EconomyTests.ExistingVersionOneProfileRetainsBankedCashOwnedCarbineAmmoAndDamagedArmor\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0462305,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0034EconomyTests.FailedAtomicPurchasesDeploymentAndSettlementRollBackMemoryAndDisk\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0592921,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0034EconomyTests.ForcedInterruptionCannotRestoreSpentInventoryOrDuplicateWalletPayouts\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.6434874,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0034EconomyTests.ZeroMoneyStillProvidesFiveBasicMagazinesWithoutFreePremiumRefills\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0457771,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+        }
+      ]
+    }
+  },
+  {
+    "suite": "reloadHealing",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"status\": \"completed\",\n  \"duration\": 1.39,\n  \"summary\": {\n    \"total\": 1,\n    \"passed\": 1,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0027HealingTests.TapeWrapConsumesOnePointPerHpBlocksFireAndImmediatelyRestoresWeapons\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.3583008,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+        }
+      ]
+    }
+  },
+  {
+    "suite": "reloadPerf",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"status\": \"completed\",\n  \"duration\": 2.51,\n  \"summary\": {\n    \"total\": 2,\n    \"passed\": 2,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.AndroidPerformanceRegressionTests.CachedHudTracksAmmoSwitchesGrenadesAndRebind\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.7087418,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.AndroidPerformanceRegressionTests.EquipmentPosePreservesMuzzleMagazineAndExpressionChanges\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.7011485,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+        }
+      ]
+    }
+  },
+  {
+    "suite": "reloadCredits",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"status\": \"completed\",\n  \"duration\": 0.24,\n  \"summary\": {\n    \"total\": 5,\n    \"passed\": 5,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0035Tests.BasicPistolUsesOrdinaryArtAndExactlyFifteenRounds\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.006652,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0035Tests.DisabledSettingPreservesReleaseEconomyAndCanBeEnabledLater\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0145022,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0035Tests.ExistingLowSavePurchaseEquipsThenRestartRestoresPlaytestFloor\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.1049147,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0035Tests.FailedTopUpRollsBackMarkerAndBalanceAndCanRetry\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.019401,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0035Tests.NewProfilesAndPreviouslyGrantedLowProfilesReceiveFloorWithoutReducingRichBalances\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0517851,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+        }
+      ]
+    }
+  },
+  {
+    "suite": "reloadFlow",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"status\": \"completed\",\n  \"duration\": 23.48,\n  \"summary\": {\n    \"total\": 12,\n    \"passed\": 12,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint024FlowTests.AlternateGapStepCanBeReachedUsingExistingDoubleJump\",\n      \"Status\": \"Passed\",\n      \"Duration\": 2.9795868,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint024FlowTests.ArmorAbsorbsBodyDamageConsumesConditionAndDoesNotProtectHeadOrNeutralHazards\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.133147,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint024FlowTests.FailedSaveRollsBackPurchaseWithoutChargingOrGrantingAnItem\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0413146,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint024FlowTests.FaintanylRevivePersistsImmediatelyWithoutResettingMissionAndRetryStock\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.8149157,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint024FlowTests.Hotfix00251PauseCentersInSafeTopAreaWithoutCoveringHudAndStillPauses\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.6839987,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint024FlowTests.InterruptedRunRestoresSavedStockAndSettlesPendingEarningsOnlyOnce\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.1546446,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint024FlowTests.PhysicalExitFullLoopRepeatsWithoutAnyPurchases\",\n      \"Status\": \"Passed\",\n      \"Duration\": 6.9424588,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint024FlowTests.PhysicalExitFullLoopRepeatsWithPurchasedEquipmentAndSavedEarnings\",\n      \"Status\": \"Passed\",\n      \"Duration\": 8.2276768,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint024FlowTests.PreparationIsMandatoryPurchasesOptionalAndResultMoneySettlesOnlyOnce\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.1221204,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint024FlowTests.PurchasedEquipmentReachesMissionAndRetryDoesNotRefillFiniteStock\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.6686419,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint024FlowTests.PurchasesRequireFundsOwnershipAndDebounceAndEquipmentPersists\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.1714686,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint024FlowTests.RealMenuShopMissionResultsAndReturnFlowBanksOneReward\",\n      \"Status\": \"Passed\",\n      \"Duration\": 2.4907613,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+        }
+      ]
+    }
+  },
+  {
+    "suite": "reloadEconomyRules",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"status\": \"completed\",\n  \"duration\": 0.58,\n  \"summary\": {\n    \"total\": 3,\n    \"passed\": 3,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0034EconomyRulesTests.ArmorLimitsAreBoundedAndHelmetsHaveSmallerPenalties\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.014452,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0034EconomyRulesTests.BalanceSimulatesPoorAverageAndSavingPlayersFromActualLevelWalletCount\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.2344508,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0034EconomyRulesTests.CatalogContainsOnlyExistingArsenalAndMedicalAndSeparateFiniteAmmoPacks\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0059013,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+        }
+      ]
+    }
+  },
+  {
+    "suite": "reloadBunker",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"status\": \"completed\",\n  \"duration\": 28.29,\n  \"summary\": {\n    \"total\": 5,\n    \"passed\": 5,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.CowardsBunkerTests.ConcreteShellBlocksEveryExteriorBoundaryExceptTheEmbrasureAndOfficerCanBeShot\",\n      \"Status\": \"Passed\",\n      \"Duration\": 5.586139,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CowardsBunkerTests.ConfirmedRearFlankDrawsOfficerThroughRealDoorWithoutTeleporting\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.3402092,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CowardsBunkerTests.LaserClipsToConcreteAndOnlyPassesThroughFiringHole\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.7967564,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CowardsBunkerTests.OfficerPeeksTelegraphsFiresHidesAndReturnsInsideConcreteWithoutDeadlock\",\n      \"Status\": \"Passed\",\n      \"Duration\": 16.0397967,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.CowardsBunkerTests.PhysicalGrenadeRoofCollisionAndRealPlayerRoofAccessRouteStayValid\",\n      \"Status\": \"Passed\",\n      \"Duration\": 4.4861786,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+        }
+      ]
+    }
+  }
+]

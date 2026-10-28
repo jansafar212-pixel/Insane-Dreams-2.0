@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "if(UnityEditor.EditorApplication.isPlaying||UnityEngine.SceneManagement.SceneManager.GetActiveScene().isDirty)throw new System.Exception(\"Busy or dirty\");var scene=UnityEngine.SceneManagement.SceneManager.GetActiveScene();var root=UnityEngine.GameObject.Find(\"CowardsBunker\").transform;var roof=root.Find(\"BunkerRoof\");roof.position=new UnityEngine.Vector2(142.75f,4.875f);var r=roof.GetComponent<UnityEngine.SpriteRenderer>();r.drawMode=UnityEngine.SpriteDrawMode.Tiled;r.size=new UnityEngine.Vector2(4.5f,.375f);roof.GetComponent<UnityEngine.BoxCollider2D>().size=r.size;root.Find(\"FrontTimber\").position=new UnityEngine.Vector2(140.625f,3.15f);root.Find(\"RearTimber\").position=new UnityEngine.Vector2(144.875f,3.15f);foreach(var t in UnityEngine.GameObject.Find(\"HandmadeEarthAndVegetation\").GetComponentsInChildren<UnityEngine.Transform>())if(t.name==\"SparseTree\")t.position=new UnityEngine.Vector2(t.position.x,2.375f);UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(scene);UnityEditor.SceneManagement.EditorSceneManager.SaveScene(scene);return \"Roof shortened behind jump arc; trees grounded. Saved.\";"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": "Roof shortened behind jump arc; trees grounded. Saved."
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7802,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

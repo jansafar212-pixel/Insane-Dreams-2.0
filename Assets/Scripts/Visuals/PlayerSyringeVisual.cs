@@ -8,6 +8,7 @@ namespace InsaneDreams.Visuals
     public sealed class PlayerSyringeVisual : MonoBehaviour
     {
         [SerializeField] private Sprite syringeSprite;
+        public Sprite InventoryIcon=>syringeSprite;
         [SerializeField,Range(.3f,1)] private float seconds=.6f;
         private PlayerRevive revive;private Health health;private PlayerRecovery recovery;private CutoutRig rig;
         private SpriteRenderer syringe,rearArm;private int armOrder;private float started;private bool playing;

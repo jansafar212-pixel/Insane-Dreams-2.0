@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "if(UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode)throw new System.InvalidOperationException(\"Stop tests before inspection\"); var prior=UnityEngine.SceneManagement.SceneManager.GetActiveScene();if(prior.isDirty)throw new System.InvalidOperationException(\"Preserve dirty scene before opening Demo\");var scene=UnityEditor.SceneManagement.EditorSceneManager.OpenScene(\"Assets/Scenes/Warehouse_Demo.unity\");int missing=0;foreach(var g in scene.GetRootGameObjects())foreach(var t in g.GetComponentsInChildren<UnityEngine.Transform>(true))missing+=UnityEditor.GameObjectUtility.GetMonoBehavioursWithMissingScriptCount(t.gameObject);var prefabMissing=new System.Collections.Generic.List<string>();foreach(var guid in UnityEditor.AssetDatabase.FindAssets(\"t:Prefab\",new[]{\"Assets/Prefabs\",\"Assets/Data/FirstOperation\"})){var p=UnityEditor.AssetDatabase.GUIDToAssetPath(guid);var root=UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.GameObject>(p);foreach(var t in root.GetComponentsInChildren<UnityEngine.Transform>(true))if(UnityEditor.GameObjectUtility.GetMonoBehavioursWithMissingScriptCount(t.gameObject)>0)prefabMissing.Add(p);}return Newtonsoft.Json.JsonConvert.SerializeObject(new {scene=scene.path,dirty=scene.isDirty,playing=UnityEditor.EditorApplication.isPlaying,missingScripts=missing,prefabMissing=prefabMissing,buildScenes=System.Array.ConvertAll(UnityEditor.EditorBuildSettings.scenes,s=>s.path+\":\"+s.enabled)});"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": "{\"scene\":\"Assets/Scenes/Warehouse_Demo.unity\",\"dirty\":false,\"playing\":false,\"missingScripts\":0,\"prefabMissing\":[],\"buildScenes\":[\"Assets/Scenes/MainMenu.unity:True\",\"Assets/Scenes/Warehouse_Demo.unity:True\",\"Assets/Scenes/Warehouse_Mission01.unity:True\",\"Assets/Scenes/SampleScene.unity:False\"]}"
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

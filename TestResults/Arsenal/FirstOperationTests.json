@@ -1,0 +1,70 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 39.74,
+      "summary": {
+        "total": 6,
+        "passed": 6,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "InsaneDreams.Tests.FirstOperationTests.AuthoredRosterSupportBulletproofPlatformsAndFiveCameraViews",
+          "Status": "Passed",
+          "Duration": 1.7223701,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.FirstOperationTests.ContinuousLevelRouteCanReachResultsUsingRealMovementAndExistingDoubleJump",
+          "Status": "Passed",
+          "Duration": 24.3527592,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.FirstOperationTests.ExpertCanThrowAtGroundApproachFromDeckEdgeAndRespectsViewport",
+          "Status": "Passed",
+          "Duration": 5.7057478,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.FirstOperationTests.OfficerTelegraphsBeforeShootingAndCannotInitiateOffscreen",
+          "Status": "Passed",
+          "Duration": 4.1696711,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.FirstOperationTests.SamuraiUsesActualSmallColliderToPursueElevatedPlayer",
+          "Status": "Passed",
+          "Duration": 1.6599826,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.FirstOperationTests.TwoPurchasedRevivalsThenFailureAndRetryNeverRefillThem",
+          "Status": "Passed",
+          "Duration": 2.0915902,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

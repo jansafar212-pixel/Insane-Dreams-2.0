@@ -1,0 +1,63 @@
+{
+  "success": true,
+  "command": "command run_tests",
+  "data": {
+    "command": "run_tests",
+    "parameters": {
+      "mode": "editor",
+      "filter": "Sprint024ProgressTests"
+    },
+    "result": {
+      "Summary": {
+        "Total": 4,
+        "Passed": 3,
+        "Failed": 1,
+        "Skipped": 0,
+        "Inconclusive": 0
+      },
+      "Results": [
+        {
+          "FullName": "InsaneDreams.Tests.Sprint024ProgressTests.ActiveAndSavedBuildProfilesCannotBypassCampaignWithTestbedOnlyScenes",
+          "Status": "Passed",
+          "Duration": 0.06229,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint024ProgressTests.AtomicSaveReloadKeepsMoneyAndCompletionWithoutOverwritingUnknownFutureVersion",
+          "Status": "Passed",
+          "Duration": 0.0286178,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint024ProgressTests.DemoHasBoundActorsStagedSpecialistsAndOriginalMissionRemainsSeparate",
+          "Status": "Failed",
+          "Duration": 0.1107873,
+          "Message": "  Expected: 17\r\n  But was:  15\r\n",
+          "StackTrace": "at InsaneDreams.Tests.Sprint024ProgressTests.DemoHasBoundActorsStagedSpecialistsAndOriginalMissionRemainsSeparate () [0x000b8] in C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Tests\\EditMode\\Sprint024ProgressTests.cs:56\r\n"
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint024ProgressTests.InvalidResourceValuesNormalizeWithoutNegativeBalances",
+          "Status": "Passed",
+          "Duration": 0.0004417,
+          "Message": null,
+          "StackTrace": null
+        }
+      ],
+      "Duration": 2.86,
+      "StatusPath": null,
+      "Mode": "EditMode",
+      "FilterApplied": "testname: Sprint024ProgressTests",
+      "success": true,
+      "result": null
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

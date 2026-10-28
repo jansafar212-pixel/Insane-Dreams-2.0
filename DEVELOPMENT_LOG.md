@@ -5522,3 +5522,1380 @@ results: HandmadeDetails_Regression.json and Edit/Play/Cover/LadderTests.json;
 saved-state proof: HandmadeDetails_FinalVerification.json, Console.json,
 ProtectedBefore/After and per-scene Before/After snapshots. Implemented by Codex;
 awaiting human artistic and device playtest verification.
+
+## Sprint 0028 — The First Operation (2026-10-25)
+
+Rebuilt Warehouse_Demo in place as five connected, explicitly authored industrial
+encounters across x=-28..159: loading yard, storage decks, Samurai pursuit bay,
+firework storage and a raised command-office finale. Continuous bounded floor,
+six ladders, optional elevated approaches, separate cover and retreat positions,
+existing chunky props/hard shadows and five finite ammo/tape supply crates. No
+new audio/music system. Testbed and Mission01 remain intact legacy references.
+
+Exact roster:3+3+2+2 basic Larpers,1 Samurai,1 Czech Fireworks Expert and1 Officer
+(13 authored occupants, persistent and present before first render; no rear spawn
+logic introduced). First guard at-18.5 rather than-16 avoids the initial touch
+Jump overlay. Storage guards occupy ground/3.2/6.4 heights; Samurai58 uses the
+existing small collider/navigation to reach the3.2-high deck. Expert94.8 starts
+near the deck edge so solid geometry does not block the ground approach. Officer
+140 stands on a reachable1.6-high dais behind separate cover with retreat space.
+Only authored camera bounds changed, including lower bound-4 for readable floor
+framing; camera controller and player movement code unchanged.
+
+User explicitly requested a new Officer after inspection found none. Native
+flat-pixel cap/uniform modules match Larper12x11/12x17/5x18/6x18 bounds,32PPU,
+Point/no mips and existing segmented joint pivots. Postava1 actually inspected;
+historical files untouched. Existing expressions/equipment reused. Officer uses
+baseline Larper HP, imperfect aim, suppression/cover/reloads; new scoped pistol
+18damage/1.4s interval/6rounds/4s reload and .7s visible wind-up. Close approach
+within4units requests existing retreat, with4–6s cooldown. New art is provisional,
+not artistically approved. GRAPHICS_BIBLE reference index updated accordingly.
+
+Basic Larper reaction is .7s plus0–.12 jitter in this scene only (global .55/.05
+prefab values preserved). Scoped fireworks variant: preparation .85->1.05s,
+recovery1.05->2.1s, preferred range7->8, damage31.2->26, radius3.2->2.8;
+normal fuse .8–1.5->1.1–1.8s, short .25–.45->.65–.9s, short chance18->12%,
+long2–3.2->2.2–3.2s. Existing miss/malfunction variation, warning ring, friendly
+fire, physical occlusion and two-projectile pool retained. Original prefabs and
+weapons unchanged; all variants live under Assets/Data/FirstOperation/.
+
+Opt-in WarehouseMission mode advances spatially through five sections. Ordinary
+kills never gate progression; only Officer defeat opens dispatch exit. Persistent
+locked-exit feedback is debounced. Existing menu/level-select/shop/results/reward
+accounting retained. No checkpoints or injection pickups in Demo. Purchased stock
+is not reset on retry; zero stock death ends the attempt through results. New
+campaign saves now explicitly start with zero injections; existing saved stock
+and migration data preserved. Capacity2 and2s revival protection unchanged.
+Legacy checkpoint fallback defaults true; Demo explicitly disables it.
+
+Verification:55/55 focused cases passed:6 mission Play cases (exact supported
+roster, actual carbine stopped by deck, persistent actors, six ladder definitions,
+controlled camera views, real-motor full route, actual small-Samurai deck landing,
+Officer telegraph/offscreen gate, Expert launch toward ground/offscreen gate,
+two revivals/failure/retry);12 campaign/shop/UI/physical-exit/payout cases;
+9 existing movement/suppression cases;12 cover cases;9 legacy mission cases;
+6 Edit layout/art/decoration checks;1 archived art Play collision/ladder case.
+Same cases are not double-counted across reruns. Final compilation succeeds;
+current Console0errors,11 existing Editor/test API deprecation/analyzer and Unity
+AI Toolkit account/network warnings. No broad historical-suite/Android claim.
+
+Tests caught and corrected a new Officer segmented-sprite reference mismatch and
+capture-driven framing/placement issues. The scripted traversal probe was changed
+from a center ray to full-body anticipation for raised steps; no movement rewrite.
+Legacy tests now use the new exit bounds/objectives or preserved reference scene,
+wait for the already-committed1.2s ragdoll recovery, and isolate checkpoint rollback
+from autonomous AI reacquisition. Snapshot compatibility normalizes only the two
+new legacy-default flags; non-default behavior remains detectable/tested.
+
+All591 protected original art/prefab/historical/other-scene files remain byte-
+identical. Demo saved/open/clean/stopped,13 valid authored points,0 missing scripts,
+0 checkpoints. MainMenu remains first build scene and catalog still routes to
+Warehouse_Demo. Prior four Resources performance-test-file deletions preserved;
+nothing staged, committed or pushed.
+
+Controlled opening/storage/pursuit/firework/Officer gameplay-camera captures were
+inspected. Combat was disabled for composition captures; integration/route tests
+use controlled inputs or programmatic defeats. This is not human combat
+playtesting.10–15minute cautious pacing, emergent combat fairness/stuck cases,
+Officer art approval and actual Android controls/frame rate require hands-on
+review. No claim of a polished or device-verified mission.
+
+Full layout/placements, scoped tuning, modified files and manual checklist:
+TestResults/Sprint0028/Report.md. Exact results: Regression.json and suite JSON;
+saved-state proof: FinalVerification.json, ProtectedCheck.json and Console.json.
+Implemented by Codex — awaiting hands-on playtest verification.
+
+## 2026-10-25 — Resumed Level 1 combat and enemy AI hotfix
+
+Continued the actual paused implementation without regenerating First Operation.
+User confirmed the documented brief constraints; no additional numerical attacker
+cap was provided. Population13->15 (+15.38%), groups[3,4,3,3,2]; opening trio
+unchanged. Added one storage Larper(x10/floor0) and command Larper(x129/floor3.2).
+Terrain/scenery/layout and protected original art/prefabs/other scenes unchanged.
+
+Scoped Samurai speed7->9.5, reaction.04->.02+jitter.02, recovery.7->.42,
+platform sampling.3->.2, jump cooldown1.2->.85. Pursuit resumes during recovery
+when the player escapes; strike cooldown/.4s anticipation, HP/damage, small
+collider, jump speed15 and existing route/failed-jump validation remain.
+
+Officer weapon asset retained, renamed Desert Eagle:18->42damage,1.4->2.4s
+interval,6->7mag,4s reload unchanged, impulse.9->1.5. Reuses compact pistol
+sprite/sounds, removes extended magazine; no new dedicated art/audio claimed.
+Every shot has1s red laser with final.2s locked direction and no fresh spread
+roll. Solid-geometry clipping/offscreen/death/disabled gates remain; one ray only
+while winding. Cooldown2.4s +.8s while assigned ally lives within14units, followed
+by fresh warning. Cowardly profile; retreat4->6, retry4–6->2.5–4s, preferred
+range7->10, cover search7->9, withdrawal6->7, reposition chance.55->.9. Baseline
+Larper HP retained. Low barricade exposed a walking-only retreat fallback after
+full crouched-cover rejection: Officer now reuses validated hop corridors at
+commitment. Original retreat/hop thresholds restored; no navigator/teleport added.
+
+Expert freezes destination/fuse at preparation and completes via its own Update;
+player jumping, ordinary LOS loss and missed combat ticks no longer cancel it.
+Real damage/death/disabled combat/defeated target/offscreen gates still cancel.
+Operation blast26->100maximum, radius2.8/impulse4/fuses/VFX unchanged; configurable
+continuous normalized damage100/85/50/20/0 at0/.25/.5/.75/1; threshold0. Center
+at/beyond radius causes0 damage. Existing armor, LOS, friendly/self damage,
+deduplication and separately weighted impulse preserved. Officer-only cached
+Health gate prevents the added optional command ally blocking completion.
+
+61/61 targeted tests pass:4 Edit Mode and57 Play Mode (rules2, layout2, focused
+combat5, Level1 integration6, campaign12, movement/suppression9, cover12, legacy
+mission9, specialists4). Tests exercise real-motor route, actual small Samurai
+deck landing, locked laser/shot match and warning, offscreen/geometry gates,
+Officer retreat, committed moving-target throw, radial player/enemy/self/armor/
+occlusion/boundary effects and optional-ally exit. Old specialist fixtures updated
+for preserved31.2 global damage/always-on friendly fire/effect lifetime and real
+enabled-combat camera gate; no global balance change. Initial failed runs and
+resolved diagnostics retained. Previous Sprint0028 results are not double-counted.
+
+Compilation clean; final Console ground truth0errors/0warnings (historical tool
+buffer retains earlier records).605 protected hashes unchanged; exact geometry
+match;15 valid saved scene occupants, assigned Officer ally,0 missing scripts.
+Warehouse_Demo saved/open/clean, Play Mode stopped. No staging/commit/push;
+all preexisting dirty work and four Resources performance-test deletions preserved.
+Original requirements preserved verbatim in SPRINT_RESUME.md, now marked complete.
+
+Controlled Officer laser capture inspected. Human combat pacing/fairness, extended
+terrain stuck cases, audio/art presentation and actual Android frame rate/touch
+controls require playtesting. No APK/device or human gameplay claim.
+Full tuning, files, exact results and manual checklist:
+TestResults/Level1CombatHotfix/Report.md and Regression.json.
+Implemented by Codex — awaiting hands-on playtest verification.
+## 2026-10-25 — Officer miniboss: Desert Eagle, full-view laser and reload
+
+Implemented the separate Officer-only brief. No planned encounter-pacing work:
+Warehouse_Demo's groups[3,4,3,3,2], all actor positions, geometry and progression
+remain unchanged. Existing dirty work preserved; no staging/commit/push.
+
+Native27x14 Desert Eagle-style pistol and3x5 magazine at32PPU/Point/no mips use
+four flat opaque colors, chunky slide/barrel, hollow trigger guard and dark grip.
+Existing carrying-hand pivot/joint chain retained. The actual muzzle is the
+barrel edge5px above the(6,6) hand pivot, correctly mirrored. Existing Larper/
+character art and historical originals unchanged; actual Postava1/current Officer
+references inspected. New weapon art remains provisional pending artistic review.
+
+Officer-only32-degree upward recoil/.09 setback recovers over.5s; free arm stays
+separate while firing. Existing PistolMagazineReload and articulated exchange
+now handle this weapon. Compact mag is visibly removed, physically released and
+replaced; generic spare is hidden to prevent duplicate presentation. Existing
+WeaponCycle owns atomic ammo transfer after the replacement seats, at2.8s
+completion. Empty threshold and partial-mag refill guard keep evasive moves from
+refilling the gun early. Damage42->55, magazine remains exactly7, reload4->2.8s
+with jitter disabled. Original HP50, cowardly retreat/cover/support-ally behavior,
+2.4s weapon interval and2.4(+.8supported) warning cooldown preserved.
+
+Laser warning1->1.15s, final.2s direction lock unchanged. Width.035->.055, opaque
+red/no glow. Range covers the camera diagonal plus muzzle offset, independent
+of mobile aspect/zoom; one solid-geometry ray still stops at real platforms,
+crates and walls. A short beam hitting nearby dais/cover is intentional. Visual
+barrel now follows the sampled warning direction throughout tracking, rather
+than nominal aim diverging from aim-error laser, and the actual shot follows the
+same committed direction. Synchronous shot pose/muzzle feedback remains intact.
+
+60/60 unique targeted cases pass (4 Edit,56 Play): rules/layout4; new Officer3;
+existing combat5; Level1 integration6; Larper reload1; weapon/suppression7; player
+weapon1; cover12; movement/double-jump9; campaign12. Affected Officer/combat/player
+presentation checks rerun after the final alignment correction without counting
+duplicates. Tests verify full-view four-direction beams at4:3/16:9/20:9, real
+solid clipping, actual seven-shot55damage AI sequence, no empty/reload fire,
+no duplicate reload,7-round refill with reserve135->128, fresh post-reload warning,
+mirrored hand/recoil/exchange/cancellation and normal defeat. Initial checks led
+to removal of duplicate generic magazine rendering and render-frame-synchronized
+presentation assertions; source errors/failed final tests are not outstanding.
+
+Compilation clean; final current Console0errors/0warnings (historical buffer
+retains earlier records).805 preexisting non-code asset/reference hashes checked:
+only Officer.prefab and OfficerPistol.asset changed. Scenes and all other assets/
+historical originals identical. Demo open/clean, Play Mode stopped,0 missing
+scripts, actual scene Officer references verified. Controlled both-facing recoil/
+reload and gameplay-zoom captures inspected; no human gameplay, artistic approval
+or Android device/performance claim. Full final values/files/test evidence/manual
+checklist: TestResults/OfficerHotfix/Report.md and Regression.json. ART_BIBLE updated.
+Implemented by Codex — awaiting hands-on playtest/artistic verification.
+## 2026-10-25 — Sprint 0027: vertical combat, physics and gameplay foundations
+
+Preserved the completed Level1/Officer work and current mostly horizontal
+15-enemy mission; no layout, encounter-placement, collider or historical-art edits.
+Full original request and acceptance criteria retained in
+TestResults/Sprint0027/OriginalRequirements.md; configuration/files/manual checks
+in Report.md;138/138 unique focused tests pass (122 Play,16 Edit, Regression.json).
+
+Existing patrol hops now validate a complete reachable body arc before launch,
+reusing pursuit safety/retry gates and existing stuck replanning. Existing uncertain
+vertical gunfire hearing verified without LOS through solid platforms; no AI aim,
+reaction-speed or personality boost. Normal Larper movement and Samurai production
+prefabs pass obstacle/elevated pursuit, interruption and viewport/memory checks.
+
+Player fall damage uses real upward-facing contacts: safe drop8units,8HP/excess
+unit, minimum impact speed12, plus ordinary/double-jump height safety. A deployed
+parachute at landing unconditionally bypasses calculation and clears the pending
+flight, regardless of height/velocity. Extreme/late chute landings do0HP, with no
+delayed damage; actual airborne combat damage remains active. Recovery/revival/
+climbing clear tracking. Running down-gesture slide and buffered post-double-jump
+landing slide reuse existing motor/posture, with finite.35s decaying momentum.
+
+Player tool slot now selects finite frag/flash/smoke, cap5/type, shop60/50/40,
+right-stick aim→13-point10Hz arc→release throw; no one-button throw. Six pooled
+projectiles, actual radial/solid-LOS self/friendly damage and bounded impulse,
+temporary flash sensory disruption and8s smoke sight obstruction. Smoke never
+stops physical bullets or explosions. Purchase/consumption stock persists; saved
+legacy slot enum/data and enemy melee remain intact. Reusable fictional mine
+prefab has configurable trigger/damage, one-shot activation and no new Level1
+placements. Small Point-filtered32PPU prop sprites and dry peel WAV authored
+natively; no character sprite redesign.
+
+Cumulative accepted impacts track head/torso/four limbs, configurable80/150/60
+thresholds. Existing corpse copies totals and releases existing head/limb joints;
+living rigs and torso root remain intact. Existing corpse cap4/lifetime45s,
+nonblocking masks, velocity limits and inexpensive sleep retained and tested.
+Tape remains200reserve/25HPpersecond/1pointperHP, vulnerable and interruptible.
+Existing simple shoulder pivots now provide wrap fallback alongside segmented
+solver; small tape band and short peel cue accompany it. Active healing blocks
+AttackExecutor before ammo/effects; release/completion/interruption restores fire.
+
+Faintanyl stays Medical-only, cap2 and no random loot/free starting stock; existing
+purchased saves preserved. Two HUD pips decrement individually. Controlled shop/
+mission test buys2, revives twice in place with exactly2s protection, confirms
+vulnerability returns and third fatal event ends attempt.
+
+Officer warning1.15→exactly.5s, final.2s direction lock preserved. Continuous
+red geometry-clipped visual-only beam covers intended viewport sightline and
+cancels on retreat/reload/offscreen/death. Actual fading tracer magenta with
+width.08 versus Larper.04; existing taper/flash/sound remain.55damage,7mag,
+2.8reload,2.4weapon interval and2.4(+.8supported) warning cooldown unchanged.
+Tests cover visual-only warning (no ammo/noise/shot), actual timed shots/fade,
+full-view four-direction/aspect beams, interruption and complete7-shot/reload.
+
+Regression fixture maintenance was necessary for the earlier Level1 redesign:
+old cover-root, roster and Samurai platform coordinates were stale. Tests now use
+current covers/roster or isolated temporary geometry with production prefabs;
+no old geometry restored. Rising-arc/short-retreat assertions observe actual
+movement rather than a late net sample. A temporary fixture initially unloaded
+the runner scene; stopped/corrected and all6 Samurai cases passed. Initial failed
+evidence remains; latest unique results all pass. Final wrapping/HUD correction
+rechecked6 affected cases. Controlled captures of grenade HUD/arc/pips, wrapping
+and actual Officer tracer inspected; these are not human/device playtests.
+
+Android support and SDK/NDK/JDK are installed; MainMenu first enabled build scene.
+No Android phone connected. Development APK build running; outcome will be
+recorded below. No staging, commits or pushes. Final gameplay/artistic acceptance
+and Android performance/touch/thermal checks remain with the user's playtesting.
+
+Sprint0027 final verification: development Android APK **Succeeded**,839.36s,
+51,387,294bytes (~49MiB), at build/Sprint0027/AKUMU2-dev.apk. Official BuildReport
+counts972 warnings, primarily existing Sentis/inference shader variants, plus
+existing deprecated Find API/optional runtime Pipeline setup. Its3error messages
+are Pipeline request/status timeouts during the long native build, not C# or
+linker failures. Deferred duplicate callback refused to overwrite the finished
+APK; recovered authoritative successful BuildReport and preserved that diagnostic.
+AndroidBuild.json/AndroidWarnings.json contain details. No Android phone attached,
+so installation, hardware FPS/thermal/touch feel and user gameplay remain untested.
+
+Final compilation succeeds; after archiving build diagnostics, current Console
+0errors/0warnings. Warehouse_Demo clean/saved/open, Play Mode stopped,0missing
+scripts; all relevant humanoid rigs/skins and new prop/audio references intact.
+813preexisting asset/reference hashes checked: only intended player/Larper/
+fireworks/Officer prefabs and catalog differ; all scenes/historical originals
+unchanged. Geometry and15-enemy counts[3,4,3,3,2] preserved.138/138unique tests
+pass (122Play,16Edit);6affected presentation/control cases rerun after last fix.
+Working tree intentionally dirty with prior work preserved; nothing staged,
+committed or pushed. Implemented by Codex — awaiting playtest verification.
+
+## 2026-10-25 — Sprint 0027.1: Officer, ladders, weapon and Medical cleanup
+
+Scoped Officer accuracy: inherited close/far spread3/40degrees→1.25/4,
+aim sampling.18→.06s, turning240→360degrees/s. Officer-only aim now uses actual
+muzzle toward last visually observed collider center, retaining crouched offset
+without live hidden-target tracking. Reaction.7s, LOS/perception, cowardly evasions,
+.5s warning/.2s lock, .08magenta tracer,55damage,7rounds,2.8reload and cadence
+unchanged. Controlled seeded10-unit stationary player-size test:6hits/6realshots;
+existing commitment/dodging, retreat and full7-shot/reload regressions pass.
+
+Desert Eagle grip brown→charcoal-black; original27x14/32PPU gun/pivot/muzzle
+preserved. Magazine3x5→2x4, socket(-2,-3)→(-1,+1)pixels, seated beneath opaque
+handle. Extracted/replacement/debris remain on existing animation/physics/cycle.
+Native asset references/GUIDs preserved through Editor APIs. Pixel containment
+check and both-facing recoil/reload captures inspected; no body/rig redesign.
+
+Actual revised-level ladder baseline reproduced a stall atcenter3.870/feet3.170
+against3.200platform: old exit checked.05units early and stopped climbing on a
+blocked horizontal corridor. At exact marker, contact skin could still block the
+full collider at the ledge. Traverse normally to marker plus configurable.04
+clearance, then reuse existing supported/clear horizontal exit. No teleport or
+layout edit. All6real ladders pass held-up automatic grounded exits, downward
+climbing and post-cooldown no-reattach.9airborne-grab checks and11existing
+ladder/touch/combat cases pass; gravity/input ownership/delay preserved.
+
+Pause painted face88x40→52x40, same top-center symbol and124x56invisible touch
+area. One visible Medical category, Duct Tape then Faintanyl; no separate tape
+or drug tab/duplicates. Tape title exactly Duct Tape. Existing resource enum/IDs,
+prices($10/50tape,$75/injection), descriptions, caps and atomic purchase/save
+behavior preserved. Actual UI purchases award and persist both resources.
+
+39/39unique focused tests pass (38Play,1Edit), including6fall/parachute and
+cumulative detachment checks. Older test inputs now scale to joystick size and
+wait for existing reaction state instead of fixed pixel/time assumptions; no
+Larper gameplay change. Compilation/current Console clean,0missing scripts,
+Warehouse_Demo saved/open and Play Mode stopped. Ragdoll/region code and prefab,
+warehouse scenes byte-identical; geometry and15-enemy pacing[3,4,3,3,2] intact.
+No detachment frequency, thresholds or exaggerated physics changed.
+
+Files/values/evidence/manual checklist: TestResults/Sprint00271/Report.md and
+Regression.json; full brief preserved as OriginalRequirements.md. Native authoring
+entry point Sprint00271Setup.Apply(). No new APK build requested/performed; prior
+0027APK does not contain0027.1. Real Android touch/feel, Officer dodge balance and
+artistic acceptance require hands-on playtesting. No stage, commit or push.
+
+## Grenade resupply / fragmentation / rare arm detachment — 2026-10-26
+
+Existing supply boxes now transfer finite two-per-type grenade stock, respecting
+five/type capacity and preserving unaccepted stock. Same interaction/LOS, ammo
+and tape behavior; Demo boxes still hold108 conventional rounds. Batched inventory
+event immediately invalidates HUD readout and uses existing campaign persistence.
+No new pickup or scene changes.
+
+Frag radius3.2→4.1(+28.125%), peak damage85→110.5(+30%); same linear falloff,
+geometry protection, friendly/self rules and impulse2. Prewarmed sprite layers:
+brief flash, flat red/orange/yellow fireball,8 cosmetic fragments,3 short smoke
+puffs. Point-filtered8x8 mask at32PPU; duration.95s. New short synthesized boom
+because inspected projectile explosionSound was unassigned. Existing camera owner
+adds distance-weighted.08/.16s/range12 shake, never feeding follow smoothing.
+One existing occluded combat-noise event per frag; no new AI state. Fixed area
+query capacity64→128 accommodates larger radius and existing ragdoll colliders.
+Flash6/1.6s and smoke3.5/8s unchanged; frag smoke is cosmetic only.
+
+Cumulative arms60→105(+75%), head80/legs60/torso150 unchanged. Existing single-region
+hit accumulation and corpse transfer retained. No CartoonRagdoll physics changes.
+
+31/31 unique focused automated cases passed:24Play Mode,7Edit Mode. Includes
+actual Demo box caps/finite partial stock/HUD/save, blast falloff/cover/self-damage,
+pooled effects/reuse, flash/smoke, single-arm105 threshold, enemy death/corpse,
+existing supplies/throwables/regional damage/ragdoll/corpse-player collision and
+weapon ammo/reload rules. Initial crate test assumption72 corrected to actual108;
+no production ammo changed. Early unapplied-prefab run canceled before final runs.
+Controlled fireball/smoke captures inspected; no human gameplay/device claim.
+
+Both warehouse scenes, ragdoll prefab/source and EnemyCombat.cs hash unchanged
+from hotfix start. Warehouse_Demo clean/open, Play Mode stopped, compilation
+successful/current Console0errors0warnings,0missing scripts. No APK build;
+real Android performance, explosion balance/audio/art feel and observed detachment
+frequency require manual playtesting. All values/file list/evidence/checklist:
+TestResults/GrenadeResupplyHotfix/Report.md and Regression.json. Existing dirty
+work preserved; nothing staged, committed or pushed.
+
+## Sprint 0028 — Operation: The Coward's Bunker — 2026-10-26
+
+Implemented in the existing Unity project (brief's Godot wording treated as an
+engine-name error). Two deliverables complete: handmade environment modules and
+functional Officer defensive position. Prior grenade hotfix and dirty work kept.
+
+Eleven reusable coarse native modules on one512x512 Point/RGBA32/no-mipmap sheet,
+4x4native-pixel cells at32PPU, binary alpha, <=5opaque colors/module: soil floor,
+wall panel, scuffed deck, banks, tufts, rocks, sparse trees, scraps, sandbags and
+timber roof/posts. Placed static scenery stays subordinate; approved crates and
+character sprites untouched. Existing terrain/route, fifteen actors [3,4,3,3,2],
+opening trio, platform dimensions, six ladders and mission triggers retained.
+
+Existing cover positions x138/146 on1.6-high dais reused; front1.625x.90625→
+1.625x1.125, rear1x1→1.625x1.125. One new solid roof4.5x.375 at(142.75,4.875),
+open rear, cosmetic posts/earth, exposed edge x136 and world management joke sign.
+All other original terrain/ladder/crate collider bounds validated against baseline.
+No scene YAML/GUID edits: native CowardsBunkerSetup authoring and small eval fixes.
+
+Existing OfficerShotTelegraph holds optional scene-only bunker references;
+EnemyCombat uses current heard/visual memory, sampled reachable paths, reservations,
+ordinary hop, hide/retreat/reload/pressure and stuck recovery.80%post-shot retreat
+attempt near bunker; random existing1.2–2.4shides. Authored cover stand-off.65
+instead of generic.08 leaves a safe jump run-up; all other slots unchanged.
+A bounded1.5ssound-memory investigation after hiding prevents losing engagement
+solely while taking cover. No omniscient target or fixed action script.
+
+Actual traces caught two clearance issues: low roof blocked full hop arc, then
+close generic slot prevented hopping out. Shorten roof behind front corridor and
+provide run-up, keeping collision checks. Final trace shows peek/warning, shot,
+return to sandbags/crouch, then emerge and shoot again; no teleport. No Officer
+health/damage/accuracy/weapon/reload/laser/tracer tuning or other enemy AI changes.
+55damage/7mag/2.8reload/.5swarning/.2slock and magenta heavy tracer remain.
+
+36/36unique focused tests pass:31Play,5Edit. Includes4new bunker integration cases
+(real shot obstruction/rear-flank defeat/corpse; repeated peek/fire/cover arrival;
+pressure decay/real player crossing; physical grenade roof collision and actual
+blast protection/open rear damage),2new asset/layout checks, existing Officer,
+ladders, pause/shop, complete ground route/results, Samurai, supplies/grenades/HUD/
+save and fall/parachute/double-jump. Initial test JSON reference replaced with
+built-in JsonUtility; optional runtime magazine overlay excluded correctly from
+environment-sprite check. Fireworks ground-approach test failed once in combined
+run, passed isolated and full-suite rerun; no unrelated rebalance applied.
+
+Controlled gameplay-camera captures inspected. No human artistic/balance or
+Android-device performance claim; no APK build. Added static modules/one collider,
+no environment Update/particles/lights; Officer uses bounded existing tactical
+samples. Editor temporarily stalled; checkpoint preserved and work resumed after
+reconnection, without forced termination/discarding unsaved work by Codex.
+
+Full files/values/results/manual steps: TestResults/CowardsBunker/Report.md,
+Regression.json, OfficerTrace.json and captures. Original brief and prior checkpoint
+preserved there; SPRINT_RESUME.md updated. No stage, commit or push. Await human
+playtest/artistic verification, especially bunker pressure/escape, visual approval,
+fireworks intermittent timing and phone performance.
+
+Final native state: Warehouse_Demo saved/clean/open, outside Play Mode; compilation successful,0missing scripts,0Console errors.8warnings remain (older API/account connectivity notices captured separately); no unrelated warning cleanup. FinalEditor.json/FinalConsole.json record status.
+
+## 2026-10-26 — Sprint 0029: Operation: The Bunker Is Real
+
+Continued the existing Sprint 0028 level without regenerating approved environment
+art or discarding prior uncommitted work. Native Editor authoring saved matching
+foreground collision on bunker sandbags, roof and two small timber headers. Muted
+back-plane posts remain decorative. Officer starts under the roof (x140 →142),
+retreat chance .8 →.9; muzzle obstruction requests a reachable peek and prevents
+telegraph/shot through cover. Retained55damage,7rounds,2.8sreload,.5swarning,
+.2scommit,1.25–4-degree imperfect spread, heavy magenta tracer and pistol art.
+Actual traversal revealed/corrected header clearance; committed muzzle checks now
+stop at target entry rather than falsely rejecting geometry behind the player.
+
+Close reachable box hops can use a safe .18s backward run-up,3s cooldown, at most
+two attempts before existing replanning. No new nav system, floor permissions or
+player motor rewrite. Six automatic ladder exits and small-collider Samurai
+platform pursuit retained and tested. Shared event hearing accepts nearby enemy
+shots and explicit explosions, uncertain memory and offscreen firing restriction
+preserved. Occluded hearing .45 →.6; Larper reaction .55 →.7 (+.12jitter), Samurai
+.02(+.02) →.25(+.08). Short LOS loss does not restart initial delay. Suppression,
+expert commitment, encounter counts and approved scenery are preserved.
+
+Medical now contains exactly Duct Tape and Faintanyl with the exact requested
+copy. Four visible categories retained; existing grenades sold under Ammunition.
+Faintanyl defaults0, maximum2 purchased charges, automatic .35s revival delay;
+charge saved at death, exactly2s central damage protection, then normal failure
+when empty. Reservation avoids last-charge game-over race. No pickup/checkpoint
+refills. Old cartoon animation reused, two actual syringe icons bind correctly.
+Existing hold-heal and three-type aim/preview/release grenade system reused.
+
+Added catalog-configurable vest/helmet tiers. Light body60/.65absorption/1.04reload;
+heavy90/.75/1.18 plus36reserve and1grenade carrying cost. Light helmet20/.45/1.02;
+heavy35/.65/1.08 plus18reserve cost. Combined heavy reload1.274,378of432 spare rounds
+per firearm,4of5grenades/type; bounded minimum capacities. Uncarried purchased stock
+is saved instead of discarded. Reload modifiers stay per-player runtime weapon,
+including pickups; shared definitions/enemies unchanged. Separate regional head/body
+ballistic condition; melee/explosion/environment bypass. No movement penalties.
+Small native flat-color32PPU Point helmet overlays follow existing head/corpse;
+no ragdoll joints/physics/limb-detachment edits.
+
+Original AKUMU Block font matches existing wordmark block construction, applied via
+shared USS to menu/shop/HUD. Medical cards fit landscape together; reserve ammo is
+separate below current/capacity, dynamically checked through firing/switching.
+Existing joystick sizes/positions, compact pause face and generous touch target
+preserved. MainMenu/Medical/Armor/HUD advancing Editor captures inspected; they do
+not establish human artistic approval or phone behavior/performance.
+
+Implementation, exact changed-file groups, acceptance coverage and manual checklist:
+TestResults/Sprint0029/Report.md. Original brief, native authoring evidence, per-suite
+JSON and captures preserved there. Test/build totals and final Editor state follow.
+
+Latest unique regression outcome:154/154 passed (132PlayMode,22EditMode), no skips
+or unresolved failures. Includes existing social fear/spacing/near-miss suites,
+complete save/menu flow and original mission checkpoint rollback/results. New
+sprite bounds assertion comparesXY (renderingZthickness has no2Dcollision role).
+Protected hashes all unchanged. Before Android build: Demo saved/clean/open,
+outsidePlay,0missing scripts,0actualConsoleerrors/warnings, compilation clean.
+Android native async development build is running; final result follows.
+
+Final Android ARM64 IL2CPP Development APK SUCCEEDED: build/Sprint0029/AKUMU2-dev.apk,
+67,235,131bytes,595.862s,0build errors.972warnings:970installed inference-package
+shader warnings,1obsolete API warning,1disabled Pipeline runtime notice. These
+are documented, not silently reported as a warning-free build. FullnativeReport
+and compactsummary saved under TestResults/Sprint0029. APK manifest/ARM64library/
+three scene data entries inspected; no physical-device launch/performance test.
+
+Final nativeEditor: Warehouse_Demo saved/clean/open, outsidePlay, notcompiling,
+0missing scripts. Console0actualerrors,82collapsedwarnings after Android build;
+prebuild actualwarnings0.154/154unique tests passed. Protected asset hashes all
+unchanged after build. Existing dirty tree preserved,0staged entries, no commit
+orpush. Implemented by Codex — awaiting human gameplay/artistic and Android-device
+verification. No known unresolved automated failure; manual checklist in Report.md.
+
+## 2026-10-26 — Officer bunker correction: concrete pillbox
+
+Replaced only the old Officer dugout in Warehouse_Demo with a compact concrete
+pillbox, preserving the approved0028environment sheet/surroundings. Five static
+nontrigger Default-layer concrete collider faces form front lower/upper sections,
+rear,roof,base. One.9-unit embrasure at y2.5–3.4 is the only firing opening. Existing
+Officer dais supports the shell; base stays within its thickness. Foreground
+facade bands and dark interior make occupancy/cover visible. Flat native32PPU
+Point art, no mipmaps, no character redesign or new dependencies.
+
+Optional scene anchors on OfficerShotTelegraph select interior peek/hide positions
+x141.05/143.25. EnemyCombat reuses motor/perception/states/suppression/reload/timers
+for local movement and bounded hiding. Actual barrel rays must cross both faces
+of the aperture, including protruding muzzles. Laser and committed shot respect
+this gate plus existing occlusion. Original Officer encounters without the scene
+anchors keep previous behavior. No damage,health,accuracy,magazine,warning-duration,
+player motor or support-radius rebalance.
+
+Controlled tests exposed/fixed arrival tolerance and downward barrel/sill clearance.
+A base initially protruded below the old platform; final thickness stays within
+it. The older route driver's single-jump policy could not cross the now-closed
+shell; it now uses the existing double jump early enough to clear the roof. Local
+physical crossing and full Level1-to-Results input traversal pass. Native authoring
+and cleanup once exceeded the CLI5s response window; clean saved scene and actual
+bounds were read back rather than blindly repeating the mutation. Test fixtures
+were updated for a closed rear, concrete surfaces, new Officer occupancy, unchanged
+nearby-ally radius and overlapping solid foundations. No gameplay weakening used.
+
+Original brief, changed-file list, captures/traces, per-suite results and limitations:
+TestResults/ConcreteBunker/Report.md. Final validation totals/state follow.
+
+### 2026-10-27 — Interrupted pillbox follow-up safely concluded
+
+Recovered actual dirty repository and finished pending verification without
+reimplementing completed systems. Previous Play batch completed22/22; resumed
+Edit checks9/9. Final focused31/31passed, no pending automated failure. Normal
+carbine fire can defeat the Officer through the slit and player input then reaches
+Results. Existing fullroute/ladder/Officer/Samurai/expert/genericAI tests pass;
+scene/roster/collision-bound/equipment rules pass. Details and latest fixture-only
+aggregation: TestResults/ConcreteBunker/Regression.json and Report.md. Earlier
+Sprint0029's154case result preserved as historical validation, not misreported as
+a fresh rerun. No additional gameplay code changed on this resume.
+
+Final native state: Warehouse_Demo saved/clean/open, outsidePlay, notcompiling,
+0missing scripts acrossscene/checkedprefabs,5concrete solidfaces, valid anchors/
+sprites. Console0actualerrors/warnings after reviewing and archiving a Unity CLI
+`editor status` dispatch error (tooling, not gamecode) and prior timeout diagnostics.
+Protected environment/Testbed/ragdoll hashes unchanged. Medical/throwables/armor/
+awareness improvements preserved. No0030overhaul, staging, commit orpush.
+
+Remaining checks: human gameplay/artistic and Android-device verification. Prior
+Sprint0029developmentAPK was built before this concrete correction; not rebuilt
+or device-tested in this focused follow-up. Rebuild before phone playtesting.
+
+## 2026-10-27 — Sprint 0030 implementation
+
+Audited the requested systems against actual0029/concretefollow-up implementation;
+kept existing bunker geometry, sound awareness/reaction tuning, local box recovery,
+medical/revival, grenade aiming/supply/VFX, armor/helmets, ladders, movement andUI.
+No scene regeneration, graphics/UIoverhaul or newAIframework.
+
+Confirmed gaps: Officer had no ballistic protection, and the concrete-branch local
+movement bypassed generic close-pressure decisions. Added finite50-point vest,
+65%absorption, using existing BodyArmor and ArmorVisual/Armor_0/Armor_1. Health stays
+at the normal50;10bodyhits of10damage vs5unprotected yields100body-shotEHP.
+Headshots/melee/explosion/environment retain armor bypass. No weapon rebalance.
+An initial test assumption100health was corrected against the actual50baseline;
+vest calibrated100→50before acceptance rather than making Officer overly durable.
+
+OfficerShotTelegraph now debounces accepted-hit retreat requests (2.5scooldown,
+.5srequestexpiry), cancelling currentwarning; existing pillbox motor/state logic
+handles physical retreat and subsequent combat. Confirmed close visual-memory
+threats cap hiding at.45s; unconfirmed/distant targets don't. No perfect new player
+knowledge, added physics queries, managers or global searches. Protection resets
+at encounter/reactivation boundaries, not on ordinary hits. Configurable fields
+saved natively in Officer prefab and placedDemoactor by Sprint0030Setup.
+
+New four-case controlled suite passed: finite2xbodydurability/reset/head/melee
+weakness, hitinterrupt/retreat/resume/debounce, close-vs-unconfirmed hold durations,
+player vest/helmet immediate disappearance and nonstacking removal. Existing player
+overlay logic already correct, so no rewrite. Controlled Officer capture inspected;
+original Postava1reference viewed read-only, reused assets retain originalpivots.
+Main regression batch87/87passed; additional corpse/checkpoint/Edit/build checks
+continue. Full brief and scope/files/manual limitations: TestResults/Sprint0030/.
+
+Final pre-build regression:118/118unique cases passed (94PlayMode,24EditMode).
+Corpse pass-through and originalcheckpoint/replay validated. One older fixture
+mixed explicitly supplied$42with automatic random enemyloot ($55); isolated only
+that test's EnemyWalletDrop, preserving exact persistence/duplicate assertions.
+Actual loot/drop tests passed separately; no gameplaycurrency orpriceschanged.
+Final scene/reference scan: Demo saved/clean/open outsidePlay,0missing scripts,
+5solidpillboxfaces,1OfficerBodyArmor,50health/50protection, validreusedsprites.
+Console0actualerrors/warnings, compilation clean. Protected art/Testbed/ragdoll/
+player motor/HUDUSS hashesmatch. Android async Development build_132a6482be7f
+queued to build/Sprint0030/AKUMU2-dev.apk; finalresult follows.
+
+Sprint0030final:118/118unique tests passed (94PlayMode,24EditMode); no skips or
+unresolved failures. New Android ARM64 IL2CPP Development APK succeeded in157.960s,
+0errors,67,235,220bytes: build/Sprint0030/AKUMU2-dev.apk. Manifest/nativeARM64lib/
+three scene data files inspected; MainMenu first.972buildwarnings remain:
+970installed inference shader warnings,1oldobsoleteAPIwarning,1Pipeline runtime
+no-config notice. No unrelated package cleanup. Full/compactbuildreport saved.
+
+FinalEditor: Warehouse_Demo saved/clean/open,outsidePlay,notcompiling,0missing
+scripts; prefab/reference scan clean. Console0actualerrors,82collapsedwarnings
+afterbuild (0beforebuild). Protected environment/Testbed/ragdoll/player motor/HUD
+hashes unchanged. Working tree preserved,0staged; no stage,commit orpush.
+Implementation and automated/build validation complete. Human gameplay/artistic
+review and Android-device testing remain unverified; no profiler/deviceclaim.
+Report/checklist/evidence: TestResults/Sprint0030/Report.md and Regression.json.
+
+## Sprint 0031 — Operation: Death to PowerPoint (2026-10-27)
+
+Implemented shared handmade interface styling across the existing main menu,
+settings, level selection, all four shop categories, HUD, pause, death/results,
+notifications and enemy speech. Approved title glyphs and backdrop retained.
+Hard square panels/buttons, flat limited palette, readable block lettering,
+rust/gold selection, pressed/focus/disabled feedback, real item icons and explicit
+purchase readiness replace the mixed presentation. Added only three tiny native
+Point icons; existing weapon, grenade, medical and armor art reused.
+
+HUD keeps existing joystick positions/dimensions/sensitivity, aim-left placement,
+input callbacks and gameplay. It adds persistent filled/empty revival slots with
+immediate inventory updates, selected grenade counts, clear empty weapon slots,
+low-health/heal feedback. Ammo stays current/capacity with reserve separate.
+Existing blind-fire eligibility, capped speech and automatic revival preserved.
+Six existing world sign font/material bindings use the existing block font; no
+level geometry, environment art, enemy prefab, combat, Officer beam or data balance
+was changed for this sprint. Before/after hashes and scoped scene diff preserved.
+
+Verification: new3UI tests pass and capture advancing gameplay/menu frames;
+actual GameView resolutions1280x720,1560x720,1600x720,1920x720,1920x1080 plus simulated
+safe-area insets pass layout checks. Captures reviewed across all changed screens.
+Missing tape icon found in visual review fixed by native stylesheet reimport.
+Original wordmark glyph data and rendering method match pre-sprint source.
+Final scene/prefab audit reports zero missing scripts, saved Demo, PlayMode stopped.
+
+113 unique tests executed:108passed/5failed (Edit21/21; Play87/92). NewUI3/3passed.
+Failures retained: old Sprint005 Larper shots>0 fixed-time assertion (also fails in
+isolation); old Sprint0025 three assumptions about free/manual revival conflict
+with current empty/automatic behavior, plus a null melee fixture. No unrelated AI,
+revival or loadout balance change made to force historical tests green. Exact
+Larper timing-failure cause remains unconfirmed. Current flow/shop/medical,
+blind-fire, movement/doublejump/cover, ladder, healing, speech cap, ragdoll and
+bunker suites pass. Test results are not a claim of human gameplay verification.
+
+Full changed-file list, screenshots, manual acceptance checklist and limitations:
+TestResults/Sprint0031/ImplementationReport.md and Validation.md. Phone touch,
+performance, smallest-screen reading and human artistic approval remain manual.
+No stage, commit or push. Existing dirty work from earlier sprints preserved.
+
+Sprint0031 Android Development APK succeeded with zero build errors;972 warnings
+(970package shader warnings, existing obsolete API, missing optional Pipeline runtime
+config). NewAPK67,235,220bytes; packaged HandmadeUI markers and changed compiled/scene
+assets verified against0030. Final Editor ready/stopped, current Console errors0.
+APK: build/Sprint0031/AKUMU2-dev.apk. No physical Android run performed.
+
+## Sprint 0032 — The enemies have brains (unfortunately), 2026-10-27
+
+Audited existing AI before editing; preserved EnemyCombat/LarperBrain, event-driven
+CombatNoise, suppression/morale/cover reservations, Samurai local graph and full-body
+physical arc validation. No new AI framework, manager, archetype, player mechanics,
+level/UI/art/weapon changes. Full original brief/audit: TestResults/Sprint0032.
+
+Recognition now persists through remembered visual interruptions instead of
+restarting after1s. Separate .18s camera-entry attack grace prevents first-visible-
+frame shots without erasing awareness. Samurai honors its brief recognition before
+pursuing while preserving committed flights. Larper already used.7s: retained,
+jitter narrowed.12->.08. Samurai.25+.08 unchanged; fireworks.3+.12->.6+.1;
+Officer.7+.05->.45+.05, unchanged.5s laser. Visual memory3->4.5s. Existing attack
+cadence, damage, imperfect aim, magazine/reload and throw behavior unchanged.
+
+Logical hearing already handled vertical combat and allied gunfire. Fixed smoke
+incorrectly attenuating hearing; solid geometry still attenuates, finite range,
+4s hearing memory,2u approximation and.25s interval unchanged. Hearing never grants
+precise target memory or recursively propagates. Credible real-shot delivery tested.
+
+Blocked grounded effort now observes1.8s (was.9), pauses.6s and limits recovery
+attempts to3s cadence. Intentional stationary/airborne states do not count; direction
+changes reset observation. Existing replan/reachable cover handles alternatives;
+failed retreat destinations are rejected before timeout. Samurai support rays now
+ignore ladder triggers and clear stale route targets. No teleport, collider growth,
+collision disabling or expanded Larper mobility. Editor-only live inspector exposes
+perception, timers, memory, suppression, reservations and rejected routes.
+
+Native prefab API authoring updated four serialized prefab files (Larper,fireworks,
+Officer,OperationFireworks); Samurai variants inherit shared fields. Exact diff and
+resolved six-prefab tuning preserved. Scenes, UI/input/player/throwables, Officer
+warning and fireworks mechanics protected hashes all unchanged. No stage/commit/push.
+
+Final selected regressions92/92passed:78PlayMode/14EditMode, newAI10/10. Includes
+small-collider multi-platform physical pursuit with intermediate/final landings,
+no snapping, crate/blocked/reopened routes, perception/occlusion/camera fairness,
+16-listener bounded noise, suppression/morale/spacing, actual bunker and Officer,
+continuous Level1 movement to results, UI/shop and weapon/balance rules.
+Fixture corrections retained all assertions: configured bare Larper as spawn does,
+used visible successive targets rather than hidden initial target; older timing
+checks now honor requested recognition/memory/camera grace; frozen suppression-only
+fixture isolates navigation, while real blocked movement is tested separately.
+
+Compile successful, final Console0errors/0warnings, missing scripts0scene/prefabs.
+Warehouse_Demo saved/clean/open outsidePlay. Implementation/automated Editor
+verification complete; no claim of exhaustive routes, human combat-feel review,
+Android hardware profiling or device testing. No new APK built/requested;0031APK
+predates0032AI. Old unrelated0031-documented Sprint0025 fixture failures not rerun.
+Report/tuning/files/manual checklist: TestResults/Sprint0032/Report.md.
+Full tests/limitations: TestResults/Sprint0032/Validation.md and Regression.json.
+
+## Sprint 0033 — Bigger bunker, fewer problems (2026-10-27)
+
+Enlarged the real Demo concrete pillbox4.5x3.175->9x6.35world units (2xwidth,
+2xheight,4xouterarea). Clear interior3.75x2.8->8.25x5.85 (~4.6xarea). Original
+floor1.6/frontx140 retained, rear149, roof7.825, opening2.5..3.9 (was2.5..3.4).
+Reused approved native tiled/Point concrete sprites; no new art/prefab/character
+changes. Front full-width masks became floor/ceiling trim, exposing Officer's
+standing/crouched silhouette, gun/reload and longer physical retreat.
+
+Hide/spawn143.25->146.5. Reachable firing anchor141.05->141.25 fixes a confirmed
+wall-probe/anchor boundary after the longer walk; no AI threshold or architecture
+change. Doubled roof exceeds existing player doublejumpheight, so one existing-
+system roof-access ladder at139 preserves physical completion. Original terrain,
+ladders, exit,15-enemy roster/encounter spacing preserved; player/input/UI and0032
+AI source hashes unchanged. Existing ladder count is now7. No movement/weapon/
+health/damage/cadence change. Longer routes naturally take longer to walk.
+
+New ladder exposed actual laser clipping at triggers: OfficerShotTelegraph visual
+ray now uses fixed-buffer non-trigger query matching real bullets/sight. Corrected
+capture shows laser passing ladder and clipping solid cover; original.5s telegraph,
+color/width, distinctive projectile and muzzle origin retained. This is the only
+runtime source edit. Scene authoring through new Editor/Sprint0033Setup; no YAML edits.
+
+Selected36/36regressionspassed (25PlayMode,11EditMode), including solid shell/window,
+Officer peek/retreat/hide/real reload/locked warning, vest, real player ladder/roof
+completion to results, all7ladder exits,5actualGameViewresolutions/simulatedcutouts,
+shop/HUD and weapon rules. Geometry-dependent tests now use enlarged dimensions/
+real anchor/physical route and float tolerance; assertions retained. Initial issue
+artifacts archived. Advancing exposed/hidden HUD captures visually inspected.
+
+Finalprebuild references:0missing scene/prefab scripts, five solidfaces, validvest,
+MainMenu first enabled scene, Demo saved/open/stopped; Console0errors/4warnings.
+Androidreadiness: IL2CPP,ARM64,API26minimum,autoSDK,LandscapeLeft,APK,developmentfalse;
+settings unchanged. Native release APK build_af454f66c815 started to
+build/Sprint0033/AKUMU2-playtest.apk; outcome follows. No device/hardware claims.
+Report, dimensions/files/manualsteps/evidence: TestResults/Sprint0033/Report.md.
+No stage/commit/push. Existingdirtywork preserved.
+
+Sprint0033release export succeeded: ARM64 APK39,750,643bytes,
+0errors/972warnings (970existing package shaders,1obsoleteAPI,1optionalPipeline
+runtimeconfig). Build676.705s. APK: build/Sprint0033/AKUMU2-playtest.apk.
+Packaged new roof-ladder scene data and0032AI metadata verified; no oldAPKsubstitution.
+FinalEditor ready/stopped/savedDemo, currentConsole0errors/82buildwarnings.
+Android configuration preserved; no physical-device run. Protected hashesmatch
+except the scoped laser-trigger fix.0staged, no commit/push.
+
+## 2026-10-27 — Adaptive Combat Camera (latest user Sprint 0031 brief)
+
+Implemented after completed UI0031, AI0032 and bunker0033; those changes preserved.
+Existing WarehouseCameraFollow remains the sole LateUpdate authority. Root causes:
+movement-driven visual facing incorrectly selected attention while retreating;
+1/32-unit output rounding introduced steps despite fractional zoom; layered
+smoothing lacked a defined settling time; no combat memory or explicit fall lead.
+
+New priority: meaningful weapon-independent aim/fire intent, 1-second combat
+memory, committed movement, last meaningful facing. Exact critical damping with
+0.5-second lead settling, 0.16 normal/0.11 combat tracking, 0.12 direction commitment,
+0.30 aim threshold with hysteresis. Ladder centers over 0.4 seconds with exit debounce.
+Vertical settling 0.24 seconds, 0.25-unit dead zone, falling lead up to 1.6 units and
+vertical aim bias up to 1.2 units. Comfortable margins 18%; boundary easing 2 units.
+Read-only existing-registry pressure within 6 units sampled every 0.15 seconds
+contracts lead by at most 45%; no target locking, new physics or scene-wide search.
+Continuous transform output; original projection/zoom retained. Input getter is
+read-only; controls, player movement, enemy decisions and weapon handling unchanged.
+Three camera scene settings authored through native Editor APIs; object IDs and
+all non-camera scene objects preserved (legacy false mission default reserialized).
+
+Modified scripts: Camera/WarehouseCameraFollow, Input/PlayerActions,
+Enemies/CombatPositionReservations. New AdaptiveCombatCameraTests; expanded existing
+LadderCameraHotfixTests. Scenes: Warehouse_Demo, Warehouse_Testbed, Warehouse_Mission01.
+Full tuning, root-cause analysis, files and phone checklist in
+TestResults/AdaptiveCombatCamera/Report.md; raw evidence and Validation.md alongside.
+
+Selected automated results: 63 run, 61 passed, 2 failed. New camera 9/9, other Play
+41/43, Edit 11/11. Two unchanged Sprint013 fixtures conflict with existing camera-entry
+attack grace and current LineRenderer count; standalone tested camera has no follow
+component. No AI/VFX changes to force old expectations green. Controlled fixture
+covers backward aiming, memory, chatter, immediate velocity, close Samurai both
+sides, fall/parachute/landing, ladders, phone aspects, 30/60/120 Hz and irregular dt.
+Zero managed bytes over 1,000 warmed camera steps; not whole-game profiling.
+
+Final Unity: compilation successful, current Console 0 errors/0 warnings, Demo
+saved/open/stopped, no missing inspected scene/prefab scripts. 27 protected files
+unchanged. Working tree remains dirty with prior work; nothing staged/committed/pushed.
+No new APK exported. Prior0033 APK does not include this camera revision.
+Implemented by Codex — awaiting human/device playtest verification. Galaxy A56
+60 FPS, frame pacing, real input latency, pixel-phase appearance and comfort during
+actual combat remain unverified; no global frame-rate or physics settings changed.
+
+## 2026-10-27 — Android performance pass (latest user Sprint 0032)
+
+Baseline captured before production edits in advancing Warehouse_Demo with all15
+original actors:600frames, seeded frame-input pattern,120warmup, CPUProfiler on.
+No adb device attached; GalaxyA56 FPS/GPU/memory/thermal results NOT TESTED.
+Top relevant Editor categories: LateBehaviourUpdate1.051ms (sprite invalidation
+nested0.473ms), RenderPlayModeViewCameras0.948ms, BehaviourUpdate0.331ms.
+Repeated fallback/equipped sprite swaps dirtied renderer data despite same final
+image. Existing HUD formatted unchanged readouts every0.2seconds; mission clock
+formatted at0.15seconds and revive offer everyframe. Pools, sampled AI/buffers,
+ragdoll sleep/wake/retirement already implemented; preserved without new frameworks.
+
+Changed CharacterVisualDriver to resolve final weapon sprite once; CutoutRig
+skips identical face/magazine sprite setters. No animation/art/pose/timing changes.
+WarehouseTouchControls compares value snapshots before formatting and invalidates
+on bind/enable; contextual input updates still everyframe, layout/cadence unchanged.
+MissionHud caches displayed clock second. New AndroidFramePacing BeforeSceneLoad
+initializer requests60FPS on Android only instead of platform-default-1. Existing
+optimizedFramePacing=true, URPscale1, AAoff, IL2CPP/ARM64/API26 and0.02physics retained.
+No scene/prefab/UIlayout/AI/movement/weapon/camera-controller edits this sprint.
+
+Controlled Editor comparison: average177.52->205.64FPS; median5.424->4.577ms;
+p957.242->6.392ms;p998.663->7.955ms;1%low68.92->76.57FPS. Short600frame samples
+are noisy and differ in duration; intermediate after sample had worse tails.
+Do not infer sustained Android frame pacing or device60FPS. Sprite-change marker
+0.473->0.040ms; unchanged HUD15.41->2.26us; mission2.47->0.75us. Warmed repeated
+same-frame player pose220.87->11.50us (not normal advancing-animation frame cost).
+WholeEditor memory includes retained profiling state and is not Player leak proof.
+Full main/render-threadCPU, GPU, Player memory and device metrics unavailable.
+
+Measurement correction: GC.GetAllocatedBytesForCurrentThread always returns0in
+this UnityMono runtime, including known8KiBallocation. Earlier camera zero-byte
+claim invalid; appended correction to its Report/Validation, and camera test now
+checks counter support before allocation assertion. Unsupported writes NOT TESTED;
+all camera behavior assertions retained. New profiling/regression tests are Editor
+only. Original baseline byte figures preserved as raw evidence but not relied on.
+
+Selected tests67/67pass (56Play,11Edit), including currentcamera9, newHUD/equipment2,
+benchmark1, existingUI/shop3, AI10, actualwarehouse6, grenade4, reactiveragdoll5,
+medical/equipment4, combat/muzzle6, ladder1, corpse/reload5, Editrules11. Initial new
+fixture expected equipped sidearm; corrected setup equips BackupPistol explicitly.
+No production fix needed. Historical Sprint013 failures not rerun or claimed fixed.
+
+Protected audit124original source/settings/scenes:120unchanged; only4existing
+runtime scripts above changed, plus new Android initializer. Prior dirty work
+preserved;0staged/no commit/no push. Native finalreferences:0missing inspected
+scene/prefab scripts, Demo open/saved/stopped, currentConsole0errors/0warnings.
+Final camera test-only rerun and finalEditor audit recorded in evidence.
+
+Complete diagnosis/files/benchmark caveats/device build+15minute profiling protocol/
+nextthree opportunities: TestResults/AndroidPerformance/Report.md. Raw results,
+ProtectedAfter.json and allocation diagnostic alongside. No APKexport in this pass;
+old0033APK predates both camera and performance work. Implemented and Editor-tested;
+A56 sustained60FPS acceptance remains pending physical-device verification.
+
+Final audit update: camera counter-correction rerun9/9passed; total remains67/67.
+Demo open/saved/stopped,0missing references, compilation successful and0Console
+errors. CurrentConsole32warnings are FMOD host output-device initialization failures
+(output remains suspended), not script errors. Older API-obsolescence/account
+warnings also exist in historical buffer. Host audio audition remains unverified;
+no audio device/project configuration or gameplay changes made to hide warnings.
+See TestResults/AndroidPerformance/FinalWarnings.json. No APKexport/deviceclaim.
+
+## 2026-10-27 — Arsenal expansion (latest user Sprint 0033 brief)
+
+Implemented following adaptivecamera/Androidperformance, preserving earlier0033
+bunker work. Audit found playerBackupPistol/Carbine/automaticGlock plus enemyOfficer
+Eagle; added separate playerEagle, SMG, shotgun, LMG, precisionSniper. Original
+weapon assets/art/stats, shop offers/prices/ownership, enemyAI, levelcontents,
+movement/physics/camera/control layout preserved. No new price/economy balancing.
+
+SharedWeaponDefinition adds modes/pellets/spread+bloom/falloff/presentation controls.
+AttackExecutor reuses hit buffers/nearestcollider logic perpellet, one magazine
+round/trigger/firingcue. Actual segments feed existing suppression. Playertracer
+ring6->16; no physicalbullets/per-shot InstantiateDestroy. Stock combat effects/audio
+pools retained. Shotgunhit marker uses actualdamagedpellet point. Olddefaults preserve
+legacyweapons; no redundant infantry/marksman rifle or movementweight penalties.
+
+Eightgunroster stats (damage/interval/mag/reload/range): Backup14/.2/8/1.5/22;
+playerEagle55/.65/7/2.8/28; SMG9/.065/30/1.8/20; Carbine20/.2/24/1.5/22;
+shotgun7x8/.85/6/2.6/16; LMG14/.11/75/4.2/26; Sniper90/1/5/2.6/45;
+existingGlock5/.07/27/4/28. SMGspread+/-5+bloom4, falloff6->20to35%;
+shotgun24degfan, falloff4->16to15%; LMG+/-2+bloom10, falloff12->26to65%.
+Bloom recovers lazily usingelapsedtime, .35*maxdegrees/sec. Newweaponpitch/flash/
+recoildata distinguish feedback; reuseexistingaudio. No claim ofauditioned audio.
+
+Snipermeaningfulrightstickhold>0.30aims cyanlaser, validreleasefiresonce, centerthen
+liftcancels. DesktopRMBhold/release. Automatic1srecovery/.35srecoil; no newbolt/fire
+button. Laser reusesoneLineRenderer/sharedmaterial andsampled10Hzgeometry preview.
+Widepale-blue shottracer differsfromOfficerlaser/shot. Existingcamera observesaim;
+no followchange. UITKPointerUp distinguishedfromcancel/captureloss; death/pause/
+reload/switch/revivalcancelpendingrelease. Exiting sniper clears rightaim/fire only,
+preserving leftmovement and preventing pistol/grenade carryover. Physicaldesktop
+heldinputs require neutral aftercancel. Release keeps peekpose through shotframe.
+Custommuzzlehelper respects crouchceiling before coverraising. No bodyart/rigpivots
+or colliderdimensions changed. HUD caches CYCLING/RELEASETOFIRE with existingreadouts.
+
+Editor/Developmentonly ArsenalTestBench: menuDEVentry saves/destroysSession, enters
+standaloneTestbed, reusableguninstances andexplicitrefill180reserve, no campaign
+writes/grants. Exitreloadsnormalprofile. Testbedappended tobuildlist, MainMenustays
+first. Normalrelease omitslabcode/entry; scene/resources packagedbutnormalflow has
+no labaccess. Newweaponacquisition/costs intentionallydeferredSprint0034.
+NativeArsenalSetup creates5defs+4pointfiltered32PPU sprite/texturepairs+catalog8refs.
+OldDEblackgrip/seatedmag artreusedunmodified. Removed inheritedpistolmags fromnew
+longguns aftercapture review. Newartawaits humanartistic/playtest review.
+
+Selected72/72passed (59Play,13Edit). Newchecks all8gunsmoving/jumping/crouched,
+reload/interrupt/switch/armorscaling/conservation, all4enemyactualhitboxes,
+shotgunnooverlappingcolliderduplicates, snipersafety/recovery/range/reuse/realrevive,
+stockedgrenade-switchsafety whilemoving, actuallabload/equip/refill/exitwith identical
+profilebytes. Existingweapon/muzzle, UI/shop, AI, camera, mission/roofroute, ragdoll,
+grenade/medicalsupplies tests passed. Controlled360triggers/1080segments keep17line
+baseline bounded; notA56FPS/zeroGC. Mono allocationcounterknownunsupported. PNG/state
+captures advancing inspected. Initialfixtures fixedclock increments/corpseisolation;
+labtest caughtmissingbuildscene. A testdiagnostic dependency removed, no packagesadded.
+
+Prebuildnativeaudit: Demoopen/saved/stopped,0missing inspectedscene/prefabscripts,
+compilesuccess, currentConsole0errors/0warnings. Protected423originalfiles:
+412unchanged,11scoped edits (9runtime/playerprefab/buildlist).0staged/no commit/push.
+Report/stats/controls/files/checklists: TestResults/Arsenal/Report.md; validation/raw
+results alongside. Originalbrief copied there and resumecheckpoint updated.
+
+AndroidDevelopmentexport build_b5950726ee99 running to
+build/Arsenal/AKUMU2-arsenal-dev.apk (Developmentonly; noDeepProfile/AutoRun).
+Outcome follows. No adbdeviceattached; A56FPS/multitouch/thermals/input/audio and
+humanweaponfeel remain unverified. HostFMODoutput-device warnings previouslyoccurred.
+
+## Context restoration — focused corrections and export recovery
+
+Recovered activeSprint0033 fromactualcheckpoint/tests/changes; no restart. FirstAPK
+exportCancelled690.332s with genericTaskCanceledException, noAPK; exactjson archived.
+LatestLMG100loaded/200testreserve/8sreload applied natively (was75/180/4.2).
+DeveloperReservecfg onlycontrols isolatedlab, no campaignammo/economy grant.
+NewDevelopmentFrameOverlay: fixed120samples, unscaledFPS/mean/P95/P99,1Hztextupdate,
+no per-framecollections/sorts, unchangedcamera/input/framecaps. Editor/Devonly.
+FrameStatsEdit testpassed; arsenalmovement8/lab1updatedchecks passed. Existing
+performancefixture exposed managedSpritewrapper referencecomparison afterimports;
+verified nativeidentity ratherthanrewritinggraphics, testasserts GetEntityId now.
+No futuregrenadepool/P90/AA12/Glock19/secondaryslot/economy/campaignfeatures started.
+CurrentfocusedUI/camera/identitytest rerun beforeincrementalDevelopmentAPKretry.
+
+Restoration verification completed: 73/73 selected checks pass (59 Play,14 Edit),
+including focused camera9/HUD3/performance2/arsenal8/lab1/rules4/frameStats1 reruns.
+Native prebuild audit clean: Demo saved/open/stopped; no missing scene/inspected
+prefab scripts; current Console zero errors/warnings. Protected423 original files:
+412 unchanged, same eleven scoped runtime/prefab/build-list changes. Retry export
+build_369cf4a48eb7 after valid dry run; no source/asset changes during export.
+
+## Final export and handoff (2026-10-28)
+
+Retry build_369cf4a48eb7 Succeeded in324.143s, zero errors,980 warnings.
+APK: build/Arsenal/AKUMU2-arsenal-dev.apk,67,238,173 bytes (about64.1MiB).
+SHA256 c6beca846c937fe34dd3abf4e36840529e1287061e0db4b64417d6ab9d8718e8.
+BuildReport totalSizeBytes includes additional development outputs; it is not APK
+file size. BuildRetryStatus.json preserves raw outcome; ApkVerification.json and
+PackagedArsenal.json record ARM64 libraries, lab/frame-overlay/release-fire metadata,
+arsenal resources/catalog and Testbed scene packaging. MainMenu remains first.
+
+Warnings are predominantly Sentis compute-shader warnings, plus obsolete Unity API
+calls (including FindObjectsSortMode in the lab/test code) and disabled remote
+Pipeline in Player because no RuntimePipelineConfig exists. No unrelated shader,
+package or tooling changes were made to suppress these. Final current Console has
+zero errors and90 build warnings; clean compilation, Editor ready/outside Play Mode.
+Warehouse_Demo remains active/open/saved. No missing scripts found in native audit.
+
+All73 selected automated checks passed; no device attached via adb. Installation,
+Galaxy A56 60FPS/frame pacing/thermals/multitouch, audio and human weapon/art review
+remain required. Implementation/build verification is not gameplay certification.
+Git working tree preserved,0staged, no commits/pushes. See FinalGitSummary.json.
+
+## Sprint 0034 — Economy, Shop & Progression (2026-10-28)
+
+Implemented the attached Sprint0034 brief in the existing catalog/session/store/UI,
+not a parallel economy. Full brief/report/prices/simulations/evidence:
+TestResults/Economy/Brief.md, Report.md, Prices.csv, BalanceSimulation.txt.
+Native EconomySetup.Apply authored DemoCatalog only. No scene/prefab/art/GUID edits.
+
+Level1 native audit:15 actors drop wallets,100% chance,$5-20 each. Expected full
+wallet collection$187.50. Completion reward$250; failure/abandon25% wallets capped$50.
+New profiles$100; existing balance/ownership/ammo/armor retained. Basic pistol now
+free starter with five-magazine total floor(40 rounds) per deployment; selected
+empty guns fall back to it. No premium ammo grant. Purchases include one magazine.
+Eight existing guns available; permanent ownership/no duplicate repurchase; per-gun
+ammo packs/caps/prices. Whole-pack fit required; existing crates honor active gun cap.
+
+Armor/helmet ownership, condition, equip/remove/repair persist using existing armor
+rules; proportional bounded reserve penalty. No movement penalty/weapon balance
+changes. Medical remains tape+Faintanyl exclusively, exact description retained;
+revive max2/two-second invulnerability unchanged, no free level replacements.
+Wallet feedback adds amount and run total; results separate wallets/reward/banked.
+Atomic save failure rolls back purchases, equipment, deployment and settlement.
+Run IDs prevent duplicate payouts. Old version1 profiles migrate without resetting.
+
+During mission, disk snapshot conservatively reserves carried stock: forced process
+termination forfeits carried supplies/condition instead of restoring spent items;
+banked cash, uncarried overflow and wallet claim journal remain. Normal results,
+pause-menu return and normal quit return unused stock. Background/resume same
+process preserves live inventory. Policy stated in shop; no per-shot/per-frame IO.
+
+Regression checks exposed existing PlayerCombat healing predicate blocking reload
+priority. Minimal CanOperate/CanUse split restores reload priority while still
+blocking firing during healing; no damage/rate/reload tuning or sniper safety change.
+Legacy tests adapted for intentional prices/starter/payout/caps/reservation, current
+visible empty revive pips, exact Faintanyl text and float epsilon. None removed.
+
+77/77 selected automated checks pass:63Play/14Edit. Includes new10 economy Play +3
+rules/scenarios, existing12 campaign flow,9wallet/healing,4grenade/frag/ragdoll,
+4equipment,1revive,3UI,8arsenal,1lab,2performance,9camera,4progress,7combat rules.
+Shared shop/result captures inspected. Tests use temp profiles, not real save path.
+Current native Console0errors/0warnings; Demo saved/open/stopped, no missing inspected
+scripts. Scope hashes156 original files:146 unchanged,10 scoped catalog/runtime edits.
+No new per-frame searches/physics work, no scene/camera/AI/movement/UI-layout changes.
+
+Android Development export build_2b1271aa2053 now running after valid dry run to
+build/Economy/AKUMU2-sprint0034-dev.apk. Final outcome follows. Do not interpret the
+old Arsenal APK as containing Sprint0034. No source/asset edits during export.
+No stage/commit/push. A56 real FPS/frame-time tails/thermals/touch and economy feel
+remain device/human verification, distinct from passing tests and controlled captures.
+
+Sprint0034 final Android pause refinement: pause-menu and Android background callbacks
+secure exact unused inventory on disk. Resume re-reserves before controls/simulation
+continue; failed reservation keeps pause active. GameSession's generic background
+save defers to the bridge so callback order cannot overwrite the safe snapshot.
+A killed paused/backgrounded app retains unused supplies; only an unannounced kill
+while combat is active conservatively forfeits carried stock. No per-frame/shot IO.
+Added controlled background/pause/resume/save-failure regression. Existing flow12,
+equipment4 and lab1 reruns pass. One test-start socket hang-up was transient;
+Editor remained responsive, raw error archived, new11 economy suite rerun underway.
+First Development APK succeeded120.463s/0errors/976warnings; a final rebuild will
+include this pause refinement and clarified shop wording. Do not use old APK hash
+as final. Raw first report preserved in BuildBeforePauseRefinement.json.
+
+Native ammo budget audit: Level1 has13x50HP +60HP +70HP targets; five existing
+108-round boxes at2/38/73/112/132 (540 finite). Ideal unarmored hit lower bounds:
+pistol62/SMG93/carbine46/DE17/sniper15, before misses/armor/range. Forty basic rounds
+are a start safety floor; finite early/later supplies support recovery. No box
+placement/content changed. Price scenarios explicitly assume existing resupply.
+Final pause-aware11 economy tests pass; sharedUI3 rerun passes; selected total78/78
+(64Play/14Edit). Final APK export build_7641ac5dff71 running, no source edits.
+
+## Sprint0034 final handoff — 2026-10-28
+
+Final implementation including safe pause/background/resume:78/78 selected tests
+passed (64Play Mode,14Edit Mode); raw JSON and ValidationSummary.json. New economy
+suite11/11 covers restart migration, ownership, whole-pack fit, zero-money safety,
+failed-save rollback, armor condition, caps, resupply, active interruption, safe
+background/pause/resume and blocked resume on write failure, and completion/shop
+replay. Controlled UI captures inspected; no human or device test claim.
+
+Final Android Development build_7641ac5dff71 Succeeded in94.615s, zero errors,
+six warnings (existing obsolete APIs/development directives and disabled remote
+Pipeline config). Earlier976-warning build report is archived separately; shader
+cache avoided repeated shader warnings in the final incremental build. Current
+Console zero errors/six warnings, compilation clean. FinalBuildWarnings.json lists
+exact messages. No unrelated warning cleanup/package changes were attempted.
+
+Fresh APK build/Economy/AKUMU2-sprint0034-dev.apk:67,236,575bytes (about64.1MiB).
+SHA256 faafcb6b12ff4c5817dc83fd5ef881f587eb32cdae536077b4543fa31222a86d.
+ARM64, economy fields/armor records/reserve/pause-save metadata and existing frame
+overlay packaged; DemoCatalog asset included. Warehouse_Demo saved/open/stopped,
+Editor ready; no missing inspected scene/prefab scripts. MainMenu remains first.
+
+156 protected pre-sprint originals checked:146 unchanged, ten scoped runtime/catalog
+changes. Git working tree:78 modified tracked,4 pre-existing deleted test resource
+files,169 untracked entries overall; zero staged. Existing dirty work preserved;
+no stage, commit or push. Scope lists/report identify this sprint's files rather
+than attributing the entire working tree to this sprint.
+
+Remaining: actual Galaxy A56 install/playtest for60FPS/frame-time tails/thermals,
+multitouch/safe-area/scroll comfort, sound, weapon consumption and economy pacing.
+No attached adb device. Analytical simulations are not player telemetry. Crates
+retain premium resupply behavior; revisit consumption/prices only after playtests.
+Safe pause/background preserves unused supplies; an unannounced kill during active
+combat may forfeit carried supplies while preserving banked cash/ownership/overflow.
+No Level2/new weapons/camera/AI/graphics overhaul started.
+
+## Sprint 0035 — Level 1 combat/gameplay polish — 2026-10-28
+
+Inspected prior optimization/economy work and dirty checkout. Exact brief preserved
+in TestResults/Sprint0035/Brief.md; Report.md lists this sprint's scoped files and
+limits. No stage/commit/push; prior changes preserved.
+
+Removed two supplemental guards: exact10Larpers+Samurai+fireworks+Officer, original
+horizontal route/cover/resupply retained. Opening live test proves one authorized
+visible shooter and no other enemy shots. Existing .7-.82s Larper and .25-.33s
+Samurai recognition, suppression, hearing uncertainty, bounded recovery and
+viewport fire gate pass without runtime rewrites.
+
+Bunker solid faces/slit/cover/hide/peek were working; sealed shell lacked egress.
+Native Editor API creates rear doorway/exit anchor using existing wall sprite and
+collider; confirmed rear flank draws Officer out by real movement. Front slit
+checks, .5s laser lock, retreat/reload/damage/tracer preserved. Physical exit test,
+bunker damage/defeat/roof passage and laser tests pass.
+
+Basic pistol8=>15rounds; removed wrongly inherited ExtendedMagazine overlay from
+BackupPistol asset, retaining existing ordinary sprite/grip. Ammo pack15 and five
+starter magazines75rounds. No weapon balance/control changes beyond requested cap.
+MissionHud now places mission card beneath actual vitals via GeometryChangedEvent,
+fixing inventory-panel overlap at tested landscape/wide sizes.
+
+Development-only catalog setting grants max(balance,10000) once with saved revision35,
+atomic rollback on write failure. Release compile branch cannot grant. Actual
+persistent profile2166=>10000, revision35 verified on disk; no purchase on actual
+profile. Isolated existing-save purchase/restart/mission tests verify deductions
+and no duplicate grant. Initial automatic review rejection resolved with explicit
+section8 authorization. Normal save .bak retained.
+
+116/116 selected checks pass:111Play/5Edit. Earlier failures were old fixture/price/
+roster assumptions, plus actual HUD overlap; no test deleted. Tests now configure
+legacy manual revival/melee explicitly, current stock rules retained. Raw captured
+runs and final summary are in Sprint0035. Controlled playability routes/scripted
+combat checks are not unassisted human gameplay. Native APK export underway;
+final result follows. No device attached by adb; physical A56 performance, thermals,
+multitouch comfort, complete combat feel and doorway artistic acceptance remain.
+
+Sprint0035 final Android Development build_3c27a20026c6 Succeeded488.978s,
+0errors/977warnings (970Sentis package shaders,6existing API/config/development,
+1new UAC0009 development-guard deprecation). APK67,236,575bytes/64.1MiB,
+SHA256 13a770232c57a260202006cfd9633d40641f71f40870ffce57ea361c770f780c.
+Full BuildStatus/ValidationSummary/ApkVerification in TestResults/Sprint0035.
+116/116selected checks (111Play/5Edit); fresh real MainMenu/shop capture confirms
+10000usable credits, revision35, no purchases on actual profile.
+
+Remaining Editor incident: final Play Mode stop after shop capture triggered native
+fatal audio ADTM realtime-thread/mix deadlock dialog. Cause not diagnosed; no
+Android reproduction/verification claimed. Restarted saved project and retained
+Assets/_Recovery/0 (3).unity without applying it. Final Editor ready/stopped,
+Warehouse_Demo open/clean,13actors,front slit/rear exit bound,0missing scripts;
+actual save10000 after restart. Console3Pipeline startup command/timeout errors
+plus1warning, compilation clean. No crash report submitted. No stage/commit/push.
+
+## Sprint 0036 — UI, HUD, shop presentation — 2026-10-28
+
+Full brief/report/captures/raw tests: TestResults/Sprint0036. Preserved dirty prior
+work; no stage/commit/push. UI Toolkit retained; no Canvas migration, new textures,
+shader/material pipeline, AI/economy/weapon/input/scene/prefab overhaul.
+
+Refined shared handmade warehouse noticeboard system: enlarged original wordmark,
+approved crate sprite reuse, dark teal panels/cream signs/ochre and rust accents,
+square heavy lower edges, immediate pressed/focus states, consistent settings,
+pause/results/revival treatment. Shop has five categories (separate throwables),
+card previews/status, prominent wallet and real weapon facts. Medical membership,
+exact Faintanyl text, armor condition/trade-offs and handlers preserved. HUD track,
+frames and speech cards restyled; empty revival slots no longer show injection art.
+Compact mission detail scrolls only on overflow. Actual visible joystick dimensions
+and positions unchanged. No new particle effects; existing feedback retained.
+
+Results inspection caught speech overlaying statistics. Fixed through the existing
+max-two-bubble registry: terminal HUD blocks/dismisses speech, disable/reset restores.
+CSS-only fix was insufficient across separate UIDocuments; final capture verified.
+100/100 selected checks pass (97Play/3Edit), TestRuns.json. New2presentation tests
+capture menu/settings/all categories/HUD/pause/victory/failure, five aspect-ratio
+layouts, stock/purchase/restart and empty-pip/terminal suppression. Scripted terminal
+captures are not organic mission victories. Full existing flow/economy/weapon/input/
+traversal/parachute/medical/AI/bunker/suppression suites run; no human/device claim.
+Cached-HUD baseline2/2 and post2/2 checks pass; no actual CPU/GPU/GC/FPS matrix.
+
+Actual test save read-only audit remains10000; prior revision35 grant unchanged,
+new/old/rich/disabled/failed-write/purchase/restart tests pass. No actual-profile
+purchase or currency reset. User confirms three music tracks not uploaded; music
+integration deferred. Existing audio effects retained; prior native Editor ADTM
+stop-time fatal remains undiagnosed. Android build_7cc902915c2c running to
+build/Sprint0036/AKUMU2-sprint0036-dev.apk; final outcome follows. Physical A56
+performance, multitouch/safe-area comfort, audio and human art acceptance remain.
+
+Sprint0036 final Android Development build_7cc902915c2c Succeeded124.941s,
+0errors/977warnings(970Sentis package shader+7API/config/development). ARM64 APK
+build/Sprint0036/AKUMU2-sprint0036-dev.apk,67,236,575bytes;SHA256
+5b3d9b4099571648cd6a478f193fe3a0bbf274d817cc411af3311d44877eda13.
+BuildStatus/ApkVerification/ValidationSummary archived. Final Editor ready/stopped,
+Warehouse_Demo open/clean; compilation clean,Console0errors/87warnings. Real save
+10000/revision35 confirmed read-only after build. No source/asset edits during
+export. No Windows Player build or physical Android test/performance matrix.
+Music explicitly deferred by user pending upload. Prior ADTM native fatal remains
+undiagnosed. 100/100selected checks, controlled captures inspected; no human
+artistic/full-combat acceptance claim. Nothing staged/committed/pushed.
+
+## Urgent wallet release hotfix — 2026-10-28
+
+Confirmed defect: GameSession.ApplyDevelopmentCredits was compiled out under
+!UNITY_EDITOR&&!DEVELOPMENT_BUILD. Release Android clean saves therefore use
+DemoCatalog serialized startingMoney100; clearing data cannot fix it. Catalog's
+C# default1000 does not override Inspector100. EconomySetup also authors100; no
+other runtime reset to100 found. GameSession.Data.balance is the single spendable
+wallet for UI/CanBuy/Buy. One catalog, MainMenu flow binding verified. Exact APK
+on disconnected phone not inspected; do not assert its provenance/build flags.
+
+Per new explicit user direction, playtest floor now applies in release too and
+at every initialization, after load/normalize/starter/migration/interruption
+settlement, before UI draw. Max(balance,10000), not additive; revision35 no longer
+blocks replenishment. Purchases still deduct normally; relaunch restores minimum.
+Atomic failure rollback/read-only corruption protection retained. No economy
+prices/startingMoney/rewards changed. Native catalog enabled floor+new diagnostic
+switch. Build tag wallet-release-floor-20261028-r1; temporary logs identify
+GameSession NewProgress/load/final/duplicate/atomic transaction callers and buildGUID.
+Disable developmentPlaytestCredits/playtestWalletDiagnostics before final shipping.
+
+30unique selected Play checks pass latest:wallet5/economy11/UI2/flow12. One unrelated
+physical gap-jump initialfailure passed isolated rerun unchanged; raw retained.
+Tests adapted for new relaunch-floor semantics; final-economy snapshots opt out.
+Searches, assignment trace, catalog/defines audit and report:TestResults/WalletHotfix.
+ADB zero connected devices: no Android installation/launch/purchase verification.
+Release build_a43a5d61425c running without Development option to
+build/WalletHotfix/AKUMU2-wallet-release-20261028-r1.apk. Final result follows.
+No source/asset edits during export; no stage/commit/push, dirty prior work preserved.
+
+Wallet hotfix final RELEASE build_a43a5d61425c Succeeded143.806s,0errors/974warnings.
+APK build/WalletHotfix/AKUMU2-wallet-release-20261028-r1.apk,39,815,271bytes/38MiB;
+SHA256 5fbe6b8aefb7a4ecc096148462f5ab127257e34da4fad0d46ad3065fbe4ccce8.
+Aapt nondebuggableARM64, optionsomitDevelopment and EditorDevelopmentfalse;
+generated releaseC++ includesMax10000/atomicCommit; APK uniquehotfixtag/diagnostic
+metadata and packedDemoCatalog verified. Version0.12/code1 unchanged: usehash/tag.
+33unique latestchecks pass30Play/3Edit; rawinitialjumpfailure kept, rerunpassed.
+Editorstopped/compileclean; reallocalprofile10000, bothcatalogswitchestrue.
+No phone attached: APK NOT installed/launched/device-tested. Do not claimphysical
+Android success. Preserve data via normalinstall/update; no needclearappdata.
+Disable temporaryfloor and diagnostic switches before finalshipping. No stage/commit/push.
+
+## Expanded Sprint0034 reload/economy implementation — 2026-10-28
+
+New full brief:TestResults/ReloadEconomy/Brief.md, not the older economy-only brief.
+Preserved prior0035/0036/releasewallet work. SharedWeaponCycle now distinguishes
+atomic magazine transfer from individually loaded shells; only shotgun opts in.
+SMG30/1.8s uses existing physical-mag exchange rig and native scoped body/mag
+assets; integrated bodymag removed in variant, original art retained as shop icon.
+Shotgun6 uses2.6/6=.43333s shell steps scaled by armor, each transfers1reserve=>1loaded.
+Can fire to cancel with loaded shells; completed insertions retained through switch,
+death, healing, snapshot/resume. Tick sole transfer authority, bounded catchup.
+Valid tape healing cancels reload; damage cooldown/grounded rules unchanged.
+HUD ammo-change event invalidates cached readout for nextUIframe, safely unsubscribed
+on disable/rebind; no HUD redesign. Complete weapon Icon retained for detachedbody.
+
+66selected tests pass18Edit/48Play. New11rules+4real-clockPlay cover tactical/empty/
+lowreserve/full, repeatedrequests, one/multiple shell interrupts, snapshot/resume,
+movement/jump/crouch/facing, switch/death/heal, bounded renderer count, actual HUD3/6.
+Existing arsenal8, economy11, wallet5, flow12, cachedHUD2, healing1, bunker5,
+arsenalrules4/economyrules3 pass. Old all-at-once shotgun assertions updated to
+full-chain timing, healingfixture waits existing.8s damage lockout. No testsdeleted.
+PriceAmmoAudit uses actual8guns:idealunarmored50HPcost pistol1.33/carbine2.25/
+Buzzbox4.44/SMG3/shotgun4/DE6/LMG2.60/sniper10. Idealpellet/range assumptions,
+not playertelemetry. No obvious new price inconsistency requiring speculative
+retune: existing coherent provisionalprices/caps/rewards retained, no finalbalance.
+Basicpistol15/fivemags75; heavycapacities sane, separateweaponstocks unchanged.
+
+Actual local disk balance8720 at audit; no direct-profile test purchases/resets.
+Existing release-enabled playtest floor remains: next normal initialization
+max(balance,10000), no stacking on shop-open/purchase; isolated wallettests pass.
+Do not revert urgentwalletfix. No adbdevice; no physicalAndroidperformance claim.
+Release build_832d92bfda0d exporting to build/ReloadEconomy/AKUMU2-reload-repair-release.apk;
+final buildresult follows. No source/asset changes during export. No stage/commit/push.
+
+Expanded0034 reload repair final RELEASE build_832d92bfda0d Succeeded128.494s,
+0errors/974warnings. APK build/ReloadEconomy/AKUMU2-reload-repair-release.apk,
+39,817,203bytes (~38MiB);SHA256
+98a13f846658f116d8ec897582344c4e1407c90a49f06b3717b246aa1d128398.
+AaptARM64/nondebuggable; metadata shell-mode/PoseReloadShell/ammo-event/wallettag
+verified. BuildStatus/ApkVerification/ValidationSummary inTestResults/ReloadEconomy.
+66/66selected tests pass18Edit/48Play. FinalEditor ready/stopped,Demoopen/clean,
+0missing scripts,Console0errors/84warnings. No device install/playtest/performance
+claim; controlled reload captures inspected, humanartreview pending; priorADTM
+nativeaudioincident remains undiagnosed. No source/asset edits during export.
+No stage/commit/push; previous dirty work preserved.
+
+## 2026-10-28 — expanded Sprint0035 combat reliability brief
+
+Evidence and exact modified-file inventory: TestResults/CombatReliability/Report.md.
+LMG's original integrated6x6container now uses shared cached physical exchange;
+DE Officer-inherited2x4mag replaced for player only with6x7black fitting sprite.
+100/8s LMG,7/2.8s DE,5/2.6s sniper, weapon prices/damage/controls preserved.
+No ammo arithmetic bug reproduced in shared atomic reload. Real shared issue:
+manual Reload used CanOperate during healing; now uses CanUse. Sniper held-aim
+cancellation/recovery/manual completion pass. SMG/shotgun regressions pass.
+Throwables retain crouched cover, common swept origin for preview/release,
+bounded existing10Hz trajectory, short.24s damageable throw exposure. All types,
+both directions, ceiling refusal, cancel, three actual storage heights pass.
+Wallets were static triggers spawned unchecked at corpse offset, root-position
+radius/LOS included smoke, actor destruction erased uncollected reward. Fixed
+supported placement/crouched clearance/height preference, two delayed checks,
+collider-distance collection/solid-only LOS, scene-owned lifetime. Exact once
+earnings and mission settlement preserved. Actual bunker/boundary/deck sites pass.
+Storage-only authoring: three cloned approved crates; perception18/16/14 and
+visible-entry reaction.30/.55/.85 on existing three actors; no roster/damage/global
+AI/camera/traversal edits. Existing continuous real-movement route reaches results.
+Urgent release wallet floor remains enabled and unchanged, max(balance,10000)
+after load/settlement, no additive grant, all inventory/progression preserved.
+106unique selected checks:105pass/1fail (23Editpass,82of83Playpass). Open older
+FirstOperation opening test: second warmup guard becomes visible and fires within
+3s; repeated atwide and16:9 views. Opening actors/AI/camera unchanged. Original
+assertion restored, no production workaround; do not claim full verification.
+Earlier fixture/import failures and wallet lower-floor preference were repaired;
+raw runs retained. New controlled captures inspected, no human acceptance claim.
+Release build_aa6a88e04ff0 underway tobuild/CombatReliability/AKUMU2-combat-reliability-release.apk.
+adb devices checked with normal user access: empty. No device install/performance
+verification. No code/native asset changes during export. No stage/commit/push.
+
+Expanded0035 final release build_aa6a88e04ff0 Succeeded139.479s,0errors/974warnings.
+APK build/CombatReliability/AKUMU2-combat-reliability-release.apk39,818,983bytes;
+SHA25667d10f53f74bded5b92757934672896afd9d6dba9e915c5ebe948682435462d9.
+Aapt ARM64/nondebuggable, new packed weapon assets/scene/catalog, generated IL2CPP
+and APK method metadata verified. adb empty; no installation or Android test.
+Final Editor ready/stopped, Demo open/clean,0missing scripts; code CRLF-aware
+whitespace check passes. Full raw tests include the one unresolved opening test.
+
+Follow-up before delivery: opening-crossfire defect resolved. Diagnostics showed
+the second warmup guard's inherited22-unit detection allowed it to approach and
+join the first fight. Scoped authored detection10, preserving normal AI/viewport
+gate/personality and unchanged firing damage/range; no camera adjustment. Original
+opening test unchanged. All8FirstOperation tests now pass, including real full
+route and authored grenade/wallet sites. Final8Edit rules/layout pass and verify
+the10-unit scene value. Final selection106/106 passes (23Edit,83Play). Earlier
+failures are retained as history, not current blockers. FinalTestRuns is canonical.
+Rebuilding release build_27fac48c3adc after this scene adjustment; previous APK
+build_aa6a88e04ff0 is superseded. No runtime/source/native changes during export.
+
+FINAL expanded0035: build_27fac48c3adc Succeeded175.721s,0errors/971warnings.
+APK build/CombatReliability/AKUMU2-combat-reliability-release.apk39,818,983bytes;
+SHA25634101a343cd859b368716a8e862a31a236f7274d96be1beb34e34758ab77ffb7.
+Editor reconnected after export; final success recovered from persisted Unity
+LastBuild.buildreport and archived in TestResults/CombatReliability. FinalBuildStatus,
+FinalPackedAssetProof, APKmetadata/aapt and final hash verified. FinalEditorAudit:
+Demo open/clean, second arrival guard detection10, walletfloor/diagnostics true,
+0missing scripts.106/106selected tests pass. No device connected; no APK installed
+or tested on Android hardware. Human artistic/combat/performance review pending.
+No stage/commit/push. No production code/native asset edits after final export.
+
+## 2026-10-28 — Hotfix0036.1 universal gameplay UI transparency
+
+Small UI-only change: appended background-color rules to WarehouseControls.uss,
+MissionControls.uss, GameFlow.uss and HandmadeUI.uss. Targets sticks40%, handles65%,
+actions60%, weapon selection65%, vitals/ammo/mission55%, healthfill85%, gameplay
+overlays/cards60–70%. Existing RGB palette and pressed/selected/healing/critical
+states retained. Text/icons/group opacity and layout/touch geometry unchanged.
+No Canvas/CanvasGroup in live HUD; actual runtime is UI Toolkit. No C# gameplay,
+AI, weapon, physics, economy, world graphics or level changes. Main menu/shop
+styles untouched; pause/results/revival overlay backgrounds transparent.
+Seven existing relevant PlayMode checks pass (FinalTestRuns.json). Attached UI
+probe verified resolved target alpha, groupopacity1 and HP/ammo/objective text1;
+critical/healing/selected states pass. Probe closed/capture imports cleaned,
+runtime background setting restored. HUD/pause/results captures inspected.
+Final release build_7173418f1d13 exporting to
+build/UITransparency0036_1/AKUMU2-ui-transparency-release.apk. Evidence/report:
+TestResults/UITransparency0036_1. No source edits during export. No stage/commit/push.
+
+Hotfix0036.1 final build_7173418f1d13 Succeeded53.461s,0errors/1251warnings.
+APK build/UITransparency0036_1/AKUMU2-ui-transparency-release.apk39,819,759bytes;
+SHA2560eac86f000b775c84a8622ac272b80af8c9939f70cb3d6c9f849cd6a796056ab.
+Aapt ARM64/nondebuggable and packed assets verify all four USS changes. Final
+presentation rerun passes and result button backgrounds inspected.7/7selected
+PlayMode checks pass; no gameplay code changed. Editor ready/stopped. No physical
+Android install/touch test claim. No stage/commit/push.
+
+## 2026-10-29 — Sprint0037 combat impact, living reactions, player damage feedback
+
+Full brief/report/file inventory/evidence: TestResults/Sprint0037. Existing live
+architecture had pose-driven rigs and HitReaction2D with no living joints; extended
+that owner with six cached collider-free angular springs/one anchor per actor.
+No normal-hit corpse spawning or new ragdoll controller. Bounded directional body
+regions reuse cached renderer lookup. Hand/grip/barrel alignment and handling poses
+preserved. Existing collapse/recovery remains separate from death, HP and fear.
+Configurable weapon hit strengths and distance scaling; pellet batches cap3.2,
+rapid-hit diminishing, balance decay1.15, heavycooldown.55, fallcooldown3/grace1.2.
+Enemy controller stays enabled, yields while down and resumes normal perception/
+navigation; no personality/accuracy edits. Production player never locks input.
+Health accepted-outcome event records actual HP/armor result without changing old
+damage events. Four safe-area UI markers and edge strips,85%alpha HP flash; camera
+.025world/.09s max once.65s with serialized0–1 reduction. Revive/invulnerability
+no fake successful-hit feedback. Existing transparent HUD/touch geometry retained.
+DE/sniper tracerScale1.6/2.2, existing variation/fade/trajectory/pool unchanged;
+Officer .08baseline/enemy color untouched. Native six prefab/three scene authoring
+and eight weapon assets updated through Editor APIs. CombatBefore/After snapshots
+identical; current audit matches. Original sprites, terrain, profiles, prices and
+progression preserved. Exact absolute file list in ModifiedFiles.txt.
+133/133unique selected tests pass:15Edit/118Play,16new impact checks plus arsenal,
+reload, cover/grenade/wallet, corpse, traversal, fear/personality, full mission,
+revive/results, bunker, HUD and presentation regression. Raw failures retained:
+spring wake needed an explicit enabled-body reset; scene unload can remove the
+physics cache before its owner, now null-safe and explicitly tested. Fixture-only
+armor/default-width assumptions corrected. Controlled captures inspected; not
+human artistic/combat or Android FPS acceptance.
+Native ADTM audio Editor crash recurred before export. Editor reconnected, saved
+source/config audited, then release build_3992cd59f9ac Succeeded197.247s,
+0errors/974warnings. APK build/Sprint0037/AKUMU2-combat-impact-release.apk,
+39,837,579bytes,ARM64/nondebuggable. SHA256
+3741ddf3f08dbc1a58cbc8e225172fe36c3e619abbc7aaedaa9423a6a274f034.
+Build report, packed assets, generated IL2CPP and APK method metadata verified.
+adb devices empty; no device installation/test or sustained mid-range performance
+claim. Native audio issue remains undiagnosed. No source/native edits during
+export. No stage/commit/push.

@@ -1,0 +1,112 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 13.41,
+      "summary": {
+        "total": 12,
+        "passed": 12,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "InsaneDreams.Tests.TraversalRegressionTests.AimAndFireIntentionAreIndependentFromMovement",
+          "Status": "Passed",
+          "Duration": 0.3344131,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.TraversalRegressionTests.DiagonalJumpRequiresFreshGestureAndAllowsOnlyOneAirborneBoost",
+          "Status": "Passed",
+          "Duration": 1.9181688,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.TraversalRegressionTests.EquipmentButtonsReadRuntimeLoadoutAndPreserveAmmo",
+          "Status": "Passed",
+          "Duration": 1.369209,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.TraversalRegressionTests.GroundOnlyEnemyStopsAtUnsafeLedgeAndStationaryCapabilityWins",
+          "Status": "Passed",
+          "Duration": 1.5257831,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.TraversalRegressionTests.IndependentTouchPointersCancellationFocusAndRespawnClearOwnership",
+          "Status": "Passed",
+          "Duration": 0.3725176,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.TraversalRegressionTests.LadderTakesPriorityAndDisabledOrDestroyedLadderRestoresGravity",
+          "Status": "Passed",
+          "Duration": 1.2311336,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.TraversalRegressionTests.LadderTopAndDiagonalArbitrationDoNotGenerateExtraJump",
+          "Status": "Passed",
+          "Duration": 1.7339461,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.TraversalRegressionTests.LarperWalksAndUsesPermittedJumpAcrossObstacle",
+          "Status": "Passed",
+          "Duration": 2.3210825,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.TraversalRegressionTests.LevelEntryRebindsSpawnCameraAndControlsWithoutSceneNames",
+          "Status": "Passed",
+          "Duration": 0.3888626,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.TraversalRegressionTests.MobileControlsFitLandscapeAndWideLandscapeTargets",
+          "Status": "Passed",
+          "Duration": 0.3991189,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.TraversalRegressionTests.ParachuteCapReleaseAndCheckpointReset",
+          "Status": "Passed",
+          "Duration": 0.9303253,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.TraversalRegressionTests.TypedSpawnResolvesArchetypeAndMissingOptionalReferencesAreSafe",
+          "Status": "Passed",
+          "Duration": 0.825419,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

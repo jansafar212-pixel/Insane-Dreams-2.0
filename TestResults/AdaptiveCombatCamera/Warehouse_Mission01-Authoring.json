@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "var s=UnityEngine.SceneManagement.SceneManager.GetActiveScene();if(s.isDirty)throw new System.Exception(\"Preserve unsaved scene\");s=UnityEditor.SceneManagement.EditorSceneManager.OpenScene(\"Assets/Scenes/Warehouse_Mission01.unity\");foreach(var g in s.GetRootGameObjects())foreach(var f in g.GetComponentsInChildren<InsaneDreams.CameraSystem.WarehouseCameraFollow>(true)){var so=new UnityEditor.SerializedObject(f);so.FindProperty(\"directionTransitionSeconds\").floatValue=.5f;so.FindProperty(\"verticalAimLookAhead\").floatValue=1.2f;so.ApplyModifiedPropertiesWithoutUndo();}UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(s);UnityEditor.SceneManagement.EditorSceneManager.SaveScene(s);return s.path;"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": "Assets/Scenes/Warehouse_Mission01.unity"
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

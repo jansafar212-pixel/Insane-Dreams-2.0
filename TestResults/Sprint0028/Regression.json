@@ -1,0 +1,105 @@
+{
+  "Passed": 55.0,
+  "Failed": 0.0,
+  "Suites": [
+    {
+      "Suite": "LayoutTests",
+      "Status": "completed",
+      "Summary": {
+        "total": 2,
+        "passed": 2,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      }
+    },
+    {
+      "Suite": "DecorationTests",
+      "Status": "completed",
+      "Summary": {
+        "total": 2,
+        "passed": 2,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      }
+    },
+    {
+      "Suite": "ArtTests",
+      "Status": "completed",
+      "Summary": {
+        "total": 2,
+        "passed": 2,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      }
+    },
+    {
+      "Suite": "PlayTests",
+      "Status": "completed",
+      "Summary": {
+        "total": 6,
+        "passed": 6,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      }
+    },
+    {
+      "Suite": "ArchivedArtPlayTests",
+      "Status": "completed",
+      "Summary": {
+        "total": 1,
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      }
+    },
+    {
+      "Suite": "CampaignTests",
+      "Status": "completed",
+      "Summary": {
+        "total": 12,
+        "passed": 12,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      }
+    },
+    {
+      "Suite": "LegacyMissionTests",
+      "Status": "completed",
+      "Summary": {
+        "total": 9,
+        "passed": 9,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      }
+    },
+    {
+      "Suite": "CoverTests",
+      "Status": "completed",
+      "Summary": {
+        "total": 12,
+        "passed": 12,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      }
+    },
+    {
+      "Suite": "MovementSuppressionTests",
+      "Status": "completed",
+      "Summary": {
+        "total": 9,
+        "passed": 9,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      }
+    }
+  ]
+}

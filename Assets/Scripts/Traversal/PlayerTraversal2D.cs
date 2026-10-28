@@ -18,6 +18,7 @@ namespace InsaneDreams.Traversal
         [SerializeField, Range(.2f, 1)] private float dismountThreshold = .6f;
         [SerializeField, Min(1)] private float dismountDominance = 1.2f;
         [SerializeField, Min(0)] private float topLandingDrop = 2.5f;
+        [SerializeField, Range(.02f,.1f)] private float topExitClearance = .04f;
         [SerializeField, Min(0)] private float sideLandingDrop = .8f;
         [SerializeField] private LayerMask solidLayers = 1;
         [SerializeField, Min(0.1f)] private float parachuteFallSpeed = 2.8f;
@@ -130,7 +131,10 @@ namespace InsaneDreams.Traversal
                 }
                 if (!IsClimbing) return;
                 bool leaveSide = Mathf.Abs(horizontalInput) >= dismountThreshold && Mathf.Abs(horizontalInput) > Mathf.Abs(climbInput) * dismountDominance;
-                bool leaveTop = body.position.y >= ladder.Top - 0.05f && climbInput > 0;
+                // Reach the endpoint and clear the contact skin before moving
+                // sideways. The revised decks meet the feet at the marker itself.
+                float climbTop=ladder.Top+topExitClearance;
+                bool leaveTop = body.position.y >= climbTop - .005f && climbInput > 0;
                 bool leaveBottom = climbInput < -entryThreshold && (body.position.y <= ladder.Bottom + 0.1f ||
                     Mathf.Abs(body.position.x - ladder.CenterX) < .1f && SafeTravel(Vector2.down, .08f) < .04f);
                 if (leaveTop)
@@ -155,7 +159,7 @@ namespace InsaneDreams.Traversal
                     float alignment = Mathf.Clamp((ladder.CenterX - body.position.x) / Time.fixedDeltaTime,
                         -ladder.AlignmentSpeed, ladder.AlignmentSpeed);
                     float dy = Mathf.Clamp(climbInput * climbSpeed * Time.fixedDeltaTime,
-                        ladder.Bottom - body.position.y, Mathf.Max(0, ladder.Top - body.position.y));
+                        ladder.Bottom - body.position.y, Mathf.Max(0, climbTop - body.position.y));
                     body.linearVelocity = new Vector2(
                         Mathf.Sign(alignment) * SafeTravel(Vector2.right * Mathf.Sign(alignment), Mathf.Abs(alignment) * Time.fixedDeltaTime) / Time.fixedDeltaTime,
                         Mathf.Sign(dy) * SafeTravel(Vector2.up * Mathf.Sign(dy), Mathf.Abs(dy)) / Time.fixedDeltaTime);

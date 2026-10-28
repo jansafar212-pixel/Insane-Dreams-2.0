@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "return Newtonsoft.Json.JsonConvert.SerializeObject(new{target=UnityEditor.EditorUserBuildSettings.activeBuildTarget.ToString(),backend=UnityEditor.PlayerSettings.GetScriptingBackend(UnityEditor.Build.NamedBuildTarget.Android).ToString(),architectures=UnityEditor.PlayerSettings.Android.targetArchitectures.ToString(),minSdk=UnityEditor.PlayerSettings.Android.minSdkVersion.ToString(),targetSdk=UnityEditor.PlayerSettings.Android.targetSdkVersion.ToString(),orientation=UnityEditor.PlayerSettings.defaultInterfaceOrientation.ToString(),bundle=UnityEditor.EditorUserBuildSettings.buildAppBundle,development=UnityEditor.EditorUserBuildSettings.development,scene=UnityEngine.SceneManagement.SceneManager.GetActiveScene().path,dirty=UnityEngine.SceneManagement.SceneManager.GetActiveScene().isDirty});"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": "{\"target\":\"Android\",\"backend\":\"IL2CPP\",\"architectures\":\"ARM64\",\"minSdk\":\"AndroidApiLevel26\",\"targetSdk\":\"AndroidApiLevelAuto\",\"orientation\":\"LandscapeLeft\",\"bundle\":false,\"development\":false,\"scene\":\"Assets/Scenes/Warehouse_Demo.unity\",\"dirty\":false}"
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

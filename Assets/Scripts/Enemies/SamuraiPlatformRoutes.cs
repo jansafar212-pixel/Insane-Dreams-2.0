@@ -9,6 +9,7 @@ namespace InsaneDreams.Enemies
     {
         private readonly Collider2D[] query=new Collider2D[64],nodes=new Collider2D[48];
         private readonly LadderVolume[] ladders=new LadderVolume[8];
+        private readonly RaycastHit2D[] supportHits=new RaycastHit2D[8];
         private readonly float[] cost=new float[48],blockedUntil=new float[16];
         private readonly int[] previous=new int[48];private readonly bool[] visited=new bool[48];
         private readonly Collider2D[] blockedFrom=new Collider2D[16],blockedTo=new Collider2D[16];
@@ -25,6 +26,7 @@ namespace InsaneDreams.Enemies
         {for(int i=0;i<16;i++)if(blockedFrom[i]==a&&blockedTo[i]==b&&Time.time<blockedUntil[i])return true;return false;}
         public bool Select(Vector2 start,Vector2 focus,float half,LayerMask layers,float singleRise,float doubleRise,float horizontal,float drop)
         {
+            Source=Destination=null;Kind=SamuraiTransition.None;Ladder=null;
             if(Time.time>=refreshAt||Vector2.Distance(start,cachedAt)>8)
             {
                 cachedAt=start;refreshAt=Time.time+1;count=ladderCount=0;
@@ -38,8 +40,8 @@ namespace InsaneDreams.Enemies
                     if(c is BoxCollider2D&&c.bounds.size.x>=.9f&&count<nodes.Length)nodes[count++]=c;
                 }
             }
-            Source=Physics2D.Raycast(start+Vector2.down*(half-.15f),Vector2.down,.45f,layers).collider;
-            var goal=Physics2D.Raycast(focus+Vector2.up*.2f,Vector2.down,5,layers).collider;
+            Source=Support(start+Vector2.down*(half-.15f),.45f,layers);
+            var goal=Support(focus+Vector2.up*.2f,5,layers);
             int source=Index(Source),target=Index(goal);Destination=null;Kind=SamuraiTransition.None;Ladder=null;
             if(source<0||target<0||source==target)return false;
             for(int i=0;i<count;i++){cost[i]=float.PositiveInfinity;previous[i]=-1;visited[i]=false;}cost[source]=0;
@@ -63,6 +65,12 @@ namespace InsaneDreams.Enemies
             int nextNode=target;for(int i=0;i<count&&previous[nextNode]!=source;i++){nextNode=previous[nextNode];if(nextNode<0)return false;}
             Destination=nodes[nextNode];Kind=Connection(Source,Destination,singleRise,doubleRise,horizontal,drop,out var ladder);Ladder=ladder;
             return true;
+        }
+        private Collider2D Support(Vector2 origin,float distance,LayerMask layers)
+        {
+            var filter=new ContactFilter2D{useTriggers=false};filter.SetLayerMask(layers);
+            int n=Physics2D.Raycast(origin,Vector2.down,filter,supportHits,distance);
+            return n>0&&n<supportHits.Length?supportHits[0].collider:null;
         }
         private int Index(Collider2D c){if(c==null)return -1;for(int i=0;i<count;i++)if(nodes[i]==c)return i;return -1;}
         private static bool Valid(Collider2D c)=>c!=null&&c.enabled&&c.gameObject.activeInHierarchy;

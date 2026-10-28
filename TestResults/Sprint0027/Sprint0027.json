@@ -1,0 +1,154 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 26.99,
+      "summary": {
+        "total": 18,
+        "passed": 18,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0027FallTests.ActiveAirborneParachuteAllowsCombatDamageAndLandingAddsNone",
+          "Status": "Passed",
+          "Duration": 1.5906665,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0027FallTests.LateParachuteClearsPendingImpactButDoesNotBlockCombatDamage",
+          "Status": "Passed",
+          "Duration": 0.9875935,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0027FallTests.MediumAndExtremeParachuteLandingsHaveExactlyZeroDamage",
+          "Status": "Passed",
+          "Duration": 6.4113483,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0027FallTests.MediumFallHurtsAndExtremeFallCanDefeat",
+          "Status": "Passed",
+          "Duration": 0.8950094,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0027FallTests.NormalDoubleJumpReturnsToGroundWithoutFallDamage",
+          "Status": "Passed",
+          "Duration": 0.2437178,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0027FallTests.SmallFallIsSafe",
+          "Status": "Passed",
+          "Duration": 0.1699086,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0027HealingTests.TapeWrapConsumesOnePointPerHpBlocksFireAndImmediatelyRestoresWeapons",
+          "Status": "Passed",
+          "Duration": 1.361858,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0027MedicalTests.PurchasedTwoRevivesConsumeOnePipEachProtectForTwoSecondsThenThirdDefeatEndsAttempt",
+          "Status": "Passed",
+          "Duration": 5.3543658,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0027MineTests.PlayerAndEnemyActivateEachMineOnlyOnceIncludingEarlyOverlap",
+          "Status": "Passed",
+          "Duration": 2.0494481,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0027NavigationTests.GunfireOnNearbyUpperFloorIsHeardButDoesNotAuthorizeSightOrShooting",
+          "Status": "Passed",
+          "Duration": 0.0632884,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0027NavigationTests.PatrolRejectsLowCeilingHopAndTurnsWithoutChangingFloors",
+          "Status": "Passed",
+          "Duration": 3.0294506,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0027RegionTests.RegionalDamageAccumulatesAcrossDefeatAndSeparatesOnlyAtThreshold",
+          "Status": "Passed",
+          "Duration": 0.324064,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0027SlideTests.DoubleJumpDownRequestSurvivesReleaseUntilLanding",
+          "Status": "Passed",
+          "Duration": 1.0426883,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0027SlideTests.RunningDownGestureSlidesWithFiniteMomentumAndReducedCollider",
+          "Status": "Passed",
+          "Duration": 1.0331026,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0027ThrowableTests.FragmentationUsesRadialFriendlySelfDamageDeduplicationAndSolidCover",
+          "Status": "Passed",
+          "Duration": 0.1781017,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0027ThrowableTests.GrenadeShopPurchasesAreBoundedAndPersistWithoutChangingMedicalStock",
+          "Status": "Passed",
+          "Duration": 0.0606521,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0027ThrowableTests.PlayerAimsThenReleasesOneFiniteGrenadeAndResetCancels",
+          "Status": "Passed",
+          "Duration": 0.8850698,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0027ThrowableTests.SmokeBlocksSensesNotPhysicalBulletsAndExpiresAndFlashIsTemporary",
+          "Status": "Passed",
+          "Duration": 1.1089373,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

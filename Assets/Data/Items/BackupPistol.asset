@@ -20,13 +20,33 @@ MonoBehaviour:
   weaponCategory: 0
   damage: 14
   firingInterval: 0.2
-  magazineCapacity: 8
+  magazineCapacity: 15
   reloadDuration: 1.5
   presentationPrefab: {fileID: 0}
   equippedSprite: {fileID: 21300000, guid: 9ece9c252eb2fa7428e54081f295ac8a, type: 2}
-  magazineSprite: {fileID: 21300000, guid: c86887c677b489c4ea609cbb28004fd0, type: 2}
+  magazineSprite: {fileID: 0}
   magazineMountOffset: {x: 0.03125, y: -0.0625}
   physicalMagazineReload: 0
+  loadsIndividually: 0
+  shellSprite: {fileID: 0}
   firearmRange: 22
   meleeRange: 1.6
   impactImpulse: 0.9
+  hitReactionStrength: 0.65
+  developerReserve: 180
+  fireMode: 0
+  pellets: 1
+  spreadDegrees: 0
+  bloomPerShot: 0
+  maximumBloom: 0
+  falloffStart: 0
+  farDamageMultiplier: 1
+  recoilScale: 1
+  tracerScale: 1
+  flashScale: 1
+  customMuzzle: 0
+  customTracer: 0
+  muzzleOffset: {x: 0, y: 0}
+  tracerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  firingSound: {fileID: 0}
+  firingPitch: 1

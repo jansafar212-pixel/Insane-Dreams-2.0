@@ -1,0 +1,577 @@
+{
+  "Impact0037First": {
+    "status": "completed",
+    "duration": 8.82,
+    "summary": {
+      "total": 12,
+      "passed": 9,
+      "failed": 3,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "results": [
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.AcceptedDirectionalFeedbackUsesIncomingVectorAndNeverFadesCriticalText(1,0,0)",
+        "Status": "Passed",
+        "Duration": 0.3955066,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.AcceptedDirectionalFeedbackUsesIncomingVectorAndNeverFadesCriticalText(-1,0,1)",
+        "Status": "Passed",
+        "Duration": 0.244865,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.AcceptedDirectionalFeedbackUsesIncomingVectorAndNeverFadesCriticalText(0,-1,2)",
+        "Status": "Passed",
+        "Duration": 0.2609705,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.AcceptedDirectionalFeedbackUsesIncomingVectorAndNeverFadesCriticalText(0,1,3)",
+        "Status": "Passed",
+        "Duration": 0.2567163,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.AccumulatedFallHasFixedDeadlineAndRecoveryGraceUnderContinuousFire",
+        "Status": "Passed",
+        "Duration": 1.2113737,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.ArmorOutcomeReducesFeedbackAndInvulnerabilityOrEnvironmentCannotFakeDirectionalHits",
+        "Status": "Failed",
+        "Duration": 0.2656024,
+        "Message": "System.NullReferenceException : Object reference not set to an instance of an object",
+        "StackTrace": "  at InsaneDreams.Tests.CombatImpact0037Tests.ArmorOutcomeReducesFeedbackAndInvulnerabilityOrEnvironmentCannotFakeDirectionalHits () [0x0004e] in C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Tests\\PlayMode\\CombatImpact0037Tests.cs:95 \r\n  at (wrapper managed-to-native) System.Reflection.RuntimeMethodInfo.InternalInvoke(System.Reflection.RuntimeMethodInfo,object,object[],System.Exception&)\r\n  at System.Reflection.RuntimeMethodInfo.Invoke (System.Object obj, System.Reflection.BindingFlags invokeAttr, System.Reflection.Binder binder, System.Object[] parameters, System.Globalization.CultureInfo culture) [0x0006a] in <c5ae8a4eeb824526b5df2932bc2395e0>:0 "
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.HeavyCameraImpulseIsTinyThrottledAndCanBeDisabled",
+        "Status": "Passed",
+        "Duration": 0.9806111,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.NativeWeaponsHaveDistinctStrengthAndShotgunBatchesAllPelletsWithoutChangingDamage",
+        "Status": "Passed",
+        "Duration": 0.3219619,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.PlayerKeepsMovementReloadAndHudInputDuringRepeatedImpactsAndEffectsFade",
+        "Status": "Passed",
+        "Duration": 1.7501572,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.RecoveringEnemyKeepsControllerAndResumesNavigationBeforeNormalDeath",
+        "Status": "Passed",
+        "Duration": 1.9558211,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.RegionalSpringsReactDirectionallyWithoutSpawningCorpsesAndReturnToPose",
+        "Status": "Failed",
+        "Duration": 0.8027806,
+        "Message": "  Opposite incoming shots reverse angular response\r\n  Expected: less than 0.0f\r\n  But was:  577.128906f\r\n",
+        "StackTrace": "at InsaneDreams.Tests.CombatImpact0037Tests+<RegionalSpringsReactDirectionallyWithoutSpawningCorpsesAndReturnToPose>d__19.MoveNext () [0x00267] in C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Tests\\PlayMode\\CombatImpact0037Tests.cs:62\r\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in .\\Library\\PackageCache\\com.unity.test-framework@80f691d4262b\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:52\r\n"
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.TracersUseNativeMultipliersAlignBothDirectionsAndFadeWithinExistingPool",
+        "Status": "Failed",
+        "Duration": 0.275156,
+        "Message": "  Expected: not null\r\n  But was:  null\r\n",
+        "StackTrace": "at InsaneDreams.Tests.CombatImpact0037Tests+<TracersUseNativeMultipliersAlignBothDirectionsAndFadeWithinExistingPool>d__27.MoveNext () [0x0023b] in C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Tests\\PlayMode\\CombatImpact0037Tests.cs:119\r\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in .\\Library\\PackageCache\\com.unity.test-framework@80f691d4262b\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:52\r\n"
+      }
+    ]
+  },
+  "Impact0037Run3": {
+    "status": "completed",
+    "duration": 9.12,
+    "summary": {
+      "total": 12,
+      "passed": 11,
+      "failed": 1,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "results": [
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.AcceptedDirectionalFeedbackUsesIncomingVectorAndNeverFadesCriticalText(1,0,0)",
+        "Status": "Passed",
+        "Duration": 0.2935515,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.AcceptedDirectionalFeedbackUsesIncomingVectorAndNeverFadesCriticalText(-1,0,1)",
+        "Status": "Passed",
+        "Duration": 0.2495074,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.AcceptedDirectionalFeedbackUsesIncomingVectorAndNeverFadesCriticalText(0,-1,2)",
+        "Status": "Passed",
+        "Duration": 0.2594255,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.AcceptedDirectionalFeedbackUsesIncomingVectorAndNeverFadesCriticalText(0,1,3)",
+        "Status": "Passed",
+        "Duration": 0.2553815,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.AccumulatedFallHasFixedDeadlineAndRecoveryGraceUnderContinuousFire",
+        "Status": "Passed",
+        "Duration": 1.4404676,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.ArmorOutcomeReducesFeedbackAndInvulnerabilityOrEnvironmentCannotFakeDirectionalHits",
+        "Status": "Passed",
+        "Duration": 0.2618171,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.HeavyCameraImpulseIsTinyThrottledAndCanBeDisabled",
+        "Status": "Passed",
+        "Duration": 0.9793868,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.NativeWeaponsHaveDistinctStrengthAndShotgunBatchesAllPelletsWithoutChangingDamage",
+        "Status": "Passed",
+        "Duration": 0.3189556,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.PlayerKeepsMovementReloadAndHudInputDuringRepeatedImpactsAndEffectsFade",
+        "Status": "Passed",
+        "Duration": 1.6893785,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.RecoveringEnemyKeepsControllerAndResumesNavigationBeforeNormalDeath",
+        "Status": "Passed",
+        "Duration": 1.9416484,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.RegionalSpringsReactDirectionallyWithoutSpawningCorpsesAndReturnToPose",
+        "Status": "Failed",
+        "Duration": 0.8084731,
+        "Message": "  Opposite incoming shots reverse angular response; first=-5,299622 second=-1,016663 direction=-1\r\n  Expected: less than 0.0f\r\n  But was:  5.38792706f\r\n",
+        "StackTrace": "at InsaneDreams.Tests.CombatImpact0037Tests+<RegionalSpringsReactDirectionallyWithoutSpawningCorpsesAndReturnToPose>d__19.MoveNext () [0x00267] in C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Tests\\PlayMode\\CombatImpact0037Tests.cs:64\r\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in .\\Library\\PackageCache\\com.unity.test-framework@80f691d4262b\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:52\r\n"
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.TracersUseNativeMultipliersAlignBothDirectionsAndFadeWithinExistingPool",
+        "Status": "Passed",
+        "Duration": 0.5379306,
+        "Message": null,
+        "StackTrace": null
+      }
+    ]
+  },
+  "ImpactDirectionFixed": {
+    "status": "completed",
+    "duration": 1.94,
+    "summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "results": [
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.RegionalSpringsReactDirectionallyWithoutSpawningCorpsesAndReturnToPose",
+        "Status": "Passed",
+        "Duration": 1.849879,
+        "Message": null,
+        "StackTrace": null
+      }
+    ]
+  },
+  "Impact0037New": {
+    "status": "completed",
+    "duration": 19.32,
+    "summary": {
+      "total": 15,
+      "passed": 15,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "results": [
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037IntegrationTests.ActualHudShowsFourDirectionsCriticalHealthAndPreservesTransparentControlsAndPause",
+        "Status": "Passed",
+        "Duration": 2.2207371,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037IntegrationTests.ReviveProtectionProducesNoSuccessfulHitFeedbackAndWeaponTracersStayDistinct",
+        "Status": "Passed",
+        "Duration": 1.9899062,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.AcceptedDirectionalFeedbackUsesIncomingVectorAndNeverFadesCriticalText(1,0,0)",
+        "Status": "Passed",
+        "Duration": 0.2703164,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.AcceptedDirectionalFeedbackUsesIncomingVectorAndNeverFadesCriticalText(-1,0,1)",
+        "Status": "Passed",
+        "Duration": 0.2614117,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.AcceptedDirectionalFeedbackUsesIncomingVectorAndNeverFadesCriticalText(0,-1,2)",
+        "Status": "Passed",
+        "Duration": 0.2675009,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.AcceptedDirectionalFeedbackUsesIncomingVectorAndNeverFadesCriticalText(0,1,3)",
+        "Status": "Passed",
+        "Duration": 0.2665694,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.AccumulatedFallHasFixedDeadlineAndRecoveryGraceUnderContinuousFire",
+        "Status": "Passed",
+        "Duration": 1.4729098,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.AllArchetypesShareRegionalPhysicsAndRapidSmgCannotPermanentlyLockThem",
+        "Status": "Passed",
+        "Duration": 5.0844772,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.ArmorOutcomeReducesFeedbackAndInvulnerabilityOrEnvironmentCannotFakeDirectionalHits",
+        "Status": "Passed",
+        "Duration": 0.2657677,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.HeavyCameraImpulseIsTinyThrottledAndCanBeDisabled",
+        "Status": "Passed",
+        "Duration": 0.9927324,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.NativeWeaponsHaveDistinctStrengthAndShotgunBatchesAllPelletsWithoutChangingDamage",
+        "Status": "Passed",
+        "Duration": 0.3312189,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.PlayerKeepsMovementReloadAndHudInputDuringRepeatedImpactsAndEffectsFade",
+        "Status": "Passed",
+        "Duration": 1.5078343,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.RecoveringEnemyKeepsControllerAndResumesNavigationBeforeNormalDeath",
+        "Status": "Passed",
+        "Duration": 1.9579955,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.RegionalSpringsReactDirectionallyWithoutSpawningCorpsesAndReturnToPose",
+        "Status": "Passed",
+        "Duration": 1.7257307,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.TracersUseNativeMultipliersAlignBothDirectionsAndFadeWithinExistingPool",
+        "Status": "Passed",
+        "Duration": 0.5479965,
+        "Message": null,
+        "StackTrace": null
+      }
+    ]
+  },
+  "ImpactFinal_CombatImpact0037": {
+    "status": "completed",
+    "duration": 18.4,
+    "summary": {
+      "total": 15,
+      "passed": 14,
+      "failed": 1,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "results": [
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037IntegrationTests.ActualHudShowsFourDirectionsCriticalHealthAndPreservesTransparentControlsAndPause",
+        "Status": "Failed",
+        "Duration": 1.6931945,
+        "Message": "TearDown : Unhandled log message: '[Exception] MissingReferenceException: The object of type 'UnityEngine.Rigidbody2D' has been destroyed but you are still trying to access it.\nYour script should either check if it is null or you should not destroy the object.'. Use UnityEngine.TestTools.LogAssert.Expect",
+        "StackTrace": "UnityEngine.Object+MarshalledUnityObject.TryThrowEditorNullExceptionObject (UnityEngine.Object unityObj, System.String parameterName) (at <93e6391e4688454a985ab5dc6ed6bd98>:0)\r\nUnityEngine.Bindings.ThrowHelper.ThrowNullReferenceException (System.Object obj) (at <93e6391e4688454a985ab5dc6ed6bd98>:0)\r\nUnityEngine.Rigidbody2D.set_angularVelocity (System.Single value) (at <7909eba3e6ed4c2db05021d315d55167>:0)\r\nInsaneDreams.Combat.HitReaction2D.SleepJoints () (at Assets/Scripts/Combat/HitReaction2D.cs:153)\r\nInsaneDreams.Combat.HitReaction2D.CancelReaction (System.Boolean restoreControls) (at Assets/Scripts/Combat/HitReaction2D.cs:64)\r\nInsaneDreams.Combat.HitReaction2D.OnDisable () (at Assets/Scripts/Combat/HitReaction2D.cs:189)\r\nUnityEngine.StackTraceUtility:ExtractStringFromExceptionInternal(Object, String&, String&)\r\n\r\n"
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037IntegrationTests.ReviveProtectionProducesNoSuccessfulHitFeedbackAndWeaponTracersStayDistinct",
+        "Status": "Passed",
+        "Duration": 1.7777331,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.AcceptedDirectionalFeedbackUsesIncomingVectorAndNeverFadesCriticalText(1,0,0)",
+        "Status": "Passed",
+        "Duration": 0.2718436,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.AcceptedDirectionalFeedbackUsesIncomingVectorAndNeverFadesCriticalText(-1,0,1)",
+        "Status": "Passed",
+        "Duration": 0.2651705,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.AcceptedDirectionalFeedbackUsesIncomingVectorAndNeverFadesCriticalText(0,-1,2)",
+        "Status": "Passed",
+        "Duration": 0.2624542,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.AcceptedDirectionalFeedbackUsesIncomingVectorAndNeverFadesCriticalText(0,1,3)",
+        "Status": "Passed",
+        "Duration": 0.2634297,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.AccumulatedFallHasFixedDeadlineAndRecoveryGraceUnderContinuousFire",
+        "Status": "Passed",
+        "Duration": 1.4486271,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.AllArchetypesShareRegionalPhysicsAndRapidSmgCannotPermanentlyLockThem",
+        "Status": "Passed",
+        "Duration": 5.0430009,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.ArmorOutcomeReducesFeedbackAndInvulnerabilityOrEnvironmentCannotFakeDirectionalHits",
+        "Status": "Passed",
+        "Duration": 0.2601595,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.HeavyCameraImpulseIsTinyThrottledAndCanBeDisabled",
+        "Status": "Passed",
+        "Duration": 0.9812309,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.NativeWeaponsHaveDistinctStrengthAndShotgunBatchesAllPelletsWithoutChangingDamage",
+        "Status": "Passed",
+        "Duration": 0.2932013,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.PlayerKeepsMovementReloadAndHudInputDuringRepeatedImpactsAndEffectsFade",
+        "Status": "Passed",
+        "Duration": 1.4946188,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.RecoveringEnemyKeepsControllerAndResumesNavigationBeforeNormalDeath",
+        "Status": "Passed",
+        "Duration": 1.946032,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.RegionalSpringsReactDirectionallyWithoutSpawningCorpsesAndReturnToPose",
+        "Status": "Passed",
+        "Duration": 1.7076105,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.TracersUseNativeMultipliersAlignBothDirectionsAndFadeWithinExistingPool",
+        "Status": "Passed",
+        "Duration": 0.542702,
+        "Message": null,
+        "StackTrace": null
+      }
+    ]
+  },
+  "ImpactRelease_CombatImpact0037": {
+    "status": "completed",
+    "duration": 19.62,
+    "summary": {
+      "total": 16,
+      "passed": 16,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "results": [
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037IntegrationTests.ActualHudShowsFourDirectionsCriticalHealthAndPreservesTransparentControlsAndPause",
+        "Status": "Passed",
+        "Duration": 2.1010364,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037IntegrationTests.ReviveProtectionProducesNoSuccessfulHitFeedbackAndWeaponTracersStayDistinct",
+        "Status": "Passed",
+        "Duration": 2.2344766,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.AcceptedDirectionalFeedbackUsesIncomingVectorAndNeverFadesCriticalText(1,0,0)",
+        "Status": "Passed",
+        "Duration": 0.2725407,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.AcceptedDirectionalFeedbackUsesIncomingVectorAndNeverFadesCriticalText(-1,0,1)",
+        "Status": "Passed",
+        "Duration": 0.2598267,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.AcceptedDirectionalFeedbackUsesIncomingVectorAndNeverFadesCriticalText(0,-1,2)",
+        "Status": "Passed",
+        "Duration": 0.2624701,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.AcceptedDirectionalFeedbackUsesIncomingVectorAndNeverFadesCriticalText(0,1,3)",
+        "Status": "Passed",
+        "Duration": 0.259591,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.AccumulatedFallHasFixedDeadlineAndRecoveryGraceUnderContinuousFire",
+        "Status": "Passed",
+        "Duration": 1.4505495,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.AllArchetypesShareRegionalPhysicsAndRapidSmgCannotPermanentlyLockThem",
+        "Status": "Passed",
+        "Duration": 5.0217697,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.ArmorOutcomeReducesFeedbackAndInvulnerabilityOrEnvironmentCannotFakeDirectionalHits",
+        "Status": "Passed",
+        "Duration": 0.2655967,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.HeavyCameraImpulseIsTinyThrottledAndCanBeDisabled",
+        "Status": "Passed",
+        "Duration": 0.9840047,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.NativeWeaponsHaveDistinctStrengthAndShotgunBatchesAllPelletsWithoutChangingDamage",
+        "Status": "Passed",
+        "Duration": 0.304828,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.PhysicsCacheCanUnloadBeforeItsOwnerWithoutMissingReferences",
+        "Status": "Passed",
+        "Duration": 0.3094889,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.PlayerKeepsMovementReloadAndHudInputDuringRepeatedImpactsAndEffectsFade",
+        "Status": "Passed",
+        "Duration": 1.4954294,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.RecoveringEnemyKeepsControllerAndResumesNavigationBeforeNormalDeath",
+        "Status": "Passed",
+        "Duration": 1.9508251,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.RegionalSpringsReactDirectionallyWithoutSpawningCorpsesAndReturnToPose",
+        "Status": "Passed",
+        "Duration": 1.7150242,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatImpact0037Tests.TracersUseNativeMultipliersAlignBothDirectionsAndFadeWithinExistingPool",
+        "Status": "Passed",
+        "Duration": 0.5430556,
+        "Message": null,
+        "StackTrace": null
+      }
+    ]
+  }
+}

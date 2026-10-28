@@ -1,0 +1,287 @@
+{
+  "Unique": 31,
+  "Passed": 31,
+  "PlayMode": 22,
+  "EditMode": 9,
+  "Results": [
+    {
+      "FullName": "InsaneDreams.Tests.FirstOperationTests.AuthoredRosterSupportBulletproofPlatformsAndFiveCameraViews",
+      "Status": "Passed",
+      "Duration": 3.0866032,
+      "Message": null,
+      "StackTrace": null,
+      "Mode": "PlayMode",
+      "Evidence": "FirstOperationTests.json"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.FirstOperationTests.ContinuousLevelRouteCanReachResultsUsingRealMovementAndExistingDoubleJump",
+      "Status": "Passed",
+      "Duration": 24.1007863,
+      "Message": null,
+      "StackTrace": null,
+      "Mode": "PlayMode",
+      "Evidence": "FirstOperationTests.json"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.FirstOperationTests.ExpertCanThrowAtGroundApproachFromDeckEdgeAndRespectsViewport",
+      "Status": "Passed",
+      "Duration": 5.9349753,
+      "Message": null,
+      "StackTrace": null,
+      "Mode": "PlayMode",
+      "Evidence": "FirstOperationTests.json"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.FirstOperationTests.OfficerTelegraphsBeforeShootingAndCannotInitiateOffscreen",
+      "Status": "Passed",
+      "Duration": 4.6949104,
+      "Message": null,
+      "StackTrace": null,
+      "Mode": "PlayMode",
+      "Evidence": "FirstOperationTests.json"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.FirstOperationTests.SamuraiUsesActualSmallColliderToPursueElevatedPlayer",
+      "Status": "Passed",
+      "Duration": 1.8147642,
+      "Message": null,
+      "StackTrace": null,
+      "Mode": "PlayMode",
+      "Evidence": "FirstOperationTests.json"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.FirstOperationTests.TwoPurchasedRevivalsThenFailureAndRetryNeverRefillThem",
+      "Status": "Passed",
+      "Duration": 2.2871964,
+      "Message": null,
+      "StackTrace": null,
+      "Mode": "PlayMode",
+      "Evidence": "FirstOperationTests.json"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CowardsBunkerTests.ConcreteShellBlocksEveryExteriorBoundaryExceptTheEmbrasureAndOfficerCanBeShot",
+      "Status": "Passed",
+      "Duration": 4.2301228,
+      "Message": null,
+      "StackTrace": null,
+      "Mode": "PlayMode",
+      "Evidence": "CowardsBunkerTests.json"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CowardsBunkerTests.LaserClipsToConcreteAndOnlyPassesThroughFiringHole",
+      "Status": "Passed",
+      "Duration": 0.8982192,
+      "Message": null,
+      "StackTrace": null,
+      "Mode": "PlayMode",
+      "Evidence": "CowardsBunkerTests.json"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CowardsBunkerTests.OfficerPeeksTelegraphsFiresHidesAndReturnsInsideConcreteWithoutDeadlock",
+      "Status": "Passed",
+      "Duration": 13.1900392,
+      "Message": null,
+      "StackTrace": null,
+      "Mode": "PlayMode",
+      "Evidence": "CowardsBunkerTests.json"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CowardsBunkerTests.PhysicalGrenadeRoofCollisionAndRealPlayerDoubleJumpRouteStayValid",
+      "Status": "Passed",
+      "Duration": 3.2259484,
+      "Message": null,
+      "StackTrace": null,
+      "Mode": "PlayMode",
+      "Evidence": "CowardsBunkerTests.json"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Level1CombatHotfixTests.ActualRadialBlastPreservesFriendlySelfArmorAndOcclusionRules",
+      "Status": "Passed",
+      "Duration": 0.8898683,
+      "Message": null,
+      "StackTrace": null,
+      "Mode": "PlayMode",
+      "Evidence": "Level1CombatHotfixTests.json"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Level1CombatHotfixTests.CommittedThrowSurvivesJumpingSightLossAndTickGaps",
+      "Status": "Passed",
+      "Duration": 2.8126762,
+      "Message": null,
+      "StackTrace": null,
+      "Mode": "PlayMode",
+      "Evidence": "Level1CombatHotfixTests.json"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Level1CombatHotfixTests.EveryOfficerShotHasHalfSecondWarningAndLockedFinalDirection",
+      "Status": "Passed",
+      "Duration": 5.6627738,
+      "Message": null,
+      "StackTrace": null,
+      "Mode": "PlayMode",
+      "Evidence": "Level1CombatHotfixTests.json"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Level1CombatHotfixTests.LaserClipsAtSolidCoverAndCancelsOffscreen",
+      "Status": "Passed",
+      "Duration": 0.6982391,
+      "Message": null,
+      "StackTrace": null,
+      "Mode": "PlayMode",
+      "Evidence": "Level1CombatHotfixTests.json"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Level1CombatHotfixTests.OfficerRetreatsWithoutTeleportingAndOptionalAllyDoesNotGateExit",
+      "Status": "Passed",
+      "Duration": 6.6730064,
+      "Message": null,
+      "StackTrace": null,
+      "Mode": "PlayMode",
+      "Evidence": "Level1CombatHotfixTests.json"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0029CombatTests.CloseBoxEdgeRecoversWithRunUpButTallWallDoesNotCauseEndlessJumps",
+      "Status": "Passed",
+      "Duration": 5.3293338,
+      "Message": null,
+      "StackTrace": null,
+      "Mode": "PlayMode",
+      "Evidence": "Sprint0029CombatTests.json"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0029CombatTests.EnemyGunfireAndExplosionsAreHeardAcrossDeckWithoutExactTargetOrOffscreenFire",
+      "Status": "Passed",
+      "Duration": 0.6599217,
+      "Message": null,
+      "StackTrace": null,
+      "Mode": "PlayMode",
+      "Evidence": "Sprint0029CombatTests.json"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0029CombatTests.LarperFirstVisualAttackWaitsAndBriefOcclusionDoesNotRestartLongDelay",
+      "Status": "Passed",
+      "Duration": 1.176249,
+      "Message": null,
+      "StackTrace": null,
+      "Mode": "PlayMode",
+      "Evidence": "Sprint0029CombatTests.json"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0029CombatTests.OfficerRequiresClearMuzzleEvenWhenEyesSeeOverCover",
+      "Status": "Passed",
+      "Duration": 3.3494759,
+      "Message": null,
+      "StackTrace": null,
+      "Mode": "PlayMode",
+      "Evidence": "Sprint0029CombatTests.json"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint00271Tests.EveryRevisedWarehouseLadderAutomaticallyExitsWithHeldTouchUp",
+      "Status": "Passed",
+      "Duration": 13.644184,
+      "Message": null,
+      "StackTrace": null,
+      "Mode": "PlayMode",
+      "Evidence": "Sprint00271Tests.json"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint00271Tests.SeededOfficerHitsStationaryTargetAtTenUnitsWithoutPerfectAimOrExtraShots",
+      "Status": "Passed",
+      "Duration": 5.9273497,
+      "Message": null,
+      "StackTrace": null,
+      "Mode": "PlayMode",
+      "Evidence": "Sprint00271Tests.json"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint00271Tests.SlimPauseRetainsTouchAreaAndOneMedicalTabPurchasesBothOriginalResources",
+      "Status": "Passed",
+      "Duration": 1.1568689,
+      "Message": null,
+      "StackTrace": null,
+      "Mode": "PlayMode",
+      "Evidence": "Sprint00271Tests.json"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CowardsBunkerRulesTests.ConcreteShellPreservesSurroundingTerrainAndRoster",
+      "Status": "Passed",
+      "Duration": 0.294512,
+      "Message": null,
+      "StackTrace": null,
+      "Mode": "EditMode",
+      "Evidence": "CowardsBunkerRulesTests.json"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CowardsBunkerRulesTests.EnvironmentModulesUseFourPixelCellsPointFilteringBinaryAlphaAndSmallPalettes",
+      "Status": "Passed",
+      "Duration": 0.477272,
+      "Message": null,
+      "StackTrace": null,
+      "Mode": "EditMode",
+      "Evidence": "CowardsBunkerRulesTests.json"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0029EquipmentRulesTests.BallisticHeadAndBodyProtectionAreIndependentAndMeleeExplosionsBypassBoth",
+      "Status": "Passed",
+      "Duration": 0.008763,
+      "Message": null,
+      "StackTrace": null,
+      "Mode": "EditMode",
+      "Evidence": "Sprint0029EquipmentRulesTests.json"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0029EquipmentRulesTests.BunkerSolidForegroundSurfacesMatchTheirColliders",
+      "Status": "Passed",
+      "Duration": 0.1136376,
+      "Message": null,
+      "StackTrace": null,
+      "Mode": "EditMode",
+      "Evidence": "Sprint0029EquipmentRulesTests.json"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0029EquipmentRulesTests.CatalogHasExactMedicalCopyAndFourProtectionChoicesWithBoundedTradeoffs",
+      "Status": "Passed",
+      "Duration": 0.0072257,
+      "Message": null,
+      "StackTrace": null,
+      "Mode": "EditMode",
+      "Evidence": "Sprint0029EquipmentRulesTests.json"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0029EquipmentRulesTests.LegacyProgressPreservesVestWithoutGrantingRevivesOrBreakingFutureSaveFormat",
+      "Status": "Passed",
+      "Duration": 0.0044641,
+      "Message": null,
+      "StackTrace": null,
+      "Mode": "EditMode",
+      "Evidence": "Sprint0029EquipmentRulesTests.json"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0029EquipmentRulesTests.PlayerReloadCostsDoNotMutateDefinitionsOrEnemyReloadsAndAmmoIsConserved",
+      "Status": "Passed",
+      "Duration": 0.0027924,
+      "Message": null,
+      "StackTrace": null,
+      "Mode": "EditMode",
+      "Evidence": "Sprint0029EquipmentRulesTests.json"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.FirstOperationLayoutTests.OfficerRetainsModularDimensionsAndNoHealthInflationAndMissionFireworksAreScoped",
+      "Status": "Passed",
+      "Duration": 0.0259191,
+      "Message": null,
+      "StackTrace": null,
+      "Mode": "EditMode",
+      "Evidence": "FirstOperationLayoutTests.json"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.FirstOperationLayoutTests.SavedLayoutHasExactRosterSupportedStartsAndNoCheckpoints",
+      "Status": "Passed",
+      "Duration": 0.1325753,
+      "Message": null,
+      "StackTrace": null,
+      "Mode": "EditMode",
+      "Evidence": "FirstOperationLayoutTests.json"
+    }
+  ]
+}

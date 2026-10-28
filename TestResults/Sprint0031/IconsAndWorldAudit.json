@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "var created=Sprint0031Icons.Create();var rows=new System.Collections.Generic.List<string>();foreach(var g in UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects())foreach(var t in g.GetComponentsInChildren<UnityEngine.TextMesh>(true))rows.Add(t.name+\" \"+t.text+\" font=\"+(t.font!=null?t.font.name:\"null\"));var p=UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.UIElements.PanelSettings>(\"Assets/UI/WarehousePanel.asset\");return created+\"\\nPanel=\"+p.scaleMode+\" ref=\"+p.referenceResolution+\"\\nWorld labels:\\n\"+string.Join(\"\\n\",rows);"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": "Three small native Point-filtered UI icons created; existing grenades, syringe, armor and weapon art reused.\nPanel=ScaleWithScreenSize ref=(1280, 720)\nWorld labels:\nSign_01 / GOODS IN_NO TRAINING PROVIDED 01 / GOODS IN\nNO TRAINING PROVIDED font=LegacyRuntime\nSign_02 / STORAGE_PROMOTION REQUIRES A LADDER 02 / STORAGE\nPROMOTION REQUIRES A LADDER font=LegacyRuntime\nSign_03 / PURSUIT BAY_NO RUNNING. EXCEPT HIM. 03 / PURSUIT BAY\nNO RUNNING. EXCEPT HIM. font=LegacyRuntime\nSign_04 / FIREWORK STORAGE_PROBABLY NOT FLAMMABLE 04 / FIREWORK STORAGE\nPROBABLY NOT FLAMMABLE font=LegacyRuntime\nSign_05 / COMMAND_MANAGEMENT IS TAKING COVER 05 / COMMAND\nMANAGEMENT IS TAKING COVER font=LegacyRuntime\nSign_DISPATCH / EXIT > DISPATCH / EXIT > font=LegacyRuntime"
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

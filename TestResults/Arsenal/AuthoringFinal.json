@@ -1,0 +1,35 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "var result=ArsenalSetup.Apply();var c=UnityEngine.Resources.Load<InsaneDreams.Inventory.ArsenalCatalog>(\"ArsenalCatalog\");var rows=new System.Collections.Generic.List<string>();foreach(var w in c.weapons)rows.Add(w.name+\":\"+(w.MagazineSprite!=null?w.MagazineSprite.name:\"none\"));return new{result,magazines=rows};"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": {
+        "result": "Seven core roles plus retained automatic Glock; Testbed appended to build scenes, MainMenu remains first. No enemy definitions/prices/ownership/scene-content changes; player tracer ring 16.",
+        "magazines": [
+          "BackupPistol:ExtendedMagazine",
+          "DesertEagle:DesertEagleMagazine",
+          "SMG:none",
+          "WarehouseCarbine:CarbineMagazine",
+          "Shotgun:none",
+          "LMG:none",
+          "Sniper:none",
+          "LarperBuzzbox:ExtendedMagazine"
+        ]
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

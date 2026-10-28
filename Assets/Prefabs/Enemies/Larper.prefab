@@ -710,6 +710,8 @@ GameObject:
   - component: {fileID: 2227119419476407966}
   - component: {fileID: 4132667183905337653}
   - component: {fileID: 5464417872304423843}
+  - component: {fileID: 3369435466260026727}
+  - component: {fileID: 8813474979453803750}
   m_Layer: 2
   m_Name: Larper
   m_TagString: Untagged
@@ -910,7 +912,9 @@ MonoBehaviour:
   ledgeProbe: 0.45
   jumpLandingDistance: 4
   state: 0
-  stuckSeconds: 0.9
+  stuckSeconds: 1.8
+  stuckRecoveryPause: 0.6
+  stuckRetrySeconds: 3
   obstacleJumpCooldown: 1.2
   retreatHopHeight: 1.6
   retreatHopWidth: 1.8
@@ -992,6 +996,7 @@ MonoBehaviour:
   dismountThreshold: 0.6
   dismountDominance: 1.2
   topLandingDrop: 2.5
+  topExitClearance: 0.04
   sideLandingDrop: 0.8
   solidLayers:
     serializedVersion: 2
@@ -1036,6 +1041,7 @@ MonoBehaviour:
   gameplayCamera: {fileID: 0}
   allowOffscreenFire: 0
   perceptionSeconds: 0.1
+  viewportAttackDelay: 0.18
   minimumCombatSpacing: 1.75
   positionSampleSeconds: 0.25
   suppressedRepositionDistanceMultiplier: 0.8
@@ -1045,7 +1051,7 @@ MonoBehaviour:
   maximumCoverHideSeconds: 6
   movementHearingRange: 11
   gunfireHearingRange: 24
-  obstructedHearingMultiplier: 0.45
+  obstructedHearingMultiplier: 0.6
   hearingMemorySeconds: 4
   soundPositionUncertainty: 2
   nearMissDistance: 1.5
@@ -1085,12 +1091,12 @@ MonoBehaviour:
   geometry:
     serializedVersion: 2
     m_Bits: 1
-  reactionSeconds: 0.55
+  reactionSeconds: 0.7
   aimSampleSeconds: 0.18
   aimDegreesPerSecond: 240
   effectiveRange: 11
   preferredDistance: 6
-  visibilityMemory: 3
+  visibilityMemory: 4.5
   rangeHysteresis: 2
   ordinaryReloadFraction: 0.2
   cowardReloadFraction: 0.4
@@ -1103,7 +1109,7 @@ MonoBehaviour:
   initialReserveAmmo: 135
   minimumWithdrawalDistance: 2.5
   reloadDurationVariation: 0.05
-  reactionJitterSeconds: 0.05
+  reactionJitterSeconds: 0.08
   blindAimUncertainty: 3
   coverSearchDistance: 7
   ordinaryBlindChance: 0.7
@@ -1389,6 +1395,48 @@ MonoBehaviour:
   geometry:
     serializedVersion: 2
     m_Bits: 1
+--- !u!114 &3369435466260026727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6616293515568177051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efee507ca41b671478958bb842660b15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Combat.BodyRegionDamage
+  headThreshold: 80
+  limbThreshold: 60
+  torsoThreshold: 150
+  armThreshold: 105
+--- !u!114 &8813474979453803750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6616293515568177051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf9aff03771bdc04ebf7a6cce5b84060, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Combat.HitReaction2D
+  stumbleImpulse: 1.65
+  knockdownImpulse: 4.5
+  knockdownChance: 1
+  recoverySeconds: 0.65
+  cooldown: 3
+  livingPhysics: 1
+  susceptibility: 1
+  balanceDecay: 1.15
+  heavyCooldown: 0.55
+  recoveryGrace: 1.2
+  maximumJointAngle: 26
+  impulseDegrees: 115
+  springReturn: 18
+  springTorque: 0.25
 --- !u!1 &6664146838325819924
 GameObject:
   m_ObjectHideFlags: 0

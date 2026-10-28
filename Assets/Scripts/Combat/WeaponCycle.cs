@@ -7,12 +7,14 @@ namespace InsaneDreams.Combat
     public sealed class WeaponCycle
     {
         private readonly RuntimeWeapon weapon;
+        private float stepDuration;
         public bool IsReloading { get; private set; }
         public event System.Action MagazineInserted;
         public float ReloadEndsAt { get; private set; }
         public float ReloadStartedAt { get; private set; }
         public float ReloadProgress(float now) => IsReloading ? Mathf.InverseLerp(ReloadStartedAt, ReloadEndsAt, now) : 0;
         public float NextAttackAt { get; private set; }
+        public bool IsRecovering(float now)=>weapon.Definition.FireMode==WeaponFireMode.ReleaseToFire&&now<NextAttackAt;
         private float malfunctionUntil;
         public bool IsMalfunctioning(float now)=>now<malfunctionUntil;
         public bool TryMalfunction(float now,float seconds)
@@ -26,6 +28,19 @@ namespace InsaneDreams.Combat
         public void Tick(float now)
         {
             if (!IsReloading || now < ReloadEndsAt || float.IsNaN(now) || float.IsInfinity(now)) return;
+            if(weapon.Definition.LoadsIndividually)
+            {
+                // Bounded by capacity, including a delayed frame; each completed step owns one shell.
+                for(int i=0;i<weapon.Definition.MagazineCapacity&&IsReloading&&now>=ReloadEndsAt;i++)
+                {
+                    if(weapon.ReserveAmmo<=0||weapon.MagazineAmmo>=weapon.Definition.MagazineCapacity){IsReloading=false;break;}
+                    weapon.SetAmmunition(weapon.MagazineAmmo+1,weapon.ReserveAmmo-1);
+                    MagazineInserted?.Invoke();
+                    if(weapon.ReserveAmmo<=0||weapon.MagazineAmmo>=weapon.Definition.MagazineCapacity)IsReloading=false;
+                    else{ReloadStartedAt=ReloadEndsAt;ReloadEndsAt+=stepDuration;}
+                }
+                return;
+            }
             IsReloading = false;
             int transfer = Mathf.Min(weapon.Definition.MagazineCapacity - weapon.MagazineAmmo, weapon.ReserveAmmo);
             weapon.SetAmmunition(weapon.MagazineAmmo + transfer, weapon.ReserveAmmo - transfer);
@@ -35,6 +50,7 @@ namespace InsaneDreams.Combat
         {
             if (float.IsNaN(now) || float.IsInfinity(now)) return false;
             Tick(now);
+            if(IsReloading&&weapon.Definition.LoadsIndividually&&weapon.MagazineAmmo>0&&now>=NextAttackAt&&!IsMalfunctioning(now))CancelReload();
             if (IsReloading || IsMalfunctioning(now) || now < NextAttackAt) return false;
             if (weapon.UsesAmmunition)
             {
@@ -49,7 +65,8 @@ namespace InsaneDreams.Combat
             if (float.IsNaN(now) || float.IsInfinity(now) || float.IsNaN(durationScale) || float.IsInfinity(durationScale) || durationScale <= 0) return false;
             Tick(now);
             if (!weapon.UsesAmmunition || IsReloading || IsMalfunctioning(now) || weapon.ReserveAmmo <= 0 || weapon.MagazineAmmo >= weapon.Definition.MagazineCapacity) return false;
-            IsReloading = true; ReloadStartedAt = now; ReloadEndsAt = now + weapon.Definition.ReloadDuration * durationScale; return true;
+            stepDuration=Mathf.Max(.05f,weapon.Definition.ReloadStepDuration*durationScale*weapon.ReloadMultiplier);
+            IsReloading = true; ReloadStartedAt = now; ReloadEndsAt = now + stepDuration; return true;
         }
         public void CancelReload() => IsReloading = false;
     }

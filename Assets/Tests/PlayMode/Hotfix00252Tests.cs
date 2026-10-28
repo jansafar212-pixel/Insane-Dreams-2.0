@@ -51,7 +51,13 @@ namespace InsaneDreams.Tests
         [UnityTest]public IEnumerator BlockedLongRetreatCanChooseShortAlternativeRatherThanFakeFullMagazineReload()
         {
             // Leave a genuinely reachable local step (>=1 unit), while blocking a major retreat.
-            Solid(2.2f,2,new Vector2(.3f,4));var e=Enemy();Float(e,"suppressionRetreatChance",0);yield return new WaitForSeconds(.2f);float start=e.transform.position.x;yield return Burst(e);Assert.GreaterOrEqual(e.SuppressionEvasions,1);Assert.Greater(Mathf.Abs(e.transform.position.x-start),.25f);Assert.Less(e.transform.position.x,X+1.75f);Assert.AreEqual(0,e.PanicEscapes);Assert.IsFalse(e.Weapon.Cycle.IsReloading);
+            Solid(2.2f,2,new Vector2(.3f,4));var e=Enemy();Float(e,"suppressionRetreatChance",0);yield return new WaitForSeconds(.2f);float start=e.transform.position.x,travel=0;
+            var burst=Burst(e);var trace=new System.Text.StringBuilder();
+            while(burst.MoveNext()){yield return burst.Current;travel=Mathf.Max(travel,Mathf.Abs(e.transform.position.x-start));trace.AppendLine($"x={e.transform.position.x-X:F3} state={e.State} suppression={e.Suppression:F2} evasions={e.SuppressionEvasions}");}
+            System.IO.File.WriteAllText("TestResults/Sprint0027/ShortRetreatTrace.txt",trace.ToString());
+            // Returning toward combat after a local escape must not erase the
+            // actual retreat movement observed during the burst.
+            Assert.GreaterOrEqual(e.SuppressionEvasions,1);Assert.Greater(travel,.25f,trace.ToString());Assert.Less(e.transform.position.x,X+1.75f);Assert.AreEqual(0,e.PanicEscapes);Assert.IsFalse(e.Weapon.Cycle.IsReloading);
         }
         [UnityTest]public IEnumerator DistantOrClippedShotsDoNotGenerateNearMissPressure()
         {

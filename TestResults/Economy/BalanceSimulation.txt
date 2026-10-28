@@ -1,0 +1,5 @@
+Scene wallets=13, range $5-20, expected collection $162,5 before rounding. Completion reward $250.
+Poor: $0 balance, 20 wallet dollars on failure => $5; free basic allowance 5 magazines (75 rounds); no premium refill.
+Average: new $100 + rounded mean wallet payout $412 => $512; SMG $350 + ammo $15 + tape $25 => $122 left.
+Saver: 3 average completions => $1336; Desert Eagle $1200, leaves $136. No mission spending assumed; actual wallet collection/consumption varies.
+Failure maximum $50, no completion reward, banked balance retained. No per-enemy kill payout added.
