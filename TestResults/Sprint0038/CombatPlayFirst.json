@@ -1,0 +1,76 @@
+{
+  "status": "completed",
+  "duration": 6.74,
+  "summary": {
+    "total": 9,
+    "passed": 7,
+    "failed": 2,
+    "skipped": 0,
+    "inconclusive": 0
+  },
+  "results": [
+    {
+      "FullName": "InsaneDreams.Tests.CombatIntegrationTests.AuthoredLadderAscentUsesExistingTraversalAndRestoresPatrol",
+      "Status": "Passed",
+      "Duration": 1.3034493,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CombatIntegrationTests.BallisticCharacterCuesAreLargerForBothTeamsButGeometryIsUnchanged",
+      "Status": "Passed",
+      "Duration": 0.5700533,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CombatIntegrationTests.InvalidAimDoesNotConsumeAmmunitionOrStartCooldown",
+      "Status": "Passed",
+      "Duration": 0.0583021,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CombatIntegrationTests.LarperEngagesShootsAndReturnsToPatrolWhenTargetLeaves",
+      "Status": "Failed",
+      "Duration": 4.1278582,
+      "Message": "  Expected: Patrol\r\n  But was:  Searching\r\n",
+      "StackTrace": "at InsaneDreams.Tests.CombatIntegrationTests+<LarperEngagesShootsAndReturnsToPatrolWhenTargetLeaves>d__16.MoveNext () [0x00221] in C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Tests\\PlayMode\\CombatIntegrationTests.cs:126\r\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in .\\Library\\PackageCache\\com.unity.test-framework@80f691d4262b\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:52\r\n"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CombatIntegrationTests.MeleeRequiresShortUnobstructedRangeAndNoAmmo",
+      "Status": "Passed",
+      "Duration": 0.0464409,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CombatIntegrationTests.PlayerFireSwitchInterruptAndDeathRecoveryPreserveInventory",
+      "Status": "Failed",
+      "Duration": 0.0554761,
+      "Message": "  Expected: 100.0f\r\n  But was:  0.0f\r\n",
+      "StackTrace": "at InsaneDreams.Tests.CombatIntegrationTests+<PlayerFireSwitchInterruptAndDeathRecoveryPreserveInventory>d__15.MoveNext () [0x001b9] in C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Tests\\PlayMode\\CombatIntegrationTests.cs:108\r\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in .\\Library\\PackageCache\\com.unity.test-framework@80f691d4262b\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:52\r\n"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CombatIntegrationTests.RaycastStopsAtGeometryAndDefeatsTargetOnce",
+      "Status": "Passed",
+      "Duration": 0.0448194,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CombatIntegrationTests.TwoThumbAimOnlyAndOuterFireZoneRemainIndependent",
+      "Status": "Passed",
+      "Duration": 0.2445076,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CombatIntegrationTests.UnavailableLadderRouteReleasesMotionAndReloadButtonIsReachable",
+      "Status": "Passed",
+      "Duration": 0.1631963,
+      "Message": null,
+      "StackTrace": null
+    }
+  ]
+}

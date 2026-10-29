@@ -6899,3 +6899,6 @@ Build report, packed assets, generated IL2CPP and APK method metadata verified.
 adb devices empty; no device installation/test or sustained mid-range performance
 claim. Native audio issue remains undiagnosed. No source/native edits during
 export. No stage/commit/push.
+
+## Sprint0038 — 2026-10-29
+Small polish: ballistic actor cues +20%, exact flush magazine extraction for BackupPistol (15/1.5s retained), five static background factory graffiti marks via native Editor authoring. Existing animation/pool retained; missing-magazine guard. 23/25 selected tests pass; two legacy AI/instant-recovery failures reproduced with pre-sprint runtime source, left outside scope. Final impact test re-passed. Report: TestResults/Sprint0038/Report.md. No APK/device verification. Two original unsaved shelf moves backed up, excluded from disk scene and restored to open Editor. No stage/commit/push.

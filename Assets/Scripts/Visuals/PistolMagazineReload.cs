@@ -44,7 +44,7 @@ namespace InsaneDreams.Visuals
         {
             var d=weapon!=null?weapon.Definition:null;
             if(!Handles(d)){if(replacement!=null)replacement.enabled=false;wasReloading=false;previous=null;return;}
-            if(rig.magazine==null)return;
+            if(rig.magazine==null||d.MagazineSprite==null){if(replacement!=null)replacement.enabled=false;wasReloading=false;return;}
             if(replacement==null){var g=new GameObject("PistolReplacementMagazine");g.transform.SetParent(rig.weapon.transform,false);replacement=g.AddComponent<SpriteRenderer>();}
             replacement.sprite=d.MagazineSprite;replacement.sortingLayerID=rig.magazine.sortingLayerID;replacement.sortingOrder=rig.magazine.sortingOrder;
             if(d!=previous||reloading&&(!wasReloading||reloadToken!=weapon.Cycle.ReloadStartedAt)){released=false;reloadToken=weapon.Cycle.ReloadStartedAt;}previous=d;wasReloading=reloading;

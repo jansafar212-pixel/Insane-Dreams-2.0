@@ -36,6 +36,30 @@ namespace InsaneDreams.Tests
             Assert.AreEqual(children,rig.weapon.GetComponentsInChildren<SpriteRenderer>(true).Length);
             combat.Reload();yield return new WaitForSeconds(.2f);load.Equip(EquipmentSlot.Firearm2,new RuntimeWeapon(AssetDatabase.LoadAssetAtPath<WeaponDefinition>("Assets/Resources/Arsenal/Shotgun.asset")));load.Select(EquipmentSlot.Firearm2);yield return null;Assert.IsFalse(w.Cycle.IsReloading);Assert.AreEqual(12,w.MagazineAmmo);Assert.AreEqual(60,w.ReserveAmmo);Assert.IsFalse(rig.weapon.transform.Find("ReplacementMagazine").GetComponent<SpriteRenderer>().enabled);
         }
+        [UnityTest]public IEnumerator DefaultPistolFlushMagazineMovesSeatsAndConservesPartialReloads()
+        {
+            var definition=AssetDatabase.LoadAssetAtPath<WeaponDefinition>("Assets/Data/Items/BackupPistol.asset");
+            var w=new RuntimeWeapon(definition);load.Equip(EquipmentSlot.Firearm1,w);load.Select(EquipmentSlot.Firearm1);
+            Assert.AreEqual(15,definition.MagazineCapacity);Assert.AreEqual(1.5f,definition.ReloadDuration);
+            var presentation=player.GetComponent<PistolMagazineReload>();Assert.IsTrue(presentation.Handles(definition));
+            foreach(var aim in new[]{Vector2.right,Vector2.left})
+            {
+                input.SetTouchAim(aim);w.SetAmmunition(7,20);yield return null;yield return new WaitForEndOfFrame();
+                Assert.IsTrue(rig.magazine.enabled);Assert.AreEqual(definition.MagazineSprite,rig.magazine.sprite);
+                int releases=presentation.Releases;combat.Reload();yield return new WaitForSeconds(.48f);
+                Assert.Less(rig.magazine.transform.localPosition.y,definition.MagazineMountOffset.y-.05f);
+                yield return new WaitForSeconds(.25f);Assert.AreEqual(releases+1,presentation.Releases);Assert.IsFalse(rig.magazine.enabled);
+                yield return new WaitForSeconds(.3f);var fresh=rig.weapon.transform.Find("PistolReplacementMagazine").GetComponent<SpriteRenderer>();
+                Assert.IsTrue(fresh.enabled);Assert.AreEqual(definition.MagazineSprite,fresh.sprite);Capture("DefaultPistolInsertion"+(aim.x>0?"Right":"Left"));
+                yield return new WaitForSeconds(.6f);yield return new WaitForEndOfFrame();
+                Assert.AreEqual(15,w.MagazineAmmo);Assert.AreEqual(12,w.ReserveAmmo);Assert.IsTrue(rig.magazine.enabled);Assert.IsFalse(fresh.enabled);
+                Assert.Less(Vector2.Distance(rig.magazine.transform.localPosition,definition.MagazineMountOffset),.001f);
+            }
+            w.SetAmmunition(7,3);combat.Reload();yield return new WaitForSeconds(1.6f);Assert.AreEqual(10,w.MagazineAmmo);Assert.AreEqual(0,w.ReserveAmmo);
+            w.SetAmmunition(7,20);combat.Reload();yield return new WaitForSeconds(.8f);load.Select(EquipmentSlot.Melee);yield return null;
+            Assert.IsFalse(w.Cycle.IsReloading);Assert.AreEqual(7,w.MagazineAmmo);Assert.AreEqual(20,w.ReserveAmmo);
+            Assert.IsFalse(rig.weapon.transform.Find("PistolReplacementMagazine").GetComponent<SpriteRenderer>().enabled);
+        }
         [UnityTest]public IEnumerator ShotgunRealClockShellsPersistOnFireAndDeathAndVisualIsBounded()
         {
             var w=Equip("Shotgun");yield return null;w.SetAmmunition(2,10);combat.Reload();yield return new WaitForSeconds(w.Definition.ReloadStepDuration*1.5f);Assert.AreEqual(3,w.MagazineAmmo);Assert.AreEqual(9,w.ReserveAmmo);Assert.IsNotNull(rig.ReloadShell);Capture("ShotgunShell");

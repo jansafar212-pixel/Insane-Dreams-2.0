@@ -15,7 +15,7 @@ MonoBehaviour:
   stableId: 6aacf22d7be845ecbe362c28a09c39ca
   displayName: Backup Pistol
   description: Sprint 003 data-only example; no combat behavior.
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 9ece9c252eb2fa7428e54081f295ac8a, type: 2}
   category: 0
   weaponCategory: 0
   damage: 14
@@ -23,9 +23,9 @@ MonoBehaviour:
   magazineCapacity: 15
   reloadDuration: 1.5
   presentationPrefab: {fileID: 0}
-  equippedSprite: {fileID: 21300000, guid: 9ece9c252eb2fa7428e54081f295ac8a, type: 2}
-  magazineSprite: {fileID: 0}
-  magazineMountOffset: {x: 0.03125, y: -0.0625}
+  equippedSprite: {fileID: 21300000, guid: de87d67cbaf258b46a0660741df34963, type: 2}
+  magazineSprite: {fileID: 21300000, guid: a47716bafc742fd4f9ce5c22a3cf9fc8, type: 2}
+  magazineMountOffset: {x: 0.03125, y: 0}
   physicalMagazineReload: 0
   loadsIndividually: 0
   shellSprite: {fileID: 0}

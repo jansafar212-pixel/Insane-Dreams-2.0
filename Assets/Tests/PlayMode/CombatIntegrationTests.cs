@@ -66,6 +66,25 @@ namespace InsaneDreams.Tests
             Assert.IsFalse(target.gameObject.activeSelf); Assert.AreEqual(1, defeated);
             Assert.IsFalse(target.ApplyDamage(new DamageInfo(100, CombatTeam.Player)));
         }
+        [UnityTest] public IEnumerator BallisticCharacterCuesAreLargerForBothTeamsButGeometryIsUnchanged()
+        {
+            var target=Target(2004);var weapon=new RuntimeWeapon(Asset<WeaponDefinition>("Assets/Data/Items/BackupPistol.asset"));
+            loadout.Equip(EquipmentSlot.Firearm1,weapon);loadout.Select(EquipmentSlot.Firearm1);yield return null;
+            var cue=player.transform.Find("HitConfirmation");
+            foreach(var team in new[]{CombatTeam.Player,CombatTeam.Enemy})
+            {
+                var ownerData=new SerializedObject(player.GetComponent<Health>());ownerData.FindProperty("team").enumValueIndex=(int)team;ownerData.ApplyModifiedPropertiesWithoutUndo();
+                var targetData=new SerializedObject(target);targetData.FindProperty("team").enumValueIndex=(int)(team==CombatTeam.Player?CombatTeam.Enemy:CombatTeam.Player);targetData.ApplyModifiedPropertiesWithoutUndo();target.Restore();
+                Physics2D.SyncTransforms();Assert.IsTrue(executor.Attack(weapon,Vector2.right,Time.time));
+                Assert.Less(target.Current,target.Maximum);Assert.IsTrue(cue.GetComponent<SpriteRenderer>().enabled);
+                Assert.AreEqual(.216f,cue.localScale.x,.0001f);Assert.AreEqual(.216f,cue.localScale.y,.0001f);yield return new WaitForSeconds(.25f);
+            }
+            var wall=Keep(new GameObject("ImpactScaleWall"));wall.transform.position=new Vector3(2002,1);wall.AddComponent<BoxCollider2D>().size=new Vector2(1,3);Physics2D.SyncTransforms();
+            Assert.IsTrue(executor.Attack(weapon,Vector2.right,Time.time));Assert.AreEqual(ShotSurface.Geometry,executor.LastSurface);
+            var feedback=player.GetComponent<CombatFeedback>();var so=new SerializedObject(feedback);
+            float originalSize=so.FindProperty("surfaceImpactSprite").objectReferenceValue!=null?1:.18f;
+            Assert.AreEqual(originalSize,player.transform.Find("SurfaceImpact").localScale.x,.0001f);
+        }
         [UnityTest] public IEnumerator MeleeRequiresShortUnobstructedRangeAndNoAmmo()
         {
             var target = Target(2001.2f); var weapon = loadout.Get(EquipmentSlot.Melee);

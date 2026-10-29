@@ -1,3 +1,15 @@
+# AKUMU 2 — Sprint0038 polish (2026-10-29)
+
+Report/evidence: TestResults/Sprint0038/Report.md. Ballistic character cue scale
+.18→.216 for both teams, environment/melee unchanged. BackupPistol now uses an
+exact extracted flush4x4 magazine/body; capacity15/reload1.5 unchanged. Five static
+factory background graffiti sprites, no layout/runtime behavior changes.
+23/25 selected tests pass; two unrelated legacy CombatIntegration tests fail
+identically with prior runtime source (AI search state/immediate death recovery).
+Final impact regression passes again after baseline comparison. No new APK/device
+test. Two original unsaved shelf moves restored to Editor only; scene stays dirty.
+No stage/commit/push. Preserve all prior sprint behavior below.
+
 # AKUMU 2 — Sprint0037 combat impact (2026-10-29)
 
 Current brief/report/captures/audits/tests: TestResults/Sprint0037.

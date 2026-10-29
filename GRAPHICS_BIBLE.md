@@ -362,3 +362,6 @@ backgrounds/text are preserved. DE/sniper tracer scales1.6/2.2 reuse the existin
 pool/material/fade; Officer's own red/thick presentation remains separate.
 Controlled captures:TestResults/Sprint0037. Human feel/artistic and phone review
 remain required; passing tests and captures are not artistic approval.
+
+## Sprint0038 implementation note — 2026-10-29
+Default pistol short4x4 magazine is extracted from existing20x8 art; recomposed seated silhouette is identical (0 pixel differences), original preserved. Five static rust/paper factory tags/skull at32PPU, Point filtered with two-native-pixel strokes, sorting-25 behind props and actors. Authoring renders inspected; user artistic review remains pending. Ballistic character cue scale +20%, colors/timing/environment impacts preserved. Evidence: TestResults/Sprint0038/Report.md.

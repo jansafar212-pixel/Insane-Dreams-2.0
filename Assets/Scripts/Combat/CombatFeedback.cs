@@ -142,7 +142,9 @@ namespace InsaneDreams.Combat
             if (!damaged) return;
             HitCues++; Sound(hitSound); hit.color=Color.white;hit.enabled = true; hitUntil = Time.time + hitSeconds;
             hitPoint = executor.LastDamagePoint; hit.transform.position = new Vector3(hitPoint.x, hitPoint.y, -.2f);
-            hit.transform.localScale = new Vector3(.18f, .18f, 1); hit.transform.rotation = Quaternion.Euler(0, 0, 45);
+            // Shared world-space character cue covers both incoming and outgoing bullets.
+            float size = .18f * (executor.LastAttackUsesAmmunition ? 1.2f : 1);
+            hit.transform.localScale = new Vector3(size, size, 1); hit.transform.rotation = Quaternion.Euler(0, 0, 45);
         }
         private void Surface(Vector2 point, ShotSurface kind)
         {
