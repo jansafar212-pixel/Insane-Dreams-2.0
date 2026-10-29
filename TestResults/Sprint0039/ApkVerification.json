@@ -1,0 +1,17 @@
+{
+  "apk": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\build\\Sprint0039\\AKUMU2-sprint0039-release.apk",
+  "bytes": 39843255,
+  "sha256": "945E4E44F16B2C8211EADD59A2A5CA20992C4BA9114D6E77B509CC933F64BEBE",
+  "version": "0.13",
+  "versionCode": 2,
+  "arm64": true,
+  "release": true,
+  "metadataEntry": "assets/bin/Data/Managed/Metadata/global-metadata.dat",
+  "updatedCode": {
+    "ammunitionInsertionOffset": true,
+    "ParachuteLandingProtected": true,
+    "secondary2": true,
+    "wallet-release-floor-20261028-r1": true,
+    "firearmRole": true
+  }
+}

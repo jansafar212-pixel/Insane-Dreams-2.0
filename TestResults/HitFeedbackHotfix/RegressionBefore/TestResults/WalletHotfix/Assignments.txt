@@ -1,0 +1,7 @@
+Assets\Editor\EconomySetup.cs:27:        c.offers=list.ToArray();c.primaryId="pistol";c.startingMoney=100;c.completionReward=250;c.failureWalletFraction=.25f;c.failurePayoutCap=50;c.basicAllowanceMagazines=5;
+Assets\Scripts\Progression\ProgressStore.cs:37:            balance=Mathf.Clamp(balance,0,1000000);tape=Finite(tape,200);armor=Finite(armor,0);
+Assets\Scripts\Progression\GameSession.cs:36:            Data.balance=Mathf.Max(Data.balance,10000);
+Assets\Scripts\Progression\GameSession.cs:48:            var data=new GameProgress{balance=Mathf.Clamp(catalog.startingMoney,0,1000000),primary=catalog.primaryId,melee=catalog.meleeId,tape=catalog.tapeCapacity};
+Assets\Scripts\Progression\GameSession.cs:110:            Data.balance=(int)Math.Min(1000000L,(long)Data.balance+Data.lastPayout);
+Assets\Scripts\Progression\GameSession.cs:138:            Data.balance-=item.price;
+Assets\Scripts\Progression\GameCatalog.cs:40:        [Min(0)] public int startingMoney=1000;

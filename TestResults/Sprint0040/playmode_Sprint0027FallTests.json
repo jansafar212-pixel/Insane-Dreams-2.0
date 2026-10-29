@@ -1,0 +1,90 @@
+{
+  "status": "completed",
+  "duration": 16.92,
+  "summary": {
+    "total": 11,
+    "passed": 11,
+    "failed": 0,
+    "skipped": 0,
+    "inconclusive": 0
+  },
+  "results": [
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0027FallTests.ActiveAirborneParachuteAllowsCombatDamageAndLandingAddsNone",
+      "Status": "Passed",
+      "Duration": 1.5650005,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0027FallTests.CancellingCanopyStillAllowsAnUnprotectedDangerousLanding",
+      "Status": "Passed",
+      "Duration": 0.4880397,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0027FallTests.ClimbingRetractsCanopyAndDismountResetsFall",
+      "Status": "Passed",
+      "Duration": 0.2100525,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0027FallTests.ControlledDescentShedsOldFallBeforeSafeNearGroundCancellation",
+      "Status": "Passed",
+      "Duration": 2.2773817,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0027FallTests.LateParachuteClearsPendingImpactButDoesNotBlockCombatDamage",
+      "Status": "Passed",
+      "Duration": 0.9687997,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0027FallTests.MediumAndExtremeParachuteLandingsHaveExactlyZeroDamage",
+      "Status": "Passed",
+      "Duration": 6.4011547,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0027FallTests.MediumFallHurtsAndExtremeFallCanDefeat",
+      "Status": "Passed",
+      "Duration": 0.8891808,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0027FallTests.NormalDoubleJumpReturnsToGroundWithoutFallDamage",
+      "Status": "Passed",
+      "Duration": 0.2445337,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0027FallTests.ProtectedLandingRetractsAndCannotLeakDamageOrBlockNextDeployment",
+      "Status": "Passed",
+      "Duration": 3.1888372,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0027FallTests.ReviveResetsFlightAndInvulnerableLandingCannotReplayItsDamage",
+      "Status": "Passed",
+      "Duration": 0.4529298,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0027FallTests.SmallFallIsSafe",
+      "Status": "Passed",
+      "Duration": 0.1720286,
+      "Message": null,
+      "StackTrace": null
+    }
+  ]
+}

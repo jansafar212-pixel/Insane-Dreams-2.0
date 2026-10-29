@@ -1,0 +1,86 @@
+[
+  {
+    "path": "Assets\\Scripts\\Combat\\HitReaction2D.cs",
+    "sha256": "9732EA1A4C78B37665909006FC7F2348136736187C2B1E4311BDFA6A909B8C48"
+  },
+  {
+    "path": "Assets\\Scripts\\Input\\PlayerActions.cs",
+    "sha256": "23396F64DC5FCFB08D860F607776C9DA63304422E49ED3D1E8F47B833EC32924"
+  },
+  {
+    "path": "Assets\\Scripts\\Input\\WarehouseTouchControls.cs",
+    "sha256": "40B9944D7D3CDA15A61E49D2C6C826788A2B7FEF4A0B390DA8D6413E45F3C591"
+  },
+  {
+    "path": "Assets\\Scripts\\Inventory\\PlayerLoadout.cs",
+    "sha256": "19FAECFCD35CE133AAEBE47794F6FF9B7076865190BB67A52623234E08024BD9"
+  },
+  {
+    "path": "Assets\\Scripts\\Inventory\\WeaponDefinition.cs",
+    "sha256": "7D72740BF00A33CF8850EA6B842FB70D50B24D7E6EDB40E02C7594CA8452046E"
+  },
+  {
+    "path": "Assets\\Scripts\\Missions\\WarehouseMission.cs",
+    "sha256": "0356924F476B9C278F34111E7372205A8AF96B446C82CE651B6D860CBA623836"
+  },
+  {
+    "path": "Assets\\Scripts\\Progression\\CampaignMissionBridge.cs",
+    "sha256": "206A8116FB029C351EDAFE143A2772809BBC208A3ADC5991AEA16A17A0191AA0"
+  },
+  {
+    "path": "Assets\\Scripts\\Progression\\GameFlowController.cs",
+    "sha256": "47532DD8BADD020C8F6A93B12A0D1061F338409B4E78DE8B4E8191E8D38EA477"
+  },
+  {
+    "path": "Assets\\Scripts\\Progression\\GameSession.cs",
+    "sha256": "4540A28EB3B676C89DF3ECEB1C114DF6249B472CE1E0F722B13A6C583BFA748E"
+  },
+  {
+    "path": "Assets\\Scripts\\Progression\\ProgressStore.cs",
+    "sha256": "6AD6F9919B10C2745ABB84EF73A10C315CFC313EA3CCD75AAB8EA0EF900E9265"
+  },
+  {
+    "path": "Assets\\Scripts\\Visuals\\CharacterVisualDriver.cs",
+    "sha256": "13691989647D944F1B723F07A55977F39FF4A49561B6269F711121188C134319"
+  },
+  {
+    "path": "Assets\\Tests\\EditMode\\Loadout0039Tests.cs",
+    "sha256": "ABFDF0DCD1BEB083ABA18F73A2BD825E5BBBDAE01E9593F81782B110DC9FB8B7"
+  },
+  {
+    "path": "Assets\\Tests\\PlayMode\\AndroidPerformanceRegressionTests.cs",
+    "sha256": "A2E69E570F326296E338D743A7E139556A73381C44778D547DC819427105AF0B"
+  },
+  {
+    "path": "Assets\\Tests\\PlayMode\\CombatImpact0037Tests.cs",
+    "sha256": "620A325711D9113BFC8BFE9AB70161AC322F0CA341B556EE3A218358AC79CDFB"
+  },
+  {
+    "path": "Assets\\Tests\\PlayMode\\Sprint0034EconomyTests.cs",
+    "sha256": "CFFE903CA0DE07E66F76CD363D0CEE449C2C105F42379B4A6C8175A22E4E79AA"
+  },
+  {
+    "path": "Assets\\Tests\\PlayMode\\Sprint024FlowTests.cs",
+    "sha256": "4A6115B3B57C0B895D281D2E357B2D90571A66F6BBEDEEC99559524F9F70E6F9"
+  },
+  {
+    "path": "Assets\\UI\\MissionControls.uxml",
+    "sha256": "3F178608034F0C4B0D45BE2CD76A23EA420EBFB6EF36123BACCD35C9518B32F0"
+  },
+  {
+    "path": "Assets\\UI\\WarehouseControls.uss",
+    "sha256": "5E561FCFFA8B7039C16D909BD04C47713C54ACA8BA8B37CBB591C1DA5E745CCA"
+  },
+  {
+    "path": "Assets\\UI\\WarehouseControls.uxml",
+    "sha256": "DC8C70755500F57F0417223B9AB74E081AF07F6CFDD94E4C4D6BB81C77121937"
+  },
+  {
+    "path": "Assets/Editor/Sprint0040Setup.cs",
+    "sha256": "40C468EC72F549F8C592EA68874082962C4B7FA9619FFCD02BC502E770667DAB"
+  },
+  {
+    "path": "Assets/Tests/PlayMode/LivingImpact0040Tests.cs",
+    "sha256": "72238EDC978BB6D86727E2902D73125D9395C1638095469094A388BC5EDDA1D5"
+  }
+]

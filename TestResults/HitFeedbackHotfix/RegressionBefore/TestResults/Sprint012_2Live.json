@@ -1,0 +1,62 @@
+{
+  "sprint": "012.2",
+  "date": "2026-10-19",
+  "scene": "Warehouse_Testbed",
+  "method": "Unity MCP live Editor trials and inline Game View captures. Runtime actor placement/protection/camera overrides discarded on Play Mode exit. No saved diagnostic screenshot claimed.",
+  "farFire": {
+    "distance": 22,
+    "shots": 6,
+    "ammoRemaining": 12,
+    "initialAmmo": 18,
+    "preferredDistanceOverride": 30,
+    "state": "Engaging",
+    "visual": "Wide inaccurate muzzle-origin rays visible across basement."
+  },
+  "cover": {
+    "paused": true,
+    "position": "(22.30, 0.71, 0.00)",
+    "displacementFromPlacement": 6.29797173,
+    "destination": "(22.15, 0.71)",
+    "cover": "Crate_21",
+    "hopped": "True",
+    "crouched": true,
+    "state": "Reloading",
+    "reloadDuration": 4.091091,
+    "ammo": 0,
+    "reserve": 54
+  },
+  "reloadCompletion": {
+    "paused": true,
+    "crouched": false,
+    "reloading": false,
+    "ammo": 18,
+    "reserve": 36,
+    "extraShots": 0,
+    "position": "(22.27, 1.64, 0.00)"
+  },
+  "audit": {
+    "scene": "Assets/Scenes/Warehouse_Testbed.unity",
+    "saved": true,
+    "dirty": false,
+    "play": false,
+    "missingScripts": 0,
+    "missingReferences": [],
+    "behavioursChecked": 80,
+    "colliders": 31,
+    "prefabs": [
+      "Assets/Prefabs/Player/WarehousePlayer.prefab",
+      "Assets/Prefabs/Enemies/Larper.prefab",
+      "Assets/Prefabs/Visuals/LarperCartoonRagdoll.prefab"
+    ]
+  },
+  "integrationFindingsResolved": [
+    "Checkpoint_Exit trigger incorrectly stopped physical retreat despite being excluded from cover planning; retreat probes now explicitly ignore triggers.",
+    "Crouch eligibility used a projected floor position while actor could still be on a crate; now requires grounded/near-original-height arrival.",
+    "Tactical sample overshoot could miss crouch endpoint tolerance; endpoint stop now runs between tactical samples."
+  ],
+  "limitations": [
+    "Only local, supported corridors with small hops are considered, not general pathfinding through a level.",
+    "Optional desperation melee not added: player melee exists but enemy equipment switching does not.",
+    "No Android hardware performance, touch control or balance claim."
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 4.09,
+      "summary": {
+        "total": 7,
+        "passed": 6,
+        "failed": 1,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "InsaneDreams.Tests.ArsenalTests.AllWeaponsDamageAllFourArchetypesThroughActualHitboxes",
+          "Status": "Failed",
+          "Duration": 1.7657372,
+          "Message": "  Sniper -> Assets/Data/FirstOperation/Officer.prefab\r\n  Expected: less than 50.0f\r\n  But was:  50.0f\r\n",
+          "StackTrace": "at InsaneDreams.Tests.ArsenalTests+<AllWeaponsDamageAllFourArchetypesThroughActualHitboxes>d__22.MoveNext () [0x0020c] in C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Tests\\PlayMode\\ArsenalTests.cs:72\r\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in .\\Library\\PackageCache\\com.unity.test-framework@80f691d4262b\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:52\r\n"
+        },
+        {
+          "FullName": "InsaneDreams.Tests.ArsenalTests.EagleUsesNormalHeldFireWhileMovingAndJumpingAndMuzzleRemainsAligned",
+          "Status": "Passed",
+          "Duration": 0.8611542,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.ArsenalTests.ShotgunPelletsConsumeOneRoundAndDoNotDuplicateColliderDamage",
+          "Status": "Passed",
+          "Duration": 0.0686219,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.ArsenalTests.SniperHoldCancelReleaseAndAutomaticRecoveryNeverDoubleFire",
+          "Status": "Passed",
+          "Duration": 1.1226575,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.ArsenalTests.SniperSwitchPauseReloadResetDeathAndRevivalCannotReleaseAnAccidentalShot",
+          "Status": "Passed",
+          "Duration": 0.0891192,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.ArsenalTests.SustainedAutomaticAndPelletFireKeepTheEffectPoolBounded",
+          "Status": "Passed",
+          "Duration": 0.0567946,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.ArsenalTests.SustainedLmgBloomBuildsAndRecoversWithoutMovementPenalty",
+          "Status": "Passed",
+          "Duration": 0.0389489,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

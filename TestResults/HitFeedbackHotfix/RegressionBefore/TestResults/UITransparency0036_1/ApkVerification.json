@@ -1,0 +1,10 @@
+{
+  "path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\build\\UITransparency0036_1\\AKUMU2-ui-transparency-release.apk",
+  "buildId": "build_7173418f1d13",
+  "bytes": 39819759,
+  "sha256": "0EAC86F000B775C84A8622AC272B80AF8C9939F70CB3D6C9F849CD6A796056AB",
+  "package": "package: name='com.GAMES.AKUMU2' versionCode='1' versionName='0.12' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'",
+  "nativeCode": "native-code: 'arm64-v8a'",
+  "debuggable": false,
+  "deviceTested": false
+}

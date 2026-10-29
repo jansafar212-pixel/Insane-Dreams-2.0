@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "if(UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode||UnityEngine.SceneManagement.SceneManager.GetActiveScene().isDirty)throw new System.InvalidOperationException(\"Preserve scene and stop Play Mode\");var scene=UnityEngine.SceneManagement.SceneManager.GetActiveScene();var font=UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.Font>(\"Assets/Art/Interface0029/AkumuBlock.ttf\");int count=0;foreach(var g in scene.GetRootGameObjects())foreach(var text in g.GetComponentsInChildren<UnityEngine.TextMesh>(true))if(text.name.StartsWith(\"Sign_\")){text.font=font;text.GetComponent<UnityEngine.MeshRenderer>().sharedMaterial=font.material;UnityEditor.EditorUtility.SetDirty(text);UnityEditor.EditorUtility.SetDirty(text.GetComponent<UnityEngine.MeshRenderer>());count++;}UnityEditor.SceneManagement.EditorSceneManager.MarkSceneDirty(scene);UnityEditor.SceneManagement.EditorSceneManager.SaveScene(scene);return count+\" existing section/exit placards restyled with the existing block font; no positions, geometry, wording or gameplay changed.\";"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": "6 existing section/exit placards restyled with the existing block font; no positions, geometry, wording or gameplay changed."
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

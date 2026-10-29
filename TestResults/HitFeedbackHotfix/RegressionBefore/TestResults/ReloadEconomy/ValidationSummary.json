@@ -1,0 +1,53 @@
+{
+  "date": "2026-10-28",
+  "tests": {
+    "total": 66,
+    "passed": 66,
+    "failed": 0,
+    "editMode": 18,
+    "playMode": 48,
+    "fullProjectSuite": false
+  },
+  "reload": {
+    "smgCapacity": 30,
+    "smgSeconds": 1.8,
+    "shotgunCapacity": 6,
+    "shotgunStepSeconds": 0.43333333333333335,
+    "shotgunFullEmptySeconds": 2.6,
+    "incrementalAmmoAuthoritative": true,
+    "loadedProgressSurvivesInterruptions": true
+  },
+  "economy": {
+    "pricesChanged": false,
+    "reason": "Existing provisional foundation audited; no confirmed new imbalance justifying speculative retune",
+    "starterPistolCapacity": 15,
+    "starterTotalRounds": 75,
+    "temporaryWalletHotfixPreserved": true
+  },
+  "build": {
+    "id": "build_832d92bfda0d",
+    "result": "Succeeded",
+    "milliseconds": 128494,
+    "errors": 0,
+    "warnings": 974,
+    "apk": "build/ReloadEconomy/AKUMU2-reload-repair-release.apk",
+    "bytes": 39817203,
+    "sha256": "98a13f846658f116d8ec897582344c4e1407c90a49f06b3717b246aa1d128398",
+    "release": true,
+    "arm64": true
+  },
+  "editor": {
+    "scene": "Warehouse_Demo",
+    "ready": true,
+    "stopped": true,
+    "dirty": false,
+    "missingScripts": 0,
+    "consoleErrors": 0,
+    "consoleWarnings": 84
+  },
+  "androidDeviceTested": false,
+  "windowsPlayerBuilt": false,
+  "priorNativeAudioIssue": "Undiagnosed ADTM incident; not claimed fixed",
+  "committed": false,
+  "pushed": false
+}

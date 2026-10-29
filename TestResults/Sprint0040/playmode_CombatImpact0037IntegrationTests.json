@@ -1,0 +1,27 @@
+{
+  "status": "completed",
+  "duration": 3.4,
+  "summary": {
+    "total": 2,
+    "passed": 2,
+    "failed": 0,
+    "skipped": 0,
+    "inconclusive": 0
+  },
+  "results": [
+    {
+      "FullName": "InsaneDreams.Tests.CombatImpact0037IntegrationTests.ActualHudShowsFourDirectionsCriticalHealthAndPreservesTransparentControlsAndPause",
+      "Status": "Passed",
+      "Duration": 1.6507535,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CombatImpact0037IntegrationTests.ReviveProtectionProducesNoSuccessfulHitFeedbackAndWeaponTracersStayDistinct",
+      "Status": "Passed",
+      "Duration": 1.6973005,
+      "Message": null,
+      "StackTrace": null
+    }
+  ]
+}

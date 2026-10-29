@@ -58,7 +58,7 @@ namespace InsaneDreams.Tests
             var catalog=AssetDatabase.LoadAssetAtPath<ArsenalCatalog>("Assets/Resources/ArsenalCatalog.asset");var load=player.GetComponent<PlayerLoadout>();
             foreach(var index in new[]{0,1,6})
             {
-                var w=new RuntimeWeapon(catalog.weapons[index]);load.Equip(EquipmentSlot.Firearm1,w);load.Select(EquipmentSlot.Firearm1);yield return new WaitForSeconds(.25f);player.SetTouchAim(new Vector2(1,.2f));yield return null;Assert.IsTrue(player.GetComponent<AttackExecutor>().Attack(w,new Vector2(1,.2f),Time.time));yield return null;yield return Capture("Tracer"+w.Definition.name);player.SetTouchAim(Vector2.zero);
+                var w=new RuntimeWeapon(catalog.weapons[index]);var slot=w.Definition.Fits(EquipmentSlot.Firearm1)?EquipmentSlot.Firearm1:EquipmentSlot.Firearm2;Assert.IsTrue(load.Equip(slot,w));load.Select(slot);yield return new WaitForSeconds(.25f);player.SetTouchAim(new Vector2(1,.2f));yield return null;Assert.IsTrue(player.GetComponent<AttackExecutor>().Attack(w,new Vector2(1,.2f),Time.time));yield return null;yield return Capture("Tracer"+w.Definition.name);player.SetTouchAim(Vector2.zero);
             }
         }
     }

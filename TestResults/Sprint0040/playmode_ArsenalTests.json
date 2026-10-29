@@ -1,0 +1,69 @@
+{
+  "status": "completed",
+  "duration": 17.37,
+  "summary": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0,
+    "skipped": 0,
+    "inconclusive": 0
+  },
+  "results": [
+    {
+      "FullName": "InsaneDreams.Tests.ArsenalTests.AllWeaponsDamageAllFourArchetypesThroughActualHitboxes",
+      "Status": "Passed",
+      "Duration": 1.4671181,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.ArsenalTests.EagleUsesNormalHeldFireWhileMovingAndJumpingAndMuzzleRemainsAligned",
+      "Status": "Passed",
+      "Duration": 0.8826642,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.ArsenalTests.EveryGunFiresWhileMovingAirborneAndCrouchingAndReloadSwitchConservesAmmo",
+      "Status": "Passed",
+      "Duration": 13.5428728,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.ArsenalTests.ShotgunPelletsConsumeOneRoundAndDoNotDuplicateColliderDamage",
+      "Status": "Passed",
+      "Duration": 0.0493134,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.ArsenalTests.SniperHoldCancelReleaseAndAutomaticRecoveryNeverDoubleFire",
+      "Status": "Passed",
+      "Duration": 1.1289355,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.ArsenalTests.SniperSwitchPauseReloadResetDeathAndRevivalCannotReleaseAnAccidentalShot",
+      "Status": "Passed",
+      "Duration": 0.1228951,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.ArsenalTests.SustainedAutomaticAndPelletFireKeepTheEffectPoolBounded",
+      "Status": "Passed",
+      "Duration": 0.0739066,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.ArsenalTests.SustainedLmgBloomBuildsAndRecoversWithoutMovementPenalty",
+      "Status": "Passed",
+      "Duration": 0.0536339,
+      "Message": null,
+      "StackTrace": null
+    }
+  ]
+}

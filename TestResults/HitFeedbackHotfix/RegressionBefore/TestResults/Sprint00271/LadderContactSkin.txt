@@ -1,0 +1,1 @@
+FireworkLoadingLadder attached=True climbing=True x=93,585 y=3,900 top=3,900 feet=3,200

@@ -1,0 +1,56 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 0.56,
+      "summary": {
+        "total": 4,
+        "passed": 4,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "InsaneDreams.Tests.Sprint024ProgressTests.ActiveAndSavedBuildProfilesCannotBypassCampaignWithTestbedOnlyScenes",
+          "Status": "Passed",
+          "Duration": 0.0603273,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint024ProgressTests.AtomicSaveReloadKeepsMoneyAndCompletionWithoutOverwritingUnknownFutureVersion",
+          "Status": "Passed",
+          "Duration": 0.0243592,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint024ProgressTests.DemoHasBoundActorsStagedSpecialistsAndOriginalMissionRemainsSeparate",
+          "Status": "Passed",
+          "Duration": 0.1731644,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint024ProgressTests.InvalidResourceValuesNormalizeWithoutNegativeBalances",
+          "Status": "Passed",
+          "Duration": 0.000266,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

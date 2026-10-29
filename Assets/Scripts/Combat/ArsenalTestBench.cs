@@ -54,7 +54,7 @@ namespace InsaneDreams.Combat
         public void Equip(int index)
         {
             if(GameSession.Instance!=null||weapons==null||index<0||index>=weapons.Length)return;
-            loadout.GetComponent<Input.PlayerActions>().SuspendInput();var slot=index<2||index==7?EquipmentSlot.Firearm2:EquipmentSlot.Firearm1;
+            loadout.GetComponent<Input.PlayerActions>().SuspendInput();var slot=weapons[index].Definition.FirearmRole==FirearmRole.Secondary?EquipmentSlot.Firearm2:EquipmentSlot.Firearm1;
             loadout.Equip(slot,weapons[index]);loadout.Select(slot);panel.style.display=DisplayStyle.None;
         }
         public void Refill(){if(GameSession.Instance==null&&weapons!=null)foreach(var weapon in weapons){weapon.Cycle.CancelReload();weapon.SetAmmunition(weapon.Definition.MagazineCapacity,weapon.Definition.DeveloperReserve);}}

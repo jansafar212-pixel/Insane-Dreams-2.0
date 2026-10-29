@@ -1,0 +1,100 @@
+[
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Visuals\\PistolMagazineReload.cs",
+    "Before": "E6F43E51EA11D487F09E4553B42F033DC4C879A0AC4A329157E1062A8FFF55EE",
+    "After": "E6F43E51EA11D487F09E4553B42F033DC4C879A0AC4A329157E1062A8FFF55EE",
+    "Unchanged": true,
+    "ExpectedChange": false
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Visuals\\CharacterVisualDriver.cs",
+    "Before": "CCE2CC0D56FF6C4D245B78DFA2F50D9A0A05BD0AB02456E2FC7DD753BBD67B59",
+    "After": "0C91DDFC5EF57DA2CE96F9847D9C7B5E9F7F58F4BEE47CABA1DFB2D70E3FC520",
+    "Unchanged": false,
+    "ExpectedChange": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Visuals\\SamuraiArticulatedRig.cs",
+    "Before": "01427D21E606A43EEBCD7D56889DC53187FF60155B1124E7472A8E6520ED8C9A",
+    "After": "01427D21E606A43EEBCD7D56889DC53187FF60155B1124E7472A8E6520ED8C9A",
+    "Unchanged": true,
+    "ExpectedChange": false
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Visuals\\CutoutRig.cs",
+    "Before": "5ACDEC801277922C392E725337383A7EF8863A62260811F9CBA564D3DF70A6D7",
+    "After": "5ACDEC801277922C392E725337383A7EF8863A62260811F9CBA564D3DF70A6D7",
+    "Unchanged": true,
+    "ExpectedChange": false
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\WeaponCycle.cs",
+    "Before": "7B955B85219ED031B111656F98C3C5895EA504A324A500E4958AFAB7D4696517",
+    "After": "7B955B85219ED031B111656F98C3C5895EA504A324A500E4958AFAB7D4696517",
+    "Unchanged": true,
+    "ExpectedChange": false
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Enemies\\FireworkProjectile.cs",
+    "Before": "64D95A56107836C8A169FB3ABDA9161DED273C0308E3555B2558AE48B99EA17D",
+    "After": "64D95A56107836C8A169FB3ABDA9161DED273C0308E3555B2558AE48B99EA17D",
+    "Unchanged": true,
+    "ExpectedChange": false
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Enemies\\FireworksCombat.cs",
+    "Before": "03EDDA5A8F856EDBA0F135298FF0562075C48CC4BB73226B81305762835F2E8C",
+    "After": "03EDDA5A8F856EDBA0F135298FF0562075C48CC4BB73226B81305762835F2E8C",
+    "Unchanged": true,
+    "ExpectedChange": false
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Prefabs\\Player\\WarehousePlayer.prefab",
+    "Before": "F43112AFE1F62B7B3BA620426CC11EB6A65F8C43D96418812FB552F7952EF314",
+    "After": "F43112AFE1F62B7B3BA620426CC11EB6A65F8C43D96418812FB552F7952EF314",
+    "Unchanged": true,
+    "ExpectedChange": false
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Prefabs\\Enemies\\FireworksExpert.prefab",
+    "Before": "6DBD18FA66FC2071FFB4F548BBCB4C001FE54028FF5989233B917E6CFFCD34E2",
+    "After": "6DBD18FA66FC2071FFB4F548BBCB4C001FE54028FF5989233B917E6CFFCD34E2",
+    "Unchanged": true,
+    "ExpectedChange": false
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Prefabs\\Enemies\\Samurai.prefab",
+    "Before": "683CF951BE4ADF565FB8866F5763516FB44BBA659D09B1B791BCE18660CE0FF0",
+    "After": "683CF951BE4ADF565FB8866F5763516FB44BBA659D09B1B791BCE18660CE0FF0",
+    "Unchanged": true,
+    "ExpectedChange": false
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scenes\\Warehouse_Mission01.unity",
+    "Before": "85D29F4A1D0AB6CCE35E4FD5CAE340C5529762676E21F63887DC17E659021817",
+    "After": "85D29F4A1D0AB6CCE35E4FD5CAE340C5529762676E21F63887DC17E659021817",
+    "Unchanged": true,
+    "ExpectedChange": false
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Missions\\WarehouseMission.cs",
+    "Before": "1099DA8861B07AAEC09AD64D93FB3BD6474B0CDE193D2AF8F74FC5EFA0AA9A66",
+    "After": "1099DA8861B07AAEC09AD64D93FB3BD6474B0CDE193D2AF8F74FC5EFA0AA9A66",
+    "Unchanged": true,
+    "ExpectedChange": false
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Prototype\\PlayerMotor2D.cs",
+    "Before": "16B89B35BDEE1C37EBD6964C8BE29C8A2AA6C980D6A42636F60153FCCF43C265",
+    "After": "740FD99A969CECF1DC00FE0AD3F310729B5BDE79F5FAD09B5544EB686CDE794E",
+    "Unchanged": false,
+    "ExpectedChange": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Camera\\WarehouseCameraFollow.cs",
+    "Before": "E2FBE12F3499E9FBA33E14E5A3A7E177D8D5986B57831D688B9DB3BB91CBBF96",
+    "After": "E2FBE12F3499E9FBA33E14E5A3A7E177D8D5986B57831D688B9DB3BB91CBBF96",
+    "Unchanged": true,
+    "ExpectedChange": false
+  }
+]

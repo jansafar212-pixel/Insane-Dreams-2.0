@@ -1,0 +1,67 @@
+{
+  "status": "completed",
+  "result": "Succeeded",
+  "platform": "Android",
+  "buildTimeMs": 595862,
+  "totalSizeBytes": 823213208,
+  "totalWarnings": 972,
+  "totalErrors": 0,
+  "outputPath": "C:/Users/jansa/Documents/GitHub/Insane-Dreams-2.0/build/Sprint0029/AKUMU2-dev.apk",
+  "warningGroups": [
+    [
+      "Shader warning in 'ConvGeneric': \"TRANSPOSE_OUTPUT variants not supported with NON_UNIFORM_CONVGROUP_PER_OC, make sure this variant is not used\"",
+      920
+    ],
+    [
+      "Shader warning in 'Hidden/Sentis/ScatterND': signed/unsigned mismatch, unsigned assumed",
+      16
+    ],
+    [
+      "Shader warning in 'Hidden/Sentis/ConvTranspose': integer modulus may be much slower, try using uints if possible.",
+      12
+    ],
+    [
+      "Shader warning in 'Hidden/Sentis/GridSample': signed/unsigned mismatch, unsigned assumed",
+      6
+    ],
+    [
+      "Shader warning in 'Hidden/Sentis/ScatterElements': signed/unsigned mismatch, unsigned assumed",
+      4
+    ],
+    [
+      "Shader warning in 'Hidden/Sentis/SliceSet': integer divides may be much slower, try using uints if possible.",
+      4
+    ],
+    [
+      "Shader warning in 'Hidden/Sentis/SliceSet': signed/unsigned mismatch, unsigned assumed",
+      4
+    ],
+    [
+      "Shader warning in 'Hidden/Sentis/Pad': integer modulus may be much slower, try using uints if possible.",
+      2
+    ],
+    [
+      "Shader warning in 'Hidden/Sentis/ScatterND': 'j': loop control variable conflicts with a previous declaration in the outer scope; most recent declaration will be used",
+      2
+    ],
+    [
+      "Pipeline: No RuntimePipelineConfig asset found (Project Settings > Pipeline > Runtime). Pipeline will be disabled in Player builds.",
+      1
+    ],
+    [
+      "warning CS0618: 'Object.FindFirstObjectByType<T>()' is obsolete: 'FindFirstObjectByType has been deprecated because it relies on instance ID ordering. Use FindAnyObjectByType instead, which does not depend on ordering.'",
+      1
+    ]
+  ],
+  "apkBytes": 67235131,
+  "sha256": "813b209a3fe6dd232a897adc52911b991d97a5377ea54703b82df3649044a734",
+  "manifestPresent": true,
+  "il2cppLibraries": [
+    "lib/arm64-v8a/libil2cpp.so"
+  ],
+  "sceneDataFiles": [
+    "assets/bin/Data/level0",
+    "assets/bin/Data/level1",
+    "assets/bin/Data/level2"
+  ]
+}

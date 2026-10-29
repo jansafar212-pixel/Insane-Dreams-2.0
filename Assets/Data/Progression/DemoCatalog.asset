@@ -21,7 +21,7 @@ MonoBehaviour:
     icon: {fileID: 21300000, guid: 277e24238735d444eacfe21ff0f23424, type: 3}
   offers:
   - id: carbine
-    title: Warehouse Carbine
+    title: Carbine
     description: Permanent ownership; one loaded magazine included. Spare ammunition sold separately. Handling unchanged.
     category: 0
     price: 500
@@ -45,7 +45,7 @@ MonoBehaviour:
     armorTier: 1
     helmet: 0
   - id: pistol
-    title: Backup Pistol
+    title: Glock
     description: Always available. Five magazines total at each mission start. No premium ammunition allowance.
     category: 0
     price: 0
@@ -69,7 +69,7 @@ MonoBehaviour:
     armorTier: 1
     helmet: 0
   - id: carbine-ammo
-    title: Warehouse Carbine / 24 rounds
+    title: Carbine ammunition
     description: One magazine of ammunition for Warehouse Carbine only. Requires ownership and room for the whole pack.
     category: 1
     price: 18
@@ -81,7 +81,7 @@ MonoBehaviour:
     armorTier: 1
     helmet: 0
   - id: pistol-ammo
-    title: Backup Pistol / 8 rounds
+    title: Glock ammunition
     description: One magazine of ammunition for Backup Pistol only. Requires ownership and room for the whole pack.
     category: 1
     price: 5
@@ -93,7 +93,7 @@ MonoBehaviour:
     armorTier: 1
     helmet: 0
   - id: buzzbox-ammo
-    title: Buzzbox Automatic Pistol / 27 rounds
+    title: Buzzbox Automatic Pistol ammunition
     description: One magazine of ammunition for Buzzbox Automatic Pistol only. Requires ownership and room for the whole pack.
     category: 1
     price: 12
@@ -213,7 +213,7 @@ MonoBehaviour:
     armorTier: 2
     helmet: 1
   - id: smg
-    title: Rattlebox SMG
+    title: SMG
     description: Permanent ownership; one loaded magazine included. Spare ammunition sold separately. Handling unchanged.
     category: 0
     price: 350
@@ -225,7 +225,7 @@ MonoBehaviour:
     armorTier: 1
     helmet: 0
   - id: smg-ammo
-    title: Rattlebox SMG / 30 rounds
+    title: SMG ammunition
     description: One magazine of ammunition for Rattlebox SMG only. Requires ownership and room for the whole pack.
     category: 1
     price: 15
@@ -237,7 +237,7 @@ MonoBehaviour:
     armorTier: 1
     helmet: 0
   - id: shotgun
-    title: Doorbell Shotgun
+    title: Shotgun
     description: Permanent ownership; one loaded magazine included. Spare ammunition sold separately. Handling unchanged.
     category: 0
     price: 650
@@ -249,7 +249,7 @@ MonoBehaviour:
     armorTier: 1
     helmet: 0
   - id: shotgun-ammo
-    title: Doorbell Shotgun / 6 rounds
+    title: Shotgun ammunition
     description: One magazine of ammunition for Doorbell Shotgun only. Requires ownership and room for the whole pack.
     category: 1
     price: 24
@@ -273,7 +273,7 @@ MonoBehaviour:
     armorTier: 1
     helmet: 0
   - id: desert-eagle-ammo
-    title: Desert Eagle / 7 rounds
+    title: Desert Eagle ammunition
     description: One magazine of ammunition for Desert Eagle only. Requires ownership and room for the whole pack.
     category: 1
     price: 42
@@ -285,7 +285,7 @@ MonoBehaviour:
     armorTier: 1
     helmet: 0
   - id: lmg
-    title: Lunchbox LMG
+    title: LMG
     description: Permanent ownership; one loaded magazine included. Spare ammunition sold separately. Handling unchanged.
     category: 0
     price: 1600
@@ -297,7 +297,7 @@ MonoBehaviour:
     armorTier: 1
     helmet: 0
   - id: lmg-ammo
-    title: Lunchbox LMG / 100 rounds
+    title: LMG ammunition
     description: One magazine of ammunition for Lunchbox LMG only. Requires ownership and room for the whole pack.
     category: 1
     price: 65
@@ -309,7 +309,7 @@ MonoBehaviour:
     armorTier: 1
     helmet: 0
   - id: sniper
-    title: Long Complaint Sniper
+    title: Sniper Rifle
     description: Permanent ownership; one loaded magazine included. Spare ammunition sold separately. Handling unchanged.
     category: 0
     price: 2000
@@ -321,12 +321,84 @@ MonoBehaviour:
     armorTier: 1
     helmet: 0
   - id: sniper-ammo
-    title: Long Complaint Sniper / 5 rounds
+    title: Sniper Rifle ammunition
     description: One magazine of ammunition for Long Complaint Sniper only. Requires ownership and room for the whole pack.
     category: 1
     price: 50
     quantity: 5
     weapon: {fileID: 11400000, guid: 3338ea8cfe0f12f4bbcabd3022ab0651, type: 2}
+    starter: 0
+    reserveCapacity: 0
+    throwable: 0
+    armorTier: 1
+    helmet: 0
+  - id: sks
+    title: SKS
+    description: Primary / semi-automatic / 10 rounds
+    category: 0
+    price: 1200
+    quantity: 1
+    weapon: {fileID: 11400000, guid: 8d2eab512d635dd4c8f38c7c2d1bace7, type: 2}
+    starter: 0
+    reserveCapacity: 120
+    throwable: 0
+    armorTier: 1
+    helmet: 0
+  - id: sks-ammo
+    title: SKS ammunition
+    description: 
+    category: 1
+    price: 60
+    quantity: 10
+    weapon: {fileID: 11400000, guid: 8d2eab512d635dd4c8f38c7c2d1bace7, type: 2}
+    starter: 0
+    reserveCapacity: 0
+    throwable: 0
+    armorTier: 1
+    helmet: 0
+  - id: aa12
+    title: AA-12
+    description: Primary / automatic / 8 rounds
+    category: 0
+    price: 2200
+    quantity: 1
+    weapon: {fileID: 11400000, guid: 55dae079c4962b549a87b88353b8c299, type: 2}
+    starter: 0
+    reserveCapacity: 64
+    throwable: 0
+    armorTier: 1
+    helmet: 0
+  - id: aa12-ammo
+    title: AA-12 ammunition
+    description: 
+    category: 1
+    price: 50
+    quantity: 8
+    weapon: {fileID: 11400000, guid: 55dae079c4962b549a87b88353b8c299, type: 2}
+    starter: 0
+    reserveCapacity: 0
+    throwable: 0
+    armorTier: 1
+    helmet: 0
+  - id: sawed-off
+    title: Sawed-off Double Barrel
+    description: Secondary / semi-automatic / 2 rounds
+    category: 0
+    price: 900
+    quantity: 1
+    weapon: {fileID: 11400000, guid: 34943df161d5d00498e6dd774611965c, type: 2}
+    starter: 0
+    reserveCapacity: 20
+    throwable: 0
+    armorTier: 1
+    helmet: 0
+  - id: sawed-off-ammo
+    title: Sawed-off Double Barrel ammunition
+    description: 
+    category: 1
+    price: 25
+    quantity: 2
+    weapon: {fileID: 11400000, guid: 34943df161d5d00498e6dd774611965c, type: 2}
     starter: 0
     reserveCapacity: 0
     throwable: 0

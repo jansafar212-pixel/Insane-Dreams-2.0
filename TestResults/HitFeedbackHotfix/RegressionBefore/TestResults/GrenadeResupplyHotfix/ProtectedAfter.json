@@ -1,0 +1,22 @@
+[
+  {
+    "Path": "Assets/Scenes/Warehouse_Demo.unity",
+    "Unchanged": true
+  },
+  {
+    "Path": "Assets/Scenes/Warehouse_Testbed.unity",
+    "Unchanged": true
+  },
+  {
+    "Path": "Assets/Prefabs/Visuals/LarperCartoonRagdoll.prefab",
+    "Unchanged": true
+  },
+  {
+    "Path": "Assets/Scripts/Visuals/CartoonRagdoll.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "Assets/Scripts/Enemies/EnemyCombat.cs",
+    "Unchanged": true
+  }
+]

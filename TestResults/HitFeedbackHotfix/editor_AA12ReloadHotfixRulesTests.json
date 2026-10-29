@@ -1,0 +1,76 @@
+{
+  "status": "completed",
+  "duration": 0.38,
+  "summary": {
+    "total": 9,
+    "passed": 9,
+    "failed": 0,
+    "skipped": 0,
+    "inconclusive": 0
+  },
+  "results": [
+    {
+      "FullName": "InsaneDreams.Tests.AA12ReloadHotfixRulesTests.CancellationHasNoTransferAndFreshReloadUsesFullDuration",
+      "Status": "Passed",
+      "Duration": 0.0669203,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.AA12ReloadHotfixRulesTests.FullMagazineOrNoReserveCannotEnterStuckReload(8,16)",
+      "Status": "Passed",
+      "Duration": 0.0017193,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.AA12ReloadHotfixRulesTests.FullMagazineOrNoReserveCannotEnterStuckReload(0,0)",
+      "Status": "Passed",
+      "Duration": 0.0005543,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.AA12ReloadHotfixRulesTests.FullMagazineOrNoReserveCannotEnterStuckReload(3,0)",
+      "Status": "Passed",
+      "Duration": 0.0001929,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.AA12ReloadHotfixRulesTests.MagazineReloadTransfersOnceAtThreeSecondsAndCannotFireDuringReload(0,16,8,8)",
+      "Status": "Passed",
+      "Duration": 0.0094095,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.AA12ReloadHotfixRulesTests.MagazineReloadTransfersOnceAtThreeSecondsAndCannotFireDuringReload(3,13,8,8)",
+      "Status": "Passed",
+      "Duration": 0.0004915,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.AA12ReloadHotfixRulesTests.MagazineReloadTransfersOnceAtThreeSecondsAndCannotFireDuringReload(4,2,6,0)",
+      "Status": "Passed",
+      "Duration": 0.0003348,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.AA12ReloadHotfixRulesTests.MagazineReloadTransfersOnceAtThreeSecondsAndCannotFireDuringReload(0,3,3,0)",
+      "Status": "Passed",
+      "Duration": 0.0003408,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.AA12ReloadHotfixRulesTests.SplitMagazineReconstructsOriginalPixelsExactly",
+      "Status": "Passed",
+      "Duration": 0.014815,
+      "Message": null,
+      "StackTrace": null
+    }
+  ]
+}

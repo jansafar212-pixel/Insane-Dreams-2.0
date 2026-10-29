@@ -1,0 +1,35 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 3.15,
+      "summary": {
+        "total": 1,
+        "passed": 0,
+        "failed": 1,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0027MedicalTests.PurchasedTwoRevivesConsumeOnePipEachProtectForTwoSecondsThenThirdDefeatEndsAttempt",
+          "Status": "Failed",
+          "Duration": 3.1063728,
+          "Message": "  Expected: in range (1,98,2)\r\n  But was:  2.00000024f\r\n",
+          "StackTrace": "at InsaneDreams.Tests.Sprint0027MedicalTests+<PurchasedTwoRevivesConsumeOnePipEachProtectForTwoSecondsThenThirdDefeatEndsAttempt>d__4.MoveNext () [0x00340] in C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Tests\\PlayMode\\Sprint0027MedicalTests.cs:31\r\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in .\\Library\\PackageCache\\com.unity.test-framework@80f691d4262b\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:52\r\n"
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

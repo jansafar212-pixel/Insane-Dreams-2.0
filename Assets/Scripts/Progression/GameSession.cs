@@ -23,7 +23,7 @@ namespace InsaneDreams.Progression
         {
             catalog=value;MissionSaveSnapshot=null;nextPurchase=0;Store=new ProgressStore(path);Data=Store.Load(NewProgress);Data.Normalize();
             TraceWallet("Initialize.Load",Data.balance,Data.balance);
-            EnsureStarter();MigrateArmor();Screen=FlowScreen.MainMenu;AudioListener.volume=Data.volume;
+            EnsureStarter();MigrateLoadout();MigrateArmor();Screen=FlowScreen.MainMenu;AudioListener.volume=Data.volume;
             if(!string.IsNullOrEmpty(Data.activeRun))Settle(Data.pendingEarnings,false);
             if(applyDevelopmentCredits)ApplyDevelopmentCredits();
             TraceWallet("Initialize.Final",Data.balance,Data.balance);
@@ -54,8 +54,25 @@ namespace InsaneDreams.Progression
         private void EnsureStarter()
         {
             foreach(var offer in catalog.offers)if(offer.starter&&offer.weapon!=null&&!Data.owned.Contains(offer.id))Data.owned.Add(offer.id);
-            var primary=catalog.Find(Data.primary);var secondary=catalog.Find(Data.secondary);
-            if((primary?.weapon==null||!Data.owned.Contains(primary.id))&&(secondary?.weapon==null||!Data.owned.Contains(secondary.id)))Data.primary=catalog.primaryId;
+        }
+        private void MigrateLoadout()
+        {
+            // Ownership/ammunition are independent of slots, including displaced legacy primaries.
+            var ids=new[]{Data.primary,Data.secondary,Store.LegacyExtraSecondary};
+            Data.primary=Data.secondary=null;
+            foreach(string id in ids)
+            {
+                var gun=catalog.Find(id);if(gun?.weapon==null||gun.weapon.WeaponCategory!=Inventory.WeaponCategory.Firearm||!Data.owned.Contains(id))continue;
+                if(gun.weapon.FirearmRole==Inventory.FirearmRole.Primary){if(Data.primary==null)Data.primary=id;}
+                else if(Data.secondary==null)Data.secondary=id;
+            }
+            Data.loadoutRevision=40;
+            foreach(var stock in Data.ammunition)
+            {
+                var gun=catalog.Find(stock.id)?.weapon;if(gun==null||gun.WeaponCategory!=Inventory.WeaponCategory.Firearm)continue;
+                int excess=Mathf.Max(0,stock.magazine-gun.MagazineCapacity);
+                stock.magazine-=excess;stock.reserve+=excess;
+            }
         }
         private void MigrateArmor()
         {
@@ -93,11 +110,9 @@ namespace InsaneDreams.Progression
                 var stock=Data.Ammo(gun.id);int target=gun.weapon.MagazineCapacity*Mathf.Max(1,catalog.basicAllowanceMagazines);
                 int total=Mathf.Max(target,stock.magazine+stock.reserve);
                 stock.magazine=Mathf.Max(stock.magazine,Mathf.Min(gun.weapon.MagazineCapacity,total));
-                stock.reserve=Mathf.Min(catalog.ReserveCapacity(Data,gun),total-stock.magazine);
+                stock.reserve=Mathf.Max(0,total-stock.magazine); // Stored excess is not carried; the bridge packs it separately.
             }
-            bool usable=false;foreach(string id in new[]{Data.primary,Data.secondary})
-            {var gun=catalog.Find(id);if(gun?.weapon!=null&&Data.owned.Contains(id)&&gun.weapon.WeaponCategory==Inventory.WeaponCategory.Firearm){var stock=Data.Ammo(id);usable|=stock.magazine+stock.reserve>0;}}
-            if(!usable)Data.primary=catalog.primaryId;
+            // Intentionally empty slots stay empty. Ownership and starter allowance remain separate.
             Data.activeRun=Guid.NewGuid().ToString("N");Data.activeLevel=SelectedLevel;Data.pendingEarnings=0;
             return Commit(snapshot);
         }
@@ -171,13 +186,21 @@ namespace InsaneDreams.Progression
             return Commit(snapshot);
         }
         public bool Equip(string id,bool secondary=false)
+            =>Equip(id,catalog.Find(id)?.weapon?.WeaponCategory==Inventory.WeaponCategory.Melee?Inventory.EquipmentSlot.Melee:secondary?Inventory.EquipmentSlot.Firearm2:Inventory.EquipmentSlot.Firearm1);
+        public bool Equip(string id,Inventory.EquipmentSlot slot)
         {
             var item=catalog.Find(id);if(Screen!=FlowScreen.Shop||Store.ReadOnly||item?.category!=ShopCategory.Weapons||item.weapon==null||!Data.owned.Contains(id))return false;
+            if(!item.weapon.Fits(slot))return false;
             string snapshot=JsonUtility.ToJson(Data);
-            if(item.weapon.WeaponCategory==Inventory.WeaponCategory.Melee)Data.melee=id;
-            else if(secondary){if(Data.primary==id)Data.primary=null;Data.secondary=id;}
-            else{if(Data.secondary==id)Data.secondary=null;Data.primary=id;}
+            if(Data.primary==id)Data.primary=null;if(Data.secondary==id)Data.secondary=null;
+            switch(slot){case Inventory.EquipmentSlot.Firearm1:Data.primary=id;break;case Inventory.EquipmentSlot.Firearm2:Data.secondary=id;break;case Inventory.EquipmentSlot.Melee:Data.melee=id;break;}
             if(!Commit(snapshot))return false;Notice="Equipped "+item.title;return true;
+        }
+        public bool Unequip(Inventory.EquipmentSlot slot)
+        {
+            if(Screen!=FlowScreen.Shop||Store.ReadOnly)return false;string snapshot=JsonUtility.ToJson(Data);
+            switch(slot){case Inventory.EquipmentSlot.Firearm1:Data.primary=null;break;case Inventory.EquipmentSlot.Firearm2:Data.secondary=null;break;default:return false;}
+            return Commit(snapshot);
         }
         public bool Save(bool reserveDeployedInventory=true)
         {

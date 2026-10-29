@@ -1,0 +1,293 @@
+{
+  "total": 39,
+  "passed": 39,
+  "failed": 0,
+  "results": [
+    {
+      "FullName": "InsaneDreams.Tests.AirborneLadderTests.AirborneDismountStillRequiresLockoutAndFreshGestureThenCanGrabAgain",
+      "Status": "Passed",
+      "Duration": 1.9426206,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.AirborneLadderTests.BlockedAndDistantLaddersDoNotCaptureHeldAirborneUpInput",
+      "Status": "Passed",
+      "Duration": 0.7227803,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.AirborneLadderTests.CandidateDestroyedBeforeCaptureLeavesTheHeldJumpAirborne",
+      "Status": "Passed",
+      "Duration": 0.6314242,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.AirborneLadderTests.CaptureZoneEnteredBeforeUpwardPressGrabsWhileFalling",
+      "Status": "Passed",
+      "Duration": 0.9540756,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.AirborneLadderTests.DisabledCandidateCanBecomeAvailableDuringHeldUpAndDestructionRestoresGravity",
+      "Status": "Passed",
+      "Duration": 0.7082367,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.AirborneLadderTests.HeldUpBeforeVerticalCaptureJumpsThenGrabsWithoutAnotherGesture",
+      "Status": "Passed",
+      "Duration": 0.782882,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.AirborneLadderTests.JumpFromLeftHoldsUpwardDiagonalBeforeHorizontalCapture",
+      "Status": "Passed",
+      "Duration": 1.1923308,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.AirborneLadderTests.JumpFromRightHoldsUpwardDiagonalBeforeHorizontalCapture",
+      "Status": "Passed",
+      "Duration": 1.1763676,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.AirborneLadderTests.LateralJumpPastLadderWithoutClimbIntentKeepsNormalAirborneMovement",
+      "Status": "Passed",
+      "Duration": 0.7264241,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Level1CombatHotfixTests.EveryOfficerShotHasHalfSecondWarningAndLockedFinalDirection",
+      "Status": "Passed",
+      "Duration": 5.7096187,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Level1CombatHotfixTests.OfficerRetreatsWithoutTeleportingAndOptionalAllyDoesNotGateExit",
+      "Status": "Passed",
+      "Duration": 2.6686213,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.OfficerHotfixTests.HalfSecondWarningIsVisualOnlyAndActualMagentaShotIsTwicePistolWidthThenFades",
+      "Status": "Passed",
+      "Duration": 0.8030325,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.OfficerHotfixTests.LaserReachesViewportInAllDirectionsAndAspectRatiosButStopsAtCover",
+      "Status": "Passed",
+      "Duration": 0.1893369,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.OfficerHotfixTests.OneHandedRecoilAndMagazineExchangeStayAttachedBothFacingsAndCancelSafely",
+      "Status": "Passed",
+      "Duration": 5.5077451,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.OfficerHotfixTests.SevenTelegraphedShotsThenVisibleReloadNoEarlyRefillOrReloadFire",
+      "Status": "Passed",
+      "Duration": 7.5084905,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.PostPlaytestHotfixTests.FaintanylShopUsesExistingAtomicCurrencyStockAndPersistence",
+      "Status": "Passed",
+      "Duration": 1.4447902,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint00271RulesTests.OfficerArtAndTuningPreserveCombatAndInsertedMagazineFitsOpaqueGrip",
+      "Status": "Passed",
+      "Duration": 0.0387102,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint00271Tests.EveryRevisedWarehouseLadderAutomaticallyExitsWithHeldTouchUp",
+      "Status": "Passed",
+      "Duration": 13.9927054,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint00271Tests.SeededOfficerHitsStationaryTargetAtTenUnitsWithoutPerfectAimOrExtraShots",
+      "Status": "Passed",
+      "Duration": 6.0194505,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint00271Tests.SlimPauseRetainsTouchAreaAndOneMedicalTabPurchasesBothOriginalResources",
+      "Status": "Passed",
+      "Duration": 1.1297326,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0027FallTests.ActiveAirborneParachuteAllowsCombatDamageAndLandingAddsNone",
+      "Status": "Passed",
+      "Duration": 1.5487802,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0027FallTests.LateParachuteClearsPendingImpactButDoesNotBlockCombatDamage",
+      "Status": "Passed",
+      "Duration": 0.9693366,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0027FallTests.MediumAndExtremeParachuteLandingsHaveExactlyZeroDamage",
+      "Status": "Passed",
+      "Duration": 6.3984982,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0027FallTests.MediumFallHurtsAndExtremeFallCanDefeat",
+      "Status": "Passed",
+      "Duration": 0.8719498,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0027FallTests.NormalDoubleJumpReturnsToGroundWithoutFallDamage",
+      "Status": "Passed",
+      "Duration": 0.2500226,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0027FallTests.SmallFallIsSafe",
+      "Status": "Passed",
+      "Duration": 0.1710357,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint0027RegionTests.RegionalDamageAccumulatesAcrossDefeatAndSeparatesOnlyAtThreshold",
+      "Status": "Passed",
+      "Duration": 0.3392691,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint005Tests.ActualTouchPointerPathEntersAndDismountsWhileAimPointerStaysIndependent",
+      "Status": "Passed",
+      "Duration": 1.409152,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint005Tests.DistantAndBlockedCandidatesAreRejectedAndWalkingNeverAttaches",
+      "Status": "Passed",
+      "Duration": 1.1106578,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint005Tests.EquidistantLaddersSelectConsistentlyAndSideWallCannotBeCrossed",
+      "Status": "Passed",
+      "Duration": 1.5204397,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint005Tests.FeedbackObservesExactlyOneDamageAndDoesNotChangeWeaponRules",
+      "Status": "Passed",
+      "Duration": 0.3912732,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint005Tests.LarperEffectiveRangeAndAccuracyAreConfigurableAndDefeatFeedbackIsSingle",
+      "Status": "Passed",
+      "Duration": 0.9945402,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint005Tests.LarperReactsApproachesAndStopsFiringImmediatelyWhenOccluded",
+      "Status": "Passed",
+      "Duration": 4.4757078,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint005Tests.MissingTopLandingHoldsSafelyAndBottomExitDoesNotLoop",
+      "Status": "Passed",
+      "Duration": 2.0772302,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint005Tests.OffsetEntryFromBothSidesAcceptsUpwardDiagonalAndAlignsSmoothly",
+      "Status": "Passed",
+      "Duration": 1.7324111,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint005Tests.SideDismountUsesSafeAdjacentPlatformWithoutUpwardImpulse",
+      "Status": "Passed",
+      "Duration": 0.8896813,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint005Tests.SideDismountWithoutLandingRestoresGravityAndRequiresFreshGesture",
+      "Status": "Passed",
+      "Duration": 1.1498419,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint005Tests.WalkingAcrossUnblockedLadderDoesNotMagneticallyAttach",
+      "Status": "Passed",
+      "Duration": 0.6666707,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sprint024FlowTests.Hotfix00251PauseCentersInSafeTopAreaWithoutCoveringHudAndStillPauses",
+      "Status": "Passed",
+      "Duration": 0.7073922,
+      "Message": null,
+      "StackTrace": null
+    }
+  ],
+  "sources": [
+    "Rules",
+    "Sprint00271Tests",
+    "OfficerHotfixTests",
+    "AirborneLadderTests",
+    "Sprint005Tests",
+    "Sprint0027FallTests",
+    "Sprint0027RegionTests",
+    "FaintanylShopUsesExistingAtomicCurrencyStockAndPersistence",
+    "Hotfix00251PauseCentersInSafeTopAreaWithoutCoveringHudAndStillPauses",
+    "EveryOfficerShotHasHalfSecondWarningAndLockedFinalDirection",
+    "OfficerRetreatsWithoutTeleportingAndOptionalAllyDoesNotGateExit"
+  ]
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "Path": "Assets/Art/CowardsBunker/Environment.asset",
+    "Hash": "4FD4A509D77B5934825E8A7CD3729D2ED982A067E54DB7AD3C3A0AD6D97CF0B1"
+  },
+  {
+    "Path": "Assets/Scenes/Warehouse_Testbed.unity",
+    "Hash": "239069EBB6576EBF8426B2F36398E20C65E2A91A28C7B52B216CC60F69F81773"
+  },
+  {
+    "Path": "Assets/Scripts/Visuals/CartoonRagdoll.cs",
+    "Hash": "115C06317D317B08BBB5512DAD61969BC473162320C543C54643334C14AC9DFB"
+  },
+  {
+    "Path": "Assets/Scripts/Prototype/PlayerMotor2D.cs",
+    "Hash": "740FD99A969CECF1DC00FE0AD3F310729B5BDE79F5FAD09B5544EB686CDE794E"
+  },
+  {
+    "Path": "Assets/UI/WarehouseControls.uss",
+    "Hash": "5252D42273359112B3DFA10158700E55C4697C4D99F2D9A2E9D27B29BA136E3C"
+  }
+]

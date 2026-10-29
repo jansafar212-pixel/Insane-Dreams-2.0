@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: LMG
   m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Inventory.WeaponDefinition
   stableId: 18eb9041c2914a1e99e76c6cdae88f83
-  displayName: Lunchbox LMG
+  displayName: LMG
   description: Sprint 003 data-only example; no combat behavior.
   icon: {fileID: 21300000, guid: c3969c5bb3d34bd45b6e8a886fa721c9, type: 2}
   category: 0
   weaponCategory: 0
+  firearmRole: 0
   damage: 14
   firingInterval: 0.11
   magazineCapacity: 100
@@ -29,6 +30,7 @@ MonoBehaviour:
   physicalMagazineReload: 1
   loadsIndividually: 0
   shellSprite: {fileID: 0}
+  ammunitionInsertionOffset: {x: 0.3, y: -0.04}
   firearmRange: 26
   meleeRange: 1.6
   impactImpulse: 0.9

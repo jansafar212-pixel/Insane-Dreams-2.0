@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9a70efdc837b5a499f298c8b3ed8a8b, type: 3}
+  m_Name: SawedOff
+  m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Inventory.WeaponDefinition
+  stableId: 591690fb25c04446bf70ff7d618ec03d
+  displayName: Sawed-off Double Barrel
+  description: 
+  icon: {fileID: 21300000, guid: b4f7f85d30fd93a41854e1ad19b45838, type: 2}
+  category: 0
+  weaponCategory: 0
+  firearmRole: 1
+  damage: 12
+  firingInterval: 0.45
+  magazineCapacity: 2
+  reloadDuration: 2.4
+  presentationPrefab: {fileID: 0}
+  equippedSprite: {fileID: 21300000, guid: b4f7f85d30fd93a41854e1ad19b45838, type: 2}
+  magazineSprite: {fileID: 0}
+  magazineMountOffset: {x: 0.125, y: -0.0625}
+  physicalMagazineReload: 0
+  loadsIndividually: 0
+  shellSprite: {fileID: 0}
+  ammunitionInsertionOffset: {x: 0.3, y: -0.04}
+  firearmRange: 11
+  meleeRange: 1.6
+  impactImpulse: 0.55
+  hitReactionStrength: 0.55
+  developerReserve: 180
+  fireMode: 1
+  pellets: 8
+  spreadDegrees: 30
+  bloomPerShot: 0
+  maximumBloom: 0
+  falloffStart: 3
+  farDamageMultiplier: 0.08
+  recoilScale: 2
+  tracerScale: 1
+  flashScale: 1
+  customMuzzle: 1
+  customTracer: 0
+  muzzleOffset: {x: 0.5625, y: 0.109375}
+  tracerColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  firingSound: {fileID: 0}
+  firingPitch: 1

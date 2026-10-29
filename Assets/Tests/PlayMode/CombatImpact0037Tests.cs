@@ -62,7 +62,7 @@ namespace InsaneDreams.Tests
                 reaction.CancelReaction();Hit(eh,1,region);yield return new WaitForSeconds(.09f);Assert.AreEqual(region,reaction.LastRegion);Assert.Greater(Mathf.Abs(reaction.RegionAngle(region)),.05f,"Actual physical spring must move");Assert.LessOrEqual(Mathf.Abs(reaction.RegionAngle(region)),26.1f);Assert.AreEqual(corpses,CartoonRagdoll.ActiveCount);Capture("Region"+region,enemy);
             }
             reaction.CancelReaction();Hit(eh,1,0,Vector2.right);yield return new WaitForSeconds(.08f);float right=reaction.RegionAngle(0);reaction.CancelReaction();Hit(eh,1,0,Vector2.left);yield return new WaitForSeconds(.08f);Assert.Less(right*reaction.RegionAngle(0),0,"Opposite incoming shots reverse angular response; first="+right+" second="+reaction.RegionAngle(0)+" direction="+reaction.Direction);
-            yield return new WaitForSeconds(.9f);Assert.AreEqual(0,reaction.RegionAngle(0),.01f);Assert.IsFalse(reaction.KnockedDown);
+            yield return new WaitForSeconds(new SerializedObject(reaction).FindProperty("responseSeconds").floatValue+.1f);Assert.AreEqual(0,reaction.RegionAngle(0),.01f);Assert.IsFalse(reaction.KnockedDown);
         }
         [UnityTest]public IEnumerator NativeWeaponsHaveDistinctStrengthAndShotgunBatchesAllPelletsWithoutChangingDamage()
         {
@@ -131,7 +131,7 @@ namespace InsaneDreams.Tests
             var attack=player.GetComponent<AttackExecutor>();var lines=(LineRenderer[])typeof(AttackExecutor).GetField("trails",BindingFlags.Instance|BindingFlags.NonPublic).GetValue(attack);int count=lines.Length;float now=Time.time+10,pistolWidth=0,eagleWidth=0,baseWidth=new SerializedObject(attack).FindProperty("tracerWidth").floatValue;
             foreach(string name in new[]{"BackupPistol","DesertEagle","Sniper"})
             {
-                var w=Gun(name);player.GetComponent<PlayerLoadout>().Equip(EquipmentSlot.Firearm1,w);player.GetComponent<PlayerLoadout>().Select(EquipmentSlot.Firearm1);yield return null;
+                var w=Gun(name);var slot=w.Definition.Fits(EquipmentSlot.Firearm1)?EquipmentSlot.Firearm1:EquipmentSlot.Firearm2;Assert.IsTrue(player.GetComponent<PlayerLoadout>().Equip(slot,w));player.GetComponent<PlayerLoadout>().Select(slot);yield return null;
                 foreach(var aim in new[]{Vector2.up,new Vector2(-1,1).normalized,new Vector2(1,1).normalized})
                 {
                     Assert.IsTrue(attack.Attack(w,aim,now+=2));var line=lines.Where(l=>l.enabled).LastOrDefault(l=>Vector2.Distance(l.GetPosition(1),attack.LastShotEnd)<.03f);Assert.IsNotNull(line);Assert.Greater(Vector2.Dot(((Vector2)(line.GetPosition(1)-line.GetPosition(0))).normalized,aim),.999f);

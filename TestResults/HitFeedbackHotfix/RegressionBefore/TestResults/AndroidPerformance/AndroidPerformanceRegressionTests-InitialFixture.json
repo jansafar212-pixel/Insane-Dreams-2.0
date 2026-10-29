@@ -1,0 +1,42 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 1.91,
+      "summary": {
+        "total": 2,
+        "passed": 0,
+        "failed": 2,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "InsaneDreams.Tests.AndroidPerformanceRegressionTests.CachedHudTracksAmmoSwitchesGrenadesAndRebind",
+          "Status": "Failed",
+          "Duration": 1.2170925,
+          "Message": "System.NullReferenceException : Object reference not set to an instance of an object",
+          "StackTrace": "  at InsaneDreams.Tests.AndroidPerformanceRegressionTests+<CachedHudTracksAmmoSwitchesGrenadesAndRebind>d__10.MoveNext () [0x0016e] in C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Tests\\PlayMode\\AndroidPerformanceRegressionTests.cs:51 \r\n  at UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in .\\Library\\PackageCache\\com.unity.test-framework@80f691d4262b\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:52 "
+        },
+        {
+          "FullName": "InsaneDreams.Tests.AndroidPerformanceRegressionTests.EquipmentPosePreservesMuzzleMagazineAndExpressionChanges",
+          "Status": "Failed",
+          "Duration": 0.6059953,
+          "Message": "  Expected: not null\r\n  But was:  null\r\n",
+          "StackTrace": "at InsaneDreams.Tests.AndroidPerformanceRegressionTests+<EquipmentPosePreservesMuzzleMagazineAndExpressionChanges>d__11.MoveNext () [0x000d4] in C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Tests\\PlayMode\\AndroidPerformanceRegressionTests.cs:63\r\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in .\\Library\\PackageCache\\com.unity.test-framework@80f691d4262b\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:52\r\n"
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

@@ -34,12 +34,12 @@ namespace InsaneDreams.Tests
                 yield return new WaitForSeconds(w.Definition.ReloadDuration*.4f);Assert.AreEqual(30,w.MagazineAmmo);Assert.AreEqual(42,w.ReserveAmmo);w.SetAmmunition(12,60);
             }
             Assert.AreEqual(children,rig.weapon.GetComponentsInChildren<SpriteRenderer>(true).Length);
-            combat.Reload();yield return new WaitForSeconds(.2f);load.Equip(EquipmentSlot.Firearm2,new RuntimeWeapon(AssetDatabase.LoadAssetAtPath<WeaponDefinition>("Assets/Resources/Arsenal/Shotgun.asset")));load.Select(EquipmentSlot.Firearm2);yield return null;Assert.IsFalse(w.Cycle.IsReloading);Assert.AreEqual(12,w.MagazineAmmo);Assert.AreEqual(60,w.ReserveAmmo);Assert.IsFalse(rig.weapon.transform.Find("ReplacementMagazine").GetComponent<SpriteRenderer>().enabled);
+            combat.Reload();yield return new WaitForSeconds(.2f);Assert.IsNotNull(load.Get(EquipmentSlot.Firearm2));load.Select(EquipmentSlot.Firearm2);yield return null;Assert.IsFalse(w.Cycle.IsReloading);Assert.AreEqual(12,w.MagazineAmmo);Assert.AreEqual(60,w.ReserveAmmo);Assert.IsFalse(rig.weapon.transform.Find("ReplacementMagazine").GetComponent<SpriteRenderer>().enabled);
         }
         [UnityTest]public IEnumerator DefaultPistolFlushMagazineMovesSeatsAndConservesPartialReloads()
         {
             var definition=AssetDatabase.LoadAssetAtPath<WeaponDefinition>("Assets/Data/Items/BackupPistol.asset");
-            var w=new RuntimeWeapon(definition);load.Equip(EquipmentSlot.Firearm1,w);load.Select(EquipmentSlot.Firearm1);
+            var w=new RuntimeWeapon(definition);Assert.IsTrue(load.Equip(EquipmentSlot.Firearm2,w));load.Select(EquipmentSlot.Firearm2);
             Assert.AreEqual(15,definition.MagazineCapacity);Assert.AreEqual(1.5f,definition.ReloadDuration);
             var presentation=player.GetComponent<PistolMagazineReload>();Assert.IsTrue(presentation.Handles(definition));
             foreach(var aim in new[]{Vector2.right,Vector2.left})
@@ -64,7 +64,7 @@ namespace InsaneDreams.Tests
         {
             var w=Equip("Shotgun");yield return null;w.SetAmmunition(2,10);combat.Reload();yield return new WaitForSeconds(w.Definition.ReloadStepDuration*1.5f);Assert.AreEqual(3,w.MagazineAmmo);Assert.AreEqual(9,w.ReserveAmmo);Assert.IsNotNull(rig.ReloadShell);Capture("ShotgunShell");
             Assert.IsTrue(player.GetComponent<AttackExecutor>().Attack(w,Vector2.right,Time.time));Assert.AreEqual(2,w.MagazineAmmo);Assert.IsFalse(w.Cycle.IsReloading);yield return null;Assert.IsFalse(rig.ReloadShell.enabled);
-            combat.Reload();yield return new WaitForSeconds(w.Definition.ReloadStepDuration*2.2f);Assert.AreEqual(4,w.MagazineAmmo);int total=w.MagazineAmmo+w.ReserveAmmo;load.Equip(EquipmentSlot.Firearm2,new RuntimeWeapon(AssetDatabase.LoadAssetAtPath<WeaponDefinition>("Assets/Resources/Arsenal/SMG.asset")));load.Select(EquipmentSlot.Firearm2);yield return null;Assert.IsFalse(w.Cycle.IsReloading);Assert.AreEqual(4,w.MagazineAmmo);load.Select(EquipmentSlot.Firearm1);combat.Reload();
+            combat.Reload();yield return new WaitForSeconds(w.Definition.ReloadStepDuration*2.2f);Assert.AreEqual(4,w.MagazineAmmo);int total=w.MagazineAmmo+w.ReserveAmmo;Assert.IsNotNull(load.Get(EquipmentSlot.Firearm2));load.Select(EquipmentSlot.Firearm2);yield return null;Assert.IsFalse(w.Cycle.IsReloading);Assert.AreEqual(4,w.MagazineAmmo);load.Select(EquipmentSlot.Firearm1);combat.Reload();
             player.GetComponent<Health>().ProtectFor(0);player.GetComponent<Health>().ApplyDamage(new DamageInfo(10000,CombatTeam.Enemy));yield return null;Assert.IsFalse(w.Cycle.IsReloading);Assert.AreEqual(total,w.MagazineAmmo+w.ReserveAmmo);Assert.IsFalse(rig.ReloadShell.enabled);Assert.AreEqual(1,rig.weapon.GetComponentsInChildren<SpriteRenderer>(true).Count(x=>x.name=="ReloadShell"));
         }
         [UnityTest]public IEnumerator StartingTapeHealingCancelsReloadWithoutDiscardingCompletedShells()

@@ -124,12 +124,12 @@ namespace InsaneDreams.Progression
                         if(item.category==ShopCategory.Weapons&&item.weapon!=null)Text(detail,$"DAMAGE {item.weapon.Damage:0} / MAG {item.weapon.MagazineCapacity} / RELOAD {item.weapon.ReloadDuration:0.0}s","weapon-facts");
                         if(item.category==ShopCategory.Weapons)
                         {
-                            bool owned=data.owned.Contains(item.id);Text(detail,data.primary==item.id?"EQUIPPED / PRIMARY":data.secondary==item.id?"EQUIPPED / SECONDARY":owned?"OWNED":"NOT OWNED");
+                            bool owned=data.owned.Contains(item.id);Text(detail,data.primary==item.id?"EQUIPPED / PRIMARY":data.secondary==item.id?"EQUIPPED / SECONDARY WEAPON":owned?"OWNED":"NOT OWNED");
                             if(owned)
                             {
                                 Text(detail,"Magazine "+data.Ammo(item.id).magazine+" · Reserve "+data.Ammo(item.id).reserve);
-                                Action(detail,"EQUIP / PRIMARY",()=>{session.Equip(item.id);Draw();});
-                                if(item.weapon.WeaponCategory==Inventory.WeaponCategory.Firearm)Action(detail,"EQUIP / SECONDARY",()=>{session.Equip(item.id,true);Draw();});
+                                if(item.weapon.FirearmRole==Inventory.FirearmRole.Primary)Action(detail,"EQUIP / PRIMARY WEAPON",()=>{session.Equip(item.id);Draw();});
+                                else Action(detail,"EQUIP / SECONDARY WEAPON",()=>{session.Equip(item.id,Inventory.EquipmentSlot.Firearm2);Draw();});
                             }
                         }
                         if(item.category==ShopCategory.Ammunition)
@@ -149,7 +149,8 @@ namespace InsaneDreams.Progression
                     }
                     Text(content,$"MISSION PAY ${catalog.completionReward} + wallets. Failure: {catalog.failureWalletFraction*100:0}% of wallets, up to ${catalog.failurePayoutCap}. Basic pistol: {catalog.basicAllowanceMagazines} magazines total at deployment.");
                     Text(content,"Pause/background saves unused supplies. Force-closing during active combat can forfeit carried stock; banked cash stays safe.");
-                    Text(content,"Equipped: "+Name(data.primary)+" / "+Name(data.secondary)+" / THROWABLES");
+                    Text(content,"PRIMARY WEAPON: "+Name(data.primary));Text(content,"SECONDARY WEAPON: "+Name(data.secondary));
+                    foreach(var slot in new[]{Inventory.EquipmentSlot.Firearm1,Inventory.EquipmentSlot.Firearm2}){var target=slot;Action(content,"CLEAR / "+(target==Inventory.EquipmentSlot.Firearm1?"PRIMARY WEAPON":"SECONDARY WEAPON"),()=>{session.Unequip(target);Draw();});}
                     Action(content,"START MISSION — PURCHASE OPTIONAL",StartMission);
                     Action(content,"BACK TO LEVELS",()=>Go(FlowScreen.Levels));break;
             }

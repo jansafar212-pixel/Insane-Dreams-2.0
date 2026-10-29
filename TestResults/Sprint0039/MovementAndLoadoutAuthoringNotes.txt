@@ -1,0 +1,39 @@
+Movement / loadout regression contribution (authored, not yet executed)
+
+Root causes fixed:
+- Deployed canopy never retracted on landing or ladder capture, leaving a stale toggle/visual.
+- Fall height/peak speed from before controlled canopy descent remained pending after cancellation.
+
+PlayerTraversal2D now records same-fixed-step protected landing before auto-retraction,
+so PlayerFallDamage remains exactly zero independently of callback order. Ladder capture
+also retracts canopy. ResetTraversal clears the latch. Existing speed/gravity/control
+identity is retained. PlayerFallDamage observes motor/traversal after them at execution
+order20, clears old fall energy during controlled descent, and labels falls Environment.
+
+No slide mechanics changed: queued double-jump slide intentionally survives directional
+release, as required by existing Sprint0027SlideTests. Normal grounded finite slide and
+ladder/parachute/cover exclusion already exist.
+
+Movement0039Setup.Apply() is native Editor authoring only: create 64x44 Point/32PPU
+canopy, retain original art, reuse Rust/Gold/Ink/rope palette, two shoulder attachment
+ends. It updates WarehousePlayer prefab and its actual CharacterSkin. ApplyScene(scene)
+updates only loaded player canopy sprite/anchor during the central authoring pass.
+Old PatchworkCanopy.png/Derived_Padak.png and actual Enemak Postava.png were inspected.
+No CutoutRig/CharacterVisualDriver changes were needed for this contribution.
+
+Run Sprint0027FallTests (11 cases including5 new), TraversalRegressionTests,
+Sprint0027SlideTests, and Sprint0026 movement tests as appropriate. New cases cover
+landing retract/redeployment/no delayed damage, cancelled dangerous descent,
+ladder capture/dismount, near-ground cancellation after canopy shed old fall energy,
+and revive/invulnerable impact with no delayed damage after protection expires.
+
+Loadout0039Tests.cs adds6 isolated EditMode tests (no actual user save touched):
+- All3 new firearms purchase once, correct price, role, equip, magazine, Point/32PPU art.
+- Oneprimary/two secondaries, role rejection, unique slots, empty slots through BeginAttempt.
+- Independent3weapon clocks/ammunition, duplicate rejection, snapshots and save reload.
+- Two-primary legacy migration retaining owned/ammo, short grenade array, old pistol relocation.
+- Fresh/spent/rich wallet minimum with other progress preserved.
+- Heavy body+helmet meaningful reserve floors, bounded reload penalty, numeric slot compatibility.
+
+No Unity commands/tests/native mutations were run by this agent; root coordinates those.
+No commits/staging/push.

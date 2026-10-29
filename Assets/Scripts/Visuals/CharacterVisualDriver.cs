@@ -94,7 +94,15 @@ namespace InsaneDreams.Visuals
             if(attacks.LastAttackUsesAmmunition)recoilUntil=Time.time+RecoilSeconds;
             else if(player!=null){meleeAim=direction;meleeUntil=Time.time+.22f;}
         }
-        private float RecoilSeconds=>loadout!=null&&loadout.SelectedWeapon!=null&&loadout.SelectedWeapon.Definition.FireMode==InsaneDreams.Inventory.WeaponFireMode.ReleaseToFire?.35f:.12f;
+        private float RecoilSeconds
+        {
+            get
+            {
+                var d=loadout!=null?loadout.SelectedWeapon?.Definition:enemy!=null?enemy.Weapon?.Definition:null;
+                return d!=null&&d.FireMode==InsaneDreams.Inventory.WeaponFireMode.ReleaseToFire?.35f:
+                    d!=null&&d.Pellets>1&&d.FireMode==InsaneDreams.Inventory.WeaponFireMode.Automatic?.16f:.12f;
+            }
+        }
         private void Hurt(DamageInfo damage)
         {
             SetReaction(FaceExpression.Stunned);flinchUntil=hitReaction!=null&&hitReaction.UsesLivingPhysics?0:Time.time+flinchSeconds;
@@ -174,7 +182,7 @@ namespace InsaneDreams.Visuals
                 rig.PoseSamurai(baseAngle+Mathf.Lerp(60,-50,Mathf.SmoothStep(0,1,progress)));
             }
             // Deployment remains authoritative even while grounded or climbing. Only the
-            rig.PoseReloadShell(definition?.ShellSprite,ReloadPoseActive&&definition!=null&&definition.LoadsIndividually,cycle!=null?cycle.ReloadProgress(Time.time):0);
+            rig.PoseReloadShell(definition?.ShellSprite,ReloadPoseActive&&definition!=null&&definition.LoadsIndividually,cycle!=null?cycle.ReloadProgress(Time.time):0,definition!=null?(Vector2?)definition.AmmunitionInsertionOffset:null);
             if(pistolReload!=null)pistolReload.Pose(rig,loadout!=null?loadout.SelectedWeapon:enemy!=null?enemy.Weapon:null,ReloadPoseActive,cycle!=null?cycle.ReloadProgress(Time.time):0);
             if(player==null&&enemy!=null&&ReloadPoseActive&&pistolReload!=null&&pistolReload.Handles(definition)&&rig.Segmented!=null)
                 rig.Segmented.PosePistolExchange(cycle.ReloadProgress(Time.time));

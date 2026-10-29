@@ -1,0 +1,1 @@
+Three throwable types, finite shop stock and existing player slot2 configured; no scenes changed

@@ -1,0 +1,123 @@
+{
+  "summary": {
+    "total": 7,
+    "passed": 7,
+    "failed": 0
+  },
+  "runs": {
+    "presentation": {
+      "status": "completed",
+      "duration": 3.69,
+      "summary": {
+        "total": 2,
+        "passed": 2,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0036PresentationTests.MissionPauseEmptyRevivalAndTerminalPanelsRemainIntegrated",
+          "Status": "Passed",
+          "Duration": 1.9876753,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0036PresentationTests.ScreensCategoriesAndResponsiveCardsUseRealInventoryWithoutDuplicates",
+          "Status": "Passed",
+          "Duration": 1.6628348,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "AndroidFireButtonWorksWithoutAimAndIndependentPointersResetSafely": {
+      "status": "completed",
+      "duration": 1.45,
+      "summary": {
+        "total": 1,
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "InsaneDreams.Tests.Sprint022CoverTests.AndroidFireButtonWorksWithoutAimAndIndependentPointersResetSafely",
+          "Status": "Passed",
+          "Duration": 1.4072546,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "FireButtonLayoutFitsBothControlTemplatesInLandscapeUltrawideAndPortrait": {
+      "status": "completed",
+      "duration": 0.7,
+      "summary": {
+        "total": 1,
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "InsaneDreams.Tests.Sprint022CoverTests.FireButtonLayoutFitsBothControlTemplatesInLandscapeUltrawideAndPortrait",
+          "Status": "Passed",
+          "Duration": 0.6511475,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "AndroidPerformanceRegressionTests": {
+      "status": "completed",
+      "duration": 2.14,
+      "summary": {
+        "total": 2,
+        "passed": 2,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "InsaneDreams.Tests.AndroidPerformanceRegressionTests.CachedHudTracksAmmoSwitchesGrenadesAndRebind",
+          "Status": "Passed",
+          "Duration": 1.1490639,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.AndroidPerformanceRegressionTests.EquipmentPosePreservesMuzzleMagazineAndExpressionChanges",
+          "Status": "Passed",
+          "Duration": 0.9571942,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "Hotfix00251PauseCentersInSafeTopAreaWithoutCoveringHudAndStillPauses": {
+      "status": "completed",
+      "duration": 1.02,
+      "summary": {
+        "total": 1,
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "InsaneDreams.Tests.Sprint024FlowTests.Hotfix00251PauseCentersInSafeTopAreaWithoutCoveringHudAndStillPauses",
+          "Status": "Passed",
+          "Duration": 0.9776511,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    }
+  }
+}

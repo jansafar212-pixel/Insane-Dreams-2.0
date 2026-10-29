@@ -1,0 +1,310 @@
+[
+  {
+    "Suite": "GrenadeResupplyHotfixTests",
+    "Status": "completed",
+    "Summary": {
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "Results": [
+      {
+        "FullName": "InsaneDreams.Tests.GrenadeResupplyHotfixTests.ExistingBoxRestocksEveryTypeWithPartialAcceptanceFiniteStockImmediateHudAndSave",
+        "Status": "Passed",
+        "Duration": 3.7749664,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.GrenadeResupplyHotfixTests.FragShakeIsDistanceBoundedExpiresAndActualEnemyDeathStillCreatesPhysicsCorpse",
+        "Status": "Passed",
+        "Duration": 1.3080022,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.GrenadeResupplyHotfixTests.FragUsesLargerRealFalloffFriendlyCoverAndPooledChunkyEffectsWithoutChangingOtherTypes",
+        "Status": "Passed",
+        "Duration": 4.0121607,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.GrenadeResupplyHotfixTests.OrdinaryLocalizedDeathKeepsArmsUntilOneRegionAccumulates105AndLegThresholdStays60",
+        "Status": "Passed",
+        "Duration": 0.8118762,
+        "Message": null,
+        "StackTrace": null
+      }
+    ]
+  },
+  {
+    "Suite": "Sprint0027ThrowableTests",
+    "Status": "completed",
+    "Summary": {
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "Results": [
+      {
+        "FullName": "InsaneDreams.Tests.Sprint0027ThrowableTests.FragmentationUsesRadialFriendlySelfDamageDeduplicationAndSolidCover",
+        "Status": "Passed",
+        "Duration": 0.1747279,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.Sprint0027ThrowableTests.GrenadeShopPurchasesAreBoundedAndPersistWithoutChangingMedicalStock",
+        "Status": "Passed",
+        "Duration": 0.0651673,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.Sprint0027ThrowableTests.PlayerAimsThenReleasesOneFiniteGrenadeAndResetCancels",
+        "Status": "Passed",
+        "Duration": 0.8798081,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.Sprint0027ThrowableTests.SmokeBlocksSensesNotPhysicalBulletsAndExpiresAndFlashIsTemporary",
+        "Status": "Passed",
+        "Duration": 1.0942538,
+        "Message": null,
+        "StackTrace": null
+      }
+    ]
+  },
+  {
+    "Suite": "Sprint023Tests",
+    "Status": "completed",
+    "Summary": {
+      "total": 9,
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "Results": [
+      {
+        "FullName": "InsaneDreams.Tests.Sprint023Tests.CrateCapsBothInventoriesAndKeepsUnacceptedContents",
+        "Status": "Passed",
+        "Duration": 0.6788552,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.Sprint023Tests.EmptyTapeCannotHealOrResurrectAndDamageRequiresFreshIntent",
+        "Status": "Passed",
+        "Duration": 1.3773973,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.Sprint023Tests.HealingWorksInCoverBlocksFireButReloadAndAirborneActionsTakePriority",
+        "Status": "Passed",
+        "Duration": 1.1498518,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.Sprint023Tests.HeldHealingConsumesExactlyRestoredHpAndStopsOnReleaseOrFullHealth",
+        "Status": "Passed",
+        "Duration": 1.0731734,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.Sprint023Tests.ImpactCueAndMaterialParticlesFadeWithinExistingPools",
+        "Status": "Passed",
+        "Duration": 0.7204651,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.Sprint023Tests.RealDefeatDropsAutomaticWalletExactlyOnceAcrossEnemyReactivation",
+        "Status": "Passed",
+        "Duration": 0.5688573,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.Sprint023Tests.RealInteractionDepletesCrateOnceAndDisableDoesNotRefillIt",
+        "Status": "Passed",
+        "Duration": 0.4166524,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.Sprint023Tests.SuppliesAndWalletsRespectSolidBarriers",
+        "Status": "Passed",
+        "Duration": 0.5680436,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.Sprint023Tests.WalletAutomaticallyCollectsAtExpandedRadiusButNotBeyondIt",
+        "Status": "Passed",
+        "Duration": 0.8705669,
+        "Message": null,
+        "StackTrace": null
+      }
+    ]
+  },
+  {
+    "Suite": "Sprint0027RegionTests",
+    "Status": "completed",
+    "Summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "Results": [
+      {
+        "FullName": "InsaneDreams.Tests.Sprint0027RegionTests.RegionalDamageAccumulatesAcrossDefeatAndSeparatesOnlyAtThreshold",
+        "Status": "Passed",
+        "Duration": 0.3159339,
+        "Message": null,
+        "StackTrace": null
+      }
+    ]
+  },
+  {
+    "Suite": "ReactiveRagdollTests",
+    "Status": "completed",
+    "Summary": {
+      "total": 5,
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "Results": [
+      {
+        "FullName": "InsaneDreams.Tests.ReactiveRagdollTests.FatalRayTransfersHitDirectionAndRepeatedShotsReuseOneInactiveEnemyBody",
+        "Status": "Passed",
+        "Duration": 0.3465908,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.ReactiveRagdollTests.InteractionDoesNotExtendAbsoluteLifetimeOrDuplicateRegistryEntry",
+        "Status": "Passed",
+        "Duration": 0.3321251,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.ReactiveRagdollTests.OffCentreSegmentImpactProducesTorqueAndAbsurdImpulsesRemainBounded",
+        "Status": "Passed",
+        "Duration": 2.0300276,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.ReactiveRagdollTests.RestingBodyWakesFromActualHitscanAndOppositeDirectionChangesMomentum",
+        "Status": "Passed",
+        "Duration": 3.1800576,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.ReactiveRagdollTests.WallOccludesCorpseAndCorpseBlocksLivingTargetBehindIt",
+        "Status": "Passed",
+        "Duration": 0.0377714,
+        "Message": null,
+        "StackTrace": null
+      }
+    ]
+  },
+  {
+    "Suite": "OverlappingCorpsesCannotBlockOrPushWalkingAndJumpingPlayer",
+    "Status": "completed",
+    "Summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "Results": [
+      {
+        "FullName": "InsaneDreams.Tests.Sprint0246Tests.OverlappingCorpsesCannotBlockOrPushWalkingAndJumpingPlayer",
+        "Status": "Passed",
+        "Duration": 1.5144144,
+        "Message": null,
+        "StackTrace": null
+      }
+    ]
+  },
+  {
+    "Suite": "Edit",
+    "Status": "completed",
+    "Summary": {
+      "total": 7,
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "Results": [
+      {
+        "FullName": "InsaneDreams.Tests.CombatRulesTests.AttacksAndReloadNeverMutateSharedDefinitions",
+        "Status": "Passed",
+        "Duration": 0.0069886,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatRulesTests.CancelledReloadTransfersNothingAndCanRestart",
+        "Status": "Passed",
+        "Duration": 0.0005818,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatRulesTests.CooldownCannotBeBypassedAndEmptyAttemptsDoNotSpendAmmo",
+        "Status": "Passed",
+        "Duration": 0.0006986,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatRulesTests.DamageFiltersInvalidFriendlyAndSelfHitsAndDefeatsOnce",
+        "Status": "Passed",
+        "Duration": 0.002851,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatRulesTests.MagazineDepletesExactlyOncePerSuccessfulAttack",
+        "Status": "Passed",
+        "Duration": 0.0005062,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatRulesTests.MeleeUsesCooldownButNeverAmmunitionOrReload",
+        "Status": "Passed",
+        "Duration": 0.000403,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CombatRulesTests.ReloadTransfersOnlyAtDeadlineAndConservesAmmunition",
+        "Status": "Passed",
+        "Duration": 0.0005131,
+        "Message": null,
+        "StackTrace": null
+      }
+    ]
+  }
+]

@@ -1,0 +1,25 @@
+{
+  "success": true,
+  "command": "command build",
+  "data": {
+    "command": "build",
+    "parameters": {
+      "target": "Android",
+      "outputPath": "build/Sprint0031/AKUMU2-dev.apk",
+      "options": "[\"Development\"]",
+      "dry_run": "true"
+    },
+    "result": {
+      "status": "dry_run",
+      "valid": true,
+      "validationErrors": []
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

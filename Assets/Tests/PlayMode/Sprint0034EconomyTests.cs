@@ -43,13 +43,13 @@ namespace InsaneDreams.Tests
         GameProgress Disk()=>new ProgressStore(path).Load(()=>throw new Exception("Expected persisted progress"));
         [Test]public void AllExistingArsenalCanBePurchasedEquippedAndReloadedFromDiskWithoutDuplicateCharges()
         {
-            session.Data.balance=10000;float now=1;
+            session.Data.balance=Mathf.Max(10000,session.Catalog.offers.Where(o=>o.category==ShopCategory.Weapons).Sum(o=>o.price)+1000);float now=1;
             foreach(var gun in session.Catalog.offers.Where(o=>o.category==ShopCategory.Weapons&&o.weapon.WeaponCategory==WeaponCategory.Firearm))
             {
                 if(!session.Data.owned.Contains(gun.id)){int before=session.Data.balance;Assert.IsTrue(session.Buy(gun.id,now++),gun.id);Assert.AreEqual(before-gun.price,session.Data.balance);}
-                int balance=session.Data.balance;Assert.IsFalse(session.Buy(gun.id,now++));Assert.AreEqual(balance,session.Data.balance);Assert.IsTrue(session.Equip(gun.id));Assert.AreEqual(gun.id,Disk().primary);
+                int balance=session.Data.balance;Assert.IsFalse(session.Buy(gun.id,now++));Assert.AreEqual(balance,session.Data.balance);var slot=gun.weapon.Fits(EquipmentSlot.Firearm1)?EquipmentSlot.Firearm1:EquipmentSlot.Firearm2;Assert.IsTrue(session.Equip(gun.id,slot));Assert.AreEqual(gun.id,slot==EquipmentSlot.Firearm1?Disk().primary:Disk().secondary);
             }
-            Assert.IsTrue(session.Equip("pistol",true));var stored=Disk();Assert.AreEqual(8,stored.owned.Count(id=>session.Catalog.Find(id)?.weapon?.WeaponCategory==WeaponCategory.Firearm));Assert.AreEqual("pistol",stored.secondary);
+            Assert.IsTrue(session.Equip("pistol",true));var stored=Disk();Assert.AreEqual(session.Catalog.offers.Count(o=>o.category==ShopCategory.Weapons&&o.weapon!=null&&o.weapon.WeaponCategory==WeaponCategory.Firearm),stored.owned.Count(id=>session.Catalog.Find(id)?.weapon?.WeaponCategory==WeaponCategory.Firearm));Assert.AreEqual("pistol",stored.secondary);
         }
         [Test]public void ExistingVersionOneProfileRetainsBankedCashOwnedCarbineAmmoAndDamagedArmor()
         {
@@ -66,7 +66,7 @@ namespace InsaneDreams.Tests
         [Test]public void ZeroMoneyStillProvidesFiveBasicMagazinesWithoutFreePremiumRefills()
         {
             session.Data.balance=2000;Assert.IsTrue(session.Buy("sniper",1));session.Equip("sniper");session.Data.balance=0;session.Data.Ammo("pistol").magazine=0;session.Data.Ammo("pistol").reserve=0;session.Data.Ammo("sniper").magazine=0;session.Data.Ammo("sniper").reserve=0;
-            Assert.IsTrue(session.PrepareMission());var basic=session.Data.Ammo("pistol");Assert.AreEqual(75,basic.magazine+basic.reserve);Assert.AreEqual("pistol",session.Data.primary);Assert.AreEqual(0,session.Data.Ammo("sniper").magazine+session.Data.Ammo("sniper").reserve);Assert.AreEqual(0,session.Data.balance);
+            Assert.IsTrue(session.PrepareMission());var basic=session.Data.Ammo("pistol");Assert.AreEqual(75,basic.magazine+basic.reserve);Assert.AreEqual("sniper",session.Data.primary);Assert.AreEqual("pistol",session.Data.secondary);Assert.AreEqual(0,session.Data.Ammo("sniper").magazine+session.Data.Ammo("sniper").reserve);Assert.AreEqual(0,session.Data.balance);
         }
         [Test]public void FailedAtomicPurchasesDeploymentAndSettlementRollBackMemoryAndDisk()
         {
@@ -101,6 +101,52 @@ namespace InsaneDreams.Tests
             bridge.SendMessage("OnApplicationPause",true);Assert.AreEqual(3,Disk().Ammo("pistol").magazine);Assert.AreEqual(11,Disk().Ammo("pistol").reserve);Assert.AreEqual(1,Disk().faintanyl);CollectionAssert.AreEqual(new[]{3,2,1},Disk().grenades);
             bridge.SendMessage("OnApplicationPause",false);Assert.AreEqual(0,Disk().Ammo("pistol").magazine);Assert.AreEqual(0,Disk().faintanyl);Assert.AreEqual(3,load.SelectedWeapon.MagazineAmmo);Assert.AreEqual(1,mission.Player.GetComponent<PlayerRevive>().Injections);
             bridge.SetPaused(true);Assert.AreEqual(1,Disk().faintanyl);Assert.AreEqual(0,Time.timeScale);Directory.CreateDirectory(path+".tmp");bridge.SetPaused(false);Assert.AreEqual(0,Time.timeScale);Assert.IsFalse(mission.Player.enabled);Directory.Delete(path+".tmp");bridge.SetPaused(false);Assert.AreEqual(1,Time.timeScale);Assert.AreEqual(0,Disk().faintanyl);
+        }
+        [UnityTest]public IEnumerator TwoFirearmMissionPackingSwitchingAndPausePreserveEachMagazineAndStoredOverflow()
+        {
+            session.Data.balance=10000;
+            Assert.IsTrue(session.Buy("sks",1));Assert.IsTrue(session.Buy("sawed-off",2));
+            Assert.IsTrue(session.Buy("heavy-armor",3));Assert.IsTrue(session.Buy("heavy-helmet",4));
+            string[] ids={"sks","pistol"};
+            var slots=new[]{EquipmentSlot.Firearm1,EquipmentSlot.Firearm2};
+            int[] magazines={7,15},overflow={17,23},carried=new int[2],storedReserve=new int[2];
+            for(int i=0;i<ids.Length;i++)
+            {
+                Assert.IsTrue(session.Equip(ids[i],slots[i]));
+                carried[i]=session.Catalog.ReserveCapacity(session.Data,session.Catalog.Find(ids[i]));
+                storedReserve[i]=carried[i]+overflow[i];
+                session.Data.Ammo(ids[i]).magazine=magazines[i];session.Data.Ammo(ids[i]).reserve=storedReserve[i];
+            }
+            Assert.IsTrue(session.Save());yield return LoadMission();
+            var load=mission.Player.GetComponent<PlayerLoadout>();var bridge=mission.GetComponent<CampaignMissionBridge>();
+            for(int i=0;i<ids.Length;i++)
+            {
+                var weapon=load.Get(slots[i]);Assert.IsNotNull(weapon,ids[i]+" must survive native mission startup");
+                Assert.AreSame(session.Catalog.Find(ids[i]).weapon,weapon.Definition);
+                Assert.AreEqual(magazines[i],weapon.MagazineAmmo,ids[i]);Assert.AreEqual(carried[i],weapon.ReserveAmmo,ids[i]);
+                Assert.AreEqual(0,Disk().Ammo(ids[i]).magazine);Assert.AreEqual(overflow[i],Disk().Ammo(ids[i]).reserve,ids[i]+" keeps only unpacked rounds on disk while deployed");
+            }
+            foreach(var slot in slots)
+            {
+                load.Select(slot);yield return new WaitForSeconds(.25f);Assert.AreSame(load.Get(slot),load.SelectedWeapon);
+                var hud=Object.FindObjectsByType<UIDocument>(FindObjectsSortMode.None).Single(d=>d.rootVisualElement.Q<Button>("slot2")!=null).rootVisualElement;
+                Assert.IsNull(hud.Q<Button>("slot3"));string name=slot==EquipmentSlot.Firearm1?"slot1":"slot2";
+                Assert.IsTrue(hud.Q<Button>(name).ClassListContains("is-selected"));Assert.GreaterOrEqual(hud.Q<Button>(name).worldBound.width,44);Assert.GreaterOrEqual(hud.Q<Button>(name).worldBound.height,44);
+                Assert.AreEqual(load.SelectedWeapon.MagazineAmmo+"/"+load.SelectedWeapon.Definition.MagazineCapacity,hud.Q<Label>("ammoValue").text);
+                for(int i=0;i<ids.Length;i++){Assert.AreEqual(magazines[i],load.Get(slots[i]).MagazineAmmo);Assert.AreEqual(carried[i],load.Get(slots[i]).ReserveAmmo);}
+            }
+            ScreenCapture.CaptureScreenshot(Path.GetFullPath("TestResults/Sprint0040/TwoSlotHud.png"));yield return new WaitForSeconds(.15f);
+            // Distinct controlled expenditures make a stale third-slot save observable.
+            for(int i=0;i<ids.Length;i++)load.Get(slots[i]).SetAmmunition(magazines[i]-1,carried[i]-2);
+            bridge.SetPaused(true);Assert.AreEqual(0,Time.timeScale);var saved=Disk();
+            Assert.AreEqual(ids[0],saved.primary);Assert.AreEqual(ids[1],saved.secondary);
+            for(int i=0;i<ids.Length;i++){Assert.AreEqual(magazines[i]-1,saved.Ammo(ids[i]).magazine,ids[i]);Assert.AreEqual(storedReserve[i]-2,saved.Ammo(ids[i]).reserve,ids[i]+" restores carried plus unpacked ammunition when paused");}
+            bridge.SetPaused(false);Assert.AreEqual(1,Time.timeScale);saved=Disk();
+            for(int i=0;i<ids.Length;i++)
+            {
+                Assert.AreEqual(0,saved.Ammo(ids[i]).magazine);Assert.AreEqual(overflow[i],saved.Ammo(ids[i]).reserve,ids[i]+" reserves carried ammunition again before resuming");
+                Assert.AreEqual(magazines[i]-1,load.Get(slots[i]).MagazineAmmo);Assert.AreEqual(carried[i]-2,load.Get(slots[i]).ReserveAmmo);
+            }
         }
         [UnityTest]public IEnumerator ForcedInterruptionCannotRestoreSpentInventoryOrDuplicateWalletPayouts()
         {

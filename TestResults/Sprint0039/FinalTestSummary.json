@@ -1,0 +1,23 @@
+{
+  "total": 102,
+  "passed": 102,
+  "failed": 0,
+  "rule": "Latest result by full test name; focused final reruns supersede earlier results",
+  "suites": [
+    "editor_ArsenalRulesTests.json",
+    "editor_ReloadRepairRulesTests.json",
+    "editor_DataAndGestureTests.json",
+    "playmode_Sprint0027FallTests.json",
+    "playmode_ArsenalTests.json",
+    "playmode_ReloadRepairPlayTests.json",
+    "playmode_CombatReliabilityPlayTests.json",
+    "editor_Sprint0034EconomyRulesTests.json",
+    "playmode_0039.json",
+    "playmode_Sprint0034EconomyTests.json",
+    "playmode_Sprint024FlowTests.json",
+    "playmode_GrenadeResupplyHotfixTests.json",
+    "editor_Loadout0039Tests.json",
+    "playmode_PhysicalExitFullLoop.json",
+    "playmode_ThreeFirearmMissionPacking.json"
+  ]
+}

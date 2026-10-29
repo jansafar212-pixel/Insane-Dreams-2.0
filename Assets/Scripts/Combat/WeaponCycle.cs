@@ -64,7 +64,7 @@ namespace InsaneDreams.Combat
         {
             if (float.IsNaN(now) || float.IsInfinity(now) || float.IsNaN(durationScale) || float.IsInfinity(durationScale) || durationScale <= 0) return false;
             Tick(now);
-            if (!weapon.UsesAmmunition || IsReloading || IsMalfunctioning(now) || weapon.ReserveAmmo <= 0 || weapon.MagazineAmmo >= weapon.Definition.MagazineCapacity) return false;
+            if (!weapon.UsesAmmunition || IsReloading || IsRecovering(now) || IsMalfunctioning(now) || weapon.ReserveAmmo <= 0 || weapon.MagazineAmmo >= weapon.Definition.MagazineCapacity) return false;
             stepDuration=Mathf.Max(.05f,weapon.Definition.ReloadStepDuration*durationScale*weapon.ReloadMultiplier);
             IsReloading = true; ReloadStartedAt = now; ReloadEndsAt = now + stepDuration; return true;
         }

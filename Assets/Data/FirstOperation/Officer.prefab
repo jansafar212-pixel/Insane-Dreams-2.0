@@ -462,6 +462,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2
   tracer: {fileID: 912359328427797702}
+  tracerMaterial: {fileID: 2100000, guid: aad1aec2f26183e409d7c81ccc5b78bb, type: 2}
   tracerSeconds: 0.17
   tracerWidth: 0.08
   maximumTracers: 6
@@ -753,7 +754,8 @@ MonoBehaviour:
   muzzleSeconds: 0.06
   hitSeconds: 0.12
   hurtSeconds: 0.1
-  hurtColor: {r: 1, g: 0.75, b: 0.6, a: 1}
+  hurtColor: {r: 1, g: 0.18, b: 0.12, a: 1}
+  damageFlashMaterial: {fileID: 2100000, guid: f3a9cafa077572541ac36ff36e340aba, type: 2}
   firingSound: {fileID: 0}
   hitSound: {fileID: 0}
   hurtSound: {fileID: 0}
@@ -1026,10 +1028,17 @@ MonoBehaviour:
   balanceDecay: 1.15
   heavyCooldown: 0.55
   recoveryGrace: 1.2
-  maximumJointAngle: 18
-  impulseDegrees: 115
-  springReturn: 18
-  springTorque: 0.25
+  maximumJointAngle: 34
+  impulseDegrees: 175
+  springReturn: 9
+  springTorque: 1.5
+  jointDamping: 2
+  springDamping: 1
+  maximumAngularSpeed: 460
+  maximumTorsoAngle: 26
+  responseSeconds: 1.1
+  torsoSpill: 0.45
+  heavyTorsoSpill: 0.7
 --- !u!1 &2537643074343068057
 GameObject:
   m_ObjectHideFlags: 0

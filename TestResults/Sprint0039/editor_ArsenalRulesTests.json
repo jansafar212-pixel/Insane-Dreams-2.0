@@ -1,0 +1,41 @@
+{
+  "status": "completed",
+  "duration": 0.22,
+  "summary": {
+    "total": 4,
+    "passed": 4,
+    "failed": 0,
+    "skipped": 0,
+    "inconclusive": 0
+  },
+  "results": [
+    {
+      "FullName": "InsaneDreams.Tests.ArsenalRulesTests.CloseRangeWeaponsLoseEffectivenessWhilePrecisionAndLegacyDamageStayConstant",
+      "Status": "Passed",
+      "Duration": 0.0113737,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.ArsenalRulesTests.EveryMagazineReloadAndInterruptedReloadConservesAmmunitionWithArmorPenalty",
+      "Status": "Passed",
+      "Duration": 0.001974,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.ArsenalRulesTests.NewLongGunsDoNotInheritThePistolMagazine",
+      "Status": "Passed",
+      "Duration": 0.0003257,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.ArsenalRulesTests.SevenCoreWeaponsAndRetainedGlockHaveDistinctDataWithoutChangingEnemyEagle",
+      "Status": "Passed",
+      "Duration": 0.0059963,
+      "Message": null,
+      "StackTrace": null
+    }
+  ]
+}

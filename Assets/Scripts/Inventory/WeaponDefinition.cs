@@ -4,10 +4,15 @@ namespace InsaneDreams.Inventory
 {
     public enum WeaponCategory { Firearm, Melee }
     public enum WeaponFireMode { Automatic, SemiAutomatic, ReleaseToFire }
+    public enum FirearmRole { Primary, Secondary }
     [CreateAssetMenu(menuName = "Insane Dreams/Weapon Definition")]
     public sealed class WeaponDefinition : ItemDefinition
     {
         [SerializeField] private WeaponCategory weaponCategory;
+        [SerializeField] private FirearmRole firearmRole;
+        public FirearmRole FirearmRole => firearmRole;
+        public bool Fits(EquipmentSlot slot)=>weaponCategory==WeaponCategory.Melee?slot==EquipmentSlot.Melee:
+            firearmRole==FirearmRole.Primary?slot==EquipmentSlot.Firearm1:slot==EquipmentSlot.Firearm2;
         [SerializeField, Min(0)] private float damage = 10;
         [SerializeField, Min(0.01f)] private float firingInterval = 0.2f;
         [SerializeField, Min(1)] private int magazineCapacity = 12;
@@ -24,6 +29,8 @@ namespace InsaneDreams.Inventory
         [SerializeField] private Sprite shellSprite;
         public bool LoadsIndividually=>loadsIndividually;
         public Sprite ShellSprite=>shellSprite;
+        [SerializeField] private Vector2 ammunitionInsertionOffset=new Vector2(.3f,-.04f);
+        public Vector2 AmmunitionInsertionOffset=>ammunitionInsertionOffset;
         public float ReloadStepDuration=>loadsIndividually?reloadDuration/Mathf.Max(1,MagazineCapacity):reloadDuration;
         [SerializeField, Min(.1f)] private float firearmRange = 22;
         [SerializeField, Min(.1f)] private float meleeRange = 1.6f;

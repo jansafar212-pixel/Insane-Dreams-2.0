@@ -1,0 +1,26 @@
+[
+  {
+    "scene": "Warehouse_Demo",
+    "cameraBlocksChanged": [
+      "--- !u!114 &89708303"
+    ],
+    "unexpectedObjectChanges": [],
+    "sameObjectIds": true
+  },
+  {
+    "scene": "Warehouse_Testbed",
+    "cameraBlocksChanged": [
+      "--- !u!114 &89708303"
+    ],
+    "unexpectedObjectChanges": [],
+    "sameObjectIds": true
+  },
+  {
+    "scene": "Warehouse_Mission01",
+    "cameraBlocksChanged": [
+      "--- !u!114 &89708303"
+    ],
+    "unexpectedObjectChanges": [],
+    "sameObjectIds": true
+  }
+]

@@ -1,0 +1,119 @@
+{
+    "width": 1280,
+    "height": 720,
+    "orthographicSize": 4.329004287719727,
+    "rows": [
+        {
+            "profile": "old-settings replay",
+            "weapon": "Glock",
+            "strength": 0.6499999761581421,
+            "maxHeadPixelsAt720": 1.6994197368621826,
+            "maxTorsoJointDegrees": 1.75775146484375,
+            "visibleSeconds": 0.0
+        },
+        {
+            "profile": "old-settings replay",
+            "weapon": "SMG",
+            "strength": 0.4000000059604645,
+            "maxHeadPixelsAt720": 0.6152438521385193,
+            "maxTorsoJointDegrees": 0.622528076171875,
+            "visibleSeconds": 0.0
+        },
+        {
+            "profile": "old-settings replay",
+            "weapon": "Rifle",
+            "strength": 1.100000023841858,
+            "maxHeadPixelsAt720": 4.823876857757568,
+            "maxTorsoJointDegrees": 4.971832275390625,
+            "visibleSeconds": 0.1799999475479126
+        },
+        {
+            "profile": "old-settings replay",
+            "weapon": "LMG",
+            "strength": 1.350000023841858,
+            "maxHeadPixelsAt720": 7.025732517242432,
+            "maxTorsoJointDegrees": 7.240631103515625,
+            "visibleSeconds": 0.19999994337558746
+        },
+        {
+            "profile": "old-settings replay",
+            "weapon": "DesertEagle",
+            "strength": 2.5999999046325684,
+            "maxHeadPixelsAt720": 11.62621021270752,
+            "maxTorsoJointDegrees": 22.059356689453125,
+            "visibleSeconds": 0.4599997401237488
+        },
+        {
+            "profile": "old-settings replay",
+            "weapon": "Shotgun",
+            "strength": 3.200000047683716,
+            "maxHeadPixelsAt720": 11.63106632232666,
+            "maxTorsoJointDegrees": 24.59857177734375,
+            "visibleSeconds": 0.47999972105026245
+        },
+        {
+            "profile": "old-settings replay",
+            "weapon": "Sniper",
+            "strength": 3.200000047683716,
+            "maxHeadPixelsAt720": 11.62621021270752,
+            "maxTorsoJointDegrees": 24.59857177734375,
+            "visibleSeconds": 0.47999972105026245
+        },
+        {
+            "profile": "native0040",
+            "weapon": "Glock",
+            "strength": 0.6499999761581421,
+            "maxHeadPixelsAt720": 4.652493953704834,
+            "maxTorsoJointDegrees": 4.790069580078125,
+            "visibleSeconds": 0.2399999350309372
+        },
+        {
+            "profile": "native0040",
+            "weapon": "SMG",
+            "strength": 0.4000000059604645,
+            "maxHeadPixelsAt720": 2.8573927879333496,
+            "maxTorsoJointDegrees": 2.94775390625,
+            "visibleSeconds": 0.15999995172023773
+        },
+        {
+            "profile": "native0040",
+            "weapon": "Rifle",
+            "strength": 1.100000023841858,
+            "maxHeadPixelsAt720": 7.866336345672607,
+            "maxTorsoJointDegrees": 8.106292724609375,
+            "visibleSeconds": 0.27999991178512573
+        },
+        {
+            "profile": "native0040",
+            "weapon": "LMG",
+            "strength": 1.350000023841858,
+            "maxHeadPixelsAt720": 9.64570426940918,
+            "maxTorsoJointDegrees": 9.9486083984375,
+            "visibleSeconds": 0.2999998927116394
+        },
+        {
+            "profile": "native0040",
+            "weapon": "DesertEagle",
+            "strength": 2.5999999046325684,
+            "maxHeadPixelsAt720": 18.51502227783203,
+            "maxTorsoJointDegrees": 19.160308837890625,
+            "visibleSeconds": 0.33999985456466675
+        },
+        {
+            "profile": "native0040",
+            "weapon": "Shotgun",
+            "strength": 3.200000047683716,
+            "maxHeadPixelsAt720": 20.451099395751953,
+            "maxTorsoJointDegrees": 21.1868896484375,
+            "visibleSeconds": 0.3599998354911804
+        },
+        {
+            "profile": "native0040",
+            "weapon": "Sniper",
+            "strength": 3.200000047683716,
+            "maxHeadPixelsAt720": 20.446300506591797,
+            "maxTorsoJointDegrees": 21.1868896484375,
+            "visibleSeconds": 0.3599998354911804
+        }
+    ]
+}

@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "var root=UnityEngine.GameObject.Find(\"CowardsBunker\");var rows=new System.Collections.Generic.List<object>();foreach(var c in root.GetComponentsInChildren<UnityEngine.BoxCollider2D>())rows.Add(new{name=c.name,center=new[]{c.bounds.center.x,c.bounds.center.y},size=new[]{c.bounds.size.x,c.bounds.size.y}});var p=UnityEngine.Object.FindAnyObjectByType<InsaneDreams.Prototype.PlayerMotor2D>();var rb=p.GetComponent<UnityEngine.Rigidbody2D>();var m=UnityEngine.Object.FindAnyObjectByType<InsaneDreams.Missions.WarehouseMission>();return Newtonsoft.Json.JsonConvert.SerializeObject(new{shell=rows,jump=p.JumpSpeed,airJump=p.AirJumpSpeed,gravity=rb.gravityScale*UnityEngine.Physics2D.gravity.y,points=System.Array.ConvertAll(m.Encounters[4].Points,x=>x.name+\" \"+x.transform.position),android=UnityEditor.EditorUserBuildSettings.activeBuildTarget.ToString(),development=UnityEditor.EditorUserBuildSettings.development});"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": "{\"shell\":[{\"name\":\"ConcreteFrontLower\",\"center\":[140.1875,2.05],\"size\":[0.375,0.9000001]},{\"name\":\"ConcreteFrontUpper\",\"center\":[140.1875,3.9],\"size\":[0.375,1.0]},{\"name\":\"ConcreteRearWall\",\"center\":[144.3125,3.0],\"size\":[0.375,2.80000019]},{\"name\":\"ConcreteRoof\",\"center\":[142.25,4.5875],\"size\":[4.5,0.375]},{\"name\":\"ConcreteBase\",\"center\":[142.25,1.5375],\"size\":[4.5,0.125]}],\"jump\":12.0,\"airJump\":10.2000008,\"gravity\":-29.43,\"points\":[\"05_Officer_Point_0 (143.25, 2.33, 0.00)\",\"CombatHotfix_CommandGuard (129.00, 3.93, 0.00)\"],\"android\":\"Android\",\"development\":false}"
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

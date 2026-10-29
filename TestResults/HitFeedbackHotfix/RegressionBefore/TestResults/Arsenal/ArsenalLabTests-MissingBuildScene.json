@@ -1,0 +1,35 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 1.13,
+      "summary": {
+        "total": 1,
+        "passed": 0,
+        "failed": 1,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "InsaneDreams.Tests.ArsenalLabTests.LabLoadsAllWeaponsRefillsAndLeavesNormalProfileUntouched",
+          "Status": "Failed",
+          "Duration": 1.0986394,
+          "Message": "Unhandled log message: '[Error] Scene 'Warehouse_Testbed' couldn't be loaded because it has not been added to the active build profile or shared scene list or the AssetBundle has not been loaded.\nTo add a scene to the active build profile or shared scene list use the menu File->Build Profiles'. Use UnityEngine.TestTools.LogAssert.Expect",
+          "StackTrace": "UnityEngine.SceneManagement.SceneManager:LoadScene (string)\r\nInsaneDreams.Combat.ArsenalTestBench/<Enter>d__10:MoveNext () (at Assets/Scripts/Combat/ArsenalTestBench.cs:51)\r\nUnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)\r\n\r\n"
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

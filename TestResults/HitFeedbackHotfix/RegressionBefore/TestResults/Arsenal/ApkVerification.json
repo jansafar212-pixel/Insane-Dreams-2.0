@@ -1,0 +1,69 @@
+{
+  "apk": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\build\\Arsenal\\AKUMU2-arsenal-dev.apk",
+  "bytes": 67238173,
+  "sha256": "c6beca846c937fe34dd3abf4e36840529e1287061e0db4b64417d6ab9d8718e8",
+  "arm64Libraries": [
+    "lib/arm64-v8a/libAppUITextMateLib.so",
+    "lib/arm64-v8a/libc++_shared.so",
+    "lib/arm64-v8a/libgame.so",
+    "lib/arm64-v8a/libmain.so",
+    "lib/arm64-v8a/lib_burst_generated.so",
+    "lib/arm64-v8a/libil2cpp.so",
+    "lib/arm64-v8a/libswappywrapper.so",
+    "lib/arm64-v8a/libunity.so"
+  ],
+  "metadata": [
+    "assets/bin/Data/Managed/Metadata/global-metadata.dat"
+  ],
+  "resources": [
+    "assets/bin/Data/3338ea8cfe0f12f4bbcabd3022ab0651",
+    "assets/bin/Data/globalgamemanagers.assets.split0",
+    "assets/bin/Data/a971933d931d6cb48acd980ff06f23cb",
+    "assets/bin/Data/sharedassets0.assets.split1",
+    "assets/bin/Data/globalgamemanagers",
+    "assets/bin/Data/5ae8317f519c0264a9291e77c85028c5",
+    "assets/bin/Data/8a43739a8731998499cf7e50b5f86642",
+    "assets/bin/Data/dd801bff41890704cad87b1995abbabb"
+  ],
+  "checks": {
+    "ArsenalTestBench": true,
+    "DevelopmentFrameOverlay": true,
+    "ReleaseToFire": true,
+    "Rattlebox": true,
+    "Long Complaint": true,
+    "Lunchbox": true,
+    "Doorbell": true,
+    "ArsenalCatalog": true,
+    "Warehouse_Testbed": true,
+    "Warehouse_Demo": true,
+    "MainMenu": true
+  },
+  "packagedStringEvidence": {
+    "Rattlebox": [
+      "assets/bin/Data/5ae8317f519c0264a9291e77c85028c5"
+    ],
+    "Long Complaint": [
+      "assets/bin/Data/3338ea8cfe0f12f4bbcabd3022ab0651"
+    ],
+    "Lunchbox": [
+      "assets/bin/Data/a971933d931d6cb48acd980ff06f23cb"
+    ],
+    "Doorbell": [
+      "assets/bin/Data/8a43739a8731998499cf7e50b5f86642"
+    ],
+    "ArsenalCatalog": [
+      "assets/bin/Data/dd801bff41890704cad87b1995abbabb",
+      "assets/bin/Data/globalgamemanagers.assets.split0"
+    ],
+    "Warehouse_Testbed": [
+      "assets/bin/Data/globalgamemanagers"
+    ],
+    "Warehouse_Demo": [
+      "assets/bin/Data/globalgamemanagers",
+      "assets/bin/Data/sharedassets0.assets.split1"
+    ],
+    "MainMenu": [
+      "assets/bin/Data/globalgamemanagers"
+    ]
+  }
+}

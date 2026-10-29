@@ -1,0 +1,56 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 21.83,
+      "summary": {
+        "total": 4,
+        "passed": 4,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "InsaneDreams.Tests.CowardsBunkerTests.ActualGrenadeBouncesOnRoofAndBlastRespectsSandbagsButOpenRearCanFlushOfficer",
+          "Status": "Passed",
+          "Duration": 1.8060058,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.CowardsBunkerTests.BunkerBlocksRealShotsButOpenRearAllowsDefeatAndDecorNeverCollides",
+          "Status": "Passed",
+          "Duration": 1.9253404,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.CowardsBunkerTests.OfficerUsesHeardOpportunityPeeksFiresAndRetreatsWithoutSnappingOrEndlessHiding",
+          "Status": "Passed",
+          "Duration": 7.0693016,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.CowardsBunkerTests.SustainedPressureUsesExistingSuppressionAndPlayerCanCrossSandbagsToRear",
+          "Status": "Passed",
+          "Duration": 10.9942537,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

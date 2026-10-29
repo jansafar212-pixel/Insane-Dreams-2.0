@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: SMG
   m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Inventory.WeaponDefinition
   stableId: 5e23f131689a464abbfffd4a1d567af6
-  displayName: Rattlebox SMG
+  displayName: SMG
   description: Sprint 003 data-only example; no combat behavior.
   icon: {fileID: 21300000, guid: eb1621ca053e10d4289827db233996be, type: 2}
   category: 0
   weaponCategory: 0
+  firearmRole: 0
   damage: 9
   firingInterval: 0.065
   magazineCapacity: 30
@@ -29,6 +30,7 @@ MonoBehaviour:
   physicalMagazineReload: 1
   loadsIndividually: 0
   shellSprite: {fileID: 0}
+  ammunitionInsertionOffset: {x: 0.3, y: -0.04}
   firearmRange: 20
   meleeRange: 1.6
   impactImpulse: 0.9

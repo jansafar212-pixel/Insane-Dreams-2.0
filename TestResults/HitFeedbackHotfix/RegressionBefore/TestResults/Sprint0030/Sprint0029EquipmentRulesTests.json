@@ -1,0 +1,63 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 0.36,
+      "summary": {
+        "total": 5,
+        "passed": 5,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0029EquipmentRulesTests.BallisticHeadAndBodyProtectionAreIndependentAndMeleeExplosionsBypassBoth",
+          "Status": "Passed",
+          "Duration": 0.0057784,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0029EquipmentRulesTests.BunkerSolidForegroundSurfacesMatchTheirColliders",
+          "Status": "Passed",
+          "Duration": 0.1347537,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0029EquipmentRulesTests.CatalogHasExactMedicalCopyAndFourProtectionChoicesWithBoundedTradeoffs",
+          "Status": "Passed",
+          "Duration": 0.0066868,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0029EquipmentRulesTests.LegacyProgressPreservesVestWithoutGrantingRevivesOrBreakingFutureSaveFormat",
+          "Status": "Passed",
+          "Duration": 0.0022068,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0029EquipmentRulesTests.PlayerReloadCostsDoNotMutateDefinitionsOrEnemyReloadsAndAmmoIsConserved",
+          "Status": "Passed",
+          "Duration": 0.0006997,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

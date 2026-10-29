@@ -20,6 +20,12 @@ namespace InsaneDreams.Combat
         [SerializeField,Range(20,400)] private float impulseDegrees=115;
         [SerializeField,Min(1)] private float springReturn=18;
         [SerializeField,Min(.01f)] private float springTorque=.25f;
+        [SerializeField,Min(0)] private float jointDamping=5;
+        [SerializeField,Range(.5f,2)] private float springDamping=1.5f;
+        [SerializeField,Range(100,600)] private float maximumAngularSpeed=320;
+        [SerializeField,Range(4,30)] private float maximumTorsoAngle=12;
+        [SerializeField,Range(.3f,2)] private float responseSeconds=.8f;
+        [SerializeField,Range(0,1)] private float torsoSpill=.25f,heavyTorsoSpill=.55f;
         private Visuals.CutoutRig rig;
         private BodyRegionDamage regions;
         private Enemies.AuthoredLadderRoute route;
@@ -33,6 +39,7 @@ namespace InsaneDreams.Combat
         private Rigidbody2D anchor;
         private bool jointsAwake;
         private readonly float[] pendingRegions=new float[6];
+        private readonly Vector2[] regionPoints=new Vector2[6],regionDirections=new Vector2[6];
         private float pendingStrength,awakeUntil,rapidLoad,nextHeavy,immuneUntil;
         private Vector2 pendingDirection;
         public bool UsesLivingPhysics=>livingPhysics;
@@ -61,7 +68,7 @@ namespace InsaneDreams.Combat
         private void OnEnable(){health.Damaged+=Hurt;health.DamageResolved+=Resolved;if(recovery!=null)recovery.Recovered+=Recovered;}
         private void Recovered()=>CancelReaction();
         public void CancelReaction(bool restoreControls=true)
-        {if(restoreControls&&!health.IsDefeated)Release();else locked=false;stumbleUntil=until=nextReaction=nextHeavy=immuneUntil=0;Balance=pendingStrength=rapidLoad=0;for(int i=0;i<6;i++)pendingRegions[i]=0;SleepJoints();}
+        {if(restoreControls&&!health.IsDefeated)Release();else locked=false;stumbleUntil=until=nextReaction=nextHeavy=immuneUntil=0;Balance=pendingStrength=rapidLoad=0;pendingDirection=Vector2.zero;for(int i=0;i<6;i++){pendingRegions[i]=0;regionPoints[i]=regionDirections[i]=Vector2.zero;}SleepJoints();}
         private void Hurt(DamageInfo hit)
         {
             if(livingPhysics)return;
@@ -85,7 +92,7 @@ namespace InsaneDreams.Combat
             for(int i=0;i<6;i++)
             {
                 var g=new GameObject("ImpactJoint"+i);g.transform.SetParent(physicsRoot.transform,false);
-                var b=springs[i]=g.AddComponent<Rigidbody2D>();b.gravityScale=0;b.mass=.1f;b.inertia=.015f;b.angularDamping=5;b.constraints=RigidbodyConstraints2D.FreezePosition;b.simulated=false;
+                var b=springs[i]=g.AddComponent<Rigidbody2D>();b.gravityScale=0;b.mass=.1f;b.inertia=.015f;b.angularDamping=jointDamping;b.constraints=RigidbodyConstraints2D.FreezePosition;b.simulated=false;
                 var j=joints[i]=g.AddComponent<HingeJoint2D>();j.connectedBody=anchor;j.autoConfigureConnectedAnchor=false;j.anchor=j.connectedAnchor=Vector2.zero;j.enableCollision=false;j.useLimits=false;j.useMotor=false;
             }
         }
@@ -98,7 +105,7 @@ namespace InsaneDreams.Combat
             float armorFactor=Mathf.Lerp(.65f,1,Mathf.Clamp01(outcome.HealthLost/Mathf.Max(.01f,hit.Amount)));
             strength=Mathf.Clamp(strength*armorFactor,0,4);
             LastRegion=regions!=null?regions.RegionAt(impact.Point):0;
-            pendingRegions[LastRegion]+=strength;pendingStrength+=strength;pendingDirection=impact.Direction;
+            pendingRegions[LastRegion]+=strength;pendingStrength+=strength;pendingDirection+=impact.Direction*strength;regionPoints[LastRegion]+=impact.Point*strength;regionDirections[LastRegion]+=impact.Direction*strength;
         }
         private void FixedUpdate()
         {
@@ -111,20 +118,30 @@ namespace InsaneDreams.Combat
                 // One physics response for the batch, including all shotgun pellets.
                 float strength=Mathf.Min(3.2f,pendingStrength)*susceptibility;
                 float diminishing=1/(1+rapidLoad*.25f);rapidLoad=Mathf.Min(4,rapidLoad+1);
-                LastIntensity=strength;PhysicalReactions++;Direction=Mathf.Abs(pendingDirection.x)>.05f?Mathf.Sign(pendingDirection.x):Mathf.Sign(pendingDirection.y);
+                Vector2 direction=pendingDirection.sqrMagnitude>.0001f?pendingDirection.normalized:Vector2.right;
+                LastIntensity=strength;PhysicalReactions++;Direction=Mathf.Abs(direction.x)>.05f?Mathf.Sign(direction.x):Mathf.Sign(direction.y);
+                Vector2 hip=rig.transform.TransformPoint((rig.leftLeg.localPosition+rig.rightLeg.localPosition)*.5f);
                 bool heavy=!locked&&Time.time>=immuneUntil&&strength>=stumbleImpulse&&Time.time>=nextHeavy;
                 if(heavy){HeavyReactions++;nextHeavy=Time.time+heavyCooldown;}
-                bool waking=!jointsAwake;anchor.simulated=true;jointsAwake=true;awakeUntil=Time.time+.8f;
+                bool waking=!jointsAwake;anchor.simulated=true;jointsAwake=true;awakeUntil=Time.time+responseSeconds;
                 for(int i=0;i<6;i++)
                 {
                     var b=springs[i];b.simulated=true;
                     if(waking){b.rotation=0;b.angularVelocity=0;b.linearVelocity=Vector2.zero;b.WakeUp();}
                     float share=pendingRegions[i]/pendingStrength;
-                    float response=Mathf.Lerp(i==0?(heavy?.55f:.25f):heavy?.2f:.08f,1,share);
-                    float kick=-Direction*impulseDegrees*strength*diminishing*response*(player!=null?.3f:1);
-                    b.AddTorque(Mathf.Clamp(kick,-320,320)*Mathf.Deg2Rad*b.inertia,ForceMode2D.Impulse);pendingRegions[i]=0;
+                    float turn=i<2?-Direction:Direction;
+                    if(pendingRegions[i]>0)
+                    {
+                        Vector2 lever=regionPoints[i]/pendingRegions[i]-(i==0?hip:(Vector2)poseParts[i].position);
+                        Vector2 incoming=regionDirections[i].normalized;
+                        float torque=lever.x*incoming.y-lever.y*incoming.x;
+                        if(Mathf.Abs(torque)>.01f)turn=Mathf.Sign(torque);
+                    }
+                    float response=Mathf.Lerp(i==0?(heavy?heavyTorsoSpill:torsoSpill):heavy?.2f:.08f,1,share);
+                    float kick=(player!=null?-Direction:turn)*impulseDegrees*strength*diminishing*response*(player!=null?.3f:1);
+                    b.AddTorque(Mathf.Clamp(kick,-maximumAngularSpeed,maximumAngularSpeed)*Mathf.Deg2Rad*b.inertia,ForceMode2D.Impulse);pendingRegions[i]=0;regionPoints[i]=regionDirections[i]=Vector2.zero;
                 }
-                pendingStrength=0;
+                pendingStrength=0;pendingDirection=Vector2.zero;
                 if(!locked&&Time.time>=immuneUntil)
                 {
                     Balance=Mathf.Min(knockdownImpulse*1.5f,Balance+strength*diminishing);
@@ -141,10 +158,10 @@ namespace InsaneDreams.Combat
             {
                 var b=springs[i];float angle=Mathf.DeltaAngle(0,b.rotation);
                 if(Mathf.Abs(angle)>maximumJointAngle){b.rotation=Mathf.Clamp(angle,-maximumJointAngle,maximumJointAngle);b.angularVelocity=0;}
-                b.angularVelocity=Mathf.Clamp(b.angularVelocity,-320,320);
+                b.angularVelocity=Mathf.Clamp(b.angularVelocity,-maximumAngularSpeed,maximumAngularSpeed);
                 // World-angle spring avoids HingeJoint motor sign/reference-angle
                 // changes when a pooled response is reset between opposite hits.
-                float acceleration=-angle*springReturn*springReturn-b.angularVelocity*springReturn*1.5f;
+                float acceleration=-angle*springReturn*springReturn-b.angularVelocity*springReturn*springDamping;
                 b.AddTorque(Mathf.Clamp(acceleration*Mathf.Deg2Rad*b.inertia,-springTorque,springTorque),ForceMode2D.Force);
             }
         }
@@ -162,7 +179,7 @@ namespace InsaneDreams.Combat
             bool constrained=reloading||healing!=null&&healing.IsHealing||traversal!=null&&(traversal.IsClimbing||traversal.ParachuteFlightActive)||cover!=null&&cover.IsCovered;
             Vector3 oldHand=rig.rightArm.TransformPoint(Vector3.down*rig.skin.arm.bounds.size.y);Quaternion barrel=rig.weaponMount.rotation;bool flip=rig.weapon.flipY;
             Vector3 hip=(rig.leftLeg.localPosition+rig.rightLeg.localPosition)*.5f;
-            float torsoAngle=Mathf.Clamp(RegionAngle(0)*facing,-12,12)*(player!=null?.65f:1)*(constrained?.2f:1);
+            float torsoAngle=Mathf.Clamp(RegionAngle(0)*facing,-maximumTorsoAngle,maximumTorsoAngle)*(player!=null?.65f:1)*(constrained?(player!=null?.2f:.45f):1);
             Quaternion upper=Quaternion.Euler(0,0,torsoAngle);
             rig.torso.localPosition=hip+upper*(rig.torso.localPosition-hip);
             for(int i=0;i<6;i++)

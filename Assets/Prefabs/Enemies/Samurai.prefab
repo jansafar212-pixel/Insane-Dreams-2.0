@@ -504,7 +504,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8813474979453803750, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
       propertyPath: maximumJointAngle
-      value: 20
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 8900685380474566528, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
       propertyPath: m_Sprite

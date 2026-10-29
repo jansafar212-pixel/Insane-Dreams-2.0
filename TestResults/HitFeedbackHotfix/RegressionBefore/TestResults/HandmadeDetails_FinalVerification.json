@@ -1,0 +1,40 @@
+{
+  "scenes": [
+    {
+      "scene": "Warehouse_Demo",
+      "dirty": false,
+      "originalDifferences": [],
+      "decorativeRenderers": 19,
+      "componentsOnlyVisual": true,
+      "validMaterials": true
+    },
+    {
+      "scene": "Warehouse_Testbed",
+      "dirty": false,
+      "originalDifferences": [],
+      "decorativeRenderers": 19,
+      "componentsOnlyVisual": true,
+      "validMaterials": true
+    },
+    {
+      "scene": "Warehouse_Mission01",
+      "dirty": false,
+      "originalDifferences": [],
+      "decorativeRenderers": 19,
+      "componentsOnlyVisual": true,
+      "validMaterials": true
+    }
+  ],
+  "activeScene": "Warehouse_Demo",
+  "dirty": false,
+  "playing": false,
+  "compiling": false,
+  "sheet": {
+    "width": 256,
+    "height": 256,
+    "filter": "Point",
+    "format": "RGBA32",
+    "mipmapCount": 1,
+    "sprites": 15
+  }
+}

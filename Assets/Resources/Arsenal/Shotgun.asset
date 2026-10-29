@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: Shotgun
   m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Inventory.WeaponDefinition
   stableId: b768049f49574d0eb87348241a27dc6c
-  displayName: Doorbell Shotgun
+  displayName: Shotgun
   description: Sprint 003 data-only example; no combat behavior.
   icon: {fileID: 21300000, guid: cb46b0c7472a582448e5b8d88a1bbb81, type: 2}
   category: 0
   weaponCategory: 0
+  firearmRole: 0
   damage: 8
   firingInterval: 0.85
   magazineCapacity: 6
@@ -29,6 +30,7 @@ MonoBehaviour:
   physicalMagazineReload: 0
   loadsIndividually: 1
   shellSprite: {fileID: 21300000, guid: e4f4225c37d5db547a1af336816d226c, type: 2}
+  ammunitionInsertionOffset: {x: 0.3, y: -0.04}
   firearmRange: 16
   meleeRange: 1.6
   impactImpulse: 0.55

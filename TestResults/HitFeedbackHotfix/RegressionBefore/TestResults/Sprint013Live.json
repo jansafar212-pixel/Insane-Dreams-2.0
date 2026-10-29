@@ -1,0 +1,144 @@
+{
+  "sprint": "013",
+  "scene": "Warehouse_Testbed",
+  "method": "Scripted live Unity MCP Play Mode checks with inline Game View captures. Temporary runtime actor placement/protection and manual camera framing discarded. No hands-on input, saved screenshots or Android hardware claim.",
+  "offscreen": {
+    "scene": "Warehouse_Testbed",
+    "paused": true,
+    "viewport": false,
+    "targetVisible": true,
+    "hasEngaged": false,
+    "newShots": 0,
+    "range": 17,
+    "ammo": 18
+  },
+  "visible": {
+    "paused": true,
+    "viewport": true,
+    "hasEngaged": true,
+    "newShots": 6,
+    "ammo": 12,
+    "liveTracers": 2
+  },
+  "cameraExit": {
+    "viewport": false,
+    "hasEngaged": true,
+    "newShots": 3,
+    "ammo": 9,
+    "team": "Enemy",
+    "line": [
+      {
+        "name": "ShotTrace",
+        "shader": "Universal Render Pipeline/Unlit",
+        "color": "RGBA(1.000, 0.435, 0.251, 0.039)",
+        "tint": "RGBA(1.000, 0.800, 0.250, 1.000)"
+      },
+      {
+        "name": "Tracer_1",
+        "shader": "Universal Render Pipeline/Unlit",
+        "color": "RGBA(1.000, 0.518, 0.357, 0.302)",
+        "tint": "RGBA(1.000, 0.800, 0.250, 1.000)"
+      },
+      {
+        "name": "Tracer_2",
+        "shader": "Universal Render Pipeline/Unlit",
+        "color": "RGBA(1.000, 0.490, 0.322, 0.925)",
+        "tint": "RGBA(1.000, 0.800, 0.250, 1.000)"
+      },
+      {
+        "name": "Tracer_3",
+        "shader": "Universal Render Pipeline/Unlit",
+        "color": "RGBA(1.000, 0.549, 0.396, 0.008)",
+        "tint": "RGBA(1.000, 0.800, 0.250, 1.000)"
+      },
+      {
+        "name": "Tracer_4",
+        "shader": "Universal Render Pipeline/Unlit",
+        "color": "RGBA(1.000, 0.510, 0.345, 0.271)",
+        "tint": "RGBA(1.000, 0.800, 0.250, 1.000)"
+      },
+      {
+        "name": "Tracer_5",
+        "shader": "Universal Render Pipeline/Unlit",
+        "color": "RGBA(1.000, 0.435, 0.243, 0.020)",
+        "tint": "RGBA(1.000, 0.800, 0.250, 1.000)"
+      }
+    ]
+  },
+  "group": {
+    "paused": true,
+    "voices": 0,
+    "actors": [
+      {
+        "name": "Live013_Group_0",
+        "position": "(8.03, 0.71, 0.00)",
+        "shots": 7,
+        "ammo": 11,
+        "activeTracers": 1,
+        "tracerCapacity": 6,
+        "particleCapacity": 12,
+        "activeParticles": 0
+      },
+      {
+        "name": "Live013_Group_1",
+        "position": "(10.00, 0.71, 0.00)",
+        "shots": 7,
+        "ammo": 11,
+        "activeTracers": 1,
+        "tracerCapacity": 6,
+        "particleCapacity": 12,
+        "activeParticles": 0
+      },
+      {
+        "name": "Live013_Group_2",
+        "position": "(14.19, 0.71, 0.00)",
+        "shots": 8,
+        "ammo": 10,
+        "activeTracers": 2,
+        "tracerCapacity": 6,
+        "particleCapacity": 12,
+        "activeParticles": 8
+      }
+    ]
+  },
+  "impacts": {
+    "wood": "Geometry/Wood/end(20.50, 0.55)/origin(18.25, 0.55)",
+    "metal": "Geometry/Metal/end(-1.84, -5.43)/origin(-1.84, -4.90)",
+    "concrete": "Geometry/Concrete/end(4.16, -7.00)/origin(4.16, -6.99)"
+  },
+  "audit": {
+    "scene": "Assets/Scenes/Warehouse_Testbed.unity",
+    "saved": true,
+    "dirty": false,
+    "playing": false,
+    "missingScripts": 0,
+    "missingReferences": [],
+    "behavioursChecked": 104,
+    "colliders": 31,
+    "surfaceMarkers": 24,
+    "diagnostics": []
+  },
+  "findings": [
+    "Initial captured yellow tracers exposed old URP/Unlit material ignoring vertex color/fade; switched shared material to Sprites/Default with white tint. Later captures visibly confirmed cyan/orange-red and fade.",
+    "Culling gate uses actual visible torso layer0 rather than collision root layer2; final automated camera-layer scenario passes."
+  ],
+  "audio": {
+    "suitableProjectClipsFound": 0,
+    "implemented": "Bounded frequent combat playback, pitch variation, material-specific slots and reload-start hook.",
+    "missing": "Authored/appropriately licensed gunfire, concrete/metal/wood/generic impact, reload handling and optional hit/hurt/empty/defeat clips.",
+    "liveVoices": 0
+  },
+  "console": {
+    "compilationFailed": false,
+    "currentErrors": 0,
+    "currentWarnings": 1,
+    "warning": "Account API did not become accessible within 30 seconds. This may be due to network issues or editor focus.",
+    "origin": "Existing Unity AI Toolkit Accounts service; outside combat code. Historical obsolete-API warnings retained in MCP buffer."
+  },
+  "limitations": [
+    "No Android FPS/GC/device/audio mixing claim.",
+    "Low preset: particles4, tracers3, muzzle glow disabled; not device-profiled.",
+    "Concrete dust contrast and muzzle/group readability need hands-on tuning.",
+    "Rare pre-existing detached defeat audio cue is separate from the new frequent-combat voice budget."
+  ]
+}

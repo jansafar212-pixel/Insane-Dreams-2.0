@@ -1,0 +1,38 @@
+[
+  {
+    "assetPath": "Assets/Art/HitFeedbackHotfix/AA12BodyPixels.asset",
+    "type": "Texture2D",
+    "guid": "509b11aae0b2f794e8f387697e68ef72",
+    "sizeBytes": 2032
+  },
+  {
+    "assetPath": "Assets/Art/HitFeedbackHotfix/AA12MagazinePixels.asset",
+    "type": "Texture2D",
+    "guid": "829d9a5d506d5bd4abcf0a03cc9e622a",
+    "sizeBytes": 228
+  },
+  {
+    "assetPath": "Assets/Art/HitFeedbackHotfix/AA12Body.asset",
+    "type": "Sprite",
+    "guid": "86a07532ac82ede4da9353bf94236481",
+    "sizeBytes": 440
+  },
+  {
+    "assetPath": "Assets/Art/HitFeedbackHotfix/AA12Magazine.asset",
+    "type": "Sprite",
+    "guid": "821c4d7896040ee439339dd547169798",
+    "sizeBytes": 444
+  },
+  {
+    "assetPath": "Assets/Art/HitFeedbackHotfix/HitFlash.mat",
+    "type": "Material",
+    "guid": "f3a9cafa077572541ac36ff36e340aba",
+    "sizeBytes": 276
+  },
+  {
+    "assetPath": "Assets/Shaders/HitFlash.shader",
+    "type": "Shader",
+    "guid": "6c5b965344da9c3458ff0ba93ba1935c",
+    "sizeBytes": 6252
+  }
+]

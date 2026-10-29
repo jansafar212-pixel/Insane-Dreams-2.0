@@ -1,0 +1,130 @@
+{
+  "scene": "Assets/Scenes/Warehouse_Demo.unity",
+  "dirty": false,
+  "playing": false,
+  "compiling": false,
+  "missingScripts": 0,
+  "firstBuildScene": "Assets/Scenes/MainMenu.unity",
+  "catalogRoute": "Warehouse_Demo",
+  "FirstOperation": true,
+  "groups": [
+    {
+      "name": "01_Warmup",
+      "starts": [
+        {
+          "archetype": "Larper",
+          "x": -18.5,
+          "y": 0.73,
+          "valid": true,
+          "placed": true
+        },
+        {
+          "archetype": "Larper",
+          "x": -8.0,
+          "y": 0.729999959,
+          "valid": true,
+          "placed": true
+        },
+        {
+          "archetype": "Larper",
+          "x": 0.0,
+          "y": 0.729999959,
+          "valid": true,
+          "placed": true
+        }
+      ]
+    },
+    {
+      "name": "02_Verticality",
+      "starts": [
+        {
+          "archetype": "Larper",
+          "x": 18.0,
+          "y": 3.93,
+          "valid": true,
+          "placed": true
+        },
+        {
+          "archetype": "Larper",
+          "x": 31.0,
+          "y": 0.729999959,
+          "valid": true,
+          "placed": true
+        },
+        {
+          "archetype": "Larper",
+          "x": 35.0,
+          "y": 7.13,
+          "valid": true,
+          "placed": true
+        }
+      ]
+    },
+    {
+      "name": "03_Samurai",
+      "starts": [
+        {
+          "archetype": "Samurai",
+          "x": 58.0,
+          "y": 0.544232,
+          "valid": true,
+          "placed": true
+        },
+        {
+          "archetype": "Larper",
+          "x": 64.0,
+          "y": 0.729999959,
+          "valid": true,
+          "placed": true
+        },
+        {
+          "archetype": "Larper",
+          "x": 68.0,
+          "y": 3.93,
+          "valid": true,
+          "placed": true
+        }
+      ]
+    },
+    {
+      "name": "04_Fireworks",
+      "starts": [
+        {
+          "archetype": "OperationFireworks",
+          "x": 94.8,
+          "y": 3.93,
+          "valid": true,
+          "placed": true
+        },
+        {
+          "archetype": "Larper",
+          "x": 86.0,
+          "y": 0.729999959,
+          "valid": true,
+          "placed": true
+        },
+        {
+          "archetype": "Larper",
+          "x": 106.0,
+          "y": 0.729999959,
+          "valid": true,
+          "placed": true
+        }
+      ]
+    },
+    {
+      "name": "05_Officer",
+      "starts": [
+        {
+          "archetype": "Officer",
+          "x": 140.0,
+          "y": 2.33,
+          "valid": true,
+          "placed": true
+        }
+      ]
+    }
+  ],
+  "total": 13,
+  "checkpoints": 0
+}

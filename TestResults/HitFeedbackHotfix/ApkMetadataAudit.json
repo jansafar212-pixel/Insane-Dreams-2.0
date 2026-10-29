@@ -1,0 +1,18 @@
+[
+  {
+    "symbol": "CancelDamageFlash",
+    "present": true
+  },
+  {
+    "symbol": "CacheTintRenderers",
+    "present": true
+  },
+  {
+    "symbol": "pendingLivingImpact",
+    "present": true
+  },
+  {
+    "symbol": "damageFlashMaterial",
+    "present": true
+  }
+]

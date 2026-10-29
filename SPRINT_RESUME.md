@@ -1,3 +1,49 @@
+# AKUMU 2 — Hit feedback / AA12 hotfix resumed (2026-10-29)
+
+Interrupted code preserved and native assets now applied. Full-body living-only
+red flash, synchronous normal-color/material restore BEFORE death observers,
+no dead/lethal-first flash; cached shared material, no per-hit material objects.
+AA12 existing magazine reload clock retained and tested, original pixels split
+and native exchange animation connected (8 rounds/3s unchanged). Existing enemy
+visual impulse160→175, pooled per-frame hit accents, shotgun muzzle/recoil polish.
+50/50 selected Edit/Play cases pass. Native material references/scene scripts,
+shader and unchanged16weapon balance audit verified. Full report/captures/filelist:
+TestResults/HitFeedbackHotfix. Release0.14.1/code4 succeeded263.197s/0errors/974warnings; identity lives
+in AndroidBuild.md. Phone readability/feel/FPS PENDING USER VERIFICATION.
+Prior0039/0040dirtywork preserved. No stage/commit/push. No deletion for diskspace.
+# AKUMU 2 — Sprint0040 implemented (2026-10-29)
+
+Sprint0040 supersedes the three-firearm design below: exactly one primary and one
+secondary, grenades separate. Actual enum/runtime/save/UI/switching third slot
+removed; private legacy-envelope migration preserves ownership/ammo/currency.
+Existing six-joint living enemy response now readable at native Android zoom:
+Glock head movement 1.70→4.65px, SMG .62→2.86px, DE 11.63→18.52px at720p.
+No weapon balance/player motor/AI/death changes. Source snapshot, final profiles,
+controlled before/after captures and reports: TestResults/Sprint0040.
+116 unique selected tests:113pass/3fail. Three CowardsBunker geometry/expectation
+mismatches remain open; relevant colliders match committedHEAD (native audit),
+not redesigned in0040. Prior intermittent ADTM Editor audio crash remains open.
+Release build_eb8380764492 Succeeded213.368s/0errors/974warnings:
+build/Sprint0040/AKUMU2-sprint0040-release.apk,39,843,675bytes,ARM64/nondebuggable,
+0.14/code3. SHA2564AEC0E14009A5BED508D47D8E452D2958061412235C8E3D5E9182C50F16CD5AD.
+Actual APK metadata verified; no connecteddevice/install/gameplay/FPS acceptance.
+Android phone and artistic/feel acceptance PENDING USER VERIFICATION.
+Preserve all dirty0039/0040work. No stage/commit/push.
+# AKUMU 2 — Sprint0039 integrated (2026-10-29)
+
+Report, final102/102selectedtest results, native/packedasset/APK audits and device
+checklist: TestResults/Sprint0039. Oneprimary/twosecondaries, SKS/AA-12/sawed-off,
+additive legacy-save migration, sniper recovery/receiver loading, stored-ammo and
+empty-inline-slot fixes, exact-zero canopy landing/retraction, grenade repairs,
+frag145/radius4.5, future-only mine prefab, red flashes/tracer shader/materials.
+No campaign mines/layout changes; Level1 retains13enemies. Native ADTM Editor
+audio fatal remains unresolved (also recurred with -noaudio); restarted normally.
+Release build_f11552b8f7ad succeeded331.231s/0errors/977warnings:
+build/Sprint0039/AKUMU2-sprint0039-release.apk,39,843,255bytes,ARM64/nondebuggable,
+0.13/code2. SHA256945E4E44F16B2C8211EADD59A2A5CA20992C4BA9114D6E77B509CC933F64BEBE.
+Actual APK code/asset metadata verified. Android playtest/art/audio/FPS acceptance
+PENDING USER VERIFICATION. No stage/commit/push; preserve all working changes.
+
 # AKUMU 2 — Sprint0038 polish (2026-10-29)
 
 Report/evidence: TestResults/Sprint0038/Report.md. Ballistic character cue scale

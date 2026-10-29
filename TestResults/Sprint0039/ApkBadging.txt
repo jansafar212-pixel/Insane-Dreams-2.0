@@ -1,0 +1,2 @@
+package: name='com.GAMES.AKUMU2' versionCode='2' versionName='0.13' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'
+native-code: 'arm64-v8a'

@@ -1,0 +1,41 @@
+{
+  "status": "completed",
+  "duration": 10.06,
+  "summary": {
+    "total": 4,
+    "passed": 4,
+    "failed": 0,
+    "skipped": 0,
+    "inconclusive": 0
+  },
+  "results": [
+    {
+      "FullName": "InsaneDreams.Tests.GrenadeResupplyHotfixTests.ExistingBoxRestocksEveryTypeWithPartialAcceptanceFiniteStockImmediateHudAndSave",
+      "Status": "Passed",
+      "Duration": 2.2164598,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.GrenadeResupplyHotfixTests.FragShakeIsDistanceBoundedExpiresAndActualEnemyDeathStillCreatesPhysicsCorpse",
+      "Status": "Passed",
+      "Duration": 1.6920866,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.GrenadeResupplyHotfixTests.FragUsesLargerRealFalloffFriendlyCoverAndPooledChunkyEffectsWithoutChangingOtherTypes",
+      "Status": "Passed",
+      "Duration": 4.5809964,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.GrenadeResupplyHotfixTests.OrdinaryLocalizedDeathKeepsArmsUntilOneRegionAccumulates105AndLegThresholdStays60",
+      "Status": "Passed",
+      "Duration": 1.5236061,
+      "Message": null,
+      "StackTrace": null
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "status": "completed",
+  "duration": 12.51,
+  "summary": {
+    "total": 9,
+    "passed": 9,
+    "failed": 0,
+    "skipped": 0,
+    "inconclusive": 0
+  },
+  "results": [
+    {
+      "FullName": "InsaneDreams.Tests.CombatPresentation0039Tests.BrightTracerUsesExistingPoolFadesAndKeepsOfficerColorAndAimMaterialSeparate",
+      "Status": "Passed",
+      "Duration": 0.5247392,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CombatPresentation0039Tests.EveryArchetypeFlashesRedDespiteReloadAndRepeatedHitsThenRestoresItsColors",
+      "Status": "Passed",
+      "Duration": 1.5805674,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CombatPresentation0039Tests.PlayerEmptyMagazineFlashRemainsGrayAndTemporary",
+      "Status": "Passed",
+      "Duration": 0.260144,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CombatPresentation0039Tests.ThreeMaterialImpactsRemainShortAndBoundedButHaveDifferentShapesAndColors",
+      "Status": "Passed",
+      "Duration": 1.12113,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Grenades0039Tests.FragmentationIsStrongerWithFalloffAndCoverAndOtherTypesKeepTheirSettings",
+      "Status": "Passed",
+      "Duration": 1.0672783,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Grenades0039Tests.InventoryBoundariesAndSwitchOrCapacityChangesCancelAimWithoutLoss",
+      "Status": "Passed",
+      "Duration": 1.0904361,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Grenades0039Tests.MinePressureUsesOneDelayedExistingBurstForPlayerAndEnemyWithoutRecursing",
+      "Status": "Passed",
+      "Duration": 2.1106273,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Grenades0039Tests.ShootingMineFromOutsideBlastIsSafeAndNeverInstallsMinesInLevelOne",
+      "Status": "Passed",
+      "Duration": 0.4623348,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Sniper0039Tests.PostShotCycleIsNotReloadAndManualLoadingRequiresFreshAimRelease",
+      "Status": "Passed",
+      "Duration": 4.2262025,
+      "Message": null,
+      "StackTrace": null
+    }
+  ]
+}

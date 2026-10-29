@@ -1,0 +1,48 @@
+{
+  "status": "completed",
+  "duration": 15.42,
+  "summary": {
+    "total": 5,
+    "passed": 5,
+    "failed": 0,
+    "skipped": 0,
+    "inconclusive": 0
+  },
+  "results": [
+    {
+      "FullName": "InsaneDreams.Tests.ReloadRepairPlayTests.DefaultPistolFlushMagazineMovesSeatsAndConservesPartialReloads",
+      "Status": "Passed",
+      "Duration": 6.0602135,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.ReloadRepairPlayTests.HudShowsEachInsertedShellOnNextUiFrameAndRebindIsSafe",
+      "Status": "Passed",
+      "Duration": 0.9159669,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.ReloadRepairPlayTests.ShotgunRealClockShellsPersistOnFireAndDeathAndVisualIsBounded",
+      "Status": "Passed",
+      "Duration": 1.9597311,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.ReloadRepairPlayTests.SmgExchangeTracksFacingMovementAndCancelsOnSwitchWithoutDebris",
+      "Status": "Passed",
+      "Duration": 4.6441582,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.ReloadRepairPlayTests.StartingTapeHealingCancelsReloadWithoutDiscardingCompletedShells",
+      "Status": "Passed",
+      "Duration": 1.7544319,
+      "Message": null,
+      "StackTrace": null
+    }
+  ]
+}

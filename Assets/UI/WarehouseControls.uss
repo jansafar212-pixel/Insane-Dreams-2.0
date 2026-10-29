@@ -43,7 +43,8 @@
 .ammo-value { color: var(--gold); font-size: 36px; }
 .reserve-value { color: var(--quiet); font-size: 11px; white-space: normal; }
 .equipment-buttons { flex-direction: row; }
-.equipment-buttons > Button { flex-grow: 1; flex-basis: 0; height: 44px; margin: 0 2px 0 0; padding: 2px; font-size: 11px; background-color: var(--raised); color: var(--cream); border-width: 2px; border-color: var(--edge); border-radius: 0; }
+.equipment-buttons > Button { min-width: 44px; min-height: 48px; }
+.equipment-buttons > Button { flex-grow: 1; flex-basis: 0; height: 48px; margin: 0 2px 0 0; padding: 2px; font-size: 11px; background-color: var(--raised); color: var(--cream); border-width: 2px; border-color: var(--edge); border-radius: 0; }
 .equipment-buttons > Button.is-selected { background-color: #68532f; border-top-color: var(--gold); border-left-color: var(--rust); color: #fff8d9; }
 .equipment-buttons > Button.is-empty { color: #858b7b; background-color: var(--panel); border-color: #484d43; }
 #throwableTypes > Button { padding-top: 15px; font-size: 10px; }

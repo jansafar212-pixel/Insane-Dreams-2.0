@@ -13,7 +13,7 @@ namespace InsaneDreams.Tests
         GameCatalog Catalog=>AssetDatabase.LoadAssetAtPath<GameCatalog>("Assets/Data/Progression/DemoCatalog.asset");
         [Test]public void CatalogContainsOnlyExistingArsenalAndMedicalAndSeparateFiniteAmmoPacks()
         {
-            var c=Catalog;var guns=c.offers.Where(o=>o.category==ShopCategory.Weapons&&o.weapon.WeaponCategory==WeaponCategory.Firearm).ToArray();Assert.AreEqual(8,guns.Length);Assert.AreEqual(c.offers.Length,c.offers.Select(o=>o.id).Distinct().Count());
+            var c=Catalog;var guns=c.offers.Where(o=>o.category==ShopCategory.Weapons&&o.weapon.WeaponCategory==WeaponCategory.Firearm).ToArray();Assert.AreEqual(11,guns.Length);Assert.AreEqual(c.offers.Length,c.offers.Select(o=>o.id).Distinct().Count());
             var actual=AssetDatabase.LoadAssetAtPath<ArsenalCatalog>("Assets/Resources/ArsenalCatalog.asset");foreach(var gun in guns){CollectionAssert.Contains(actual.weapons,gun.weapon);var ammo=c.Find(gun.id+"-ammo");Assert.AreSame(gun.weapon,ammo.weapon);Assert.AreEqual(gun.weapon.MagazineCapacity,ammo.quantity);Assert.Greater(ammo.price,0);Assert.GreaterOrEqual(gun.reserveCapacity,ammo.quantity);}
             Assert.IsTrue(c.Find("pistol").starter);Assert.AreEqual(0,c.Find("pistol").price);Assert.AreEqual("relax its not addictive, just habit forming",c.Find("faintanyl").description);Assert.AreEqual(1,c.offers.Count(o=>o.category==ShopCategory.Faintanyl));Assert.Greater(c.Find("sniper-ammo").price/(float)c.Find("sniper-ammo").quantity,c.Find("pistol-ammo").price/(float)c.Find("pistol-ammo").quantity);
         }

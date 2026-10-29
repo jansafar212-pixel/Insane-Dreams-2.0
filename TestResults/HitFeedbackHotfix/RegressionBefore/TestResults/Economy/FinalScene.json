@@ -1,0 +1,28 @@
+{
+  "success": true,
+  "command": "command list_open_scenes",
+  "data": {
+    "command": "list_open_scenes",
+    "parameters": {},
+    "result": {
+      "count": 1,
+      "scenes": [
+        {
+          "name": "Warehouse_Demo",
+          "path": "Assets/Scenes/Warehouse_Demo.unity",
+          "isLoaded": true,
+          "isDirty": false,
+          "isActive": true,
+          "rootCount": 17
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

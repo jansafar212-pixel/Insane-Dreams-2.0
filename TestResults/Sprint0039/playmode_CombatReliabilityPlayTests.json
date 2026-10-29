@@ -1,0 +1,62 @@
+{
+  "status": "completed",
+  "duration": 37.62,
+  "summary": {
+    "total": 7,
+    "passed": 7,
+    "failed": 0,
+    "skipped": 0,
+    "inconclusive": 0
+  },
+  "results": [
+    {
+      "FullName": "InsaneDreams.Tests.CombatReliabilityPlayTests.AllGrenadesClearCoverOnBothSidesAndReturnToCrouch",
+      "Status": "Passed",
+      "Duration": 5.4100272,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CombatReliabilityPlayTests.EagleExchangeFacesBothWaysAndCancelsWithoutLooseObjects",
+      "Status": "Passed",
+      "Duration": 6.3287064,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CombatReliabilityPlayTests.HealingCancelsLmgAndBlocksAllThreeManualReloadsAndFire",
+      "Status": "Passed",
+      "Duration": 1.1923567,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CombatReliabilityPlayTests.LmgExchangeFacesBothWaysAndCancelsWithoutLooseObjects",
+      "Status": "Passed",
+      "Duration": 17.236301,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CombatReliabilityPlayTests.LowCeilingRefusesThrowWithoutSpendingAndDelayedWalletRecoveryIsBounded",
+      "Status": "Passed",
+      "Duration": 2.8769933,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CombatReliabilityPlayTests.SniperManualReloadCancelsHeldShotAndRecoversWithoutGrantingAmmo",
+      "Status": "Passed",
+      "Duration": 4.1405589,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CombatReliabilityPlayTests.WalletsRecoverFromCratesWallsElevatedDecksAndAwardExactlyOnceBothDirections",
+      "Status": "Passed",
+      "Duration": 0.3648588,
+      "Message": null,
+      "StackTrace": null
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "void Capture(UnityEngine.Vector2 center,float zoom,string file){var camera=new UnityEngine.GameObject(\"ControlledCapture\").AddComponent<UnityEngine.Camera>();camera.CopyFrom(UnityEngine.Camera.main);camera.enabled=false;camera.transform.position=new UnityEngine.Vector3(center.x,center.y,-10);camera.orthographicSize=zoom;camera.aspect=16f/9;var previous=UnityEngine.RenderTexture.active;var rt=new UnityEngine.RenderTexture(960,540,24);camera.targetTexture=rt;camera.Render();UnityEngine.RenderTexture.active=rt;var texture=new UnityEngine.Texture2D(960,540,UnityEngine.TextureFormat.RGB24,false);texture.ReadPixels(new UnityEngine.Rect(0,0,960,540),0,0);texture.Apply();System.IO.File.WriteAllBytes(System.IO.Path.GetFullPath(\"TestResults/Sprint0027/\"+file+\".png\"),texture.EncodeToPNG());UnityEngine.RenderTexture.active=previous;camera.targetTexture=null;rt.Release();UnityEngine.Object.Destroy(rt);UnityEngine.Object.Destroy(texture);UnityEngine.Object.Destroy(camera.gameObject);}\nvar a=UnityEngine.Object.FindAnyObjectByType<InsaneDreams.Missions.WarehouseMission>().Player;Capture((UnityEngine.Vector2)a.transform.position+UnityEngine.Vector2.up*.15f,1.3f,\"TapeWrap\");a.SetHealIntent(false);\nreturn new { healing=a.GetComponent<InsaneDreams.Visuals.PlayerHealingPresentation>().IsWrapping, time=UnityEngine.Time.time };"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": {
+        "healing": true,
+        "time": 40.7725754
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

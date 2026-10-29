@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "var s=UnityEngine.SceneManagement.SceneManager.GetActiveScene();return Newtonsoft.Json.JsonConvert.SerializeObject(new{scene=s.path,dirty=s.isDirty,playing=UnityEditor.EditorApplication.isPlaying,development=UnityEditor.EditorUserBuildSettings.development,orientation=UnityEditor.PlayerSettings.defaultInterfaceOrientation.ToString()});"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": "{\"scene\":\"Assets/Scenes/Warehouse_Demo.unity\",\"dirty\":false,\"playing\":false,\"development\":false,\"orientation\":\"LandscapeLeft\"}"
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

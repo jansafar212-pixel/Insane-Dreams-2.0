@@ -1,0 +1,48 @@
+{
+  "status": "completed",
+  "duration": 19.43,
+  "summary": {
+    "total": 5,
+    "passed": 5,
+    "failed": 0,
+    "skipped": 0,
+    "inconclusive": 0
+  },
+  "results": [
+    {
+      "FullName": "InsaneDreams.Tests.HitFeedbackHotfixTests.Aa12NativeMagazineAnimationHudAndSwitchInterruptionConserveAmmo",
+      "Status": "Passed",
+      "Duration": 14.3310392,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.HitFeedbackHotfixTests.AllElevenNativeFirearmsFlashTheWholeLivingLarperAndRestoreColorsAndMaterials",
+      "Status": "Passed",
+      "Duration": 2.5504422,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.HitFeedbackHotfixTests.ConcurrentShotgunBatchesReuseParticlesAndExistingPhysicsWithoutPerPelletObjects",
+      "Status": "Passed",
+      "Duration": 1.8124347,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.HitFeedbackHotfixTests.FirstLethalHitNeverStartsAFlash",
+      "Status": "Passed",
+      "Duration": 0.0667895,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.HitFeedbackHotfixTests.RepeatedPelletsRefreshAndDeathRestoresBeforeObserversAndCannotReflashForearms",
+      "Status": "Passed",
+      "Duration": 0.5484495,
+      "Message": null,
+      "StackTrace": null
+    }
+  ]
+}

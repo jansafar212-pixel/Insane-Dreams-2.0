@@ -1,0 +1,57 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "var projectile=UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.GameObject>(\"Assets/Data/Sprint0027/Throwable.prefab\");var p=new UnityEditor.SerializedObject(projectile.GetComponent<InsaneDreams.Combat.ThrowableProjectile2D>());var firework=new UnityEditor.SerializedObject(UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.GameObject>(\"Assets/Prefabs/Enemies/CartoonFirework.prefab\").GetComponent<InsaneDreams.Enemies.FireworkProjectile>());string[] fields={\"blastRadius\",\"fragmentationDamage\",\"blastImpulse\",\"flashRadius\",\"flashSeconds\",\"smokeRadius\",\"smokeSeconds\"};return new{values=fields.Select(n=>new{name=n,value=p.FindProperty(n).floatValue}).ToArray(),sound=UnityEditor.AssetDatabase.GetAssetPath(firework.FindProperty(\"burstSound\").objectReferenceValue),effect=UnityEditor.AssetDatabase.GetAssetPath(firework.FindProperty(\"effectSprite\").objectReferenceValue),crateCount=UnityEngine.Object.FindObjectsByType<InsaneDreams.Inventory.SupplyCrate2D>().Length};"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": {
+        "values": [
+          {
+            "name": "blastRadius",
+            "value": 3.2
+          },
+          {
+            "name": "fragmentationDamage",
+            "value": 85
+          },
+          {
+            "name": "blastImpulse",
+            "value": 2
+          },
+          {
+            "name": "flashRadius",
+            "value": 6
+          },
+          {
+            "name": "flashSeconds",
+            "value": 1.6
+          },
+          {
+            "name": "smokeRadius",
+            "value": 3.5
+          },
+          {
+            "name": "smokeSeconds",
+            "value": 8
+          }
+        ],
+        "sound": "",
+        "effect": "Assets/Prototype/PlaceholderSquare.png",
+        "crateCount": 5
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

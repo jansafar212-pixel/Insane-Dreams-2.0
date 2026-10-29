@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "var g=UnityEngine.GameObject.Find(\"ConcreteFrontLower\");return \"scene=\"+UnityEngine.SceneManagement.SceneManager.GetActiveScene().path+\" dirty=\"+UnityEngine.SceneManagement.SceneManager.GetActiveScene().isDirty+\" collider=\"+g.GetComponent<UnityEngine.BoxCollider2D>().bounds+\" renderer=\"+g.GetComponent<UnityEngine.SpriteRenderer>().bounds;"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": "scene=Assets/Scenes/Warehouse_Demo.unity dirty=False collider=Center: (140.19, 2.05, 0.00), Extents: (0.19, 0.45, 0.00) renderer=Center: (140.19, 2.05, 0.00), Extents: (0.19, 0.45, 0.10)"
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

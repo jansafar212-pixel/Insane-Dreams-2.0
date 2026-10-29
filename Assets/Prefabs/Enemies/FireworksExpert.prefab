@@ -284,6 +284,18 @@ PrefabInstance:
       propertyPath: personality
       value: 
       objectReference: {fileID: 11400000, guid: d975348349db302459b2808a65464e38, type: 2}
+    - target: {fileID: 3952280421088528623, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
+      propertyPath: hurtColor.b
+      value: 0.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3952280421088528623, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
+      propertyPath: hurtColor.g
+      value: 0.18
+      objectReference: {fileID: 0}
+    - target: {fileID: 3952280421088528623, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
+      propertyPath: damageFlashMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: f3a9cafa077572541ac36ff36e340aba, type: 2}
     - target: {fileID: 4052374020717442031, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
       propertyPath: skin
       value: 
@@ -316,6 +328,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5749682673223932391, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
+      propertyPath: tracerMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: aad1aec2f26183e409d7c81ccc5b78bb, type: 2}
     - target: {fileID: 6129873356527366220, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -367,6 +383,50 @@ PrefabInstance:
     - target: {fileID: 7952524903900054866, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
       propertyPath: obstructedHearingMultiplier
       value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8813474979453803750, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
+      propertyPath: torsoSpill
+      value: 0.45
+      objectReference: {fileID: 0}
+    - target: {fileID: 8813474979453803750, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
+      propertyPath: jointDamping
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8813474979453803750, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
+      propertyPath: springReturn
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8813474979453803750, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
+      propertyPath: springTorque
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8813474979453803750, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
+      propertyPath: springDamping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8813474979453803750, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
+      propertyPath: impulseDegrees
+      value: 175
+      objectReference: {fileID: 0}
+    - target: {fileID: 8813474979453803750, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
+      propertyPath: heavyTorsoSpill
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8813474979453803750, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
+      propertyPath: responseSeconds
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8813474979453803750, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
+      propertyPath: maximumJointAngle
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 8813474979453803750, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
+      propertyPath: maximumTorsoAngle
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 8813474979453803750, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
+      propertyPath: maximumAngularSpeed
+      value: 460
       objectReference: {fileID: 0}
     - target: {fileID: 8989811805195186138, guid: f45d04ecbe1bb0048a21e2d38c0666a7, type: 3}
       propertyPath: m_Sprite

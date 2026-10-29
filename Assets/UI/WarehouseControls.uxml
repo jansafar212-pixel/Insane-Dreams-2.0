@@ -13,7 +13,7 @@
             <ui:VisualElement class="weapon-heading"><ui:Label name="weaponStatus" text="PRIMARY" class="hud-eyebrow" picking-mode="Ignore" /><ui:Image name="weaponIcon" class="weapon-icon" picking-mode="Ignore" /></ui:VisualElement>
             <ui:Label name="loadout" text="EQUIPMENT" class="loadout" picking-mode="Ignore" />
             <ui:VisualElement class="ammo-row" picking-mode="Ignore"><ui:Label name="ammoValue" text="--" class="ammo-value" /><ui:Label name="reserveValue" text="RESERVE --" class="reserve-value" /></ui:VisualElement>
-            <ui:VisualElement class="equipment-buttons"><ui:Button name="slot1" text="1 / MAIN" /><ui:Button name="slot2" text="2 / SIDE" /><ui:Button name="melee" text="M / TOOL" /></ui:VisualElement>
+            <ui:VisualElement class="equipment-buttons"><ui:Button name="slot1" text="1 MAIN" /><ui:Button name="slot2" text="2 SIDE" /><ui:Button name="melee" text="3 G" /></ui:VisualElement>
             <ui:Label name="suppliesNotice" class="supply-notice" picking-mode="Ignore" />
         </ui:VisualElement>
         <ui:VisualElement name="moveStick" class="stick move-stick"><ui:Label text="MOVE / CLIMB" class="stick-label" picking-mode="Ignore" /><ui:VisualElement class="knob" picking-mode="Ignore" /></ui:VisualElement>

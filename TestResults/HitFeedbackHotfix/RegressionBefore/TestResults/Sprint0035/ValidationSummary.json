@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-28",
+  "tests": {
+    "total": 116,
+    "passed": 116,
+    "failed": 0,
+    "playMode": 111,
+    "editMode": 5,
+    "scope": "Selected automated checks, not full project suite"
+  },
+  "build": {
+    "id": "build_3c27a20026c6",
+    "result": "Succeeded",
+    "milliseconds": 488978,
+    "errors": 0,
+    "warnings": 977,
+    "warningGroups": {
+      "existing API/config/development warning": 6,
+      "new development directive warning": 1,
+      "shader package": 970
+    },
+    "apk": "build/Sprint0035/AKUMU2-sprint0035-dev.apk",
+    "apkBytes": 67236575,
+    "sha256": "13a770232c57a260202006cfd9633d40641f71f40870ffce57ea361c770f780c",
+    "arm64": true
+  },
+  "actualSave": {
+    "before": 2166,
+    "after": 10000,
+    "revision": 35,
+    "shopCapture": "ActualSaveShop10000.png",
+    "restartBalance": 10000,
+    "purchasesOnActualSave": false
+  },
+  "editor": {
+    "restartedAfterNativeAudioFatal": true,
+    "fatal": "ADTM: Attempting to update control while a mix is ongoing, but realtime thread is disabled will lead to a deadlock",
+    "observedDuring": "Final Play Mode stop after successful build and shop capture",
+    "rootCause": "Not diagnosed; not reproduced on Android",
+    "recoveryBackup": "Assets/_Recovery/0 (3).unity",
+    "finalState": "ready, stopped, Warehouse_Demo open, scene clean, missing scripts 0",
+    "console": "3 Pipeline startup command/timeout errors and 1 warning after restart; compilation clean"
+  },
+  "androidDeviceConnected": false,
+  "humanFullCombatRun": false,
+  "staged": false,
+  "committed": false,
+  "pushed": false
+}

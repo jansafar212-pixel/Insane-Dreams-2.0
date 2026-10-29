@@ -1,0 +1,498 @@
+[
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Camera\\GameplayViewport.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Camera\\WarehouseCameraFollow.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Checkpoints\\CheckpointMarker.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Checkpoints\\PlayerRecovery.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\AreaCombat2D.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\AttackExecutor.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\BodyArmor.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\BodyRegionDamage.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\CombatFeedback.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\CombatNoise.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\CombatVisibility2D.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\DeactivateOnDefeat.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\EnvironmentalMine2D.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\Health.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\HitReaction2D.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\ImpactSurface2D.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\PhysicalImpact.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\PlayerCombat.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\PlayerCover2D.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\PlayerFallDamage.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\PlayerHealing.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\PlayerHealthRecovery.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\PlayerRevive.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\PlayerSuppression.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\PlayerThrowables.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\SmokeCloud2D.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\SuppressionMeter.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\ThrowableProjectile2D.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\WeaponCycle.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Data\\DefinitionAsset.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Enemies\\AuthoredLadderRoute.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Enemies\\CombatPositionReservations.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Enemies\\EnemyArchetype.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Enemies\\EnemyCombat.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Enemies\\EnemySpawnPoint.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Enemies\\EnemyWalletDrop.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Enemies\\FireworkProjectile.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Enemies\\FireworksCombat.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Enemies\\LarperAwareness.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Enemies\\LarperBrain.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Enemies\\LarperPersonalityProfile.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Enemies\\LarperSpeechBubble.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Enemies\\OfficerShotTelegraph.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Enemies\\SamuraiBodyHitbox.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Enemies\\SamuraiCombat.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Enemies\\SamuraiPlatformRoutes.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Input\\JoystickJumpGesture.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Input\\PlayerActions.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Input\\WarehouseTouchControls.cs",
+    "Unchanged": false
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Inventory\\ItemDefinition.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Inventory\\PlayerLoadout.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Inventory\\PlayerSupplies.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Inventory\\RuntimeWeapon.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Inventory\\SupplyCrate2D.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Inventory\\WalletPickup.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Inventory\\WeaponDefinition.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Level\\LevelEntry.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Level\\RagdollPracticeStation.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Missions\\MissionEncounter.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Missions\\MissionHud.cs",
+    "Unchanged": false
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Missions\\MissionTrigger.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Missions\\WarehouseMission.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Progression\\CampaignMissionBridge.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Progression\\GameCatalog.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Progression\\GameFlowController.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Progression\\GameSession.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Progression\\ProgressStore.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Prototype\\DesktopPlayerInput.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Prototype\\PlatformCameraFollow.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Prototype\\PlayerMotor2D.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Traversal\\LadderVolume.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Traversal\\PlayerPosture2D.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Traversal\\PlayerPostureVisual.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Traversal\\PlayerTraversal2D.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Visuals\\ArmorVisual.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Visuals\\CartoonRagdoll.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Visuals\\CutoutRig.cs",
+    "Unchanged": false
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Visuals\\CharacterSkin.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Visuals\\CharacterVisualDriver.cs",
+    "Unchanged": false
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Visuals\\LadderVisual2D.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Visuals\\MovementAudioHooks.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Visuals\\OfficerWeaponPresentation.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Visuals\\PistolMagazineReload.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Visuals\\PlayerDeathRagdoll.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Visuals\\PlayerHealingPresentation.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Visuals\\PlayerSyringeVisual.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Visuals\\RagdollCollisionCue.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Visuals\\RagdollOnDefeat.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Visuals\\SamuraiArticulatedRig.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Visuals\\WorldMarkerCue.cs",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\AudioManager.asset",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\ClusterInputManager.asset",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\DynamicsManager.asset",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\EditorBuildSettings.asset",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\EditorSettings.asset",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\GraphicsSettings.asset",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\InputManager.asset",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\MemorySettings.asset",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\MultiplayerManager.asset",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\NavMeshAreas.asset",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\NetworkManager.asset",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\PackageManagerSettings.asset",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\Physics2DSettings.asset",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\PhysicsCoreProjectSettings2D.asset",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\PresetManager.asset",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\ProjectAuditorSettings.asset",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\ProjectSettings.asset",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\ProjectVersion.txt",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\QualitySettings.asset",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\SceneTemplateSettings.json",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\ShaderGraphSettings.asset",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\TagManager.asset",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\TimeManager.asset",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\UnityConnectSettings.asset",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\URPProjectSettings.asset",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\VersionControlSettings.asset",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\VFXManager.asset",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\XRSettings.asset",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scenes\\MainMenu.unity",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scenes\\Prototype_01.unity",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scenes\\SampleScene.unity",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scenes\\Warehouse_Demo.unity",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scenes\\Warehouse_Mission01.unity",
+    "Unchanged": true
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scenes\\Warehouse_Testbed.unity",
+    "Unchanged": true
+  }
+]

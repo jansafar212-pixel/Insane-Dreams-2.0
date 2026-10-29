@@ -1,0 +1,182 @@
+{
+  "version": "0.13",
+  "versionCode": 2,
+  "wallet": true,
+  "start": 100,
+  "arsenal": [
+    {
+      "name": "BackupPistol",
+      "StableId": "6aacf22d7be845ecbe362c28a09c39ca",
+      "DisplayName": "Glock",
+      "role": "Secondary",
+      "MagazineCapacity": 15,
+      "ReloadDuration": 1.5,
+      "mode": "Automatic",
+      "LoadsIndividually": false,
+      "Damage": 14.0,
+      "FiringInterval": 0.2,
+      "TracerScale": 1.0,
+      "sprite": "Assets/Art/Sprint0038/PistolBody.asset"
+    },
+    {
+      "name": "DesertEagle",
+      "StableId": "0895173022164b03987e377392e45314",
+      "DisplayName": "Desert Eagle",
+      "role": "Secondary",
+      "MagazineCapacity": 7,
+      "ReloadDuration": 2.8,
+      "mode": "Automatic",
+      "LoadsIndividually": false,
+      "Damage": 55.0,
+      "FiringInterval": 0.65,
+      "TracerScale": 1.6,
+      "sprite": "Assets/Data/FirstOperation/DesertEagle.asset"
+    },
+    {
+      "name": "SMG",
+      "StableId": "5e23f131689a464abbfffd4a1d567af6",
+      "DisplayName": "SMG",
+      "role": "Primary",
+      "MagazineCapacity": 30,
+      "ReloadDuration": 1.8,
+      "mode": "Automatic",
+      "LoadsIndividually": false,
+      "Damage": 9.0,
+      "FiringInterval": 0.065,
+      "TracerScale": 1.0,
+      "sprite": "Assets/Art/ReloadRepair/SmgBody.asset"
+    },
+    {
+      "name": "WarehouseCarbine",
+      "StableId": "712a12a65f944c8e9c613d28169f1850",
+      "DisplayName": "Carbine",
+      "role": "Primary",
+      "MagazineCapacity": 24,
+      "ReloadDuration": 1.5,
+      "mode": "Automatic",
+      "LoadsIndividually": false,
+      "Damage": 20.0,
+      "FiringInterval": 0.2,
+      "TracerScale": 1.0,
+      "sprite": "Assets/Art/Hotfix00251/CarbineReceiver.asset"
+    },
+    {
+      "name": "Shotgun",
+      "StableId": "b768049f49574d0eb87348241a27dc6c",
+      "DisplayName": "Shotgun",
+      "role": "Primary",
+      "MagazineCapacity": 6,
+      "ReloadDuration": 2.6,
+      "mode": "Automatic",
+      "LoadsIndividually": true,
+      "Damage": 8.0,
+      "FiringInterval": 0.85,
+      "TracerScale": 1.0,
+      "sprite": "Assets/Resources/Arsenal/ShotgunSprite.asset"
+    },
+    {
+      "name": "LMG",
+      "StableId": "18eb9041c2914a1e99e76c6cdae88f83",
+      "DisplayName": "LMG",
+      "role": "Primary",
+      "MagazineCapacity": 100,
+      "ReloadDuration": 8.0,
+      "mode": "Automatic",
+      "LoadsIndividually": false,
+      "Damage": 14.0,
+      "FiringInterval": 0.11,
+      "TracerScale": 1.0,
+      "sprite": "Assets/Art/ReloadRepair/LmgBody.asset"
+    },
+    {
+      "name": "Sniper",
+      "StableId": "650a8deef030476dba52808e5b9abcc2",
+      "DisplayName": "Sniper Rifle",
+      "role": "Primary",
+      "MagazineCapacity": 5,
+      "ReloadDuration": 2.6,
+      "mode": "ReleaseToFire",
+      "LoadsIndividually": true,
+      "Damage": 90.0,
+      "FiringInterval": 1.0,
+      "TracerScale": 2.2,
+      "sprite": "Assets/Resources/Arsenal/SniperSprite.asset"
+    },
+    {
+      "name": "LarperBuzzbox",
+      "StableId": "ef823ec7a8dd46f09fc6c687495d16a8",
+      "DisplayName": "Buzzbox Automatic Pistol",
+      "role": "Secondary",
+      "MagazineCapacity": 27,
+      "ReloadDuration": 4.0,
+      "mode": "Automatic",
+      "LoadsIndividually": false,
+      "Damage": 5.0,
+      "FiringInterval": 0.07,
+      "TracerScale": 1.0,
+      "sprite": "Assets/Art/Sprint0246/LarperPistol.asset"
+    },
+    {
+      "name": "SKS",
+      "StableId": "d7a1b51d39774196bc1af2e8e2e2a104",
+      "DisplayName": "SKS",
+      "role": "Primary",
+      "MagazineCapacity": 10,
+      "ReloadDuration": 2.7,
+      "mode": "SemiAutomatic",
+      "LoadsIndividually": true,
+      "Damage": 38.0,
+      "FiringInterval": 0.33,
+      "TracerScale": 1.0,
+      "sprite": "Assets/Art/Arsenal0039/SKS.asset"
+    },
+    {
+      "name": "AA12",
+      "StableId": "fd6b4370a49a40908b2f1404c73f8477",
+      "DisplayName": "AA-12",
+      "role": "Primary",
+      "MagazineCapacity": 8,
+      "ReloadDuration": 3.0,
+      "mode": "Automatic",
+      "LoadsIndividually": false,
+      "Damage": 8.0,
+      "FiringInterval": 0.26,
+      "TracerScale": 1.0,
+      "sprite": "Assets/Art/Arsenal0039/AA12.asset"
+    },
+    {
+      "name": "SawedOff",
+      "StableId": "591690fb25c04446bf70ff7d618ec03d",
+      "DisplayName": "Sawed-off Double Barrel",
+      "role": "Secondary",
+      "MagazineCapacity": 2,
+      "ReloadDuration": 2.4,
+      "mode": "SemiAutomatic",
+      "LoadsIndividually": false,
+      "Damage": 12.0,
+      "FiringInterval": 0.45,
+      "TracerScale": 1.0,
+      "sprite": "Assets/Art/Arsenal0039/SawedOff.asset"
+    }
+  ],
+  "scenes": [
+    {
+      "path": "Assets/Scenes/Warehouse_Demo.unity",
+      "mines": 0,
+      "enemies": 13,
+      "missing": 0
+    },
+    {
+      "path": "Assets/Scenes/Warehouse_Testbed.unity",
+      "mines": 0,
+      "enemies": 7,
+      "missing": 0
+    },
+    {
+      "path": "Assets/Scenes/Warehouse_Mission01.unity",
+      "mines": 0,
+      "enemies": 10,
+      "missing": 0
+    }
+  ]
+}

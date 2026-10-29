@@ -1,0 +1,27 @@
+{
+  "status": "completed",
+  "duration": 19.42,
+  "summary": {
+    "total": 2,
+    "passed": 2,
+    "failed": 0,
+    "skipped": 0,
+    "inconclusive": 0
+  },
+  "results": [
+    {
+      "FullName": "InsaneDreams.Tests.LivingImpact0040Tests.GameplayZoomReadabilityProbe",
+      "Status": "Passed",
+      "Duration": 13.9707807,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.LivingImpact0040Tests.RegionalDiagonalImpulsesStayAttachedAndRespectFacingWithoutRootForces",
+      "Status": "Passed",
+      "Duration": 5.3800798,
+      "Message": null,
+      "StackTrace": null
+    }
+  ]
+}

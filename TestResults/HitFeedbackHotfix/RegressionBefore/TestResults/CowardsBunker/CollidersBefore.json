@@ -1,0 +1,530 @@
+[
+  {
+    "name": "LoadingFloor",
+    "trigger": false,
+    "p": [
+      -12.0,
+      -0.5
+    ],
+    "size": [
+      32.0,
+      1.0
+    ]
+  },
+  {
+    "name": "StorageFloor",
+    "trigger": false,
+    "p": [
+      22.0,
+      -0.5
+    ],
+    "size": [
+      36.0,
+      1.0
+    ]
+  },
+  {
+    "name": "PursuitFloor",
+    "trigger": false,
+    "p": [
+      57.0,
+      -0.5
+    ],
+    "size": [
+      34.0,
+      1.0
+    ]
+  },
+  {
+    "name": "FireworkFloor",
+    "trigger": false,
+    "p": [
+      92.0,
+      -0.5
+    ],
+    "size": [
+      36.0,
+      1.0
+    ]
+  },
+  {
+    "name": "CommandFloor",
+    "trigger": false,
+    "p": [
+      134.5,
+      -0.5
+    ],
+    "size": [
+      49.0,
+      1.0
+    ]
+  },
+  {
+    "name": "BoundaryWest",
+    "trigger": false,
+    "p": [
+      -28.5,
+      6.0
+    ],
+    "size": [
+      1.0,
+      14.0
+    ]
+  },
+  {
+    "name": "BoundaryEast",
+    "trigger": false,
+    "p": [
+      159.5,
+      6.0
+    ],
+    "size": [
+      1.0,
+      14.0
+    ]
+  },
+  {
+    "name": "BoundaryCeiling",
+    "trigger": false,
+    "p": [
+      65.5,
+      13.5
+    ],
+    "size": [
+      188.0,
+      1.0
+    ]
+  },
+  {
+    "name": "StorageLowDeck",
+    "trigger": false,
+    "p": [
+      21.0,
+      2.95
+    ],
+    "size": [
+      14.0,
+      0.5
+    ]
+  },
+  {
+    "name": "StorageHighDeck",
+    "trigger": false,
+    "p": [
+      31.5,
+      6.15
+    ],
+    "size": [
+      11.0,
+      0.5
+    ]
+  },
+  {
+    "name": "StorageWestLadder",
+    "trigger": true,
+    "p": [
+      13.3,
+      1.95
+    ],
+    "size": [
+      1.0,
+      3.9
+    ]
+  },
+  {
+    "name": "StorageUpperLadder",
+    "trigger": true,
+    "p": [
+      25.3,
+      5.15
+    ],
+    "size": [
+      1.0,
+      3.90000033
+    ]
+  },
+  {
+    "name": "SamuraiStep",
+    "trigger": false,
+    "p": [
+      55.5,
+      1.35
+    ],
+    "size": [
+      3.0,
+      0.5
+    ]
+  },
+  {
+    "name": "SamuraiDeck",
+    "trigger": false,
+    "p": [
+      66.0,
+      2.95
+    ],
+    "size": [
+      12.0,
+      0.5
+    ]
+  },
+  {
+    "name": "PursuitDeckLadder",
+    "trigger": true,
+    "p": [
+      59.3,
+      1.95
+    ],
+    "size": [
+      1.0,
+      3.9
+    ]
+  },
+  {
+    "name": "FireworkLookout",
+    "trigger": false,
+    "p": [
+      87.5,
+      6.15
+    ],
+    "size": [
+      7.0,
+      0.5
+    ]
+  },
+  {
+    "name": "FireworkLoadingDeck",
+    "trigger": false,
+    "p": [
+      99.5,
+      2.95
+    ],
+    "size": [
+      11.0,
+      0.5
+    ]
+  },
+  {
+    "name": "FireworkLoadingLadder",
+    "trigger": true,
+    "p": [
+      93.3,
+      1.95
+    ],
+    "size": [
+      1.0,
+      3.9
+    ]
+  },
+  {
+    "name": "FireworkUpperLadder",
+    "trigger": true,
+    "p": [
+      91.7,
+      3.55
+    ],
+    "size": [
+      1.0,
+      7.1
+    ]
+  },
+  {
+    "name": "OfficeFlank",
+    "trigger": false,
+    "p": [
+      128.0,
+      2.95
+    ],
+    "size": [
+      9.0,
+      0.5
+    ]
+  },
+  {
+    "name": "OfficeFlankLadder",
+    "trigger": true,
+    "p": [
+      122.8,
+      1.95
+    ],
+    "size": [
+      1.0,
+      3.9
+    ]
+  },
+  {
+    "name": "EntranceCover",
+    "trigger": false,
+    "p": [
+      -21.0,
+      0.5
+    ],
+    "size": [
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "ArrivalRetreatA",
+    "trigger": false,
+    "p": [
+      -12.0,
+      0.5
+    ],
+    "size": [
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "ArrivalRetreatB",
+    "trigger": false,
+    "p": [
+      -4.0,
+      0.453125
+    ],
+    "size": [
+      1.625,
+      0.90625
+    ]
+  },
+  {
+    "name": "StorageFloorCover",
+    "trigger": false,
+    "p": [
+      29.0,
+      0.453125
+    ],
+    "size": [
+      1.625,
+      0.90625
+    ]
+  },
+  {
+    "name": "StorageLowCover",
+    "trigger": false,
+    "p": [
+      21.5,
+      3.69999981
+    ],
+    "size": [
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "StorageHighCover",
+    "trigger": false,
+    "p": [
+      32.5,
+      6.9
+    ],
+    "size": [
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "PursuitEntryCover",
+    "trigger": false,
+    "p": [
+      45.0,
+      0.5
+    ],
+    "size": [
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "PursuitRetreat",
+    "trigger": false,
+    "p": [
+      69.5,
+      0.5
+    ],
+    "size": [
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "PursuitDeckCover",
+    "trigger": false,
+    "p": [
+      70.0,
+      3.65312481
+    ],
+    "size": [
+      1.625,
+      0.90625
+    ]
+  },
+  {
+    "name": "FireworkEntryCover",
+    "trigger": false,
+    "p": [
+      79.0,
+      0.453125
+    ],
+    "size": [
+      1.625,
+      0.90625
+    ]
+  },
+  {
+    "name": "FireworkAllyCover",
+    "trigger": false,
+    "p": [
+      88.5,
+      0.5
+    ],
+    "size": [
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "FireworkExitCover",
+    "trigger": false,
+    "p": [
+      108.0,
+      0.5
+    ],
+    "size": [
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "ExpertCover",
+    "trigger": false,
+    "p": [
+      102.0,
+      3.69999981
+    ],
+    "size": [
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "OfficeApproachA",
+    "trigger": false,
+    "p": [
+      114.0,
+      0.5
+    ],
+    "size": [
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "OfficeApproachB",
+    "trigger": false,
+    "p": [
+      125.0,
+      0.453125
+    ],
+    "size": [
+      1.625,
+      0.90625
+    ]
+  },
+  {
+    "name": "OfficerBarricade",
+    "trigger": false,
+    "p": [
+      138.0,
+      2.053125
+    ],
+    "size": [
+      1.625,
+      0.90625
+    ]
+  },
+  {
+    "name": "OfficerRetreatCover",
+    "trigger": false,
+    "p": [
+      146.0,
+      2.1
+    ],
+    "size": [
+      1.0,
+      1.0
+    ]
+  },
+  {
+    "name": "OperationSupply_2",
+    "trigger": true,
+    "p": [
+      2.0,
+      0.399999976
+    ],
+    "size": [
+      2.5,
+      1.5
+    ]
+  },
+  {
+    "name": "OperationSupply_38",
+    "trigger": true,
+    "p": [
+      38.0,
+      0.399999976
+    ],
+    "size": [
+      2.5,
+      1.5
+    ]
+  },
+  {
+    "name": "OperationSupply_73",
+    "trigger": true,
+    "p": [
+      73.0,
+      0.399999976
+    ],
+    "size": [
+      2.5,
+      1.5
+    ]
+  },
+  {
+    "name": "OperationSupply_112",
+    "trigger": true,
+    "p": [
+      112.0,
+      0.399999976
+    ],
+    "size": [
+      2.5,
+      1.5
+    ]
+  },
+  {
+    "name": "OperationSupply_132",
+    "trigger": true,
+    "p": [
+      132.0,
+      0.399999976
+    ],
+    "size": [
+      2.5,
+      1.5
+    ]
+  },
+  {
+    "name": "OfficerDais",
+    "trigger": false,
+    "p": [
+      144.25,
+      1.35
+    ],
+    "size": [
+      17.5,
+      0.5
+    ]
+  }
+]

@@ -257,7 +257,7 @@ namespace InsaneDreams.Tests
                 Assert.AreEqual(FlowScreen.Levels,session.Screen);yield return Press("PREPARE EQUIPMENT");Assert.AreEqual(FlowScreen.Shop,session.Screen);
                 if(run==0&&purchase)
                 {
-                    yield return Press(session.Catalog.Find("buzzbox").title+"  $"+session.Catalog.Find("buzzbox").price);yield return Press("BUY",false,true);yield return Press("EQUIP / PRIMARY");
+                    yield return Press(session.Catalog.Find("buzzbox").title+"  $"+session.Catalog.Find("buzzbox").price);yield return Press("BUY",false,true);yield return Press("EQUIP / SECONDARY WEAPON");
                     yield return Press("Ammunition");yield return Press(session.Catalog.Find("buzzbox-ammo").title+"  $"+session.Catalog.Find("buzzbox-ammo").price);yield return Press("BUY",false,true);
                     yield return Press("Body armor");yield return Press("BUY",false,true);Assert.AreEqual(1000-session.Catalog.Find("buzzbox").price-session.Catalog.Find("buzzbox-ammo").price-session.Catalog.Find("armor").price,session.Data.balance);
                 }
@@ -266,10 +266,13 @@ namespace InsaneDreams.Tests
                 var mission=Object.FindAnyObjectByType<InsaneDreams.Missions.WarehouseMission>();var player=mission.Player;
                 player.GetComponent<InsaneDreams.Combat.Health>().ProtectFor(120);
                 Assert.AreEqual(purchase?60:0,player.GetComponent<InsaneDreams.Combat.BodyArmor>().Condition);
-                Assert.AreEqual(purchase?"buzzbox":"pistol",session.Data.primary);
-                Assert.AreSame(session.Catalog.Find(session.Data.primary).weapon,player.GetComponent<InsaneDreams.Inventory.PlayerLoadout>().SelectedWeapon.Definition);
-                if(purchase)Assert.AreEqual(session.Catalog.Find("buzzbox-ammo").quantity,player.GetComponent<InsaneDreams.Inventory.PlayerLoadout>().SelectedWeapon.ReserveAmmo);
-                Assert.AreEqual(session.Data.Ammo(session.Data.primary).reserve,player.GetComponent<InsaneDreams.Inventory.PlayerLoadout>().SelectedWeapon.ReserveAmmo);
+                string expectedId=purchase?"buzzbox":session.Catalog.primaryId;var expectedDefinition=session.Catalog.Find(expectedId).weapon;
+                var expectedSlot=expectedDefinition.Fits(InsaneDreams.Inventory.EquipmentSlot.Firearm1)?InsaneDreams.Inventory.EquipmentSlot.Firearm1:InsaneDreams.Inventory.EquipmentSlot.Firearm2;
+                Assert.AreEqual(expectedId,expectedSlot==InsaneDreams.Inventory.EquipmentSlot.Firearm1?session.Data.primary:session.Data.secondary);
+                var equipped=player.GetComponent<InsaneDreams.Inventory.PlayerLoadout>().Get(expectedSlot);Assert.AreSame(expectedDefinition,equipped.Definition);
+                if(purchase)Assert.AreEqual(session.Catalog.Find("buzzbox-ammo").quantity,equipped.ReserveAmmo);
+                var active=player.GetComponent<InsaneDreams.Inventory.PlayerLoadout>().SelectedWeapon;var activeOffer=session.Catalog.offers.Single(o=>o.category==ShopCategory.Weapons&&o.weapon==active.Definition);
+                Assert.AreEqual(session.Data.Ammo(activeOffer.id).reserve,active.ReserveAmmo);
                 var zones=Object.FindObjectsByType<InsaneDreams.Missions.MissionTrigger>(FindObjectsSortMode.None);
                 var exit=Array.Find(zones,z=>z.Zone==InsaneDreams.Missions.MissionZone.Exit);Assert.IsTrue(exit.Region.enabled);Assert.IsTrue(exit.Region.isTrigger);Assert.AreSame(mission,exit.Mission);
                 // An actual non-player rigidbody crossing must not activate the checkpoint.

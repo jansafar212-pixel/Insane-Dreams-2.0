@@ -1,5 +1,9 @@
 # AKUMU 2 project guidance
 
+- Follow `LEVEL_DESIGN_BIBLE.md` and `GRAPHICS_BIBLE.md` together. Final creative authority remains with the project owner. Flag major unrequested design decisions; minor reversible polish may follow the established direction.
+- Identify root causes before substantial bug fixes. Preserve working mechanics unless deliberately changed; reuse existing systems, avoid architectural duplication and unnecessary dependencies, and test affected integrations. Report unfinished work and verification limits honestly.
+- Android hardware is normally disconnected while Codex works. Complete automated checks and supported builds independently; label actual phone gameplay checks PENDING USER VERIFICATION. Never equate Editor checks with real-device testing.
+
 - Before any graphics-related work, read `GRAPHICS_BIBLE.md`, the current visual-direction authority, and inspect its relevant approved references. `ART_BIBLE.md` retains detailed technical/provenance history; dated or provisional entries are not blanket artistic approval.
 - Before changing character graphics, read `ART_BIBLE.md` and inspect the actual Enemak reference files under `HistoricalArtSources/Drive/Postavy/Enemak/`. Preserve historical originals. Do not claim unavailable artwork was inspected.
 - Sprint 024.7 explicitly selects the current basic Larper as the production implementation baseline and authorizes the protagonist, Samurai and fireworks redesigns. Preserve that baseline; new redesign artwork still requires playtest/artistic review. Older candidate-approval notes are historical.

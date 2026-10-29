@@ -1,0 +1,6 @@
+x=0,096 state=Reacting suppression=74,65 evasions=0
+x=-0,111 state=Reacting suppression=100,00 evasions=0
+x=0,197 state=Withdrawing suppression=100,00 evasions=1
+x=0,828 state=Withdrawing suppression=100,00 evasions=1
+x=1,167 state=Reacting suppression=100,00 evasions=1
+x=1,167 state=Reacting suppression=100,00 evasions=1

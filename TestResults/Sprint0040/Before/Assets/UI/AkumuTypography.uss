@@ -1,0 +1,4 @@
+/* Original block lettering follows the existing AKUMU wordmark. */
+Label, Button {
+    -unity-font-definition: url("../Art/Interface0029/AkumuBlock.ttf");
+}

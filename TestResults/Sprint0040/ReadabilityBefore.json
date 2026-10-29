@@ -1,0 +1,46 @@
+{
+    "rows": [
+        {
+            "weapon": "Glock",
+            "strength": 0.6499999761581421,
+            "maxHeadPixelsAt720": 1.8751823902130127,
+            "maxTorsoJointDegrees": 1.75775146484375
+        },
+        {
+            "weapon": "SMG",
+            "strength": 0.4000000059604645,
+            "maxHeadPixelsAt720": 0.625009298324585,
+            "maxTorsoJointDegrees": 0.636016845703125
+        },
+        {
+            "weapon": "Rifle",
+            "strength": 1.100000023841858,
+            "maxHeadPixelsAt720": 4.380000591278076,
+            "maxTorsoJointDegrees": 4.971832275390625
+        },
+        {
+            "weapon": "LMG",
+            "strength": 1.350000023841858,
+            "maxHeadPixelsAt720": 6.889290809631348,
+            "maxTorsoJointDegrees": 7.240631103515625
+        },
+        {
+            "weapon": "DesertEagle",
+            "strength": 2.5999999046325684,
+            "maxHeadPixelsAt720": 11.937043190002441,
+            "maxTorsoJointDegrees": 22.059356689453125
+        },
+        {
+            "weapon": "Shotgun",
+            "strength": 3.200000047683716,
+            "maxHeadPixelsAt720": 11.937043190002441,
+            "maxTorsoJointDegrees": 24.59857177734375
+        },
+        {
+            "weapon": "Sniper",
+            "strength": 3.200000047683716,
+            "maxHeadPixelsAt720": 11.937043190002441,
+            "maxTorsoJointDegrees": 24.59857177734375
+        }
+    ]
+}

@@ -44,9 +44,13 @@ namespace InsaneDreams.Traversal
         private LadderVolume ladder;
         private bool exiting;
         private float exitX;
+        private float protectedLandingTime = float.NegativeInfinity;
         private readonly RaycastHit2D[] solidHits = new RaycastHit2D[16];
         public bool IsClimbing => ladder != null;
         public bool IsParachuting { get; private set; }
+        // Collision callbacks may run in either component order. Keep the deployment
+        // state for this physics landing even after its presentation has retracted.
+        public bool ParachuteLandingProtected => IsParachuting || protectedLandingTime == Time.fixedTime;
         public bool ParachuteFlightActive => IsParachuting && !IsClimbing && motor != null && !motor.IsGrounded;
         public float HorizontalSpeedMultiplier => ParachuteFlightActive ? parachuteHorizontalMultiplier : 1;
         public bool CanUseLadder => FindUsableLadder() != null;
@@ -113,6 +117,7 @@ namespace InsaneDreams.Traversal
                 {
                     ladder = closest;
                     ownsMotion = true;
+                    ClearParachute();
                     motor.enabled = false; // The existing motor remains the sole walking/jumping implementation.
                     body.gravityScale = 0;
                 }
@@ -271,12 +276,27 @@ namespace InsaneDreams.Traversal
             if (parachuteVisual != null && parachuteVisual.activeSelf != active) parachuteVisual.SetActive(active);
         }
 
+        private void OnCollisionEnter2D(Collision2D hit) => RetractOnLanding(hit);
+        private void OnCollisionStay2D(Collision2D hit) => RetractOnLanding(hit);
+        private void RetractOnLanding(Collision2D hit)
+        {
+            if (!IsParachuting) return;
+            for (int i = 0; i < hit.contactCount; i++)
+            {
+                if (hit.GetContact(i).normal.y <= .65f) continue;
+                protectedLandingTime = Time.fixedTime;
+                ClearParachute();
+                return;
+            }
+        }
+
         public void ResetTraversal()
         {
             LeaveLadder();
             requireClimbRelease = false;
             climbInput = horizontalInput = 0;
             parachuteHeld = false;
+            protectedLandingTime = float.NegativeInfinity;
             SetParachute(false);
             nextParachuteDeploy = 0;
             if (motor != null)

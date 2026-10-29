@@ -25,7 +25,8 @@ namespace InsaneDreams.Tests
             var s=new SerializedObject(input);s.FindProperty("readKeyboard").boolValue=false;s.ApplyModifiedPropertiesWithoutUndo();player.GetComponent<Health>().ProtectFor(300);catalog=Resources.Load<ArsenalCatalog>("ArsenalCatalog");yield return null;yield return null;
         }
         [UnityTearDown] public IEnumerator Cleanup(){Time.timeScale=1;foreach(var g in owned)if(g!=null)Object.Destroy(g);foreach(var d in Object.FindObjectsByType<CartoonRagdoll>(FindObjectsSortMode.None))d.Retire();owned.Clear();yield return null;Application.runInBackground=background;AudioListener.volume=volume;UnityEngine.Random.state=random;}
-        RuntimeWeapon Equip(int index){input.SuspendInput();var w=new RuntimeWeapon(catalog.weapons[index],180);Assert.IsTrue(loadout.Equip(EquipmentSlot.Firearm1,w));loadout.Select(EquipmentSlot.Firearm1);return w;}
+        static EquipmentSlot Slot(WeaponDefinition definition)=>definition.Fits(EquipmentSlot.Firearm1)?EquipmentSlot.Firearm1:EquipmentSlot.Firearm2;
+        RuntimeWeapon Equip(int index){input.SuspendInput();var w=new RuntimeWeapon(catalog.weapons[index],180);var slot=Slot(w.Definition);Assert.IsTrue(loadout.Equip(slot,w));loadout.Select(slot);return w;}
         IEnumerator Hold(Vector2 aim){input.BeginTouchAim();input.SetTouchAim(aim);input.SetFireIntent(true);yield return null;yield return null;}
         void Release(bool valid){input.EndTouchAim(valid);input.SetTouchAim(Vector2.zero);input.SetFireIntent(false);}
         [UnityTest] public IEnumerator SniperHoldCancelReleaseAndAutomaticRecoveryNeverDoubleFire()
@@ -38,7 +39,7 @@ namespace InsaneDreams.Tests
         }
         [UnityTest] public IEnumerator SniperSwitchPauseReloadResetDeathAndRevivalCannotReleaseAnAccidentalShot()
         {
-            Equip(6);yield return null;yield return Hold(Vector2.right);loadout.Equip(EquipmentSlot.Firearm2,new RuntimeWeapon(catalog.weapons[0],20));loadout.Select(EquipmentSlot.Firearm2);Release(true);yield return null;Assert.AreEqual(0,attack.ShotsFired);
+            Equip(6);yield return null;yield return Hold(Vector2.right);Assert.IsTrue(loadout.Equip(EquipmentSlot.Firearm2,new RuntimeWeapon(catalog.weapons[0],20)));loadout.Select(EquipmentSlot.Firearm2);Release(true);yield return null;Assert.AreEqual(0,attack.ShotsFired);
             Equip(6);yield return null;var grenades=player.GetComponent<PlayerThrowables>();grenades.RestoreStock(new[]{1,0,0});yield return Hold(Vector2.right);input.SetTouchMove(Vector2.left);yield return null;loadout.Select(EquipmentSlot.Melee);yield return null;Release(true);yield return null;Assert.AreEqual(0,grenades.Throws,"Old sniper hold cannot become a grenade throw");Assert.Less(input.Move.x,0,"Cancelling weapon aim must preserve movement");
             Equip(6);yield return null;yield return Hold(Vector2.right);Time.timeScale=0;Release(true);input.SuspendInput();Time.timeScale=1;yield return null;Assert.AreEqual(0,attack.ShotsFired);
             yield return Hold(Vector2.right);input.SuspendInput();Release(true);yield return null;Assert.AreEqual(0,attack.ShotsFired);
@@ -67,7 +68,7 @@ namespace InsaneDreams.Tests
         {
             foreach(var definition in catalog.weapons)foreach(var path in new[]{"Assets/Prefabs/Enemies/Larper.prefab","Assets/Prefabs/Enemies/Samurai.prefab","Assets/Prefabs/Enemies/FireworksExpert.prefab","Assets/Data/FirstOperation/Officer.prefab"})
             {
-                var w=new RuntimeWeapon(definition,180);loadout.Equip(EquipmentSlot.Firearm1,w);loadout.Select(EquipmentSlot.Firearm1);
+                var w=new RuntimeWeapon(definition,180);var slot=Slot(definition);Assert.IsTrue(loadout.Equip(slot,w));loadout.Select(slot);
                 var enemy=Keep(Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>(path),new Vector3(X+4,.72f),Quaternion.identity));enemy.GetComponent<Enemies.EnemyCombat>().enabled=false;enemy.GetComponent<Enemies.LarperBrain>().enabled=false;yield return null;
                 var hp=enemy.GetComponent<Health>();float before=hp.Current;var hitbox=enemy.GetComponent<Enemies.SamuraiBodyHitbox>();Vector2 center=hitbox!=null?hitbox.VisibleBounds.center:enemy.GetComponent<Collider2D>().bounds.center;
                 Vector2 aim=Vector2.right;for(int n=0;n<3;n++){aim=(center-attack.Origin).normalized;player.GetComponent<CharacterVisualDriver>().PrepareShot(aim);}Physics2D.SyncTransforms();Assert.IsTrue(attack.Attack(w,aim,Time.time+10));Assert.Less(hp.Current,before,definition.name+" -> "+path+" / "+attack.LastSurface);Object.Destroy(enemy);foreach(var corpse in Object.FindObjectsByType<CartoonRagdoll>(FindObjectsSortMode.None))corpse.Retire();yield return null;
@@ -93,7 +94,7 @@ namespace InsaneDreams.Tests
                 input.SuspendInput();deadline=Time.time+3;while(!motor.IsGrounded&&Time.time<deadline)yield return null;
                 input.SetTouchMove(Vector2.down);yield return new WaitForSeconds(.2f);Assert.IsTrue(player.GetComponent<Traversal.PlayerPosture2D>().IsCrouched);
                 yield return new WaitForSeconds(Mathf.Max(.01f,w.Cycle.NextAttackAt-Time.time+.02f));int before=attack.ShotsFired;yield return Hold(Vector2.right);if(w.Definition.FireMode==WeaponFireMode.ReleaseToFire)Release(true);yield return new WaitForSeconds(.1f);Assert.Greater(attack.ShotsFired,before,"Crouched "+w.Definition.name);
-                input.SuspendInput();int total=w.MagazineAmmo+w.ReserveAmmo;combat.Reload();Assert.IsTrue(w.Cycle.IsReloading);loadout.Select(EquipmentSlot.Firearm2);yield return null;Assert.IsFalse(w.Cycle.IsReloading);Assert.AreEqual(total,w.MagazineAmmo+w.ReserveAmmo);loadout.Select(EquipmentSlot.Firearm1);combat.Reload();w.Cycle.Tick(w.Cycle.ReloadStartedAt+w.Definition.ReloadDuration*w.ReloadMultiplier+.01f);Assert.AreEqual(w.Definition.MagazineCapacity,w.MagazineAmmo);Assert.AreEqual(total,w.MagazineAmmo+w.ReserveAmmo);
+                input.SuspendInput();if(w.Definition.FireMode==WeaponFireMode.ReleaseToFire)yield return new WaitForSeconds(Mathf.Max(.01f,w.Cycle.NextAttackAt-Time.time+.02f));int total=w.MagazineAmmo+w.ReserveAmmo;var equippedSlot=Slot(w.Definition);combat.Reload();Assert.IsTrue(w.Cycle.IsReloading);loadout.Select(equippedSlot==EquipmentSlot.Firearm1?EquipmentSlot.Firearm2:EquipmentSlot.Firearm1);yield return null;Assert.IsFalse(w.Cycle.IsReloading);Assert.AreEqual(total,w.MagazineAmmo+w.ReserveAmmo);loadout.Select(equippedSlot);combat.Reload();w.Cycle.Tick(w.Cycle.ReloadStartedAt+w.Definition.ReloadDuration*w.ReloadMultiplier+.01f);Assert.AreEqual(w.Definition.MagazineCapacity,w.MagazineAmmo);Assert.AreEqual(total,w.MagazineAmmo+w.ReserveAmmo);
             }
         }
     }

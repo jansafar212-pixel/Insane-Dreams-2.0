@@ -32,6 +32,7 @@ namespace InsaneDreams.Tests
             yield return EditorSceneManager.LoadSceneAsyncInPlayMode("Assets/Scenes/Warehouse_Demo.unity",new LoadSceneParameters(LoadSceneMode.Single));yield return null;yield return null;
             mission=Object.FindAnyObjectByType<WarehouseMission>();hud=Object.FindAnyObjectByType<WarehouseTouchControls>();mission.Player.GetComponent<Health>().ProtectFor(120);
             Assert.IsTrue(mission.Player.GetComponent<PlayerLoadout>().Equip(EquipmentSlot.Firearm2,new RuntimeWeapon(AssetDatabase.LoadAssetAtPath<WeaponDefinition>("Assets/Data/Items/BackupPistol.asset"),42)));
+            Assert.IsTrue(mission.Player.GetComponent<PlayerLoadout>().Equip(EquipmentSlot.Firearm1,new RuntimeWeapon(AssetDatabase.LoadAssetAtPath<WeaponDefinition>("Assets/Data/Items/WarehouseCarbine.asset"),42))); // This fixture exercises two occupied slots; a fresh profile intentionally may have no primary.
             foreach(var enemy in Object.FindObjectsByType<InsaneDreams.Enemies.EnemyCombat>(FindObjectsSortMode.None))enemy.enabled=false;
         }
         [UnityTearDown] public IEnumerator Cleanup()

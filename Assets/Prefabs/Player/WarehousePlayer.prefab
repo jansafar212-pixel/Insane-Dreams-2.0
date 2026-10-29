@@ -986,6 +986,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2
   tracer: {fileID: 5555821992489777300}
+  tracerMaterial: {fileID: 2100000, guid: aad1aec2f26183e409d7c81ccc5b78bb, type: 2}
   tracerSeconds: 0.17
   tracerWidth: 0.04
   maximumTracers: 16
@@ -1149,6 +1150,7 @@ MonoBehaviour:
   hitSeconds: 0.12
   hurtSeconds: 0.1
   hurtColor: {r: 1, g: 0.75, b: 0.6, a: 1}
+  damageFlashMaterial: {fileID: 2100000, guid: f3a9cafa077572541ac36ff36e340aba, type: 2}
   firingSound: {fileID: 0}
   hitSound: {fileID: 0}
   hurtSound: {fileID: 0}
@@ -1446,6 +1448,13 @@ MonoBehaviour:
   impulseDegrees: 115
   springReturn: 18
   springTorque: 0.25
+  jointDamping: 5
+  springDamping: 1.5
+  maximumAngularSpeed: 320
+  maximumTorsoAngle: 12
+  responseSeconds: 0.8
+  torsoSpill: 0.25
+  heavyTorsoSpill: 0.55
 --- !u!114 &416866442911911424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1500,6 +1509,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VisualRoot
       objectReference: {fileID: 0}
+    - target: {fileID: 1241004614522282896, guid: ed0469b33f1ae2544828fb77c95382ca, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5b4642d0d2f23f24c82ab4b447bbd939, type: 2}
     - target: {fileID: 1242457048344921831, guid: ed0469b33f1ae2544828fb77c95382ca, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -1527,6 +1540,10 @@ PrefabInstance:
     - target: {fileID: 4188002218569594257, guid: ed0469b33f1ae2544828fb77c95382ca, type: 3}
       propertyPath: m_Color.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5891328520242681178, guid: ed0469b33f1ae2544828fb77c95382ca, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.296875
       objectReference: {fileID: 0}
     - target: {fileID: 6793892886298600212, guid: ed0469b33f1ae2544828fb77c95382ca, type: 3}
       propertyPath: m_LocalPosition.x

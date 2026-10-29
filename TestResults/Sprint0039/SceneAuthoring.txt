@@ -1,0 +1,3 @@
+Warehouse_Demo: wood=8, metal=11, concrete=7
+Warehouse_Testbed: wood=0, metal=0, concrete=0
+Warehouse_Mission01: wood=0, metal=0, concrete=0

@@ -1,0 +1,27 @@
+{
+  "status": "completed",
+  "duration": 2.82,
+  "summary": {
+    "total": 2,
+    "passed": 2,
+    "failed": 0,
+    "skipped": 0,
+    "inconclusive": 0
+  },
+  "results": [
+    {
+      "FullName": "InsaneDreams.Tests.AndroidPerformanceRegressionTests.CachedHudTracksAmmoSwitchesGrenadesAndRebind",
+      "Status": "Passed",
+      "Duration": 1.5896518,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.AndroidPerformanceRegressionTests.EquipmentPosePreservesMuzzleMagazineAndExpressionChanges",
+      "Status": "Passed",
+      "Duration": 1.19302,
+      "Message": null,
+      "StackTrace": null
+    }
+  ]
+}

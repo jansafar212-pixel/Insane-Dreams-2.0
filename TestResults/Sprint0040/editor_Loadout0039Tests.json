@@ -1,0 +1,90 @@
+{
+  "status": "completed",
+  "duration": 0.59,
+  "summary": {
+    "total": 11,
+    "passed": 11,
+    "failed": 0,
+    "skipped": 0,
+    "inconclusive": 0
+  },
+  "results": [
+    {
+      "FullName": "InsaneDreams.Tests.Loadout0039Tests.EveryAddedFirearmCanBePurchasedOnceAndEquippedInItsUnchangedRole",
+      "Status": "Passed",
+      "Duration": 0.0814726,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Loadout0039Tests.HeavyArmorLimitsRemainUsefulAndReloadPenaltyBounded",
+      "Status": "Passed",
+      "Duration": 0.010248,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Loadout0039Tests.LegacyInspectorRoleMismatchCannotExposeAnotherUsableSidearm",
+      "Status": "Passed",
+      "Duration": 0.0077321,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Loadout0039Tests.LegacyOverfilledMagazineAndSpentWalletPreserveProgress",
+      "Status": "Passed",
+      "Duration": 0.0161382,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Loadout0039Tests.NoHiddenThirdFirearmExistsAndOldNumericRequestsAreRejected",
+      "Status": "Passed",
+      "Duration": 0.0075782,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Loadout0039Tests.ReplacingEitherSlotPreservesOwnershipAmmoAndAllowsEmptySlots",
+      "Status": "Passed",
+      "Duration": 0.049281,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Loadout0039Tests.ThreeFirearmSaveMigrationIsDeterministicLosslessAndIdempotent(\"pistol\",\"desert-eagle\",\"pistol\")",
+      "Status": "Passed",
+      "Duration": 0.0212447,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Loadout0039Tests.ThreeFirearmSaveMigrationIsDeterministicLosslessAndIdempotent(\"missing\",\"desert-eagle\",\"desert-eagle\")",
+      "Status": "Passed",
+      "Duration": 0.0097542,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Loadout0039Tests.ThreeFirearmSaveMigrationIsDeterministicLosslessAndIdempotent(null,\"desert-eagle\",\"desert-eagle\")",
+      "Status": "Passed",
+      "Duration": 0.0085047,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Loadout0039Tests.ThreeFirearmSaveMigrationIsDeterministicLosslessAndIdempotent(\"pistol\",\"pistol\",\"pistol\")",
+      "Status": "Passed",
+      "Duration": 0.0102967,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Loadout0039Tests.TwoRuntimeWeaponsKeepIndependentClocksAndPartialStocks",
+      "Status": "Passed",
+      "Duration": 0.0094474,
+      "Message": null,
+      "StackTrace": null
+    }
+  ]
+}

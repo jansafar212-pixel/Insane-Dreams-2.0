@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: Sniper
   m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Inventory.WeaponDefinition
   stableId: 650a8deef030476dba52808e5b9abcc2
-  displayName: Long Complaint Sniper
+  displayName: Sniper Rifle
   description: Sprint 003 data-only example; no combat behavior.
   icon: {fileID: 21300000, guid: a0b732b3a7b395e4ca32cce65afaa15d, type: 2}
   category: 0
   weaponCategory: 0
+  firearmRole: 0
   damage: 90
   firingInterval: 1
   magazineCapacity: 5
@@ -27,8 +28,9 @@ MonoBehaviour:
   magazineSprite: {fileID: 0}
   magazineMountOffset: {x: 0.03125, y: -0.0625}
   physicalMagazineReload: 0
-  loadsIndividually: 0
-  shellSprite: {fileID: 0}
+  loadsIndividually: 1
+  shellSprite: {fileID: 21300000, guid: 950f0bf903a2d0a4f8ff91933ed768ab, type: 2}
+  ammunitionInsertionOffset: {x: 0.3, y: 0.14}
   firearmRange: 45
   meleeRange: 1.6
   impactImpulse: 3

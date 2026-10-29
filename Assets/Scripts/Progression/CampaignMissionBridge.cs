@@ -115,7 +115,7 @@ namespace InsaneDreams.Progression
             {
                 var weapon=loadout.Get((Inventory.EquipmentSlot)i);if(weapon==null)continue;
                 var offer=System.Array.Find(Session.Catalog.offers,x=>x.category==ShopCategory.Weapons&&x.weapon==weapon.Definition);
-                if(offer==null)continue;var ammo=data.Ammo(offer.id);ammo.magazine=weapon.MagazineAmmo;ammo.reserve=Mathf.Min(Session.Catalog.ammoCapacity,weapon.ReserveAmmo+(offer.id==packedAmmoIds[i]?uncarriedAmmo[i]:0));
+                if(offer==null)continue;var ammo=data.Ammo(offer.id);ammo.magazine=weapon.MagazineAmmo;ammo.reserve=weapon.ReserveAmmo+(offer.id==packedAmmoIds[i]?uncarriedAmmo[i]:0);
             }
             data.tape=mission.Player.GetComponent<Combat.PlayerHealing>().DuctTape;
             var revive=mission.Player.GetComponent<Combat.PlayerRevive>();if(revive!=null)data.faintanyl=revive.Injections;

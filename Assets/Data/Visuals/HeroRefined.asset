@@ -17,7 +17,7 @@ MonoBehaviour:
   arm: {fileID: 21300000, guid: 6972fcf7b1c65ed4e8d09b0d80159172, type: 2}
   leg: {fileID: 21300000, guid: de1e319f881b02c408a722b56fe266c8, type: 2}
   weapon: {fileID: 21300000, guid: ee653c3947dd44e4bb81b51d314b4f33, type: 2}
-  parachute: {fileID: 21300000, guid: f89cc3f609931e34791fea7c21333f51, type: 3}
+  parachute: {fileID: 21300000, guid: 5b4642d0d2f23f24c82ab4b447bbd939, type: 2}
   secondaryWeapon: {fileID: 21300000, guid: 0d9544d255dbe2e43a08107018622f45, type: 3}
   meleeWeapon: {fileID: 21300000, guid: 2f5b2ca3950189843963dc27d4609498, type: 3}
   panicFace: {fileID: 21300000, guid: 3481ee439abf71d4682c52c44716a0a5, type: 2}

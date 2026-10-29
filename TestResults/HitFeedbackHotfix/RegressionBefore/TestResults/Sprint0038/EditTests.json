@@ -1,0 +1,90 @@
+{
+  "status": "completed",
+  "duration": 0.47,
+  "summary": {
+    "total": 11,
+    "passed": 11,
+    "failed": 0,
+    "skipped": 0,
+    "inconclusive": 0
+  },
+  "results": [
+    {
+      "FullName": "InsaneDreams.Tests.ReloadRepairRulesTests.FullEmptyReserveArmorAndLargeTickAreBounded",
+      "Status": "Passed",
+      "Duration": 0.0333255,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.ReloadRepairRulesTests.InterruptedShellsRemainUsableAndResumeDoesNotRepeatThem(1)",
+      "Status": "Passed",
+      "Duration": 0.0017916,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.ReloadRepairRulesTests.InterruptedShellsRemainUsableAndResumeDoesNotRepeatThem(2)",
+      "Status": "Passed",
+      "Duration": 0.000259,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.ReloadRepairRulesTests.ShellSnapshotKeepsCompletedInsertionAndResumeDoesNotGrantPendingShell",
+      "Status": "Passed",
+      "Duration": 0.0012238,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.ReloadRepairRulesTests.ShellStepsTransferExactlyOneAndRepeatedTicksCannotDuplicate(0,20)",
+      "Status": "Passed",
+      "Duration": 0.0013479,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.ReloadRepairRulesTests.ShellStepsTransferExactlyOneAndRepeatedTicksCannotDuplicate(2,10)",
+      "Status": "Passed",
+      "Duration": 0.0002579,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.ReloadRepairRulesTests.ShellStepsTransferExactlyOneAndRepeatedTicksCannotDuplicate(2,1)",
+      "Status": "Passed",
+      "Duration": 0.0001689,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.ReloadRepairRulesTests.ShellStepsTransferExactlyOneAndRepeatedTicksCannotDuplicate(5,1)",
+      "Status": "Passed",
+      "Duration": 0.0001411,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.ReloadRepairRulesTests.SmgAtomicExchangeConservesTacticalRounds(0,60,30,30)",
+      "Status": "Passed",
+      "Duration": 0.0022354,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.ReloadRepairRulesTests.SmgAtomicExchangeConservesTacticalRounds(12,60,30,42)",
+      "Status": "Passed",
+      "Duration": 0.0003298,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.ReloadRepairRulesTests.SmgAtomicExchangeConservesTacticalRounds(12,3,15,0)",
+      "Status": "Passed",
+      "Duration": 0.0001885,
+      "Message": null,
+      "StackTrace": null
+    }
+  ]
+}

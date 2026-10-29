@@ -4,6 +4,7 @@ using UnityEngine;
 namespace InsaneDreams.Combat
 {
     [RequireComponent(typeof(Health),typeof(PlayerMotor2D),typeof(PlayerTraversal2D))]
+    [DefaultExecutionOrder(20)] // Observe the motor and traversal's current physics step.
     public sealed class PlayerFallDamage : MonoBehaviour
     {
         [SerializeField,Min(1)] private float safeDrop=8,damagePerUnit=8,minimumImpactSpeed=12;
@@ -18,7 +19,13 @@ namespace InsaneDreams.Combat
         {
             if(health.IsDefeated||!body.simulated||traversal.IsClimbing){ResetFall();return;}
             if(!motor.IsGrounded||body.linearVelocity.y<-.1f)airborne=true;
-            if(airborne){highestFeet=Mathf.Max(highestFeet,shape.bounds.min.y);fallSpeed=Mathf.Max(fallSpeed,-body.linearVelocity.y);}
+            if(airborne)
+            {
+                // Controlled descent sheds the preceding fall's energy. If the
+                // canopy is later cancelled, assess only the new unprotected drop.
+                if(traversal.ParachuteFlightActive){highestFeet=shape.bounds.min.y;fallSpeed=0;}
+                else{highestFeet=Mathf.Max(highestFeet,shape.bounds.min.y);fallSpeed=Mathf.Max(fallSpeed,-body.linearVelocity.y);}
+            }
             else highestFeet=shape.bounds.min.y;
         }
         private void OnCollisionEnter2D(Collision2D hit)=>Contact(hit);
@@ -30,13 +37,13 @@ namespace InsaneDreams.Combat
             Landings++;LastDamage=0;
             // Absolute landing rule. Clear the entire flight before any calculation:
             // no stored velocity/height can become delayed damage after undeployment.
-            if(traversal.IsParachuting){ResetFall();return;}
+            if(traversal.ParachuteLandingProtected){ResetFall();return;}
             float drop=highestFeet-shape.bounds.min.y,speed=fallSpeed;ResetFall();
             float gravity=-Physics2D.gravity.y*normalGravity;
             float ordinaryJump=gravity>0?(motor.JumpSpeed*motor.JumpSpeed+motor.AirJumpSpeed*motor.AirJumpSpeed)/(2*gravity)+.5f:safeDrop;
             if(speed<minimumImpactSpeed)return;
             LastDamage=Mathf.Max(0,drop-Mathf.Max(safeDrop,ordinaryJump))*damagePerUnit;
-            if(LastDamage>0)health.ApplyDamage(new DamageInfo(LastDamage,CombatTeam.Neutral));
+            if(LastDamage>0)health.ApplyDamage(new DamageInfo(LastDamage,CombatTeam.Neutral,kind:DamageKind.Environment));
         }
         private void OnDisable(){var recovery=GetComponent<InsaneDreams.Checkpoints.PlayerRecovery>();if(recovery!=null)recovery.Recovered-=ResetFall;var revive=GetComponent<PlayerRevive>();if(revive!=null)revive.Revived-=ResetFall;ResetFall();}
     }

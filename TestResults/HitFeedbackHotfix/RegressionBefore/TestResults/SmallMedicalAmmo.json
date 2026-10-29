@@ -1,0 +1,35 @@
+[
+  {
+    "filter": "FaintanylShopUsesExistingAtomicCurrencyStockAndPersistence",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"status\": \"completed\",\n  \"duration\": 2.19,\n  \"summary\": {\n    \"total\": 1,\n    \"passed\": 1,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.PostPlaytestHotfixTests.FaintanylShopUsesExistingAtomicCurrencyStockAndPersistence\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.9777092,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+        }
+      ]
+    }
+  },
+  {
+    "filter": "StructuredHudBindsRealHealthAmmoAndKeepsSecondaryJoystickFire",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"status\": \"completed\",\n  \"duration\": 4.42,\n  \"summary\": {\n    \"total\": 1,\n    \"passed\": 1,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.GraphicsUiReworkTests.StructuredHudBindsRealHealthAmmoAndKeepsSecondaryJoystickFire\",\n      \"Status\": \"Passed\",\n      \"Duration\": 4.3962878,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+        }
+      ]
+    }
+  },
+  {
+    "filter": "EquipmentButtonsReadRuntimeLoadoutAndPreserveAmmo",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"status\": \"completed\",\n  \"duration\": 1.4,\n  \"summary\": {\n    \"total\": 1,\n    \"passed\": 1,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.TraversalRegressionTests.EquipmentButtonsReadRuntimeLoadoutAndPreserveAmmo\",\n      \"Status\": \"Passed\",\n      \"Duration\": 1.3732179,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+        }
+      ]
+    }
+  }
+]

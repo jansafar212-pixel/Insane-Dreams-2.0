@@ -1,0 +1,48 @@
+{
+  "status": "completed",
+  "duration": 28.58,
+  "summary": {
+    "total": 5,
+    "passed": 2,
+    "failed": 3,
+    "skipped": 0,
+    "inconclusive": 0
+  },
+  "results": [
+    {
+      "FullName": "InsaneDreams.Tests.CowardsBunkerTests.ConcreteShellBlocksEveryExteriorBoundaryExceptTheEmbrasureAndOfficerCanBeShot",
+      "Status": "Failed",
+      "Duration": 1.1972123,
+      "Message": "  Front y=3,949998\r\n  Expected: True\r\n  But was:  False\r\n",
+      "StackTrace": "at InsaneDreams.Tests.CowardsBunkerTests+<ConcreteShellBlocksEveryExteriorBoundaryExceptTheEmbrasureAndOfficerCanBeShot>d__19.MoveNext () [0x00070] in C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Tests\\PlayMode\\CowardsBunkerTests.cs:52\r\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in .\\Library\\PackageCache\\com.unity.test-framework@80f691d4262b\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:52\r\n"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CowardsBunkerTests.ConfirmedRearFlankDrawsOfficerThroughRealDoorWithoutTeleporting",
+      "Status": "Failed",
+      "Duration": 8.7893302,
+      "Message": "  Expected: True\r\n  But was:  False\r\n",
+      "StackTrace": "at InsaneDreams.Tests.CowardsBunkerTests+<ConfirmedRearFlankDrawsOfficerThroughRealDoorWithoutTeleporting>d__20.MoveNext () [0x001a9] in C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Tests\\PlayMode\\CowardsBunkerTests.cs:74\r\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in .\\Library\\PackageCache\\com.unity.test-framework@80f691d4262b\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:52\r\n"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CowardsBunkerTests.LaserClipsToConcreteAndOnlyPassesThroughFiringHole",
+      "Status": "Passed",
+      "Duration": 1.0394292,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CowardsBunkerTests.OfficerPeeksTelegraphsFiresHidesAndReturnsInsideConcreteWithoutDeadlock",
+      "Status": "Passed",
+      "Duration": 16.0173128,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CowardsBunkerTests.PhysicalGrenadeRoofCollisionAndRealPlayerRoofAccessRouteStayValid",
+      "Status": "Failed",
+      "Duration": 1.4845855,
+      "Message": "  Expected: greater than 7.82000017f\r\n  But was:  6.1052618f\r\n",
+      "StackTrace": "at InsaneDreams.Tests.CowardsBunkerTests+<PhysicalGrenadeRoofCollisionAndRealPlayerRoofAccessRouteStayValid>d__23.MoveNext () [0x0009c] in C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Tests\\PlayMode\\CowardsBunkerTests.cs:100\r\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in .\\Library\\PackageCache\\com.unity.test-framework@80f691d4262b\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:52\r\n"
+    }
+  ]
+}

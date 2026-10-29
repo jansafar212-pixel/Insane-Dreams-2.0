@@ -1,0 +1,25 @@
+{
+  "total": 116,
+  "passed": 113,
+  "failed": 3,
+  "failures": [
+    {
+      "FullName": "InsaneDreams.Tests.CowardsBunkerTests.ConcreteShellBlocksEveryExteriorBoundaryExceptTheEmbrasureAndOfficerCanBeShot",
+      "Status": "Failed",
+      "Message": "  Front y=3,949998\r\n  Expected: True\r\n  But was:  False\r\n",
+      "Evidence": "playmode_CowardsBunkerTests.json"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CowardsBunkerTests.ConfirmedRearFlankDrawsOfficerThroughRealDoorWithoutTeleporting",
+      "Status": "Failed",
+      "Message": "  Expected: True\r\n  But was:  False\r\n",
+      "Evidence": "playmode_CowardsBunkerTests.json"
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CowardsBunkerTests.PhysicalGrenadeRoofCollisionAndRealPlayerRoofAccessRouteStayValid",
+      "Status": "Failed",
+      "Message": "  Expected: greater than 7.82000017f\r\n  But was:  6.1052618f\r\n",
+      "Evidence": "playmode_CowardsBunkerTests.json"
+    }
+  ]
+}

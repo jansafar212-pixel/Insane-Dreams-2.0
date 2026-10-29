@@ -7,7 +7,7 @@ namespace InsaneDreams.Combat
     {
         [SerializeField] private Sprite[] icons;
         [SerializeField] private Sprite smokeSprite;
-        [SerializeField,Min(.1f)] private float fuseSeconds=1.4f,blastRadius=4.1f,fragmentationDamage=110.5f,blastImpulse=2;
+        [SerializeField,Min(.1f)] private float fuseSeconds=1.4f,blastRadius=4.5f,fragmentationDamage=145f,blastImpulse=2;
         [SerializeField,Min(.1f)] private float flashRadius=6,flashSeconds=1.6f,smokeRadius=3.5f,smokeSeconds=8;
         [Header("Pooled fragmentation presentation")]
         [SerializeField] private Sprite burstSprite,fragmentSprite;
@@ -51,6 +51,10 @@ namespace InsaneDreams.Combat
         {
             owner=source;kind=selected;exploded=false;Affected=0;cloud.enabled=false;ring.enabled=false;HideFrag();sound.Stop();gameObject.SetActive(true);body.simulated=false;transform.position=origin;body.position=origin;transform.localScale=Vector3.one;visual.sprite=icons[(int)kind];visual.color=Color.white;visual.enabled=true;body.simulated=true;body.linearVelocity=velocity;body.angularVelocity=180;detonateAt=Time.time+(fuse>=0?fuse:fuseSeconds);
         }
+        // Authored hazards reuse the grenade's damage, bounded queries and cached visuals.
+        // Immediate detonation never adds a simulated moving mine projectile.
+        public void Burst(GameObject source,Vector2 origin)
+        {Launch(source,ThrowableKind.Fragmentation,origin,Vector2.zero,0);Detonate();}
         private void Update()
         {
             if(!exploded){if(Time.time>=detonateAt)Detonate();return;}

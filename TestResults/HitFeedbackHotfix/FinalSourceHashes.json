@@ -1,0 +1,30 @@
+[
+  {
+    "path": "Assets/Scripts/Combat/CombatFeedback.cs",
+    "sha256": "13D5814114AF38F4DA27334B090E70898384DB5FCA312969036D686E8E6DE192"
+  },
+  {
+    "path": "Assets/Scripts/Visuals/CharacterVisualDriver.cs",
+    "sha256": "1814FD13FB5BD40D653DEEF103718D13D779C5163206E714B9D74B609854CF44"
+  },
+  {
+    "path": "Assets/Editor/HitFeedbackHotfixSetup.cs",
+    "sha256": "911A0D6227341DD00FDA489D9165EC916BFE88240DECF1195EEA30DB9C0BB5CB"
+  },
+  {
+    "path": "Assets/Shaders/HitFlash.shader",
+    "sha256": "266D8C56AD1752539E156A01599B48B8C3424D6ACCA4FFA2853EAA6F70C5B126"
+  },
+  {
+    "path": "Assets/Tests/EditMode/AA12ReloadHotfixRulesTests.cs",
+    "sha256": "20D217B3F001AA6C5187559534A5F1A83469DB1C5538D9A61D07B97FE58D087D"
+  },
+  {
+    "path": "Assets/Tests/PlayMode/HitFeedbackHotfixTests.cs",
+    "sha256": "E87F11087476D9BEFCD98FE9319242CC499B82815B0D7A8EF96330057DA125E3"
+  },
+  {
+    "path": "Assets/Resources/Arsenal/AA12.asset",
+    "sha256": "D970BFBB9167EC486C3DADC28A3209D72E483A48A33D638217A3B096EB98F5F6"
+  }
+]

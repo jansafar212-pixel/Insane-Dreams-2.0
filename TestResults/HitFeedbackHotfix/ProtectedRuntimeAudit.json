@@ -1,0 +1,26 @@
+[
+  {
+    "path": "Assets/Scripts/Combat/Health.cs",
+    "unchanged": true
+  },
+  {
+    "path": "Assets/Scripts/Combat/WeaponCycle.cs",
+    "unchanged": true
+  },
+  {
+    "path": "Assets/Scripts/Combat/HitReaction2D.cs",
+    "unchanged": true
+  },
+  {
+    "path": "Assets/Scripts/Visuals/PistolMagazineReload.cs",
+    "unchanged": true
+  },
+  {
+    "path": "Assets/Scripts/Visuals/CutoutRig.cs",
+    "unchanged": true
+  },
+  {
+    "path": "Assets/Scripts/Visuals/RagdollOnDefeat.cs",
+    "unchanged": true
+  }
+]

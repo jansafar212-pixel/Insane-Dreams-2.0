@@ -22,12 +22,13 @@ namespace InsaneDreams.Visuals
         private SpriteRenderer replacementMagazine;
         private SpriteRenderer reloadShell;
         public SpriteRenderer ReloadShell=>reloadShell;
-        public void PoseReloadShell(Sprite sprite,bool active,float progress)
+        public void PoseReloadShell(Sprite sprite,bool active,float progress,Vector2? insertionPoint=null)
         {
             if(reloadShell==null&&sprite!=null){var go=new GameObject("ReloadShell");go.transform.SetParent(weapon.transform,false);reloadShell=go.AddComponent<SpriteRenderer>();reloadShell.sortingLayerID=weapon.sortingLayerID;reloadShell.sortingOrder=weapon.sortingOrder+2;}
             if(reloadShell==null)return;reloadShell.sprite=sprite;reloadShell.enabled=active&&sprite!=null&&weapon.enabled&&progress<.92f;
             float flip=weapon.flipY?-1:1;
-            reloadShell.transform.localPosition=Vector3.Lerp(new Vector3(.22f,-.4f*flip,-.02f),new Vector3(.3f,-.04f*flip,-.02f),Mathf.SmoothStep(0,1,progress));
+            Vector2 socket=insertionPoint??new Vector2(.3f,-.04f);
+            reloadShell.transform.localPosition=Vector3.Lerp(new Vector3(socket.x-.08f,(socket.y-.36f)*flip,-.02f),new Vector3(socket.x,socket.y*flip,-.02f),Mathf.SmoothStep(0,1,progress));
             reloadShell.transform.localRotation=Quaternion.Euler(0,0,90);reloadShell.transform.localScale=new Vector3(1,flip,1);
             if(active&&sprite!=null)
             {

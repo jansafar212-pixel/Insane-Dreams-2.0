@@ -1,0 +1,42 @@
+[
+  {
+    "Path": "Assets/Art/CowardsBunker/Environment.asset",
+    "Hash": "4FD4A509D77B5934825E8A7CD3729D2ED982A067E54DB7AD3C3A0AD6D97CF0B1"
+  },
+  {
+    "Path": "Assets/Scenes/Warehouse_Demo.unity",
+    "Hash": "C4C89A918C423D43D5AF420E973B1306E0C1170F5E4A7B2A04B611F3ED25B305"
+  },
+  {
+    "Path": "Assets/Scenes/Warehouse_Testbed.unity",
+    "Hash": "239069EBB6576EBF8426B2F36398E20C65E2A91A28C7B52B216CC60F69F81773"
+  },
+  {
+    "Path": "Assets/Data/FirstOperation/Officer.prefab",
+    "Hash": "5C0793581127A44B48F7E47CCCAE669653DC9C74C8CBB86DEB53D183051D52F3"
+  },
+  {
+    "Path": "Assets/Scripts/Enemies/EnemyCombat.cs",
+    "Hash": "BF8490DC20C70F8E575DBBCE608AA3B1101D8EB6D1D0BE812A6FF92B7A31F0C8"
+  },
+  {
+    "Path": "Assets/Scripts/Enemies/OfficerShotTelegraph.cs",
+    "Hash": "FF58F05C67D44592137DA9611CAE9D5C7CB4733A7635BF5D274051CD0943B374"
+  },
+  {
+    "Path": "Assets/Scripts/Prototype/PlayerMotor2D.cs",
+    "Hash": "740FD99A969CECF1DC00FE0AD3F310729B5BDE79F5FAD09B5544EB686CDE794E"
+  },
+  {
+    "Path": "Assets/Scripts/Combat/PlayerThrowables.cs",
+    "Hash": "D951A66D99FAC9E8F83A23205CD375E0CCF7B3C0D8691E94F375EB678ABA29C1"
+  },
+  {
+    "Path": "Assets/Scripts/Progression/GameSession.cs",
+    "Hash": "AD2254990E51E3068EDCE1039E4BF1E8897175D597045CFCC0079F9F2D50C01F"
+  },
+  {
+    "Path": "Assets/Data/Progression/DemoCatalog.asset",
+    "Hash": "A7781A0E836422483F2AC82C603C494E01AA5E9F23212B901B73E4AF3DFFD656"
+  }
+]

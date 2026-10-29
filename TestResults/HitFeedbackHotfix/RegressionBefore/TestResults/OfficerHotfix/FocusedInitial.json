@@ -1,0 +1,49 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 11.89,
+      "summary": {
+        "total": 3,
+        "passed": 1,
+        "failed": 2,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "InsaneDreams.Tests.OfficerHotfixTests.LaserReachesViewportInAllDirectionsAndAspectRatiosButStopsAtCover",
+          "Status": "Passed",
+          "Duration": 0.3468608,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.OfficerHotfixTests.OneHandedRecoilAndMagazineExchangeStayAttachedBothFacingsAndCancelSafely",
+          "Status": "Failed",
+          "Duration": 2.75423,
+          "Message": "  Expected: False\r\n  But was:  True\r\n",
+          "StackTrace": "at InsaneDreams.Tests.OfficerHotfixTests+<OneHandedRecoilAndMagazineExchangeStayAttachedBothFacingsAndCancelSafely>d__17.MoveNext () [0x00408] in C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Tests\\PlayMode\\OfficerHotfixTests.cs:80\r\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in .\\Library\\PackageCache\\com.unity.test-framework@80f691d4262b\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:52\r\n"
+        },
+        {
+          "FullName": "InsaneDreams.Tests.OfficerHotfixTests.SevenTelegraphedShotsThenVisibleReloadNoEarlyRefillOrReloadFire",
+          "Status": "Failed",
+          "Duration": 8.730244,
+          "Message": "  Expected: False\r\n  But was:  True\r\n",
+          "StackTrace": "at InsaneDreams.Tests.OfficerHotfixTests+<SevenTelegraphedShotsThenVisibleReloadNoEarlyRefillOrReloadFire>d__16.MoveNext () [0x00412] in C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Tests\\PlayMode\\OfficerHotfixTests.cs:67\r\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in .\\Library\\PackageCache\\com.unity.test-framework@80f691d4262b\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:52\r\n"
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: WarehouseCarbine
   m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Inventory.WeaponDefinition
   stableId: 712a12a65f944c8e9c613d28169f1850
-  displayName: Warehouse Carbine
+  displayName: Carbine
   description: Sprint 003 data-only example; no combat behavior.
   icon: {fileID: 0}
   category: 0
   weaponCategory: 0
+  firearmRole: 0
   damage: 20
   firingInterval: 0.2
   magazineCapacity: 24
@@ -29,6 +30,7 @@ MonoBehaviour:
   physicalMagazineReload: 1
   loadsIndividually: 0
   shellSprite: {fileID: 0}
+  ammunitionInsertionOffset: {x: 0.3, y: -0.04}
   firearmRange: 22
   meleeRange: 1.6
   impactImpulse: 0.9

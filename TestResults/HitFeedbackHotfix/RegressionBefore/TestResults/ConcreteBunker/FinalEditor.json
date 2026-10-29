@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "if(UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode||UnityEditor.EditorApplication.isCompiling)throw new System.InvalidOperationException(\"Editor must be idle after tests\");var s=UnityEngine.SceneManagement.SceneManager.GetActiveScene();if(s.isDirty)throw new System.InvalidOperationException(\"Preserve unsaved scene\");if(s.path!=\"Assets/Scenes/Warehouse_Demo.unity\")s=UnityEditor.SceneManagement.EditorSceneManager.OpenScene(\"Assets/Scenes/Warehouse_Demo.unity\");int missing=0;foreach(var g in s.GetRootGameObjects())foreach(var t in g.GetComponentsInChildren<UnityEngine.Transform>(true))missing+=UnityEditor.GameObjectUtility.GetMonoBehavioursWithMissingScriptCount(t.gameObject);var prefabMissing=new System.Collections.Generic.List<string>();foreach(var guid in UnityEditor.AssetDatabase.FindAssets(\"t:Prefab\",new[]{\"Assets/Prefabs\",\"Assets/Data/FirstOperation\"})){string p=UnityEditor.AssetDatabase.GUIDToAssetPath(guid);var a=UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.GameObject>(p);foreach(var t in a.GetComponentsInChildren<UnityEngine.Transform>(true))if(UnityEditor.GameObjectUtility.GetMonoBehavioursWithMissingScriptCount(t.gameObject)>0)prefabMissing.Add(p);}var o=UnityEngine.Object.FindAnyObjectByType<InsaneDreams.Enemies.OfficerShotTelegraph>();var b=UnityEngine.GameObject.Find(\"CowardsBunker\");int missingSprites=System.Linq.Enumerable.Count(b.GetComponentsInChildren<UnityEngine.SpriteRenderer>(true),r=>r.sprite==null);return Newtonsoft.Json.JsonConvert.SerializeObject(new{scene=s.path,dirty=s.isDirty,playing=UnityEditor.EditorApplication.isPlaying,compiling=UnityEditor.EditorApplication.isCompiling,missingScripts=missing,prefabMissing=prefabMissing,pillboxConfigured=o.UsesEmbrasure,missingPillboxSprites=missingSprites,solidFaces=b.GetComponentsInChildren<UnityEngine.BoxCollider2D>().Length,buildTarget=UnityEditor.EditorUserBuildSettings.activeBuildTarget.ToString()});"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": "{\"scene\":\"Assets/Scenes/Warehouse_Demo.unity\",\"dirty\":false,\"playing\":false,\"compiling\":false,\"missingScripts\":0,\"prefabMissing\":[],\"pillboxConfigured\":true,\"missingPillboxSprites\":0,\"solidFaces\":5,\"buildTarget\":\"Android\"}"
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

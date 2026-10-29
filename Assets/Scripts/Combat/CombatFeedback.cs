@@ -43,6 +43,7 @@ namespace InsaneDreams.Combat
         [SerializeField, Min(.02f)] private float hitSeconds = .12f;
         [SerializeField, Min(.02f)] private float hurtSeconds = .15f;
         [SerializeField] private Color hurtColor = new Color(1, .25f, .2f);
+        [SerializeField] private Material damageFlashMaterial;
         [SerializeField] private AudioClip firingSound, hitSound, hurtSound, reloadSound, emptySound, defeatSound;
         [SerializeField, Range(0, 1)] private float volume = .5f;
         private Health health;
@@ -52,6 +53,8 @@ namespace InsaneDreams.Combat
         private AudioSource audioSource;
         private SpriteRenderer[] renderers;
         private Color[] colors;
+        private Material[] materials;
+        private bool damageTint;
         private SpriteRenderer muzzle, hit;
         private SpriteRenderer surface;
         private InsaneDreams.Visuals.CutoutRig rig;
@@ -60,6 +63,11 @@ namespace InsaneDreams.Combat
         private Vector2 surfacePoint;
         private float muzzleUntil, hitUntil, tintUntil;
         private bool tinted;
+        private Color activeTint;
+        private float hurtUntil;
+        private bool pendingLivingImpact;
+        private Vector2 livingPoint,livingDirection;
+        private float livingStrength;
         private Vector2 hitPoint;
         public int ShotCues { get; private set; }
         public int HitCues { get; private set; }
@@ -88,6 +96,17 @@ namespace InsaneDreams.Combat
             }
             rig = GetComponentInChildren<InsaneDreams.Visuals.CutoutRig>(true);
         }
+        private void Start()=>CacheTintRenderers();
+        private void CacheTintRenderers()
+        {
+            // Child rig Awake/skin binding must finish before capturing segmented limbs.
+            bool resume=tinted;var tint=activeTint;bool damage=damageTint;
+            RestoreTint();
+            renderers=rig!=null?rig.GetComponentsInChildren<SpriteRenderer>(true):renderers;
+            colors=new Color[renderers.Length];materials=new Material[renderers.Length];
+            for(int i=0;i<renderers.Length;i++){colors[i]=renderers[i].color;materials[i]=renderers[i].sharedMaterial;}
+            if(resume&&!health.IsDefeated)Tint(tint,Mathf.Max(0,tintUntil-Time.time),damage);
+        }
         private SpriteRenderer Effect(string name, Color color)
         {
             var go = new GameObject(name); go.transform.SetParent(transform, false);
@@ -98,6 +117,7 @@ namespace InsaneDreams.Combat
         {
             executor.Fired += Fired; executor.EmptyAttempt += Empty; health.Damaged += Hurt; health.Defeated += Defeat;
             executor.SurfaceHit += Surface;
+            health.DamageResolved += Resolved;
             if (player != null) player.ReloadStarted += Reload;
             if (enemy != null) enemy.ReloadStarted += Reload;
         }
@@ -105,9 +125,10 @@ namespace InsaneDreams.Combat
         {
             executor.Fired -= Fired; executor.EmptyAttempt -= Empty; health.Damaged -= Hurt; health.Defeated -= Defeat;
             executor.SurfaceHit -= Surface;
+            health.DamageResolved -= Resolved;
             if (player != null) player.ReloadStarted -= Reload;
             if (enemy != null) enemy.ReloadStarted -= Reload;
-            RestoreTint(); muzzle.enabled = hit.enabled = surface.enabled = false;
+            CancelDamageFlash();muzzle.enabled = hit.enabled = surface.enabled = false;
             glow.enabled=false;foreach(var p in particles)p.enabled=false;
             for(int i=0;i<voices.Length;i++){voices[i].Stop();ReleaseVoice(i);}
         }
@@ -132,7 +153,7 @@ namespace InsaneDreams.Combat
             bool custom=muzzleFlashSprite!=null&&definition==muzzleFlashWeapon;
             muzzle.sprite=custom?muzzleFlashSprite:effectSprite;
             muzzle.transform.position = (Vector3)executor.LastShotOrigin + Vector3.back * .15f;
-            float variation=Random.Range(.88f,1.12f)*(definition!=null?definition.FlashScale:1);muzzle.transform.localScale = custom?Vector3.one*variation:new Vector3(.28f*variation, .14f*variation, 1);
+            float variation=Random.Range(.88f,1.12f)*(definition!=null?definition.FlashScale:1)*(definition!=null&&definition.Pellets>1?1.25f:1);muzzle.transform.localScale = custom?Vector3.one*variation:new Vector3(.28f*variation, .14f*variation, 1);
             muzzle.color=Color.Lerp(new Color(1,.65f,.1f),Color.white,Random.Range(.15f,.5f));
             glow.enabled=muzzleGlowEnabled;glow.transform.position=muzzle.transform.position;glow.transform.localScale=new Vector3(.45f,.3f,1);
             muzzle.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
@@ -153,24 +174,61 @@ namespace InsaneDreams.Combat
             LastImpactMaterial=executor.LastImpactMaterial;
             Color color=LastImpactMaterial switch {ImpactMaterial.Concrete=>new Color(.65f,.68f,.7f),ImpactMaterial.Metal=>new Color(1,.9f,.35f),ImpactMaterial.Wood=>new Color(.8f,.48f,.2f),_=>new Color(.65f,.85f,1)};
             surface.color=surfaceColor=kind==ShotSurface.Ragdoll?new Color(.5f,.95f,1):color;
-            surface.transform.localScale = Vector3.one * (surfaceImpactSprite != null ? 1 : .18f);
+            float impactScale=kind==ShotSurface.Geometry&&LastImpactMaterial!=ImpactMaterial.Generic?1.25f:1;
+            surface.transform.localScale = Vector3.one * (surfaceImpactSprite != null ? 1 : .18f)*impactScale;
             for(int i=0;i<3;i++)
             {
                 int n=nextParticle;nextParticle=(n+1)%particles.Length;var p=particles[n];p.enabled=true;p.color=particleColors[n]=color;
-                particlePositions[n]=point;particleVelocities[n]=Quaternion.Euler(0,0,Random.Range(-65f,65f))*executor.LastHitNormal*Random.Range(.6f,2.5f);
+                float speed=kind!=ShotSurface.Geometry?2.5f:LastImpactMaterial==ImpactMaterial.Concrete?1.4f:LastImpactMaterial==ImpactMaterial.Wood?1.9f:2.5f;
+                particlePositions[n]=point;particleVelocities[n]=Quaternion.Euler(0,0,Random.Range(-65f,65f))*executor.LastHitNormal*Random.Range(.6f,speed);
                 particleDurations[n]=particleSeconds*Random.Range(.75f,1.2f);particleExpires[n]=Time.time+particleDurations[n];
                 float length=LastImpactMaterial==ImpactMaterial.Metal?(Random.value<.2f?.3f:.13f):LastImpactMaterial==ImpactMaterial.Wood?.12f:.07f;
-                p.transform.localScale=new Vector3(length,.04f,1);p.transform.rotation=Quaternion.Euler(0,0,Mathf.Atan2(particleVelocities[n].y,particleVelocities[n].x)*Mathf.Rad2Deg);
+                float width=.04f;
+                if(kind==ShotSurface.Geometry&&LastImpactMaterial!=ImpactMaterial.Generic){length*=1.4f;width=LastImpactMaterial==ImpactMaterial.Concrete?.085f:.055f;}
+                p.transform.localScale=new Vector3(length,width,1);p.transform.rotation=Quaternion.Euler(0,0,Mathf.Atan2(particleVelocities[n].y,particleVelocities[n].x)*Mathf.Rad2Deg);
                 p.transform.position=new Vector3(point.x,point.y,-.22f);
             }
             AudioClip clip=LastImpactMaterial switch{ImpactMaterial.Concrete=>concreteImpactSound,ImpactMaterial.Metal=>metalImpactSound,ImpactMaterial.Wood=>woodImpactSound,_=>geometryImpactSound};
             Sound(kind==ShotSurface.Ragdoll?ragdollImpactSound:clip!=null?clip:geometryImpactSound);
         }
-        private void Hurt(DamageInfo _) { HurtCues++; Tint(hurtColor, hurtSeconds); Sound(hurtSound); }
-        private void Reload() { ReloadCues++; Tint(new Color(1, .8f, .2f), .25f); Sound(reloadSound,false); }
-        private void Empty() { EmptyCues++; Tint(Color.gray, .12f); Sound(emptySound); }
+        private void Resolved(DamageOutcome outcome)
+        {
+            if(health.IsDefeated){CancelDamageFlash();return;}
+            if(health.Team!=CombatTeam.Enemy||outcome.Hit.Kind!=DamageKind.Ballistic||!outcome.Hit.Impact.HasValue)return;
+            var impact=outcome.Hit.Impact.Value;
+            // One small cached burst per rendered frame, never one burst per pellet.
+            pendingLivingImpact=true;livingPoint=impact.Point;livingDirection=impact.Direction;
+            livingStrength=Mathf.Min(3.2f,livingStrength+impact.ReactionStrength);
+        }
+        public void CancelDamageFlash(){RestoreTint();hurtUntil=tintUntil=0;pendingLivingImpact=false;livingStrength=0;}
+        private void LivingImpact()
+        {
+            pendingLivingImpact=false;
+            int count=livingStrength>=1.65f?4:2;
+            for(int i=0;i<count;i++)
+            {
+                int n=nextParticle;nextParticle=(n+1)%particles.Length;var p=particles[n];
+                p.enabled=true;p.color=particleColors[n]=new Color(1,.72f,.38f);
+                particlePositions[n]=livingPoint;
+                particleVelocities[n]=(Vector2)(Quaternion.Euler(0,0,-45+i*30)*(Vector3)(-livingDirection.normalized))* (livingStrength>=1.65f?1.8f:1.1f);
+                particleDurations[n]=.12f;particleExpires[n]=Time.time+.12f;
+                p.transform.position=new Vector3(livingPoint.x,livingPoint.y,-.22f);
+                p.transform.localScale=new Vector3(livingStrength>=1.65f?.09f:.0625f,.03125f,1);
+                p.transform.rotation=Quaternion.Euler(0,0,Mathf.Atan2(particleVelocities[n].y,particleVelocities[n].x)*Mathf.Rad2Deg);
+            }
+            livingStrength=0;
+        }
+        private void Hurt(DamageInfo _)
+        {
+            if(health.IsDefeated){CancelDamageFlash();return;}
+            if(materials==null)CacheTintRenderers();
+            HurtCues++;hurtUntil=Time.time+hurtSeconds;Tint(hurtColor,hurtSeconds,true);Sound(hurtSound);
+        }
+        private void Reload() { ReloadCues++; if(Time.time>=hurtUntil)Tint(new Color(1, .8f, .2f), .25f); Sound(reloadSound,false); }
+        private void Empty() { EmptyCues++; if(Time.time>=hurtUntil)Tint(Color.gray, .12f); Sound(emptySound); }
         private void Defeat(DamageInfo _)
         {
+            CancelDamageFlash();
             DefeatCues++;
             // A short, detached silhouette survives immediate authoritative enemy deactivation.
             if (health.Team != CombatTeam.Enemy || effectSprite == null) return;
@@ -186,17 +244,28 @@ namespace InsaneDreams.Combat
             var go = new GameObject("DefeatCue"); go.transform.position = transform.position;
             go.transform.localScale = new Vector3(.85f, .2f, 1);
             var sprite = go.AddComponent<SpriteRenderer>(); sprite.sprite = effectSprite;
-            sprite.sortingOrder = 12; sprite.color = hurtColor;
+            sprite.sortingOrder = 12; sprite.color = Color.white;
             if (defeatSound != null) { var source = go.AddComponent<AudioSource>(); source.PlayOneShot(defeatSound, volume); }
             Destroy(go, defeatSound != null ? Mathf.Max(.25f, defeatSound.length) : .25f);
         }
-        private void Tint(Color color, float seconds)
+        private void Tint(Color color, float seconds,bool damage=false)
         {
+            if(health.IsDefeated)return;
+            bool changed=!tinted||activeTint!=color||damageTint!=damage;
+            // Skin initialization and equipment presentation may set base colors after Awake.
+            // Snapshot once per tint sequence, never snapshot an already tinted frame.
+            if(!tinted)for(int i=0;i<renderers.Length;i++)if(renderers[i]!=null){colors[i]=renderers[i].color;if(materials!=null)materials[i]=renderers[i].sharedMaterial;}
             tintUntil = Time.time + seconds;
-            tinted = true;
-            for (int i = 0; i < renderers.Length; i++) if (renderers[i] != null) renderers[i].color = color;
+            tinted = true;activeTint=color;damageTint=damage;
+            // Repeated pellets refresh the deadline without redundant sprite writes.
+            if(changed)ApplyTint();
         }
-        private void RestoreTint() { if (!tinted) return; tinted = false; for (int i = 0; i < renderers.Length; i++) if (renderers[i] != null) renderers[i].color = colors[i]; }
+        private void ApplyTint()
+        {
+            for(int i=0;i<renderers.Length;i++)if(renderers[i]!=null){if(renderers[i].color!=activeTint)renderers[i].color=activeTint;
+                if(materials!=null){var desired=damageTint&&health.Team==CombatTeam.Enemy&&damageFlashMaterial!=null?damageFlashMaterial:materials[i];if(renderers[i].sharedMaterial!=desired)renderers[i].sharedMaterial=desired;}}
+        }
+        private void RestoreTint() { if (!tinted) return; tinted = false;damageTint=false; for (int i = 0; i < renderers.Length; i++) if (renderers[i] != null) {renderers[i].color = colors[i];if(materials!=null)renderers[i].sharedMaterial=materials[i];} }
         private void Update()
         {
             if (Time.time >= muzzleUntil) muzzle.enabled = false;
@@ -220,6 +289,9 @@ namespace InsaneDreams.Combat
         }
         private void LateUpdate()
         {
+            // Pose/weapon scripts run first; they must not erase a confirmed damage flash.
+            if(health.IsDefeated)CancelDamageFlash();
+            else{if(pendingLivingImpact)LivingImpact();if(tinted)ApplyTint();}
             // The cutout driver (order 100) has now applied this frame's aim, crouch and recoil.
             if(muzzle.enabled&&shotAnchoredFlash)
             {muzzle.transform.SetPositionAndRotation(flashShotPosition,flashShotRotation);}

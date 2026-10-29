@@ -1,0 +1,18 @@
+{
+  "path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\build\\Sprint0037\\AKUMU2-combat-impact-release.apk",
+  "buildId": "build_3992cd59f9ac",
+  "bytes": 39837579,
+  "writtenUtc": "2026-10-28T23:25:38.9320815Z",
+  "sha256": "3741DDF3F08DBC1A58CBC8E225172FE36C3E619ABBC7AAEDAA9423A6A274F034",
+  "package": "package: name='com.GAMES.AKUMU2' versionCode='1' versionName='0.12' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'",
+  "nativeCode": "native-code: 'arm64-v8a'",
+  "debuggable": false,
+  "livingPhysics": true,
+  "jointCache": true,
+  "acceptedOutcome": true,
+  "playerFeedback": true,
+  "reactionStrength": true,
+  "shakeReduction": true,
+  "walletFloor": true,
+  "deviceTested": false
+}

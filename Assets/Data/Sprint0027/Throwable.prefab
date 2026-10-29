@@ -189,8 +189,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1f3d4468391dd2f4b898f74bb573c7f1, type: 2}
   smokeSprite: {fileID: 21300000, guid: 928c7878d57c05a4d872ad5c882bd797, type: 2}
   fuseSeconds: 1.4
-  blastRadius: 4.1
-  fragmentationDamage: 110.5
+  blastRadius: 4.5
+  fragmentationDamage: 145
   blastImpulse: 2
   flashRadius: 6
   flashSeconds: 1.6

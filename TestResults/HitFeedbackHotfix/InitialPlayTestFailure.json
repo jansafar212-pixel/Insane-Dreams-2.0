@@ -1,0 +1,48 @@
+{
+  "status": "completed",
+  "duration": 19.55,
+  "summary": {
+    "total": 5,
+    "passed": 4,
+    "failed": 1,
+    "skipped": 0,
+    "inconclusive": 0
+  },
+  "results": [
+    {
+      "FullName": "InsaneDreams.Tests.HitFeedbackHotfixTests.Aa12NativeMagazineAnimationHudAndSwitchInterruptionConserveAmmo",
+      "Status": "Passed",
+      "Duration": 14.5282983,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.HitFeedbackHotfixTests.AllElevenNativeFirearmsFlashTheWholeLivingLarperAndRestoreColorsAndMaterials",
+      "Status": "Passed",
+      "Duration": 2.7028837,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.HitFeedbackHotfixTests.ConcurrentShotgunBatchesReuseParticlesAndExistingPhysicsWithoutPerPelletObjects",
+      "Status": "Passed",
+      "Duration": 1.8083555,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.HitFeedbackHotfixTests.FirstLethalHitNeverStartsAFlash",
+      "Status": "Passed",
+      "Duration": 0.0936126,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.HitFeedbackHotfixTests.RepeatedPelletsRefreshAndDeathRestoresBeforeObserversAndCannotReflashForearms",
+      "Status": "Failed",
+      "Duration": 0.2654229,
+      "Message": "Unhandled log message: '[Error] SendMessage Hurt has no receiver!'. Use UnityEngine.TestTools.LogAssert.Expect",
+      "StackTrace": "UnityEngine.Component:SendMessage (string,object)\r\nInsaneDreams.Tests.HitFeedbackHotfixTests/<RepeatedPelletsRefreshAndDeathRestoresBeforeObserversAndCannotReflashForearms>d__11:MoveNext () (at Assets/Tests/PlayMode/HitFeedbackHotfixTests.cs:75)\r\nUnityEngine.SetupCoroutine:InvokeMoveNext (System.Collections.IEnumerator,intptr)\r\n\r\n"
+    }
+  ]
+}

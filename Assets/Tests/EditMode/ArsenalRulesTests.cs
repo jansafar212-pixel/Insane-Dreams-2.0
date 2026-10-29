@@ -8,7 +8,7 @@ namespace InsaneDreams.Tests
     {
         [Test] public void SevenCoreWeaponsAndRetainedGlockHaveDistinctDataWithoutChangingEnemyEagle()
         {
-            var c=AssetDatabase.LoadAssetAtPath<ArsenalCatalog>("Assets/Resources/ArsenalCatalog.asset");Assert.AreEqual(8,c.weapons.Length);Assert.AreEqual(27,c.weapons[7].MagazineCapacity);
+            var c=AssetDatabase.LoadAssetAtPath<ArsenalCatalog>("Assets/Resources/ArsenalCatalog.asset");Assert.AreEqual(11,c.weapons.Length);Assert.AreEqual(27,c.weapons[7].MagazineCapacity);
             Assert.AreEqual(WeaponFireMode.Automatic,c.weapons[1].FireMode);Assert.AreEqual(7,c.weapons[4].Pellets);Assert.Greater(c.weapons[5].MagazineCapacity,c.weapons[3].MagazineCapacity);Assert.AreEqual(WeaponFireMode.ReleaseToFire,c.weapons[6].FireMode);
             Assert.AreEqual(2.4f,AssetDatabase.LoadAssetAtPath<WeaponDefinition>("Assets/Data/FirstOperation/OfficerPistol.asset").FiringInterval);
             Assert.AreEqual(14,c.weapons[0].Damage);Assert.AreEqual(20,c.weapons[3].Damage);

@@ -1,0 +1,384 @@
+[
+  {
+    "Suite": "CowardsBunkerTests",
+    "Status": "completed",
+    "Summary": {
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "Results": [
+      {
+        "FullName": "InsaneDreams.Tests.CowardsBunkerTests.ActualGrenadeBouncesOnRoofAndBlastRespectsSandbagsButOpenRearCanFlushOfficer",
+        "Status": "Passed",
+        "Duration": 2.1600037,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CowardsBunkerTests.BunkerBlocksRealShotsButOpenRearAllowsDefeatAndDecorNeverCollides",
+        "Status": "Passed",
+        "Duration": 1.7278285,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CowardsBunkerTests.OfficerUsesHeardOpportunityPeeksFiresAndRetreatsWithoutSnappingOrEndlessHiding",
+        "Status": "Passed",
+        "Duration": 6.191724,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CowardsBunkerTests.SustainedPressureUsesExistingSuppressionAndPlayerCanCrossSandbagsToRear",
+        "Status": "Passed",
+        "Duration": 10.4663269,
+        "Message": null,
+        "StackTrace": null
+      }
+    ]
+  },
+  {
+    "Suite": "OfficerHotfixTests",
+    "Status": "completed",
+    "Summary": {
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "Results": [
+      {
+        "FullName": "InsaneDreams.Tests.OfficerHotfixTests.HalfSecondWarningIsVisualOnlyAndActualMagentaShotIsTwicePistolWidthThenFades",
+        "Status": "Passed",
+        "Duration": 0.8182893,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.OfficerHotfixTests.LaserReachesViewportInAllDirectionsAndAspectRatiosButStopsAtCover",
+        "Status": "Passed",
+        "Duration": 0.1978665,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.OfficerHotfixTests.OneHandedRecoilAndMagazineExchangeStayAttachedBothFacingsAndCancelSafely",
+        "Status": "Passed",
+        "Duration": 5.4641689,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.OfficerHotfixTests.SevenTelegraphedShotsThenVisibleReloadNoEarlyRefillOrReloadFire",
+        "Status": "Passed",
+        "Duration": 7.4998002,
+        "Message": null,
+        "StackTrace": null
+      }
+    ]
+  },
+  {
+    "Suite": "Sprint00271Tests",
+    "Status": "completed",
+    "Summary": {
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "Results": [
+      {
+        "FullName": "InsaneDreams.Tests.Sprint00271Tests.EveryRevisedWarehouseLadderAutomaticallyExitsWithHeldTouchUp",
+        "Status": "Passed",
+        "Duration": 13.5550292,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.Sprint00271Tests.SeededOfficerHitsStationaryTargetAtTenUnitsWithoutPerfectAimOrExtraShots",
+        "Status": "Passed",
+        "Duration": 5.9273794,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.Sprint00271Tests.SlimPauseRetainsTouchAreaAndOneMedicalTabPurchasesBothOriginalResources",
+        "Status": "Passed",
+        "Duration": 1.1620004,
+        "Message": null,
+        "StackTrace": null
+      }
+    ]
+  },
+  {
+    "Suite": "FirstOperationTests",
+    "Status": "completed",
+    "Summary": {
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "Results": [
+      {
+        "FullName": "InsaneDreams.Tests.FirstOperationTests.AuthoredRosterSupportBulletproofPlatformsAndFiveCameraViews",
+        "Status": "Passed",
+        "Duration": 1.7278789,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.FirstOperationTests.ContinuousGroundRouteCanReachResultsUsingRealMovementAndObstacleJumps",
+        "Status": "Passed",
+        "Duration": 23.4006903,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.FirstOperationTests.ExpertCanThrowAtGroundApproachFromDeckEdgeAndRespectsViewport",
+        "Status": "Passed",
+        "Duration": 5.705475,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.FirstOperationTests.OfficerTelegraphsBeforeShootingAndCannotInitiateOffscreen",
+        "Status": "Passed",
+        "Duration": 4.4522204,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.FirstOperationTests.SamuraiUsesActualSmallColliderToPursueElevatedPlayer",
+        "Status": "Passed",
+        "Duration": 1.6149779,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.FirstOperationTests.TwoPurchasedRevivalsThenFailureAndRetryNeverRefillThem",
+        "Status": "Passed",
+        "Duration": 2.3681432,
+        "Message": null,
+        "StackTrace": null
+      }
+    ]
+  },
+  {
+    "Suite": "GrenadeResupplyHotfixTests",
+    "Status": "completed",
+    "Summary": {
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "Results": [
+      {
+        "FullName": "InsaneDreams.Tests.GrenadeResupplyHotfixTests.ExistingBoxRestocksEveryTypeWithPartialAcceptanceFiniteStockImmediateHudAndSave",
+        "Status": "Passed",
+        "Duration": 1.1020958,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.GrenadeResupplyHotfixTests.FragShakeIsDistanceBoundedExpiresAndActualEnemyDeathStillCreatesPhysicsCorpse",
+        "Status": "Passed",
+        "Duration": 1.0216545,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.GrenadeResupplyHotfixTests.FragUsesLargerRealFalloffFriendlyCoverAndPooledChunkyEffectsWithoutChangingOtherTypes",
+        "Status": "Passed",
+        "Duration": 3.9456784,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.GrenadeResupplyHotfixTests.OrdinaryLocalizedDeathKeepsArmsUntilOneRegionAccumulates105AndLegThresholdStays60",
+        "Status": "Passed",
+        "Duration": 0.940634,
+        "Message": null,
+        "StackTrace": null
+      }
+    ]
+  },
+  {
+    "Suite": "Sprint0027ThrowableTests",
+    "Status": "completed",
+    "Summary": {
+      "total": 4,
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "Results": [
+      {
+        "FullName": "InsaneDreams.Tests.Sprint0027ThrowableTests.FragmentationUsesRadialFriendlySelfDamageDeduplicationAndSolidCover",
+        "Status": "Passed",
+        "Duration": 0.1872124,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.Sprint0027ThrowableTests.GrenadeShopPurchasesAreBoundedAndPersistWithoutChangingMedicalStock",
+        "Status": "Passed",
+        "Duration": 0.0835911,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.Sprint0027ThrowableTests.PlayerAimsThenReleasesOneFiniteGrenadeAndResetCancels",
+        "Status": "Passed",
+        "Duration": 0.8872415,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.Sprint0027ThrowableTests.SmokeBlocksSensesNotPhysicalBulletsAndExpiresAndFlashIsTemporary",
+        "Status": "Passed",
+        "Duration": 1.1047474,
+        "Message": null,
+        "StackTrace": null
+      }
+    ]
+  },
+  {
+    "Suite": "Sprint0027FallTests",
+    "Status": "completed",
+    "Summary": {
+      "total": 6,
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "Results": [
+      {
+        "FullName": "InsaneDreams.Tests.Sprint0027FallTests.ActiveAirborneParachuteAllowsCombatDamageAndLandingAddsNone",
+        "Status": "Passed",
+        "Duration": 1.5478267,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.Sprint0027FallTests.LateParachuteClearsPendingImpactButDoesNotBlockCombatDamage",
+        "Status": "Passed",
+        "Duration": 0.9661267,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.Sprint0027FallTests.MediumAndExtremeParachuteLandingsHaveExactlyZeroDamage",
+        "Status": "Passed",
+        "Duration": 6.4079236,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.Sprint0027FallTests.MediumFallHurtsAndExtremeFallCanDefeat",
+        "Status": "Passed",
+        "Duration": 0.8849451,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.Sprint0027FallTests.NormalDoubleJumpReturnsToGroundWithoutFallDamage",
+        "Status": "Passed",
+        "Duration": 0.2481404,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.Sprint0027FallTests.SmallFallIsSafe",
+        "Status": "Passed",
+        "Duration": 0.1722119,
+        "Message": null,
+        "StackTrace": null
+      }
+    ]
+  },
+  {
+    "Suite": "CowardsBunkerRulesTests",
+    "Status": "completed",
+    "Summary": {
+      "total": 2,
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "Results": [
+      {
+        "FullName": "InsaneDreams.Tests.CowardsBunkerRulesTests.EnvironmentModulesUseFourPixelCellsPointFilteringBinaryAlphaAndSmallPalettes",
+        "Status": "Passed",
+        "Duration": 0.5354997,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.CowardsBunkerRulesTests.ScenePreservesOriginalGeometryExceptTwoSandbagsAndOneRoofAndRoster",
+        "Status": "Passed",
+        "Duration": 0.2911537,
+        "Message": null,
+        "StackTrace": null
+      }
+    ]
+  },
+  {
+    "Suite": "FirstOperationLayoutTests",
+    "Status": "completed",
+    "Summary": {
+      "total": 2,
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "Results": [
+      {
+        "FullName": "InsaneDreams.Tests.FirstOperationLayoutTests.OfficerRetainsModularDimensionsAndNoHealthInflationAndMissionFireworksAreScoped",
+        "Status": "Passed",
+        "Duration": 0.0327377,
+        "Message": null,
+        "StackTrace": null
+      },
+      {
+        "FullName": "InsaneDreams.Tests.FirstOperationLayoutTests.SavedLayoutHasExactRosterSupportedStartsAndNoCheckpoints",
+        "Status": "Passed",
+        "Duration": 0.189602,
+        "Message": null,
+        "StackTrace": null
+      }
+    ]
+  },
+  {
+    "Suite": "Sprint00271RulesTests",
+    "Status": "completed",
+    "Summary": {
+      "total": 1,
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "inconclusive": 0
+    },
+    "Results": [
+      {
+        "FullName": "InsaneDreams.Tests.Sprint00271RulesTests.OfficerArtAndTuningPreserveCombatAndInsertedMagazineFitsOpaqueGrip",
+        "Status": "Passed",
+        "Duration": 0.0470438,
+        "Message": null,
+        "StackTrace": null
+      }
+    ]
+  }
+]

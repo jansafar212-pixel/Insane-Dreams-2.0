@@ -8,7 +8,7 @@ namespace InsaneDreams.Combat
     {
         public const int Capacity=5;
         public int MaximumCapacity{get;private set;}=Capacity;
-        public void ConfigureCapacity(int value){MaximumCapacity=Mathf.Clamp(value,3,Capacity);for(int i=0;i<3;i++)stock[i]=Mathf.Min(stock[i],MaximumCapacity);InventoryChanged?.Invoke();}
+        public void ConfigureCapacity(int value){Cancel();MaximumCapacity=Mathf.Clamp(value,3,Capacity);for(int i=0;i<3;i++)stock[i]=Mathf.Min(stock[i],MaximumCapacity);InventoryChanged?.Invoke();}
         [SerializeField] private ThrowableProjectile2D projectile;
         [SerializeField] private Sprite[] icons;
         [SerializeField,Min(1)] private float throwSpeed=12;
@@ -25,11 +25,11 @@ namespace InsaneDreams.Combat
         public bool IsAiming=>aiming;
         public int Throws{get;private set;}
         public event System.Action InventoryChanged;
-        public int Count(ThrowableKind kind)=>stock[(int)kind];
+        public int Count(ThrowableKind kind)=>(int)kind>=0&&(int)kind<stock.Length?stock[(int)kind]:0;
         public int TakeSupply(int[] available)
         {
-            if(available==null||available.Length<3)return 0;int total=0;
-            for(int i=0;i<3;i++){int added=Mathf.Clamp(available[i],0,MaximumCapacity-stock[i]);stock[i]+=added;available[i]-=added;total+=added;}
+            if(available==null)return 0;int total=0;
+            for(int i=0;i<Mathf.Min(stock.Length,available.Length);i++){int added=Mathf.Clamp(available[i],0,MaximumCapacity-stock[i]);stock[i]+=added;available[i]-=added;total+=added;}
             if(total>0)InventoryChanged?.Invoke();return total;
         }
         public Sprite Icon=>icons!=null&&icons.Length==3?icons[(int)Selected]:null;
@@ -75,7 +75,11 @@ namespace InsaneDreams.Combat
             }
             else if(aiming&&!intent)
             {
-                aiming=false;preview.enabled=false;if(!TryReleaseOrigin(rememberedAim,out var origin))return;foreach(var p in pool)if(p!=null&&!p.Busy){p.Launch(gameObject,Selected,origin,Velocity(rememberedAim));cover?.ExposeThrow();stock[(int)Selected]--;Throws++;nextThrow=Time.time+throwCooldown;InventoryChanged?.Invoke();break;}
+                aiming=false;preview.enabled=false;
+                // Inventory or equipment can change between preview and release.
+                // Only a successfully launched cached projectile consumes one item.
+                if(Count(Selected)<=0||Time.time<nextThrow||!TryReleaseOrigin(rememberedAim,out var origin))return;
+                foreach(var p in pool)if(p!=null&&!p.Busy){p.Launch(gameObject,Selected,origin,Velocity(rememberedAim));cover?.ExposeThrow();stock[(int)Selected]--;Throws++;nextThrow=Time.time+throwCooldown;InventoryChanged?.Invoke();break;}
             }
         }
         private void OnDestroy(){foreach(var p in pool)if(p!=null)Destroy(p.gameObject);if(material!=null)Destroy(material);}

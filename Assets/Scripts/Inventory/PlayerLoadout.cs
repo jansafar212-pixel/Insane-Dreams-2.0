@@ -3,7 +3,8 @@ using UnityEngine;
 
 namespace InsaneDreams.Inventory
 {
-    public enum EquipmentSlot { Firearm1, Firearm2, Melee }
+    // Preserve the numeric values already present in scenes and saves.
+    public enum EquipmentSlot { Firearm1=0, Firearm2=1, Melee=2 }
     public sealed class PlayerLoadout : MonoBehaviour
     {
         [SerializeField] private WeaponDefinition initialFirearm1;
@@ -37,15 +38,20 @@ namespace InsaneDreams.Inventory
         public EquipmentSlot SelectedSlot => selectedSlot;
         // Preserve serialized slot2/save data while replacing only the player's active tool slot.
         public RuntimeWeapon SelectedWeapon => throwables!=null&&selectedSlot==EquipmentSlot.Melee?null:Get(selectedSlot);
-        public RuntimeWeapon Get(EquipmentSlot slot) => slot switch
+        public RuntimeWeapon Get(EquipmentSlot slot)
         {
-            EquipmentSlot.Firearm1 => firearm1, EquipmentSlot.Firearm2 => firearm2,
-            EquipmentSlot.Melee => melee, _ => null
-        };
+            var weapon=slot switch{EquipmentSlot.Firearm1=>firearm1,EquipmentSlot.Firearm2=>firearm2,EquipmentSlot.Melee=>melee,_=>null};
+            // Unity may materialize an empty inline serializable class for a new or
+            // unequipped Inspector field. It is an empty slot, never a usable weapon.
+            return weapon?.Definition!=null&&weapon.Definition.Fits(slot)?weapon:null;
+        }
 
         private void Awake()
         {
+            if(!System.Enum.IsDefined(typeof(EquipmentSlot),selectedSlot))selectedSlot=EquipmentSlot.Firearm1;
             throwables=GetComponent<InsaneDreams.Combat.PlayerThrowables>();
+            if(firearm1?.Definition==null||!firearm1.Definition.Fits(EquipmentSlot.Firearm1))firearm1=null;
+            if(firearm2?.Definition==null||!firearm2.Definition.Fits(EquipmentSlot.Firearm2))firearm2=null;
             if (initialFirearm1 != null) Equip(EquipmentSlot.Firearm1, new RuntimeWeapon(initialFirearm1, initialReserveAmmo));
             if (initialFirearm2 != null) Equip(EquipmentSlot.Firearm2, new RuntimeWeapon(initialFirearm2, initialReserveAmmo));
             if (initialMelee != null) Equip(EquipmentSlot.Melee, new RuntimeWeapon(initialMelee));
@@ -65,8 +71,9 @@ namespace InsaneDreams.Inventory
         {
             if (!System.Enum.IsDefined(typeof(EquipmentSlot), slot)) return false;
             if (weapon == null) { Unequip(slot); return true; }
-            bool wantsMelee = slot == EquipmentSlot.Melee;
-            if (weapon.Definition == null || wantsMelee != (weapon.Definition.WeaponCategory == WeaponCategory.Melee)) return false;
+            if (weapon.Definition == null || !weapon.Definition.Fits(slot)) return false;
+            foreach(var equipped in new[]{firearm1,firearm2,melee})
+                if(equipped!=null&&equipped.Definition==weapon.Definition&&Get(slot)!=equipped)return false;
             if(weapon.UsesAmmunition)weapon.SetReloadMultiplier(equipmentReloadMultiplier);
             if (firearm1 == weapon || firearm2 == weapon || melee == weapon) return Get(slot) == weapon;
             if (slot == selectedSlot) SelectionChanging?.Invoke();

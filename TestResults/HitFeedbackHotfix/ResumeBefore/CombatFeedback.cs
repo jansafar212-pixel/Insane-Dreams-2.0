@@ -1,0 +1,301 @@
+using InsaneDreams.Enemies;
+using UnityEngine;
+
+namespace InsaneDreams.Combat
+{
+    // Observes combat outcomes only. Never applies damage, consumes ammunition, or changes attack timing.
+    [DefaultExecutionOrder(200)]
+    [RequireComponent(typeof(Health), typeof(AttackExecutor), typeof(AudioSource))]
+    public sealed class CombatFeedback : MonoBehaviour
+    {
+        [SerializeField] private Sprite effectSprite;
+        [SerializeField] private Sprite surfaceImpactSprite;
+        [SerializeField] private AudioClip geometryImpactSound, ragdollImpactSound;
+        [SerializeField] private AudioClip concreteImpactSound, metalImpactSound, woodImpactSound;
+        [SerializeField, Range(4,24)] private int maximumImpactParticles=12;
+        [SerializeField, Range(.08f,.5f)] private float particleSeconds=.24f;
+        [SerializeField, Range(0,.15f)] private float pitchVariation=.07f;
+        [SerializeField] private bool muzzleGlowEnabled=true;
+        [SerializeField] private Sprite muzzleFlashSprite;
+        [SerializeField] private InsaneDreams.Inventory.WeaponDefinition muzzleFlashWeapon;
+        [Tooltip("These weapons keep the flash at the recorded shot origin, matching their world-space tracer throughout recoil.")]
+        [SerializeField] private InsaneDreams.Inventory.WeaponDefinition[] shotAnchoredFlashWeapons;
+        private bool shotAnchoredFlash;
+        private Vector3 flashShotPosition;
+        private Quaternion flashShotRotation;
+        private InsaneDreams.Inventory.PlayerLoadout loadout;
+        private SpriteRenderer glow;
+        private SpriteRenderer[] particles;
+        private Vector2[] particlePositions,particleVelocities;
+        private float[] particleExpires,particleDurations;
+        private Color[] particleColors;
+        private int nextParticle;
+        private readonly AudioSource[] voices=new AudioSource[2];
+        private readonly bool[] voiceReserved=new bool[2];
+        private static int activeVoices;
+        public const int GlobalVoiceLimit=12;
+        public int ImpactParticleCapacity => particles!=null?particles.Length:0;
+        public ImpactMaterial LastImpactMaterial {get;private set;}
+        public static int ActiveAudioVoices => activeVoices;
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void ResetVoices()=>activeVoices=0;
+        [SerializeField, Min(.02f)] private float muzzleSeconds = .06f;
+        [SerializeField, Min(.02f)] private float hitSeconds = .12f;
+        [SerializeField, Min(.02f)] private float hurtSeconds = .15f;
+        [SerializeField] private Color hurtColor = new Color(1, .25f, .2f);
+        [SerializeField] private Material damageFlashMaterial;
+        [SerializeField] private AudioClip firingSound, hitSound, hurtSound, reloadSound, emptySound, defeatSound;
+        [SerializeField, Range(0, 1)] private float volume = .5f;
+        private Health health;
+        private AttackExecutor executor;
+        private PlayerCombat player;
+        private EnemyCombat enemy;
+        private AudioSource audioSource;
+        private SpriteRenderer[] renderers;
+        private Color[] colors;
+        private Material[] materials;
+        private bool damageTint;
+        private SpriteRenderer muzzle, hit;
+        private SpriteRenderer surface;
+        private InsaneDreams.Visuals.CutoutRig rig;
+        private float surfaceUntil;
+        private Color surfaceColor;
+        private Vector2 surfacePoint;
+        private float muzzleUntil, hitUntil, tintUntil;
+        private bool tinted;
+        private Color activeTint;
+        private float hurtUntil;
+        private bool pendingLivingImpact;
+        private Vector2 livingPoint,livingDirection;
+        private float livingStrength;
+        private Vector2 hitPoint;
+        public int ShotCues { get; private set; }
+        public int HitCues { get; private set; }
+        public int HurtCues { get; private set; }
+        public int ReloadCues { get; private set; }
+        public int EmptyCues { get; private set; }
+        public int DefeatCues { get; private set; }
+        private void Awake()
+        {
+            health = GetComponent<Health>(); executor = GetComponent<AttackExecutor>();
+            player = GetComponent<PlayerCombat>(); enemy = GetComponent<EnemyCombat>(); audioSource = GetComponent<AudioSource>();
+            loadout=GetComponent<InsaneDreams.Inventory.PlayerLoadout>();
+            audioSource.playOnAwake = false; audioSource.spatialBlend = 0;
+            renderers = GetComponentsInChildren<SpriteRenderer>(true); colors = new Color[renderers.Length];
+            for (int i = 0; i < renderers.Length; i++) colors[i] = renderers[i].color;
+            muzzle = Effect("MuzzleCue", new Color(1, .85f, .25f)); hit = Effect("HitConfirmation", Color.white);
+            surface = Effect("SurfaceImpact", Color.white); if (surfaceImpactSprite != null) surface.sprite = surfaceImpactSprite;
+            glow=Effect("MuzzleGlow",new Color(1,.75f,.2f,.18f));
+            int capacity=Mathf.Clamp(maximumImpactParticles,4,24);
+            particles=new SpriteRenderer[capacity];particlePositions=new Vector2[capacity];particleVelocities=new Vector2[capacity];particleExpires=new float[capacity];particleDurations=new float[capacity];particleColors=new Color[capacity];
+            for(int i=0;i<capacity;i++)particles[i]=Effect("ImpactParticle_"+i,Color.white);
+            for(int i=0;i<voices.Length;i++)
+            {
+                var go=new GameObject("CombatVoice_"+i);go.transform.SetParent(transform,false);voices[i]=go.AddComponent<AudioSource>();
+                voices[i].playOnAwake=false;voices[i].spatialBlend=0;voices[i].outputAudioMixerGroup=audioSource.outputAudioMixerGroup;
+            }
+            rig = GetComponentInChildren<InsaneDreams.Visuals.CutoutRig>(true);
+        }
+        private void Start()=>CacheTintRenderers();
+        private void CacheTintRenderers()
+        {
+            // Child rig Awake/skin binding must finish before capturing segmented limbs.
+            bool resume=tinted;var tint=activeTint;bool damage=damageTint;
+            RestoreTint();
+            renderers=rig!=null?rig.GetComponentsInChildren<SpriteRenderer>(true):renderers;
+            colors=new Color[renderers.Length];materials=new Material[renderers.Length];
+            for(int i=0;i<renderers.Length;i++){colors[i]=renderers[i].color;materials[i]=renderers[i].sharedMaterial;}
+            if(resume&&!health.IsDefeated)Tint(tint,Mathf.Max(0,tintUntil-Time.time),damage);
+        }
+        private SpriteRenderer Effect(string name, Color color)
+        {
+            var go = new GameObject(name); go.transform.SetParent(transform, false);
+            var sprite = go.AddComponent<SpriteRenderer>(); sprite.sprite = effectSprite; sprite.color = color;
+            sprite.sortingOrder = 30; sprite.enabled = false; return sprite;
+        }
+        private void OnEnable()
+        {
+            executor.Fired += Fired; executor.EmptyAttempt += Empty; health.Damaged += Hurt; health.Defeated += Defeat;
+            executor.SurfaceHit += Surface;
+            health.DamageResolved += Resolved;
+            if (player != null) player.ReloadStarted += Reload;
+            if (enemy != null) enemy.ReloadStarted += Reload;
+        }
+        private void OnDisable()
+        {
+            executor.Fired -= Fired; executor.EmptyAttempt -= Empty; health.Damaged -= Hurt; health.Defeated -= Defeat;
+            executor.SurfaceHit -= Surface;
+            health.DamageResolved -= Resolved;
+            if (player != null) player.ReloadStarted -= Reload;
+            if (enemy != null) enemy.ReloadStarted -= Reload;
+            RestoreTint();hurtUntil=0; muzzle.enabled = hit.enabled = surface.enabled = false;
+            glow.enabled=false;foreach(var p in particles)p.enabled=false;
+            for(int i=0;i<voices.Length;i++){voices[i].Stop();ReleaseVoice(i);}
+        }
+        private void ReleaseVoice(int i){if(!voiceReserved[i])return;voiceReserved[i]=false;activeVoices=Mathf.Max(0,activeVoices-1);}
+        private void Sound(AudioClip clip,bool vary=true,float pitch=1)
+        {
+            if(clip==null||!isActiveAndEnabled)return;
+            for(int i=0;i<voices.Length;i++)
+            {
+                if(voices[i].isPlaying)continue;ReleaseVoice(i);if(activeVoices>=GlobalVoiceLimit)return;
+                voices[i].clip=clip;voices[i].volume=volume;voices[i].pitch=pitch*(vary?Random.Range(1-pitchVariation,1+pitchVariation):1);
+                voices[i].Play();voiceReserved[i]=true;activeVoices++;return;
+            }
+        }
+        private void Fired(Vector2 direction, Vector2 point, bool damaged)
+        {
+            if(executor.LastAttackUsesAmmunition)
+            {
+            var definition=loadout!=null?loadout.SelectedWeapon?.Definition:enemy!=null?enemy.Weapon?.Definition:null;
+            ShotCues++; Sound(definition!=null&&definition.FiringSound!=null?definition.FiringSound:firingSound,true,definition!=null?definition.FiringPitch:1); muzzle.enabled = true; muzzleUntil = Time.time + muzzleSeconds;
+            shotAnchoredFlash=definition!=null&&(definition.CustomMuzzle||shotAnchoredFlashWeapons!=null&&System.Array.IndexOf(shotAnchoredFlashWeapons,definition)>=0);
+            bool custom=muzzleFlashSprite!=null&&definition==muzzleFlashWeapon;
+            muzzle.sprite=custom?muzzleFlashSprite:effectSprite;
+            muzzle.transform.position = (Vector3)executor.LastShotOrigin + Vector3.back * .15f;
+            float variation=Random.Range(.88f,1.12f)*(definition!=null?definition.FlashScale:1)*(definition!=null&&definition.Pellets>1?1.25f:1);muzzle.transform.localScale = custom?Vector3.one*variation:new Vector3(.28f*variation, .14f*variation, 1);
+            muzzle.color=Color.Lerp(new Color(1,.65f,.1f),Color.white,Random.Range(.15f,.5f));
+            glow.enabled=muzzleGlowEnabled;glow.transform.position=muzzle.transform.position;glow.transform.localScale=new Vector3(.45f,.3f,1);
+            muzzle.transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
+            flashShotPosition=muzzle.transform.position;flashShotRotation=muzzle.transform.rotation;
+            }
+            else{muzzle.enabled=false;glow.enabled=false;}
+            if (!damaged) return;
+            HitCues++; Sound(hitSound); hit.color=Color.white;hit.enabled = true; hitUntil = Time.time + hitSeconds;
+            hitPoint = executor.LastDamagePoint; hit.transform.position = new Vector3(hitPoint.x, hitPoint.y, -.2f);
+            // Shared world-space character cue covers both incoming and outgoing bullets.
+            float size = .18f * (executor.LastAttackUsesAmmunition ? 1.2f : 1);
+            hit.transform.localScale = new Vector3(size, size, 1); hit.transform.rotation = Quaternion.Euler(0, 0, 45);
+        }
+        private void Surface(Vector2 point, ShotSurface kind)
+        {
+            if (kind != ShotSurface.Geometry && kind != ShotSurface.Ragdoll) return;
+            surfacePoint = point; surface.enabled = true; surfaceUntil = Time.time + hitSeconds;
+            LastImpactMaterial=executor.LastImpactMaterial;
+            Color color=LastImpactMaterial switch {ImpactMaterial.Concrete=>new Color(.65f,.68f,.7f),ImpactMaterial.Metal=>new Color(1,.9f,.35f),ImpactMaterial.Wood=>new Color(.8f,.48f,.2f),_=>new Color(.65f,.85f,1)};
+            surface.color=surfaceColor=kind==ShotSurface.Ragdoll?new Color(.5f,.95f,1):color;
+            float impactScale=kind==ShotSurface.Geometry&&LastImpactMaterial!=ImpactMaterial.Generic?1.25f:1;
+            surface.transform.localScale = Vector3.one * (surfaceImpactSprite != null ? 1 : .18f)*impactScale;
+            for(int i=0;i<3;i++)
+            {
+                int n=nextParticle;nextParticle=(n+1)%particles.Length;var p=particles[n];p.enabled=true;p.color=particleColors[n]=color;
+                float speed=kind!=ShotSurface.Geometry?2.5f:LastImpactMaterial==ImpactMaterial.Concrete?1.4f:LastImpactMaterial==ImpactMaterial.Wood?1.9f:2.5f;
+                particlePositions[n]=point;particleVelocities[n]=Quaternion.Euler(0,0,Random.Range(-65f,65f))*executor.LastHitNormal*Random.Range(.6f,speed);
+                particleDurations[n]=particleSeconds*Random.Range(.75f,1.2f);particleExpires[n]=Time.time+particleDurations[n];
+                float length=LastImpactMaterial==ImpactMaterial.Metal?(Random.value<.2f?.3f:.13f):LastImpactMaterial==ImpactMaterial.Wood?.12f:.07f;
+                float width=.04f;
+                if(kind==ShotSurface.Geometry&&LastImpactMaterial!=ImpactMaterial.Generic){length*=1.4f;width=LastImpactMaterial==ImpactMaterial.Concrete?.085f:.055f;}
+                p.transform.localScale=new Vector3(length,width,1);p.transform.rotation=Quaternion.Euler(0,0,Mathf.Atan2(particleVelocities[n].y,particleVelocities[n].x)*Mathf.Rad2Deg);
+                p.transform.position=new Vector3(point.x,point.y,-.22f);
+            }
+            AudioClip clip=LastImpactMaterial switch{ImpactMaterial.Concrete=>concreteImpactSound,ImpactMaterial.Metal=>metalImpactSound,ImpactMaterial.Wood=>woodImpactSound,_=>geometryImpactSound};
+            Sound(kind==ShotSurface.Ragdoll?ragdollImpactSound:clip!=null?clip:geometryImpactSound);
+        }
+        private void Resolved(DamageOutcome outcome)
+        {
+            if(health.IsDefeated){CancelDamageFlash();return;}
+            if(health.Team!=CombatTeam.Enemy||outcome.Hit.Kind!=DamageKind.Ballistic||!outcome.Hit.Impact.HasValue)return;
+            var impact=outcome.Hit.Impact.Value;
+            // One small cached burst per rendered frame, never one burst per pellet.
+            pendingLivingImpact=true;livingPoint=impact.Point;livingDirection=impact.Direction;
+            livingStrength=Mathf.Min(3.2f,livingStrength+impact.ReactionStrength);
+        }
+        public void CancelDamageFlash(){RestoreTint();hurtUntil=tintUntil=0;pendingLivingImpact=false;livingStrength=0;}
+        private void LivingImpact()
+        {
+            pendingLivingImpact=false;
+            int count=livingStrength>=1.65f?4:2;
+            for(int i=0;i<count;i++)
+            {
+                int n=nextParticle;nextParticle=(n+1)%particles.Length;var p=particles[n];
+                p.enabled=true;p.color=particleColors[n]=new Color(1,.72f,.38f);
+                particlePositions[n]=livingPoint;
+                particleVelocities[n]=(Vector2)(Quaternion.Euler(0,0,-45+i*30)*(Vector3)(-livingDirection.normalized))* (livingStrength>=1.65f?1.8f:1.1f);
+                particleDurations[n]=.12f;particleExpires[n]=Time.time+.12f;
+                p.transform.position=new Vector3(livingPoint.x,livingPoint.y,-.22f);
+                p.transform.localScale=new Vector3(livingStrength>=1.65f?.09f:.0625f,.03125f,1);
+                p.transform.rotation=Quaternion.Euler(0,0,Mathf.Atan2(particleVelocities[n].y,particleVelocities[n].x)*Mathf.Rad2Deg);
+            }
+            livingStrength=0;
+        }
+        private void Hurt(DamageInfo _)
+        {
+            if(health.IsDefeated){CancelDamageFlash();return;}
+            if(materials==null)CacheTintRenderers();
+            HurtCues++;hurtUntil=Time.time+hurtSeconds;Tint(hurtColor,hurtSeconds,true);Sound(hurtSound);
+        }
+        private void Reload() { ReloadCues++; if(Time.time>=hurtUntil)Tint(new Color(1, .8f, .2f), .25f); Sound(reloadSound,false); }
+        private void Empty() { EmptyCues++; if(Time.time>=hurtUntil)Tint(Color.gray, .12f); Sound(emptySound); }
+        private void Defeat(DamageInfo _)
+        {
+            CancelDamageFlash();
+            DefeatCues++;
+            // A short, detached silhouette survives immediate authoritative enemy deactivation.
+            if (health.Team != CombatTeam.Enemy || effectSprite == null) return;
+            if (GetComponent<InsaneDreams.Visuals.RagdollOnDefeat>() != null)
+            {
+                if (defeatSound != null)
+                {
+                    var cue = new GameObject("DefeatSound"); cue.transform.position = transform.position;
+                    cue.AddComponent<AudioSource>().PlayOneShot(defeatSound, volume); Destroy(cue, defeatSound.length);
+                }
+                return;
+            }
+            var go = new GameObject("DefeatCue"); go.transform.position = transform.position;
+            go.transform.localScale = new Vector3(.85f, .2f, 1);
+            var sprite = go.AddComponent<SpriteRenderer>(); sprite.sprite = effectSprite;
+            sprite.sortingOrder = 12; sprite.color = Color.white;
+            if (defeatSound != null) { var source = go.AddComponent<AudioSource>(); source.PlayOneShot(defeatSound, volume); }
+            Destroy(go, defeatSound != null ? Mathf.Max(.25f, defeatSound.length) : .25f);
+        }
+        private void Tint(Color color, float seconds,bool damage=false)
+        {
+            if(health.IsDefeated)return;
+            // Skin initialization and equipment presentation may set base colors after Awake.
+            // Snapshot once per tint sequence, never snapshot an already tinted frame.
+            if(!tinted)for(int i=0;i<renderers.Length;i++)if(renderers[i]!=null){colors[i]=renderers[i].color;if(materials!=null)materials[i]=renderers[i].sharedMaterial;}
+            tintUntil = Time.time + seconds;
+            tinted = true;activeTint=color;damageTint=damage;
+            ApplyTint();
+        }
+        private void ApplyTint()
+        {
+            for(int i=0;i<renderers.Length;i++)if(renderers[i]!=null){renderers[i].color=activeTint;
+                if(materials!=null)renderers[i].sharedMaterial=damageTint&&health.Team==CombatTeam.Enemy&&damageFlashMaterial!=null?damageFlashMaterial:materials[i];}
+        }
+        private void RestoreTint() { if (!tinted) return; tinted = false;damageTint=false; for (int i = 0; i < renderers.Length; i++) if (renderers[i] != null) {renderers[i].color = colors[i];if(materials!=null)renderers[i].sharedMaterial=materials[i];} }
+        private void Update()
+        {
+            if (Time.time >= muzzleUntil) muzzle.enabled = false;
+            if(!muzzle.enabled)glow.enabled=false;
+            for(int i=0;i<voices.Length;i++)if(voiceReserved[i]&&!voices[i].isPlaying)ReleaseVoice(i);
+            for(int i=0;i<particles.Length;i++)
+            {
+                var p=particles[i];if(!p.enabled)continue;float remaining=particleExpires[i]-Time.time;if(remaining<=0){p.enabled=false;continue;}
+                particleVelocities[i]+=Vector2.down*(4*Time.deltaTime);particlePositions[i]+=particleVelocities[i]*Time.deltaTime;
+                p.transform.position=new Vector3(particlePositions[i].x,particlePositions[i].y,-.22f);Color c=particleColors[i];c.a*=Mathf.Clamp01(remaining/particleDurations[i]);p.color=c;
+            }
+            if (Time.time >= hitUntil) hit.enabled = false;
+            else {hit.transform.position = new Vector3(hitPoint.x, hitPoint.y, -.2f);hit.color=new Color(1,1,1,Mathf.Clamp01((hitUntil-Time.time)/hitSeconds));}
+            if (Time.time >= tintUntil) RestoreTint();
+            if (Time.time >= surfaceUntil) surface.enabled = false;
+            else
+            {
+                surface.transform.position = new Vector3(surfacePoint.x, surfacePoint.y, -.2f);
+                var color=surfaceColor;color.a*=Mathf.Clamp01((surfaceUntil-Time.time)/Mathf.Max(.02f,hitSeconds));surface.color=color;
+            }
+        }
+        private void LateUpdate()
+        {
+            // Pose/weapon scripts run first; they must not erase a confirmed damage flash.
+            if(health.IsDefeated)CancelDamageFlash();
+            else{if(pendingLivingImpact)LivingImpact();if(tinted)ApplyTint();}
+            // The cutout driver (order 100) has now applied this frame's aim, crouch and recoil.
+            if(muzzle.enabled&&shotAnchoredFlash)
+            {muzzle.transform.SetPositionAndRotation(flashShotPosition,flashShotRotation);}
+            else if (muzzle.enabled && rig != null && rig.weapon.enabled && rig.weapon.sprite != null)
+                muzzle.transform.position = (Vector3)rig.MuzzlePosition + Vector3.back * .15f;
+            if(glow.enabled)glow.transform.position=muzzle.transform.position;
+        }
+    }
+}

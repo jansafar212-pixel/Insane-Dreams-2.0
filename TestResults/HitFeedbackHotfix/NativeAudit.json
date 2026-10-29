@@ -1,0 +1,196 @@
+{
+  "balanceUnchanged": true,
+  "shaderErrors": false,
+  "prefabs": [
+    {
+      "path": "Assets/Prefabs/Enemies/FireworksExpert.prefab",
+      "flashMaterial": true,
+      "impulse": 175.0
+    },
+    {
+      "path": "Assets/Prefabs/Enemies/Larper.prefab",
+      "flashMaterial": true,
+      "impulse": 175.0
+    },
+    {
+      "path": "Assets/Prefabs/Enemies/Samurai.prefab",
+      "flashMaterial": true,
+      "impulse": 175.0
+    },
+    {
+      "path": "Assets/Prefabs/Player/WarehousePlayer.prefab",
+      "flashMaterial": true,
+      "impulse": 115.0
+    },
+    {
+      "path": "Assets/Data/FirstOperation/Officer.prefab",
+      "flashMaterial": true,
+      "impulse": 175.0
+    },
+    {
+      "path": "Assets/Data/FirstOperation/OperationFireworksExpert.prefab",
+      "flashMaterial": true,
+      "impulse": 175.0
+    },
+    {
+      "path": "Assets/Data/FirstOperation/OperationSamurai.prefab",
+      "flashMaterial": true,
+      "impulse": 175.0
+    }
+  ],
+  "scenes": [
+    {
+      "path": "Assets/Scenes/Warehouse_Demo.unity",
+      "isDirty": false,
+      "missingScripts": 0,
+      "feedback": [
+        {
+          "name": "Player",
+          "material": true
+        },
+        {
+          "name": "01_Warmup_Larper_0",
+          "material": true
+        },
+        {
+          "name": "01_Warmup_Larper_1",
+          "material": true
+        },
+        {
+          "name": "01_Warmup_Larper_2",
+          "material": true
+        },
+        {
+          "name": "02_Verticality_Larper_0",
+          "material": true
+        },
+        {
+          "name": "02_Verticality_Larper_1",
+          "material": true
+        },
+        {
+          "name": "02_Verticality_Larper_2",
+          "material": true
+        },
+        {
+          "name": "03_Samurai_Samurai_0",
+          "material": true
+        },
+        {
+          "name": "03_Samurai_Larper_1",
+          "material": true
+        },
+        {
+          "name": "03_Samurai_Larper_2",
+          "material": true
+        },
+        {
+          "name": "04_Fireworks_OperationFireworks_0",
+          "material": true
+        },
+        {
+          "name": "04_Fireworks_Larper_1",
+          "material": true
+        },
+        {
+          "name": "04_Fireworks_Larper_2",
+          "material": true
+        },
+        {
+          "name": "05_Officer_Officer_0",
+          "material": true
+        }
+      ]
+    },
+    {
+      "path": "Assets/Scenes/Warehouse_Testbed.unity",
+      "isDirty": false,
+      "missingScripts": 0,
+      "feedback": [
+        {
+          "name": "Player",
+          "material": true
+        },
+        {
+          "name": "OpeningLarper_EnemySpawn_-7_0,8",
+          "material": true
+        },
+        {
+          "name": "OpeningLarper_EnemySpawn_WitnessPatrol",
+          "material": true
+        },
+        {
+          "name": "ResidentLarper_EnemySpawn_LadderPatrol",
+          "material": true
+        },
+        {
+          "name": "OpeningLarper_Sprint012_Encounter_0",
+          "material": true
+        },
+        {
+          "name": "ResidentLarper_Sprint012_Encounter_1",
+          "material": true
+        },
+        {
+          "name": "ResidentLarper_Sprint012_Encounter_2",
+          "material": true
+        },
+        {
+          "name": "ResidentLarper_Sprint012_Encounter_3",
+          "material": true
+        }
+      ]
+    },
+    {
+      "path": "Assets/Scenes/Warehouse_Mission01.unity",
+      "isDirty": false,
+      "missingScripts": 0,
+      "feedback": [
+        {
+          "name": "Player",
+          "material": true
+        },
+        {
+          "name": "Occupant_Arrival_Spawn_0",
+          "material": true
+        },
+        {
+          "name": "Occupant_Storage_Spawn_0",
+          "material": true
+        },
+        {
+          "name": "Occupant_Storage_Spawn_1",
+          "material": true
+        },
+        {
+          "name": "Occupant_Storage_Spawn_2",
+          "material": true
+        },
+        {
+          "name": "Occupant_Storage_Spawn_3",
+          "material": true
+        },
+        {
+          "name": "Occupant_Processing_Spawn_0",
+          "material": true
+        },
+        {
+          "name": "Occupant_Processing_Spawn_1",
+          "material": true
+        },
+        {
+          "name": "Occupant_Processing_Spawn_2",
+          "material": true
+        },
+        {
+          "name": "Occupant_Processing_Spawn_3",
+          "material": true
+        },
+        {
+          "name": "Occupant_Processing_Spawn_4",
+          "material": true
+        }
+      ]
+    }
+  ]
+}

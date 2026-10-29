@@ -1,0 +1,4 @@
+{
+  "result": "Exception",
+  "error": "System.InvalidOperationException: Sprint APK already exists; refusing to overwrite\r\n  at PipelineEvaluation.PipelineEval_37938605+<>c.<Execute>b__0_0 () [0x0003f] in <8600bcab4e0e4fa1a73b285c918a0565>:0 "
+}

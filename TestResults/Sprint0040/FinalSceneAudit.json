@@ -1,0 +1,26 @@
+[
+  {
+    "path": "Assets/Scenes/Warehouse_Demo.unity",
+    "dirty": false,
+    "missingScripts": 0,
+    "enemies": 13,
+    "mines": 0,
+    "thirdSerializedFields": 0
+  },
+  {
+    "path": "Assets/Scenes/Warehouse_Testbed.unity",
+    "dirty": false,
+    "missingScripts": 0,
+    "enemies": 7,
+    "mines": 0,
+    "thirdSerializedFields": 0
+  },
+  {
+    "path": "Assets/Scenes/Warehouse_Mission01.unity",
+    "dirty": false,
+    "missingScripts": 0,
+    "enemies": 10,
+    "mines": 0,
+    "thirdSerializedFields": 0
+  }
+]

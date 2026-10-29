@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: BackupPistol
   m_EditorClassIdentifier: InsaneDreams.Runtime::InsaneDreams.Inventory.WeaponDefinition
   stableId: 6aacf22d7be845ecbe362c28a09c39ca
-  displayName: Backup Pistol
+  displayName: Glock
   description: Sprint 003 data-only example; no combat behavior.
   icon: {fileID: 21300000, guid: 9ece9c252eb2fa7428e54081f295ac8a, type: 2}
   category: 0
   weaponCategory: 0
+  firearmRole: 1
   damage: 14
   firingInterval: 0.2
   magazineCapacity: 15
@@ -29,6 +30,7 @@ MonoBehaviour:
   physicalMagazineReload: 0
   loadsIndividually: 0
   shellSprite: {fileID: 0}
+  ammunitionInsertionOffset: {x: 0.3, y: -0.04}
   firearmRange: 22
   meleeRange: 1.6
   impactImpulse: 0.9

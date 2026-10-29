@@ -1,0 +1,84 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 16.57,
+      "summary": {
+        "total": 8,
+        "passed": 7,
+        "failed": 1,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0032Tests.InitialLarperDelayAndLongerBriefOcclusionRetainRecognitionWithoutChangingCadence",
+          "Status": "Passed",
+          "Duration": 2.4027122,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0032Tests.LocalSimultaneousNoiseDoesNotBecomeAnAlertStorm",
+          "Status": "Passed",
+          "Duration": 0.1830345,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0032Tests.OffscreenRecognitionDoesNotPermitInstantCameraEntryAttack",
+          "Status": "Passed",
+          "Duration": 1.840263,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0032Tests.PlatformSupportIgnoresLadderTriggersAndFailedEdgesRetryAfterCooldown",
+          "Status": "Passed",
+          "Duration": 0.3703535,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0032Tests.SamuraiRecognitionDelaysPursuitBrieflyThenRemainsAggressive",
+          "Status": "Passed",
+          "Duration": 0.6905256,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0032Tests.SmokeDoesNotMakeDistantAudibleGunfireSilentAndAlliedNoiseDoesNotRebroadcast",
+          "Status": "Passed",
+          "Duration": 0.0290606,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0032Tests.StuckRecoveryIsBoundedDoesNotTriggerWhileStationaryAndRecoversAfterWallRemoval",
+          "Status": "Failed",
+          "Duration": 6.5291603,
+          "Message": "  Expected: in range (1,2)\r\n  But was:  0\r\n",
+          "StackTrace": "at InsaneDreams.Tests.Sprint0032Tests+<StuckRecoveryIsBoundedDoesNotTriggerWhileStationaryAndRecoversAfterWallRemoval>d__16.MoveNext () [0x0013e] in C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Tests\\PlayMode\\Sprint0032Tests.cs:76\r\nat UnityEngine.TestTools.TestEnumerator+<Execute>d__8.MoveNext () [0x0003a] in .\\Library\\PackageCache\\com.unity.test-framework@80f691d4262b\\UnityEngine.TestRunner\\NUnitExtensions\\Attributes\\TestEnumerator.cs:52\r\n"
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0032Tests.UpperPlatformHearingIsApproximateThrottledLocalAndExpiresWithoutSight",
+          "Status": "Passed",
+          "Duration": 4.4407146,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

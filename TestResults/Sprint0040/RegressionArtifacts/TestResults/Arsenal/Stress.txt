@@ -1,0 +1,1 @@
+Controlled Editor 360 trigger pulls / 1080 hitscan segments; bounded line pool=17; elapsed including yielded frames ms=26,2771

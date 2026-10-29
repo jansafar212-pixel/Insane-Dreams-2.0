@@ -15,9 +15,9 @@ namespace InsaneDreams.Combat
         private void Awake(){actions=GetComponent<PlayerActions>();loadout=GetComponent<PlayerLoadout>();executor=GetComponent<AttackExecutor>();cover=GetComponent<PlayerCover2D>();syringe=GetComponent<Visuals.PlayerSyringeVisual>();health=GetComponent<Health>();healing=GetComponent<PlayerHealing>();}
         private void OnEnable(){actions.ReloadRequested+=Reload;actions.InputReset+=Cancel;actions.AimReleased+=ReleaseAim;loadout.SelectionChanging+=ChangingWeapon;health.Defeated+=Defeated;}
         private void OnDisable(){actions.ReloadRequested-=Reload;actions.InputReset-=Cancel;actions.AimReleased-=ReleaseAim;loadout.SelectionChanging-=ChangingWeapon;health.Defeated-=Defeated;Cancel();}
-        private void ChangingWeapon(){bool sniper=loadout.SelectedWeapon!=null&&loadout.SelectedWeapon.Definition.FireMode==WeaponFireMode.ReleaseToFire;Cancel();if(sniper)actions.CancelWeaponAim();}
+        private void ChangingWeapon(){Cancel();actions.CancelWeaponAim();}
         private void Defeated(DamageInfo damage)=>Cancel();
-        public void Reload(){CancelAim();if(CanUse&&loadout.SelectedWeapon!=null&&loadout.SelectedWeapon.Cycle.TryReload(Time.time))ReloadStarted?.Invoke();}
+        public void Reload(){CancelAim();if(loadout.SelectedWeapon?.Definition.FireMode==WeaponFireMode.ReleaseToFire)actions.CancelWeaponAim();if(CanUse&&loadout.SelectedWeapon!=null&&loadout.SelectedWeapon.Cycle.TryReload(Time.time))ReloadStarted?.Invoke();}
         public void Cancel(){blockFiring|=previous!=null&&previous.Definition.FireMode==WeaponFireMode.ReleaseToFire;previous?.Cycle.CancelReload();loadout.SelectedWeapon?.Cycle.CancelReload();CancelAim();}
         private void CancelAim(){armed=queued=false;armedWeapon=null;releaseBlocked=true;if(laser!=null)laser.enabled=false;}
         private bool CanOperate=>isActiveAndEnabled&&actions.isActiveAndEnabled&&!health.IsDefeated&&Time.timeScale>0&&(syringe==null||!syringe.IsPlaying);
@@ -51,7 +51,7 @@ namespace InsaneDreams.Combat
         }
         private void ShowLaser(RuntimeWeapon current,Vector2 aim)
         {
-            if(laser==null){laser=new GameObject("PlayerSniperAim").AddComponent<LineRenderer>();laser.transform.SetParent(transform,false);laser.sharedMaterial=executor.TracerMaterial;laser.useWorldSpace=true;laser.positionCount=2;laser.startWidth=laser.endWidth=.025f;laser.sortingOrder=28;laser.startColor=new Color(.1f,1,1,.85f);laser.endColor=new Color(.1f,1,1,.35f);}
+            if(laser==null){laser=new GameObject("PlayerSniperAim").AddComponent<LineRenderer>();laser.transform.SetParent(transform,false);laser.sharedMaterial=executor.AimMaterial;laser.useWorldSpace=true;laser.positionCount=2;laser.startWidth=laser.endWidth=.025f;laser.sortingOrder=28;laser.startColor=new Color(.1f,1,1,.85f);laser.endColor=new Color(.1f,1,1,.35f);}
             if(Time.time>=nextLaserSample){nextLaserSample=Time.time+.1f;laserEnd=executor.PreviewEnd(aim,current.Definition.AttackRange);}
             float distance=Vector2.Distance(executor.Origin,laserEnd);laser.enabled=true;
             laser.SetPosition(0,(Vector3)executor.Origin+Vector3.back*.1f);laser.SetPosition(1,(Vector3)(executor.Origin+aim*distance)+Vector3.back*.1f);

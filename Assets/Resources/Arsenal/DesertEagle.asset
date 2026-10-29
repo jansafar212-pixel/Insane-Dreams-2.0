@@ -18,6 +18,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: a9907f20f09460c4e9f5c81de6d3235d, type: 2}
   category: 0
   weaponCategory: 0
+  firearmRole: 1
   damage: 55
   firingInterval: 0.65
   magazineCapacity: 7
@@ -29,6 +30,7 @@ MonoBehaviour:
   physicalMagazineReload: 1
   loadsIndividually: 0
   shellSprite: {fileID: 0}
+  ammunitionInsertionOffset: {x: 0.3, y: -0.04}
   firearmRange: 28
   meleeRange: 1.6
   impactImpulse: 2.5

@@ -1,0 +1,27 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "if(UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode)throw new System.Exception(\"Wait for tests\");var scene=UnityEditor.SceneManagement.EditorSceneManager.OpenScene(\"Assets/Scenes/Warehouse_Testbed.unity\");var p=UnityEngine.Object.FindAnyObjectByType<InsaneDreams.Combat.PlayerCombat>();var a=p.GetComponent<InsaneDreams.Combat.AttackExecutor>();return new{scene=scene.path,pool=new UnityEditor.SerializedObject(a).FindProperty(\"maximumTracers\").intValue,prefab=UnityEditor.PrefabUtility.GetCorrespondingObjectFromSource(a)!=null};"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": {
+        "scene": "Assets/Scenes/Warehouse_Testbed.unity",
+        "pool": 16,
+        "prefab": true
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

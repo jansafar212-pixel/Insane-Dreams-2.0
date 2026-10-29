@@ -1,0 +1,150 @@
+{
+  "success": true,
+  "command": "command console",
+  "data": {
+    "command": "console",
+    "parameters": {
+      "level": "warn",
+      "tail": "12"
+    },
+    "result": {
+      "entries": [
+        {
+          "seq": 331,
+          "timestampUtc": "2026-10-26T13:20:02.9911452Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "Assets\\Tests\\PlayMode\\Sprint011CombatTests.cs(47,31): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 332,
+          "timestampUtc": "2026-10-26T13:20:02.9911452Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "Assets\\Tests\\PlayMode\\Sprint009TransitionTests.cs(30,182): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 333,
+          "timestampUtc": "2026-10-26T13:20:02.9911452Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "Assets\\Tests\\PlayMode\\Sprint009TransitionTests.cs(30,141): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 334,
+          "timestampUtc": "2026-10-26T13:20:40.1036553Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "Account API did not become accessible within 30 seconds. This may be due to network issues or editor focus.",
+          "stackTrace": "UnityEngine.Debug:LogWarning (object)\nUnity.AI.Toolkit.Accounts.Services.States.ApiAccessibleState/<WaitForCloudProjectSettings>d__4:MoveNext () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Modules/Unity.AI.Toolkit.Accounts/Services/States/ApiAccessibleState.cs:46)\nSystem.Threading.Tasks.TaskCompletionSource`1<bool>:TrySetResult (bool)\nUnity.AI.Toolkit.EditorTask/<>c__DisplayClass22_0:<WaitForCondition>b__0 () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Modules/Unity.AI.Toolkit.Async/EditorTask.cs:420)\nUnityEditor.EditorApplication:Internal_CallUpdateFunctions ()\n",
+          "seeded": false
+        },
+        {
+          "seq": 391,
+          "timestampUtc": "2026-10-26T13:25:08.9583554Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "Assets\\Editor\\Sprint009PresentationSetup.cs(79,93): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 392,
+          "timestampUtc": "2026-10-26T13:25:08.9583554Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "Assets\\Editor\\Sprint009PresentationSetup.cs(79,31): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 393,
+          "timestampUtc": "2026-10-26T13:25:08.9583554Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "Assets\\Editor\\Sprint012CombatSetup.cs(75,90): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 394,
+          "timestampUtc": "2026-10-26T13:25:08.9583554Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "Assets\\Editor\\Sprint012CombatSetup.cs(75,20): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsInactive, FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 395,
+          "timestampUtc": "2026-10-26T13:25:08.9583554Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "Assets\\Editor\\Sprint008ArtSetup.cs(143,88): warning CS0618: 'FindObjectsSortMode' is obsolete: 'FindObjectsSortMode has been deprecated. Use the FindObjectsByType overloads that do not take a FindObjectsSortMode parameter.'",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 396,
+          "timestampUtc": "2026-10-26T13:25:08.9583554Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "Assets\\Editor\\Sprint008ArtSetup.cs(143,26): warning CS0618: 'Object.FindObjectsByType<T>(FindObjectsSortMode)' is obsolete: 'FindObjectsByType with FindObjectsSortMode parameter has been deprecated. Use FindObjectsByType<T>() or FindObjectsByType<T>(FindObjectsInactive) instead. InstanceID will be replaced in the future with EntityId and previous sort order cannot be maintained.'",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 397,
+          "timestampUtc": "2026-10-26T13:25:08.9593579Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "Assets\\Editor\\CampaignEntry.cs(27,33): warning UAC0005: AppDomain.GetAssemblies() in Unity may return already unloaded assemblies and result in errors or leaks. Use Unity APIs instead, such as 'CurrentAssemblies.GetLoadedAssemblies()' or 'TypeCache.GetTypesDerivedFrom()'.",
+          "stackTrace": "",
+          "seeded": false
+        },
+        {
+          "seq": 398,
+          "timestampUtc": "2026-10-26T13:25:44.5471673Z",
+          "level": "warn",
+          "logType": "Warning",
+          "message": "Account API did not become accessible within 30 seconds. This may be due to network issues or editor focus.",
+          "stackTrace": "UnityEngine.Debug:LogWarning (object)\nUnity.AI.Toolkit.Accounts.Services.States.ApiAccessibleState/<WaitForCloudProjectSettings>d__4:MoveNext () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Modules/Unity.AI.Toolkit.Accounts/Services/States/ApiAccessibleState.cs:46)\nSystem.Threading.Tasks.TaskCompletionSource`1<bool>:TrySetResult (bool)\nUnity.AI.Toolkit.EditorTask/<>c__DisplayClass22_0:<WaitForCondition>b__0 () (at ./Library/PackageCache/com.unity.ai.assistant@1b11b9bfd84a/Modules/Unity.AI.Toolkit.Async/EditorTask.cs:420)\nUnityEditor.EditorApplication:Internal_CallUpdateFunctions ()\n",
+          "seeded": false
+        }
+      ],
+      "cursor": 398,
+      "session": "f59f216cf6754fb5beb3f9c00336591c",
+      "returned": 12,
+      "dropped": false,
+      "reset": false,
+      "counts": {
+        "error": 1,
+        "warn": 174,
+        "log": 223
+      },
+      "groundTruth": {
+        "sampledUtc": "2026-10-26T13:27:30.9044738Z",
+        "ageMs": 187,
+        "compilationFailed": false,
+        "compiling": false,
+        "consoleErrors": 0,
+        "consoleWarnings": 8,
+        "consoleLogs": 0,
+        "seeded": true
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7800,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

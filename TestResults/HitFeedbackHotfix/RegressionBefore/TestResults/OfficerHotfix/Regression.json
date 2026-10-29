@@ -1,0 +1,127 @@
+{
+  "Passed": 60.0,
+  "Failed": 0.0,
+  "Suites": [
+    {
+      "Suite": "Focused",
+      "Summary": {
+        "total": 3,
+        "passed": 3,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "Evidence": "Focused.json"
+    },
+    {
+      "Suite": "Rules",
+      "Summary": {
+        "total": 2,
+        "passed": 2,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "Evidence": "Rules.json"
+    },
+    {
+      "Suite": "Layout",
+      "Summary": {
+        "total": 2,
+        "passed": 2,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "Evidence": "Layout.json"
+    },
+    {
+      "Suite": "Combat",
+      "Summary": {
+        "total": 5,
+        "passed": 5,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "Evidence": "Combat.json"
+    },
+    {
+      "Suite": "Level1",
+      "Summary": {
+        "total": 6,
+        "passed": 6,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "Evidence": "Level1.json"
+    },
+    {
+      "Suite": "LarperReload",
+      "Summary": {
+        "total": 1,
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "Evidence": "LarperReload.json"
+    },
+    {
+      "Suite": "WeaponsSuppression",
+      "Summary": {
+        "total": 7,
+        "passed": 7,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "Evidence": "WeaponsSuppression.json"
+    },
+    {
+      "Suite": "PlayerWeapon",
+      "Summary": {
+        "total": 1,
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "Evidence": "PlayerWeapon.json"
+    },
+    {
+      "Suite": "Cover",
+      "Summary": {
+        "total": 12,
+        "passed": 12,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "Evidence": "Cover.json"
+    },
+    {
+      "Suite": "Movement",
+      "Summary": {
+        "total": 9,
+        "passed": 9,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "Evidence": "Movement.json"
+    },
+    {
+      "Suite": "Campaign",
+      "Summary": {
+        "total": 12,
+        "passed": 12,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "Evidence": "Campaign.json"
+    }
+  ]
+}

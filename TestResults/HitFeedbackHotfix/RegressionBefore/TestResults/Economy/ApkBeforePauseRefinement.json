@@ -1,0 +1,15 @@
+{
+  "apk": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\build\\Economy\\AKUMU2-sprint0034-dev.apk",
+  "bytes": 67236575,
+  "sha256": "ef66e0621960a32b4c19ab9c2dbb8d247ba140ebcabaceb964c4cec10752f603",
+  "arm64": true,
+  "metadataChecks": {
+    "GameSession": true,
+    "MissionSaveSnapshot": true,
+    "ReserveCapacityFor": true,
+    "failureWalletFraction": true,
+    "ArmorStock": true,
+    "basicAllowanceMagazines": true,
+    "DevelopmentFrameOverlay": true
+  }
+}

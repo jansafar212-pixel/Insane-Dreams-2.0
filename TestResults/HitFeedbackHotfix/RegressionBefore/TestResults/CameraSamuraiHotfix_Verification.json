@@ -1,0 +1,34 @@
+{
+  "audit": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"output\": null,\n  \"diagnostics\": [],\n  \"success\": true,\n  \"result\": [\n    {\n      \"p\": \"Assets/Scenes/Warehouse_Demo.unity\",\n      \"missing\": 0,\n      \"broken\": 0\n    },\n    {\n      \"p\": \"Assets/Scenes/Warehouse_Testbed.unity\",\n      \"missing\": 0,\n      \"broken\": 0\n    },\n    {\n      \"p\": \"Assets/Scenes/Warehouse_Mission01.unity\",\n      \"missing\": 0,\n      \"broken\": 0\n    }\n  ]\n}"
+      }
+    ]
+  },
+  "liveStart": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"output\": null,\n  \"diagnostics\": [],\n  \"success\": true,\n  \"result\": {\n    \"frame\": 2622,\n    \"time\": 8.098407,\n    \"scene\": \"Warehouse_Demo\"\n  }\n}"
+      }
+    ]
+  },
+  "liveCapture": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"output\": null,\n  \"diagnostics\": [],\n  \"success\": true,\n  \"result\": {\n    \"frame\": 6163,\n    \"time\": 18.79855,\n    \"zoom\": 4.843074,\n    \"skin\": \"HeroRefined\",\n    \"path\": \"C:\\\\Users\\\\jansa\\\\Documents\\\\GitHub\\\\Insane-Dreams-2.0\\\\TestResults\\\\CameraSamuraiHotfix_Warehouse.png\"\n  }\n}"
+      }
+    ]
+  },
+  "summary": {
+    "editPassed": 78,
+    "editTotal": 78,
+    "uniqueTargetedPlayPassed": 86,
+    "uniqueTargetedPlayTotal": 86
+  },
+  "humanPCPlaytest": false,
+  "androidDeviceTest": false
+}

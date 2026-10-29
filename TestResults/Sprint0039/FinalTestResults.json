@@ -1,0 +1,614 @@
+[
+  {
+    "test": "InsaneDreams.Tests.ArsenalRulesTests.CloseRangeWeaponsLoseEffectivenessWhilePrecisionAndLegacyDamageStayConstant",
+    "status": "Passed",
+    "duration": 0.0113737,
+    "source": "editor_ArsenalRulesTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.ArsenalRulesTests.EveryMagazineReloadAndInterruptedReloadConservesAmmunitionWithArmorPenalty",
+    "status": "Passed",
+    "duration": 0.001974,
+    "source": "editor_ArsenalRulesTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.ArsenalRulesTests.NewLongGunsDoNotInheritThePistolMagazine",
+    "status": "Passed",
+    "duration": 0.0003257,
+    "source": "editor_ArsenalRulesTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.ArsenalRulesTests.SevenCoreWeaponsAndRetainedGlockHaveDistinctDataWithoutChangingEnemyEagle",
+    "status": "Passed",
+    "duration": 0.0059963,
+    "source": "editor_ArsenalRulesTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.ArsenalTests.AllWeaponsDamageAllFourArchetypesThroughActualHitboxes",
+    "status": "Passed",
+    "duration": 1.5400614,
+    "source": "playmode_ArsenalTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.ArsenalTests.EagleUsesNormalHeldFireWhileMovingAndJumpingAndMuzzleRemainsAligned",
+    "status": "Passed",
+    "duration": 0.8706318,
+    "source": "playmode_ArsenalTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.ArsenalTests.EveryGunFiresWhileMovingAirborneAndCrouchingAndReloadSwitchConservesAmmo",
+    "status": "Passed",
+    "duration": 13.5427844,
+    "source": "playmode_ArsenalTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.ArsenalTests.ShotgunPelletsConsumeOneRoundAndDoNotDuplicateColliderDamage",
+    "status": "Passed",
+    "duration": 0.0463368,
+    "source": "playmode_ArsenalTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.ArsenalTests.SniperHoldCancelReleaseAndAutomaticRecoveryNeverDoubleFire",
+    "status": "Passed",
+    "duration": 1.1876951,
+    "source": "playmode_ArsenalTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.ArsenalTests.SniperSwitchPauseReloadResetDeathAndRevivalCannotReleaseAnAccidentalShot",
+    "status": "Passed",
+    "duration": 0.1577018,
+    "source": "playmode_ArsenalTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.ArsenalTests.SustainedAutomaticAndPelletFireKeepTheEffectPoolBounded",
+    "status": "Passed",
+    "duration": 0.0772378,
+    "source": "playmode_ArsenalTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.ArsenalTests.SustainedLmgBloomBuildsAndRecoversWithoutMovementPenalty",
+    "status": "Passed",
+    "duration": 0.046995,
+    "source": "playmode_ArsenalTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.CombatPresentation0039Tests.BrightTracerUsesExistingPoolFadesAndKeepsOfficerColorAndAimMaterialSeparate",
+    "status": "Passed",
+    "duration": 0.7792459,
+    "source": "playmode_0039.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.CombatPresentation0039Tests.EveryArchetypeFlashesRedDespiteReloadAndRepeatedHitsThenRestoresItsColors",
+    "status": "Passed",
+    "duration": 1.6643561,
+    "source": "playmode_0039.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.CombatPresentation0039Tests.PlayerEmptyMagazineFlashRemainsGrayAndTemporary",
+    "status": "Passed",
+    "duration": 0.2935287,
+    "source": "playmode_0039.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.CombatPresentation0039Tests.ThreeMaterialImpactsRemainShortAndBoundedButHaveDifferentShapesAndColors",
+    "status": "Passed",
+    "duration": 1.1340898,
+    "source": "playmode_0039.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.CombatReliabilityPlayTests.AllGrenadesClearCoverOnBothSidesAndReturnToCrouch",
+    "status": "Passed",
+    "duration": 5.4100272,
+    "source": "playmode_CombatReliabilityPlayTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.CombatReliabilityPlayTests.EagleExchangeFacesBothWaysAndCancelsWithoutLooseObjects",
+    "status": "Passed",
+    "duration": 6.3287064,
+    "source": "playmode_CombatReliabilityPlayTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.CombatReliabilityPlayTests.HealingCancelsLmgAndBlocksAllThreeManualReloadsAndFire",
+    "status": "Passed",
+    "duration": 1.1923567,
+    "source": "playmode_CombatReliabilityPlayTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.CombatReliabilityPlayTests.LmgExchangeFacesBothWaysAndCancelsWithoutLooseObjects",
+    "status": "Passed",
+    "duration": 17.236301,
+    "source": "playmode_CombatReliabilityPlayTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.CombatReliabilityPlayTests.LowCeilingRefusesThrowWithoutSpendingAndDelayedWalletRecoveryIsBounded",
+    "status": "Passed",
+    "duration": 2.8769933,
+    "source": "playmode_CombatReliabilityPlayTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.CombatReliabilityPlayTests.SniperManualReloadCancelsHeldShotAndRecoversWithoutGrantingAmmo",
+    "status": "Passed",
+    "duration": 4.1405589,
+    "source": "playmode_CombatReliabilityPlayTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.CombatReliabilityPlayTests.WalletsRecoverFromCratesWallsElevatedDecksAndAwardExactlyOnceBothDirections",
+    "status": "Passed",
+    "duration": 0.3648588,
+    "source": "playmode_CombatReliabilityPlayTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.DataAndGestureTests.AuthoredDefinitionsHaveValidUniqueIdentities",
+    "status": "Passed",
+    "duration": 0.1535736,
+    "source": "editor_DataAndGestureTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.DataAndGestureTests.EmptySlotsAndMeleeAreExplicit",
+    "status": "Passed",
+    "duration": 0.0048547,
+    "source": "editor_DataAndGestureTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.DataAndGestureTests.EnemyIdentityAndExplicitCapabilitiesAreIndependent",
+    "status": "Passed",
+    "duration": 0.0045282,
+    "source": "editor_DataAndGestureTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.DataAndGestureTests.LadderArbitrationConsumesHeldGestureAcrossTransitions",
+    "status": "Passed",
+    "duration": 0.0007644,
+    "source": "editor_DataAndGestureTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.DataAndGestureTests.SafeAreaInsetsRespectCutoutsInBothLandscapeOrientations",
+    "status": "Passed",
+    "duration": 0.0020528,
+    "source": "editor_DataAndGestureTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.DataAndGestureTests.StableSnapshotsResolveByDefinitionIdentity",
+    "status": "Passed",
+    "duration": 0.0033117,
+    "source": "editor_DataAndGestureTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.DataAndGestureTests.SwitchingPreservesIndependentRuntimeAmmoAndDefinitions",
+    "status": "Passed",
+    "duration": 0.0025425,
+    "source": "editor_DataAndGestureTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.DataAndGestureTests.UpwardDiagonalClimbsButLateralDiagonalRetainsJumpAndNeutralHysteresis",
+    "status": "Passed",
+    "duration": 0.0016205,
+    "source": "editor_DataAndGestureTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.DataAndGestureTests.UpwardGestureRequiresNeutralAndNeverRepeatsOnLanding",
+    "status": "Passed",
+    "duration": 0.0005009,
+    "source": "editor_DataAndGestureTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.GrenadeResupplyHotfixTests.ExistingBoxRestocksEveryTypeWithPartialAcceptanceFiniteStockImmediateHudAndSave",
+    "status": "Passed",
+    "duration": 2.2164598,
+    "source": "playmode_GrenadeResupplyHotfixTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.GrenadeResupplyHotfixTests.FragShakeIsDistanceBoundedExpiresAndActualEnemyDeathStillCreatesPhysicsCorpse",
+    "status": "Passed",
+    "duration": 1.6920866,
+    "source": "playmode_GrenadeResupplyHotfixTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.GrenadeResupplyHotfixTests.FragUsesLargerRealFalloffFriendlyCoverAndPooledChunkyEffectsWithoutChangingOtherTypes",
+    "status": "Passed",
+    "duration": 4.5809964,
+    "source": "playmode_GrenadeResupplyHotfixTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.GrenadeResupplyHotfixTests.OrdinaryLocalizedDeathKeepsArmsUntilOneRegionAccumulates105AndLegThresholdStays60",
+    "status": "Passed",
+    "duration": 1.5236061,
+    "source": "playmode_GrenadeResupplyHotfixTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Grenades0039Tests.FragmentationIsStrongerWithFalloffAndCoverAndOtherTypesKeepTheirSettings",
+    "status": "Passed",
+    "duration": 1.068069,
+    "source": "playmode_0039.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Grenades0039Tests.InventoryBoundariesAndSwitchOrCapacityChangesCancelAimWithoutLoss",
+    "status": "Passed",
+    "duration": 1.1199391,
+    "source": "playmode_0039.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Grenades0039Tests.MinePressureUsesOneDelayedExistingBurstForPlayerAndEnemyWithoutRecursing",
+    "status": "Passed",
+    "duration": 2.1112967,
+    "source": "playmode_0039.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Grenades0039Tests.ShootingMineFromOutsideBlastIsSafeAndNeverInstallsMinesInLevelOne",
+    "status": "Passed",
+    "duration": 0.5481424,
+    "source": "playmode_0039.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Loadout0039Tests.EmptyInlineInspectorWeaponIsAnEmptySlot",
+    "status": "Passed",
+    "duration": 0.064703,
+    "source": "editor_Loadout0039Tests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Loadout0039Tests.EveryAddedFirearmCanBePurchasedOnceWithItsRealPriceAndEquippedInItsRole",
+    "status": "Passed",
+    "duration": 0.0719106,
+    "source": "editor_Loadout0039Tests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Loadout0039Tests.FreshAndSpentExistingSavesRestoreWalletMinimumWithoutResettingOtherProgress",
+    "status": "Passed",
+    "duration": 0.0387746,
+    "source": "editor_Loadout0039Tests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Loadout0039Tests.HeavyBodyAndHelmetKeepUsefulAmmunitionCapacityAndBoundedReloadPenalty",
+    "status": "Passed",
+    "duration": 0.0083222,
+    "source": "editor_Loadout0039Tests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Loadout0039Tests.OldTwoPrimarySaveMigratesWithoutDiscardingOwnedWeaponsAmmoOrShortGrenadeArrays",
+    "status": "Passed",
+    "duration": 0.0410338,
+    "source": "editor_Loadout0039Tests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Loadout0039Tests.OnePrimaryAndTwoDifferentSecondariesEnforceRolesWithoutLosingOwnership",
+    "status": "Passed",
+    "duration": 0.0607062,
+    "source": "editor_Loadout0039Tests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Loadout0039Tests.ThreeRuntimeWeaponsKeepIndependentAmmunitionAndPersistTheirPartialStocks",
+    "status": "Passed",
+    "duration": 0.0440095,
+    "source": "editor_Loadout0039Tests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.ReloadRepairPlayTests.DefaultPistolFlushMagazineMovesSeatsAndConservesPartialReloads",
+    "status": "Passed",
+    "duration": 6.0602135,
+    "source": "playmode_ReloadRepairPlayTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.ReloadRepairPlayTests.HudShowsEachInsertedShellOnNextUiFrameAndRebindIsSafe",
+    "status": "Passed",
+    "duration": 0.9159669,
+    "source": "playmode_ReloadRepairPlayTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.ReloadRepairPlayTests.ShotgunRealClockShellsPersistOnFireAndDeathAndVisualIsBounded",
+    "status": "Passed",
+    "duration": 1.9597311,
+    "source": "playmode_ReloadRepairPlayTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.ReloadRepairPlayTests.SmgExchangeTracksFacingMovementAndCancelsOnSwitchWithoutDebris",
+    "status": "Passed",
+    "duration": 4.6441582,
+    "source": "playmode_ReloadRepairPlayTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.ReloadRepairPlayTests.StartingTapeHealingCancelsReloadWithoutDiscardingCompletedShells",
+    "status": "Passed",
+    "duration": 1.7544319,
+    "source": "playmode_ReloadRepairPlayTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.ReloadRepairRulesTests.FullEmptyReserveArmorAndLargeTickAreBounded",
+    "status": "Passed",
+    "duration": 0.0031206,
+    "source": "editor_ReloadRepairRulesTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.ReloadRepairRulesTests.InterruptedShellsRemainUsableAndResumeDoesNotRepeatThem(1)",
+    "status": "Passed",
+    "duration": 0.0004389,
+    "source": "editor_ReloadRepairRulesTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.ReloadRepairRulesTests.InterruptedShellsRemainUsableAndResumeDoesNotRepeatThem(2)",
+    "status": "Passed",
+    "duration": 6.2E-05,
+    "source": "editor_ReloadRepairRulesTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.ReloadRepairRulesTests.ShellSnapshotKeepsCompletedInsertionAndResumeDoesNotGrantPendingShell",
+    "status": "Passed",
+    "duration": 0.0002976,
+    "source": "editor_ReloadRepairRulesTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.ReloadRepairRulesTests.ShellStepsTransferExactlyOneAndRepeatedTicksCannotDuplicate(0,20)",
+    "status": "Passed",
+    "duration": 0.0008539,
+    "source": "editor_ReloadRepairRulesTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.ReloadRepairRulesTests.ShellStepsTransferExactlyOneAndRepeatedTicksCannotDuplicate(2,1)",
+    "status": "Passed",
+    "duration": 6.64E-05,
+    "source": "editor_ReloadRepairRulesTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.ReloadRepairRulesTests.ShellStepsTransferExactlyOneAndRepeatedTicksCannotDuplicate(2,10)",
+    "status": "Passed",
+    "duration": 8.88E-05,
+    "source": "editor_ReloadRepairRulesTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.ReloadRepairRulesTests.ShellStepsTransferExactlyOneAndRepeatedTicksCannotDuplicate(5,1)",
+    "status": "Passed",
+    "duration": 6.3E-05,
+    "source": "editor_ReloadRepairRulesTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.ReloadRepairRulesTests.SmgAtomicExchangeConservesTacticalRounds(0,60,30,30)",
+    "status": "Passed",
+    "duration": 0.0005406,
+    "source": "editor_ReloadRepairRulesTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.ReloadRepairRulesTests.SmgAtomicExchangeConservesTacticalRounds(12,3,15,0)",
+    "status": "Passed",
+    "duration": 6.98E-05,
+    "source": "editor_ReloadRepairRulesTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.ReloadRepairRulesTests.SmgAtomicExchangeConservesTacticalRounds(12,60,30,42)",
+    "status": "Passed",
+    "duration": 0.0001256,
+    "source": "editor_ReloadRepairRulesTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sniper0039Tests.PostShotCycleIsNotReloadAndManualLoadingRequiresFreshAimRelease",
+    "status": "Passed",
+    "duration": 4.2605518,
+    "source": "playmode_0039.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sprint0027FallTests.ActiveAirborneParachuteAllowsCombatDamageAndLandingAddsNone",
+    "status": "Passed",
+    "duration": 1.5762603,
+    "source": "playmode_Sprint0027FallTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sprint0027FallTests.CancellingCanopyStillAllowsAnUnprotectedDangerousLanding",
+    "status": "Passed",
+    "duration": 0.483291,
+    "source": "playmode_Sprint0027FallTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sprint0027FallTests.ClimbingRetractsCanopyAndDismountResetsFall",
+    "status": "Passed",
+    "duration": 0.2001155,
+    "source": "playmode_Sprint0027FallTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sprint0027FallTests.ControlledDescentShedsOldFallBeforeSafeNearGroundCancellation",
+    "status": "Passed",
+    "duration": 2.2642476,
+    "source": "playmode_Sprint0027FallTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sprint0027FallTests.LateParachuteClearsPendingImpactButDoesNotBlockCombatDamage",
+    "status": "Passed",
+    "duration": 0.9601368,
+    "source": "playmode_Sprint0027FallTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sprint0027FallTests.MediumAndExtremeParachuteLandingsHaveExactlyZeroDamage",
+    "status": "Passed",
+    "duration": 6.3984177,
+    "source": "playmode_Sprint0027FallTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sprint0027FallTests.MediumFallHurtsAndExtremeFallCanDefeat",
+    "status": "Passed",
+    "duration": 0.8755547,
+    "source": "playmode_Sprint0027FallTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sprint0027FallTests.NormalDoubleJumpReturnsToGroundWithoutFallDamage",
+    "status": "Passed",
+    "duration": 0.2430842,
+    "source": "playmode_Sprint0027FallTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sprint0027FallTests.ProtectedLandingRetractsAndCannotLeakDamageOrBlockNextDeployment",
+    "status": "Passed",
+    "duration": 3.1929013,
+    "source": "playmode_Sprint0027FallTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sprint0027FallTests.ReviveResetsFlightAndInvulnerableLandingCannotReplayItsDamage",
+    "status": "Passed",
+    "duration": 0.4577462,
+    "source": "playmode_Sprint0027FallTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sprint0027FallTests.SmallFallIsSafe",
+    "status": "Passed",
+    "duration": 0.174052,
+    "source": "playmode_Sprint0027FallTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sprint0034EconomyRulesTests.ArmorLimitsAreBoundedAndHelmetsHaveSmallerPenalties",
+    "status": "Passed",
+    "duration": 0.0160087,
+    "source": "editor_Sprint0034EconomyRulesTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sprint0034EconomyRulesTests.BalanceSimulatesPoorAverageAndSavingPlayersFromActualLevelWalletCount",
+    "status": "Passed",
+    "duration": 0.2205507,
+    "source": "editor_Sprint0034EconomyRulesTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sprint0034EconomyRulesTests.CatalogContainsOnlyExistingArsenalAndMedicalAndSeparateFiniteAmmoPacks",
+    "status": "Passed",
+    "duration": 0.0062539,
+    "source": "editor_Sprint0034EconomyRulesTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sprint0034EconomyTests.AllExistingArsenalCanBePurchasedEquippedAndReloadedFromDiskWithoutDuplicateCharges",
+    "status": "Passed",
+    "duration": 1.205489,
+    "source": "playmode_Sprint0034EconomyTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sprint0034EconomyTests.ArmorOwnershipSelectionAndDamagePersistWithoutFreeRepairs",
+    "status": "Passed",
+    "duration": 0.1086776,
+    "source": "playmode_Sprint0034EconomyTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sprint0034EconomyTests.BackgroundAndPauseSecureUnusedSuppliesThenResumeReservesBeforePlay",
+    "status": "Passed",
+    "duration": 1.6031198,
+    "source": "playmode_Sprint0034EconomyTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sprint0034EconomyTests.CompletionReturnsUnusedStockPaysOnceAndAllowsReplayAndShopping",
+    "status": "Passed",
+    "duration": 1.7549084,
+    "source": "playmode_Sprint0034EconomyTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sprint0034EconomyTests.ConsumableCapsAndFailurePayoutNeverCreateMoneyOrFreeInjections",
+    "status": "Passed",
+    "duration": 0.0922888,
+    "source": "playmode_Sprint0034EconomyTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sprint0034EconomyTests.ExactAmmoPackFitAndOwnershipAreRequiredWithoutOvercharging",
+    "status": "Passed",
+    "duration": 0.0395601,
+    "source": "playmode_Sprint0034EconomyTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sprint0034EconomyTests.ExistingAmmoSupplyUsesEquippedWeaponCapacityAndLeavesOverflowInBox",
+    "status": "Passed",
+    "duration": 1.2719975,
+    "source": "playmode_Sprint0034EconomyTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sprint0034EconomyTests.ExistingVersionOneProfileRetainsBankedCashOwnedCarbineAmmoAndDamagedArmor",
+    "status": "Passed",
+    "duration": 0.0552496,
+    "source": "playmode_Sprint0034EconomyTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sprint0034EconomyTests.FailedAtomicPurchasesDeploymentAndSettlementRollBackMemoryAndDisk",
+    "status": "Passed",
+    "duration": 0.0626922,
+    "source": "playmode_Sprint0034EconomyTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sprint0034EconomyTests.ForcedInterruptionCannotRestoreSpentInventoryOrDuplicateWalletPayouts",
+    "status": "Passed",
+    "duration": 1.3094388,
+    "source": "playmode_Sprint0034EconomyTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sprint0034EconomyTests.ThreeFirearmMissionPackingSwitchingAndPausePreserveEachMagazineAndStoredOverflow",
+    "status": "Passed",
+    "duration": 1.838929,
+    "source": "playmode_ThreeFirearmMissionPacking.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sprint0034EconomyTests.ZeroMoneyStillProvidesFiveBasicMagazinesWithoutFreePremiumRefills",
+    "status": "Passed",
+    "duration": 0.0695045,
+    "source": "playmode_Sprint0034EconomyTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sprint024FlowTests.AlternateGapStepCanBeReachedUsingExistingDoubleJump",
+    "status": "Passed",
+    "duration": 3.3541458,
+    "source": "playmode_Sprint024FlowTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sprint024FlowTests.ArmorAbsorbsBodyDamageConsumesConditionAndDoesNotProtectHeadOrNeutralHazards",
+    "status": "Passed",
+    "duration": 0.1533815,
+    "source": "playmode_Sprint024FlowTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sprint024FlowTests.FailedSaveRollsBackPurchaseWithoutChargingOrGrantingAnItem",
+    "status": "Passed",
+    "duration": 0.0446074,
+    "source": "playmode_Sprint024FlowTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sprint024FlowTests.FaintanylRevivePersistsImmediatelyWithoutResettingMissionAndRetryStock",
+    "status": "Passed",
+    "duration": 1.4748027,
+    "source": "playmode_Sprint024FlowTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sprint024FlowTests.Hotfix00251PauseCentersInSafeTopAreaWithoutCoveringHudAndStillPauses",
+    "status": "Passed",
+    "duration": 1.5204843,
+    "source": "playmode_Sprint024FlowTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sprint024FlowTests.InterruptedRunRestoresSavedStockAndSettlesPendingEarningsOnlyOnce",
+    "status": "Passed",
+    "duration": 0.1895834,
+    "source": "playmode_Sprint024FlowTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sprint024FlowTests.PhysicalExitFullLoopRepeatsWithoutAnyPurchases",
+    "status": "Passed",
+    "duration": 7.2665301,
+    "source": "playmode_PhysicalExitFullLoop.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sprint024FlowTests.PhysicalExitFullLoopRepeatsWithPurchasedEquipmentAndSavedEarnings",
+    "status": "Passed",
+    "duration": 8.3884826,
+    "source": "playmode_PhysicalExitFullLoop.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sprint024FlowTests.PreparationIsMandatoryPurchasesOptionalAndResultMoneySettlesOnlyOnce",
+    "status": "Passed",
+    "duration": 0.146517,
+    "source": "playmode_Sprint024FlowTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sprint024FlowTests.PurchasedEquipmentReachesMissionAndRetryDoesNotRefillFiniteStock",
+    "status": "Passed",
+    "duration": 1.2186297,
+    "source": "playmode_Sprint024FlowTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sprint024FlowTests.PurchasesRequireFundsOwnershipAndDebounceAndEquipmentPersists",
+    "status": "Passed",
+    "duration": 0.1537456,
+    "source": "playmode_Sprint024FlowTests.json"
+  },
+  {
+    "test": "InsaneDreams.Tests.Sprint024FlowTests.RealMenuShopMissionResultsAndReturnFlowBanksOneReward",
+    "status": "Passed",
+    "duration": 3.3291336,
+    "source": "playmode_Sprint024FlowTests.json"
+  }
+]

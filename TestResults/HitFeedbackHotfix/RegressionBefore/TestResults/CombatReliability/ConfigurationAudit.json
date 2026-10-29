@@ -1,0 +1,80 @@
+{
+  "startingMoney": 100,
+  "developmentPlaytestCredits": true,
+  "playtestWalletDiagnostics": true,
+  "models": [
+    {
+      "name": "LMG",
+      "MagazineCapacity": 100,
+      "ReloadDuration": 8,
+      "fireMode": "Automatic",
+      "PhysicalMagazineReload": true,
+      "magazine": "Assets/Art/ReloadRepair/LmgContainer.asset",
+      "body": "Assets/Art/ReloadRepair/LmgBody.asset",
+      "icon": "Assets/Resources/Arsenal/LMGSprite.asset"
+    },
+    {
+      "name": "DesertEagle",
+      "MagazineCapacity": 7,
+      "ReloadDuration": 2.8,
+      "fireMode": "Automatic",
+      "PhysicalMagazineReload": true,
+      "magazine": "Assets/Art/ReloadRepair/DesertEagleMagazine.asset",
+      "body": "Assets/Data/FirstOperation/DesertEagle.asset",
+      "icon": "Assets/Data/FirstOperation/DesertEagle.asset"
+    },
+    {
+      "name": "Sniper",
+      "MagazineCapacity": 5,
+      "ReloadDuration": 2.6,
+      "fireMode": "ReleaseToFire",
+      "PhysicalMagazineReload": false,
+      "magazine": "",
+      "body": "Assets/Resources/Arsenal/SniperSprite.asset",
+      "icon": "Assets/Resources/Arsenal/SniperSprite.asset"
+    }
+  ],
+  "storage": [
+    {
+      "name": "02_Verticality_Larper_2",
+      "position": "(35.00, 7.13, 0.00)",
+      "detection": 14,
+      "viewportDelay": 0.85,
+      "allowOffscreen": false
+    },
+    {
+      "name": "02_Verticality_Larper_1",
+      "position": "(31.00, 0.73, 0.00)",
+      "detection": 16,
+      "viewportDelay": 0.55,
+      "allowOffscreen": false
+    },
+    {
+      "name": "02_Verticality_Larper_0",
+      "position": "(18.00, 3.93, 0.00)",
+      "detection": 18,
+      "viewportDelay": 0.3,
+      "allowOffscreen": false
+    }
+  ],
+  "covers": [
+    {
+      "name": "StorageLadderRetreatCover",
+      "position": "(23.50, 3.70, 0.00)",
+      "bounds": "Center: (23.50, 3.70, 0.00), Extents: (0.50, 0.50, 0.00)"
+    },
+    {
+      "name": "StorageUpperApproachCover",
+      "position": "(28.00, 6.90, 0.00)",
+      "bounds": "Center: (28.00, 6.90, 0.00), Extents: (0.50, 0.50, 0.00)"
+    },
+    {
+      "name": "StorageEntryVerticalCover",
+      "position": "(16.00, 0.50, 0.00)",
+      "bounds": "Center: (16.00, 0.50, 0.00), Extents: (0.50, 0.50, 0.00)"
+    }
+  ],
+  "missingScripts": 0,
+  "scene": "Assets/Scenes/Warehouse_Demo.unity",
+  "dirty": false
+}

@@ -34,6 +34,46 @@ namespace InsaneDreams.Tests
         {
             yield return Drop(3,false);var actions=actor.GetComponent<InsaneDreams.Input.PlayerActions>();var motor=actor.GetComponent<InsaneDreams.Prototype.PlayerMotor2D>();var fall=actor.GetComponent<PlayerFallDamage>();int before=fall.Landings;actions.Jump();yield return new WaitForSeconds(.2f);actions.Jump();yield return new WaitForFixedUpdate();Assert.AreEqual(2,motor.JumpsUsed);float end=Time.time+10;while(fall.Landings==before&&Time.time<end)yield return new WaitForFixedUpdate();Assert.Greater(fall.Landings,before);Assert.AreEqual(100,actor.GetComponent<Health>().Current);Assert.AreEqual(0,fall.LastDamage);
         }
+        [UnityTest]public IEnumerator ProtectedLandingRetractsAndCannotLeakDamageOrBlockNextDeployment()
+        {
+            yield return Drop(12,true);var chute=actor.GetComponent<PlayerTraversal2D>();var body=actor.GetComponent<Rigidbody2D>();var fall=actor.GetComponent<PlayerFallDamage>();
+            yield return new WaitForSeconds(.35f);Assert.IsFalse(chute.IsParachuting);Assert.AreEqual(3,body.gravityScale);Assert.AreEqual(1,fall.Landings);Assert.AreEqual(0,fall.LastDamage);
+            body.position=new Vector2(28000,12.85f);body.linearVelocity=Vector2.down*20;fall.ResetFall();Physics2D.SyncTransforms();yield return new WaitForFixedUpdate();
+            Assert.IsTrue(chute.ToggleParachute(),"The next deployment must not merely close a stale canopy");float end=Time.time+20;while(fall.Landings<2&&Time.time<end)yield return new WaitForFixedUpdate();
+            yield return new WaitForSeconds(.35f);Assert.AreEqual(2,fall.Landings);Assert.AreEqual(100,actor.GetComponent<Health>().Current);Assert.AreEqual(0,fall.LastDamage);Assert.IsFalse(chute.IsParachuting);
+        }
+        [UnityTest]public IEnumerator CancellingCanopyStillAllowsAnUnprotectedDangerousLanding()
+        {
+            actor=Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Player/WarehousePlayer.prefab"),new Vector3(28000,20.85f),Quaternion.identity);objects.Add(actor);
+            var hp=actor.GetComponent<Health>();hp.ProtectFor(0);var chute=actor.GetComponent<PlayerTraversal2D>();var fall=actor.GetComponent<PlayerFallDamage>();Assert.IsTrue(chute.ToggleParachute());
+            yield return new WaitForSeconds(.3f);chute.ClearParachute();float end=Time.time+15;while(fall.Landings==0&&Time.time<end)yield return new WaitForFixedUpdate();
+            Assert.AreEqual(1,fall.Landings);Assert.Greater(fall.LastDamage,0);Assert.Less(hp.Current,100);
+        }
+        [UnityTest]public IEnumerator ClimbingRetractsCanopyAndDismountResetsFall()
+        {
+            actor=Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Player/WarehousePlayer.prefab"),new Vector3(28000,12.85f),Quaternion.identity);objects.Add(actor);
+            var hp=actor.GetComponent<Health>();hp.ProtectFor(0);var chute=actor.GetComponent<PlayerTraversal2D>();Assert.IsTrue(chute.ToggleParachute());
+            var ladder=new GameObject("FallLadder");objects.Add(ladder);ladder.transform.position=new Vector3(28000,7);var box=ladder.AddComponent<BoxCollider2D>();box.isTrigger=true;box.size=new Vector2(1,14);ladder.AddComponent<LadderVolume>();Physics2D.SyncTransforms();
+            actor.GetComponent<InsaneDreams.Input.PlayerActions>().SetTouchMove(Vector2.up);yield return new WaitForSeconds(.15f);Assert.IsTrue(chute.IsClimbing);Assert.IsFalse(chute.IsParachuting);
+            actor.GetComponent<InsaneDreams.Input.PlayerActions>().SetTouchMove(Vector2.zero);var body=actor.GetComponent<Rigidbody2D>();body.position=new Vector2(28000,3);body.linearVelocity=Vector2.zero;Object.Destroy(ladder);Physics2D.SyncTransforms();
+            var fall=actor.GetComponent<PlayerFallDamage>();float end=Time.time+10;while(fall.Landings==0&&Time.time<end)yield return new WaitForFixedUpdate();Assert.AreEqual(1,fall.Landings);Assert.AreEqual(100,hp.Current);Assert.AreEqual(0,fall.LastDamage);
+        }
+        [UnityTest]public IEnumerator ControlledDescentShedsOldFallBeforeSafeNearGroundCancellation()
+        {
+            actor=Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Player/WarehousePlayer.prefab"),new Vector3(28000,20.85f),Quaternion.identity);objects.Add(actor);
+            var hp=actor.GetComponent<Health>();hp.ProtectFor(0);var body=actor.GetComponent<Rigidbody2D>();body.linearVelocity=Vector2.down*30;var chute=actor.GetComponent<PlayerTraversal2D>();var fall=actor.GetComponent<PlayerFallDamage>();yield return new WaitForFixedUpdate();Assert.IsTrue(chute.ToggleParachute());
+            float end=Time.time+20;while(body.position.y>2&&Time.time<end)yield return new WaitForFixedUpdate();Assert.Greater(body.position.y,1);chute.ClearParachute();
+            end=Time.time+5;while(fall.Landings==0&&Time.time<end)yield return new WaitForFixedUpdate();Assert.AreEqual(1,fall.Landings);Assert.AreEqual(0,fall.LastDamage);Assert.AreEqual(100,hp.Current);
+        }
+        [UnityTest]public IEnumerator ReviveResetsFlightAndInvulnerableLandingCannotReplayItsDamage()
+        {
+            actor=Object.Instantiate(AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/Player/WarehousePlayer.prefab"),new Vector3(28000,12.85f),Quaternion.identity);objects.Add(actor);
+            var hp=actor.GetComponent<Health>();hp.ProtectFor(0);var revive=actor.GetComponent<PlayerRevive>();revive.RestoreInventory(1);var settings=new SerializedObject(revive);settings.FindProperty("automaticRevival").boolValue=false;settings.ApplyModifiedPropertiesWithoutUndo();
+            var chute=actor.GetComponent<PlayerTraversal2D>();Assert.IsTrue(chute.ToggleParachute());yield return new WaitForFixedUpdate();Assert.IsTrue(hp.ApplyDamage(new DamageInfo(1000,CombatTeam.Enemy)));Assert.IsTrue(hp.IsDefeated);Assert.IsTrue(revive.TryRevive());Assert.IsFalse(chute.IsParachuting);Assert.AreEqual(100,hp.Current);
+            // Keep explicit protection through an otherwise dangerous unassisted landing.
+            hp.ProtectFor(20);var fall=actor.GetComponent<PlayerFallDamage>();float end=Time.time+10;while(fall.Landings==0&&Time.time<end)yield return new WaitForFixedUpdate();Assert.AreEqual(1,fall.Landings);Assert.Greater(fall.LastDamage,0);Assert.AreEqual(100,hp.Current);
+            hp.ProtectFor(0);yield return new WaitForSeconds(.35f);Assert.AreEqual(1,fall.Landings);Assert.AreEqual(100,hp.Current);
+        }
     }
 }
 #endif

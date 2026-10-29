@@ -1,0 +1,7 @@
+FireworkLoadingLadder attached=True climbing=False x=95,060 y=3,928 top=3,900 feet=3,228
+FireworkUpperLadder attached=True climbing=False x=89,940 y=7,128 top=7,100 feet=6,428
+OfficeFlankLadder attached=True climbing=False x=124,560 y=3,928 top=3,900 feet=3,228
+PillboxRoofAccessLadder attached=True climbing=False x=140,760 y=8,553 top=8,525 feet=7,853
+PursuitDeckLadder attached=True climbing=False x=61,060 y=3,928 top=3,900 feet=3,228
+StorageUpperLadder attached=True climbing=False x=27,060 y=7,128 top=7,100 feet=6,428
+StorageWestLadder attached=True climbing=False x=15,060 y=3,928 top=3,900 feet=3,228

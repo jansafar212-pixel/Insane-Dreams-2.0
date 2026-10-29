@@ -9,6 +9,7 @@ namespace InsaneDreams.Combat
         [SerializeField] private LayerMask hitLayers = 5;
         [SerializeField] private LayerMask physicalImpactLayers = 2;
         [SerializeField] private LineRenderer tracer;
+        [SerializeField] private Material tracerMaterial;
         [SerializeField, Range(.02f, 1)] private float tracerSeconds = .17f;
         [SerializeField, Min(.001f)] private float tracerWidth = .035f;
         [SerializeField, Range(1, 16)] private int maximumTracers = 6;
@@ -35,6 +36,7 @@ namespace InsaneDreams.Combat
         private Color[] trailColors;
         private int nextTrail;
         private Material ownedMaterial;
+        private Material aimMaterial;
         public int ShotsFired { get; private set; }
         public bool LastAttackUsesAmmunition { get; private set; }
         public event System.Action<Vector2, Vector2, bool> Fired;
@@ -46,6 +48,7 @@ namespace InsaneDreams.Combat
         private float bloom,lastSpreadShot;
         public float SustainedSpread=>bloom;
         public Material TracerMaterial=>trails!=null&&trails.Length>0?trails[0].sharedMaterial:null;
+        public Material AimMaterial=>aimMaterial;
         public Vector2 PreviewEnd(Vector2 direction,float range)
         {
             Vector2 start=Origin;var filter=new ContactFilter2D{useTriggers=false};filter.SetLayerMask(hitLayers.value|physicalImpactLayers.value);
@@ -64,6 +67,8 @@ namespace InsaneDreams.Combat
             trailColors=new Color[trails.Length];
             Material material = tracer != null ? tracer.sharedMaterial : null;
             if (material == null) material = ownedMaterial = new Material(Shader.Find("Sprites/Default"));
+            aimMaterial=material;
+            if(tracerMaterial!=null)material=tracerMaterial;
             for (int i = 0; i < trails.Length; i++)
             {
                 var line = i == 0 && tracer != null ? tracer : new GameObject("Tracer_" + i).AddComponent<LineRenderer>();

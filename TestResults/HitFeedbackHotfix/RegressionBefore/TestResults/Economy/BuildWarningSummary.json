@@ -1,0 +1,42 @@
+[
+  {
+    "Count": 920,
+    "Name": "Shader warning in 'ConvGeneric'"
+  },
+  {
+    "Count": 18,
+    "Name": "Shader warning in 'Hidden/Sentis/ScatterND'"
+  },
+  {
+    "Count": 12,
+    "Name": "Shader warning in 'Hidden/Sentis/ConvTranspose'"
+  },
+  {
+    "Count": 8,
+    "Name": "Shader warning in 'Hidden/Sentis/SliceSet'"
+  },
+  {
+    "Count": 6,
+    "Name": "Shader warning in 'Hidden/Sentis/GridSample'"
+  },
+  {
+    "Count": 4,
+    "Name": "Shader warning in 'Hidden/Sentis/ScatterElements'"
+  },
+  {
+    "Count": 3,
+    "Name": "warning CS0618"
+  },
+  {
+    "Count": 2,
+    "Name": "Shader warning in 'Hidden/Sentis/Pad'"
+  },
+  {
+    "Count": 2,
+    "Name": "warning UAC0009"
+  },
+  {
+    "Count": 1,
+    "Name": "Pipeline"
+  }
+]

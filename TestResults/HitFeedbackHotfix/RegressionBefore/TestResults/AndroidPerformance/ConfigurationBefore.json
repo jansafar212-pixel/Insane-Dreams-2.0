@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "var p=typeof(UnityEditor.PlayerSettings.Android);var props=new System.Collections.Generic.List<string>();foreach(var x in p.GetProperties())if(x.Name.ToLowerInvariant().Contains(\"frame\"))props.Add(x.Name+\":\"+x.GetValue(null));var urp=UnityEngine.Rendering.GraphicsSettings.currentRenderPipeline;var so=new UnityEditor.SerializedObject(urp);var renderer=UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(\"Assets/Settings/Renderer2D.asset\");var sr=new UnityEditor.SerializedObject(renderer);return Newtonsoft.Json.JsonConvert.SerializeObject(new{android=props,minSDK=UnityEditor.PlayerSettings.Android.minSdkVersion,backend=UnityEditor.PlayerSettings.GetScriptingBackend(UnityEditor.Build.NamedBuildTarget.Android).ToString(),architecture=UnityEditor.PlayerSettings.Android.targetArchitectures.ToString(),renderScale=so.FindProperty(\"m_RenderScale\").floatValue,msaa=so.FindProperty(\"m_MSAA\").intValue,qualityAA=UnityEngine.QualitySettings.antiAliasing,physics=UnityEngine.Time.fixedDeltaTime,scene=UnityEngine.SceneManagement.SceneManager.GetActiveScene().path});"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": "{\"android\":[\"optimizedFramePacing:True\"],\"minSDK\":26,\"backend\":\"IL2CPP\",\"architecture\":\"ARM64\",\"renderScale\":1.0,\"msaa\":1,\"qualityAA\":0,\"physics\":0.0199999921,\"scene\":\"Assets/Scenes/Warehouse_Demo.unity\"}"
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

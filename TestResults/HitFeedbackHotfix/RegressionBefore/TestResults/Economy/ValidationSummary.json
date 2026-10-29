@@ -1,0 +1,100 @@
+[
+  {
+    "Suite": "AdaptiveCombatCameraTests",
+    "Passed": 9,
+    "Failed": 0,
+    "Total": 9,
+    "Skipped": 0
+  },
+  {
+    "Suite": "AndroidPerformanceRegressionTests",
+    "Passed": 2,
+    "Failed": 0,
+    "Total": 2,
+    "Skipped": 0
+  },
+  {
+    "Suite": "ArsenalLabTests",
+    "Passed": 1,
+    "Failed": 0,
+    "Total": 1,
+    "Skipped": 0
+  },
+  {
+    "Suite": "ArsenalTests",
+    "Passed": 8,
+    "Failed": 0,
+    "Total": 8,
+    "Skipped": 0
+  },
+  {
+    "Suite": "CombatRulesTests",
+    "Passed": 7,
+    "Failed": 0,
+    "Total": 7,
+    "Skipped": 0
+  },
+  {
+    "Suite": "GrenadeResupplyHotfixTests",
+    "Passed": 4,
+    "Failed": 0,
+    "Total": 4,
+    "Skipped": 0
+  },
+  {
+    "Suite": "Sprint0027MedicalTests",
+    "Passed": 1,
+    "Failed": 0,
+    "Total": 1,
+    "Skipped": 0
+  },
+  {
+    "Suite": "Sprint0029SystemsTests",
+    "Passed": 4,
+    "Failed": 0,
+    "Total": 4,
+    "Skipped": 0
+  },
+  {
+    "Suite": "Sprint0031Tests",
+    "Passed": 3,
+    "Failed": 0,
+    "Total": 3,
+    "Skipped": 0
+  },
+  {
+    "Suite": "Sprint0034EconomyRulesTests",
+    "Passed": 3,
+    "Failed": 0,
+    "Total": 3,
+    "Skipped": 0
+  },
+  {
+    "Suite": "Sprint0034EconomyTests",
+    "Passed": 11,
+    "Failed": 0,
+    "Total": 11,
+    "Skipped": 0
+  },
+  {
+    "Suite": "Sprint023Tests",
+    "Passed": 9,
+    "Failed": 0,
+    "Total": 9,
+    "Skipped": 0
+  },
+  {
+    "Suite": "Sprint024FlowTests",
+    "Passed": 12,
+    "Failed": 0,
+    "Total": 12,
+    "Skipped": 0
+  },
+  {
+    "Suite": "Sprint024ProgressTests",
+    "Passed": 4,
+    "Failed": 0,
+    "Total": 4,
+    "Skipped": 0
+  }
+]

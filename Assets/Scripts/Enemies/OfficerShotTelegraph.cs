@@ -81,9 +81,9 @@ namespace InsaneDreams.Enemies
         public bool AlliesAlive{get{foreach(var ally in nearbyAllies)if(ally!=null&&ally.isActiveAndEnabled&&!ally.IsDefeated&&((Vector2)(ally.transform.position-transform.position)).sqrMagnitude<=allyRange*allyRange)return true;return false;}}
         private void Awake()
         {
-            attacks=GetComponent<AttackExecutor>();combat=GetComponent<EnemyCombat>();owner=GetComponent<Health>();var template=GetComponentInChildren<LineRenderer>(true);
+            attacks=GetComponent<AttackExecutor>();combat=GetComponent<EnemyCombat>();owner=GetComponent<Health>();
             var g=new GameObject("OfficerRedLaser");g.transform.SetParent(transform,false);laser=g.AddComponent<LineRenderer>();laser.useWorldSpace=true;laser.positionCount=2;laser.startWidth=laser.endWidth=beamWidth;laser.sortingOrder=28;laser.startColor=laser.endColor=new Color(1,.07f,.04f,1);laser.enabled=false;
-            laser.sharedMaterial=template!=null?template.sharedMaterial:null;if(laser.sharedMaterial==null)laser.sharedMaterial=ownedMaterial=new Material(Shader.Find("Sprites/Default"));
+            laser.sharedMaterial=attacks!=null?attacks.AimMaterial:null;if(laser.sharedMaterial==null)laser.sharedMaterial=ownedMaterial=new Material(Shader.Find("Sprites/Default"));
         }
         public bool AllowShot(Vector2 aim,float spread,float distance,out Vector2 shot)
         {

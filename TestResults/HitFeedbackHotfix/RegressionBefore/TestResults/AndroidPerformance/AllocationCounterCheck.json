@@ -1,0 +1,27 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "long before=System.GC.GetAllocatedBytesForCurrentThread();var a=new byte[8192];long after=System.GC.GetAllocatedBytesForCurrentThread();System.GC.KeepAlive(a);return new{before,after,delta=after-before};"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": {
+        "before": 0,
+        "after": 0,
+        "delta": 0
+      }
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

@@ -1,0 +1,498 @@
+[
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Camera\\GameplayViewport.cs",
+    "Hash": "939C5524E1BF4C8E47361E4D6EEF382D2B75086F31C5EADFADA25B38548215D7"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Camera\\WarehouseCameraFollow.cs",
+    "Hash": "172AE8CFF5617EC2C65D827C524598182BA1FA736204E8E0C90A1D0C34507CDB"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Checkpoints\\CheckpointMarker.cs",
+    "Hash": "FF9AF18BB68A550226B762CA3CD89D2D355A4E4BCC71CF14172F25FA71672C57"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Checkpoints\\PlayerRecovery.cs",
+    "Hash": "9C78B2AE1B09C6D8717A4D92FD307F8E5E3E924B54B48348733D7B1500D657BE"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\AreaCombat2D.cs",
+    "Hash": "90D67B487B8AA2317ADDE589BCFCBB99D1321D2F867308D7948670846C600FE7"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\AttackExecutor.cs",
+    "Hash": "ED08250E59D914B9148D2D97571B930B157FC96E826C6FD49679149BDD65B855"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\BodyArmor.cs",
+    "Hash": "6DA8946DC01862AD63AA30423ABB3DB5B6FF848D7636438D86CB52269D12DC0C"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\BodyRegionDamage.cs",
+    "Hash": "9734EEF58F55E34F9AB23CC164CB212E506C6C7199C4308F88FA7BBB11BB93BF"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\CombatFeedback.cs",
+    "Hash": "746678B52AD023A8853F22CC0F588A993AC29A818854FD46B83DD7A1AFF90A7B"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\CombatNoise.cs",
+    "Hash": "4BD42EAF81879CD1443B5BF2CF29895CC5E85534F98E4D7502FA6D12D89C56B4"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\CombatVisibility2D.cs",
+    "Hash": "842FD309F3FB5FCEADB939E27803844C33B20CA0A28E09052AE0AB81ECD0FA90"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\DeactivateOnDefeat.cs",
+    "Hash": "65FF0E576AB1CF65F38E26CEB7E55D5378623BCEA4302B7AE9F1F064F5D0F165"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\EnvironmentalMine2D.cs",
+    "Hash": "1B8E3390926925FB8B339B157B9DD551E42C93B06DE2CB55D39854A7D98601EC"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\Health.cs",
+    "Hash": "1CA932AD6D3D5359A1621579C0AEEA998039013F8B737100D404A608FD82AB0E"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\HitReaction2D.cs",
+    "Hash": "1A7EF077486DB9609FB708668C1CB0131E7CE2670502241310D4D882C239BA5F"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\ImpactSurface2D.cs",
+    "Hash": "F7CCA1A1E5EE59FCFAE555E832DCE781DA02737C1E4B5EF387A8E318C771021E"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\PhysicalImpact.cs",
+    "Hash": "EDDC2F060B642DBEEFEED1170ED4F490D02BE16719A8C99713301FD69A465D9D"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\PlayerCombat.cs",
+    "Hash": "8FE37831EC95277FE74D4BE7397E4CEE611FCEA605FCAFDF24E5CCE40256EF6D"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\PlayerCover2D.cs",
+    "Hash": "213D49BCFB631F7773979B90FDA2CC9CCCB352C3389F43ABBE6E13E9F67FA339"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\PlayerFallDamage.cs",
+    "Hash": "66CEC10AC45DB40FA86EC71B16820DE222A26D2BD6C47E7F26A6369AEAE264C4"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\PlayerHealing.cs",
+    "Hash": "318FD62866A8D06273EE8E645E5A762DE9A3FCF5531E92B0B8ED5B412E171265"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\PlayerHealthRecovery.cs",
+    "Hash": "3AF674DE134D81C2FE99AA76F79DEDDE8BCD3EF7D133D002FB4CB8EAF3C69381"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\PlayerRevive.cs",
+    "Hash": "4110D6D402911076F9582987467C8FE450CE20DA2DCA8370DE3BF49504015131"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\PlayerSuppression.cs",
+    "Hash": "2643D51C6AA900DA085CBB0601C3F2C63B1064E6BCBF4497F9D725A0192E0588"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\PlayerThrowables.cs",
+    "Hash": "D951A66D99FAC9E8F83A23205CD375E0CCF7B3C0D8691E94F375EB678ABA29C1"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\SmokeCloud2D.cs",
+    "Hash": "F1EE60F18CC0AE0EE7F3F27FE050530ACD66985E3D2BB65DE0896F82A9219CAF"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\SuppressionMeter.cs",
+    "Hash": "A9A46A8D5C3A85BBEC3C0DF80F0763078D2E10D57422834FCBE482582DFA7847"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\ThrowableProjectile2D.cs",
+    "Hash": "C7F76E7B3C173C7F79623990D56F5CF12222CE3293B18A0A9DC670D7403A3A64"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Combat\\WeaponCycle.cs",
+    "Hash": "E88BD0BE16A94D10C6C785852659320365FF1F9B9BCD708751E977AFE10C897E"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Data\\DefinitionAsset.cs",
+    "Hash": "15EB768F66DBCDB730DED64F778DF04B1BC6A2CCB59FDE00430809C585D8E0F6"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Enemies\\AuthoredLadderRoute.cs",
+    "Hash": "0B2B1CCC831E91768C744BF4E102B93D3019D6A8FDD2C44069DEBD10AE3217C1"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Enemies\\CombatPositionReservations.cs",
+    "Hash": "B6C101CCEC29C6A2D4A1D07D58CDD770C4C4ADA9BD68BE654D83E7D2682A2403"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Enemies\\EnemyArchetype.cs",
+    "Hash": "346CFAF7AC9AB179111A51838039B83ED327E0AF751C0426F69A46AB8C5C6937"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Enemies\\EnemyCombat.cs",
+    "Hash": "7C6B7C5587BCF6C0C00C912C75DB0D4DC575B45CC5904E8E44525236A7D8EE4F"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Enemies\\EnemySpawnPoint.cs",
+    "Hash": "38D0EB3D876D2C90C3B892A3D1549255F27595122818482F833275FEED4F3BF6"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Enemies\\EnemyWalletDrop.cs",
+    "Hash": "436B608DE235D7C5FCA514A2AD904E7F3C78854B5B10BEC27BE886EFD2392C9A"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Enemies\\FireworkProjectile.cs",
+    "Hash": "D93EF49E416E2F747728E6D456765FB0A2E5CC71E4EF7DA72A6223D6B406B656"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Enemies\\FireworksCombat.cs",
+    "Hash": "7B431C87B73652EE0A02393884D115A3E4C0D7690B3709AE1F7D4484C5265568"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Enemies\\LarperAwareness.cs",
+    "Hash": "3F0AD809A0B377E675B4382924A40C3F6BF945F10E13866AA86DE78AAA24D9B5"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Enemies\\LarperBrain.cs",
+    "Hash": "7ADC9B2A2059FA7DEB723B711D35B389D70686C26E56872DBEBEB2EF91A18EA5"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Enemies\\LarperPersonalityProfile.cs",
+    "Hash": "2EB5355CF17E04E515B00780E57E4EF1B0E5320A1815769E5134BBAA30E73CF5"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Enemies\\LarperSpeechBubble.cs",
+    "Hash": "07FBEE8F4DC1B72E25C50D89A27C21AB84EAC52AEEF9FE68306309066C73FEEE"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Enemies\\OfficerShotTelegraph.cs",
+    "Hash": "C34F229C7751B52EA7702F6FCCACDB2597E8D06E543F85D88655DC825CFAAD87"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Enemies\\SamuraiBodyHitbox.cs",
+    "Hash": "08CC75C3EB192AFACC75D2CEAAB51A8B415B0E4EBAB942BCB8D46CAE8A34E40A"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Enemies\\SamuraiCombat.cs",
+    "Hash": "DE6F5CEF3AFCC777C2A18C9CE7394A0A6CBEAF1A42B604CFAECF9C9E36ED9014"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Enemies\\SamuraiPlatformRoutes.cs",
+    "Hash": "4E5F3446F0C0E688CEDF7803FC4620CCBC7D586C4D42C1E6DFE96206F00F358D"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Input\\JoystickJumpGesture.cs",
+    "Hash": "5A2045A996534EC48EB9A900E31BC4DE6398ED61DF5EED97FA3E9D082B261E81"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Input\\PlayerActions.cs",
+    "Hash": "B2530B5B5C3EB7C77F6A2576455C8D12A9828F53B92F347F7908EB0AD22A8B3E"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Input\\WarehouseTouchControls.cs",
+    "Hash": "6927F83B1DF4C51B1815FB14FFAC29CB12AE825D132D1F24FAEBE4548E41D04D"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Inventory\\ItemDefinition.cs",
+    "Hash": "56FB80B405D76A98B03412A57149A1BEA279F4D506B5DD9936749209B93A3758"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Inventory\\PlayerLoadout.cs",
+    "Hash": "73B2048F95BDA7CE2B53584AF36DCC2A4A439ECC73835D5846D456FB10392A33"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Inventory\\PlayerSupplies.cs",
+    "Hash": "19A837D28903435B71490CC061ECA77C0CBB82194E55D3DB9481F410B2BE1A8A"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Inventory\\RuntimeWeapon.cs",
+    "Hash": "49F439A83B8CC04B94C3610625C94C73D0FC30E5D7C60369C321451D99D44816"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Inventory\\SupplyCrate2D.cs",
+    "Hash": "110D6783605253A09A29FDF781CB220B8BD785287351E8F1C55340A0A98D1F72"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Inventory\\WalletPickup.cs",
+    "Hash": "8BA35F45EE1099C27768FE635260CD14F5344CC886E02AEDF5CDFEC82C94D321"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Inventory\\WeaponDefinition.cs",
+    "Hash": "458BCBC98D106CBA183C9A8EA9A9ABF832A6CC23D16022956D44B2A430C1F069"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Level\\LevelEntry.cs",
+    "Hash": "06EE1E64C2C76342665C0FF8116E447BCC3B6021E6A88C8D46B867A5307B6934"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Level\\RagdollPracticeStation.cs",
+    "Hash": "4C93A28E03726412EB054BBC0F692B9B5FD4B682B7B17966FA3511F9952B4947"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Missions\\MissionEncounter.cs",
+    "Hash": "75CE00FE4CF5C409BFDAC3916F70D345289D742856876F5797C75D0B3067EA8C"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Missions\\MissionHud.cs",
+    "Hash": "77566B8872F30162AD396C0AEBFC01CC72303678F282DD017C81CAEFB9645502"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Missions\\MissionTrigger.cs",
+    "Hash": "7C61A31BBC9D0DDA564799019A8A6FD003D58BAF936BD0B55B613BF42DFD9C00"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Missions\\WarehouseMission.cs",
+    "Hash": "0356924F476B9C278F34111E7372205A8AF96B446C82CE651B6D860CBA623836"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Progression\\CampaignMissionBridge.cs",
+    "Hash": "8F7D3FAB452681088F4BA6FAD4AFD0A85B23859C795D090A895B807390C2CDDD"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Progression\\GameCatalog.cs",
+    "Hash": "743B551FDF63A871F0F59B75C95F99258D90A3B53C2B018ACA03184B38A1540E"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Progression\\GameFlowController.cs",
+    "Hash": "552F58ADF418188938C6DD7BC343AC77BF948F790384042384DC4EAF8ABAAC3D"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Progression\\GameSession.cs",
+    "Hash": "AD2254990E51E3068EDCE1039E4BF1E8897175D597045CFCC0079F9F2D50C01F"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Progression\\ProgressStore.cs",
+    "Hash": "77A618B2DE61218ECBCC5162FA2F21FB1CBC7E7123AA660A7C4553D9E10D76DE"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Prototype\\DesktopPlayerInput.cs",
+    "Hash": "5E780D2C261F3D413C8B2D835748D08FAA649C1D9BA3787CA74BBE41B953CDE6"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Prototype\\PlatformCameraFollow.cs",
+    "Hash": "03F812E58EB35666C2625888256D9BC958B3E16CC9740E70ED74F22068D18496"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Prototype\\PlayerMotor2D.cs",
+    "Hash": "740FD99A969CECF1DC00FE0AD3F310729B5BDE79F5FAD09B5544EB686CDE794E"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Traversal\\LadderVolume.cs",
+    "Hash": "135723D94B0D22B0C087CC990CCDC529C549DA0B94C32D1699B1A9D4826D96D3"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Traversal\\PlayerPosture2D.cs",
+    "Hash": "BCBD8FFEE8C170ECEF8F90F265613DD0EAA4DD9137E3D96A44EA1449E4EF2D28"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Traversal\\PlayerPostureVisual.cs",
+    "Hash": "9417C7CBE0BD37958F9B04982A30F8A7EAA21F95A1CA25E1F031B2534F4EBB6D"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Traversal\\PlayerTraversal2D.cs",
+    "Hash": "52EB2CBDEC6A9991AEE6364EB997342B7EEDB40FC33618C9A090CF9434882DBA"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Visuals\\ArmorVisual.cs",
+    "Hash": "789964C012E3900497EAB1DA8B9EE7749890A0DB502A89231791043974B625C9"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Visuals\\CartoonRagdoll.cs",
+    "Hash": "115C06317D317B08BBB5512DAD61969BC473162320C543C54643334C14AC9DFB"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Visuals\\CutoutRig.cs",
+    "Hash": "482C6890B221A5A4CF4DBF860B3FDD40E0D0384235ED6C3B5CC939AF8FD37BB1"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Visuals\\CharacterSkin.cs",
+    "Hash": "A6BFA5CF1FEFF1DA35A17EBACFDD840DE5159B54ABC0BE969FF014DE923E8C1E"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Visuals\\CharacterVisualDriver.cs",
+    "Hash": "CD319CD2D975EA48C04173CD5B8BDA1659B318EC8204A709A148C42A2F03F37F"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Visuals\\LadderVisual2D.cs",
+    "Hash": "D513C832C17AC9AC1195FD148501F1BD99AACFBB86E839C3D79C0F8F93F26D6B"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Visuals\\MovementAudioHooks.cs",
+    "Hash": "58E643CF1CEEB2430444042F965F05E8B855A406ABB529484F8F6607843D8238"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Visuals\\OfficerWeaponPresentation.cs",
+    "Hash": "3A78BD770FA7AD0C2702413BB82F58F12B29AD1638F2F16FCDA50A254DB86A98"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Visuals\\PistolMagazineReload.cs",
+    "Hash": "E6F43E51EA11D487F09E4553B42F033DC4C879A0AC4A329157E1062A8FFF55EE"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Visuals\\PlayerDeathRagdoll.cs",
+    "Hash": "D90F69E90CF703CBD1EFFFBEE7C983779FEBB1AE395445E97D3D6C797838DEBF"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Visuals\\PlayerHealingPresentation.cs",
+    "Hash": "5460E9F488A1D2945813564CF79998227DAD9DD91E5016D2A1D9E4C2ABB43E1F"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Visuals\\PlayerSyringeVisual.cs",
+    "Hash": "B5F61C6DD34AA9553644381317905E8601D2BD016F1EDFF6B07788555EE547BA"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Visuals\\RagdollCollisionCue.cs",
+    "Hash": "DE9F5A4F0E0E63A4F9999AEE1DB601F735D11724E856A214E35C41D0F8C43597"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Visuals\\RagdollOnDefeat.cs",
+    "Hash": "CAB62DE444C40A87703B9EC425448DB538EAA7206F35B669DBFEFC3A2DB1227C"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Visuals\\SamuraiArticulatedRig.cs",
+    "Hash": "EE99E244D6B514F5DDCFAE549978DE53878265F73F503F853246505B5CB0963A"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scripts\\Visuals\\WorldMarkerCue.cs",
+    "Hash": "37B36654EAE9A389DB56F8AE6A00917FF694A9572158F603C6C4D347E76DE2C2"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\AudioManager.asset",
+    "Hash": "AEEDEB3243F07B61DBBE854AA08B5EF6F0B5274DD9852AD9F6129DDE3E105A31"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\ClusterInputManager.asset",
+    "Hash": "40E65DD214BF254955D2C8829CA8CE2130FD3510485560CE012E9A1DDD93E623"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\DynamicsManager.asset",
+    "Hash": "B7C9A9DC08B98990109D4346F68745E15E238DE400F96C583E53E1C83C743A78"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\EditorBuildSettings.asset",
+    "Hash": "3858B09427B1C865FD9D11AAC917105BB3738C2C9E8B567F9F17E1489CDDBCE0"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\EditorSettings.asset",
+    "Hash": "3D39340D125716248BA7ED54B8F01DF59D76AC0E674FE9DFF04EC7844DA36022"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\GraphicsSettings.asset",
+    "Hash": "9EE4C5644B163546FAF4396E2861257E1EC0063A3DD8ED30AF69895D1213CE18"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\InputManager.asset",
+    "Hash": "7A1BB836A1008D26D0860D143E9D9DF7CA41731D30A72901B518063819C62DF2"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\MemorySettings.asset",
+    "Hash": "1E8379A461B10AE09F3F696911088C16875D63E87ED5F2D95DF9E1892703F9FD"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\MultiplayerManager.asset",
+    "Hash": "ABA89FD1A1DDAD182727AD82727E536D27372E90328A8196DA2A4560398983DD"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\NavMeshAreas.asset",
+    "Hash": "80106CFA7E6181A1928B142C075F3E510D527441E3D79BC83590E4AC91E7CD66"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\NetworkManager.asset",
+    "Hash": "46395DEF99A6B5AE38EBB19B3E18F75215A9D4172C219361521A5A51E051F386"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\PackageManagerSettings.asset",
+    "Hash": "BE815F7E993301FFA59A59C06160E969A6B5EC52833DFED83929759660F69DD1"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\Physics2DSettings.asset",
+    "Hash": "50E61D70BC38C632CB0E6EFE364A9C5BCFD9A8DBCF4E7B5ECFB06A2030C4518F"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\PhysicsCoreProjectSettings2D.asset",
+    "Hash": "BEDC5339A832C60DC3F11B84ABC4F4384DBFA20B0CD9AD6C444B907E751FC35E"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\PresetManager.asset",
+    "Hash": "29C125923FE6E29F90190D4FCE1C82D660E7051546E2C9D02908D18C9CF2436C"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\ProjectAuditorSettings.asset",
+    "Hash": "9E68444B9BDA981E2927A98DF9EDF69EA88362F0C6B7F3C81B39B9D515D2A416"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\ProjectSettings.asset",
+    "Hash": "15853438E023980D10B3463FCE5941193EA44C7980E72DF34C33E8443508A35F"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\ProjectVersion.txt",
+    "Hash": "9207210A75D6F7E920816752A3A9228F1366DF762E660FB6C1F8F56EE3AF8661"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\QualitySettings.asset",
+    "Hash": "C1ED060F85623D3595B1E9EEA133D957CD92191639A6EDC51C638E3EDCBA240C"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\SceneTemplateSettings.json",
+    "Hash": "BB9098B3BFCDE78D93E264B96F7B77B5430E64E8C57A7AAD7F5A5D9C3945E16A"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\ShaderGraphSettings.asset",
+    "Hash": "5C432C9C73FDF73FEE91C8823EA02AB98E3B7A8EDF341B5AE6901D699CCE52A7"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\TagManager.asset",
+    "Hash": "8E18B1C820E9C09E16BBD1F1B7842E9FB3B0158A0921B0964E0B8FA12C6E2C01"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\TimeManager.asset",
+    "Hash": "3396F52FDC16D445024E01D7A2D99DB6F0A37569D1D73C0302E9FFB857D90287"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\UnityConnectSettings.asset",
+    "Hash": "7F2112B8C6EA0885DCC72B312C9726FFCD909F2E89D1EEAD61889274A4E5D1C0"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\URPProjectSettings.asset",
+    "Hash": "C317FE22B9488785C0611F0642429922E5D324430D929BFFB41648130F30C218"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\VersionControlSettings.asset",
+    "Hash": "E199CDFA6A8F2BF33CFD47E549198F13E3EB2A5099E908FDB4E0F14D939CCC6B"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\VFXManager.asset",
+    "Hash": "F066C6483919961332415EE64204F74FE52F38C02E82892EB02B7A5B2E381F0E"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\ProjectSettings\\XRSettings.asset",
+    "Hash": "EDD2BEB4A2E388312B4B7DA241AA51070434005D82C59363F1237DD2E567585F"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scenes\\MainMenu.unity",
+    "Hash": "D90BBD6F63517BA5E3A45BE4A6C86822E8F6E7466D10352765D724C8B0253D81"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scenes\\Prototype_01.unity",
+    "Hash": "4A9FA8B2E74AA600C36625389DA716785DD774F5AA42D5C965CD1BA8A124450F"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scenes\\SampleScene.unity",
+    "Hash": "387D8216A517BE775B6ECC2AB55B97ECE687C3372322DA2BA027A96908014912"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scenes\\Warehouse_Demo.unity",
+    "Hash": "0F13BC1ADF9C477B05BFF2FC23B9AF18AC9350E6E929A41695B5963424BF428E"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scenes\\Warehouse_Mission01.unity",
+    "Hash": "ECF62AAF56FA84DE13725BABDB68D076FB2F1577D1BE2CCF5ACB4C92E6583D1E"
+  },
+  {
+    "Path": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0\\Assets\\Scenes\\Warehouse_Testbed.unity",
+    "Hash": "946E17E119A7F71474AAB05C93674DD0ABF3D1762F80577A4DA248BD53D8FE57"
+  }
+]

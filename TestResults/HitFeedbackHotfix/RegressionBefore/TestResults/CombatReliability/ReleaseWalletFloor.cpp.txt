@@ -1,0 +1,203 @@
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp:4756:IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool GameSession_ApplyDevelopmentCredits_m799C65EC037180930748CC703CF0AF668E2BFB3E (GameSession_tD60066256F3ACCC3307AACC8C9E81089F3A9E8BE* __this, const RuntimeMethod* method) ;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4757-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool GameSession_Commit_m7CA3B90BA64F81CA1D7D74CB546C0156BAB0D13F (GameSession_tD60066256F3ACCC3307AACC8C9E81089F3A9E8BE* __this, String_t* ___0_snapshot, String_t* ___1_operation, const RuntimeMethod* method) ;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4758-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Object_Destroy_mE97D0A766419A81296E8D4E5C23D01D3FE91ACBB (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C* ___0_obj, const RuntimeMethod* method) ;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4759-IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void GameSession_set_Instance_mE51666B124F3C725393D97B55C912DA2E8D09C26_inline (GameSession_tD60066256F3ACCC3307AACC8C9E81089F3A9E8BE* ___0_value, const RuntimeMethod* method) ;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4760-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Object_DontDestroyOnLoad_m4B70C3AEF886C176543D1295507B6455C9DCAEA7 (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C* ___0_target, const RuntimeMethod* method) ;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4761-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void GameProgress__ctor_mBC68405A237036C04A2B2B5DB389E32B995D8601 (GameProgress_tA3023129EC468CC5B4F076D0B7E595C9E1869E42* __this, const RuntimeMethod* method) ;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4762-inline void List_1_Add_mF10DB1D3CBB0B14215F0E4F8AB4934A1955E5351_inline (List_1_tF470A3BE5C1B5B68E1325EF3F109D172E60BD7CD* __this, String_t* ___0_item, const RuntimeMethod* method)
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4763-{
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4764-	((  void (*) (List_1_tF470A3BE5C1B5B68E1325EF3F109D172E60BD7CD*, String_t*, const RuntimeMethod*))List_1_Add_m0CE6E39234ED33F5195AABC8029D06D4756C75C1_gshared_inline)(__this, ___0_item, method);
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4765-}
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4766-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__DisplayClass40_0__ctor_mEDC1FD9EA88D747E676B72CE466C8578BBD45693 (U3CU3Ec__DisplayClass40_0_t7EB6B87F45A65711BD25250C76A1813DC96692C6* __this, const RuntimeMethod* method) ;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4767-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ArmorStock__ctor_m2EC5C949EBB8CDC6521B0C3FB0B997D40088FBCE (ArmorStock_tB22AA6F93C89E25023E0046B3A0B1FE273717A7E* __this, const RuntimeMethod* method) ;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4768-inline void List_1_Add_m0364724EBA7BE0A9108562D51772D6B653A4BAC6_inline (List_1_t09D6F3C344736EED826D718D75552C20A8A2C302* __this, ArmorStock_tB22AA6F93C89E25023E0046B3A0B1FE273717A7E* ___0_item, const RuntimeMethod* method)
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4769-{
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4770-	((  void (*) (List_1_t09D6F3C344736EED826D718D75552C20A8A2C302*, ArmorStock_tB22AA6F93C89E25023E0046B3A0B1FE273717A7E*, const RuntimeMethod*))List_1_Add_m0CE6E39234ED33F5195AABC8029D06D4756C75C1_gshared_inline)(__this, ___0_item, method);
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4771-}
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4772-IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void GameSession_set_Notice_m9977B8A3EB3BDF4A576C641B40792AE126EF1792_inline (GameSession_tD60066256F3ACCC3307AACC8C9E81089F3A9E8BE* __this, String_t* ___0_value, const RuntimeMethod* method) ;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4773-IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void GameSession_set_SelectedLevel_m9EBC76F1FAE139EC4B48242BC550F0870F4B15FC_inline (GameSession_tD60066256F3ACCC3307AACC8C9E81089F3A9E8BE* __this, String_t* ___0_value, const RuntimeMethod* method) ;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4774-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Guid_t Guid_NewGuid_m1F4894E8DC089811D6252148AD5858E58D43A7BD (const RuntimeMethod* method) ;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4775-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* Guid_ToString_mDAA91A4A993E3A7AD8339665E3F0CC35FE00E833 (Guid_t* __this, String_t* ___0_format, const RuntimeMethod* method) ;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4776-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t GameCatalog_Payout_m1C6B36B22833E1C7E666A216F8A6CA1D61683F74 (GameCatalog_t2AEB29B4C2CB3DABFB98477184D3380F34FBE5C2* __this, int32_t ___0_wallets, bool ___1_complete, const RuntimeMethod* method) ;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4777-inline int32_t List_1_get_Count_mB63183A9151F4345A9DD444A7CBE0D6E03F77C7C_inline (List_1_tF470A3BE5C1B5B68E1325EF3F109D172E60BD7CD* __this, const RuntimeMethod* method)
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4778-{
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4779-	return ((  int32_t (*) (List_1_tF470A3BE5C1B5B68E1325EF3F109D172E60BD7CD*, const RuntimeMethod*))List_1_get_Count_mD2ED26ACAF3BAF386FFEA83893BA51DB9FD8BA30_fshared_inline)(__this, method);
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4780-}
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4781-inline void List_1_RemoveAt_m031D3A21689276A872FCA7566C8F2F79F9581F0D (List_1_tF470A3BE5C1B5B68E1325EF3F109D172E60BD7CD* __this, int32_t ___0_index, const RuntimeMethod* method)
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4782-{
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4783-	((  void (*) (List_1_tF470A3BE5C1B5B68E1325EF3F109D172E60BD7CD*, int32_t, const RuntimeMethod*))List_1_RemoveAt_m36F68EA689DB109415094085A496D5EA21E2F23C_gshared)(__this, ___0_index, method);
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4784-}
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4785-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__DisplayClass48_0__ctor_mD002423DDB623E5E8E6118E110AC7E6A42691291 (U3CU3Ec__DisplayClass48_0_t5C0958BE975AC3BAA8D2D7BC980E8AF08FC14A3D* __this, const RuntimeMethod* method) ;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4786-IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Single_IsNaN_mFE637F6ECA9F7697CE8EFF56427858F4C5EDF75D_inline (float ___0_f, const RuntimeMethod* method) ;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4787-IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool Single_IsInfinity_m8D101DE5C104130734F6DCA3E6E86345B064E4AD_inline (float ___0_f, const RuntimeMethod* method) ;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4788-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void GameSession_SelectArmor_m4B2B1FF04A3200EBF6B68F1A0D9D286F404ECA4A (GameSession_tD60066256F3ACCC3307AACC8C9E81089F3A9E8BE* __this, ShopOffer_t2DB80E4BDED2F5DB19A76627E9B9773D1E07A915* ___0_item, float ___1_condition, const RuntimeMethod* method) ;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4789-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__DisplayClass49_0__ctor_mAD424856A9F285475526C19377E843DF5A0C573A (U3CU3Ec__DisplayClass49_0_t637880BB0877ED576BAC69EBF9C484DA1D5C305D* __this, const RuntimeMethod* method) ;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4790-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__DisplayClass49_1__ctor_mEE5164CDD5E202BFC1E83F7C33FEA1B40EA1BA10 (U3CU3Ec__DisplayClass49_1_t548D8247061C2A774A77F23C94CFBFF99232272A* __this, const RuntimeMethod* method) ;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4791-inline void Predicate_1__ctor_mCEB62F8D098A1C27D80FD7467FBBAC3777FB7EB8 (Predicate_1_t017B0FDF762445773C31B98652BDC0045DCD17DA* __this, RuntimeObject* ___0_object, intptr_t ___1_method, const RuntimeMethod* method)
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4792-{
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4793-	((  void (*) (Predicate_1_t017B0FDF762445773C31B98652BDC0045DCD17DA*, RuntimeObject*, intptr_t, const RuntimeMethod*))Predicate_1__ctor_m7D1570CDB641655E3D88721AFB55C6C3AD34B7C3_gshared)(__this, ___0_object, ___1_method, method);
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4794-}
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4795-inline AmmoStock_tBC9871E444CA92CC3BD0B056C902ED139DB6B1BE* List_1_Find_mA0B1AAA1C3E572DCB114C4FD74AB248875AC1D17 (List_1_tF14F941A222B1D851C2FA47075DBC402EF9860EE* __this, Predicate_1_t017B0FDF762445773C31B98652BDC0045DCD17DA* ___0_match, const RuntimeMethod* method)
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4796-{
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4797-	return ((  AmmoStock_tBC9871E444CA92CC3BD0B056C902ED139DB6B1BE* (*) (List_1_tF14F941A222B1D851C2FA47075DBC402EF9860EE*, Predicate_1_t017B0FDF762445773C31B98652BDC0045DCD17DA*, const RuntimeMethod*))List_1_Find_m6620F179C7B4BFD1BB040EA342AEBDEC8B2C5B44_gshared)(__this, ___0_match, method);
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4798-}
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4799-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void U3CU3Ec__DisplayClass51_0__ctor_m7C6FBAAD1B4A2AD402D0EE96F4512B4CC332DDFC (U3CU3Ec__DisplayClass51_0_tDB0CF87BA5B2BEFFBAD61A6EC5EA7CBD21540E94* __this, const RuntimeMethod* method) ;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4800-IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR Func_1_tCBBB1BA5B3FB344C81E50C7783A4DAF5D1C47905* GameSession_get_MissionSaveSnapshot_m697F65D8EEC099FAF9E382C435C6BE4DD4200243_inline (GameSession_tD60066256F3ACCC3307AACC8C9E81089F3A9E8BE* __this, const RuntimeMethod* method) ;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4801-inline GameProgress_tA3023129EC468CC5B4F076D0B7E595C9E1869E42* Func_1_Invoke_m74FD5C612D4C882E7B93DF1CE71463EF94F7D9AF_inline (Func_1_tCBBB1BA5B3FB344C81E50C7783A4DAF5D1C47905* __this, const RuntimeMethod* method)
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4802-{
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4803-	return ((  GameProgress_tA3023129EC468CC5B4F076D0B7E595C9E1869E42* (*) (Func_1_tCBBB1BA5B3FB344C81E50C7783A4DAF5D1C47905*, const RuntimeMethod*))Func_1_Invoke_m201DDBB72CE38673C89C22034EC8779981D83E6D_gshared_inline)(__this, method);
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4804-}
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4805-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool ProgressStore_Save_m86D3211D59C867070BA1994545CB67268616E763 (ProgressStore_t4C6FDD389DA199200649E77661A097F52F590B06* __this, GameProgress_tA3023129EC468CC5B4F076D0B7E595C9E1869E42* ___0_data, const RuntimeMethod* method) ;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4806-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR float Time_get_deltaTime_mC3195000401F0FD167DD2F948FD2BC58330D0865 (const RuntimeMethod* method) ;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4807-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2 Vector3_SmoothDamp_m4A3D0EA27C95C3B8CF7DE5F91DEB6D9D1F2591DD (Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* ___0_current, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* ___1_target, Vector3_t24C512C7B96BBABAD472002D0BA2BDA40A5A80B2* ___2_currentVelocity, float ___3_smoothTime, float ___4_maxSpeed, float ___5_deltaTime, const RuntimeMethod* method) ;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4808-IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t BitConverter_SingleToInt32Bits_mC760C7CFC89725E3CF68DC45BE3A9A42A7E7DA73_inline (float ___0_value, const RuntimeMethod* method) ;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4809-inline void List_1_AddWithResize_mCC24A812DFC30C3DE2230E3C8EE705871C1DFF81 (List_1_t6959D78D53022948E65A4FDA6291D7F38FEFA02E* __this, Il2CppSharedGenericObject* ___0_item, const RuntimeMethod* method)
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4810-{
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4811-	((  void (*) (List_1_t6959D78D53022948E65A4FDA6291D7F38FEFA02E*, Il2CppSharedGenericObject*, const RuntimeMethod*))List_1_AddWithResize_mCC24A812DFC30C3DE2230E3C8EE705871C1DFF81_gshared)(__this, ___0_item, method);
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4812-}
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4813-#ifdef __clang__
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4814-#pragma clang diagnostic push
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4815-#pragma clang diagnostic ignored "-Winvalid-offsetof"
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4816-#pragma clang diagnostic ignored "-Wunused-variable"
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4817-#endif
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4818-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void WorldMarkerCue_Update_m71090D23DBF8518D348E7A62A4290AB123B5EECF (WorldMarkerCue_tE3E62A26F20D6296214CAF2DB62A8BB63B71CDB4* __this, const RuntimeMethod* method) 
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4819-{
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4820-	static bool s_Il2CppMethodInitialized;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4821-	if (!s_Il2CppMethodInitialized)
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4822-	{
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4823-		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4824-		s_Il2CppMethodInitialized = true;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4825-	}
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4826-	CHECKED_LOCAL(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_StaticInit);
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4827-	Color_tD001788D726C3A7F1379BEED0260B9591F440C1F V_0;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4828-	memset((&V_0), 0, sizeof(V_0));
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4829-	float V_1 = 0.0f;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4830-	int32_t G_B7_0 = 0;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4831-	Color_tD001788D726C3A7F1379BEED0260B9591F440C1F G_B10_0;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4832-	memset((&G_B10_0), 0, sizeof(G_B10_0));
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4833-	{
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4834-		SpriteRenderer_t1DD7FE258F072E1FA87D6577BA27225892B8047B* L_0 = __this->___indicator;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4835-		CHECKED_LOCAL_INIT(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_StaticInit,(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var),il2cpp_codegen_runtime_class_init_inline);
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4836-		bool L_1;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4837-		L_1 = Object_op_Equality_mB6120F782D83091EF56A198FCEBCF066DB4A9605(L_0, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4838-		if (!L_1)
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4839-		{
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4840-			goto IL_000f;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4841-		}
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4842-	}
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4843-	{
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4844-		return;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4845-	}
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4846-
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4847-IL_000f:
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4848-	{
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4849-		CheckpointMarker_tA02A4F53890C90690B6AF36F2BFA919E2634BBF3* L_2 = __this->___checkpoint;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4850-		CHECKED_LOCAL_INIT(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_StaticInit,(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var),il2cpp_codegen_runtime_class_init_inline);
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4851-		bool L_3;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4852-		L_3 = Object_op_Inequality_mD0BE578448EAA61948F25C32F8DD55AB1F778602(L_2, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4853-		if (L_3)
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4854-		{
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4855-			goto IL_0041;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-4856-		}
+--
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp:18495:IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool GameSession_ApplyDevelopmentCredits_m799C65EC037180930748CC703CF0AF668E2BFB3E (GameSession_tD60066256F3ACCC3307AACC8C9E81089F3A9E8BE* __this, const RuntimeMethod* method) 
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18496-{
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18497-	static bool s_Il2CppMethodInitialized;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18498-	if (!s_Il2CppMethodInitialized)
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18499-	{
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18500-		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var);
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18501-		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteralA9120042D2FC01DA5F45897D759B14592ADD1EB0);
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18502-		s_Il2CppMethodInitialized = true;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18503-	}
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18504-	CHECKED_LOCAL(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_StaticInit);
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18505-	String_t* V_0 = NULL;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18506-	{
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18507-		GameCatalog_t2AEB29B4C2CB3DABFB98477184D3380F34FBE5C2* L_0 = __this->___catalog;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18508-		CHECKED_LOCAL_INIT(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_StaticInit,(Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C_il2cpp_TypeInfo_var),il2cpp_codegen_runtime_class_init_inline);
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18509-		bool L_1;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18510-		L_1 = Object_op_Equality_mB6120F782D83091EF56A198FCEBCF066DB4A9605(L_0, (Object_tC12DECB6760A7F2CBF65D9DCF18D044C2D97152C*)NULL, NULL);
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18511-		if (L_1)
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18512-		{
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18513-			goto IL_0059;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18514-		}
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18515-	}
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18516-	{
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18517-		GameCatalog_t2AEB29B4C2CB3DABFB98477184D3380F34FBE5C2* L_2 = __this->___catalog;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18518-		NullCheck(L_2);
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18519-		bool L_3 = L_2->___developmentPlaytestCredits;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18520-		if (!L_3)
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18521-		{
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18522-			goto IL_0059;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18523-		}
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18524-	}
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18525-	{
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18526-		ProgressStore_t4C6FDD389DA199200649E77661A097F52F590B06* L_4;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18527-		L_4 = GameSession_get_Store_mB5069C5616D1E2019844ED796443B6BBB34A16C5_inline(__this, NULL);
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18528-		if (!L_4)
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18529-		{
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18530-			goto IL_0059;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18531-		}
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18532-	}
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18533-	{
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18534-		ProgressStore_t4C6FDD389DA199200649E77661A097F52F590B06* L_5;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18535-		L_5 = GameSession_get_Store_mB5069C5616D1E2019844ED796443B6BBB34A16C5_inline(__this, NULL);
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18536-		NullCheck(L_5);
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18537-		bool L_6;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18538-		L_6 = ProgressStore_get_ReadOnly_m7FC0BE7DCC54A98A3D1EE6EA5FA757AE08EBD7DE_inline(L_5, NULL);
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18539-		if (L_6)
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18540-		{
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18541-			goto IL_0059;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18542-		}
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18543-	}
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18544-	{
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18545-		GameProgress_tA3023129EC468CC5B4F076D0B7E595C9E1869E42* L_7;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18546-		L_7 = GameSession_get_Data_m22E8B7B746352D54FFE6D157BD0A7E04FFAA9751_inline(__this, NULL);
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18547-		if (!L_7)
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18548-		{
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18549-			goto IL_0059;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18550-		}
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18551-	}
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18552-	{
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18553-		GameProgress_tA3023129EC468CC5B4F076D0B7E595C9E1869E42* L_8;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18554-		L_8 = GameSession_get_Data_m22E8B7B746352D54FFE6D157BD0A7E04FFAA9751_inline(__this, NULL);
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18555-		NullCheck(L_8);
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18556-		int32_t L_9 = L_8->___balance;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18557-		if ((((int32_t)L_9) < ((int32_t)((int32_t)10000))))
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18558-		{
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18559-			goto IL_005b;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18560-		}
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18561-	}
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18562-	{
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18563-		GameProgress_tA3023129EC468CC5B4F076D0B7E595C9E1869E42* L_10;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18564-		L_10 = GameSession_get_Data_m22E8B7B746352D54FFE6D157BD0A7E04FFAA9751_inline(__this, NULL);
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18565-		NullCheck(L_10);
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18566-		int32_t L_11 = L_10->___developmentCreditRevision;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18567-		if ((((int32_t)L_11) < ((int32_t)((int32_t)35))))
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18568-		{
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18569-			goto IL_005b;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18570-		}
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18571-	}
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18572-
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18573-IL_0059:
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18574-	{
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18575-		return (bool)0;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18576-	}
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18577-
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18578-IL_005b:
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18579-	{
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18580-		GameProgress_tA3023129EC468CC5B4F076D0B7E595C9E1869E42* L_12;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18581-		L_12 = GameSession_get_Data_m22E8B7B746352D54FFE6D157BD0A7E04FFAA9751_inline(__this, NULL);
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18582-		String_t* L_13;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18583-		L_13 = JsonUtility_ToJson_m28CC6843B9D3723D88AD13EA3829B71FDE7826BA(L_12, NULL);
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18584-		V_0 = L_13;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18585-		GameProgress_tA3023129EC468CC5B4F076D0B7E595C9E1869E42* L_14;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18586-		L_14 = GameSession_get_Data_m22E8B7B746352D54FFE6D157BD0A7E04FFAA9751_inline(__this, NULL);
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18587-		GameProgress_tA3023129EC468CC5B4F076D0B7E595C9E1869E42* L_15;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18588-		L_15 = GameSession_get_Data_m22E8B7B746352D54FFE6D157BD0A7E04FFAA9751_inline(__this, NULL);
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18589-		NullCheck(L_15);
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18590-		int32_t L_16 = L_15->___balance;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18591-		int32_t L_17;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18592-		L_17 = Mathf_Max_m7FA442918DE37E3A00106D1F2E789D65829792B8_inline(L_16, ((int32_t)10000), NULL);
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18593-		NullCheck(L_14);
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18594-		L_14->___balance = L_17;
+Library/Bee/artifacts/Android/il2cppOutput/cpp\InsaneDreams.Runtime__1.cpp-18595-		GameProgress_tA3023129EC468CC5B4F076D0B7E595C9E1869E42* L_18;

@@ -69,7 +69,7 @@ namespace InsaneDreams.Tests
         [UnityTest] public IEnumerator BallisticCharacterCuesAreLargerForBothTeamsButGeometryIsUnchanged()
         {
             var target=Target(2004);var weapon=new RuntimeWeapon(Asset<WeaponDefinition>("Assets/Data/Items/BackupPistol.asset"));
-            loadout.Equip(EquipmentSlot.Firearm1,weapon);loadout.Select(EquipmentSlot.Firearm1);yield return null;
+            Assert.IsTrue(loadout.Equip(EquipmentSlot.Firearm2,weapon));loadout.Select(EquipmentSlot.Firearm2);yield return null;
             var cue=player.transform.Find("HitConfirmation");
             foreach(var team in new[]{CombatTeam.Player,CombatTeam.Enemy})
             {

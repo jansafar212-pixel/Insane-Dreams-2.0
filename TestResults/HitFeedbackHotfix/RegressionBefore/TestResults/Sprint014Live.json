@@ -1,0 +1,116 @@
+{
+  "sprint": "014",
+  "scene": "Assets/Scenes/Warehouse_Mission01.unity",
+  "method": "Scripted live Unity Editor playthroughs using PlayerActions for movement/jump/aim/fire/climb/reload/interaction, with actual hitscan damage and existing camera/recovery. Inline Game View captures inspected. No saved screenshot, hands-on playtest or Android hardware claim.",
+  "diagnosticRun": {
+    "status": "COMPLETED phase=26 stage=Complete pos=(23.98, 1.67) kills=10 deaths=1 time=78,68974",
+    "trace": "PHASE 1 t=2,41 pos=(-19.39, 0.71) hp=100 kills=0\nPHASE 2 t=2,84 pos=(-19.38, 0.71) hp=100 kills=1\nPHASE 3 t=3,67 pos=(-15.97, 0.71) hp=100 kills=1\nPHASE 4 t=3,67 pos=(-15.97, 0.71) hp=100 kills=1\nPHASE 5 t=4,67 pos=(-9.28, 0.71) hp=100 kills=1\nPHASE 6 t=6,11 pos=(-9.06, 0.71) hp=65 kills=3\nSTALLED (-26.59, -6.29) stage=ClearStorage\nRESUME phase=28 pos=(-26.59, -6.29)\nPHASE 7 t=33,23 pos=(-12.22, -6.29) hp=65 kills=4\nPHASE 8 t=36,01 pos=(-12.00, 6.23) hp=60 kills=4\nPHASE 9 t=36,69 pos=(-9.23, 0.71) hp=55 kills=4\nSTALLED (-9.01, 0.71) stage=ClearStorage\nRESUME phase=6 pos=(-9.01, 0.71)\nPHASE 7 t=62,05 pos=(-9.84, 2.99) hp=55 kills=4\nPHASE 8 t=62,77 pos=(-12.00, 6.23) hp=55 kills=5\nPHASE 9 t=63,21 pos=(-9.29, 6.11) hp=55 kills=5\nPHASE 10 t=63,21 pos=(-9.29, 6.11) hp=55 kills=5\nPHASE 11 t=63,85 pos=(-4.84, 6.11) hp=55 kills=5\nPHASE 12 t=64,67 pos=(0.55, 6.11) hp=55 kills=5\nPHASE 13 t=64,68 pos=(0.55, 6.11) hp=55 kills=5\nINJECTED LETHAL HIT: checkpoint restoration test\nPHASE 13 t=64,68 pos=(1.00, 6.25) hp=100 kills=5\nPHASE 14 t=64,77 pos=(1.24, 6.11) hp=100 kills=5\nPHASE 15 t=65,35 pos=(4.58, 8.01) hp=100 kills=5\nPHASE 16 t=65,97 pos=(7.53, 9.71) hp=100 kills=5\nPHASE 17 t=66,59 pos=(10.43, 11.41) hp=100 kills=6\nPHASE 18 t=67,27 pos=(13.62, 12.71) hp=90 kills=6\nPHASE 19 t=67,47 pos=(14.69, 12.72) hp=85 kills=6\nPHASE 20 t=68,29 pos=(18.22, 12.71) hp=55 kills=6\nPHASE 21 t=69,11 pos=(21.13, 12.71) hp=50 kills=6\nPHASE 22 t=69,27 pos=(21.91, 12.72) hp=50 kills=6\nPHASE 23 t=69,99 pos=(20.26, 6.11) hp=40 kills=6\nPHASE 24 t=77,56 pos=(18.78, 6.11) hp=15 kills=10\nPHASE 25 t=77,57 pos=(18.78, 6.11) hp=15 kills=10\nPHASE 26 t=78,17 pos=(22.67, 6.10) hp=15 kills=10",
+    "stage": "Complete",
+    "elapsed": 78.68974,
+    "kills": 10,
+    "deaths": 1,
+    "completions": 1,
+    "checkpointCommits": 2,
+    "health": 15,
+    "playerShots": 44,
+    "hasRecords": true,
+    "actors": 10
+  },
+  "normalDamageRun": {
+    "status": "COMPLETED phase=26 stage=Complete pos=(23.98, 1.67) kills=10 deaths=1 time=51,05746",
+    "trace": "NO INJECTED DAMAGE: combat and recovery use normal gameplay only.\nPHASE 1 t=2,42 pos=(-19.39, 0.71) hp=100 kills=0\nPHASE 2 t=2,85 pos=(-19.38, 0.71) hp=95 kills=1\nPHASE 3 t=3,68 pos=(-15.97, 0.71) hp=95 kills=1\nPHASE 4 t=3,68 pos=(-15.97, 0.71) hp=95 kills=1\nPHASE 5 t=4,68 pos=(-9.28, 0.71) hp=95 kills=1\nPHASE 6 t=6,24 pos=(-9.06, 0.71) hp=70 kills=3\nPHASE 7 t=6,54 pos=(-9.85, 2.92) hp=70 kills=3\nPHASE 8 t=7,26 pos=(-12.00, 6.16) hp=55 kills=3\nPHASE 9 t=7,70 pos=(-9.29, 6.11) hp=50 kills=4\nSTALLED (-9.07, 6.11) stage=ClearStorage\nRESUME phase=30 pos=(-9.07, 6.11)\nNO INJECTED DAMAGE: combat and recovery use normal gameplay only.\nPHASE 31 t=33,02 pos=(-9.86, 8.32) hp=50 kills=4\nPHASE 7 t=33,83 pos=(-12.00, 4.72) hp=50 kills=5\nPHASE 8 t=34,14 pos=(-12.00, 6.16) hp=50 kills=5\nPHASE 9 t=34,58 pos=(-9.29, 6.11) hp=50 kills=5\nPHASE 10 t=34,58 pos=(-9.29, 6.11) hp=50 kills=5\nPHASE 11 t=35,22 pos=(-4.84, 6.11) hp=50 kills=5\nPHASE 12 t=36,04 pos=(0.55, 6.11) hp=50 kills=5\nPHASE 13 t=36,16 pos=(1.14, 6.11) hp=50 kills=5\nPHASE 14 t=36,18 pos=(1.25, 6.11) hp=50 kills=5\nPHASE 15 t=36,76 pos=(4.58, 8.01) hp=50 kills=5\nPHASE 16 t=37,38 pos=(7.53, 9.71) hp=45 kills=5\nPHASE 17 t=38,00 pos=(10.43, 11.41) hp=30 kills=6\nPHASE 18 t=38,68 pos=(13.62, 12.71) hp=20 kills=6\nPHASE 19 t=38,88 pos=(14.69, 12.72) hp=20 kills=6\nPHASE 13 t=39,39 pos=(1.00, 6.25) hp=100 kills=5\nPHASE 14 t=39,48 pos=(1.24, 6.11) hp=100 kills=5\nPHASE 15 t=40,06 pos=(4.58, 8.01) hp=100 kills=5\nPHASE 16 t=40,68 pos=(7.53, 9.71) hp=100 kills=5\nPHASE 17 t=41,30 pos=(10.43, 11.41) hp=100 kills=6\nPHASE 18 t=41,98 pos=(13.62, 12.71) hp=80 kills=6\nPHASE 19 t=42,18 pos=(14.69, 12.72) hp=65 kills=6\nPHASE 20 t=43,00 pos=(18.22, 12.71) hp=40 kills=6\nPHASE 21 t=43,82 pos=(21.13, 12.71) hp=35 kills=6\nPHASE 22 t=43,98 pos=(21.91, 12.72) hp=35 kills=6\nPHASE 23 t=44,70 pos=(20.26, 6.11) hp=35 kills=6\nPHASE 32 t=44,70 pos=(20.26, 6.11) hp=35 kills=6\nPHASE 33 t=45,16 pos=(20.86, 8.50) hp=30 kills=7\nPHASE 34 t=46,16 pos=(23.00, 13.00) hp=20 kills=8\nPHASE 22 t=49,16 pos=(23.58, 12.72) hp=20 kills=9\nPHASE 23 t=49,84 pos=(21.66, 6.11) hp=20 kills=9\nPHASE 24 t=50,01 pos=(20.54, 6.11) hp=20 kills=10\nPHASE 25 t=50,02 pos=(20.40, 6.11) hp=20 kills=10\nPHASE 26 t=50,54 pos=(22.67, 6.10) hp=20 kills=10",
+    "stage": "Complete",
+    "elapsed": 51.0574646,
+    "clearedEnemies": 10,
+    "totalDefeatEvents": 11,
+    "deaths": 1,
+    "completions": 1,
+    "checkpointCommits": 3,
+    "health": 20,
+    "shots": 54,
+    "records": true,
+    "actors": 10,
+    "normalGameplayOnly": true
+  },
+  "replay": {
+    "stage": "EnterWarehouse",
+    "kills": 0,
+    "totalDefeats": 0,
+    "deaths": 0,
+    "records": false,
+    "elapsed": 0,
+    "health": 100,
+    "position": "(-24.00, 0.85, 0.00)",
+    "actors": 10,
+    "active": 0
+  },
+  "audit": {
+    "scene": "Assets/Scenes/Warehouse_Mission01.unity",
+    "saved": true,
+    "dirty": false,
+    "playing": false,
+    "missingScripts": 0,
+    "missingReferences": [],
+    "behavioursChecked": 118,
+    "colliders": 38,
+    "spawns": 10,
+    "zones": [
+      {
+        "name": "Mission_Entrance",
+        "layer": 2,
+        "bounds": "(1.00, 3.00, 0.00)"
+      },
+      {
+        "name": "Mission_Storage",
+        "layer": 2,
+        "bounds": "(1.50, 9.00, 0.00)"
+      },
+      {
+        "name": "Mission_Checkpoint",
+        "layer": 2,
+        "bounds": "(1.50, 2.00, 0.00)"
+      },
+      {
+        "name": "Mission_Processing",
+        "layer": 2,
+        "bounds": "(2.00, 3.00, 0.00)"
+      },
+      {
+        "name": "Mission_Records",
+        "layer": 2,
+        "bounds": "(2.00, 2.00, 0.00)"
+      },
+      {
+        "name": "Mission_Exit",
+        "layer": 2,
+        "bounds": "(1.50, 3.00, 0.00)"
+      }
+    ]
+  },
+  "console": {
+    "sampledUtc": "2026-10-19T10:22:47.5505452Z",
+    "ageMs": 134,
+    "compilationFailed": false,
+    "compiling": false,
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "consoleLogs": 111,
+    "seeded": true
+  },
+  "testbedSha256": "DBD270D874D8BDE8F12B0EA43746C00F0906104F888B392718C3F053146F3915",
+  "findings": [
+    "First diagnostic run completed after pauses and setup fixes; one explicit lethal hit tested checkpoint recovery.",
+    "Saved-scene normal-damage run completed with a natural enemy-caused death and checkpoint retry; no injected damage, immunity, teleporting or direct enemy-defeat calls.",
+    "Normal run: 51.057 game seconds (includes one 25-second pilot stall; debug pauses excluded), ten unique mission enemies cleared, eleven actual defeat events, one death, 54 shots, twenty health, three checkpoint commits.",
+    "Pilot paused to adapt to a storage guard dropping to the ground floor; west ladder provided a valid return route. East roof-access ladder also used to finish rooftop threats.",
+    "Actual results and replay button verified; replay returned to start with ten same prewarmed actors inactive, full health and fresh ammunition/progress/statistics.",
+    "Mission zones were initially included in landing probes and beacon sizing scaled triggers; fixed on saved scene and covered by regression tests."
+  ],
+  "limitations": [
+    "5–10 minute normal human first-playthrough target remains unverified. Precise scripted aiming/navigation is not a human pacing measurement.",
+    "Enemies can change floors during traversal/retreat; all observed positions were reachable, but human navigation/readability needs review.",
+    "Wide Game View inspected; portrait/notched-phone layouts and touch ergonomics not device-validated.",
+    "Suitable audio assets remain missing from previous sprint; no new sounds claimed.",
+    "No Android device FPS/GC or build validation."
+  ]
+}

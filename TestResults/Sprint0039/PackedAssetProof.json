@@ -1,0 +1,26 @@
+[
+  {
+    "asset": "Assets/Resources/Arsenal/SKS.asset",
+    "packed": true
+  },
+  {
+    "asset": "Assets/Resources/Arsenal/AA12.asset",
+    "packed": true
+  },
+  {
+    "asset": "Assets/Resources/Arsenal/SawedOff.asset",
+    "packed": true
+  },
+  {
+    "asset": "Assets/Art/CombatPresentation0039/PixelTracer.mat",
+    "packed": true
+  },
+  {
+    "asset": "Assets/Shaders/PixelTracer.shader",
+    "packed": true
+  },
+  {
+    "asset": "Assets/Art/Movement0039/ConnectedCanopy.asset",
+    "packed": true
+  }
+]

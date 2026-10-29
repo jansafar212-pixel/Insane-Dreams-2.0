@@ -1,0 +1,56 @@
+@import url("AkumuTypography.uss");
+:root {
+    --ink: #171c1d;
+    --panel: #252c2b;
+    --raised: #383f38;
+    --cream: #e9e2c5;
+    --quiet: #b1b49d;
+    --edge: #727965;
+    --rust: #cd783e;
+    --gold: #d9bc5a;
+    --danger: #b45a4b;
+}
+Label, Button { -unity-font-style: normal; }
+.pixel-panel { background-color: var(--panel); border-width: 3px; border-color: var(--edge); border-bottom-width: 6px; border-bottom-color: var(--ink); border-radius: 0; color: var(--cream); }
+.flow-button, .results-replay, .revive-primary, .revive-back, .interact-button {
+    background-color: var(--raised); color: var(--cream); border-width: 2px; border-color: var(--edge); border-bottom-width: 5px; border-bottom-color: var(--ink); border-radius: 0; white-space: normal;
+}
+.flow-button:hover, .flow-button:focus, .results-replay:hover, .revive-back:hover { background-color: #4a5142; border-top-color: var(--gold); color: #fff8d9; }
+.flow-button:active, .results-replay:active, .revive-primary:active, .revive-back:active, .interact-button:active { background-color: var(--rust); color: var(--ink); border-top-color: var(--ink); border-bottom-color: var(--cream); }
+.flow-button:disabled, .results-replay:disabled { background-color: #292d2a; color: #878b7d; border-color: #484d43; border-bottom-color: var(--ink); opacity: .7; }
+.flow-button.is-selected { background-color: #68532f; border-left-color: var(--rust); border-top-color: var(--gold); color: #fff8d9; }
+.button-notch { position: absolute; left: -3px; top: 42%; width: 7px; height: 12px; background-color: var(--rust); display: none; }
+.flow-button:hover > .button-notch, .flow-button:focus > .button-notch, .flow-button.is-selected > .button-notch { display: flex; }
+.flow-button:disabled > .button-notch { display: none; }
+.ui-icon { width: 30px; height: 30px; flex-shrink: 0; -unity-background-scale-mode: scale-to-fit; }
+.frag-mark { background-image: url("../Data/Sprint0027/Frag.asset"); }
+.flash-mark { background-image: url("../Data/Sprint0027/Flash.asset"); }
+.smoke-mark { background-image: url("../Data/Sprint0027/Smoke.asset"); }
+.tape-mark { background-image: url("../Art/Interface0031/DuctTape.asset"); }
+.coin-mark { background-image: url("../Art/Interface0031/Coin.asset"); }
+.helmet-mark { background-image: url("../Art/Equipment0029/HeavyHelmet.asset"); }
+.vest-mark { background-image: url("../Art/Sprint0245/Armor_0.asset"); }
+.syringe-mark { background-image: url("../Art/PostPlaytestHotfix/FaintanylSyringe.asset"); }
+.ammo-mark { background-image: url("../Art/Interface0031/Ammo.asset"); }
+.larper-speech { position: absolute; width: 220px; white-space: normal; font-size: 16px; -unity-text-align: middle-center; color: var(--cream); background-color: var(--panel); border-width: 2px; border-color: var(--edge); border-bottom-width: 4px; border-bottom-color: var(--ink); border-radius: 0; padding: 6px 8px; }
+.larper-speech.panic-speech { background-color: #65372e; border-color: var(--rust); }
+.pixel-notice { background-color: var(--ink); color: var(--gold); border-left-width: 3px; border-left-color: var(--rust); padding-left: 5px; }
+
+/* Sprint 0036: warehouse noticeboard, reusable across every screen. */
+.flow-button, .results-replay, .revive-primary, .revive-back, .interact-button {
+    border-width: 3px; border-top-color: #92947a; border-left-color: #92947a;
+    border-right-color: #171c1d; border-bottom-width: 6px; border-bottom-color: #171c1d;
+}
+.flow-button:focus, .results-replay:focus, .revive-primary:focus, .revive-back:focus {
+    border-left-color: var(--gold); border-top-color: var(--gold);
+}
+.flow-button:active, .results-replay:active, .revive-primary:active, .revive-back:active {
+    border-top-width: 6px; border-bottom-width: 3px; border-top-color: var(--ink);
+}
+.larper-speech { background-color: #e9e2c5; color: #221f23; border-width: 3px; border-color: #221f23; border-bottom-width: 6px; padding: 6px 8px; }
+.larper-speech.panic-speech { background-color: #e9b476; color: #221f23; border-color: #583728; }
+
+/* Hotfix0036.1: gameplay speech cards, preserving opaque lettering. */
+.larper-speech { background-color: rgba(233,226,197,.70); }
+.larper-speech.panic-speech { background-color: rgba(233,180,118,.70); }
+

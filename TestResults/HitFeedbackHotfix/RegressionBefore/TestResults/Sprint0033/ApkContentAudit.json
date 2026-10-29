@@ -1,0 +1,16 @@
+{
+  "bytes": 39750643,
+  "sha256": "c5b999f4c2733f20dd67e77bead32f60bd972f24364d0a75866d74596fe1f9c8",
+  "markers": {
+    "PillboxRoofAccessLadder": [
+      "assets/bin/Data/level1"
+    ],
+    "viewportAttackDelay": [
+      "assets/bin/Data/Managed/Metadata/global-metadata.dat"
+    ],
+    "stuckRecoveryPause": [
+      "assets/bin/Data/Managed/Metadata/global-metadata.dat"
+    ]
+  },
+  "arm64": true
+}

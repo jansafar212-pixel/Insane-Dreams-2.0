@@ -1,0 +1,62 @@
+{
+  "status": "completed",
+  "duration": 0.4,
+  "summary": {
+    "total": 7,
+    "passed": 7,
+    "failed": 0,
+    "skipped": 0,
+    "inconclusive": 0
+  },
+  "results": [
+    {
+      "FullName": "InsaneDreams.Tests.Loadout0039Tests.EmptyInlineInspectorWeaponIsAnEmptySlot",
+      "Status": "Passed",
+      "Duration": 0.064703,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Loadout0039Tests.EveryAddedFirearmCanBePurchasedOnceWithItsRealPriceAndEquippedInItsRole",
+      "Status": "Passed",
+      "Duration": 0.0719106,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Loadout0039Tests.FreshAndSpentExistingSavesRestoreWalletMinimumWithoutResettingOtherProgress",
+      "Status": "Passed",
+      "Duration": 0.0387746,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Loadout0039Tests.HeavyBodyAndHelmetKeepUsefulAmmunitionCapacityAndBoundedReloadPenalty",
+      "Status": "Passed",
+      "Duration": 0.0083222,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Loadout0039Tests.OldTwoPrimarySaveMigratesWithoutDiscardingOwnedWeaponsAmmoOrShortGrenadeArrays",
+      "Status": "Passed",
+      "Duration": 0.0410338,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Loadout0039Tests.OnePrimaryAndTwoDifferentSecondariesEnforceRolesWithoutLosingOwnership",
+      "Status": "Passed",
+      "Duration": 0.0607062,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.Loadout0039Tests.ThreeRuntimeWeaponsKeepIndependentAmmunitionAndPersistTheirPartialStocks",
+      "Status": "Passed",
+      "Duration": 0.0440095,
+      "Message": null,
+      "StackTrace": null
+    }
+  ]
+}

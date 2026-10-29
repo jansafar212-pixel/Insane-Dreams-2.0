@@ -1,0 +1,21 @@
+{
+  "androidDryRun": {
+    "status": "fulfilled",
+    "value": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\n  \"status\": \"dry_run\",\n  \"valid\": true,\n  \"validationErrors\": []\n}"
+        }
+      ]
+    }
+  },
+  "native": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"output\": null,\n  \"diagnostics\": [],\n  \"success\": true,\n  \"result\": {\n    \"scene\": \"Assets/Scenes/MainMenu.unity\",\n    \"dirty\": false,\n    \"playing\": false,\n    \"background\": false,\n    \"start\": \"MainMenu\",\n    \"prefabs\": [\n      {\n        \"path\": \"Assets/Prefabs/Player/WarehousePlayer.prefab\",\n        \"missing\": 0\n      },\n      {\n        \"path\": \"Assets/Prefabs/Enemies/Larper.prefab\",\n        \"missing\": 0\n      },\n      {\n        \"path\": \"Assets/Prefabs/Enemies/Samurai.prefab\",\n        \"missing\": 0\n      }\n    ]\n  }\n}"
+      }
+    ]
+  }
+}

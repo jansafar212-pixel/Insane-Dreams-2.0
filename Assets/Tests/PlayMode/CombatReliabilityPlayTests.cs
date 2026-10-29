@@ -27,7 +27,8 @@ namespace InsaneDreams.Tests
             player.GetComponent<PlayerHealthRecovery>().enabled=false;input=player.GetComponent<PlayerActions>();var s=new SerializedObject(input);s.FindProperty("readKeyboard").boolValue=false;s.ApplyModifiedPropertiesWithoutUndo();load=player.GetComponent<PlayerLoadout>();combat=player.GetComponent<PlayerCombat>();yield return new WaitForSeconds(.3f);
         }
         [UnityTearDown]public IEnumerator Cleanup(){foreach(var g in owned)if(g!=null)Object.Destroy(g);owned.Clear();yield return null;Application.runInBackground=background;}
-        RuntimeWeapon Equip(string name){var w=new RuntimeWeapon(AssetDatabase.LoadAssetAtPath<WeaponDefinition>("Assets/Resources/Arsenal/"+name+".asset"));load.Equip(EquipmentSlot.Firearm1,w);load.Select(EquipmentSlot.Firearm1);return w;}
+        static EquipmentSlot Slot(WeaponDefinition definition)=>definition.Fits(EquipmentSlot.Firearm1)?EquipmentSlot.Firearm1:EquipmentSlot.Firearm2;
+        RuntimeWeapon Equip(string name){var w=new RuntimeWeapon(AssetDatabase.LoadAssetAtPath<WeaponDefinition>("Assets/Resources/Arsenal/"+name+".asset"));var slot=Slot(w.Definition);Assert.IsTrue(load.Equip(slot,w));load.Select(slot);return w;}
         void Capture(string name)
         {
             var go=new GameObject("ReliabilityCapture");var c=go.AddComponent<Camera>();c.orthographic=true;c.orthographicSize=1.4f;c.transform.position=player.transform.position+new Vector3(0,.1f,-10);var rt=new RenderTexture(640,360,24);var previous=RenderTexture.active;c.targetTexture=rt;c.Render();RenderTexture.active=rt;var t=new Texture2D(640,360,TextureFormat.RGB24,false);t.ReadPixels(new Rect(0,0,640,360),0,0);t.Apply();Directory.CreateDirectory("TestResults/CombatReliability");File.WriteAllBytes("TestResults/CombatReliability/"+name+".png",t.EncodeToPNG());RenderTexture.active=previous;c.targetTexture=null;Object.Destroy(t);Object.Destroy(rt);Object.Destroy(go);
@@ -45,7 +46,7 @@ namespace InsaneDreams.Tests
                     Assert.AreEqual(side,player.GetComponent<CharacterVisualDriver>().Facing);input.SetTouchMove(Vector2.zero);Capture(name+"Inserted"+side);Assert.AreEqual(count,rig.weapon.GetComponentsInChildren<SpriteRenderer>(true).Length);
                 }
                 w.SetAmmunition(1,3);combat.Reload();yield return new WaitForSeconds(.1f);load.Select(EquipmentSlot.Melee);yield return null;Assert.IsFalse(w.Cycle.IsReloading);Assert.AreEqual(1,w.MagazineAmmo);Assert.AreEqual(3,w.ReserveAmmo);
-                load.Select(EquipmentSlot.Firearm1);yield return null;combat.Reload();player.GetComponent<Health>().ProtectFor(0);player.GetComponent<Health>().ApplyDamage(new DamageInfo(10000,CombatTeam.Enemy));yield return null;Assert.IsFalse(w.Cycle.IsReloading);Assert.AreEqual(4,w.MagazineAmmo+w.ReserveAmmo);player.GetComponent<Health>().Restore();input.SuspendInput();
+                load.Select(Slot(w.Definition));yield return null;combat.Reload();player.GetComponent<Health>().ProtectFor(0);player.GetComponent<Health>().ApplyDamage(new DamageInfo(10000,CombatTeam.Enemy));yield return null;Assert.IsFalse(w.Cycle.IsReloading);Assert.AreEqual(4,w.MagazineAmmo+w.ReserveAmmo);player.GetComponent<Health>().Restore();input.SuspendInput();
         }
         [UnityTest]public IEnumerator SniperManualReloadCancelsHeldShotAndRecoversWithoutGrantingAmmo()
         {

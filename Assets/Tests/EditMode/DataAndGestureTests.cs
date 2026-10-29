@@ -81,8 +81,9 @@ namespace InsaneDreams.Tests
         [Test] public void SwitchingPreservesIndependentRuntimeAmmoAndDefinitions()
         {
             var definition = Weapon(WeaponCategory.Firearm); string before = JsonUtility.ToJson(definition);
+            var secondaryDefinition=Weapon(WeaponCategory.Firearm);Set(secondaryDefinition,"firearmRole",FirearmRole.Secondary);string secondaryBefore=JsonUtility.ToJson(secondaryDefinition);
             var loadout = Keep(new GameObject("LoadoutTest")).AddComponent<PlayerLoadout>();
-            var first = new RuntimeWeapon(definition); var second = new RuntimeWeapon(definition);
+            var first = new RuntimeWeapon(definition); var second = new RuntimeWeapon(secondaryDefinition);
             first.SetAmmunition(3, 7); second.SetAmmunition(8, 20);
             Assert.IsTrue(loadout.Equip(EquipmentSlot.Firearm1, first));
             Assert.IsTrue(loadout.Equip(EquipmentSlot.Firearm2, second));
@@ -90,6 +91,7 @@ namespace InsaneDreams.Tests
             Assert.AreEqual(3, loadout.SelectedWeapon.MagazineAmmo); Assert.AreEqual(8, second.MagazineAmmo);
             Assert.AreNotEqual(first.InstanceId, second.InstanceId);
             Assert.AreEqual(before, JsonUtility.ToJson(definition));
+            Assert.AreEqual(secondaryBefore,JsonUtility.ToJson(secondaryDefinition));
         }
         [Test] public void StableSnapshotsResolveByDefinitionIdentity()
         {

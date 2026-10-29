@@ -1,0 +1,3 @@
+Assets\Editor\EconomySetup.cs:27:        c.offers=list.ToArray();c.primaryId="pistol";c.startingMoney=100;c.completionReward=250;c.failureWalletFraction=.25f;c.failurePayoutCap=50;c.basicAllowanceMagazines=5;
+Assets\Data\Progression\DemoCatalog.asset:337:  startingMoney: 100
+Assets\Scripts\Progression\GameCatalog.cs:40:        [Min(0)] public int startingMoney=1000;

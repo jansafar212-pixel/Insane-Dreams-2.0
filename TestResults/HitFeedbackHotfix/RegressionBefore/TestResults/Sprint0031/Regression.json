@@ -1,0 +1,122 @@
+[
+  {
+    "Suite": "CombatRulesTests",
+    "Total": 7,
+    "Passed": 7,
+    "Failed": 0
+  },
+  {
+    "Suite": "CowardsBunkerRulesTests",
+    "Total": 2,
+    "Passed": 2,
+    "Failed": 0
+  },
+  {
+    "Suite": "CowardsBunkerTests",
+    "Total": 4,
+    "Passed": 4,
+    "Failed": 0
+  },
+  {
+    "Suite": "FirstOperationLayoutTests",
+    "Total": 2,
+    "Passed": 2,
+    "Failed": 0
+  },
+  {
+    "Suite": "Hotfix00253PlaytestTests",
+    "Total": 6,
+    "Passed": 6,
+    "Failed": 0
+  },
+  {
+    "Suite": "MovementCompletionTests",
+    "Total": 11,
+    "Passed": 11,
+    "Failed": 0
+  },
+  {
+    "Suite": "PersonalityIntegrationTests",
+    "Total": 3,
+    "Passed": 3,
+    "Failed": 0
+  },
+  {
+    "Suite": "Sprint0025Tests",
+    "Total": 8,
+    "Passed": 4,
+    "Failed": 4
+  },
+  {
+    "Suite": "Sprint00271Tests",
+    "Total": 3,
+    "Passed": 3,
+    "Failed": 0
+  },
+  {
+    "Suite": "Sprint0029EquipmentRulesTests",
+    "Total": 5,
+    "Passed": 5,
+    "Failed": 0
+  },
+  {
+    "Suite": "Sprint0029SystemsTests",
+    "Total": 4,
+    "Passed": 4,
+    "Failed": 0
+  },
+  {
+    "Suite": "Sprint0030Tests",
+    "Total": 4,
+    "Passed": 4,
+    "Failed": 0
+  },
+  {
+    "Suite": "Sprint0031Tests",
+    "Total": 3,
+    "Passed": 3,
+    "Failed": 0
+  },
+  {
+    "Suite": "Sprint005Tests",
+    "Total": 11,
+    "Passed": 10,
+    "Failed": 1
+  },
+  {
+    "Suite": "Sprint0224Tests",
+    "Total": 9,
+    "Passed": 9,
+    "Failed": 0
+  },
+  {
+    "Suite": "Sprint023Tests",
+    "Total": 9,
+    "Passed": 9,
+    "Failed": 0
+  },
+  {
+    "Suite": "Sprint0246Tests",
+    "Total": 5,
+    "Passed": 5,
+    "Failed": 0
+  },
+  {
+    "Suite": "Sprint024FlowTests",
+    "Total": 12,
+    "Passed": 12,
+    "Failed": 0
+  },
+  {
+    "Suite": "Sprint024ProgressTests",
+    "Total": 4,
+    "Passed": 4,
+    "Failed": 0
+  },
+  {
+    "Suite": "SuppressionRulesTests",
+    "Total": 1,
+    "Passed": 1,
+    "Failed": 0
+  }
+]

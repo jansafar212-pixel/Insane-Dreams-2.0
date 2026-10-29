@@ -1,0 +1,30 @@
+[
+  {
+    "path": "Assets\\Scripts\\Combat\\AttackExecutor.cs",
+    "unchanged": true
+  },
+  {
+    "path": "Assets\\Scripts\\Combat\\BodyRegionDamage.cs",
+    "unchanged": true
+  },
+  {
+    "path": "Assets\\Scripts\\Combat\\Health.cs",
+    "unchanged": true
+  },
+  {
+    "path": "Assets\\Scripts\\Enemies\\EnemyCombat.cs",
+    "unchanged": true
+  },
+  {
+    "path": "Assets\\Scripts\\Enemies\\LarperBrain.cs",
+    "unchanged": true
+  },
+  {
+    "path": "Assets\\Scripts\\Prototype\\PlayerMotor2D.cs",
+    "unchanged": true
+  },
+  {
+    "path": "Assets\\Scripts\\Visuals\\CartoonRagdoll.cs",
+    "unchanged": true
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\n  \"status\": \"completed\",\n  \"duration\": 0.38,\n  \"summary\": {\n    \"total\": 3,\n    \"passed\": 3,\n    \"failed\": 0,\n    \"skipped\": 0,\n    \"inconclusive\": 0\n  },\n  \"results\": [\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0034EconomyRulesTests.ArmorLimitsAreBoundedAndHelmetsHaveSmallerPenalties\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.0028782,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0034EconomyRulesTests.BalanceSimulatesPoorAverageAndSavingPlayersFromActualLevelWalletCount\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.1627007,\n      \"Message\": null,\n      \"StackTrace\": null\n    },\n    {\n      \"FullName\": \"InsaneDreams.Tests.Sprint0034EconomyRulesTests.CatalogContainsOnlyExistingArsenalAndMedicalAndSeparateFiniteAmmoPacks\",\n      \"Status\": \"Passed\",\n      \"Duration\": 0.007037,\n      \"Message\": null,\n      \"StackTrace\": null\n    }\n  ]\n}"
+    }
+  ]
+}

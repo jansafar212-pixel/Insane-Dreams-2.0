@@ -1,0 +1,56 @@
+{
+  "success": true,
+  "command": "command test_status",
+  "data": {
+    "command": "test_status",
+    "parameters": {},
+    "result": {
+      "status": "completed",
+      "duration": 7.73,
+      "summary": {
+        "total": 4,
+        "passed": 4,
+        "failed": 0,
+        "skipped": 0,
+        "inconclusive": 0
+      },
+      "results": [
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0030Tests.ConfirmedClosePlayerShortensHidingWithoutOmniscientOrPermanentRetreat",
+          "Status": "Passed",
+          "Duration": 1.5979255,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0030Tests.DirectHitCancelsWarningTriggersDebouncedPhysicalRetreatAndCombatResumes",
+          "Status": "Passed",
+          "Duration": 4.5876588,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0030Tests.OfficerVestDoublesBodyShotDurabilityWithoutExtraHealthAndHeadAndMeleeRemainWeaknesses",
+          "Status": "Passed",
+          "Duration": 0.7662238,
+          "Message": null,
+          "StackTrace": null
+        },
+        {
+          "FullName": "InsaneDreams.Tests.Sprint0030Tests.PlayerVestAndHelmetDisappearImmediatelyWhenBrokenAndRemovingGearDoesNotStackPenalties",
+          "Status": "Passed",
+          "Duration": 0.7039655,
+          "Message": null,
+          "StackTrace": null
+        }
+      ]
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

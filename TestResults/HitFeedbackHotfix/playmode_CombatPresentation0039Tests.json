@@ -1,0 +1,41 @@
+{
+  "status": "completed",
+  "duration": 3.52,
+  "summary": {
+    "total": 4,
+    "passed": 4,
+    "failed": 0,
+    "skipped": 0,
+    "inconclusive": 0
+  },
+  "results": [
+    {
+      "FullName": "InsaneDreams.Tests.CombatPresentation0039Tests.BrightTracerUsesExistingPoolFadesAndKeepsOfficerColorAndAimMaterialSeparate",
+      "Status": "Passed",
+      "Duration": 0.4961908,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CombatPresentation0039Tests.EveryArchetypeFlashesRedDespiteReloadAndRepeatedHitsThenRestoresItsColors",
+      "Status": "Passed",
+      "Duration": 1.5624556,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CombatPresentation0039Tests.PlayerEmptyMagazineFlashRemainsGrayAndTemporary",
+      "Status": "Passed",
+      "Duration": 0.2888086,
+      "Message": null,
+      "StackTrace": null
+    },
+    {
+      "FullName": "InsaneDreams.Tests.CombatPresentation0039Tests.ThreeMaterialImpactsRemainShortAndBoundedButHaveDifferentShapesAndColors",
+      "Status": "Passed",
+      "Duration": 1.1264532,
+      "Message": null,
+      "StackTrace": null
+    }
+  ]
+}

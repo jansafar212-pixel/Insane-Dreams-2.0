@@ -1,0 +1,34 @@
+[
+  {
+    "symbol": "maximumTorsoAngle",
+    "present": true
+  },
+  {
+    "symbol": "springDamping",
+    "present": true
+  },
+  {
+    "symbol": "regionDirections",
+    "present": true
+  },
+  {
+    "symbol": "LegacyLoadout",
+    "present": true
+  },
+  {
+    "symbol": "LegacyExtraSecondary",
+    "present": true
+  },
+  {
+    "symbol": "loadoutRevision",
+    "present": true
+  },
+  {
+    "symbol": "Firearm3",
+    "present": false
+  },
+  {
+    "symbol": "firearm3",
+    "present": false
+  }
+]

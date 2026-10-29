@@ -575,6 +575,22 @@ MonoBehaviour:
   knockdownChance: 0.15
   recoverySeconds: 0.65
   cooldown: 3
+  livingPhysics: 0
+  susceptibility: 1
+  balanceDecay: 1.15
+  heavyCooldown: 0.55
+  recoveryGrace: 1.2
+  maximumJointAngle: 26
+  impulseDegrees: 115
+  springReturn: 18
+  springTorque: 0.25
+  jointDamping: 5
+  springDamping: 1.5
+  maximumAngularSpeed: 320
+  maximumTorsoAngle: 12
+  responseSeconds: 0.8
+  torsoSpill: 0.25
+  heavyTorsoSpill: 0.55
 --- !u!114 &1764850612260203748
 MonoBehaviour:
   m_ObjectHideFlags: 0

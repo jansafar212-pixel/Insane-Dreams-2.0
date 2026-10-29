@@ -1,0 +1,123 @@
+{
+  "sprint": "015",
+  "scene": "Assets/Scenes/Warehouse_Mission01.unity",
+  "method": "Scripted live Editor checks using PlayerActions and normal gameplay damage/weapon/healing rules; enlarged camera inspection for pose and actual screen HUD/results captures. No hands-on human or Android hardware playtest claim.",
+  "finalRun": {
+    "status": "COMPLETED phase=26 stage=Complete pos=(23.98, 1.67) kills=10 deaths=0 time=19,90608",
+    "trace": "NORMAL COMBAT ONLY; healing requested through PlayerActions when HP <= 65.\nPHASE 1 t=2,43 pos=(-19.39, 0.71) hp=100 kills=1\nPHASE 2 t=2,43 pos=(-19.39, 0.71) hp=100 kills=1\nPHASE 3 t=3,25 pos=(-15.98, 0.71) hp=100 kills=2\nPHASE 4 t=3,25 pos=(-15.98, 0.71) hp=100 kills=2\nPHASE 5 t=4,25 pos=(-9.29, 0.71) hp=100 kills=2\nPHASE 6 t=4,84 pos=(-9.07, 0.71) hp=100 kills=3\nPHASE 7 t=5,15 pos=(-9.86, 2.92) hp=100 kills=3\nPHASE 8 t=5,87 pos=(-12.00, 6.16) hp=85 kills=3\nPHASE 9 t=6,31 pos=(-9.29, 6.11) hp=75 kills=4\nPHASE 30 t=6,31 pos=(-9.29, 6.11) hp=75 kills=4\nPHASE 31 t=7,35 pos=(-11.23, 6.19) hp=75 kills=4\nPHASE 7 t=8,11 pos=(-12.00, 2.77) hp=70 kills=5\nPHASE 8 t=8,87 pos=(-12.00, 6.19) hp=70 kills=5\nPHASE 9 t=9,31 pos=(-9.29, 6.12) hp=70 kills=5\nPHASE 10 t=9,31 pos=(-9.29, 6.12) hp=70 kills=5\nPHASE 11 t=9,95 pos=(-4.84, 6.12) hp=70 kills=5\nPHASE 12 t=10,77 pos=(0.55, 6.11) hp=70 kills=5\nPHASE 13 t=10,89 pos=(1.14, 6.11) hp=70 kills=5\nPHASE 14 t=12,39 pos=(1.36, 6.11) hp=70 kills=5\nPHASE 15 t=12,97 pos=(4.58, 8.01) hp=70 kills=5\nPHASE 16 t=13,59 pos=(7.53, 9.71) hp=70 kills=5\nHEALED +35 at t=13,93178 hp=100\nPHASE 17 t=14,21 pos=(10.43, 11.41) hp=95 kills=6\nPHASE 18 t=14,89 pos=(13.62, 12.71) hp=85 kills=6\nPHASE 19 t=15,09 pos=(14.69, 12.72) hp=85 kills=7\nPHASE 20 t=15,91 pos=(18.22, 12.71) hp=85 kills=7\nPHASE 21 t=16,73 pos=(21.13, 12.71) hp=85 kills=7\nPHASE 22 t=16,89 pos=(21.91, 12.72) hp=85 kills=7\nPHASE 23 t=17,61 pos=(20.26, 6.11) hp=75 kills=7\nHEALED +35 at t=18,08781 hp=100\nPHASE 24 t=18,79 pos=(18.78, 6.11) hp=85 kills=10\nPHASE 25 t=18,87 pos=(19.04, 6.11) hp=85 kills=10\nPHASE 26 t=19,39 pos=(22.67, 6.10) hp=85 kills=10",
+    "stage": "Complete",
+    "elapsed": 19.90608,
+    "totalDefeats": 10,
+    "cleared": 10,
+    "deaths": 0,
+    "health": 85,
+    "shots": 40,
+    "checkpoints": 3,
+    "hasRecords": true,
+    "completions": 1,
+    "actors": 10
+  },
+  "earlierCompletedRun": {
+    "status": "COMPLETED phase=26 stage=Complete pos=(23.98, 1.67) kills=10 deaths=0 time=21,47077",
+    "trace": "NORMAL COMBAT ONLY; healing requested through PlayerActions when HP <= 65.\nPHASE 1 t=2,43 pos=(-19.39, 0.71) hp=100 kills=1\nPHASE 2 t=2,43 pos=(-19.39, 0.71) hp=100 kills=1\nPHASE 3 t=3,25 pos=(-15.97, 0.71) hp=100 kills=2\nPHASE 4 t=3,25 pos=(-15.97, 0.71) hp=100 kills=2\nPHASE 5 t=4,25 pos=(-9.28, 0.71) hp=100 kills=2\nPHASE 6 t=5,12 pos=(-9.06, 0.71) hp=100 kills=3\nPHASE 7 t=5,43 pos=(-9.85, 2.92) hp=100 kills=3\nPHASE 8 t=6,15 pos=(-12.00, 6.16) hp=100 kills=3\nPHASE 9 t=6,59 pos=(-9.29, 6.11) hp=100 kills=4\nPHASE 30 t=6,60 pos=(-9.29, 6.11) hp=100 kills=4\nPHASE 31 t=7,63 pos=(-11.23, 6.19) hp=100 kills=4\nPHASE 7 t=9,10 pos=(-12.00, 1.96) hp=100 kills=5\nPHASE 8 t=10,03 pos=(-12.00, 6.19) hp=100 kills=5\nPHASE 9 t=10,47 pos=(-9.29, 6.12) hp=100 kills=5\nPHASE 10 t=10,47 pos=(-9.29, 6.12) hp=100 kills=5\nPHASE 11 t=11,11 pos=(-4.84, 6.12) hp=100 kills=5\nPHASE 12 t=11,93 pos=(0.55, 6.11) hp=100 kills=5\nPHASE 13 t=12,05 pos=(1.14, 6.11) hp=100 kills=5\nPHASE 14 t=13,56 pos=(1.36, 6.11) hp=100 kills=5\nPHASE 15 t=14,13 pos=(4.58, 8.01) hp=100 kills=5\nPHASE 16 t=14,75 pos=(7.53, 9.71) hp=95 kills=5\nPHASE 17 t=15,37 pos=(10.43, 11.41) hp=90 kills=6\nPHASE 18 t=16,05 pos=(13.62, 12.71) hp=85 kills=6\nPHASE 19 t=16,25 pos=(14.69, 12.72) hp=85 kills=7\nPHASE 20 t=17,07 pos=(18.22, 12.71) hp=85 kills=7\nPHASE 21 t=17,89 pos=(21.13, 12.71) hp=85 kills=7\nPHASE 22 t=18,05 pos=(21.91, 12.72) hp=85 kills=7\nPHASE 23 t=18,77 pos=(20.26, 6.11) hp=85 kills=7\nHEALED +35 at t=19,3288 hp=100\nPHASE 24 t=20,34 pos=(18.78, 6.11) hp=50 kills=10\nPHASE 25 t=20,43 pos=(19.04, 6.11) hp=50 kills=10\nPHASE 26 t=20,95 pos=(22.67, 6.10) hp=50 kills=10",
+    "stage": "Complete",
+    "elapsed": 21.47077,
+    "totalDefeats": 10,
+    "cleared": 10,
+    "deaths": 0,
+    "health": 50,
+    "shots": 37,
+    "checkpoints": 3,
+    "hasRecords": true,
+    "completions": 1,
+    "actors": 10
+  },
+  "replayObserved": {
+    "stage": "EnterWarehouse",
+    "kills": 0,
+    "defeats": 0,
+    "deaths": 0,
+    "records": false,
+    "health": 100,
+    "actors": 10,
+    "sameActors": true,
+    "active": 10,
+    "cover": "Flex"
+  },
+  "controlledHealingCheck": {
+    "separateFromFullMission": true,
+    "damageApplied": 50,
+    "healingRequestedThrough": "PlayerActions.RequestHeal",
+    "restored": 35,
+    "healthAfter": 85,
+    "maximum": 100
+  },
+  "poseInspection": {
+    "colliderFeetY": 0.0149999,
+    "visualFeetY": 0.01875001,
+    "headTorsoLegScales": [
+      1,
+      1,
+      1
+    ]
+  },
+  "audit": {
+    "scene": "Assets/Scenes/Warehouse_Mission01.unity",
+    "dirty": false,
+    "playing": false,
+    "compiling": false,
+    "behaviours": 280,
+    "missingScripts": 0,
+    "missingReferences": [],
+    "occupants": 10,
+    "spawnPoints": 10,
+    "ragdoll": {
+      "prefab": "Assets/Prefabs/Visuals/LarperCartoonRagdoll.prefab",
+      "behaviours": 7,
+      "missingScripts": 0,
+      "missingReferences": []
+    }
+  },
+  "console": {
+    "entries": [],
+    "cursor": 1039,
+    "session": "311c03fcb2894ed6ade1fd64bfc5ea4a",
+    "returned": 0,
+    "dropped": false,
+    "reset": false,
+    "counts": {
+      "error": 2,
+      "warn": 291,
+      "log": 746
+    },
+    "groundTruth": {
+      "sampledUtc": "2026-10-19T17:47:58.2385492Z",
+      "ageMs": 102,
+      "compilationFailed": false,
+      "compiling": false,
+      "consoleErrors": 0,
+      "consoleWarnings": 0,
+      "consoleLogs": 113,
+      "seeded": true
+    }
+  },
+  "testbedSha256": "DBD270D874D8BDE8F12B0EA43746C00F0906104F888B392718C3F053146F3915",
+  "captures": [
+    "TestResults/Sprint015Standing.png",
+    "TestResults/Sprint015Crouch.png",
+    "TestResults/Sprint015Healing.png",
+    "TestResults/Sprint015Results.png"
+  ],
+  "integrationFindings": [
+    "Staged authored actors held their posts rather than wandering before activation; real player hits alert the encounter.",
+    "A disabled CheckpointMarker received Physics2D triggers and stole the recovery spawn; explicit isActiveAndEnabled guard fixed this and the final physical-contact regression passes.",
+    "Opaque .18-second reset cover allows reused authored mission actors to restore safely without camera-pending soft locks.",
+    "The lower crouched firing origin was repaired after the broad movement regression caught the raised muzzle."
+  ],
+  "limitations": [
+    "Human mission pacing and subjective pose/difficulty review remain unverified; precise automated aim is not human input.",
+    "Android/touch hardware and performance profiling not performed.",
+    "Existing missing combat audio unchanged.",
+    "Replay was inspected live before the last alert/contact correction and is also exercised by final passing mission tests."
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "success": true,
+  "command": "command eval",
+  "data": {
+    "command": "eval",
+    "parameters": {
+      "code": "var drops=UnityEngine.Object.FindObjectsByType<InsaneDreams.Enemies.EnemyWalletDrop>(UnityEngine.FindObjectsInactive.Include);var c=UnityEditor.AssetDatabase.LoadAssetAtPath<InsaneDreams.Progression.GameCatalog>(\"Assets/Data/Progression/DemoCatalog.asset\");return Newtonsoft.Json.JsonConvert.SerializeObject(new{health=drops.Select(x=>new{x.name,hp=x.GetComponent<InsaneDreams.Combat.Health>().Maximum}),crates=UnityEngine.Object.FindObjectsByType<InsaneDreams.Inventory.SupplyCrate2D>(UnityEngine.FindObjectsInactive.Include).Select(x=>new{x.name,rounds=new UnityEditor.SerializedObject(x).FindProperty(\"ammunition\").intValue}),hitLowerBounds=c.offers.Where(o=>o.category==InsaneDreams.Progression.ShopCategory.Weapons&&o.weapon.WeaponCategory==InsaneDreams.Inventory.WeaponCategory.Firearm).Select(o=>new{o.id,perfectHitsIgnoringArmor=drops.Sum(x=>UnityEngine.Mathf.CeilToInt(x.GetComponent<InsaneDreams.Combat.Health>().Maximum/o.weapon.Damage))})});"
+    },
+    "result": {
+      "output": null,
+      "diagnostics": [],
+      "success": true,
+      "result": "{\"health\":[{\"name\":\"01_Warmup_Larper_1\",\"hp\":50.0},{\"name\":\"04_Fireworks_Larper_2\",\"hp\":50.0},{\"name\":\"01_Warmup_Larper_0\",\"hp\":50.0},{\"name\":\"02_Verticality_Larper_0\",\"hp\":50.0},{\"name\":\"CombatHotfix_CommandGuard_Actor\",\"hp\":50.0},{\"name\":\"04_Fireworks_Larper_1\",\"hp\":50.0},{\"name\":\"03_Samurai_Larper_1\",\"hp\":50.0},{\"name\":\"04_Fireworks_OperationFireworks_0\",\"hp\":60.0},{\"name\":\"CombatHotfix_StorageGuard_Actor\",\"hp\":50.0},{\"name\":\"01_Warmup_Larper_2\",\"hp\":50.0},{\"name\":\"02_Verticality_Larper_1\",\"hp\":50.0},{\"name\":\"03_Samurai_Larper_2\",\"hp\":50.0},{\"name\":\"05_Officer_Officer_0\",\"hp\":50.0},{\"name\":\"03_Samurai_Samurai_0\",\"hp\":70.0},{\"name\":\"02_Verticality_Larper_2\",\"hp\":50.0}],\"crates\":[{\"name\":\"OperationSupply_2\",\"rounds\":108},{\"name\":\"OperationSupply_112\",\"rounds\":108},{\"name\":\"OperationSupply_132\",\"rounds\":108},{\"name\":\"OperationSupply_38\",\"rounds\":108},{\"name\":\"OperationSupply_73\",\"rounds\":108}],\"hitLowerBounds\":[{\"id\":\"carbine\",\"perfectHitsIgnoringArmor\":46},{\"id\":\"pistol\",\"perfectHitsIgnoringArmor\":62},{\"id\":\"buzzbox\",\"perfectHitsIgnoringArmor\":156},{\"id\":\"smg\",\"perfectHitsIgnoringArmor\":93},{\"id\":\"shotgun\",\"perfectHitsIgnoringArmor\":108},{\"id\":\"desert-eagle\",\"perfectHitsIgnoringArmor\":17},{\"id\":\"lmg\",\"perfectHitsIgnoringArmor\":62},{\"id\":\"sniper\",\"perfectHitsIgnoringArmor\":15}]}"
+    },
+    "target": {
+      "host": "127.0.0.1",
+      "port": 7801,
+      "projectPath": "C:\\Users\\jansa\\Documents\\GitHub\\Insane-Dreams-2.0"
+    }
+  },
+  "errors": [],
+  "warnings": []
+}

@@ -1,0 +1,109 @@
+@import url("HandmadeUI.uss");
+.flow-background { position: absolute; left: 0; right: 0; top: 0; bottom: 0; background-color: #191d2b; align-items: center; justify-content: center; padding: 18px 28px; }
+.warehouse-scene { position: absolute; left: 0; right: 0; top: 0; bottom: 0; overflow: hidden; }
+.warehouse-moon { position: absolute; right: 12%; top: 7%; width: 74px; height: 74px; background-color: #b58441; }
+.warehouse-wall { position: absolute; left: -4%; right: -2%; bottom: 58px; height: 43%; background-color: #242b36; border-top-width: 12px; border-top-color: #0c6374; rotate: -2deg; }
+.warehouse-door { position: absolute; right: 9%; bottom: 0; width: 230px; height: 73%; background-color: #111723; border-width: 10px; border-color: #37404a; }
+.warehouse-window { position: absolute; left: 8%; top: 34px; width: 150px; height: 64px; background-color: #b58441; border-width: 8px; border-color: #191d2b; }
+.warehouse-sign { position: absolute; right: 8%; top: -56px; color: var(--quiet); font-size: 12px; letter-spacing: 1px; }
+.warehouse-crate { position: absolute; right: 5%; bottom: 58px; width: 124px; height: 124px; background-image: url("../Art/Sprint008/ShippingCrate.png"); -unity-background-scale-mode: scale-to-fit; }
+.warehouse-crate.small { right: 15%; width: 86px; height: 86px; }
+.warehouse-floor { position: absolute; left: 0; right: 0; bottom: 0; height: 58px; background-color: #111723; border-top-width: 6px; border-top-color: #e2671e; }
+.flow-scroll { width: 100%; max-width: 1080px; max-height: 100%; }
+.flow-scroll .unity-scroller--vertical { width: 18px; min-width: 18px; background-color: var(--ink); }
+.flow-scroll #unity-tracker { background-color: var(--ink); }
+.flow-scroll #unity-dragger { background-color: var(--edge); border-width: 2px; border-color: var(--ink); border-radius: 0; }
+.flow-scroll .unity-scroller__low-button, .flow-scroll .unity-scroller__high-button { background-image: none; background-color: var(--raised); border-width: 0; color: var(--cream); }
+.flow-scroll .flow-scroll-arrow { background-image: none; background-color: var(--raised); color: var(--cream); font-size: 12px; height: 20px; }
+.flow-content { padding: 16px 20px; background-color: var(--panel); border-width: 3px; border-color: var(--edge); border-bottom-width: 7px; border-bottom-color: var(--ink); color: var(--cream); }
+.front-page { background-color: rgba(23,28,29,.2); border-width: 0; padding: 24px 18px; }
+.flow-kicker { color: var(--quiet); font-size: 11px; letter-spacing: 1px; margin-bottom: 8px; white-space: normal; }
+.front-page .flow-kicker { color: var(--gold); }
+.flow-brand { color: var(--gold); font-size: 23px; letter-spacing: 1px; margin-bottom: 3px; }
+.flow-front { flex-direction: row; flex-wrap: wrap; }
+.flow-hero { flex-grow: 1; flex-basis: 450px; padding-right: 28px; padding-bottom: 12px; }
+.flow-logo { width: 100%; max-width: 390px; height: 70px; margin-top: 22px; margin-bottom: 18px; }
+.flow-tagline { color: var(--gold); font-size: 26px; white-space: normal; margin-top: 2px; }
+.flow-stamp { align-self: flex-start; margin-top: 22px; margin-bottom: 16px; padding: 7px 10px; border-width: 2px; border-color: var(--rust); color: var(--rust); font-size: 12px; letter-spacing: 1px; rotate: -2deg; }
+.flow-intro { color: var(--cream); font-size: 17px; white-space: normal; }
+.flow-nav { flex-grow: 1; flex-basis: 300px; min-width: 240px; justify-content: center; }
+.flow-nav-title { color: var(--gold); font-size: 11px; letter-spacing: 1px; margin: 8px 4px; }
+.flow-nav-note { color: var(--quiet); font-size: 14px; margin: 14px 8px; white-space: normal; }
+.flow-footer { color: #a3a58e; font-size: 10px; white-space: normal; margin-top: 24px; padding-top: 10px; border-top-width: 2px; border-top-color: var(--edge); }
+.flow-title { color: var(--cream); font-size: 24px; white-space: normal; margin: 8px 0; }
+.flow-copy { color: #d1d1b7; font-size: 16px; white-space: normal; margin: 5px 0; }
+.flow-warning { color: #e7a66d; font-size: 15px; white-space: normal; margin: 6px 0; padding: 6px; border-left-width: 4px; border-left-color: var(--rust); background-color: var(--ink); }
+.flow-button { min-height: 52px; margin: 4px; padding: 9px 18px; font-size: 17px; }
+.flow-primary { background-color: var(--rust); color: var(--ink); border-top-color: #edb76c; border-left-color: #edb76c; }
+.flow-primary:hover, .flow-primary:focus { background-color: var(--gold); color: var(--ink); }
+.flow-nav .flow-button { min-height: 66px; font-size: 23px; }
+.flow-nav .flow-quiet { background-color: var(--panel); color: var(--quiet); font-size: 16px; min-height: 50px; }
+.flow-row { flex-direction: row; flex-wrap: wrap; }
+.flow-list { flex-grow: 1; flex-basis: 280px; padding-right: 10px; }
+.flow-list .flow-button { -unity-text-align: middle-left; padding-left: 18px; font-size: 15px; }
+.flow-detail { flex-grow: 2; flex-basis: 350px; padding: 12px 16px; margin: 4px; background-color: #30372f; border-width: 2px; border-color: var(--edge); border-bottom-width: 5px; border-bottom-color: var(--ink); }
+.flow-row > .flow-button { flex-grow: 1; }
+#shopCategories > .flow-button { font-size: 15px; min-height: 48px; }
+.purchase-state { font-size: 13px; color: var(--gold); white-space: normal; margin: 5px 0; }
+.purchase-state.unavailable { color: #d39685; }
+.shop-icon { width: 64px; height: 48px; margin: 2px 0 6px; -unity-background-scale-mode: scale-to-fit; }
+.flow-slider { min-height: 52px; margin: 6px 12px 16px; }
+.flow-slider .unity-base-slider__tracker { height: 8px; background-color: var(--ink); border-width: 2px; border-color: var(--edge); }
+.flow-slider .unity-base-slider__dragger { width: 26px; height: 28px; background-color: var(--gold); border-width: 3px; border-color: var(--ink); border-radius: 0; }
+.flow-slider:focus .unity-base-slider__dragger { background-color: var(--rust); }
+.setting-value { color: var(--gold); font-size: 18px; margin-left: 12px; }
+.level-entry { padding: 10px 14px; background-color: #30372f; border-width: 2px; border-color: var(--edge); border-left-width: 6px; margin-bottom: 10px; }
+.level-entry.is-complete { border-left-color: var(--gold); }
+.level-entry.is-locked { border-color: #704f47; background-color: #282a27; }
+.level-entry.is-selected { border-left-color: var(--rust); }
+.level-icon { width: 84px; height: 64px; -unity-background-scale-mode: scale-to-fit; }
+.campaign-pause { position: absolute; left: 50%; translate: -50% 0; top: 12px; bottom: auto; min-width: 124px; min-height: 56px; margin: 0; padding: 0; background-color: rgba(0,0,0,0); border-width: 0; align-items: center; justify-content: center; }
+.campaign-pause:hover, .campaign-pause:focus, .campaign-pause:active { background-color: rgba(0,0,0,0); border-width: 0; }
+.pause-face { width: 52px; height: 40px; background-color: var(--gold); border-width: 2px; border-color: var(--ink); align-items: center; justify-content: center; }
+.campaign-pause:active .pause-face { background-color: var(--rust); }
+.pause-icon { flex-direction: row; width: 18px; height: 18px; justify-content: space-between; }
+.pause-bar { width: 6px; height: 18px; background-color: var(--ink); }
+.campaign-overlay { position: absolute; left: 0; right: 0; top: 0; bottom: 0; background-color: rgba(23,28,29,.9); align-items: center; justify-content: center; }
+.campaign-panel { width: 80%; max-width: 560px; padding: 18px; background-color: var(--panel); border-width: 3px; border-color: var(--edge); border-top-color: var(--rust); border-bottom-width: 7px; border-bottom-color: var(--ink); }
+#medicalShop { flex-direction: row; flex-wrap: wrap; }
+#medicalShop > .flow-detail { flex-grow: 1; flex-basis: 280px; }
+
+.flow-intro { background-color: var(--ink); padding: 6px 8px; align-self: flex-start; }
+.wallet-row { flex-direction: row; align-items: center; margin: 4px 0; }
+.wallet-row .ui-icon { width: 22px; height: 22px; margin-right: 8px; }
+.wallet-value { color: var(--gold); font-size: 16px; white-space: normal; flex-shrink: 1; }
+
+/* Shared field-office noticeboard composition. No animated backgrounds. */
+.flow-content { border-width: 4px; border-top-color: var(--gold); border-bottom-width: 8px; padding: 12px 16px; }
+.front-page { border-width: 0; background-color: rgba(23,28,29,.65); padding: 28px; }
+.flow-logo { max-width: 546px; height: 98px; margin-top: 12px; }
+.flow-hero { flex-basis: 470px; }
+.flow-tagline { font-size: 24px; color: var(--cream); }
+.flow-nav { border-left-width: 4px; border-left-color: var(--rust); padding-left: 16px; }
+.flow-brand { color: var(--gold); font-size: 18px; }
+.flow-title { padding-bottom: 8px; border-bottom-width: 3px; border-bottom-color: var(--edge); }
+.flow-detail { background-color: #202b2c; border-width: 3px; border-top-color: var(--gold); border-bottom-width: 6px; }
+.flow-list { flex-basis: 300px; }
+.flow-list .shop-entry { min-height: 84px; padding-left: 78px; padding-bottom: 26px; }
+.shop-entry .shop-icon { position: absolute; left: 8px; top: 8px; width: 58px; height: 46px; }
+.item-stock { position: absolute; left: 78px; right: 8px; bottom: 5px; font-size: 11px; color: var(--gold); white-space: normal; }
+.flow-detail > .shop-icon { width: 120px; height: 64px; background-color: rgba(23,28,29,.5); }
+.weapon-facts { padding: 8px; color: var(--gold); background-color: var(--ink); font-size: 14px; white-space: normal; }
+#shopCategories > .flow-button { flex-basis: 150px; min-height: 52px; border-bottom-width: 5px; }
+#medicalShop > .flow-detail { border-top-color: #86aa98; }
+.wallet-row { padding: 8px 10px; background-color: var(--ink); border-left-width: 5px; border-left-color: var(--gold); }
+.wallet-value { font-size: 20px; }
+.campaign-panel { border-width: 4px; border-top-color: var(--gold); border-bottom-width: 8px; }
+.warehouse-floor { border-top-color: var(--rust); }
+.warehouse-crate { background-image: url("../Art/LevelArt0026/CrateWoodBrace_32x32.asset"); }
+
+/* Hotfix0036.1: only overlays with gameplay behind them; front-end/shop untouched. */
+.pause-face { background-color: rgba(217,188,90,.60); }
+.campaign-pause:active .pause-face { background-color: rgba(205,120,62,.60); }
+.campaign-overlay { background-color: rgba(23,28,29,.60); }
+.campaign-panel { background-color: rgba(37,44,43,.65); }
+.campaign-panel .flow-button { background-color: rgba(56,63,56,.65); }
+.campaign-panel .flow-button:hover, .campaign-panel .flow-button:focus { background-color: rgba(74,81,66,.65); }
+.campaign-panel .flow-button.is-selected { background-color: rgba(104,83,47,.65); }
+.campaign-panel .flow-button:active { background-color: rgba(205,120,62,.65); }
+.campaign-panel .flow-button:disabled { background-color: rgba(41,45,42,.65); }
