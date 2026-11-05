@@ -38,6 +38,23 @@ passing test or a Codex capture does not establish artistic approval.
   YAML/GUID edits. Compare at gameplay zoom and phone size. Compilation and
   controlled captures are not human artistic or Android-device acceptance.
 
+## Spatial-first dependency and reusable biome environments
+
+**Approved spatial graybox precedes graphical production.** Follow
+`LEVEL_DESIGN_BIBLE.md`: graphics must not disguise or compensate for flat,
+repetitive or poorly traversable geometry. For a new or redesigned level, wait
+until the owner approves its topology and playable graybox before composing
+detailed backgrounds or decorating the level.
+
+Build a reusable environment/background sprite library **for each of the five
+biomes**. Prefer recombining, recoloring and adapting suitable established
+sprites over drawing every wall, structure, distant feature or prop from scratch.
+Each biome should be cohesive, while layout silhouettes and composition must
+reflect the approved gameplay geometry rather than being interchangeable
+hallway wallpaper. Reuse is deliberate production efficiency, not permission
+for visually repetitive scenes. Evaluate the result at real camera zoom and
+Android screen size.
+
 ## Visual philosophy
 
 **A passionate teenager making a pixel-art game in a free drawing program, with
