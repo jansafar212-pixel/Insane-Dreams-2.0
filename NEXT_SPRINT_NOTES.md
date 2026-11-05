@@ -1,3 +1,27 @@
+## CURRENT ACTIVE AGENDA — 2026-11-05: spatial-first level quality gate
+
+**Priority: Level 2 redesign — spatial topology BEFORE graphics.** Current Level
+2's flat/hallway-heavy layout and insufficient meaningful verticality are a
+failed spatial design, not a cosmetic bug. Do not start by redrawing scenery.
+
+1. Submit a topology sketch/diagram with start/exit, elevations, playable
+   connections, ladders/drops, cover and distinctive combat spaces.
+2. Review it against the mandatory `LEVEL_DESIGN_BIBLE.md` spatial gate:
+   meaningful verticality, varied encounters and route choices, recognizably
+   different sections, valid enemy traversal, fair sightlines and mobile controls.
+3. Revise the diagram until approved; then implement a functional graybox using
+   placeholders, without spending effort on art.
+4. Playtest traversal and combat in the graybox; mark device-dependent items
+   PENDING USER VERIFICATION until tested on Android. Owner must accept the
+   spatial design before proceeding.
+5. **Only after approval:** polish visuals with a reusable biome-specific
+   background/environment sprite set, following `GRAPHICS_BIBLE.md`.
+6. Apply this same spatial-first acceptance gate to all subsequent levels.
+   A visually polished but boring corridor is a rejection, not a completed level.
+
+The dated sprint recommendations below are historical; the agenda above is the
+current policy for level production.
+
 # Sprint 003 recommendations
 
 1. Validate the warehouse on an Android device before expanding systems: genuine
