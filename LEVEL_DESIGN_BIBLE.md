@@ -3,6 +3,51 @@
 The project owner retains final creative authority. Read this together with
 GRAPHICS_BIBLE.md before designing or changing levels.
 
+## Non-negotiable spatial-first workflow and graybox quality gate (2026-11-05)
+
+**Spatial design FIRST; graphics SECOND.** A technically playable level is not
+automatically a well-designed level. Do not proceed to detailed environment art,
+decoration, new background composition or visual polish until the spatial graybox
+has passed the owner's design review. New level work must be specified in
+observable spatial terms; a vague request to "make an interesting level" is
+insufficient.
+
+For every new level or major level redesign:
+
+1. **Topology before Unity geometry.** Present a readable plan/diagram showing
+   start and exit, traversable elevations, routes, ladders and drops, encounter
+   spaces, cover, chokepoints, sightlines and spatial landmarks. Explain why each
+   major region exists and how the player moves and fights there. Obtain owner
+   approval of the proposed topology before expensive implementation.
+2. **Graybox before decoration.** Implement simple placeholder geometry with
+   functional collision, movement connections, encounter positions and camera
+   considerations. Do not attempt to rescue weak spatial design with attractive
+   backgrounds or cosmetic props.
+3. **Meaningful verticality.** Elevated areas must change traversal, combat
+   decisions, enemy approach angles or sightlines; decorative platforms do not
+   count. Verticality alone is not quality: stacked empty rectangles can be as
+   boring as one long horizontal corridor. Level 1 may remain intentionally
+   accessible and mostly horizontal; subsequent levels require their own spatial
+   identity, not arbitrary platform quotas.
+4. **Encounter variety and spatial choices.** Avoid monotonous flat corridors.
+   Include purposeful changes of elevation, openness, cover, pressure, or
+   traversal rhythm appropriate to the mission. Distinct rooms/sections must
+   create recognizable decisions rather than repeat the same shooting lane.
+5. **Playable on a phone.** Validate ladders, jumps, crouch and cover where used;
+   enemy traversal, line of sight, camera framing, offscreen fairness, touch
+   precision and legibility must work at actual gameplay scale.
+6. **Mandatory decision: PASS or REVISE.** Review traversal and combat through
+   the whole graybox, record failures, iterate until the owner approves its
+   geometry and spatial identity. Only then begin biome art and environmental
+   sprite placement. Android feel and fairness remain **PENDING USER
+   VERIFICATION** until actual device playtesting; final level approval requires
+   the existing project-wide device/QA gate.
+
+**Immediate application:** Level 2's current flat, weakly vertical, visually
+unconvincing layout fails the spatial gate. Redesign its topology and graybox
+before any graphics redesign. For later visual production, reuse/recombine the
+approved sprite library for its biome; do not build every backdrop from scratch.
+
 Every campaign level needs a recognizable gameplay identity. At most two levels
 may substantially share layout, encounter composition, pacing or overall feel.
 A different background alone does not create a different level. Deliberately
