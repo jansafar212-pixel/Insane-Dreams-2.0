@@ -12,6 +12,20 @@
 - Run relevant Unity Edit/Play Mode tests after code changes. Distinguish automated checks and controlled captures from human gameplay or Android-device verification.
 - Do not stage, commit or push unless explicitly requested.
 
+## Level-design implementation order (mandatory)
+
+Follow the spatial-first gate in `LEVEL_DESIGN_BIBLE.md` for **every** new or
+substantially revised campaign level. Present a topological layout for owner
+review **before** building Unity geometry. Graybox with placeholder shapes first;
+assess traversable verticality, encounter/route variety, spatial landmarks,
+sightlines, enemy navigation, camera and mobile-control usability. Reject flat,
+repetitive corridor layouts or ornamental verticality; do not use art as a
+workaround for bad geometry. Do not begin environmental decoration or graphics
+polish until the owner approves the graybox. Afterward, reuse the appropriate
+biome's existing sprite library per `GRAPHICS_BIBLE.md`. Record the spatial
+gate result separately from technical tests and Android verification. Level 2's
+redesign is the immediate priority for this procedure.
+
 ## Mandatory quality gate — verify before expanding
 
 **Hard rule: Do not start implementing the next new gameplay feature, weapon, enemy archetype, hazard, movement mechanic, major UI system or level until the previous addition has passed its acceptance and regression tests.** Apply this to materially changed features as well as entirely new ones. This rule supersedes sprint-number pressure and the temptation to batch unverified features.
